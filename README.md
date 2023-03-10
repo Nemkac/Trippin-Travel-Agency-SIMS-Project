@@ -10,7 +10,7 @@ This application is written using .NET framework for backend and WPF for the fro
 
 The whole project was divided into four roles and each role was developed by a different person. These are the people that worked on this project with their respective roles:
 
-1. Owner -> Developed by [Nemanja Todorovic](github.com/Nemkac) 
+1. Owner -> Developed by Nemanja Todorovic
 2. GuestOne -> Developed by Vladimir Blanusa 
 3. TourGuide -> Developed by Aleksa Simeunovic 
 4. GuestTwo -> Developed by Nemanja Ranitovic 
