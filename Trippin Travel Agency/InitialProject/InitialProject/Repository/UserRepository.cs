@@ -16,12 +16,14 @@ namespace InitialProject.Repository
         public UserRepository()
         {
             _serializer = new Serializer<User>();
-            _users = _serializer.FromCSV(FilePath);
+            //_users = _serializer.FromCSV(FilePath);
+            _users = SqliteDataAccess.LoadUsers();
         }
 
         public User GetByUsername(string username)
         {
-            _users = _serializer.FromCSV(FilePath);
+            // _users = _serializer.FromCSV(FilePath);
+            _users = SqliteDataAccess.LoadUsers();
             return _users.FirstOrDefault(u => u.Username == username);
         }
     }
