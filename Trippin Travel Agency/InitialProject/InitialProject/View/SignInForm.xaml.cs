@@ -1,9 +1,10 @@
-﻿using InitialProject.Forms;
-using InitialProject.Model;
+﻿using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.View;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+
 
 namespace InitialProject
 {
@@ -50,9 +51,11 @@ namespace InitialProject
             {
                 if(user.Password == txtPassword.Password)
                 {
-                    CommentsOverview commentsOverview = new CommentsOverview(user);
-                    commentsOverview.Show();
+                    Window2 window2 = new Window2();
+                    window2.Show();
                     Close();
+                
+
                 } 
                 else
                 {

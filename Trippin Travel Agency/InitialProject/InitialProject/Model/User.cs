@@ -1,9 +1,8 @@
-﻿using InitialProject.Serializer;
-using System;
+﻿using System;
 
 namespace InitialProject.Model
 {
-    public class User : ISerializable
+    public class User
     {
         public int Id { get; set; }
         public string Username { get; set; }
