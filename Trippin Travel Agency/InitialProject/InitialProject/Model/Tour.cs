@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,9 +26,9 @@ namespace InitialProject.Model
 
         public string name { get; set; }
 
-        public int location { get; set; }
+        public TourLocation location { get; set; }
 
-        public int keyPoints { get; set; } // ovo kada se dobavlja bice nova metoda u sqlitedataaccess
+        public ICollection<KeyPoint> keyPoints { get; set; } // ovo kada se dobavlja bice nova metoda u sqlitedataaccess
 
         public string description { get; set; } 
 
@@ -35,11 +36,11 @@ namespace InitialProject.Model
 
         public int touristLimit { get; set; }
 
-        public List<DateAndTime> startDates = new List<DateAndTime>();  
+        public string startDates { get; set; }
 
         public int hoursDuration { get; set; }
 
-        public Tour(int id, string name, int location, int keyPoints, string description, language language, int touristLimit, List<DateAndTime> startDates, int hoursDuration)
+        public Tour(int id, string name, TourLocation location, ICollection<KeyPoint> keyPoints, string description, language language, int touristLimit, string startDates, int hoursDuration)
         {
             this.id = id;
             this.name = name;
