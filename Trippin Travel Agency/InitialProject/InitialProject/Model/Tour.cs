@@ -2,6 +2,7 @@
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace InitialProject.Model
         Serbian
     }
 
-
+    [Table("Tour")]
     public class Tour
     {
         public int id { get; set; }
@@ -57,5 +58,3 @@ namespace InitialProject.Model
     }
 }
 
-// Ostao je problem povezivanja tabela za keyPoite (mozda)
-// Ostao je problem sa listom datuma. -> Kako sve to povezati sa bazom. 

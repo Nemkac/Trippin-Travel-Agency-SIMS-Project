@@ -8,10 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="MyDatabase.sqlite" />
     <None Remove="SQLiteDB.db" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="MyDatabase.sqlite">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="SQLiteDB.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

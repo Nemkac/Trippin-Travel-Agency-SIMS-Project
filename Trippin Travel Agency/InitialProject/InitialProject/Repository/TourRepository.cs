@@ -1,4 +1,6 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Context;
+using InitialProject.Model;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,17 +11,20 @@ namespace InitialProject.Repository
 {
     public class TourRepository
     {
-        private List<Tour> _tours;
-
-        public TourRepository()
-        {
-            _tours = SqliteDataAccess.LoadTours();
-        }
-
         public Tour GetById(int id)
         {
-            _tours = SqliteDataAccess.LoadTours();
-            return _tours.FirstOrDefault(t => t.id == id);
+            using (var db = new DataBaseContext())
+            {
+                foreach (Tour tour in db.Tour) 
+                {
+                    if (tour.id == id) { 
+                    
+                    return tour;
+                    
+                    }
+                }
+                return null;    
+            }
         }
     }
 }

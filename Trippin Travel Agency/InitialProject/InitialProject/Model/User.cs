@@ -1,7 +1,10 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InitialProject.Model
 {
+
+    [Table("Users")]
     public class User
     {
         public int Id { get; set; }

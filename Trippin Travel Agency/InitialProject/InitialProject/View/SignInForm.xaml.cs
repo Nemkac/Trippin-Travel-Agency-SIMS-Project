@@ -72,8 +72,6 @@ namespace InitialProject
                         guestOneInterface.Show();
                     }
                     Close();
-                
-
                 } 
                 else
                 {
