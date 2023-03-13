@@ -7,7 +7,6 @@ namespace InitialProject.Repository
 {
     public class UserRepository
     {
-        private const string FilePath = "../../../Resources/Data/users.csv";
 
         private List<User> _users;
 

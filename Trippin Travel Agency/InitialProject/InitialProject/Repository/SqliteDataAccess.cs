@@ -30,6 +30,24 @@ namespace InitialProject.Repository
             }
         }
 
+        public static List<Tour> LoadTours()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<Tour>("select * from Tours", new DynamicParameters());
+                return output.ToList();
+            }
+        }
+
+        public static List<Accommodation> LoadAccommodations()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<Accommodation>("select * from Accommodations", new DynamicParameters());
+                return output.ToList();
+            }
+        }
+
         private static string LoadConnectionString(string id = "Default") 
         {
             return ConfigurationManager.ConnectionStrings[id].ConnectionString;

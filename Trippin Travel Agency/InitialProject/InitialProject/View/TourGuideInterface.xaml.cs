@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace InitialProject.View
 {
     /// <summary>
-    /// Interaction logic for xaml.xaml
+    /// Interaction logic for TourGuideInterface.xaml
     /// </summary>
-    public partial class Window2 : Window
+    public partial class TourGuideInterface : Window
     {
-        public Window2()
+        public TourGuideInterface()
         {
             InitializeComponent();
         }

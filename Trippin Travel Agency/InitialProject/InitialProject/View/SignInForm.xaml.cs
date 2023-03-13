@@ -51,8 +51,26 @@ namespace InitialProject
             {
                 if(user.Password == txtPassword.Password)
                 {
-                    Window2 window2 = new Window2();
-                    window2.Show();
+                    OwnerInterface ownerInterface = new OwnerInterface();
+                    TourGuideInterface tourGuideInterface = new TourGuideInterface();
+                    GuestTwoInterface guestTwoInterface = new GuestTwoInterface();
+                    GuestOneInterface guestOneInterface = new GuestOneInterface();
+                    if (user.Role == "Owner")
+                    {
+                        ownerInterface.Show();
+                    }
+                    else if (user.Role == "TourGuide")
+                    {
+                        tourGuideInterface.Show();
+                    }
+                    else if (user.Role == "GuestTwo")
+                    {
+                        guestTwoInterface.Show();
+                    }
+                    else if (user.Role == "GuestOne")
+                    {
+                        guestOneInterface.Show();
+                    }
                     Close();
                 
 
