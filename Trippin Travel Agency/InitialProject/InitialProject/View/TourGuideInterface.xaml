@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="TourGuideInterface" Height="450" Width="800">
     <Grid>
-        <Label Content="TourGuide logged in" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Content="TourGuide logged in" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,22,0,0"/>
+        <Button Content="Create Tour" Click="LeadCreateTour" HorizontalAlignment="Center" Margin="0,75,0,0" VerticalAlignment="Top" Height="34" Width="100" BorderThickness="0,0,0,0"/>
 
     </Grid>
 </Window>

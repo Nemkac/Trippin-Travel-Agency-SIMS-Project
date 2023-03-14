@@ -1,5 +1,4 @@
-﻿using InitialProject.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,20 +15,13 @@ using System.Windows.Shapes;
 namespace InitialProject.View
 {
     /// <summary>
-    /// Interaction logic for TourGuideInterface.xaml
+    /// Interaction logic for TourInterface.xaml
     /// </summary>
-    public partial class TourGuideInterface : Window
+    public partial class TourInterface : Window
     {
-        public TourGuideInterface()
+        public TourInterface()
         {
             InitializeComponent();
-        }
-
-        private void LeadCreateTour(object sender, RoutedEventArgs e)
-        {
-            TourInterface TourInterface = new TourInterface();
-            TourInterface.Show(); 
-
         }
     }
 }
