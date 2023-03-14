@@ -10,7 +10,7 @@ namespace InitialProject.Context
 {
     public class DataBaseContext : DbContext
     {
-        public DbSet<Tour> Tour { get; set; }
+        public DbSet<Tour> Tours { get; set; }
         public DbSet<User> Users { get; set; }
 
         public DbSet<Accommodation> Accommodations { get; set; }    

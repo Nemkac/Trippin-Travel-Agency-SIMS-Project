@@ -15,7 +15,7 @@ namespace InitialProject.Repository
         {
             using (var db = new DataBaseContext())
             {
-                foreach (Tour tour in db.Tour) 
+                foreach (Tour tour in db.Tours) 
                 {
                     if (tour.id == id) { 
                     

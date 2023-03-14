@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="GuestTwoInterface" Height="450" Width="800">
     <Grid>
-        <Label Content="Welcome guest two!" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+        <Label Content="Welcome guest two!" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,62,0,0"/>
+        <DataGrid x:Name="dataGrid" Margin="87,151,87,151"/>
     </Grid>
 </Window>
