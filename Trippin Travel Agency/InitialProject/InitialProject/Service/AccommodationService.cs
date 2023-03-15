@@ -20,15 +20,15 @@ namespace InitialProject.Service
             Accommodation accommodation2 = new Accommodation();
             accommodation1.name = "Menza";
             AccommodationLocation location1 = new AccommodationLocation("Serbia", "Novi Sad");
-            accommodation1.location = location1.GetLocation();
+            accommodation1.location = location1;
             accommodation1.minDaysBooked = 7;
             accommodation1.bookingCancelPeriodDays = 5;
             accommodation1.type = Model.Type.Hut;
             accommodation1.guestLimit = 5;
 
             accommodation2.name = "Morava";
-            AccommodationLocation location2 = new AccommodationLocation("Serbia", "Cacak");
-            accommodation2.location = location2.GetLocation();
+            AccommodationLocation location2 = new AccommodationLocation("Cuba", "Cacak");
+            accommodation2.location = location2;
             accommodation2.type = Model.Type.Apartment;
             accommodation2.guestLimit = 5; ;
 
@@ -88,7 +88,7 @@ namespace InitialProject.Service
             return filteredList;
         }
 
-        public List<int> GetByType(int type)
+/*        public List<int> GetByType(int type)
         {
             DataBaseContext context = new DataBaseContext();
             List<Accommodation> dataList = context.Accommodations.ToList();
@@ -101,18 +101,35 @@ namespace InitialProject.Service
                 }
             }
             return filteredList;
-        }
+        }*/
 
-        public List<int> GetByCountry(string country)
+        /*public List<int> GetByCountry(string country)
         {
             DataBaseContext context = new DataBaseContext();
-            List<Accommodation> dataList = context.Accommodations.ToList();
+            List<Accommodation> accommodationsData = context.Accommodations.ToList();
+            List<AccommodationLocation> locationsData = context.LocationsOfAccommodations.ToList(); 
             List<int> filteredList = new List<int>();
-            foreach (Accommodation accommodation in dataList.ToList())
+            foreach (Accommodation accommodation in accommodationsData.ToList()) 
             {
                 if (accommodation.location.Country == country)
                 {
                     filteredList.Add(accommodation.id);
+                }
+            }
+            return filteredList;
+        }*/
+
+        public List<int> GetByCountry(string country) // VRACA ID LOKACIJA A NE ACCOMMODATIONAAAAAAAAAAAAAAAA
+        {
+            DataBaseContext context = new DataBaseContext();
+            //List<Accommodation> accommodationsData = context.Accommodations.ToList();
+            List<AccommodationLocation> locationsData = context.LocationsOfAccommodations.ToList();
+            List<int> filteredList = new List<int>();
+            foreach (AccommodationLocation location in locationsData.ToList())
+            {
+                if (location.Country == country)
+                {
+                    filteredList.Add(location.Id);
                 }
             }
             return filteredList;
