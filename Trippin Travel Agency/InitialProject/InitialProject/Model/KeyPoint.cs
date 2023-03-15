@@ -14,7 +14,7 @@ namespace InitialProject.Model
 
         public bool visited { get; set; }
 
-        public int Tourid { get; set; }
+        public int tourId { get; set; }
 
         public KeyPoint(string name, bool visited)
         {

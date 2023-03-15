@@ -40,17 +40,23 @@ namespace InitialProject.View
             // List<User> dataList = uS.TestFirstView();
             // this.dataGrid.ItemsSource = dataList;               
             TourService tourService = new TourService();
-            tourService.createTour();
+            tourService.createTour();                       // dodaj unique na polja koja to zahtevaju u bazi 
+
             DataBaseContext context = new DataBaseContext();
             List<TourDTO> dataList = new List<TourDTO>();
             TourDTO dto = new TourDTO();    
-           // List<TourLocation> tourLocations = context.TourLocations.ToList();   
+
             foreach (Tour tour in context.Tours.ToList())
               {
-                  dto = tourService.createDTO(tour);
+                  dto = tourService.CreateDTO(tour);
                   dataList.Add(dto);
               }
                   this.dataGrid.ItemsSource = dataList;
               }
+
+        private void ApplyFilters(object sender, RoutedEventArgs e)
+        {
+
         }
+    }
 }

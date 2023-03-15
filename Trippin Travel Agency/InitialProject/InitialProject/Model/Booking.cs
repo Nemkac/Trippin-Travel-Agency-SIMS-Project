@@ -10,7 +10,7 @@ namespace InitialProject.Model
 {
     public class Booking
     {
-        public int Id { get; set; }
+        public int id { get; set; }
         public Accommodation accommodation { get; set; }
 
         public DateAndTime arrival { get; set; }

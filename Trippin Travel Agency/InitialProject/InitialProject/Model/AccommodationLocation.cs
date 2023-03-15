@@ -8,17 +8,17 @@ namespace InitialProject.Model
 {
     public class AccommodationLocation
     {
-        public int Id {  get; set; }
-        public string Country { get; set; }
+        public int id {  get; set; }
+        public string country { get; set; }
 
-        public string City { get; set; }
+        public string city { get; set; }
 
         public AccommodationLocation() { }
          
         public AccommodationLocation(string country, string city)
         {
-            this.Country = country;
-            this.City = city;
+            this.country = country;
+            this.city = city;
 
         }
     }

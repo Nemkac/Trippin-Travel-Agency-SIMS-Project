@@ -18,28 +18,28 @@ namespace InitialProject.Service
 
             Tour tour = new Tour();
 
-            // Tour name
-            tour.name = "Novi Sad spring tour";
-            // Tour location
-            TourLocation location = new TourLocation("Beograd", "Serbia");
+            tour.name = "Novi Sad GHETTO";
+            
+            TourLocation location = new TourLocation("Novi Sad", "Serbia");
 
             tour.location = location;
-            // Tour key poits
+           
             ICollection<KeyPoint> keyPoints = new List<KeyPoint>
             {
-                new KeyPoint("Petrovaradin", false)
+                new KeyPoint("Detelinara", false),
+                new KeyPoint("Novo Naselje",false)
             };
             tour.keyPoints = keyPoints.ToList();
-            // Tour description
-            tour.description = "Description";
-            // Tour language
-            tour.language = language.English;
-            // Tour tourist limit
-            tour.touristLimit = 5;
-            // Tour start dates
-            tour.startDates = "02-02-2022";
-            // Tour hours duration
-            tour.hoursDuration = 3;
+            
+            tour.description = "Visit Magic Forest";
+            
+            tour.language = language.Serbian;
+            
+            tour.touristLimit = 15;
+            
+            tour.startDates = "02-05-2022";
+            
+            tour.hoursDuration = 24;
 
             context.Attach(tour);
             List<Tour> dataList = context.Tours.ToList();
@@ -64,28 +64,25 @@ namespace InitialProject.Service
 
                 }
             }
-
             return requiredTour;
-
         }
 
-        public TourDTO createDTO(Tour tour)
+        public TourDTO CreateDTO(Tour tour)
         {
             DataBaseContext dataBaseContext = new DataBaseContext();
 
-            List<string> selectedKeyPoints = new List<string>(); // needed for dtos
+            string keyPoints = "";
 
-
-            foreach (KeyPoint keyPoint in dataBaseContext.KeyPoints.ToList()) // za svaki kp iz svih kpova 
+            foreach (KeyPoint keyPoint in dataBaseContext.KeyPoints.ToList()) 
             {
-                if (keyPoint.Tourid == tour.id)// ako je id ture od kpa isti kao neki od ture iz lista svih tura
+                if (keyPoint.tourId == tour.id)
                 {
-                    selectedKeyPoints.Add(keyPoint.name); // u listu selektovanih kpa dodajemo ime kpa
+                    keyPoints += keyPoint.name + '\n'; 
                 }
             }
 
             TourLocation tmp = GetTourLocation(tour.id);
-            TourDTO tourDTO = new(tour.id, tour.name, tour.description,tmp.city, tmp.country, selectedKeyPoints, tour.language, tour.touristLimit, tour.startDates, tour.hoursDuration);
+            TourDTO tourDTO = new(tour.id, tour.name, tour.description,tmp.city, tmp.country, keyPoints, tour.language, tour.touristLimit, tour.startDates, tour.hoursDuration);
             return tourDTO;
         }
     }
