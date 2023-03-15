@@ -23,5 +23,12 @@ namespace InitialProject.View
         {
             InitializeComponent();
         }
+
+        private void RegisterNewAccommodation(object sender, RoutedEventArgs e)
+        {
+            AccommodationRegistrationInterface accommodationRegistrationInterface = new AccommodationRegistrationInterface();
+            accommodationRegistrationInterface.Show();
+            this.Close();
+        }
     }
 }

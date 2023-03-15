@@ -48,7 +48,7 @@ namespace InitialProject.Repository
             }
         }
 
-        private static string LoadConnectionString(string id = "Default") 
+        public static string LoadConnectionString(string id = "Default") 
         {
             return ConfigurationManager.ConnectionStrings[id].ConnectionString;
         }

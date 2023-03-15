@@ -26,12 +26,10 @@ namespace InitialProject.Model
         public int minDaysBooked { get; set; }
         public int bookingCancelPeriodDays { get; set; }
         public Type type { get; set; }
-
         public Accommodation() { }
 
-        public Accommodation(int id, string name, AccommodationLocation location, int guestLimit, int minDaysBooked, int bookingCancelPeriodDays, Type type)
+        public Accommodation(string name, AccommodationLocation location, int guestLimit, int minDaysBooked, int bookingCancelPeriodDays, Type type)
         {
-            this.id = id;
             this.name = name;
             this.location = location;
             this.guestLimit = guestLimit;
