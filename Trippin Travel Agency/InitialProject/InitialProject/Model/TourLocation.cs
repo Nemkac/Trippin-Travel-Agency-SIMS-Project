@@ -15,9 +15,8 @@ namespace InitialProject.Model
 
         public string country { get; set; }
 
-        public TourLocation(int id, string city, string country)
+        public TourLocation(string city, string country)
         {
-            this.id = id;
             this.city = city;
             this.country = country;
         }

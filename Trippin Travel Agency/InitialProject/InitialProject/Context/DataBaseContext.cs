@@ -12,12 +12,15 @@ namespace InitialProject.Context
     {
         public DbSet<Tour> Tours { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<TourLocation> TourLocations { get; set; }  
+
+        public DbSet<KeyPoint> KeyPoints { get; set; }
 
         public DbSet<Accommodation> Accommodations { get; set; }    
 
         public DbSet<AccommodationLocation> LocationsOfAccommodations { get; set; }
 
-        public string path = @".\MyDatabase.sqlite";
+        public string path = @"C:\Users\Dusan\Documents\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite($"Data Source={path}");

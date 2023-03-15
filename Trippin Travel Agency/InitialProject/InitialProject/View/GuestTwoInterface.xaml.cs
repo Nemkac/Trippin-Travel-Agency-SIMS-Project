@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using InitialProject.Context;
 using InitialProject.Model;
+using InitialProject.Service;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using InitialProject.DTO;
 
 namespace InitialProject.View
 {
@@ -34,25 +36,21 @@ namespace InitialProject.View
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            /* DataBaseContext context = new DataBaseContext();
-             SQLiteConnection conn = new SQLiteConnection("Data Source = MyDatabase.sqlite");
-             conn.Open();
-             SQLiteCommand cmd = new SQLiteCommand("select * from Users", conn);
-             SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
-             DataTable dataTable = new DataTable();
-             adapter.Fill(dataTable);
-             this.dataGrid.ItemsSource = dataTable.DefaultView; */
-
+            // UserService uS = new UserService();
+            // List<User> dataList = uS.TestFirstView();
+            // this.dataGrid.ItemsSource = dataList;               
+            TourService tourService = new TourService();
+            tourService.createTour();
             DataBaseContext context = new DataBaseContext();
-            List<User> dataList = context.Users.ToList();
-            foreach (User user in dataList.ToList())
-            {
-                if (user.Role == "TourGuide") {
-                    dataList.Remove(user);
-                }
-
-            }
-            this.dataGrid.ItemsSource = dataList;
+            List<TourDTO> dataList = new List<TourDTO>();
+            TourDTO dto = new TourDTO();    
+           // List<TourLocation> tourLocations = context.TourLocations.ToList();   
+            foreach (Tour tour in context.Tours.ToList())
+              {
+                  dto = tourService.createDTO(tour);
+                  dataList.Add(dto);
+              }
+                  this.dataGrid.ItemsSource = dataList;
+              }
         }
-    }
 }

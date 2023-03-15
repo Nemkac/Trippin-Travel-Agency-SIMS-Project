@@ -2,6 +2,7 @@
 using InitialProject.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230314233459_AddedKeypointTOurid")]
+    partial class AddedKeypointTOurid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.3");
@@ -73,7 +76,7 @@ namespace InitialProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Tourid")
+                    b.Property<int>("TourID")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("name")
@@ -85,7 +88,7 @@ namespace InitialProject.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("Tourid");
+                    b.HasIndex("TourID");
 
                     b.ToTable("KeyPoints");
                 });
@@ -143,7 +146,7 @@ namespace InitialProject.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("TourLocations");
+                    b.ToTable("TourLocation");
                 });
 
             modelBuilder.Entity("InitialProject.Model.User", b =>
@@ -184,7 +187,7 @@ namespace InitialProject.Migrations
                 {
                     b.HasOne("InitialProject.Model.Tour", null)
                         .WithMany("keyPoints")
-                        .HasForeignKey("Tourid")
+                        .HasForeignKey("TourID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
