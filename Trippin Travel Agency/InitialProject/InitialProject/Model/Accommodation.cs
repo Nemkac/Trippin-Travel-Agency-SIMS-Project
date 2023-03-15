@@ -39,5 +39,16 @@ namespace InitialProject.Model
             this.bookingCancelPeriodDays = bookingCancelPeriodDays;
             this.type = type;
         }
+
+        public string GetCity()
+        {
+            return location.City;
+        }
+
+        public string GetCountry()
+        {
+            return location.Country;
+        }
+
     }
 }

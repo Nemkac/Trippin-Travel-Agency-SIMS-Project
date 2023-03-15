@@ -39,22 +39,30 @@ namespace InitialProject.View
         }
 
         private void showAccommodations(object sender, RoutedEventArgs e)
-        {
+        {   
+            AccommodationService accommodationService = new AccommodationService();
+            accommodationService.createAccommodations();
             DataBaseContext context = new DataBaseContext();
             List<Accommodation> dataList = context.Accommodations.ToList();
+            
             this.dataGrid.ItemsSource = dataList;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             AccommodationService accommodationService = new AccommodationService();
-            //List<int> byName = accommodationService.GetByName(input_name.Text);
-            int byName = accommodationService.GetByName(input_name.Text);
-            /*List<int> byCity = accommodationService.GetByCity(input_country.Text);
-            List<int> byType = accommodationService.GetByCountry(input_city.Text);
-            List<int> byGuests = accommodationService.GetByGuestsNumber(int.Parse(input_guests.Text));*/
-            //debuger.Text = "name: " + acc.name + " country: " + acc.location.Country + " city: " + acc.location.City + " type: " + acc.type + " guests:" + acc.guestLimit + " days: " + acc.minDaysBooked;
-            debuger.Text = byName.ToString();
+            List<int> byName = accommodationService.GetByName(input_name.Text);
+            List<int> byCountry = accommodationService.GetByCountry(input_country.Text);
+            //List<int> byCity = accommodationService.GetByCity(input_city.Text);
+            //List<int> byType = accommodationService.GetByType(int.Parse(input_type.Text)); //da stavis da za odredjeni unos tipa rokas odredjeni int 
+            //List<int> byGuests = accommodationService.GetByGuestsNumber(int.Parse(input_guests.Text));
+            List<Accommodation> foundAccommodations = new List<Accommodation>();
+            for (int i = 0; i < byCountry.Count(); i++)
+            {
+                foundAccommodations.Add(accommodationService.GetById(byCountry[i]));
+            }
+            this.dataGrid.ItemsSource = foundAccommodations;
+
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -12,7 +13,36 @@ namespace InitialProject.Service
 {
     public class AccommodationService
     {
-        public Accommodation getById(int id)
+        public List<Accommodation> createAccommodations()
+        {
+            DataBaseContext context = new DataBaseContext();
+            Accommodation accommodation1 = new Accommodation();
+            Accommodation accommodation2 = new Accommodation();
+            accommodation1.name = "Menza";
+            AccommodationLocation location1 = new AccommodationLocation("Serbia", "Novi Sad");
+            accommodation1.location = location1.GetLocation();
+            accommodation1.minDaysBooked = 7;
+            accommodation1.bookingCancelPeriodDays = 5;
+            accommodation1.type = Model.Type.Hut;
+            accommodation1.guestLimit = 5;
+
+            accommodation2.name = "Morava";
+            AccommodationLocation location2 = new AccommodationLocation("Serbia", "Cacak");
+            accommodation2.location = location2.GetLocation();
+            accommodation2.type = Model.Type.Apartment;
+            accommodation2.guestLimit = 5; ;
+
+            context.Attach(accommodation1);
+            context.Attach(accommodation2);
+            List<Accommodation> dataList = context.Accommodations.ToList();
+            dataList.Add(accommodation1);
+            dataList.Add(accommodation2);
+            context.SaveChanges();
+            return dataList;
+
+        }
+
+        public Accommodation GetById(int id)
         {
             DataBaseContext context = new DataBaseContext();
             List<Accommodation> dataList = context.Accommodations.ToList();
@@ -26,7 +56,7 @@ namespace InitialProject.Service
             return null;
         }
 
-        public int GetByName(string name)
+        /*public int GetByName(string name)
         {
             DataBaseContext context = new DataBaseContext();
             List<Accommodation> dataList = context.Accommodations.ToList();
@@ -40,9 +70,9 @@ namespace InitialProject.Service
                 }
             }
             return 0;
-        }
+        }*/
 
-/*        public List<int> GetByName(string name)
+        public List<int> GetByName(string name)
         {
             DataBaseContext context = new DataBaseContext();
             List<Accommodation> dataList = context.Accommodations.ToList();
@@ -52,22 +82,22 @@ namespace InitialProject.Service
                 string nameToUpper = accommodation.name.ToUpper();
                 if (nameToUpper.Contains(name.ToUpper()))
                 {
-                    filteredList.Append(accommodation.id);
+                    filteredList.Add(accommodation.id);
                 }
             }
             return filteredList;
-        }*/
+        }
 
-        public List<int> GetByType(string type)
+        public List<int> GetByType(int type)
         {
             DataBaseContext context = new DataBaseContext();
             List<Accommodation> dataList = context.Accommodations.ToList();
             List<int> filteredList = new List<int>();
             foreach (Accommodation accommodation in dataList.ToList())
             {
-                if (accommodation.GetType().ToString() == type)
+                if ((int)accommodation.type == type)
                 {
-                    filteredList.Append(accommodation.id);
+                    filteredList.Add(accommodation.id);
                 }
             }
             return filteredList;
@@ -82,7 +112,7 @@ namespace InitialProject.Service
             {
                 if (accommodation.location.Country == country)
                 {
-                    filteredList.Append(accommodation.id);
+                    filteredList.Add(accommodation.id);
                 }
             }
             return filteredList;
@@ -97,7 +127,7 @@ namespace InitialProject.Service
             {
                 if (accommodation.location.City == city)
                 {
-                    filteredList.Append(accommodation.id);
+                    filteredList.Add(accommodation.id);
                 }
             }
             return filteredList;
@@ -112,13 +142,13 @@ namespace InitialProject.Service
             {
                 if (accommodation.guestLimit >= guestsNumber)
                 {
-                    filteredList.Append(accommodation.id);
+                    filteredList.Add(accommodation.id);
                 }
             }
             return filteredList;
         }
 
-        public List<Accommodation> GetFreeDays(int daysNumber)
+        public List<Accommodation> GetAvailableDays(int daysNumber)
         {
             DataBaseContext context = new DataBaseContext();
             List<Accommodation> dataList = context.Accommodations.ToList();

@@ -13,7 +13,7 @@ namespace InitialProject.Model
 
         public string City { get; set; }
 
-        public AccommodationLocation() { }
+        public AccommodationLocation() {}
          
         public AccommodationLocation(string country, string city)
         {
@@ -21,5 +21,17 @@ namespace InitialProject.Model
             this.City = city;
 
         }
+
+        public AccommodationLocation GetLocation()
+        {
+            return (AccommodationLocation)this.MemberwiseClone();
+        }
+
+        public void Set(string country, string city)
+        {
+            this.Country = country;
+            this.City = city;
+        }
+
     }
 }
