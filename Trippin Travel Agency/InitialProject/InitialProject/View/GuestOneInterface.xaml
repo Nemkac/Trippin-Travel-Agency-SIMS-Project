@@ -7,7 +7,22 @@
         mc:Ignorable="d"
         Title="GuestOneInterface" Height="450" Width="800">
     <Grid>
-        <Label Content="Welcome guest one!" HorizontalAlignment="Left" Margin="351,199,0,0" VerticalAlignment="Top"/>
+        <Label Content="Welcome guest one!" HorizontalAlignment="Left" Margin="351,50,0,0" VerticalAlignment="Top"/>
+        <Label Content="Pretrazi po nazivu" HorizontalAlignment="Left" Margin="100,80,0,0" VerticalAlignment="Top"/>
+        <Label Content="Pretrazu po lokaciji" HorizontalAlignment="Left" Margin="210,80,0,0" VerticalAlignment="Top"/>
+        <Label Content="Pretrazi po tipu" HorizontalAlignment="Left" Margin="320,80,0,0" VerticalAlignment="Top"/>
+        <Label Content="Pretrazi po broju gostiju" HorizontalAlignment="Left" Margin="420,80,0,0" VerticalAlignment="Top"/>
+        <Label Content="Pretrazi po broju dana" HorizontalAlignment="Left" Margin="560,80,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="dataGrid" Margin ="87,217,87,95"/>
+        <TextBox HorizontalAlignment="Left" Margin="119,115,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="85" Height="25" Name="input_name"/>
+        <TextBox HorizontalAlignment="Left" Margin="227,109,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="60" Height="32" RenderTransformOrigin="0.147,0.03" Name="input_city"/>
+        <TextBox HorizontalAlignment="Left" Margin="320,111,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="46" Height="29" Name="input_type"/>
+        <TextBox HorizontalAlignment="Left" Margin="429,113,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Name="input_guests"/>
+        <TextBox HorizontalAlignment="Left" Margin="568,111,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Name="input_days"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="258,156,0,0" VerticalAlignment="Top" Height="56" Width="273" Click="Button_Click"/>
+        <TextBox HorizontalAlignment="Left" Margin="227,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Height="26" Name="input_country"/>
+        <TextBlock HorizontalAlignment="Left" Margin="57,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="656" Name="debuger"/>
+
 
     </Grid>
 </Window>
