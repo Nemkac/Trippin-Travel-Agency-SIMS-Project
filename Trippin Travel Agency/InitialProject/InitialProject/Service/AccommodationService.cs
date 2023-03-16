@@ -78,13 +78,14 @@ namespace InitialProject.Service
         public List<int> GetByCity(string city)
         {
             DataBaseContext context = new DataBaseContext();
-            List<AccommodationLocation> dataList = context.LocationsOfAccommodations.ToList();
+            List<AccommodationLocation> locationsData = context.LocationsOfAccommodations.ToList();
+            List<Accommodation> accommodationsData = context.Accommodations.ToList();
             List<int> filteredList = new List<int>();
-            foreach (AccommodationLocation location in dataList.ToList())
+            foreach (Accommodation accommodation in accommodationsData.ToList())
             {
-                if (location.City == city)
+                if (accommodation.location.City == city)
                 {
-                    filteredList.Add(location.Id);
+                    filteredList.Add(accommodation.id);
                 }
             }
             return filteredList;
@@ -116,9 +117,39 @@ namespace InitialProject.Service
             }
             return filteredList;
         }
+
+        public List<int> GetByMininumDays(int days)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<Accommodation> dataList = context.Accommodations.ToList();
+            List<int> filteredList = new List<int>();
+            foreach (Accommodation accommodation in dataList.ToList())
+            {
+                if (accommodation.minDaysBooked <= days)
+                {
+                    filteredList.Add(accommodation.id);
+                }
+            }
+            return filteredList;
+        }
+
+        public List<int> GetByType (string type)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<Accommodation> dataList = context.Accommodations.ToList();
+            List<int> filteredList = new List<int>();
+            foreach (Accommodation accommodation in dataList.ToList())
+            {
+                if (accommodation.type.ToString() == type)
+                {
+                    filteredList.Add(accommodation.id);
+                }
+            }
+            return filteredList;
+        }
     }
 }
 
-   
-    
+
+
 

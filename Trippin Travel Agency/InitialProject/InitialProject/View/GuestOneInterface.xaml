@@ -14,15 +14,21 @@
         <Label Content="Type" HorizontalAlignment="Left" Margin="420,80,0,0" VerticalAlignment="Top"/>
         <Label Content="No.of guests" HorizontalAlignment="Left" Margin="514,80,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.396"/>
         <Label Content="No.of days" HorizontalAlignment="Left" Margin="623,80,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.58"/>
-        <DataGrid x:Name="dataGrid" Margin ="100,217,110,50"/>
+        <DataGrid x:Name="dataGrid" Margin ="100,235,110,12"/>
         <TextBox HorizontalAlignment="Left" Margin="100,106,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="85" Height="35" Name="input_name" />
         <TextBox HorizontalAlignment="Left" Margin="206,106,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="60" Height="35" RenderTransformOrigin="0.147,0.03" Name="input_country"/>
         <TextBox HorizontalAlignment="Left" Margin="383,106,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="112" Height="35" Name="input_type"/>
         <TextBox HorizontalAlignment="Left" Margin="519,106,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="68" Name="input_guests" Height="35"/>
         <TextBox HorizontalAlignment="Left" Margin="624,106,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="64" Name="input_days" Height="35"/>
-        <Button Content="Apply filters" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Top" Height="33" Width="110" Click="Button_Click" Margin="0,167,0,0"/>
         <TextBox HorizontalAlignment="Left" Margin="284,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Height="35" Name="input_city"/>
         <TextBlock HorizontalAlignment="Left" Margin="57,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="656" Name="debuger"/>
+        <Button Content="Refresh" HorizontalAlignment="Left" Margin="350,200,0,0" VerticalAlignment="Top" Click="showAccommodations"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="122,165,0,0" VerticalAlignment="Top" Click="GetByName"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="218,164,0,0" VerticalAlignment="Top" Click="GetByCountry"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="304,165,0,0" VerticalAlignment="Top" Click="GetByCity"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="414,165,0,0" VerticalAlignment="Top" Click="GetByType"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="536,164,0,0" VerticalAlignment="Top" Click="GetByGuests"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="638,165,0,0" VerticalAlignment="Top" Click="GetByDays"/>
 
 
     </Grid>
