@@ -92,18 +92,6 @@ namespace InitialProject.Service
             return filteredList;
         }
 
-        public List<Accommodation> GetAvailableDays(int daysNumber)
-        {
-            DataBaseContext context = new DataBaseContext();
-            List<Accommodation> dataList = context.Accommodations.ToList();
-            List<Accommodation> filteredList = new List<Accommodation>();
-            foreach (Accommodation accommodation in dataList.ToList())
-            {
-                // ovo ce biti jebeno
-            }
-            return filteredList;
-        }
-
         public List<int> GetByMininumDays(int days)
         {
             DataBaseContext context = new DataBaseContext();
