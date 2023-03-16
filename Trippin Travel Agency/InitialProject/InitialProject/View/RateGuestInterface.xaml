@@ -1,0 +1,25 @@
+﻿<Window x:Class="InitialProject.View.RateGuestInterface"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View"
+        mc:Ignorable="d"
+        Title="RateGuestInterface" Height="450" Width="450">
+    <Grid>
+        <Label x:Name="label1" Content="Respecting the rules" HorizontalAlignment="Left" Margin="49,67,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="radioButton_Copy" Content="1" HorizontalAlignment="Left" Margin="181,73,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="radioButton1_Copy" Content="2" HorizontalAlignment="Center" Margin="0,73,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="radioButton2_Copy" Content="3" HorizontalAlignment="Left" Margin="281,73,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="radioButton3_Copy" Content="4" HorizontalAlignment="Left" Margin="331,73,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="radioButton4_Copy" Content="5" HorizontalAlignment="Left" Margin="381,73,0,0" VerticalAlignment="Top"/>
+        <Grid Height="434" VerticalAlignment="Bottom">
+            <Label x:Name="label1_Copy" Content="Cleanness" HorizontalAlignment="Left" Margin="49,97,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="radioButton_Copy1" Content="1" HorizontalAlignment="Left" Margin="181,103,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="radioButton1_Copy1" Content="2" HorizontalAlignment="Center" Margin="0,103,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="radioButton2_Copy1" Content="3" HorizontalAlignment="Left" Margin="281,103,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="radioButton3_Copy1" Content="4" HorizontalAlignment="Left" Margin="331,103,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="radioButton4_Copy1" Content="5" HorizontalAlignment="Left" Margin="381,103,0,0" VerticalAlignment="Top"/>
+        </Grid>
+    </Grid>
+</Window>

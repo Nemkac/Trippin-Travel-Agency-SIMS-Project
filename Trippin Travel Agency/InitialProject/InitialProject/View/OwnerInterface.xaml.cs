@@ -1,4 +1,8 @@
-﻿using System;
+﻿using InitialProject.Context;
+using InitialProject.DTO;
+using InitialProject.Model;
+using InitialProject.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +26,37 @@ namespace InitialProject.View
         public OwnerInterface()
         {
             InitializeComponent();
+            this.Loaded += ShowBookings;
+        }
+
+        private void ShowBookings(object sender, RoutedEventArgs e)
+        {
+            BookingService bookingService = new BookingService();
+            DataBaseContext bookingContext = new DataBaseContext();
+            List<BookingDTO> dataList = new List<BookingDTO>();
+            BookingDTO dto = new BookingDTO();
+
+            foreach(Booking booking in bookingContext.Bookings.ToList())
+            {
+                dto = bookingService.CreateDTO(booking);
+                dataList.Add(dto);
+            }
+
+            this.bookingDataGrid.ItemsSource = dataList;
+        }
+
+        private void RegisterNewAccommodation(object sender, RoutedEventArgs e)
+        {
+            AccommodationRegistrationInterface accommodationRegistrationInterface = new AccommodationRegistrationInterface();
+            accommodationRegistrationInterface.Show();
+            this.Close();
+        }
+
+        private void RateGuest(object sender, RoutedEventArgs e)
+        {
+            RateGuestInterface rateGuestInterface = new RateGuestInterface();
+            rateGuestInterface.Show();
+            this.Close();
         }
     }
 }
