@@ -53,9 +53,20 @@ namespace InitialProject.View
             int minDaysBooked = int.Parse(minDaysBookedInput);
             string bookingCancelPeriodInput = bookingCancelPeriodTB.Text;
             int bookingCancelPeriod = int.Parse(bookingCancelPeriodInput);
+            Model.Type type = GetRadioButtonInput();
 
+            Accommodation accommodation = new Accommodation(name, location, guestLimit, minDaysBooked, bookingCancelPeriod, type);
+            AccommodationService.Save(accommodation);
+            clearInputs();
+            OwnerInterface ownerInterface = new OwnerInterface();
+            ownerInterface.Show();
+            this.Close();
+        }
+
+        private Model.Type GetRadioButtonInput()
+        {
             Model.Type type;
-            if(houseRadioButton.IsChecked == true)
+            if (houseRadioButton.IsChecked == true)
             {
                 type = 0;
             }
@@ -68,12 +79,7 @@ namespace InitialProject.View
                 type = (Model.Type)2;
             }
 
-            Accommodation accommodation = new Accommodation(name, location, guestLimit, minDaysBooked, bookingCancelPeriod, type);
-            AccommodationService.Save(accommodation);
-            clearInputs();
-            OwnerInterface ownerInterface = new OwnerInterface();
-            ownerInterface.Show();
-            this.Close();
+            return type;
         }
 
         private void countryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
