@@ -22,11 +22,6 @@ namespace InitialProject.Model
 
         }
 
-        /*public AccommodationLocation GetLocation()
-        {
-            return (AccommodationLocation)this.MemberwiseClone();
-        }
-*/
         public void Set(string country, string city)
         {
             this.Country = country;
