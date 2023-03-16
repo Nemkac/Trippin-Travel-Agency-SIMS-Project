@@ -121,5 +121,14 @@ namespace InitialProject.View
             }
             this.dataGrid.ItemsSource = foundResults;
         }
+
+        private void BookAccommodation_Click(object sender, RoutedEventArgs e)
+        {
+            // rezervacija selektovanog smestaja
+            Accommodation accommodation = (Accommodation)dataGrid.SelectedItem;
+            List<Accommodation> test = new List<Accommodation>();
+            test.Add(accommodation);
+            this.dataGrid.ItemsSource = test;
+        }
     }
 }
