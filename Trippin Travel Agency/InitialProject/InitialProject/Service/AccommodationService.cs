@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
@@ -43,23 +44,7 @@ namespace InitialProject.Service
             return filteredList;
         }
 
-        /*public List<int> GetByCountry(string country)
-        {
-            DataBaseContext context = new DataBaseContext();
-            List<Accommodation> accommodationsData = context.Accommodations.ToList();
-            List<AccommodationLocation> locationsData = context.LocationsOfAccommodations.ToList(); 
-            List<int> filteredList = new List<int>();
-            foreach (Accommodation accommodation in accommodationsData.ToList()) 
-            {
-                if (accommodation.location.Country == country)
-                {
-                    filteredList.Add(accommodation.id);
-                }
-            }
-            return filteredList;
-        }*/
-
-        public List<int> GetByCountry(string country) // VRACA ID LOKACIJA A NE ACCOMMODATIONAAAAAAAAAAAAAAAA
+        public List<int> GetByCountry(string country)
         {
             DataBaseContext context = new DataBaseContext();
             List<AccommodationLocation> locationsData = context.LocationsOfAccommodations.ToList();
@@ -67,7 +52,8 @@ namespace InitialProject.Service
             List<int> filteredList = new List<int>();
             foreach (Accommodation accommodation in accommodationsData.ToList())
             {
-                if (accommodation.location.Country == country)
+
+                if ((accommodation.location.Country.ToUpper()).Contains(country.ToUpper()))
                 {
                     filteredList.Add(accommodation.id);
                 }
@@ -83,7 +69,7 @@ namespace InitialProject.Service
             List<int> filteredList = new List<int>();
             foreach (Accommodation accommodation in accommodationsData.ToList())
             {
-                if (accommodation.location.City == city)
+                if ((accommodation.location.City.ToUpper()).Contains(city.ToUpper()))
                 {
                     filteredList.Add(accommodation.id);
                 }
@@ -140,7 +126,7 @@ namespace InitialProject.Service
             List<int> filteredList = new List<int>();
             foreach (Accommodation accommodation in dataList.ToList())
             {
-                if (accommodation.type.ToString() == type)
+                if ((accommodation.type.ToString().ToUpper()).Contains(type.ToUpper()))
                 {
                     filteredList.Add(accommodation.id);
                 }

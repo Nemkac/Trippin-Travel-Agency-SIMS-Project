@@ -46,25 +46,6 @@ namespace InitialProject.View
             
             this.dataGrid.ItemsSource = dataList;
         }
-        
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            AccommodationService accommodationService = new AccommodationService();
-            AccommodationLocationService locationService = new AccommodationLocationService();
-            //List<int> byName = accommodationService.GetByName(input_name.Text);
-            List<int> byCountry = accommodationService.GetByCountry(input_country.Text);
-            //List<int> byCity = accommodationService.GetByCity(input_city.Text);
-            //List<int> byType = accommodationService.GetByType(int.Parse(input_type.Text)); //da stavis da za odredjeni unos tipa rokas odredjeni int 
-            //List<int> byGuests = accommodationService.GetByGuestsNumber(int.Parse(input_guests.Text));
-            List<AccommodationLocation> foundCountries = new List<AccommodationLocation>();
-            List<Accommodation> foundResults = new List<Accommodation>();
-            for(int i = 0; i < byCountry.Count(); i++)
-            {
-                foundResults.Add(accommodationService.GetById(byCountry[i]));
-            }
-            this.dataGrid.ItemsSource = foundResults;
-
-        }
 
         private void GetByName(object sender, RoutedEventArgs e)
         {
