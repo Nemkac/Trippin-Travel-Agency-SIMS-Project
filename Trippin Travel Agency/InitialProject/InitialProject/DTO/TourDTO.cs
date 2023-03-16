@@ -17,10 +17,10 @@ namespace InitialProject.DTO
         public string keypoints { get; set; }
         public language language { get; set; }
         public int touristLimit { get; set; }
-        public string startDates { get; set; }
+        public DateTime startDates { get; set; }
         public int hoursDuration { get; set; }
 
-        public TourDTO(int id, string name, string description, string cityLocation, string countryLocation, string keypoints, language language, int touristLimit, string startDates, int hoursDuration)
+        public TourDTO(int id, string name, string description, string cityLocation, string countryLocation, string keypoints, language language, int touristLimit, DateTime startDates, int hoursDuration)
         {
             this.id = id;
             this.name = name;

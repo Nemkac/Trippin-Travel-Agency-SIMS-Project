@@ -10,17 +10,18 @@
         <Label Content="Welcome guest two!" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,38,0,0"/>
         <DataGrid x:Name="dataGrid" d:DataContext ="" Margin="87,64,87,238"/>
         <Canvas>
-            <TextBox Canvas.Bottom="175" HorizontalAlignment="Left" Margin="87,246,0,0" Text = "" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox Canvas.Bottom="175" HorizontalAlignment="Left" Margin="87,246,0,0" Text = "" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Name = "cityName"/>
             <Label Canvas.Bottom="192" Content="Filter by city" HorizontalAlignment="Left" Margin="87,215,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
             <Label Canvas.Bottom="130" Content="Filter by country" HorizontalAlignment="Left" Margin="87,272,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
-            <TextBox Canvas.Bottom="113" HorizontalAlignment="Left" Margin="87,306,0,0" Text = "" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox Canvas.Bottom="113" HorizontalAlignment="Left" Margin="87,306,0,0" Text = "" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Name ="countryName"/>
             <Label Canvas.Bottom ="192" Content="Filter by language" HorizontalAlignment="Left" Margin="242,217,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
-            <TextBox Canvas.Bottom="113" HorizontalAlignment="Left" Margin="242,306,0,0" Text = "" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox Canvas.Bottom="113" HorizontalAlignment="Left" Margin="242,306,0,0" Text = "" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Name ="duration"/>
             <Label Canvas.Bottom="130" Content="Filter by duration" HorizontalAlignment="Left" Margin="242,275,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
-            <TextBox Canvas.Bottom="175" HorizontalAlignment="Left" Margin="242,246,0,0" Text = "" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <Slider Canvas.Bottom ="30" HorizontalAlignment="Left" Margin="102,383,0,0" VerticalAlignment="Top" Width="120"/>
-            <Label Canvas.Bottom ="50" Content="Maximum tourist number" HorizontalAlignment="Left" Margin="87,357,0,0" VerticalAlignment="Top" Width="150" Height="26"/>
+            <ComboBox Canvas.Bottom="175" HorizontalAlignment="Left" Margin="242,246,0,0" Text = "" VerticalAlignment="Top" Width="120" Name ="languageBox"/>
+            <TextBox Canvas.Bottom ="30" HorizontalAlignment="Left" Text = "" VerticalAlignment="Top" Width="120" Canvas.Left="87" Name="touristLimit"/>
+            <Label Canvas.Bottom ="50" Content="Maximum tourist number" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="26" Canvas.Left="72"/>
             <Button Canvas.Bottom="190" Content="Apply filters" HorizontalAlignment="Left" Margin="625,255,0,0" VerticalAlignment="Top" Height="33" Width="76" Click="ApplyFilters"/>
+            
         </Canvas>
     </Grid>
 </Window>

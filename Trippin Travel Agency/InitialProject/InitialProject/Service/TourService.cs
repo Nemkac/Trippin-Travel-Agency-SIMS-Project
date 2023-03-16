@@ -36,8 +36,8 @@ namespace InitialProject.Service
             tour.language = language.Serbian;
             
             tour.touristLimit = 15;
-            
-            tour.startDates = "02-05-2022";
+
+            tour.startDates = new DateTime(2022,2,2,05,00,0);
             
             tour.hoursDuration = 24;
 
@@ -85,5 +85,107 @@ namespace InitialProject.Service
             TourDTO tourDTO = new(tour.id, tour.name, tour.description,tmp.city, tmp.country, keyPoints, tour.language, tour.touristLimit, tour.startDates, tour.hoursDuration);
             return tourDTO;
         }
+
+        public List<TourDTO> GetByInputCityName(string cityName)
+        {
+            DataBaseContext dataBaseContext = new DataBaseContext();
+            List<TourDTO> tourDTOs = new List<TourDTO>();
+            TourDTO tourDTO = new TourDTO();
+
+            foreach (Tour tour in dataBaseContext.Tours.ToList())
+            {
+                TourLocation tourLocation = GetTourLocation(tour.id);
+                if (tourLocation.city.ToUpper().Contains(cityName.ToUpper()))
+                {
+                    tourDTO = CreateDTO(tour);
+                    tourDTOs.Add(tourDTO);
+                }
+            }
+            return tourDTOs;
+        }
+        public List<TourDTO> GetByInputCountryName(string countryName)
+        {
+            DataBaseContext dataBaseContext = new DataBaseContext();
+            List<TourDTO> tourDTOs = new List<TourDTO>();
+            TourDTO tourDTO = new TourDTO();
+
+            foreach (Tour tour in dataBaseContext.Tours.ToList())
+            {
+                TourLocation tourLocation = GetTourLocation(tour.id);
+                if (tourLocation.country.ToUpper().Contains(countryName.ToUpper()))
+                {
+                    tourDTO = CreateDTO(tour);
+                    tourDTOs.Add(tourDTO);
+                }
+            }
+            return tourDTOs;
+        }
+
+        public List<TourDTO> GetByInputlanguage(language language)
+        {
+            DataBaseContext dataBaseContext = new DataBaseContext();
+            List<TourDTO> tourDTOs = new List<TourDTO>();
+            TourDTO tourDTO = new TourDTO();
+
+            foreach (Tour tour in dataBaseContext.Tours.ToList())
+            {
+                if (tour.language == language)
+                {
+                    tourDTO = CreateDTO(tour);
+                    tourDTOs.Add(tourDTO);
+                }
+            }
+            return tourDTOs;
+        }
+        public List<TourDTO> GetByInputLanguage(language tourLanguage)
+        {
+            DataBaseContext dataBaseContext = new DataBaseContext();
+            List<TourDTO> tourDTOs = new List<TourDTO>();
+            TourDTO tourDTO = new TourDTO();
+
+            foreach (Tour tour in dataBaseContext.Tours.ToList())
+            {
+                if (tour.language == tourLanguage)
+                {
+                    tourDTO = CreateDTO(tour);
+                    tourDTOs.Add(tourDTO);
+                }
+            }
+            return tourDTOs;
+        }
+        public List<TourDTO> GetByInputTourDuration(string duration)
+        {
+            DataBaseContext dataBaseContext = new DataBaseContext();
+            List<TourDTO> tourDTOs = new List<TourDTO>();
+            TourDTO tourDTO = new TourDTO();
+
+            foreach (Tour tour in dataBaseContext.Tours.ToList())
+            {
+                if (tour.hoursDuration == int.Parse(duration))
+                {
+                    tourDTO = CreateDTO(tour);
+                    tourDTOs.Add(tourDTO);
+                }
+            }
+            return tourDTOs;
+        }
+
+        public List<TourDTO> GetByInputTouristLimit(string limit)
+        {
+            DataBaseContext dataBaseContext = new DataBaseContext();
+            List<TourDTO> tourDTOs = new List<TourDTO>();
+            TourDTO tourDTO = new TourDTO();
+
+            foreach (Tour tour in dataBaseContext.Tours.ToList())
+            {
+                if (tour.hoursDuration == int.Parse(limit))
+                {
+                    tourDTO = CreateDTO(tour);
+                    tourDTOs.Add(tourDTO);
+                }
+            }
+            return tourDTOs;
+        }
+
     }
 }

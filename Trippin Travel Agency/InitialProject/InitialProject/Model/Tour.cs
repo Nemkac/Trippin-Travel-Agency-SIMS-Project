@@ -37,11 +37,11 @@ namespace InitialProject.Model
 
         public int touristLimit { get; set; }
 
-        public string startDates { get; set; }
+        public DateTime startDates { get; set; }
 
         public int hoursDuration { get; set; }
 
-        public Tour(int id, string name, TourLocation location, ICollection<KeyPoint> keyPoints, string description, language language, int touristLimit, string startDates, int hoursDuration)
+        public Tour(int id, string name, TourLocation location, ICollection<KeyPoint> keyPoints, string description, language language, int touristLimit, DateTime startDates, int hoursDuration)
         {
             this.id = id;
             this.name = name;
