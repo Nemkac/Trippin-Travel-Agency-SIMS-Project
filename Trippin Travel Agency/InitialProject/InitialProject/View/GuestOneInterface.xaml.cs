@@ -126,9 +126,20 @@ namespace InitialProject.View
         {
             // rezervacija selektovanog smestaja
             Accommodation accommodation = (Accommodation)dataGrid.SelectedItem;
-            List<Accommodation> test = new List<Accommodation>();
-            test.Add(accommodation);
-            this.dataGrid.ItemsSource = test;
+            List<DateTime> dateLimits = GetDateLimits(sender, e);
+            this.dataGrid.ItemsSource = dateLimits;
+
         }
+
+        private List<DateTime> GetDateLimits(object sender, RoutedEventArgs e)
+        {   
+            DateTime startingDate = input_starting_date.SelectedDate.Value;
+            DateTime endingDate = input_ending_date.SelectedDate.Value;
+            List<DateTime> dateLimits = new List<DateTime>();
+            dateLimits.Add(startingDate);
+            dateLimits.Add(endingDate);
+            return dateLimits;
+        }
+
     }
 }

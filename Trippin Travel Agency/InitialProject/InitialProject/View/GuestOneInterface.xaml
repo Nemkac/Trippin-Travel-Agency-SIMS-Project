@@ -29,8 +29,8 @@
         <Button Content="Button" HorizontalAlignment="Left" Margin="414,165,0,0" VerticalAlignment="Top" Click="GetByType"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="536,164,0,0" VerticalAlignment="Top" Click="GetByGuests"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="638,165,0,0" VerticalAlignment="Top" Click="GetByDays"/>
-        <DatePicker HorizontalAlignment="Left" Margin="208,363,0,0" VerticalAlignment="Top"/>
-        <DatePicker HorizontalAlignment="Left" Margin="423,362,0,0" VerticalAlignment="Top"/>
+        <DatePicker HorizontalAlignment="Left" Margin="208,363,0,0" VerticalAlignment="Top" Name ="input_starting_date"/>
+        <DatePicker HorizontalAlignment="Left" Margin="423,362,0,0" VerticalAlignment="Top" Name ="input_ending_date"/>
         <Label Content="Starting date" HorizontalAlignment="Left" Margin="217,340,0,0" VerticalAlignment="Top"/>
         <Label Content="Ending date" HorizontalAlignment="Left" Margin="434,339,0,0" VerticalAlignment="Top"/>
         <Button Content="Book accommodation" HorizontalAlignment="Left" Height="18" Margin="295,406,0,0" VerticalAlignment="Top" Width="130" Name = "BookAccommodation" Click="BookAccommodation_Click" />

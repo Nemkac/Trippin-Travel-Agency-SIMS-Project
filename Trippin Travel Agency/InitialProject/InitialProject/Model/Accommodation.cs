@@ -40,15 +40,6 @@ namespace InitialProject.Model
             this.type = type;
         }
 
-        public string GetCity()
-        {
-            return location.City;
-        }
-
-        public string GetCountry()
-        {
-            return location.Country;
-        }
 
     }
 }

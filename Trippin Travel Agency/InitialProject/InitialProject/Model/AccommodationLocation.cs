@@ -13,19 +13,13 @@ namespace InitialProject.Model
 
         public string City { get; set; }
 
-        //public AccommodationLocation() {}
+        public AccommodationLocation() {}
          
         public AccommodationLocation(string country, string city)
         {
             this.Country = country;
             this.City = city;
 
-        }
-
-        public void Set(string country, string city)
-        {
-            this.Country = country;
-            this.City = city;
         }
 
     }
