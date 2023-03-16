@@ -15,6 +15,8 @@ namespace InitialProject.Context
 
         public DbSet<Accommodation> Accommodations { get; set; }    
 
+        public DbSet<Booking> Bookings { get; set; }
+
         public DbSet<AccommodationLocation> LocationsOfAccommodations { get; set; }
 
         public string path = @"C:\Users\Nemanja\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";

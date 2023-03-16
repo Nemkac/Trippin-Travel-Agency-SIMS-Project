@@ -20,7 +20,7 @@ namespace InitialProject.Services
             MessageBox.Show("Accommodation registered succesfuly!");
         }
 
-        public static AccommodationLocation findLocation(string country, string city)
+        public static AccommodationLocation GetLocation(string country, string city)
         {
             DataBaseContext locationContext = new DataBaseContext();
             List<AccommodationLocation> locationsList = locationContext.LocationsOfAccommodations.ToList();
@@ -33,6 +33,20 @@ namespace InitialProject.Services
 
             AccommodationLocation newLocation = new AccommodationLocation(country, city);
             return newLocation;
+        }
+
+        public Accommodation GetById(int id)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<Accommodation> dataList = context.Accommodations.ToList();
+            foreach (Accommodation accommodation in dataList.ToList())
+            {
+                if (accommodation.id == id)
+                {
+                    return accommodation;
+                }
+            }
+            return null;
         }
     }
 }

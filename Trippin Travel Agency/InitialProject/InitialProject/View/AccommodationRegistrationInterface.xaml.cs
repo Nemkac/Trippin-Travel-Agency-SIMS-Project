@@ -46,7 +46,7 @@ namespace InitialProject.View
             string name = accommodationNameTB.Text;
             string country = countryComboBox.SelectedValue.ToString();
             string city = cityComboBox.SelectedValue.ToString();
-            AccommodationLocation location = AccommodationService.findLocation(country, city);
+            AccommodationLocation location = AccommodationService.GetLocation(country, city);
             string guestLimitInput = guestLimitTB.Text;
             int guestLimit = int.Parse(guestLimitInput);
             string minDaysBookedInput = minDaysBookedTB.Text;

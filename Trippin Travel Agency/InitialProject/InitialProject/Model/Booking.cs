@@ -11,19 +11,22 @@ namespace InitialProject.Model
     public class Booking
     {
         public int Id { get; set; }
-        public Accommodation accommodation { get; set; }
+        public int accommodationId { get; set; }
 
-        public DateAndTime arrival { get; set; }
-        public DateAndTime departure { get; set; }
+        public string arrival { get; set; }
+        public string departure { get; set; }
 
         public int stayingPeriod { get; set; }
 
-        public Booking(Accommodation accommodation, DateAndTime arrival, DateAndTime departure, int stayingPeriod)
+        public int guestId { get; set; }    
+
+        public Booking(int accommodationId, string arrival, string departure, int stayingPeriod, int guestId)
         {
-            this.accommodation = accommodation;
+            this.accommodationId = accommodationId;
             this.arrival = arrival;
             this.departure = departure;
             this.stayingPeriod = stayingPeriod;
+            this.guestId = guestId; 
         }
 
         public Booking() { }    
