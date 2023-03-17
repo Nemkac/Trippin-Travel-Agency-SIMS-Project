@@ -95,13 +95,13 @@ namespace InitialProject.Service
             DataBaseContext dbContext = new DataBaseContext();
             TourLocation requiredTour = new TourLocation();
 
-            List<TourLocation> tours = dbContext.TourLocation.ToList();
+            List<TourLocation> locations = dbContext.TourLocation.ToList();
 
-            foreach (TourLocation tour in tours)
+            foreach (TourLocation location in locations)
             {
-                if (tour.id == id)
+                if (location.id == id)
                 {
-                    requiredTour = tour;
+                    requiredTour = location;
                 }
             }
             return requiredTour;
@@ -120,7 +120,6 @@ namespace InitialProject.Service
                     keyPoints += keyPoint.name + '\n'; 
                 }
             }
-
             TourLocation tmp = GetTourLocation(tour.id);
             TourDTO tourDTO = new(tour.id, tour.name, tour.description,tmp.city, tmp.country, keyPoints, tour.language, tour.touristLimit, tour.startDates, tour.hoursDuration);
             return tourDTO;
@@ -185,7 +184,7 @@ namespace InitialProject.Service
 
             foreach (Tour tour in dataBaseContext.Tours.ToList())
             {
-                if (tour.hoursDuration == int.Parse(duration))
+                if (tour.hoursDuration == Int32.Parse(duration))
                 {
                     tourDTO = CreateDTO(tour);
                     tourDTOs.Add(tourDTO);
@@ -202,7 +201,7 @@ namespace InitialProject.Service
 
             foreach (Tour tour in dataBaseContext.Tours.ToList())
             {
-                if (tour.hoursDuration == int.Parse(limit))
+                if (tour.touristLimit == Int32.Parse(limit))
                 {
                     tourDTO = CreateDTO(tour);
                     tourDTOs.Add(tourDTO);

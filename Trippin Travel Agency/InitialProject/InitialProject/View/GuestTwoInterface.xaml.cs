@@ -38,6 +38,7 @@ namespace InitialProject.View
         {
             this.languageBox.ItemsSource = Enum.GetValues(typeof(language)).Cast<language>();
             TourService tourService = new TourService();
+            //tourService.createTour();
             DataBaseContext context = new DataBaseContext();
             List<TourDTO> dataList = new List<TourDTO>();
             TourDTO dto = new TourDTO();
@@ -47,8 +48,8 @@ namespace InitialProject.View
                 dto = tourService.CreateDTO(tour);
                 dataList.Add(dto);
             }
+            //this.dataGrid.ItemsSource = context.TourLocation.ToList();
             this.dataGrid.ItemsSource = dataList;
-
         }
 
         private void ApplyFilters(object sender, RoutedEventArgs e)

@@ -191,7 +191,7 @@ namespace InitialProject.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("TourLocations");
+                    b.ToTable("TourLocation");
                 });
 
             modelBuilder.Entity("InitialProject.Model.User", b =>
