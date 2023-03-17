@@ -5,9 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="TourGuideInterface" Height="450" Width="800">
-    <Grid>
-        <Label Content="TourGuide logged in" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        Title="TourGuideInterface" Height="768" Width="1366">
+    <Grid Height="600" Width="1198" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
 
+        <Label Content="TourGuide logged in" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,22,0,0" FontSize="36"/>
+        <Button Content="Configure Tour" Click="LeadCreateTour" HorizontalAlignment="Center" Margin="0,75,0,0" VerticalAlignment="Center" Height="340" Width="700" BorderThickness="0,0,0,0"/>
     </Grid>
 </Window>

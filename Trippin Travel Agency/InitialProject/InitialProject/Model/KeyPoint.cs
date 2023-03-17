@@ -14,9 +14,8 @@ namespace InitialProject.Model
 
         public bool visited { get; set; }
 
-        public KeyPoint(int id, string name, bool visited)
+        public KeyPoint(string name, bool visited)
         {
-            this.id = id;
             this.name = name;
             this.visited = visited;
         }

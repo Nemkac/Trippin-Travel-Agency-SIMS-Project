@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InitialProject.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,13 @@ namespace InitialProject.View
         public TourGuideInterface()
         {
             InitializeComponent();
+        }
+
+        private void LeadCreateTour(object sender, RoutedEventArgs e)
+        {
+            TourInterface TourInterface = new TourInterface();
+            TourInterface.Show(); 
+
         }
     }
 }
