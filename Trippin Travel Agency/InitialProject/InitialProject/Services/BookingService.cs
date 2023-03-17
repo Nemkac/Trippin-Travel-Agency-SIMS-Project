@@ -23,5 +23,22 @@ namespace InitialProject.Services
             bookingDto = new BookingDTO(tmpUser.Username, booking.Id, tmpAccommodation.name, booking.arrival, booking.departure, booking.stayingPeriod);
             return bookingDto;
         }
+        
+        public int GetGuestId(int bookingId)
+        {
+            int guestId;
+            DataBaseContext guestIdContext = new DataBaseContext();
+            List<Booking> bookingList = guestIdContext.Bookings.ToList();
+
+            foreach(Booking booking in bookingList.ToList()) 
+            {
+                if(booking.Id ==  bookingId)
+                {
+                    guestId = booking.guestId;
+                    return guestId;
+                }
+            }
+            return -1;
+        }
     }
 }
