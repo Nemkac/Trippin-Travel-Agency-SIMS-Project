@@ -53,8 +53,11 @@ namespace InitialProject.View
         }
 
         private void RateGuest(object sender, RoutedEventArgs e)
-        {   
-            RateGuestInterface rateGuestInterface = new RateGuestInterface();
+        {
+            Button button = sender as Button;
+            BookingDTO bookingDTO = button.DataContext as BookingDTO;
+            int bookingId = bookingDTO.bookingId;
+            RateGuestInterface rateGuestInterface = new RateGuestInterface(bookingId);
             rateGuestInterface.Show();
         }
     }

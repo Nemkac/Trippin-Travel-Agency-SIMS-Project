@@ -18,6 +18,7 @@ namespace InitialProject.Context
         public DbSet<AccommodationLocation> LocationsOfAccommodations { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<KeyPoint> KeyPoints { get; set; }
+        public DbSet<GuestRate> GuestRate { get; set; }
 
         // Apsolute paths for every memeber of the team
         // public string path = @"C:\Users\ifeel\Documents\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";

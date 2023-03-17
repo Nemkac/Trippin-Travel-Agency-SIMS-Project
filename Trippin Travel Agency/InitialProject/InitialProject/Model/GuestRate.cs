@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Model
 {
-    class GuestRate
+    public class GuestRate
     {
+        public int id { get; set; }
         public int cleanness { get; set; }
         public int respectingRules { get; set; }
         public string comment { get; set; }

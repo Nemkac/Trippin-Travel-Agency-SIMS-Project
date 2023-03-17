@@ -23,22 +23,20 @@ namespace InitialProject.View
     /// </summary>
     public partial class RateGuestInterface : Window
     {
-        public RateGuestInterface()
+        private int bookingToFind;
+        public RateGuestInterface(int bookingId)
         {
             InitializeComponent();
+            this.bookingToFind = bookingId;
         }
 
         private void SaveRate(object sender, RoutedEventArgs e)
         {
-            BookingService bookingService = new BookingService();  
-            Button button = sender as Button;
-            BookingDTO bookingDTO = button.DataContext as BookingDTO;
-
+            BookingService bookingService = new BookingService();
             int cleannessRate = GetCleanness();
             int rulesRate = GetRulesRespecting();
             string comment = commentTB.Text;
-            int bookingId = bookingDTO.bookingId;
-            int guestId = bookingService.GetGuestId(bookingId);
+            int guestId = bookingService.GetGuestId(bookingToFind);
             GuestRate newGuestRate = new GuestRate(cleannessRate, rulesRate, comment, guestId);
 
             GuestRateService.Save(newGuestRate);
