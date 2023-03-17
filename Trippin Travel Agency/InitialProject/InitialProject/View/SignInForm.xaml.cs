@@ -8,9 +8,6 @@ using System.Windows;
 
 namespace InitialProject
 {
-    /// <summary>
-    /// Interaction logic for SignInForm.xaml
-    /// </summary>
     public partial class SignInForm : Window
     {
 

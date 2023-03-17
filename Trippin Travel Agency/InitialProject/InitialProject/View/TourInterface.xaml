@@ -3,19 +3,66 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.View"
+        xmlns:local="clr-namespace:InitialProject.Model"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Create tour" Height="450" Width="800">
+        Title="Create tour" Height="768" Width="1366">
+
+    <Window.Resources>
+        <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:language"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
+
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="0*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="0*"/>
-            <RowDefinition Height="0*"/>
         </Grid.RowDefinitions>
 
+        <Label x:Name="label" Content="Tour name" HorizontalAlignment="Left" Height="27" Margin="48,102,0,0" VerticalAlignment="Top" Width="165"/>
+        <TextBox x:Name="tourNameTextBox" HorizontalAlignment="Left" Margin="48,134,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="25"/>
+
+        <Label x:Name="label1" Content="Country" HorizontalAlignment="Left" Margin="68,211,0,0" VerticalAlignment="Top" Height="30" Width="150"/>
+        <ComboBox x:Name="countryComboBox" HorizontalAlignment="Left" Margin="68,246,0,0" VerticalAlignment="Top" Width="150" Height="22" SelectionChanged="countryComboBox_SelectionChanged"/>
+
+        <Label x:Name="label2" Content="City" HorizontalAlignment="Left" Margin="68,286,0,0" VerticalAlignment="Top" Width="125" Height="26"/>
+        <ComboBox x:Name="cityComboBox" HorizontalAlignment="Left" Margin="68,317,0,0" VerticalAlignment="Top" Width="150" Height="22"/>
+
+        <Rectangle HorizontalAlignment="Left" Height="180" Margin="48,195,0,0" Stroke="Black" VerticalAlignment="Top" Width="190"/>
+        <Label x:Name="label3" Content="Location" HorizontalAlignment="Left" Margin="48,164,0,0" VerticalAlignment="Top" Width="126" Height="26"/>
+
+        <Label x:Name="label4" Content="Maximum number of guests" HorizontalAlignment="Left" Margin="330,26,0,0" VerticalAlignment="Top" Width="160" Height="26"/>
+        <TextBox x:Name="guestLimitTextBox" HorizontalAlignment="Left" Margin="330,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="25"/>
+
+        <Label x:Name="label5" Content="Duration (hours)" HorizontalAlignment="Left" Margin="330,102,0,0" VerticalAlignment="Top" Width="190" Height="26"/>
+        <TextBox x:Name="hoursDurationTextBox" HorizontalAlignment="Left" Margin="330,133,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="25"/>
+
+        <Label x:Name="label9" Content="Description" HorizontalAlignment="Left" Margin="574,27,0,0" VerticalAlignment="Top" Width="190" Height="26"/>
+        <TextBox x:Name="descriptionTextBox" HorizontalAlignment="Center" Margin="0,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="184"/>
+
+        <Label x:Name="label6" Content="Date and time" HorizontalAlignment="Left" Margin="330,182,0,0" VerticalAlignment="Top" Width="193" Height="26"/>
+        <DatePicker x:Name="datePicker" HorizontalAlignment="Left" Margin="333,211,0,0" VerticalAlignment="Top" Width="190" Height="30"/>
+
+        <Label x:Name="label7" Content="Language" HorizontalAlignment="Left" Margin="333,259,0,0" VerticalAlignment="Top" Width="190" Height="26"/>
+        <ComboBox x:Name="languageComboBox" HorizontalAlignment="Left" Margin="330,289,0,0" VerticalAlignment="Top" Width="190" Height="22" ItemsSource="{Binding Source={StaticResource dataFromEnum}}"/>
+
+        <Button x:Name="save" Content="Save Tour" Click="Save" HorizontalAlignment="Left" Margin="333,345,0,0" VerticalAlignment="Top" Width="183" Height="30" Background="BlueViolet" Foreground="White"/>
+
+        <Label Content="Starting point name: " HorizontalAlignment="Left" Margin="802,34,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.237,-0.653"/>
+        <TextBox x:Name="startingPointTextBox" HorizontalAlignment="Left" Margin="940,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="107"/>
+
+        <Label Content="Ending point name: " HorizontalAlignment="Left" Margin="1080,34,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="endingPointTextBox" HorizontalAlignment="Left" Margin="1202,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+        <StackPanel x:Name="containerStackPanel">
+            <Button x:Name ="addCheckpointButton" Content="Add checkpoint in between" HorizontalAlignment="Left" Margin="802,70,0,0" VerticalAlignment="Top" Width="520" Click="addCheckpointButton_Click"/>
+        </StackPanel>
+        <Label Content="Insert image" HorizontalAlignment="Left" Margin="588,259,0,0" VerticalAlignment="Top"/>
+        <StackPanel x:Name="containerImageStackPanel">
+        <Button x:Name="addImageButton" Content="Add" HorizontalAlignment="Left" Margin="683,259,0,0" Height="26" Width="95" Click="addImageButton_Click" RenderTransformOrigin="0.489,0.521"/>
+        </StackPanel>
     </Grid>
 </Window>

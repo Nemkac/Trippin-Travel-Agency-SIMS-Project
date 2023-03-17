@@ -3,6 +3,7 @@ using System;
 using InitialProject.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230315234559_addedKeyPoints")]
+    partial class addedKeyPoints
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.3");
@@ -66,26 +69,6 @@ namespace InitialProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("LocationsOfAccommodations");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.Image", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("Tourid")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("imageLink")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("Tourid");
-
-                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("InitialProject.Model.KeyPoint", b =>
@@ -200,13 +183,6 @@ namespace InitialProject.Migrations
                     b.Navigation("location");
                 });
 
-            modelBuilder.Entity("InitialProject.Model.Image", b =>
-                {
-                    b.HasOne("InitialProject.Model.Tour", null)
-                        .WithMany("imageLinks")
-                        .HasForeignKey("Tourid");
-                });
-
             modelBuilder.Entity("InitialProject.Model.KeyPoint", b =>
                 {
                     b.HasOne("InitialProject.Model.Tour", null)
@@ -227,8 +203,6 @@ namespace InitialProject.Migrations
 
             modelBuilder.Entity("InitialProject.Model.Tour", b =>
                 {
-                    b.Navigation("imageLinks");
-
                     b.Navigation("keyPoints");
                 });
 #pragma warning restore 612, 618
