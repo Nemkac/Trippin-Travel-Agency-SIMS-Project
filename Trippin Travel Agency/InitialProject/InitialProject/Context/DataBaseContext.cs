@@ -26,5 +26,5 @@ namespace InitialProject.Context
         {
             optionsBuilder.UseSqlite($"Data Source={path}");
         }
-       }
+    }
 }
