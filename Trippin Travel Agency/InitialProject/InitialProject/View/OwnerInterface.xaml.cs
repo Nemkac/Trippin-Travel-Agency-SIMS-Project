@@ -56,7 +56,6 @@ namespace InitialProject.View
         {
             RateGuestInterface rateGuestInterface = new RateGuestInterface();
             rateGuestInterface.Show();
-            this.Close();
         }
     }
 }

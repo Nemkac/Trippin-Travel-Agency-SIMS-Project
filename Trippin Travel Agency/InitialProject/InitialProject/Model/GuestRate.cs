@@ -14,12 +14,13 @@ namespace InitialProject.Model
         public int overallRating { get; set; }  
         public int userId { get; set; }
 
-        public GuestRate(int cleanness, int respectingRules, string comment)
+        public GuestRate(int cleanness, int respectingRules, string comment, int userId)
         {
             this.cleanness = cleanness;
             this.respectingRules = respectingRules;
             this.comment = comment;
             this.overallRating = (cleanness + respectingRules) / 2; 
+            this.userId = userId;
         }
     }
 }
