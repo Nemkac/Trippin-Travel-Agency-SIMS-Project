@@ -11,9 +11,6 @@ namespace InitialProject.Model
     public class Image
     {
         public int id { get; set; }
-        
         public String imageLink { get; set; }
-
-
     }
 }

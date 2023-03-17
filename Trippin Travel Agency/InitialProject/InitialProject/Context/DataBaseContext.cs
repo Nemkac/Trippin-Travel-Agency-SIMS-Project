@@ -16,13 +16,13 @@ namespace InitialProject.Context
         public DbSet<Accommodation> Accommodations { get; set; }    
         public DbSet<AccommodationLocation> LocationsOfAccommodations { get; set; }
         public DbSet<Image> Images { get; set; }
-
-        public DbSet<KeyPoint> KeyPoints { get; set; }  
+        public DbSet<KeyPoint> KeyPoints { get; set; }
+        
         // Apsolute paths for every memeber of the team
-        public string path = @"C:\Users\aleks\OneDrive\Dokumenti\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
+        public string path_aleksasimeunovic = @"C:\Users\ifeel\Documents\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite($"Data Source={path}");
+            optionsBuilder.UseSqlite($"Data Source={path_aleksasimeunovic}");
         }
-    }
+       }
 }
