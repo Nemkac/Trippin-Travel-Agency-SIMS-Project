@@ -2,6 +2,7 @@
 using InitialProject.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230315163025_Test3")]
+    partial class Test3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.3");
@@ -67,54 +70,6 @@ namespace InitialProject.Migrations
                     b.ToTable("LocationsOfAccommodations");
                 });
 
-            modelBuilder.Entity("InitialProject.Model.Booking", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("accommodationId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("arrival")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("departure")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("guestId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("stayingPeriod")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Bookings");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.Image", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("Tourid")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("imageLink")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("Tourid");
-
-                    b.ToTable("Images");
-                });
-
             modelBuilder.Entity("InitialProject.Model.KeyPoint", b =>
                 {
                     b.Property<int>("id")
@@ -161,7 +116,8 @@ namespace InitialProject.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("startDates")
+                    b.Property<string>("startDates")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("touristLimit")
@@ -227,13 +183,6 @@ namespace InitialProject.Migrations
                     b.Navigation("location");
                 });
 
-            modelBuilder.Entity("InitialProject.Model.Image", b =>
-                {
-                    b.HasOne("InitialProject.Model.Tour", null)
-                        .WithMany("imageLinks")
-                        .HasForeignKey("Tourid");
-                });
-
             modelBuilder.Entity("InitialProject.Model.KeyPoint", b =>
                 {
                     b.HasOne("InitialProject.Model.Tour", null)
@@ -256,8 +205,6 @@ namespace InitialProject.Migrations
 
             modelBuilder.Entity("InitialProject.Model.Tour", b =>
                 {
-                    b.Navigation("imageLinks");
-
                     b.Navigation("keyPoints");
                 });
 #pragma warning restore 612, 618

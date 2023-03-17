@@ -72,7 +72,7 @@ namespace InitialProject.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     name = table.Column<string>(type: "TEXT", nullable: false),
                     visited = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Tourid = table.Column<int>(type: "INTEGER", nullable: true)
+                    Tourid = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {

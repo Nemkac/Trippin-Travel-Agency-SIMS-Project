@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 namespace InitialProject.Model
 {
     public class KeyPoint
-    {
+    {   
         public int id { get; set; }
 
         public string name { get; set; }
 
         public bool visited { get; set; }
+
+        public int tourId { get; set; }
 
         public KeyPoint(string name, bool visited)
         {

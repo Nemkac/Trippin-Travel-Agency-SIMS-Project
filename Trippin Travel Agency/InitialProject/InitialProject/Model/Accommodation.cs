@@ -14,15 +14,12 @@ namespace InitialProject.Model
         House,
         Hut
     }
-
     public class Accommodation
     {
         public int id { get; set; }
         public string name { get; set; }
-        
         public AccommodationLocation location { get; set; }
         public int guestLimit { get; set; }
-
         public int minDaysBooked { get; set; }
         public int bookingCancelPeriodDays { get; set; }
         public Type type { get; set; }

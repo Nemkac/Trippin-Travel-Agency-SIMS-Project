@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Resources\**" />
+    <EmbeddedResource Remove="Resources\**" />
+    <None Remove="Resources\**" />
+    <Page Remove="Resources\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="MyDatabase.sqlite" />
     <None Remove="SQLiteDB.db" />
   </ItemGroup>
@@ -33,16 +40,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.117" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Resources\Images\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="System.Data.SQLite">
-      <HintPath>bin\Debug\net6.0-windows\System.Data.SQLite.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>
