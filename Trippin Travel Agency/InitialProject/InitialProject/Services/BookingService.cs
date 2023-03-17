@@ -38,6 +38,7 @@ namespace InitialProject.Services
                     return guestId;
                 }
             }
+
             return -1;
         }
     }

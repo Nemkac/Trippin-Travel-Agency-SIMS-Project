@@ -1,4 +1,6 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Context;
+using InitialProject.DTO;
+using InitialProject.Model;
 using InitialProject.Services;
 using System;
 using System.Collections.Generic;
@@ -28,10 +30,15 @@ namespace InitialProject.View
 
         private void SaveRate(object sender, RoutedEventArgs e)
         {
+            BookingService bookingService = new BookingService();  
+            Button button = sender as Button;
+            BookingDTO bookingDTO = button.DataContext as BookingDTO;
+
             int cleannessRate = GetCleanness();
             int rulesRate = GetRulesRespecting();
             string comment = commentTB.Text;
-            int guestId = 2;
+            int bookingId = bookingDTO.bookingId;
+            int guestId = bookingService.GetGuestId(bookingId);
             GuestRate newGuestRate = new GuestRate(cleannessRate, rulesRate, comment, guestId);
 
             GuestRateService.Save(newGuestRate);

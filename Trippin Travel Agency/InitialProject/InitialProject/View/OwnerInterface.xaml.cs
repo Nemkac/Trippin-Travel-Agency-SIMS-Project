@@ -53,7 +53,7 @@ namespace InitialProject.View
         }
 
         private void RateGuest(object sender, RoutedEventArgs e)
-        {
+        {   
             RateGuestInterface rateGuestInterface = new RateGuestInterface();
             rateGuestInterface.Show();
         }
