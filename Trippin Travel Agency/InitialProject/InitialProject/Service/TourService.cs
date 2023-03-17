@@ -61,7 +61,6 @@ namespace InitialProject.Service
                 if (tour.id == id)
                 {
                     requiredTour = tour;
-
                 }
             }
             return requiredTour;
@@ -121,22 +120,6 @@ namespace InitialProject.Service
             return tourDTOs;
         }
 
-        public List<TourDTO> GetByInputlanguage(language language)
-        {
-            DataBaseContext dataBaseContext = new DataBaseContext();
-            List<TourDTO> tourDTOs = new List<TourDTO>();
-            TourDTO tourDTO = new TourDTO();
-
-            foreach (Tour tour in dataBaseContext.Tours.ToList())
-            {
-                if (tour.language == language)
-                {
-                    tourDTO = CreateDTO(tour);
-                    tourDTOs.Add(tourDTO);
-                }
-            }
-            return tourDTOs;
-        }
         public List<TourDTO> GetByInputLanguage(language tourLanguage)
         {
             DataBaseContext dataBaseContext = new DataBaseContext();

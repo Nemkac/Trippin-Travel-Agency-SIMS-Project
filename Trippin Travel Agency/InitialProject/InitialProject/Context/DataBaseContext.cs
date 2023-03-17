@@ -20,10 +20,11 @@ namespace InitialProject.Context
 
         public DbSet<AccommodationLocation> LocationsOfAccommodations { get; set; }
 
-        public string path = @"C:\Users\Dusan\Documents\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
+        //Nemanja Ranitovic putanja desktop
+        public string path_nemanjaranitovic= @"C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite($"Data Source={path}");
+            optionsBuilder.UseSqlite($"Data Source={path_nemanjaranitovic}");
         }
 
     }

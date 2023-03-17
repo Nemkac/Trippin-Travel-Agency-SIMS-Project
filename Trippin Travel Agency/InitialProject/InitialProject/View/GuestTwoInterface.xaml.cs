@@ -38,8 +38,6 @@ namespace InitialProject.View
         {
             this.languageBox.ItemsSource = Enum.GetValues(typeof(language)).Cast<language>();
             TourService tourService = new TourService();
-            //tourService.createTour();                       // dodaj unique na polja koja to zahtevaju u bazi 
-
             DataBaseContext context = new DataBaseContext();
             List<TourDTO> dataList = new List<TourDTO>();
             TourDTO dto = new TourDTO();
@@ -57,8 +55,6 @@ namespace InitialProject.View
         {
             TourService tourService = new TourService();
             DataBaseContext context = new DataBaseContext();
-            //List<TourDTO> tourDTOsByLanguage = tourService.GetByInputLanguage(language.Text);
-
 
             if (!cityName.Text.Equals(""))
             {
