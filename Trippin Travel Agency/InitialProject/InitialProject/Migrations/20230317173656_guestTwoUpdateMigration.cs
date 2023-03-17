@@ -5,7 +5,7 @@
 namespace InitialProject.Migrations
 {
     /// <inheritdoc />
-    public partial class Testing2 : Migration
+    public partial class guestTwoUpdateMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

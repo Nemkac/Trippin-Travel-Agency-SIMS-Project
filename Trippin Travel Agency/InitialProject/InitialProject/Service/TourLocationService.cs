@@ -16,7 +16,7 @@ namespace InitialProject.Service
             DataBaseContext db = new DataBaseContext();
             TourLocation matchingTourLocation = new TourLocation();
 
-            foreach(TourLocation tourLocation in db.TourLocations.ToList())
+            foreach(TourLocation tourLocation in db.TourLocation.ToList())
             {
                 if(tourLocation.id == id)
                 {

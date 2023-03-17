@@ -34,9 +34,9 @@ namespace InitialProject.View
             List<AccommodationLocation> countryList  = countryContext.LocationsOfAccommodations.ToList();
             foreach(AccommodationLocation location in countryList.ToList())
             {
-                if (!countryComboBox.Items.Contains(location.Country))
+                if (!countryComboBox.Items.Contains(location.country))
                 {
-                    countryComboBox.Items.Add(location.Country);
+                    countryComboBox.Items.Add(location.country);
                 }    
             }
         }
@@ -92,11 +92,11 @@ namespace InitialProject.View
 
             foreach(AccommodationLocation location in  cityList.ToList()) 
             { 
-                if(location.Country.ToString() == selectedCountry)
+                if(location.country.ToString() == selectedCountry)
                 {
-                    if (!cityComboBox.Items.Contains(location.City))
+                    if (!cityComboBox.Items.Contains(location.city))
                     {
-                        cityComboBox.Items.Add(location.City);
+                        cityComboBox.Items.Add(location.city);
                     }
                 }
             }

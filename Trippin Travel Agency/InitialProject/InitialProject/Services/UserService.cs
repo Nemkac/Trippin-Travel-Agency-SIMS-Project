@@ -16,7 +16,7 @@ namespace InitialProject.Services
             List<User> userList = context.Users.ToList();
             foreach (User user in userList.ToList())
             {
-                if (user.Id == id)
+                if (user.id == id)
                 {
                     return user;
                 }

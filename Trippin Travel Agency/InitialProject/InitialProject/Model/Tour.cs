@@ -43,8 +43,7 @@ namespace InitialProject.Model
         public int hoursDuration { get; set; }
 
         public List<Image> imageLinks { get; set; }
-
-        // Deleted Id because of the autoincrement, left off TourPoints and Images because of the logic implementations
+ 
         public Tour(string name, TourLocation location, ICollection<KeyPoint> keyPoints, string description, language language, int touristLimit, DateTime startDates, int hoursDuration, List<Image> imageLinks)
         {
             this.name = name;
@@ -56,6 +55,19 @@ namespace InitialProject.Model
             this.startDates = startDates;
             this.hoursDuration = hoursDuration;
             this.imageLinks = imageLinks;
+
+        }
+
+        public Tour(string name, TourLocation location, ICollection<KeyPoint> keyPoints, string description, language language, int touristLimit, DateTime startDates, int hoursDuration)
+        {
+            this.name = name;
+            this.location = location;
+            this.keyPoints = keyPoints.ToList();
+            this.description = description;
+            this.language = language;
+            this.touristLimit = touristLimit;
+            this.startDates = startDates;
+            this.hoursDuration = hoursDuration;
 
         }
 

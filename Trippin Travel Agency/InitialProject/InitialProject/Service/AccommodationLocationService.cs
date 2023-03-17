@@ -17,7 +17,7 @@ namespace InitialProject.Service
             List<AccommodationLocation> dataList = context.LocationsOfAccommodations.ToList();
             foreach (AccommodationLocation location in dataList.ToList())
             {
-                if (location.Id == id)
+                if (location.id == id)
                 {
                     return location;
                 }

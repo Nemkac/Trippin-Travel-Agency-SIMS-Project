@@ -53,7 +53,7 @@ namespace InitialProject.Service
             foreach (Accommodation accommodation in accommodationsData.ToList())
             {
 
-                if ((accommodation.location.Country.ToUpper()).Contains(country.ToUpper()))
+                if ((accommodation.location.country.ToUpper()).Contains(country.ToUpper()))
                 {
                     filteredList.Add(accommodation.id);
                 }
@@ -69,7 +69,7 @@ namespace InitialProject.Service
             List<int> filteredList = new List<int>();
             foreach (Accommodation accommodation in accommodationsData.ToList())
             {
-                if ((accommodation.location.City.ToUpper()).Contains(city.ToUpper()))
+                if ((accommodation.location.city.ToUpper()).Contains(city.ToUpper()))
                 {
                     filteredList.Add(accommodation.id);
                 }

@@ -5,7 +5,7 @@
 namespace InitialProject.Migrations
 {
     /// <inheritdoc />
-    public partial class addedTourLocations : Migration
+    public partial class GuestMigrationMerge : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

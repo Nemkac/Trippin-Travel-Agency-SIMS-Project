@@ -26,7 +26,7 @@ namespace InitialProject.Services
             List<AccommodationLocation> locationsList = locationContext.LocationsOfAccommodations.ToList();
 
             foreach(AccommodationLocation location in locationsList.ToList()) { 
-                if(location.Country == country && location.City == city) {
+                if(location.country == country && location.city == city) {
                     return location;
                 }
             }

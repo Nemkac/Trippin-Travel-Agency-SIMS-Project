@@ -12,6 +12,8 @@ namespace InitialProject.Model
         public string country { get; set; }
 
         public string city { get; set; }
+        
+
 
         public AccommodationLocation() {}
          

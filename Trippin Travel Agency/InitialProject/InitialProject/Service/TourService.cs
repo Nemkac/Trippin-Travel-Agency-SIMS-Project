@@ -49,13 +49,10 @@ namespace InitialProject.Service
                 var tour = context.Tours.FirstOrDefault(t => t.name == name && t.startDates == date);
                 return tour != null;
             }
+
         }
+    
 
-
-namespace InitialProject.Service
-{
-    public class TourService
-    {
         public List<Tour> createTour()
         {
             DataBaseContext context = new DataBaseContext();
@@ -98,7 +95,7 @@ namespace InitialProject.Service
             DataBaseContext dbContext = new DataBaseContext();
             TourLocation requiredTour = new TourLocation();
 
-            List<TourLocation> tours = dbContext.TourLocations.ToList();
+            List<TourLocation> tours = dbContext.TourLocation.ToList();
 
             foreach (TourLocation tour in tours)
             {
