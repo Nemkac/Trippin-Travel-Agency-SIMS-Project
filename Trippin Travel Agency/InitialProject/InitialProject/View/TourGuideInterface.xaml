@@ -5,14 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="TourGuideInterface" Height="768" Width="1366">
-    <Grid Height="600" Width="1198" VerticalAlignment="Center" HorizontalAlignment="Center">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
+        Title="TourGuideInterface" Height="768" Width="1366" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
-        <Label Content="TourGuide logged in" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,22,0,0" FontSize="36"/>
-        <Button Content="Configure Tour" Click="LeadCreateTour" HorizontalAlignment="Center" Margin="0,75,0,0" VerticalAlignment="Center" Height="340" Width="700" BorderThickness="0,0,0,0"/>
-    </Grid>
+    <DockPanel LastChildFill="False" Background="#f5f6fa">
+        <!-- Menu bar on the left -->
+        <StackPanel Background ="#40739e" DockPanel.Dock="Left" Width="200">
+            <Grid Height="100">
+                <!-- First row for logo -->
+                <Image Source="C:\Users\ifeel\Documents\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\logo.png"
+                       Stretch="Uniform" Margin="35"/>
+            </Grid>
+            <Grid Height="50">
+                <!-- Second row for Create Tour button -->
+                <Button Content="Create Tour" Background="#40739e" Foreground="#f5f6fa" Margin="0" 
+                    Height="40" HorizontalAlignment="Stretch" BorderThickness="0"
+                    MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" FontFamily="Poppins" FontSize="16" Click="LeadCreateTour"/>
+            </Grid>
+            <Grid Height="50">
+                <!-- Third row for Track Tour button -->
+                <Button Content="Track Tour Live" Background="#40739e" Foreground="#f5f6fa" Margin="0" 
+                    Height="40" HorizontalAlignment="Stretch" BorderThickness="0"
+                    MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" FontFamily="Poppins" FontSize="16"/>
+            </Grid>
+        </StackPanel>
+        <!-- Information at the top -->
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Height="75" Background="#f5f6fa">
+            <Label Content="Hello, Aleksa!" VerticalAlignment="Center" FontFamily="Poppins" FontSize="18" Foreground="#192a56" Margin="1000,0,0,0"/>
+        </StackPanel>
+    </DockPanel>
+
 </Window>

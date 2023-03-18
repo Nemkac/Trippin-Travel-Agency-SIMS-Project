@@ -1,17 +1,7 @@
-﻿using InitialProject.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.Windows.Media; 
 
 namespace InitialProject.View
 {
@@ -31,5 +21,26 @@ namespace InitialProject.View
             TourInterface.Show(); 
 
         }
+
+        private void Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Button btn = sender as Button;
+            if (btn != null)
+            {
+                btn.Background = new SolidColorBrush(Color.FromRgb(255, 0, 208));
+                btn.Foreground = new SolidColorBrush(Color.FromRgb(64, 115, 158));
+            }
+        }
+
+        private void Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Button btn = sender as Button;
+            if (btn != null)
+            {
+                btn.Background = new SolidColorBrush(Color.FromRgb(64, 115, 158));
+                btn.Foreground = new SolidColorBrush(Color.FromRgb(245, 246, 250));
+            }
+        }
+
     }
 }
