@@ -40,5 +40,23 @@ namespace InitialProject.Services
             }
             return -1;
         }
+
+        public string GetGuestName(int bookingId)
+        {
+            UserService userService = new UserService();
+            DataBaseContext bookingContext = new DataBaseContext();
+            List<Booking> bookingList = bookingContext.Bookings.ToList();
+            User user = new User();
+
+            foreach(Booking booking  in bookingList.ToList())
+            {
+                if(booking.Id == bookingId)
+                {
+                    user = userService.GetById(booking.guestId);
+                }
+            }
+
+            return user.username;
+        }
     }
 }

@@ -21,19 +21,21 @@ namespace InitialProject.View
     /// </summary>
     public partial class RateGuestInterface : Window
     {
-        public RateGuestInterface()
+        private int bookingId;
+        public RateGuestInterface(int bookingId)
         {
             InitializeComponent();
+            this.bookingId = bookingId;
         }
 
         private void SaveRate(object sender, RoutedEventArgs e)
         {
+            BookingService bookingService = new BookingService();
             int cleannessRate = GetCleanness();
             int rulesRate = GetRulesRespecting();
             string comment = commentTB.Text;
-            int guestId = 2;
-            GuestRate newGuestRate = new GuestRate(cleannessRate, rulesRate, comment, guestId);
-
+            int guestId = bookingService.GetGuestId(bookingId);
+            GuestRate newGuestRate = new GuestRate(cleannessRate, rulesRate, comment, guestId, bookingId);
             GuestRateService.Save(newGuestRate);
             this.Close();
         }

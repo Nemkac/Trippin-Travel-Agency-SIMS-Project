@@ -18,5 +18,20 @@ namespace InitialProject.Services
             saveContext.SaveChanges();
             MessageBox.Show("Guest rating successful!");
         }
+
+        public bool IsRated(int bookingId)
+        {
+            DataBaseContext ratedBookingContext = new DataBaseContext();
+            List<GuestRate> ratedGuests = ratedBookingContext.GuestRate.ToList();
+            foreach(GuestRate guestRate in ratedGuests.ToList())
+            {
+                if(guestRate.bookingId == bookingId)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

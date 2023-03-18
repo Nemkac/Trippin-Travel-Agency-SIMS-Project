@@ -20,6 +20,7 @@ namespace InitialProject.Model
 
         public int guestId { get; set; }    
 
+
         public Booking(int accommodationId, string arrival, string departure, int stayingPeriod, int guestId)
         {
             this.accommodationId = accommodationId;
