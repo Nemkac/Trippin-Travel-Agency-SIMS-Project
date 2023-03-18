@@ -7,37 +7,36 @@
         mc:Ignorable="d"
         Title="GuestOneInterface" Height="450" Width="800">
     <Grid>
-        <Label Content="Welcome!" FontSize ="35" HorizontalAlignment="Center" Margin="0,18,0,0" VerticalAlignment="Top"/>
-        <Label Content="Name" HorizontalAlignment="Left" Margin="122,80,0,0" VerticalAlignment="Top"/>
-        <Label Content="City" HorizontalAlignment="Left" Margin="309,80,0,0" VerticalAlignment="Top"/>
-        <Label Content="Country" HorizontalAlignment="Left" Margin="206,80,0,0" VerticalAlignment="Top"/>
-        <Label Content="Type" HorizontalAlignment="Left" Margin="420,80,0,0" VerticalAlignment="Top"/>
-        <Label Content="No.of guests" HorizontalAlignment="Left" Margin="514,80,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.396"/>
-        <Label Content="No.of days" HorizontalAlignment="Left" Margin="623,80,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.58"/>
-        <DataGrid x:Name="dataGrid" Margin ="98,231,112,111"/>
-        <TextBox HorizontalAlignment="Left" Margin="100,106,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="85" Height="35" Name="input_name" />
-        <TextBox HorizontalAlignment="Left" Margin="206,106,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="60" Height="35" RenderTransformOrigin="0.147,0.03" Name="input_country"/>
-        <TextBox HorizontalAlignment="Left" Margin="383,106,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="112" Height="35" Name="input_type"/>
-        <TextBox HorizontalAlignment="Left" Margin="519,106,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="68" Name="input_guests" Height="35"/>
-        <TextBox HorizontalAlignment="Left" Margin="624,106,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="64" Name="input_days" Height="35"/>
-        <TextBox HorizontalAlignment="Left" Margin="284,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Height="35" Name="input_city"/>
+        <Label Content="Welcome!" FontSize ="35" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,-14,0,0"/>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="122,32,0,0" VerticalAlignment="Top"/>
+        <Label Content="City" HorizontalAlignment="Left" Margin="309,32,0,0" VerticalAlignment="Top"/>
+        <Label Content="Country" HorizontalAlignment="Left" Margin="206,32,0,0" VerticalAlignment="Top"/>
+        <Label Content="Type" HorizontalAlignment="Left" Margin="420,32,0,0" VerticalAlignment="Top"/>
+        <Label Content="No.of guests" HorizontalAlignment="Left" Margin="514,32,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.396"/>
+        <Label Content="No.of days" HorizontalAlignment="Left" Margin="623,32,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.58"/>
+        <DataGrid x:Name="dataGrid" Margin ="102,134,108,156"/>
+        <TextBox HorizontalAlignment="Left" Margin="100,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="85" Height="35" Name="input_name" />
+        <TextBox HorizontalAlignment="Left" Margin="206,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="60" Height="35" RenderTransformOrigin="0.147,0.03" Name="input_country"/>
+        <TextBox HorizontalAlignment="Left" Margin="383,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="112" Height="35" Name="input_type"/>
+        <TextBox HorizontalAlignment="Left" Margin="519,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="68" Name="input_guests" Height="35"/>
+        <TextBox HorizontalAlignment="Left" Margin="624,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="64" Name="input_days" Height="35"/>
+        <TextBox HorizontalAlignment="Left" Margin="284,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Height="35" Name="input_city"/>
         <TextBlock HorizontalAlignment="Left" Margin="57,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="656" Name="debuger"/>
-        <Button Content="Refresh" HorizontalAlignment="Left" Margin="350,200,0,0" VerticalAlignment="Top" Click="showAccommodations"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="122,165,0,0" VerticalAlignment="Top" Click="GetByName"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="218,164,0,0" VerticalAlignment="Top" Click="GetByCountry"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="304,165,0,0" VerticalAlignment="Top" Click="GetByCity"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="414,165,0,0" VerticalAlignment="Top" Click="GetByType"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="536,164,0,0" VerticalAlignment="Top" Click="GetByGuests"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="638,165,0,0" VerticalAlignment="Top" Click="GetByDays"/>
-        <DatePicker HorizontalAlignment="Left" Margin="208,363,0,0" VerticalAlignment="Top" Name ="input_starting_date"/>
-        <DatePicker HorizontalAlignment="Left" Margin="423,362,0,0" VerticalAlignment="Top" Name ="input_ending_date"/>
-        <Label Content="Starting date" HorizontalAlignment="Left" Margin="217,340,0,0" VerticalAlignment="Top"/>
-        <Label Content="Ending date" HorizontalAlignment="Left" Margin="434,339,0,0" VerticalAlignment="Top"/>
-        <Button Content="Book accommodation" HorizontalAlignment="Left" Height="18" Margin="295,406,0,0" VerticalAlignment="Top" Width="130" Name = "BookAccommodation" Click="BookAccommodation_Click" />
-
-
-
-
+        <Button Content="Refresh" HorizontalAlignment="Left" Margin="702,198,0,0" VerticalAlignment="Top" Click="showAccommodations"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="122,99,0,0" VerticalAlignment="Top" Click="GetByName"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="218,98,0,0" VerticalAlignment="Top" Click="GetByCountry"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="304,99,0,0" VerticalAlignment="Top" Click="GetByCity"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="414,99,0,0" VerticalAlignment="Top" Click="GetByType"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="536,98,0,0" VerticalAlignment="Top" Click="GetByGuests"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="638,99,0,0" VerticalAlignment="Top" Click="GetByDays"/>
+        <DatePicker HorizontalAlignment="Left" Margin="209,288,0,0" VerticalAlignment="Top" Name ="input_starting_date" Height="23"/>
+        <DatePicker HorizontalAlignment="Left" Margin="459,289,0,0" VerticalAlignment="Top" Name ="input_ending_date"/>
+        <Label Content="Starting date" HorizontalAlignment="Left" Margin="218,266,0,0" VerticalAlignment="Top" Height="25"/>
+        <Label Content="Ending date" HorizontalAlignment="Left" Margin="470,266,0,0" VerticalAlignment="Top"/>
+        <Button Content="Check for dates" HorizontalAlignment="Left" Height="18" Margin="336,289,0,0" VerticalAlignment="Top" Width="104" Click="CheckForDates" />
+        <Button Content="Book" HorizontalAlignment="Left" Height="50" Margin="520,335,0,0" VerticalAlignment="Top" Width="92"  Click="BookAccommodation"/>
+        <DataGrid HorizontalAlignment="Left" Height="80" Margin="272,320,0,0" VerticalAlignment="Top" Width="238" Name ="dataGrid2" />
+        <TextBlock HorizontalAlignment="Left" Height="133" Margin="623,283,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="157" Name="successfullyBooked"/>
 
     </Grid>
 </Window>

@@ -40,5 +40,12 @@ namespace InitialProject.Services
             }
             return -1;
         }
+
+        public static void Save(Booking booking)
+        {
+            DataBaseContext saveContext = new DataBaseContext();
+            saveContext.Attach(booking);
+            saveContext.SaveChanges();
+        }
     }
 }
