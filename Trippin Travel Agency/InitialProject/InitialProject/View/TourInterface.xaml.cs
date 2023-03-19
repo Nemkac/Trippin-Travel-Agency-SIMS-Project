@@ -93,7 +93,7 @@ namespace InitialProject.View
                 imageLinks.Add(image);
             }
 
-            Tour tour = new Tour(name, location, keyPoints, description, languageInput, guestLimit, selectedDate, hoursDuration, imageLinks);
+            Tour tour = new Tour(name, location.id, keyPoints, description, languageInput, guestLimit, selectedDate, hoursDuration, imageLinks);
             bool tourExists = TourService.CheckTourExists(name, selectedDate);
             if (!tourExists)
             {

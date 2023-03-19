@@ -21,7 +21,17 @@
             <TextBox Canvas.Bottom ="30" HorizontalAlignment="Left" Text = "" VerticalAlignment="Top" Width="120" Canvas.Left="87" Name="touristLimit"/>
             <Label Canvas.Bottom ="50" Content="Maximum tourist number" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="26" Canvas.Left="72"/>
             <Button Canvas.Bottom="190" Content="Apply filters" HorizontalAlignment="Left" Margin="625,255,0,0" VerticalAlignment="Top" Height="33" Width="76" Click="ApplyFilters"/>
-            
+            <Border BorderBrush="Black" BorderThickness="1" Height="101" Canvas.Bottom="30" Canvas.Right="100" Width="220" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox Canvas.Bottom ="95" Canvas.Right="140" TextWrapping="Wrap" Text="" Width="80" RenderTransformOrigin="0.467,3.229" HorizontalAlignment="Left" VerticalAlignment="Center" Name ="NumberOfTourists"/>
+            <Label Canvas.Bottom ="90" Canvas.Right ="250" Content="No. of tourists" HorizontalAlignment="Left" VerticalAlignment="Center" Width="95" Height="30" Canvas.Left="480" Canvas.Top="314"/>
+            <Button Canvas.Bottom ="70" Canvas.Right="255" Content="Book" HorizontalAlignment="Left" VerticalAlignment="Center" Width="62" Background="BlueViolet" Click="ReserveTour">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <TextBlock Height="60" Canvas.Right="105" Canvas.Bottom ="32.5" TextWrapping="Wrap" Text="" Width="145" HorizontalAlignment="Left"  VerticalAlignment="Center" Background="#d1e0e0" Name ="TextBlock"/>
         </Canvas>
     </Grid>
 </Window>

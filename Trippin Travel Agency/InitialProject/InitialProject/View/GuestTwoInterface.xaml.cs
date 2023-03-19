@@ -38,7 +38,6 @@ namespace InitialProject.View
         {
             this.languageBox.ItemsSource = Enum.GetValues(typeof(language)).Cast<language>();
             TourService tourService = new TourService();
-            //tourService.createTour();
             DataBaseContext context = new DataBaseContext();
             List<TourDTO> dataList = new List<TourDTO>();
             TourDTO dto = new TourDTO();
@@ -48,7 +47,7 @@ namespace InitialProject.View
                 dto = tourService.CreateDTO(tour);
                 dataList.Add(dto);
             }
-            //this.dataGrid.ItemsSource = context.TourLocation.ToList();
+
             this.dataGrid.ItemsSource = dataList;
         }
 
@@ -84,7 +83,7 @@ namespace InitialProject.View
                 languageBox.SelectedIndex = -1;
                 this.dataGrid.ItemsSource = tourDTOsByLanguage;
             }
-            else
+            else // ovo refaktorisati u funkciju u servisu koja pravi dtoove za sve ture.
             {
                 List<TourDTO> dataList = new List<TourDTO>();
                 TourDTO dto = new TourDTO();
@@ -95,9 +94,33 @@ namespace InitialProject.View
                     dataList.Add(dto);
                 }
                 this.dataGrid.ItemsSource = dataList;
-
             }
+        }
 
+        private void ReserveTour(object sender, RoutedEventArgs e)
+        {
+            TourService tourService = new TourService();
+            TourDTO selectedTour = (TourDTO)this.dataGrid.SelectedItem;
+            List<TourDTO> tourDTOs = new List<TourDTO>();   
+            int index = selectedTour.id;
+            int numberOfGuests = Int32.Parse(NumberOfTourists.Text);
+            int flag =  tourService.ReserveTour(index, numberOfGuests);
+
+            if (flag == 0)
+            {
+                this.TextBlock.Text = "You have booked the selected tour.";
+            }
+            else if (flag == 1)
+            {
+                this.TextBlock.Text = "Not enough room for desired number of tourists. Number of spots left for this tour: " + selectedTour.touristLimit;
+                tourDTOs = tourService.GetPreviouslySelected(selectedTour.id);
+                this.dataGrid.ItemsSource = tourDTOs;
+            }
+            else if (flag == -1) {
+                this.TextBlock.Text = "This tour is full. Here are some other tours in the same location.";
+                tourDTOs = tourService.GetNonFullTours(selectedTour.cityLocation,selectedTour.name);
+                this.dataGrid.ItemsSource = tourDTOs;
+            }
         }
     }
 }

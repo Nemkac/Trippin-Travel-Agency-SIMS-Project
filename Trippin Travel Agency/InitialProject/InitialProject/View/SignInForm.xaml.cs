@@ -46,12 +46,18 @@ namespace InitialProject
             User user = _repository.GetByUsername(Username);
             if (user != null)
             {
+
                 if(user.password == txtPassword.Password)
                 {
                     OwnerInterface ownerInterface = new OwnerInterface();
                     TourGuideInterface tourGuideInterface = new TourGuideInterface();
                     GuestTwoInterface guestTwoInterface = new GuestTwoInterface();
                     GuestOneInterface guestOneInterface = new GuestOneInterface();
+                   
+                    LoggedUser.id = user.id;
+                    LoggedUser.username = user.username;
+                    LoggedUser.role = user.role;
+
                     if (user.role == "Owner")
                     {
                         ownerInterface.Show();
