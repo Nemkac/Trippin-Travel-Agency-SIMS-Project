@@ -18,6 +18,7 @@ using Dapper;
 using InitialProject.Model;
 using InitialProject.Service;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using System.Configuration;
 
 namespace InitialProject.View
 {
@@ -139,13 +140,15 @@ namespace InitialProject.View
             List<string> displayableDates = new List<string>();
             foreach (List<DateTime> checkInCheckOut in availableDates)
             {
-                string date = checkInCheckOut[0].ToString().Substring(0, checkInCheckOut[0].ToString().Length - 11) + "  -  " + checkInCheckOut[1].ToString().Substring(0, checkInCheckOut[0].ToString().Length - 11);
+                string arrivalPart = checkInCheckOut[0].Date.ToShortDateString() + "  -  ";
+                string departurePart = checkInCheckOut[1].Date.ToShortDateString();
+                string date = arrivalPart + departurePart;
                 displayableDates.Add(date);
             }
             var result = displayableDates.Select(s => new { value = s }).ToList();
             dataGrid2.ItemsSource = result;
-
-        }
+            
+            }
 
         private List<DateTime> GetDateLimits(object sender, RoutedEventArgs e)
         {

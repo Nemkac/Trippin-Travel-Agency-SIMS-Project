@@ -37,6 +37,7 @@
         <Button Content="Book" HorizontalAlignment="Left" Height="50" Margin="520,335,0,0" VerticalAlignment="Top" Width="92"  Click="BookAccommodation"/>
         <DataGrid HorizontalAlignment="Left" Height="80" Margin="272,320,0,0" VerticalAlignment="Top" Width="238" Name ="dataGrid2" />
         <TextBlock HorizontalAlignment="Left" Height="133" Margin="623,283,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="157" Name="successfullyBooked"/>
+        <TextBlock HorizontalAlignment="Left" Height="64" Margin="27,328,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" RenderTransformOrigin="0.56,0.609" Name= "debugger"/>
 
     </Grid>
 </Window>

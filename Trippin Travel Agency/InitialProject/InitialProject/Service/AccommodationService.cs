@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Security.AccessControl;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -122,18 +123,48 @@ namespace InitialProject.Service
             return filteredList;
         }
 
-        public List<List<DateTime>> GetAvailableDates(Accommodation accommodation, int days, List<DateTime> dateLimits)
+        public List<List<DateTime>> GetAvailableDates(Accommodation accommodation, int daysToBook, List<DateTime> dateLimits)
         {
             DataBaseContext context = new DataBaseContext();
             List<Booking> bookings = context.Bookings.ToList();
             DateTime startingDate = dateLimits[0];
             DateTime endingDate = dateLimits[1];
             int startEndSpan = (endingDate.Subtract(startingDate)).Days;
-            int daysToBook = days;
-            // nadji sve bookinge u tom smestaju
-            List<Booking> sameAccommodationBookings = new List<Booking>();
             List<List<DateTime>> availablePeriods = new List<List<DateTime>>();
-            List<DateTime> checkInCheckOut = new List<DateTime>();
+
+            List<Booking> sameAccommodationBookings = new List<Booking>();
+            sameAccommodationBookings = GetAccommodationsBookings(bookings, accommodation); 
+            if (sameAccommodationBookings.Count == 0)
+            {
+                for (int i = 0; i <= startEndSpan - daysToBook; i++)
+                {   
+                    availablePeriods.Add(new List<DateTime>() { startingDate.AddDays(i), startingDate.AddDays(i + daysToBook) });
+                }
+                return availablePeriods;
+            }
+
+            List<List<DateTime>> takenDates = new List<List<DateTime>>();
+            foreach (Booking booking in sameAccommodationBookings)
+            {
+                takenDates.Add(new List<DateTime>() { DateTime.Parse(booking.arrival), DateTime.Parse(booking.departure) });
+            }
+            
+
+            if (FindAvailableDates(startEndSpan, daysToBook,startingDate, takenDates).Count > 0)
+            {
+                return FindAvailableDates(startEndSpan, daysToBook, startingDate, takenDates);
+            }
+
+            if (SuggestAdditionalDates(startEndSpan, daysToBook, startingDate, takenDates).Count > 0)
+            {
+                return SuggestAdditionalDates(startEndSpan, daysToBook, startingDate, takenDates);
+            }
+            return null;       
+        }
+
+        public List<Booking> GetAccommodationsBookings(List<Booking> bookings, Accommodation accommodation) 
+        {
+            List<Booking> sameAccommodationBookings = new List<Booking>();
             foreach (Booking booking in bookings)
             {
                 if (booking.accommodationId == accommodation.id)
@@ -141,28 +172,14 @@ namespace InitialProject.Service
                     sameAccommodationBookings.Add(booking);
                 }
             }
-            // ako nije nadjen nijedan booking, ponudi sve moguce datume koji upadaju izmedju dva zadata
-            if (sameAccommodationBookings.Count == 0)
-            {
-                for (int i = 0; i <= startEndSpan - daysToBook; i++)
-                {
-                    availablePeriods.Add(new List<DateTime>() { startingDate.AddDays(i), startingDate.AddDays(i + daysToBook) });
-                }
-                return availablePeriods;
-            }
+            return sameAccommodationBookings;
+        }
 
-            // izvuci sve zauzete datume tog smestaja u neku listu
-            List<DateTime> arrivalAndDepartueOfFoundBooking = new List<DateTime>();
-            List<List<DateTime>> allDates = new List<List<DateTime>>();
-            foreach (Booking booking in sameAccommodationBookings)
-            {
-                allDates.Add(new List<DateTime>() { DateTime.Parse(booking.arrival), DateTime.Parse(booking.departure) });
-            }
-
-            // nadji slobodan datum 
+        public List<List<DateTime>> FindAvailableDates(int startEndSpan, int daysToBook, DateTime startingDate, List<List<DateTime>> takenDates)
+        {
             DateTime exactDay;
             int availablePeriod;
-            bool availablePeriodFound = false;
+            List<List<DateTime>> availablePeriods = new List<List<DateTime>>();
             for (int i = 0; i <= startEndSpan - daysToBook; i++)
             {
                 availablePeriod = 0;
@@ -170,7 +187,7 @@ namespace InitialProject.Service
                 {
                     exactDay = startingDate.AddDays(j);
 
-                    foreach (List<DateTime> bookingsDates in allDates)
+                    foreach (List<DateTime> bookingsDates in takenDates)
                     {
                         if (exactDay >= bookingsDates[0] && exactDay < bookingsDates[1])
                         {
@@ -181,24 +198,24 @@ namespace InitialProject.Service
                 if (availablePeriod == 0)
                 {
                     availablePeriods.Add(new List<DateTime>() { startingDate.AddDays(i), startingDate.AddDays(i + daysToBook) });
-                    availablePeriodFound = true;
                 }
             }
-            if (availablePeriodFound)
-            {
-                return availablePeriods;
-            }
+            return availablePeriods;
+        }
 
-            // ako je availablePeriodFound ostao na false onda se predlazu neki datumi van onih zadatih
+        public List<List<DateTime>> SuggestAdditionalDates(int startEndSpan, int daysToBook, DateTime startingDate, List<List<DateTime>> takenDates) 
+        {
             int periodsFound = 0;
-
+            DateTime exactDay;
+            int availablePeriod;
+            List<List<DateTime>> availablePeriods = new List<List<DateTime>>();
             for (int i = 0; i < startEndSpan - daysToBook + 1095; i++)
             {
                 availablePeriod = 0;
                 for (int j = i; j < i + daysToBook; j++)
                 {
                     exactDay = startingDate.AddDays(j);
-                    foreach (List<DateTime> bookingsDates in allDates)
+                    foreach (List<DateTime> bookingsDates in takenDates)
                     {
                         if (exactDay >= bookingsDates[0] && exactDay < bookingsDates[1])
                         {
@@ -209,7 +226,6 @@ namespace InitialProject.Service
                 if (availablePeriod == 0)
                 {
                     availablePeriods.Add(new List<DateTime>() { startingDate.AddDays(i), startingDate.AddDays(i + daysToBook) });
-                    availablePeriodFound = true;
                     periodsFound++;
                     if (periodsFound == 3)
                     {
@@ -217,14 +233,9 @@ namespace InitialProject.Service
                     }
                 }
             }
-
-            if (!availablePeriodFound)
-            {
-                // napisi da nema slobodnih datuma u naredne 3 godine
-                return availablePeriods;
-            }
             return availablePeriods;
         }
+
     }
 }
 
