@@ -30,70 +30,18 @@ namespace InitialProject.View
         public OwnerInterface()
         {
             InitializeComponent();
-            this.Loaded += ShowBookings;
         }
 
         private void ShowBookings(object sender, RoutedEventArgs e)
         {
-            GuestRateService guestRateService = new GuestRateService(); 
-            BookingService bookingService = new BookingService();
-            DataBaseContext bookingContext = new DataBaseContext();
-            List<BookingDTO> dataList = new List<BookingDTO>();
-            BookingDTO dto = new BookingDTO();
-
-            foreach (Booking booking in bookingContext.Bookings.ToList())
-            {
-                dto = bookingService.CreateDTO(booking);
-                dataList.Add(dto);
-            }
-
-            this.bookingDataGrid.ItemsSource = dataList;
-
-            foreach (Booking booking in bookingContext.Bookings.ToList())
-            {
-                if (ValidForNotification(guestRateService, booking))
-                {
-                    string guestUsername = bookingService.GetGuestName(booking.Id);
-                    MessageBox.Show($"Guest {guestUsername} has not been rated yet for booking: " + $"{booking.Id}!");
-                }
-            }
-        }
-
-        private static bool ValidForNotification(GuestRateService guestRateService, Booking booking)
-        {
-            DateTime departureDate = DateTime.ParseExact(booking.departure, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            DateTime currentDate = DateTime.Now;
-            TimeSpan timeSinceDeparture = currentDate - departureDate;
-            if (timeSinceDeparture.TotalDays <= 5 && timeSinceDeparture.TotalDays >= 0 && !guestRateService.IsRated(booking.Id)) return true;
-            return false;
+            OwnersBookingDisplay bookingDisplay = new OwnersBookingDisplay();
+            bookingDisplay.Show();
         }
 
         private void RegisterNewAccommodation(object sender, RoutedEventArgs e)
         {
             AccommodationRegistrationInterface accommodationRegistrationInterface = new AccommodationRegistrationInterface();
             accommodationRegistrationInterface.Show();
-            this.Close();
         }
-
-        private void RateGuest(object sender, RoutedEventArgs e)
-        {
-            DataBaseContext isAlreadyRated = new DataBaseContext();
-            List<GuestRate> rates = isAlreadyRated.GuestRate.ToList();
-            Button button = sender as Button;
-            BookingDTO bookingDTO = button.DataContext as BookingDTO;
-            int bookingId = bookingDTO.bookingId;
-            foreach (GuestRate rate in rates)
-            {
-                if(rate.bookingId == bookingDTO.bookingId)
-                {
-                    MessageBox.Show("Guest is already rated!");
-                    return;
-                }
-            }
-            RateGuestInterface rateGuestInterface = new RateGuestInterface(bookingId);
-            rateGuestInterface.Show();
-        }
-
     }
-
 }

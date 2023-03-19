@@ -112,5 +112,6 @@ namespace InitialProject.View
             hutRadioButton.IsChecked = false;
             apartmentRadioButton.IsChecked = false;
         }
+
     }
 }

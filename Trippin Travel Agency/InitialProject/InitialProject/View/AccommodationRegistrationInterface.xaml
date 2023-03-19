@@ -7,7 +7,6 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="AccommodationRegistrationInterface" Height="450" Width="570">
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -32,7 +31,7 @@
         <RadioButton x:Name="houseRadioButton" Content="House" HorizontalAlignment="Left" Margin="350,268,0,0" VerticalAlignment="Top" Height="14" Width="137"/>
         <RadioButton x:Name="apartmentRadioButton" Content="Apartment" HorizontalAlignment="Left" Margin="350,296,0,0" VerticalAlignment="Top"/>
         <RadioButton x:Name="hutRadioButton" Content="Hut" HorizontalAlignment="Left" Margin="350,321,0,0" VerticalAlignment="Top"/>
-        <Rectangle HorizontalAlignment="Left" Height="93" Margin="330,257,0,0" Stroke="Black" VerticalAlignment="Top" Width="190"/>
+        <Rectangle HorizontalAlignment="Left" Height="93" Margin="333,257,0,0" Stroke="Black" VerticalAlignment="Top" Width="187"/>
 
     </Grid>
 </Window>

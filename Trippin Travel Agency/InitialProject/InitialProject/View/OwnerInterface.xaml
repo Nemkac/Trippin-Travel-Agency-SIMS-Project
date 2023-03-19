@@ -1,24 +1,105 @@
 ﻿<Window x:Class="InitialProject.View.OwnerInterface"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:InitialProject.ViewModels"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="OwnerInterface" Height="450" Width="850">
+        WindowStartupLocation="CenterScreen"
+        Title="OwnerInterface" Height="768" Width="1024">
+
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:AccommodationRegistrationViewModel}">
+            <local:AccommodationRegistrationInterface/>
+        </DataTemplate>
+    </Window.Resources>
+
     <Grid>
-        <Label Content="Welcome owner!" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
-        <Button x:Name="button" Click="RegisterNewAccommodation" Content="Register new accommodation" HorizontalAlignment="Left" Margin="630,10,0,0" VerticalAlignment="Top" Height="39" Width="196"/>
-        <DataGrid x:Name="bookingDataGrid" HorizontalAlignment="Left" Height="192" Margin="24,88,0,0" VerticalAlignment="Top" Width="580" d:ItemsSource="{d:SampleData ItemCount=5}">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Rate Guest" Click="RateGuest"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+        <Grid.ColumnDefinitions>
+            <!--Navigation menu-->
+            <ColumnDefinition Width="300"/>
+            <!--Content section-->
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!--Navigation menu-->
+        <Border CornerRadius="10, 0, 0, 10" Grid.Column="0">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0.7">
+                    <GradientStop Color="#0582CA" Offset="0"/>
+                    <GradientStop Color="#006494" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <StackPanel>
+                <!--Logo-->
+                <StackPanel Orientation="Horizontal" Height="35" Margin="0, 25, 0, 40" HorizontalAlignment="Center">
+                    <Image Source="C:\Users\Nemanja\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\logo.png"/>
+                    <TextBlock Text="TRIPPIN" Foreground="#f4fff8" FontFamily="Montserrat" FontSize="20" FontWeight="Medium" VerticalAlignment="Center" Margin="10, 0, 0, 0"/>
+                </StackPanel>
+
+                <!--Menu buttons-->
+                <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource HoverColor}" Checked="RegisterNewAccommodation">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="FloppyDisk" Style="{StaticResource menuButtonIcon}"/>
+                        <TextBlock Style="{StaticResource menuButtonText}" Text="New Accommodation"/>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource HoverColor}" Checked="ShowBookings">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="Bookmark" Style="{StaticResource menuButtonIcon}"/>
+                        <TextBlock Style="{StaticResource menuButtonText}" Text="Bookings"/>
+                    </StackPanel>
+                </RadioButton>
+
+            </StackPanel>
+        </Border>
+
+        <!--Main section-->
+        <Border CornerRadius="10, 0, 0, 10" Grid.Column="1">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="1, 1" EndPoint="0, 0">
+                    <GradientStop Color="#fffcf7" Offset="0"/>
+                    <GradientStop Color="#f4fff8" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+           
+            <Grid>
+                <Grid.RowDefinitions>
+                    <!--Header / Caption-->
+                    <RowDefinition Height="45"/>
+                    <!--Content/Child views-->
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <!--Header/Caption-->
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!--Caption-->
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <fa:IconImage Icon="{Binding Icon}" Height="20" Width="20" Foreground="#003554" Margin="35, 0, 10, 0"/>
+                        <TextBlock Text="{Binding Caption}" Foreground="#003554" FontSize="18" FontWeight="Medium" FontFamily="Montserrat" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    
+                    <!--User-->
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" FlowDirection="RightToLeft" VerticalAlignment="Center" Margin="0, 0, 35, 0">
+                        <Label Content="Hello, Nemanja" FontSize="18" FontWeight="Medium" FontFamily="Montserrat" Foreground="#003554"/>
+                    </StackPanel>
+                </Grid>
+                
+                <!--Content/Child views-->
+                <ContentControl Content="{Binding CurrentChildView}" Grid.Row="1" Margin="25"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>
