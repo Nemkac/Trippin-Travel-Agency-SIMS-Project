@@ -37,11 +37,5 @@ namespace InitialProject.View
             OwnersBookingDisplay bookingDisplay = new OwnersBookingDisplay();
             bookingDisplay.Show();
         }
-
-        private void RegisterNewAccommodation(object sender, RoutedEventArgs e)
-        {
-            AccommodationRegistrationInterface accommodationRegistrationInterface = new AccommodationRegistrationInterface();
-            accommodationRegistrationInterface.Show();
-        }
     }
 }

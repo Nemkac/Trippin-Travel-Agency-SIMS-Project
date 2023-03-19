@@ -61,20 +61,20 @@ namespace InitialProject.ViewModels
         }
 
         //--> Commands
-        public ICommand ShowOwnerInterfaceViewCommand { get; }
+        public ICommand ShowOwnersBookingViewCommand { get; }
         public ICommand ShowAccommodationRegistrationViewCommand { get; }
 
         public MainViewModel()
         {
             //Initialize commands
-            ShowOwnerInterfaceViewCommand = new ViewModelCommand(ExecuteShowOwnerInterfaceViewCommand);
+            ShowOwnersBookingViewCommand = new ViewModelCommand(ExecuteShowOwnersBookingViewCommand);
             ShowAccommodationRegistrationViewCommand = new ViewModelCommand(ExecuteShowAccommodationRegistrationViewCommand);
 
             //Default view
-            ExecuteShowOwnerInterfaceViewCommand(null);
+            ExecuteShowOwnersBookingViewCommand(null);
         }
 
-        private void ExecuteShowOwnerInterfaceViewCommand(object obj)
+        private void ExecuteShowOwnersBookingViewCommand(object obj)
         {
             CurrentChildView = new OwnersBookingDisplayViewModel();
             Caption = "Bookings";

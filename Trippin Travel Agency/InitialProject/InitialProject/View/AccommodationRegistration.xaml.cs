@@ -1,12 +1,8 @@
 ﻿using InitialProject.Context;
 using InitialProject.Model;
-using InitialProject.Repository;
 using InitialProject.Services;
-using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,27 +13,27 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Xml;
 
 namespace InitialProject.View
 {
     /// <summary>
-    /// Interaction logic for AccommodationRegistrationInterface.xaml
+    /// Interaction logic for AccommodationRegistration.xaml
     /// </summary>
-    public partial class AccommodationRegistrationInterface : Window
+    public partial class AccommodationRegistration : UserControl
     {
-        public AccommodationRegistrationInterface()
+        public AccommodationRegistration()
         {
             InitializeComponent();
             DataBaseContext countryContext = new DataBaseContext();
-            List<AccommodationLocation> countryList  = countryContext.LocationsOfAccommodations.ToList();
-            foreach(AccommodationLocation location in countryList.ToList())
+            List<AccommodationLocation> countryList = countryContext.LocationsOfAccommodations.ToList();
+            foreach (AccommodationLocation location in countryList.ToList())
             {
                 if (!countryComboBox.Items.Contains(location.country))
                 {
                     countryComboBox.Items.Add(location.country);
-                }    
+                }
             }
         }
 
@@ -58,9 +54,6 @@ namespace InitialProject.View
             Accommodation accommodation = new Accommodation(name, location, guestLimit, minDaysBooked, bookingCancelPeriod, type);
             AccommodationService.Save(accommodation);
             clearInputs();
-            OwnerInterface ownerInterface = new OwnerInterface();
-            ownerInterface.Show();
-            this.Close();
         }
 
         private Model.Type GetRadioButtonInput()
@@ -90,9 +83,9 @@ namespace InitialProject.View
             DataBaseContext cityContext = new DataBaseContext();
             List<AccommodationLocation> cityList = cityContext.LocationsOfAccommodations.ToList();
 
-            foreach(AccommodationLocation location in  cityList.ToList()) 
-            { 
-                if(location.country.ToString() == selectedCountry)
+            foreach (AccommodationLocation location in cityList.ToList())
+            {
+                if (location.country.ToString() == selectedCountry)
                 {
                     if (!cityComboBox.Items.Contains(location.city))
                     {
@@ -112,6 +105,5 @@ namespace InitialProject.View
             hutRadioButton.IsChecked = false;
             apartmentRadioButton.IsChecked = false;
         }
-
     }
 }

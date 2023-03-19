@@ -16,7 +16,11 @@
 
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:AccommodationRegistrationViewModel}">
-            <local:AccommodationRegistrationInterface/>
+            <local:AccommodationRegistration/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:OwnersBookingDisplayViewModel}">
+            <local:OwnersBookingInterface/>
         </DataTemplate>
     </Window.Resources>
 
@@ -45,13 +49,13 @@
                 </StackPanel>
 
                 <!--Menu buttons-->
-                <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource HoverColor}" Checked="RegisterNewAccommodation">
+                <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource HoverColor}" Command="{Binding ShowAccommodationRegistrationViewCommand}">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="FloppyDisk" Style="{StaticResource menuButtonIcon}"/>
                         <TextBlock Style="{StaticResource menuButtonText}" Text="New Accommodation"/>
                     </StackPanel>
                 </RadioButton>
-                <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource HoverColor}" Checked="ShowBookings">
+                <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource HoverColor}" Command="{Binding ShowOwnersBookingViewCommand}">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Bookmark" Style="{StaticResource menuButtonIcon}"/>
                         <TextBlock Style="{StaticResource menuButtonText}" Text="Bookings"/>
