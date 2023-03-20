@@ -31,11 +31,5 @@ namespace InitialProject.View
         {
             InitializeComponent();
         }
-
-        private void ShowBookings(object sender, RoutedEventArgs e)
-        {
-            OwnersBookingDisplay bookingDisplay = new OwnersBookingDisplay();
-            bookingDisplay.Show();
-        }
     }
 }

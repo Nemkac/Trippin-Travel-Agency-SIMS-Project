@@ -33,7 +33,7 @@
         </Grid.ColumnDefinitions>
         
         <!--Navigation menu-->
-        <Border CornerRadius="10, 0, 0, 10" Grid.Column="0">
+        <Border Grid.Column="0">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0.7">
                     <GradientStop Color="#0582CA" Offset="0"/>
@@ -55,13 +55,18 @@
                         <TextBlock Style="{StaticResource menuButtonText}" Text="New Accommodation"/>
                     </StackPanel>
                 </RadioButton>
-                <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource HoverColor}" Command="{Binding ShowOwnersBookingViewCommand}">
+                <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource HoverColor}" Command="{Binding ShowOwnersBookingViewCommand}" IsChecked="True">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Bookmark" Style="{StaticResource menuButtonIcon}"/>
                         <TextBlock Style="{StaticResource menuButtonText}" Text="Bookings"/>
                     </StackPanel>
                 </RadioButton>
-
+                
+                <!--Dark theme-->
+                <StackPanel Orientation="Horizontal" Height="35" HorizontalAlignment="Center" Margin="0, 460, 0, 0">
+                    <Label Content="Toggle night mode button" FontFamily="Montserrat" FontSize="13" Foreground="#f4fff8"/>
+                </StackPanel>
+                
             </StackPanel>
         </Border>
 
