@@ -29,15 +29,14 @@
         <Button Content="Button" HorizontalAlignment="Left" Margin="414,99,0,0" VerticalAlignment="Top" Click="GetByType"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="536,98,0,0" VerticalAlignment="Top" Click="GetByGuests"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="638,99,0,0" VerticalAlignment="Top" Click="GetByDays"/>
-        <DatePicker HorizontalAlignment="Left" Margin="209,288,0,0" VerticalAlignment="Top" Name ="input_starting_date" Height="23"/>
-        <DatePicker HorizontalAlignment="Left" Margin="459,289,0,0" VerticalAlignment="Top" Name ="input_ending_date"/>
-        <Label Content="Starting date" HorizontalAlignment="Left" Margin="218,266,0,0" VerticalAlignment="Top" Height="25"/>
-        <Label Content="Ending date" HorizontalAlignment="Left" Margin="470,266,0,0" VerticalAlignment="Top"/>
-        <Button Content="Check for dates" HorizontalAlignment="Left" Height="18" Margin="336,289,0,0" VerticalAlignment="Top" Width="104" Click="CheckForDates" />
-        <Button Content="Book" HorizontalAlignment="Left" Height="50" Margin="520,335,0,0" VerticalAlignment="Top" Width="92"  Click="BookAccommodation"/>
-        <DataGrid HorizontalAlignment="Left" Height="80" Margin="272,320,0,0" VerticalAlignment="Top" Width="238" Name ="dataGrid2" />
-        <TextBlock HorizontalAlignment="Left" Height="133" Margin="623,283,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="157" Name="successfullyBooked"/>
-        <TextBlock HorizontalAlignment="Left" Height="64" Margin="27,328,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" RenderTransformOrigin="0.56,0.609" Name= "debugger"/>
+        <DatePicker HorizontalAlignment="Center" Margin="0,299,0,0" VerticalAlignment="Top" Name ="input_starting_date" Height="23"/>
+        <DatePicker HorizontalAlignment="Center" Margin="0,375,0,0" VerticalAlignment="Top" Name ="input_ending_date"/>
+        <Label Content="Starting date" HorizontalAlignment="Left" Margin="358,277,0,0" VerticalAlignment="Top" Height="25"/>
+        <Label Content="Ending date" HorizontalAlignment="Left" Margin="360,352,0,0" VerticalAlignment="Top"/>
+        <Button Content="Check for dates" HorizontalAlignment="Left" Height="42" Margin="613,331,0,0" VerticalAlignment="Top" Width="104" Click="CheckForDates" />
+        <TextBox HorizontalAlignment="Left" Height="20" Margin="478,342,0,0" TextWrapping="Wrap" Name ="numberOfDays"  VerticalAlignment="Top" Width="92"/>
+        <TextBlock HorizontalAlignment="Left" Margin="492,325,0,0" TextWrapping="Wrap" Text="Days to stay" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Height="51" Margin="478,373,0,0" TextWrapping="Wrap" Name="warningText" VerticalAlignment="Top" Width="92"/>
 
     </Grid>
 </Window>

@@ -133,10 +133,9 @@ namespace InitialProject.View
             Accommodation accommodation = (Accommodation)dataGrid.SelectedItem;
             selectedAccommodation = accommodation;
             List<DateTime> dateLimits = GetDateLimits(sender, e);
-            int daysToBook = (int.Parse(input_days.Text));
+            int daysToBook = (int.Parse(numberOfDays.Text));
             List<List<DateTime>> availableDates = accommodationService.GetAvailableDates(accommodation, daysToBook, dateLimits);
 
-            // razlaganje u normalne datume
             List<string> displayableDates = new List<string>();
             foreach (List<DateTime> checkInCheckOut in availableDates)
             {
@@ -145,10 +144,19 @@ namespace InitialProject.View
                 string date = arrivalPart + departurePart;
                 displayableDates.Add(date);
             }
-            var result = displayableDates.Select(s => new { value = s }).ToList();
-            dataGrid2.ItemsSource = result;
-            
+            dynamic result = displayableDates.Select(s => new { value = s }).ToList();
+            if (daysToBook < selectedAccommodation.minDaysBooked)
+            {
+                warningText.Text = selectedAccommodation.name + " cannot be booked for under " + selectedAccommodation.minDaysBooked.ToString() + " days.";
             }
+            else
+            {
+                BookAccommodationInterface BookAccommodationInterface = new BookAccommodationInterface();
+                BookAccommodationInterface.SetAattributes(selectedAccommodation.id, 4);
+                BookAccommodationInterface.ShowsBookings(result);
+                BookAccommodationInterface.Show();
+            }
+        }
 
         private List<DateTime> GetDateLimits(object sender, RoutedEventArgs e)
         {
@@ -158,28 +166,6 @@ namespace InitialProject.View
             dateLimits.Add(startingDate);
             dateLimits.Add(endingDate);
             return dateLimits;
-        }
-
-        private void BookAccommodation(object sender, RoutedEventArgs e)
-        {
-            string selectedDate = dataGrid2.SelectedItem.ToString();
-            selectedDate = selectedDate.Substring(10, selectedDate.Length - 12);
-            List<string> dates = selectedDate.Split("-").ToList();
-            List<string> checkInCheckOut = new List<string>();
-            string arrival = dates[0].Substring(0, dates[0].Length - 2);
-            string departure = dates[1].Substring(2, dates[0].Length - 2);
-
-            int accommodationId = selectedAccommodation.id;
-            string accommodationName = selectedAccommodation.name;
-            int userId = 4;
-            int guestsNumber = int.Parse(input_guests.Text);
-            int stayingPeriod = (DateTime.Parse(departure).Subtract(DateTime.Parse(arrival))).Days;
-            string report = "";
-            report = "Accommodations name :" + accommodationName + "\nAccommodation id : " + accommodationId + "\nGuests id : " + userId + "\nArrival : " + arrival;
-            report += "\nDeparture : " + departure + "\nDays : " + stayingPeriod + "\nNo.of guests : " + guestsNumber + "\nAccommodation successfully booked !";
-            successfullyBooked.Text = report;
-            Booking booking = new Booking(accommodationId, arrival, departure, stayingPeriod, userId);
-            Services.BookingService.Save(booking);
         }
     }
 }
