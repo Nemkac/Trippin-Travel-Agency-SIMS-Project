@@ -43,8 +43,10 @@ namespace InitialProject.Model
         public int hoursDuration { get; set; }
 
         public List<Image> imageLinks { get; set; }
+
+        public bool active { get; set; }
  
-        public Tour(string name, TourLocation location, ICollection<KeyPoint> keyPoints, string description, language language, int touristLimit, DateTime startDates, int hoursDuration, List<Image> imageLinks)
+        public Tour(string name, TourLocation location, ICollection<KeyPoint> keyPoints, string description, language language, int touristLimit, DateTime startDates, int hoursDuration, List<Image> imageLinks, bool active)
         {
             this.name = name;
             this.location = location;
@@ -55,7 +57,7 @@ namespace InitialProject.Model
             this.startDates = startDates;
             this.hoursDuration = hoursDuration;
             this.imageLinks = imageLinks;
-
+            this.active = active;
         }
 
         public Tour(string name, TourLocation location, ICollection<KeyPoint> keyPoints, string description, language language, int touristLimit, DateTime startDates, int hoursDuration)
@@ -68,7 +70,6 @@ namespace InitialProject.Model
             this.touristLimit = touristLimit;
             this.startDates = startDates;
             this.hoursDuration = hoursDuration;
-
         }
 
         public Tour() { }

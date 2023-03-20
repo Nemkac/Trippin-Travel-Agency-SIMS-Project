@@ -32,6 +32,14 @@ namespace InitialProject.View
             }
 
         }
+
+        private void LeadTrackTourLive(object sender, RoutedEventArgs e)
+        {
+            TrackTourLiveInterface TrackTourLiveInterface = new TrackTourLiveInterface();
+            TrackTourLiveInterface.Show();
+
+        }
+
         private void countryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cityComboBox.Items.Clear();
@@ -76,8 +84,7 @@ namespace InitialProject.View
 
             ICollection<KeyPoint> keyPoints = new List<KeyPoint>
             {
-                new KeyPoint(startingPointTextBox.Text, false),
-                new KeyPoint(endingPointTextBox.Text, false)
+                new KeyPoint(startingPointTextBox.Text, false)
             };
 
             foreach (var textBox in dynamicTextBoxes)
@@ -85,6 +92,8 @@ namespace InitialProject.View
                 KeyPoint kp = new KeyPoint(textBox.Text, false);
                 keyPoints.Add(kp);
             }
+
+            keyPoints.Add(new KeyPoint(endingPointTextBox.Text, false));
 
             List<Model.Image> imageLinks = new List<Model.Image>();
 
@@ -95,7 +104,9 @@ namespace InitialProject.View
                 imageLinks.Add(image);
             }
 
-            Tour tour = new Tour(name, location, keyPoints, description, languageInput, guestLimit, selectedDate, hoursDuration, imageLinks);
+            bool active = false; 
+
+            Tour tour = new Tour(name, location, keyPoints, description, languageInput, guestLimit, selectedDate, hoursDuration, imageLinks, active);
             bool tourExists = TourService.CheckTourExists(name, selectedDate);
             if (!tourExists)
             {

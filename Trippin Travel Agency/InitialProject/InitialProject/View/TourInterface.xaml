@@ -34,7 +34,7 @@
                 <!-- Third row for Track Tour button -->
                 <Button Content="Track Tour Live" Background="#40739e" Foreground="#f5f6fa" Margin="0" 
                     Height="40" HorizontalAlignment="Stretch" BorderThickness="0"
-                    MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" FontFamily="Poppins" FontSize="16"/>
+                    MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" FontFamily="Poppins" FontSize="16" Click="LeadTrackTourLive"/>
             </Grid>
         </StackPanel>
         <!-- Information at the top -->
@@ -64,7 +64,7 @@
             <TextBox x:Name="hoursDurationTextBox" HorizontalAlignment="Left" Margin="15, 0, 0, 0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="150"/>
             
             <!-- Button -->
-            <Button x:Name="save" Content="Save Tour" Click="Save" HorizontalAlignment="Left" Margin="15,30,0,0" VerticalAlignment="Top" Width="190" Height="50" Background="BlueViolet" Foreground="White"/>
+            <Button x:Name="save" Content="Save Tour" Click="Save" HorizontalAlignment="Left" Margin="15,30,0,0" VerticalAlignment="Top" Width="190" Height="50" Background="#e84118" Foreground="White"/>
 
         </StackPanel>
         <!-- Description, date -->

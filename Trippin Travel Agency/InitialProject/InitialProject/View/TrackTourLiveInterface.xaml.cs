@@ -1,7 +1,10 @@
-﻿using System.Windows;
+﻿using InitialProject.Model;
+using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using InitialProject.Service;
 
 namespace InitialProject.View
 {
@@ -10,6 +13,9 @@ namespace InitialProject.View
         public TrackTourLiveInterface()
         {
             InitializeComponent();
+            TourService tourService = new TourService();
+            List<Tour> toursToday = tourService.GetToursToday();
+            tourDataGrid.ItemsSource = toursToday;
         }
 
         private void LeadCreateTour(object sender, RoutedEventArgs e)
@@ -43,6 +49,30 @@ namespace InitialProject.View
             {
                 btn.Background = new SolidColorBrush(Color.FromRgb(64, 115, 158));
                 btn.Foreground = new SolidColorBrush(Color.FromRgb(245, 246, 250));
+            }
+        }
+
+        private void StartTourButton_Click(object sender, RoutedEventArgs e)
+        {
+            Tour selectedTour = tourDataGrid.SelectedItem as Tour;
+
+            if (selectedTour != null)
+            {
+                // Activate the selected tour
+                selectedTour.active = true;
+                TourManager.ActiveTours.Add(selectedTour);
+
+                if (TourManager.ActiveTours.Count > 1)
+                {
+                    // Cannot have more than one active tour
+                    MessageBox.Show("You cannot have more than one active tour");
+                    return;
+                }
+
+                // Show the TourLive window
+                TourLive tourLive = new TourLive(selectedTour);
+                tourLive.DataContext = selectedTour;
+                tourLive.Show();
             }
         }
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="TrackTourLiveInterface" Height="768" Width="1366" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Track Tour Live" Height="768" Width="1366" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
     <DockPanel LastChildFill="False" Background="#f5f6fa">
         <!-- Menu bar on the left -->
@@ -31,6 +31,46 @@
         <!-- Information at the top -->
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Height="75" Background="#f5f6fa">
             <Label Content="Hello, Aleksa!" VerticalAlignment="Center" FontFamily="Poppins" FontSize="18" Foreground="#192a56" Margin="1000,0,0,0"/>
+        </StackPanel>
+        <!-- All tours -->
+        <StackPanel Orientation="Vertical" DockPanel.Dock="Top" Height="500">
+            <DataGrid x:Name="tourDataGrid">
+                <DataGrid.CellStyle>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Setter Property="FontFamily" Value="Poppins"/>
+                        <Setter Property="FontSize" Value="16"/>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.RowStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="FontFamily" Value="Poppins"/>
+                        <Setter Property="FontSize" Value="12"/>
+                        <Setter Property="Padding" Value="6"/>
+                        <Setter Property="Background" Value="#dcdde1"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Start a tour">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <!-- Button Start Tour-->
+                            <DataTemplate>
+                                <Button Content="Start tour" Click="StartTourButton_Click" Width="140" Height="50" Background="#44bd32" Foreground="White" BorderThickness="0" Margin="0"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!--<ListView x:Name="tourListView" Background="#ffffff" Height="500"  DisplayMemberPath="name">
+                
+            </ListView> -->
         </StackPanel>
     </DockPanel>
 

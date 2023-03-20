@@ -1,18 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace InitialProject.Model
 {
-    public class KeyPoint
+    public class KeyPoint : INotifyPropertyChanged
     {   
         public int id { get; set; }
 
         public string name { get; set; }
 
-        public bool visited { get; set; }
+        private bool _visited;
+        public bool visited
+        {
+            get { return _visited; }
+            set
+            {
+                _visited = value;
+                OnPropertyChanged("visited");
+            }
+        }
 
         public int tourId { get; set; }
 
@@ -21,6 +31,13 @@ namespace InitialProject.Model
             this.name = name;
             this.visited = visited;
         }
-        public KeyPoint() { }   
+        public KeyPoint() { }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
