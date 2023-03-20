@@ -2,7 +2,6 @@
 using InitialProject.Context;
 using InitialProject.Model;
 using InitialProject.Service;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -15,55 +14,67 @@ namespace InitialProject.View
 {
     public partial class TourLive : Window
     {
-        private TourService tourService = new TourService();
-        private Tour selectedTour;
+        private readonly TourService tourService = new TourService();
+        private readonly Tour selectedTour;
+        private readonly List<KeyPoint> keyPointsList = new List<KeyPoint>();
 
         public TourLive(Tour selectedTour)
         {
             InitializeComponent();
 
             this.selectedTour = selectedTour;
-
             DataContext = selectedTour;
 
-            List<KeyPoint> keyPointsList = new List<KeyPoint>();
+            LoadKeyPoints();
+            SubscribeToKeyPointChanges();
+            DisplayKeyPoints();
+            UpdateFirstKeyPointToVisited();
+        }
+
+        private void LoadKeyPoints()
+        {
             using (var db = new DataBaseContext())
             {
-                keyPointsList = db.KeyPoints.Where(kp => kp.tourId == selectedTour.id).ToList();
+                keyPointsList.AddRange(db.KeyPoints.Where(kp => kp.tourId == selectedTour.id));
             }
+        }
 
+        private void SubscribeToKeyPointChanges()
+        {
             foreach (var keyPoint in keyPointsList)
             {
                 keyPoint.PropertyChanged += KeyPoint_PropertyChanged;
             }
+        }
 
+        private void DisplayKeyPoints()
+        {
             keyPointsDataGrid.ItemsSource = keyPointsList;
-            keyPointsList[0].visited = true;
+        }
 
+        private void UpdateFirstKeyPointToVisited()
+        {
+            keyPointsList[0].visited = true;
             using (var db = new DataBaseContext())
             {
                 db.KeyPoints.Update(keyPointsList[0]);
                 db.SaveChanges();
             }
-
         }
 
         private void LeadCreateTour(object sender, RoutedEventArgs e)
         {
-            TourInterface TourInterface = new TourInterface();
-            TourInterface.Show();
+            new TourInterface().Show();
         }
 
         private void LeadTrackTourLive(object sender, RoutedEventArgs e)
         {
-            TrackTourLiveInterface TrackTourLiveInterface = new TrackTourLiveInterface();
-            TrackTourLiveInterface.Show();
+            new TrackTourLiveInterface().Show();
         }
 
         public void Button_MouseEnter(object sender, MouseEventArgs e)
         {
-            Button btn = sender as Button;
-            if (btn != null)
+            if (sender is Button btn)
             {
                 btn.Background = new SolidColorBrush(Color.FromRgb(255, 0, 208));
                 btn.Foreground = new SolidColorBrush(Color.FromRgb(64, 115, 158));
@@ -72,8 +83,7 @@ namespace InitialProject.View
 
         public void Button_MouseLeave(object sender, MouseEventArgs e)
         {
-            Button btn = sender as Button;
-            if (btn != null)
+            if (sender is Button btn)
             {
                 btn.Background = new SolidColorBrush(Color.FromRgb(64, 115, 158));
                 btn.Foreground = new SolidColorBrush(Color.FromRgb(245, 246, 250));
@@ -82,7 +92,7 @@ namespace InitialProject.View
 
         public void ChangeButton_Click(object sender, RoutedEventArgs e)
         {
-            KeyPoint selectedKeyPoint = (KeyPoint)keyPointsDataGrid.SelectedItem;
+            var selectedKeyPoint = (KeyPoint)keyPointsDataGrid.SelectedItem;
             selectedKeyPoint.visited = true;
 
             using (var db = new DataBaseContext())
@@ -91,48 +101,31 @@ namespace InitialProject.View
                 db.SaveChanges();
             }
 
-            List<KeyPoint> keyPointsList = new List<KeyPoint>();
-            using (var db = new DataBaseContext())
-            {
-                keyPointsList = db.KeyPoints.Where(kp => kp.tourId == selectedTour.id).ToList();
-            }
-
-            keyPointsDataGrid.ItemsSource = keyPointsList;
-
+            RefreshKeyPoints();
             if (tourService.IsTourFinished(keyPointsList))
             {
-                MessageBox.Show("Tour finished");
-                this.Close();  // close the window
-                selectedTour.active = false;  // update the tour's active property
-                TourManager.ActiveTours.Clear();  // clear the list in TourManager
+                EndTour();
             }
         }
 
-
-        private void KeyPoint_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void RefreshKeyPoints()
         {
-            if (e.PropertyName == "visited")
+            using (var db = new DataBaseContext())
             {
-                keyPointsDataGrid.Items.Refresh();
+                keyPointsList.Clear();
+                keyPointsList.AddRange(db.KeyPoints.Where(kp => kp.tourId == selectedTour.id));
             }
+            keyPointsDataGrid.Items.Refresh();
         }
 
         private void EndTourButton_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to end the tour?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                List<KeyPoint> keyPointsList = new List<KeyPoint>();
-                using (var db = new DataBaseContext())
-                {
-                    keyPointsList = db.KeyPoints.Where(kp => kp.tourId == selectedTour.id).ToList();
-                }
-
+                RefreshKeyPoints();
                 if (tourService.IsTourFinished(keyPointsList))
                 {
-                    MessageBox.Show("Tour finished");
-                    this.Close();  // close the window
-                    selectedTour.active = false;  // update the tour's active property
-                    TourManager.ActiveTours.Clear();  // clear the list in TourManager
+                    EndTour();
                 }
                 else
                 {
@@ -141,5 +134,20 @@ namespace InitialProject.View
             }
         }
 
+        private void EndTour()
+        {
+            MessageBox.Show("Tour finished");
+            Close();
+            selectedTour.active = false;
+            TourManager.ActiveTours.Clear();
+        }
+
+        private void KeyPoint_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(KeyPoint.visited))
+            {
+                keyPointsDataGrid.Items.Refresh();
+            }
+        }
     }
 }
