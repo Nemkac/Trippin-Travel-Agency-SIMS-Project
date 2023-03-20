@@ -215,6 +215,7 @@ namespace InitialProject.Service
                 return toursToday;
             }
         }
+
         public Tour GetTourByButton(object sender)
         {
             Button tourButton = sender as Button;
@@ -232,8 +233,6 @@ namespace InitialProject.Service
         {
             return keyPoints != null && keyPoints.All(kp => kp.visited);
         }
-
-
 
         public List<TourDTO> GetPreviouslySelected(int id)
         {
