@@ -36,7 +36,7 @@
         <Button Content="Check for dates" HorizontalAlignment="Left" Height="42" Margin="613,331,0,0" VerticalAlignment="Top" Width="104" Click="CheckForDates" />
         <TextBox HorizontalAlignment="Left" Height="20" Margin="478,342,0,0" TextWrapping="Wrap" Name ="numberOfDays"  VerticalAlignment="Top" Width="92"/>
         <TextBlock HorizontalAlignment="Left" Margin="492,325,0,0" TextWrapping="Wrap" Text="Days to stay" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Height="51" Margin="478,373,0,0" TextWrapping="Wrap" Name="warningText" VerticalAlignment="Top" Width="92"/>
+        <TextBlock HorizontalAlignment="Left" Height="51" Margin="472,367,0,0" TextWrapping="Wrap" Name="warningText" VerticalAlignment="Top" Width="130"/>
 
     </Grid>
 </Window>

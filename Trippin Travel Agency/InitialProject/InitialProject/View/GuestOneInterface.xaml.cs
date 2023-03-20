@@ -135,15 +135,8 @@ namespace InitialProject.View
             List<DateTime> dateLimits = GetDateLimits(sender, e);
             int daysToBook = (int.Parse(numberOfDays.Text));
             List<List<DateTime>> availableDates = accommodationService.GetAvailableDates(accommodation, daysToBook, dateLimits);
+            List<string> displayableDates = Services.BookingService.GetDisplayableDates(availableDates);
 
-            List<string> displayableDates = new List<string>();
-            foreach (List<DateTime> checkInCheckOut in availableDates)
-            {
-                string arrivalPart = checkInCheckOut[0].Date.ToShortDateString() + "  -  ";
-                string departurePart = checkInCheckOut[1].Date.ToShortDateString();
-                string date = arrivalPart + departurePart;
-                displayableDates.Add(date);
-            }
             dynamic result = displayableDates.Select(s => new { value = s }).ToList();
             if (daysToBook < selectedAccommodation.minDaysBooked)
             {
