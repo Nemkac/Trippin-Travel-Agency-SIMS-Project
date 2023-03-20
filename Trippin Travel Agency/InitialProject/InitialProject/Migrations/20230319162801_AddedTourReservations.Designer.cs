@@ -3,6 +3,7 @@ using System;
 using InitialProject.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230319162801_AddedTourReservations")]
+    partial class AddedTourReservations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.3");
@@ -96,36 +99,6 @@ namespace InitialProject.Migrations
                     b.ToTable("Bookings");
                 });
 
-            modelBuilder.Entity("InitialProject.Model.GuestRate", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("bookingId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("cleanness")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("comment")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("overallRating")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("respectingRules")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("userId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("id");
-
-                    b.ToTable("GuestRate");
-                });
-
             modelBuilder.Entity("InitialProject.Model.Image", b =>
                 {
                     b.Property<int>("id")
@@ -173,9 +146,6 @@ namespace InitialProject.Migrations
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("active")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("description")

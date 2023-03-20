@@ -49,33 +49,35 @@ namespace InitialProject.Service
             }
 
         }
+
         public List<Tour> createTour()
         {
             DataBaseContext context = new DataBaseContext();
 
             Tour tour = new Tour();
 
-            tour.name = "Novi Sad GHETTO";
-            
-            TourLocation location = new TourLocation("Novi Sad", "Serbia");
+            tour.name = "Washington DC";
+            TourLocation loc = new TourLocation("Washington", "USA");
+
+            tour.location = loc.id;
 
             tour.location = location.id;
            
             ICollection<KeyPoint> keyPoints = new List<KeyPoint>
             {
-                new KeyPoint("Detelinara", false),
-                new KeyPoint("Novo Naselje",false)
+                new KeyPoint("White house", false),
+                new KeyPoint("Stadion",false)
             };
             tour.keyPoints = keyPoints.ToList();
-            
-            tour.description = "Visit Magic Forest";
-            
-            tour.language = language.Serbian;
-            
+
+            tour.description = "Visit presidental house";
+
+            tour.language = language.English;
+
             tour.touristLimit = 15;
 
-            tour.startDates = new DateTime(2022,2,2,05,00,0);
-            
+            tour.startDates = new DateTime(2022, 2, 2, 05, 00, 0);
+
             tour.hoursDuration = 24;
 
             context.Attach(tour);
@@ -101,21 +103,22 @@ namespace InitialProject.Service
             }
             return requiredTour;
         }
-        public TourDTO CreateDTO(Tour tour)
+
+        public TourDTO CreateDTO(Tour tour) 
         {
             DataBaseContext dataBaseContext = new DataBaseContext();
 
             string keyPoints = "";
 
-            foreach (KeyPoint keyPoint in dataBaseContext.KeyPoints.ToList()) 
+            foreach (KeyPoint keyPoint in dataBaseContext.KeyPoints.ToList())
             {
                 if (keyPoint.tourId == tour.id)
-                {
-                    keyPoints += keyPoint.name + '\n'; 
+                {                                                               // Ovaj deo mozda refaktorisati? 
+                    keyPoints += keyPoint.name + '\n';
                 }
             }
-            TourLocation tmp = GetTourLocation(tour.id);
-            TourDTO tourDTO = new(tour.id, tour.name, tour.description,tmp.city, tmp.country, keyPoints, tour.language, tour.touristLimit, tour.startDates, tour.hoursDuration);
+            TourLocation tmp = GetTourLocation(tour.location);
+            TourDTO tourDTO = new(tour.id, tour.name, tour.description, tmp.city, tmp.country, keyPoints, tour.language, tour.touristLimit, tour.startDates, tour.hoursDuration);
             return tourDTO;
         }
         public List<TourDTO> GetByInputCityName(string cityName)
@@ -126,7 +129,7 @@ namespace InitialProject.Service
 
             foreach (Tour tour in dataBaseContext.Tours.ToList())
             {
-                TourLocation tourLocation = GetTourLocation(tour.id);
+                TourLocation tourLocation = GetTourLocation(tour.location);
                 if (tourLocation.city.ToUpper().Contains(cityName.ToUpper()))
                 {
                     tourDTO = CreateDTO(tour);
@@ -143,7 +146,7 @@ namespace InitialProject.Service
 
             foreach (Tour tour in dataBaseContext.Tours.ToList())
             {
-                TourLocation tourLocation = GetTourLocation(tour.id);
+                TourLocation tourLocation = GetTourLocation(tour.location);
                 if (tourLocation.country.ToUpper().Contains(countryName.ToUpper()))
                 {
                     tourDTO = CreateDTO(tour);
@@ -234,5 +237,72 @@ namespace InitialProject.Service
 
 
 
+        public List<TourDTO> GetPreviouslySelected(int id)
+        {
+            DataBaseContext dataBaseContext = new DataBaseContext();
+            List<TourDTO> tourDTOs = new List<TourDTO>();
+            TourDTO tourDTO = new TourDTO();
+
+            foreach (Tour tour in dataBaseContext.Tours.ToList())
+            {
+                if (tour.id == id)
+                {
+                    tourDTO = CreateDTO(tour);
+                    tourDTOs.Add(tourDTO);
+                    break;
+                }
+            }
+            return tourDTOs;
+        }
+        public List<TourDTO> GetNonFullTours(string cityName, string nameOfFullTour)
+        {
+            DataBaseContext dataBaseContext = new DataBaseContext();
+            List<TourDTO> tourDTOs = new List<TourDTO>();
+            TourDTO tourDTO = new TourDTO();
+
+            foreach (Tour tour in dataBaseContext.Tours.ToList())
+            {
+                if (tour.name != nameOfFullTour)
+                {
+                    TourLocation tourLocation = GetTourLocation(tour.location);
+                    if (tourLocation.city.ToUpper().Contains(cityName.ToUpper()))
+                    {
+                        tourDTO = CreateDTO(tour);
+                        tourDTOs.Add(tourDTO);
+                    }
+                }
+            }
+            return tourDTOs;
+        }
+
+        public int ReserveTour(int tourIndex, int numberOfTourists)
+        {
+            DataBaseContext dataBase = new DataBaseContext();
+            List<Tour> allTours = dataBase.Tours.ToList();
+
+            foreach (Tour tour in allTours)
+            {
+                if (tour.id == tourIndex)
+                {
+                    if (tour.touristLimit - numberOfTourists >= 0)
+                    {
+                        tour.touristLimit -= numberOfTourists;
+                        TourReservation tourReservation = new TourReservation(LoggedUser.id, tourIndex, numberOfTourists);
+                        dataBase.Attach(tourReservation);
+                        dataBase.SaveChanges();
+                        return 0; // Tour registered
+
+                    }else if (tour.touristLimit > 0)
+                    {
+                        return 1; // Too many guests for selected tour
+                    }
+                    if(tour.touristLimit == 0)
+                    {
+                        return -1; // Tour filled
+                    }
+                }
+            }
+            return -2; // Error return value
+        }
     }
 }
