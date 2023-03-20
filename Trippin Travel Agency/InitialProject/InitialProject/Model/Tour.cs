@@ -28,7 +28,7 @@ namespace InitialProject.Model
 
         public string name { get; set; }
 
-        public TourLocation location { get; set; }
+        public int location { get; set; }
 
         public ICollection<KeyPoint> keyPoints { get; set; }
 
@@ -46,7 +46,7 @@ namespace InitialProject.Model
 
         public bool active { get; set; }
  
-        public Tour(string name, TourLocation location, ICollection<KeyPoint> keyPoints, string description, language language, int touristLimit, DateTime startDates, int hoursDuration, List<Image> imageLinks, bool active)
+        public Tour(string name, int location, ICollection<KeyPoint> keyPoints, string description, language language, int touristLimit, DateTime startDates, int hoursDuration, List<Image> imageLinks, bool active)
         {
             this.name = name;
             this.location = location;
@@ -60,7 +60,7 @@ namespace InitialProject.Model
             this.active = active;
         }
 
-        public Tour(string name, TourLocation location, ICollection<KeyPoint> keyPoints, string description, language language, int touristLimit, DateTime startDates, int hoursDuration)
+        public Tour(string name, int location, ICollection<KeyPoint> keyPoints, string description, language language, int touristLimit, DateTime startDates, int hoursDuration)
         {
             this.name = name;
             this.location = location;

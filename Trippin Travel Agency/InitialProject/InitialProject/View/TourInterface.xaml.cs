@@ -64,6 +64,8 @@ namespace InitialProject.View
         List<TextBox> dynamicImageLinksTextBoxes = new List<TextBox>();
         private void Save(object sender, RoutedEventArgs e)
         {
+
+            // Basic Properties 
             string name = tourNameTextBox.Text;
 
             string country = countryComboBox.SelectedValue.ToString(); 
@@ -81,6 +83,10 @@ namespace InitialProject.View
             language languageInput = (language)languageComboBox.SelectedValue;
 
             DateTime selectedDate = datePicker.SelectedDate ?? DateTime.Today;
+
+            bool active = false;
+
+            // Add KeyPoints
 
             ICollection<KeyPoint> keyPoints = new List<KeyPoint>
             {
@@ -103,10 +109,10 @@ namespace InitialProject.View
                 image.imageLink = textBox.Text;
                 imageLinks.Add(image);
             }
+            
+            Tour tour = new Tour(name, location.id, keyPoints, description, languageInput, guestLimit, selectedDate, hoursDuration, imageLinks, active);
 
-            bool active = false; 
-
-            Tour tour = new Tour(name, location, keyPoints, description, languageInput, guestLimit, selectedDate, hoursDuration, imageLinks, active);
+            // Does tour already exists
             bool tourExists = TourService.CheckTourExists(name, selectedDate);
             if (!tourExists)
             {
@@ -120,7 +126,6 @@ namespace InitialProject.View
 
             }
         }
-
         private void clearInputs()
         {
             datePicker.SelectedDate = null; 

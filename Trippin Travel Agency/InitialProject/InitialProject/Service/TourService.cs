@@ -59,7 +59,7 @@ namespace InitialProject.Service
             
             TourLocation location = new TourLocation("Novi Sad", "Serbia");
 
-            tour.location = location;
+            tour.location = location.id;
            
             ICollection<KeyPoint> keyPoints = new List<KeyPoint>
             {
