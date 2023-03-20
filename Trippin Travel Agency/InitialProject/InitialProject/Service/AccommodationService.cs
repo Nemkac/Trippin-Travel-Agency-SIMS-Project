@@ -6,6 +6,7 @@ using System.Security.AccessControl;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml.Linq;
 using InitialProject.Context;
 using InitialProject.Model;
@@ -29,22 +30,23 @@ namespace InitialProject.Service
             return null;
         }
 
-        public List<string> GetLocation(int id)
+        // Potrebno refaktorisati
+        public List<string> GetLocationList(int id)
         {
             DataBaseContext context = new DataBaseContext();
             List<Accommodation> dataList = context.Accommodations.ToList();
-            List<string> countyAndCity = new List<string>();
+            List<string> countryAndCity = new List<string>();
             List<AccommodationLocation> locationsData = context.LocationsOfAccommodations.ToList();
 
             foreach (Accommodation accommodation in dataList)
             {
                 if (accommodation.id == id)
                 {
-                    countyAndCity.Add(accommodation.location.country);
-                    countyAndCity.Add(accommodation.location.city);
+                    countryAndCity.Add(accommodation.location.country);
+                    countryAndCity.Add(accommodation.location.city);
                 }
             }
-            return countyAndCity;
+            return countryAndCity;
         }
 
         public List<int> GetByName(string name)
@@ -143,19 +145,17 @@ namespace InitialProject.Service
 
         public List<List<DateTime>> GetAvailableDates(Accommodation accommodation, int daysToBook, List<DateTime> dateLimits)
         {
-            DataBaseContext context = new DataBaseContext();
-            List<Booking> bookings = context.Bookings.ToList();
-            DateTime startingDate = dateLimits[0];
-            DateTime endingDate = dateLimits[1];
-            int startEndSpan = (endingDate.Subtract(startingDate)).Days;
-            List<List<DateTime>> availablePeriods = new List<List<DateTime>>();
-            List<Booking> sameAccommodationBookings = new List<Booking>();
-            sameAccommodationBookings = GetAccommodationsBookings(bookings, accommodation); 
+            // Get date basic properties
+            DateTime startingDate;
+            int startEndSpan;
+            List<List<DateTime>> availablePeriods;
+            List<Booking> sameAccommodationBookings;
+            GetDateBasicProperties(accommodation, dateLimits, out startingDate, out startEndSpan, out availablePeriods, out sameAccommodationBookings);
 
             if (sameAccommodationBookings.Count == 0)
             {
                 for (int i = 0; i <= startEndSpan - daysToBook; i++)
-                {   
+                {
                     availablePeriods.Add(new List<DateTime>() { startingDate.AddDays(i), startingDate.AddDays(i + daysToBook) });
                 }
                 return availablePeriods;
@@ -166,17 +166,29 @@ namespace InitialProject.Service
             {
                 takenDates.Add(new List<DateTime>() { DateTime.Parse(booking.arrival), DateTime.Parse(booking.departure) });
             }
-            
-            if (FindAvailableDates(startEndSpan, daysToBook,startingDate, takenDates).Count > 0)
+
+            if (GetAvailableDates(startEndSpan, daysToBook, startingDate, takenDates).Count > 0)
             {
-                return FindAvailableDates(startEndSpan, daysToBook, startingDate, takenDates);
+                return GetAvailableDates(startEndSpan, daysToBook, startingDate, takenDates);
             }
 
             if (SuggestAdditionalDates(startEndSpan, daysToBook, startingDate, takenDates).Count > 0)
             {
                 return SuggestAdditionalDates(startEndSpan, daysToBook, startingDate, takenDates);
             }
-            return null;       
+            return null;
+        }
+
+        private void GetDateBasicProperties(Accommodation accommodation, List<DateTime> dateLimits, out DateTime startingDate, out int startEndSpan, out List<List<DateTime>> availablePeriods, out List<Booking> sameAccommodationBookings)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<Booking> bookings = context.Bookings.ToList();
+            startingDate = dateLimits[0];
+            DateTime endingDate = dateLimits[1];
+            startEndSpan = (endingDate.Subtract(startingDate)).Days;
+            availablePeriods = new List<List<DateTime>>();
+            sameAccommodationBookings = new List<Booking>();
+            sameAccommodationBookings = GetAccommodationsBookings(bookings, accommodation);
         }
 
         public List<Booking> GetAccommodationsBookings(List<Booking> bookings, Accommodation accommodation) 
@@ -192,7 +204,7 @@ namespace InitialProject.Service
             return sameAccommodationBookings;
         }
 
-        public List<List<DateTime>> FindAvailableDates(int startEndSpan, int daysToBook, DateTime startingDate, List<List<DateTime>> takenDates)
+        public List<List<DateTime>> GetAvailableDates(int startEndSpan, int daysToBook, DateTime startingDate, List<List<DateTime>> takenDates)
         {
             DateTime exactDay;
             int availablePeriod;
@@ -220,6 +232,7 @@ namespace InitialProject.Service
             return availablePeriods;
         }
 
+        // Treba refaktorisati
         public List<List<DateTime>> SuggestAdditionalDates(int startEndSpan, int daysToBook, DateTime startingDate, List<List<DateTime>> takenDates) 
         {
             int periodsFound = 0;
@@ -251,6 +264,31 @@ namespace InitialProject.Service
                 }
             }
             return availablePeriods;
+        }
+
+        public static AccommodationLocation GetLocation(string country, string city)
+        {
+            DataBaseContext locationContext = new DataBaseContext();
+            List<AccommodationLocation> locationsList = locationContext.LocationsOfAccommodations.ToList();
+
+            foreach (AccommodationLocation location in locationsList.ToList())
+            {
+                if (location.country == country && location.city == city)
+                {
+                    return location;
+                }
+            }
+
+            AccommodationLocation newLocation = new AccommodationLocation(country, city);
+            return newLocation;
+        }
+
+        public static void Save(Accommodation accommodation)
+        {
+            DataBaseContext saveContext = new DataBaseContext();
+            saveContext.Attach(accommodation);
+            saveContext.SaveChanges();
+            MessageBox.Show("Accommodation registered succesfuly!");
         }
 
     }

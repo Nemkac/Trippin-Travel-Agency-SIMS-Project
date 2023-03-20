@@ -22,21 +22,22 @@
         <TextBox HorizontalAlignment="Left" Margin="624,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="64" Name="input_days" Height="35"/>
         <TextBox HorizontalAlignment="Left" Margin="284,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Height="35" Name="input_city"/>
         <TextBlock HorizontalAlignment="Left" Margin="57,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="656" Name="debuger"/>
-        <Button Content="Refresh" HorizontalAlignment="Left" Margin="702,198,0,0" VerticalAlignment="Top" Click="showAccommodations"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="122,99,0,0" VerticalAlignment="Top" Click="GetByName"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="218,98,0,0" VerticalAlignment="Top" Click="GetByCountry"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="304,99,0,0" VerticalAlignment="Top" Click="GetByCity"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="414,99,0,0" VerticalAlignment="Top" Click="GetByType"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="536,98,0,0" VerticalAlignment="Top" Click="GetByGuests"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="638,99,0,0" VerticalAlignment="Top" Click="GetByDays"/>
-        <DatePicker HorizontalAlignment="Center" Margin="0,299,0,0" VerticalAlignment="Top" Name ="input_starting_date" Height="23" />
-        <DatePicker HorizontalAlignment="Center" Margin="0,375,0,0" VerticalAlignment="Top" Name ="input_ending_date"/>
-        <Label Content="Starting date" HorizontalAlignment="Left" Margin="358,277,0,0" VerticalAlignment="Top" Height="25"/>
-        <Label Content="Ending date" HorizontalAlignment="Left" Margin="360,352,0,0" VerticalAlignment="Top"/>
-        <Button Content="Check for dates" HorizontalAlignment="Left" Height="42" Margin="613,331,0,0" VerticalAlignment="Top" Width="104" Click="CheckForDates" />
-        <TextBox HorizontalAlignment="Left" Height="20" Margin="478,342,0,0" TextWrapping="Wrap" Name ="numberOfDays"  VerticalAlignment="Top" Width="92"/>
-        <TextBlock HorizontalAlignment="Left" Margin="492,325,0,0" TextWrapping="Wrap" Text="Days to stay" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Height="51" Margin="472,367,0,0" TextWrapping="Wrap" Name="warningText" VerticalAlignment="Top" Width="130"/>
-
+        <Canvas Margin="-31,32,31,-32">
+            <DatePicker HorizontalAlignment="Center" VerticalAlignment="Top" Name ="input_starting_date" Height="23" Canvas.Right="350" Canvas.Bottom ="110" />
+            <DatePicker HorizontalAlignment="Center" VerticalAlignment="Top" Name ="input_ending_date" Canvas.Bottom="65" Canvas.Right="350"/>
+            <Label Content="Starting date" HorizontalAlignment="Center" VerticalAlignment="Top" Height="25" Canvas.Bottom="130" Canvas.Right="365" />
+            <Label Content="Ending date" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Bottom="1" Canvas.Right="365"/>
+            <Button Content="Check for dates" HorizontalAlignment="Left" Height="42" Margin="613,331,0,0" VerticalAlignment="Top" Width="104" Click="CheckForDates" Canvas.Bottom="70" Canvas.Right="100"/>
+            <TextBox HorizontalAlignment="Left" Height="20" Margin="478,342,0,0" TextWrapping="Wrap" Name ="numberOfDays"  VerticalAlignment="Top" Width="92" Canvas.Bottom="90" Canvas.Right="227"/>
+            <TextBlock HorizontalAlignment="Left" Margin="492,325,0,0" TextWrapping="Wrap" Text="Days to stay" VerticalAlignment="Top" Canvas.Bottom="120" Canvas.Right="240"/>
+            <TextBlock HorizontalAlignment="Left" Height="51" Margin="472,367,0,0" TextWrapping="Wrap" Name="warningText" VerticalAlignment="Top" Width="130" Canvas.Bottom="40" Canvas.Right="205"/>
+            <Button Content="Refresh" HorizontalAlignment="Left" Margin="702,198,0,0" VerticalAlignment="Top" Click="ShowAccommodations" Canvas.Right ="20" Canvas.Bottom="275"/>
+        </Canvas>
     </Grid>
 </Window>

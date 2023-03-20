@@ -1,13 +1,14 @@
 ﻿using InitialProject.Context;
 using InitialProject.DTO;
 using InitialProject.Model;
+using InitialProject.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InitialProject.Services
+namespace InitialProject.Service
 {
     class BookingService
     {

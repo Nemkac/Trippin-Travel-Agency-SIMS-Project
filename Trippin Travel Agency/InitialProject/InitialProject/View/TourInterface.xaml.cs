@@ -19,7 +19,12 @@ namespace InitialProject.View
         public TourInterface()
         {
             InitializeComponent();
+            FillCountryComboBox();
 
+        }
+
+        private void FillCountryComboBox()
+        {
             DataBaseContext countryToursContext = new DataBaseContext();
 
             List<TourLocation> countryList = countryToursContext.TourLocation.ToList();
@@ -30,7 +35,6 @@ namespace InitialProject.View
                     countryComboBox.Items.Add(location.country);
                 }
             }
-
         }
 
         private void LeadTrackTourLive(object sender, RoutedEventArgs e)
@@ -44,7 +48,12 @@ namespace InitialProject.View
         {
             cityComboBox.Items.Clear();
             string selectedCountry = countryComboBox.SelectedValue.ToString();
-            
+
+            GetCitiesByCountry(selectedCountry);
+        }
+
+        private void GetCitiesByCountry(string selectedCountry)
+        {
             DataBaseContext cityContext = new DataBaseContext();
             List<TourLocation> cityList = cityContext.TourLocation.ToList();
 
@@ -73,16 +82,12 @@ namespace InitialProject.View
             bool active;
             CreateTourBasicProperties(out name, out location, out guestLimit, out hoursDuration, out description, out languageInput, out selectedDate, out active);
 
-            // Add KeyPoints
             ICollection<KeyPoint> keyPoints = CreateKeyPoints();
 
-            // Add image links
             List<Model.Image> imageLinks = CreateImageLinks();
 
-            // Constructor for tour
             Tour tour = new Tour(name, location.id, keyPoints, description, languageInput, guestLimit, selectedDate, hoursDuration, imageLinks, active);
 
-            // Does tour already exists
             DoesTourExist(name, selectedDate, tour);
         }
 
@@ -91,7 +96,7 @@ namespace InitialProject.View
             name = tourNameTextBox.Text;
             string country = countryComboBox.SelectedValue.ToString();
             string city = cityComboBox.SelectedValue.ToString();
-            location = TourService.findLocation(country, city);
+            location = TourService.Get(country, city);
             string guestLimitInput = guestLimitTextBox.Text;
             guestLimit = int.Parse(guestLimitInput);
             string hoursDurationInput = hoursDurationTextBox.Text;
@@ -104,7 +109,7 @@ namespace InitialProject.View
 
         private void DoesTourExist(string name, DateTime selectedDate, Tour tour)
         {
-            bool tourExists = TourService.CheckTourExists(name, selectedDate);
+            bool tourExists = TourService.CheckExistence(name, selectedDate);
             if (!tourExists)
             {
                 TourService.Save(tour);

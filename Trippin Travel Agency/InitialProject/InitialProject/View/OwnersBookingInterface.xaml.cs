@@ -1,7 +1,7 @@
 ﻿using InitialProject.Context;
 using InitialProject.DTO;
 using InitialProject.Model;
-using InitialProject.Services;
+using InitialProject.Service;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -21,9 +21,7 @@ using System.Windows.Shapes;
 
 namespace InitialProject.View
 {
-    /// <summary>
-    /// Interaction logic for OwnersBookingInterface.xaml
-    /// </summary>
+
     public partial class OwnersBookingInterface : UserControl
     {
         public OwnersBookingInterface()

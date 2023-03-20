@@ -23,9 +23,7 @@ using InitialProject.DTO;
 
 namespace InitialProject.View
 {
-    /// <summary>
-    /// Interaction logic for GuestTwoInterface.xaml
-    /// </summary>
+
     public partial class GuestTwoInterface : Window
     {
         public GuestTwoInterface()
@@ -58,43 +56,50 @@ namespace InitialProject.View
 
             if (!cityName.Text.Equals(""))
             {
-                List<TourDTO> tourDTOsByCityName = tourService.GetByInputCityName(cityName.Text);
+                List<TourDTO> tourDTOsByCityName = tourService.GetByCity(cityName.Text);
                 this.dataGrid.ItemsSource = tourDTOsByCityName;
 
             }
             else if (!countryName.Text.Equals(""))
             {
-                List<TourDTO> tourDTOsByCountryName = tourService.GetByInputCountryName(countryName.Text);
+                List<TourDTO> tourDTOsByCountryName = tourService.GetByCountry(countryName.Text);
                 this.dataGrid.ItemsSource = tourDTOsByCountryName;
             }
             else if (!duration.Text.Equals(""))
             {
-                List<TourDTO> tourDTOsByDuration = tourService.GetByInputTourDuration(duration.Text);
+                List<TourDTO> tourDTOsByDuration = tourService.GetByDuration(duration.Text);
                 this.dataGrid.ItemsSource = tourDTOsByDuration;
             }
             else if (!touristLimit.Text.Equals(""))
             {
-                List<TourDTO> tourDTOsByTouristLimit = tourService.GetByInputTouristLimit(touristLimit.Text);
+                List<TourDTO> tourDTOsByTouristLimit = tourService.GetByTouristLimit(touristLimit.Text);
                 this.dataGrid.ItemsSource = tourDTOsByTouristLimit;
             }
             else if (languageBox.SelectedIndex > -1)  
             {
-                List<TourDTO> tourDTOsByLanguage = tourService.GetByInputLanguage((language)languageBox.Items[languageBox.SelectedIndex]);
+                List<TourDTO> tourDTOsByLanguage = tourService.GetByLanguage((language)languageBox.Items[languageBox.SelectedIndex]);
                 languageBox.SelectedIndex = -1;
                 this.dataGrid.ItemsSource = tourDTOsByLanguage;
             }
-            else // ovo refaktorisati u funkciju u servisu koja pravi dtoove za sve ture.
+            else
             {
-                List<TourDTO> dataList = new List<TourDTO>();
-                TourDTO dto = new TourDTO();
-
-                foreach (Tour tour in context.Tours.ToList())
-                {
-                    dto = tourService.CreateDTO(tour);
-                    dataList.Add(dto);
-                }
+                List<TourDTO> dataList = GetTourDtos(tourService, context);
                 this.dataGrid.ItemsSource = dataList;
             }
+        }
+
+        private static List<TourDTO> GetTourDtos(TourService tourService, DataBaseContext context)
+        {
+            List<TourDTO> dataList = new List<TourDTO>();
+            TourDTO dto = new TourDTO();
+
+            foreach (Tour tour in context.Tours.ToList())
+            {
+                dto = tourService.CreateDTO(tour);
+                dataList.Add(dto);
+            }
+
+            return dataList;
         }
 
         private void ReserveTour(object sender, RoutedEventArgs e)
@@ -104,7 +109,7 @@ namespace InitialProject.View
             List<TourDTO> tourDTOs = new List<TourDTO>();   
             int index = selectedTour.id;
             int numberOfGuests = Int32.Parse(NumberOfTourists.Text);
-            int flag =  tourService.ReserveTour(index, numberOfGuests);
+            int flag =  tourService.BookTour(index, numberOfGuests);
 
             if (flag == 0)
             {
@@ -118,7 +123,7 @@ namespace InitialProject.View
             }
             else if (flag == -1) {
                 this.TextBlock.Text = "This tour is full. Here are some other tours in the same location.";
-                tourDTOs = tourService.GetNonFullTours(selectedTour.cityLocation,selectedTour.name);
+                tourDTOs = tourService.GetBookableTours(selectedTour.cityLocation,selectedTour.name);
                 this.dataGrid.ItemsSource = tourDTOs;
             }
         }

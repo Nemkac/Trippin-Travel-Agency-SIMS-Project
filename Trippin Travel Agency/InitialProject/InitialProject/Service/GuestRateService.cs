@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace InitialProject.Services
+namespace InitialProject.Service
 {
     class GuestRateService
     {
@@ -23,9 +23,9 @@ namespace InitialProject.Services
         {
             DataBaseContext ratedBookingContext = new DataBaseContext();
             List<GuestRate> ratedGuests = ratedBookingContext.GuestRate.ToList();
-            foreach(GuestRate guestRate in ratedGuests.ToList())
+            foreach (GuestRate guestRate in ratedGuests.ToList())
             {
-                if(guestRate.bookingId == bookingId)
+                if (guestRate.bookingId == bookingId)
                 {
                     return true;
                 }

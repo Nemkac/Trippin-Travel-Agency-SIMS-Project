@@ -23,9 +23,7 @@ using InitialProject.DTO;
 
 namespace InitialProject.View
 {
-    /// <summary>
-    /// Interaction logic for GuestOneInterface.xaml
-    /// </summary>
+
     public partial class GuestOneInterface : Window
     {
         public AccommodationLocation location { get; set; }
@@ -41,10 +39,10 @@ namespace InitialProject.View
         public GuestOneInterface()
         {
             InitializeComponent();
-            this.Loaded += showAccommodations;
+            this.Loaded += ShowAccommodations;
         }
 
-        private void showAccommodations(object sender, RoutedEventArgs e)
+        private void ShowAccommodations(object sender, RoutedEventArgs e)
         {
             DataBaseContext context = new DataBaseContext();
             List<Accommodation> accommodations = context.Accommodations.ToList();
@@ -52,7 +50,7 @@ namespace InitialProject.View
             List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
             foreach (Accommodation accommodation in accommodations)
             {
-                accommodationsDTO.Add(new AccommodationDTO(accommodation,accommodationService.GetLocation(accommodation.id)));
+                accommodationsDTO.Add(new AccommodationDTO(accommodation,accommodationService.GetLocationList(accommodation.id)));
             }
             this.dataGrid.ItemsSource = accommodationsDTO;
         }
@@ -69,7 +67,7 @@ namespace InitialProject.View
             List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
             foreach (Accommodation accommodation in foundResults)
             {
-                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetLocation(accommodation.id)));
+                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetLocationList(accommodation.id)));
             }
             this.dataGrid.ItemsSource = accommodationsDTO;
 
@@ -88,7 +86,7 @@ namespace InitialProject.View
             List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
             foreach (Accommodation accommodation in foundResults)
             {
-                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetLocation(accommodation.id)));
+                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetLocationList(accommodation.id)));
             }
             this.dataGrid.ItemsSource = accommodationsDTO;
         }
@@ -106,7 +104,7 @@ namespace InitialProject.View
             List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
             foreach (Accommodation accommodation in foundResults)
             {
-                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetLocation(accommodation.id)));
+                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetLocationList(accommodation.id)));
             }
             this.dataGrid.ItemsSource = accommodationsDTO;
         }
@@ -123,7 +121,7 @@ namespace InitialProject.View
             List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
             foreach (Accommodation accommodation in foundResults)
             {
-                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetLocation(accommodation.id)));
+                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetLocationList(accommodation.id)));
             }
             this.dataGrid.ItemsSource = accommodationsDTO;
         }
@@ -140,7 +138,7 @@ namespace InitialProject.View
             List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
             foreach (Accommodation accommodation in foundResults)
             {
-                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetLocation(accommodation.id)));
+                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetLocationList(accommodation.id)));
             }
             this.dataGrid.ItemsSource = accommodationsDTO;
         }
@@ -157,21 +155,16 @@ namespace InitialProject.View
             List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
             foreach (Accommodation accommodation in foundResults)
             {
-                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetLocation(accommodation.id)));
+                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetLocationList(accommodation.id)));
             }
             this.dataGrid.ItemsSource = accommodationsDTO;
         }
 
         private void CheckForDates(object sender, RoutedEventArgs e)
         {
-            AccommodationService accommodationService = new AccommodationService();
-            AccommodationDTO accommodationDTO = (AccommodationDTO)dataGrid.SelectedItem;
-            Accommodation accommodation = accommodationService.GetById(accommodationDTO.id);
-            selectedAccommodation = accommodation;
-            List<DateTime> dateLimits = GetDateLimits(sender, e);
-            int daysToBook = (int.Parse(numberOfDays.Text));
-            List<List<DateTime>> availableDates = accommodationService.GetAvailableDates(accommodation, daysToBook, dateLimits);
-            List<string> displayableDates = Services.BookingService.GetDisplayableDates(availableDates);
+            int daysToBook;
+            List<string> displayableDates;
+            GetBasicDatesProperties(sender, e, out daysToBook, out displayableDates);
 
             dynamic result = displayableDates.Select(s => new { value = s }).ToList();
             if (daysToBook < selectedAccommodation.minDaysBooked)
@@ -181,10 +174,22 @@ namespace InitialProject.View
             else
             {
                 BookAccommodationInterface BookAccommodationInterface = new BookAccommodationInterface();
-                BookAccommodationInterface.SetAattributes(selectedAccommodation.id, 4); // logedUser.id
-                BookAccommodationInterface.ShowsBookings(result);
+                BookAccommodationInterface.SetAttributes(selectedAccommodation.id,LoggedUser.id);
+                BookAccommodationInterface.ShowBookings(result);
                 BookAccommodationInterface.Show();
             }
+        }
+
+        private void GetBasicDatesProperties(object sender, RoutedEventArgs e, out int daysToBook, out List<string> displayableDates)
+        {
+            AccommodationService accommodationService = new AccommodationService();
+            AccommodationDTO accommodationDTO = (AccommodationDTO)dataGrid.SelectedItem;
+            Accommodation accommodation = accommodationService.GetById(accommodationDTO.id);
+            selectedAccommodation = accommodation;
+            List<DateTime> dateLimits = GetDateLimits(sender, e);
+            daysToBook = (int.Parse(numberOfDays.Text));
+            List<List<DateTime>> availableDates = accommodationService.GetAvailableDates(accommodation, daysToBook, dateLimits);
+            displayableDates = Service.BookingService.GetDisplayableDates(availableDates);
         }
 
         private List<DateTime> GetDateLimits(object sender, RoutedEventArgs e)

@@ -8,9 +8,20 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Service
 {
-    public class UserService
+    class UserService
     {
-        
+        public User GetById(int id)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<User> userList = context.Users.ToList();
+            foreach (User user in userList.ToList())
+            {
+                if (user.id == id)
+                {
+                    return user;
+                }
+            }
+            return null;
+        }
     }
 }
-// ALO ATTACH + SAVECHANGES DA BI SE UPISALO U BAZU

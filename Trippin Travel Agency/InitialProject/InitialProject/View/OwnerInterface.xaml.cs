@@ -1,7 +1,7 @@
 ﻿using InitialProject.Context;
 using InitialProject.DTO;
 using InitialProject.Model;
-using InitialProject.Services;
+using InitialProject.Service;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,9 +21,7 @@ using System.Windows.Threading;
 
 namespace InitialProject.View
 {
-    /// <summary>
-    /// Interaction logic for OwnerInterface.xaml
-    /// </summary>
+
     public partial class OwnerInterface : Window
     {
 
