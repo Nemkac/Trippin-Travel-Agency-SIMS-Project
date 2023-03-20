@@ -48,7 +48,7 @@ namespace InitialProject.View
             selectedDate = selectedDate.Substring(10, selectedDate.Length - 12);
             List<string> dates = selectedDate.Split("-").ToList();
             string arrival = dates[0].Substring(0, dates[0].Length - 2);
-            string departure = dates[1].Substring(2, dates[0].Length - 2);
+            string departure = dates[1].Substring(2, dates[1].Length - 2);
             string guestsNumber = numberOfGuests.Text;
             if (int.Parse(guestsNumber) > accommodationService.GetById(accommodationId).guestLimit)
             {
