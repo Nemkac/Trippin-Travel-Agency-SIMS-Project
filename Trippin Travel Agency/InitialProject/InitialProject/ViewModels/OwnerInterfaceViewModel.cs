@@ -85,7 +85,7 @@ namespace InitialProject.ViewModels
         {
             CurrentChildView = new AccommodationRegistrationViewModel();
             Caption = "New Accommodation";
-            Icon = IconChar.FloppyDisk;
+            Icon = IconChar.Plus;
         }
     }
 }

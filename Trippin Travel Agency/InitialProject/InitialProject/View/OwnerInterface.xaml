@@ -51,7 +51,7 @@
                 <!--Menu buttons-->
                 <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource HoverColor}" Command="{Binding ShowAccommodationRegistrationViewCommand}">
                     <StackPanel Orientation="Horizontal">
-                        <fa:IconImage Icon="FloppyDisk" Style="{StaticResource menuButtonIcon}"/>
+                        <fa:IconImage Icon="Plus" Style="{StaticResource menuButtonIcon}"/>
                         <TextBlock Style="{StaticResource menuButtonText}" Text="New Accommodation"/>
                     </StackPanel>
                 </RadioButton>
