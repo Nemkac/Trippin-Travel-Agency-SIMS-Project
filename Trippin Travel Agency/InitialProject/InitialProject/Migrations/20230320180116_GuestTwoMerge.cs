@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace InitialProject.Migrations
 {
     /// <inheritdoc />
-    public partial class MigrationGuestTwo : Migration
+    public partial class GuestTwoMerge : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,6 +29,24 @@ namespace InitialProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "GuestRate",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    cleanness = table.Column<int>(type: "INTEGER", nullable: false),
+                    respectingRules = table.Column<int>(type: "INTEGER", nullable: false),
+                    comment = table.Column<string>(type: "TEXT", nullable: false),
+                    overallRating = table.Column<int>(type: "INTEGER", nullable: false),
+                    userId = table.Column<int>(type: "INTEGER", nullable: false),
+                    bookingId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GuestRate", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LocationsOfAccommodations",
                 columns: table => new
                 {
@@ -43,6 +61,26 @@ namespace InitialProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Tour",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    name = table.Column<string>(type: "TEXT", nullable: false),
+                    location = table.Column<int>(type: "INTEGER", nullable: false),
+                    description = table.Column<string>(type: "TEXT", nullable: false),
+                    language = table.Column<int>(type: "INTEGER", nullable: false),
+                    touristLimit = table.Column<int>(type: "INTEGER", nullable: false),
+                    startDates = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    hoursDuration = table.Column<int>(type: "INTEGER", nullable: false),
+                    active = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tour", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TourLocation",
                 columns: table => new
                 {
@@ -54,6 +92,21 @@ namespace InitialProject.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TourLocation", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TourReservations",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    guestId = table.Column<int>(type: "INTEGER", nullable: false),
+                    tourId = table.Column<int>(type: "INTEGER", nullable: false),
+                    guestNumber = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TourReservations", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -91,31 +144,6 @@ namespace InitialProject.Migrations
                         name: "FK_Accommodations_LocationsOfAccommodations_locationid",
                         column: x => x.locationid,
                         principalTable: "LocationsOfAccommodations",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Tour",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    name = table.Column<string>(type: "TEXT", nullable: false),
-                    locationid = table.Column<int>(type: "INTEGER", nullable: false),
-                    description = table.Column<string>(type: "TEXT", nullable: false),
-                    language = table.Column<int>(type: "INTEGER", nullable: false),
-                    touristLimit = table.Column<int>(type: "INTEGER", nullable: false),
-                    startDates = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    hoursDuration = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tour", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_Tour_TourLocation_locationid",
-                        column: x => x.locationid,
-                        principalTable: "TourLocation",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -174,11 +202,6 @@ namespace InitialProject.Migrations
                 name: "IX_KeyPoints_tourId",
                 table: "KeyPoints",
                 column: "tourId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tour_locationid",
-                table: "Tour",
-                column: "locationid");
         }
 
         /// <inheritdoc />
@@ -191,10 +214,19 @@ namespace InitialProject.Migrations
                 name: "Bookings");
 
             migrationBuilder.DropTable(
+                name: "GuestRate");
+
+            migrationBuilder.DropTable(
                 name: "Images");
 
             migrationBuilder.DropTable(
                 name: "KeyPoints");
+
+            migrationBuilder.DropTable(
+                name: "TourLocation");
+
+            migrationBuilder.DropTable(
+                name: "TourReservations");
 
             migrationBuilder.DropTable(
                 name: "Users");
@@ -204,9 +236,6 @@ namespace InitialProject.Migrations
 
             migrationBuilder.DropTable(
                 name: "Tour");
-
-            migrationBuilder.DropTable(
-                name: "TourLocation");
         }
     }
 }

@@ -60,8 +60,6 @@ namespace InitialProject.Service
             TourLocation loc = new TourLocation("Washington", "USA");
 
             tour.location = loc.id;
-
-            tour.location = location.id;
            
             ICollection<KeyPoint> keyPoints = new List<KeyPoint>
             {
