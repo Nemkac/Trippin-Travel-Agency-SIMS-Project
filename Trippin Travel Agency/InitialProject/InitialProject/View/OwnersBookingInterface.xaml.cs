@@ -70,7 +70,7 @@ namespace InitialProject.View
 
         private static bool ValidForNotification(GuestRateService guestRateService, Booking booking)
         {
-            DateTime departureDate = DateTime.ParseExact(booking.departure, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            DateTime departureDate = DateTime.ParseExact(booking.departure, "M/d/yyyy", CultureInfo.InvariantCulture);
             DateTime currentDate = DateTime.Now;
             TimeSpan timeSinceDeparture = currentDate - departureDate;
             if (timeSinceDeparture.TotalDays <= 5 && timeSinceDeparture.TotalDays >= 0 && !guestRateService.IsRated(booking.Id)) return true;
