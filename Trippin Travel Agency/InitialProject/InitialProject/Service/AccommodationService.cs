@@ -29,6 +29,24 @@ namespace InitialProject.Service
             return null;
         }
 
+        public List<string> GetLocation(int id)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<Accommodation> dataList = context.Accommodations.ToList();
+            List<string> countyAndCity = new List<string>();
+            List<AccommodationLocation> locationsData = context.LocationsOfAccommodations.ToList();
+
+            foreach (Accommodation accommodation in dataList)
+            {
+                if (accommodation.id == id)
+                {
+                    countyAndCity.Add(accommodation.location.country);
+                    countyAndCity.Add(accommodation.location.city);
+                }
+            }
+            return countyAndCity;
+        }
+
         public List<int> GetByName(string name)
         {
             DataBaseContext context = new DataBaseContext();
@@ -131,9 +149,9 @@ namespace InitialProject.Service
             DateTime endingDate = dateLimits[1];
             int startEndSpan = (endingDate.Subtract(startingDate)).Days;
             List<List<DateTime>> availablePeriods = new List<List<DateTime>>();
-
             List<Booking> sameAccommodationBookings = new List<Booking>();
             sameAccommodationBookings = GetAccommodationsBookings(bookings, accommodation); 
+
             if (sameAccommodationBookings.Count == 0)
             {
                 for (int i = 0; i <= startEndSpan - daysToBook; i++)
@@ -149,7 +167,6 @@ namespace InitialProject.Service
                 takenDates.Add(new List<DateTime>() { DateTime.Parse(booking.arrival), DateTime.Parse(booking.departure) });
             }
             
-
             if (FindAvailableDates(startEndSpan, daysToBook,startingDate, takenDates).Count > 0)
             {
                 return FindAvailableDates(startEndSpan, daysToBook, startingDate, takenDates);
