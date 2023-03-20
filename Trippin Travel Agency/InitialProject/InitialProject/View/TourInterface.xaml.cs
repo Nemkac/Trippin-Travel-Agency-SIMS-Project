@@ -9,6 +9,8 @@ using InitialProject.Service;
 using System.Collections;
 using Microsoft.Win32;
 using System.IO;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace InitialProject.View
 {
@@ -176,6 +178,28 @@ namespace InitialProject.View
 
             imageCounter++;
         }
+
+
+        private void Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Button btn = sender as Button;
+            if (btn != null)
+            {
+                btn.Background = new SolidColorBrush(Color.FromRgb(255, 0, 208));
+                btn.Foreground = new SolidColorBrush(Color.FromRgb(64, 115, 158));
+            }
+        }
+
+        private void Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Button btn = sender as Button;
+            if (btn != null)
+            {
+                btn.Background = new SolidColorBrush(Color.FromRgb(64, 115, 158));
+                btn.Foreground = new SolidColorBrush(Color.FromRgb(245, 246, 250));
+            }
+        }
+
     }
 }
 

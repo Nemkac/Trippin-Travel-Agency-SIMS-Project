@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:InitialProject.Model"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Create tour" Height="768" Width="1366">
+        Title="Create tour" Height="768" Width="1366"  WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
@@ -16,7 +16,106 @@
         </ObjectDataProvider>
     </Window.Resources>
 
-    <Grid>
+    <DockPanel LastChildFill="False" Background="#f5f6fa">
+        <!-- Menu bar on the left -->
+        <StackPanel Background ="#40739e" DockPanel.Dock="Left" Width="200">
+            <Grid Height="100">
+                <!-- First row for logo -->
+                <Image Source="C:\Users\ifeel\Documents\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\logo.png"
+                       Stretch="Uniform" Margin="35"/>
+            </Grid>
+            <Grid Height="50">
+                <!-- Second row for Create Tour button -->
+                <Button Content="Create Tour" Background="#192a56" Foreground="#f5f6fa" Margin="0" 
+                    Height="40" HorizontalAlignment="Stretch" BorderThickness="0"
+                    MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" FontFamily="Poppins" FontSize="16"/>
+            </Grid>
+            <Grid Height="50">
+                <!-- Third row for Track Tour button -->
+                <Button Content="Track Tour Live" Background="#40739e" Foreground="#f5f6fa" Margin="0" 
+                    Height="40" HorizontalAlignment="Stretch" BorderThickness="0"
+                    MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" FontFamily="Poppins" FontSize="16"/>
+            </Grid>
+        </StackPanel>
+        <!-- Information at the top -->
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Height="75" Background="#f5f6fa">
+            <Label Content="Hello, Aleksa!" VerticalAlignment="Center" FontFamily="Poppins" FontSize="18" Foreground="#192a56" Margin="1000,0,0,0"/>
+        </StackPanel>
+        <!-- Name, location, max, duration -->
+        <StackPanel Orientation="Vertical" DockPanel.Dock="Left" Width="230" Background="#f5f6fa">
+            <!-- Tour name -->
+            <Label x:Name="label" Content="Tour name" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top"/>
+            <TextBox x:Name="tourNameTextBox" HorizontalAlignment="Left" Margin="15, 0, 0, 0" VerticalAlignment="Top" Width="190" Height="35"/>
+
+            <!-- Country -->
+            <Label x:Name="label1" Content="Country" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Height="30" Width="150"/>
+            <ComboBox x:Name="countryComboBox" HorizontalAlignment="Left" Margin="15, 0, 0, 0" VerticalAlignment="Top" Height="30" Width="150" SelectionChanged="countryComboBox_SelectionChanged"/>
+            
+            <!-- City -->
+            <Label x:Name="label2" Content="City" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Width="125" Height="26"/>
+            <ComboBox x:Name="cityComboBox" HorizontalAlignment="Left" Margin="15, 0, 0, 0" VerticalAlignment="Top" Height="30" Width="150"/>
+            
+            <!-- Maximum guests allowed -->
+            <Label x:Name="label4" Content="Maximum number of guests" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Width="160" Height="26"/>
+            <TextBox x:Name="guestLimitTextBox" HorizontalAlignment="Left" Margin="15, 0, 0, 0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="150"/>
+            
+            <!-- Duration (hours) -->
+            <Label x:Name="label5" Content="Duration (hours)" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Width="160" Height="26"/>
+            <TextBox x:Name="hoursDurationTextBox" HorizontalAlignment="Left" Margin="15, 0, 0, 0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="30" Width="150"/>
+            
+            <!-- Button -->
+            <Button x:Name="save" Content="Save Tour" Click="Save" HorizontalAlignment="Left" Margin="15,30,0,0" VerticalAlignment="Top" Width="190" Height="50" Background="BlueViolet" Foreground="White"/>
+
+        </StackPanel>
+        <!-- Description, date -->
+        <StackPanel Orientation="Vertical" DockPanel.Dock="Left" Width="250" Background="#f5f6fa">
+            <!-- Description -->
+            <Label x:Name="label9" Content="Description" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Width="190" Height="26"/>
+            <TextBox x:Name="descriptionTextBox" Margin="-30, 0, 0, 0" Width="190" Height="100"/>
+
+            <!-- Date picker -->
+            <Label x:Name="label6" Content="Date and time" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Width="193" Height="26"/>
+            <DatePicker x:Name="datePicker" HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Top" Width="190" Height="30"/>
+
+            <!-- Language -->
+            <Label x:Name="label7" Content="Language" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Width="190" Height="26"/>
+            <ComboBox x:Name="languageComboBox" HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Top" Width="190" Height="22" ItemsSource="{Binding Source={StaticResource dataFromEnum}}"/>
+
+        </StackPanel>
+        <!-- Key points -->
+        <StackPanel Orientation="Vertical" DockPanel.Dock="Left" Width="300" Background="#f5f6fa">
+            <StackPanel Orientation="Horizontal" Height="80">
+                <StackPanel Orientation="Vertical" Width="150">
+                    <Label Content="Starting point name: " HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" RenderTransformOrigin="-0.237,-0.653"/>
+                    <TextBox x:Name="startingPointTextBox" HorizontalAlignment="Left" Margin="15,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="107"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Width="150">
+                    <Label Content="Ending point name: " HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top"/>
+                    <TextBox x:Name="endingPointTextBox" HorizontalAlignment="Left" Margin="15,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+                </StackPanel>
+
+
+            </StackPanel>
+            <StackPanel x:Name="containerStackPanel">
+                <Button x:Name ="addCheckpointButton" Content="Add checkpoint in between" HorizontalAlignment="Center" Margin="15" VerticalAlignment="Top" Width="250" Height="50" Click="addCheckpointButton_Click"/>
+            </StackPanel>
+        </StackPanel>
+        <!-- Images -->
+        <StackPanel Orientation="Vertical" Width="336">
+            <Label Content="Insert image" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top"/>
+            <StackPanel x:Name="containerImageStackPanel">
+                <Button x:Name="addImageButton" Content="Add" HorizontalAlignment="Left" Margin="15,0,0,0" Height="30" Width="100" Click="addImageButton_Click" RenderTransformOrigin="0.489,0.521"/>
+            </StackPanel>
+        </StackPanel>
+
+
+
+    </DockPanel>
+
+
+    <!--<Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="0*"/>
@@ -64,5 +163,5 @@
         <StackPanel x:Name="containerImageStackPanel">
         <Button x:Name="addImageButton" Content="Add" HorizontalAlignment="Left" Margin="683,259,0,0" Height="26" Width="95" Click="addImageButton_Click" RenderTransformOrigin="0.489,0.521"/>
         </StackPanel>
-    </Grid>
+    </Grid>-->
 </Window>

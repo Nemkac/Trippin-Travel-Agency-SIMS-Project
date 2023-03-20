@@ -58,5 +58,26 @@ namespace InitialProject.Services
 
             return user.username;
         }
+        public static void Save(Booking booking)
+        {
+            DataBaseContext saveContext = new DataBaseContext();
+            saveContext.Attach(booking);
+            saveContext.SaveChanges();
+        }
+
+        public static List<string> GetDisplayableDates(List<List<DateTime>> availableDates)
+        {
+            List<string> displayableDates = new List<string>();
+            foreach (List<DateTime> checkInCheckOut in availableDates)
+            {
+                string arrivalPart = checkInCheckOut[0].Date.ToShortDateString() + "  -  ";
+                string departurePart = checkInCheckOut[1].Date.ToShortDateString();
+                string date = arrivalPart + departurePart;
+                displayableDates.Add(date);
+            }
+            return displayableDates;
+        }
     }
 }
+
+

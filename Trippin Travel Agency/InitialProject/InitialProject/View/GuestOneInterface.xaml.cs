@@ -17,6 +17,9 @@ using System.Windows.Shapes;
 using Dapper;
 using InitialProject.Model;
 using InitialProject.Service;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using System.Configuration;
+using InitialProject.DTO;
 
 namespace InitialProject.View
 {
@@ -24,12 +27,15 @@ namespace InitialProject.View
     /// Interaction logic for GuestOneInterface.xaml
     /// </summary>
     public partial class GuestOneInterface : Window
-    {   
+    {
         public AccommodationLocation location { get; set; }
         public string name { get; set; }
         public int type { get; set; }
         public int guestsNumber { get; set; }
         public int daysNumber { get; set; }
+
+        public Accommodation selectedAccommodation = new Accommodation();
+        public DateTime selectedDate = new DateTime();
 
 
         public GuestOneInterface()
@@ -39,12 +45,16 @@ namespace InitialProject.View
         }
 
         private void showAccommodations(object sender, RoutedEventArgs e)
-        {   
-            AccommodationService accommodationService = new AccommodationService();
+        {
             DataBaseContext context = new DataBaseContext();
-            List<Accommodation> dataList = context.Accommodations.ToList();
-            
-            this.dataGrid.ItemsSource = dataList;
+            List<Accommodation> accommodations = context.Accommodations.ToList();
+            AccommodationService accommodationService = new AccommodationService();
+            List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
+            foreach (Accommodation accommodation in accommodations)
+            {
+                accommodationsDTO.Add(new AccommodationDTO(accommodation,accommodationService.GetLocation(accommodation.id)));
+            }
+            this.dataGrid.ItemsSource = accommodationsDTO;
         }
 
         private void GetByName(object sender, RoutedEventArgs e)
@@ -56,7 +66,12 @@ namespace InitialProject.View
             {
                 foundResults.Add(accommodationService.GetById(byName[i]));
             }
-            this.dataGrid.ItemsSource = foundResults;
+            List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
+            foreach (Accommodation accommodation in foundResults)
+            {
+                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetLocation(accommodation.id)));
+            }
+            this.dataGrid.ItemsSource = accommodationsDTO;
 
         }
 
@@ -70,7 +85,12 @@ namespace InitialProject.View
             {
                 foundResults.Add(accommodationService.GetById(byCountry[i]));
             }
-            this.dataGrid.ItemsSource = foundResults;
+            List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
+            foreach (Accommodation accommodation in foundResults)
+            {
+                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetLocation(accommodation.id)));
+            }
+            this.dataGrid.ItemsSource = accommodationsDTO;
         }
 
         private void GetByCity(object sender, RoutedEventArgs e)
@@ -83,19 +103,29 @@ namespace InitialProject.View
             {
                 foundResults.Add(accommodationService.GetById(byCity[i]));
             }
-            this.dataGrid.ItemsSource = foundResults;
+            List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
+            foreach (Accommodation accommodation in foundResults)
+            {
+                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetLocation(accommodation.id)));
+            }
+            this.dataGrid.ItemsSource = accommodationsDTO;
         }
 
         private void GetByType(object sender, RoutedEventArgs e)
         {
             AccommodationService accommodationService = new AccommodationService();
-            List<int> byType = accommodationService.GetByType(input_type.Text); 
+            List<int> byType = accommodationService.GetByType(input_type.Text);
             List<Accommodation> foundResults = new List<Accommodation>();
             for (int i = 0; i < byType.Count(); i++)
             {
                 foundResults.Add(accommodationService.GetById(byType[i]));
             }
-            this.dataGrid.ItemsSource = foundResults;
+            List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
+            foreach (Accommodation accommodation in foundResults)
+            {
+                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetLocation(accommodation.id)));
+            }
+            this.dataGrid.ItemsSource = accommodationsDTO;
         }
 
         private void GetByGuests(object sender, RoutedEventArgs e)
@@ -107,7 +137,12 @@ namespace InitialProject.View
             {
                 foundResults.Add(accommodationService.GetById(byGuests[i]));
             }
-            this.dataGrid.ItemsSource = foundResults;
+            List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
+            foreach (Accommodation accommodation in foundResults)
+            {
+                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetLocation(accommodation.id)));
+            }
+            this.dataGrid.ItemsSource = accommodationsDTO;
         }
 
         private void GetByDays(object sender, RoutedEventArgs e)
@@ -119,20 +154,41 @@ namespace InitialProject.View
             {
                 foundResults.Add(accommodationService.GetById(byDays[i]));
             }
-            this.dataGrid.ItemsSource = foundResults;
+            List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
+            foreach (Accommodation accommodation in foundResults)
+            {
+                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetLocation(accommodation.id)));
+            }
+            this.dataGrid.ItemsSource = accommodationsDTO;
         }
 
-        private void BookAccommodation_Click(object sender, RoutedEventArgs e)
+        private void CheckForDates(object sender, RoutedEventArgs e)
         {
-            // rezervacija selektovanog smestaja
-            Accommodation accommodation = (Accommodation)dataGrid.SelectedItem;
+            AccommodationService accommodationService = new AccommodationService();
+            AccommodationDTO accommodationDTO = (AccommodationDTO)dataGrid.SelectedItem;
+            Accommodation accommodation = accommodationService.GetById(accommodationDTO.id);
+            selectedAccommodation = accommodation;
             List<DateTime> dateLimits = GetDateLimits(sender, e);
-            this.dataGrid.ItemsSource = dateLimits;
+            int daysToBook = (int.Parse(numberOfDays.Text));
+            List<List<DateTime>> availableDates = accommodationService.GetAvailableDates(accommodation, daysToBook, dateLimits);
+            List<string> displayableDates = Services.BookingService.GetDisplayableDates(availableDates);
 
+            dynamic result = displayableDates.Select(s => new { value = s }).ToList();
+            if (daysToBook < selectedAccommodation.minDaysBooked)
+            {
+                warningText.Text = selectedAccommodation.name + " cannot be booked for under " + selectedAccommodation.minDaysBooked.ToString() + " days.";
+            }
+            else
+            {
+                BookAccommodationInterface BookAccommodationInterface = new BookAccommodationInterface();
+                BookAccommodationInterface.SetAattributes(selectedAccommodation.id, 4); // logedUser.id
+                BookAccommodationInterface.ShowsBookings(result);
+                BookAccommodationInterface.Show();
+            }
         }
 
         private List<DateTime> GetDateLimits(object sender, RoutedEventArgs e)
-        {   
+        {
             DateTime startingDate = input_starting_date.SelectedDate.Value;
             DateTime endingDate = input_ending_date.SelectedDate.Value;
             List<DateTime> dateLimits = new List<DateTime>();
@@ -140,6 +196,5 @@ namespace InitialProject.View
             dateLimits.Add(endingDate);
             return dateLimits;
         }
-
     }
 }
