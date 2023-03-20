@@ -181,7 +181,7 @@ namespace InitialProject.View
             else
             {
                 BookAccommodationInterface BookAccommodationInterface = new BookAccommodationInterface();
-                BookAccommodationInterface.SetAattributes(selectedAccommodation.id, 4);
+                BookAccommodationInterface.SetAattributes(selectedAccommodation.id, 4); // logedUser.id
                 BookAccommodationInterface.ShowsBookings(result);
                 BookAccommodationInterface.Show();
             }
