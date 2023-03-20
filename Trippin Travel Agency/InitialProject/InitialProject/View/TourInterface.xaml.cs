@@ -32,6 +32,14 @@ namespace InitialProject.View
             }
 
         }
+
+        private void LeadTrackTourLive(object sender, RoutedEventArgs e)
+        {
+            TrackTourLiveInterface TrackTourLiveInterface = new TrackTourLiveInterface();
+            TrackTourLiveInterface.Show();
+
+        }
+
         private void countryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cityComboBox.Items.Clear();
@@ -52,50 +60,50 @@ namespace InitialProject.View
             }
         }
 
+        // Lists used for creating dynamic TextBox elements for both images and key points
         List<TextBox> dynamicTextBoxes = new List<TextBox>();
         List<TextBox> dynamicImageLinksTextBoxes = new List<TextBox>();
         private void Save(object sender, RoutedEventArgs e)
         {
-            string name = tourNameTextBox.Text;
+            string name, description;
+            TourLocation location;
+            int guestLimit, hoursDuration;
+            language languageInput;
+            DateTime selectedDate;
+            bool active;
+            CreateTourBasicProperties(out name, out location, out guestLimit, out hoursDuration, out description, out languageInput, out selectedDate, out active);
 
-            string country = countryComboBox.SelectedValue.ToString(); 
+            // Add KeyPoints
+            ICollection<KeyPoint> keyPoints = CreateKeyPoints();
+
+            // Add image links
+            List<Model.Image> imageLinks = CreateImageLinks();
+
+            // Constructor for tour
+            Tour tour = new Tour(name, location.id, keyPoints, description, languageInput, guestLimit, selectedDate, hoursDuration, imageLinks, active);
+
+            // Does tour already exists
+            DoesTourExist(name, selectedDate, tour);
+        }
+
+        private void CreateTourBasicProperties(out string name, out TourLocation location, out int guestLimit, out int hoursDuration, out string description, out language languageInput, out DateTime selectedDate, out bool active)
+        {
+            name = tourNameTextBox.Text;
+            string country = countryComboBox.SelectedValue.ToString();
             string city = cityComboBox.SelectedValue.ToString();
-            TourLocation location = TourService.findLocation(country, city); 
-
+            location = TourService.findLocation(country, city);
             string guestLimitInput = guestLimitTextBox.Text;
-            int guestLimit = int.Parse(guestLimitInput);
-
+            guestLimit = int.Parse(guestLimitInput);
             string hoursDurationInput = hoursDurationTextBox.Text;
-            int hoursDuration = int.Parse(hoursDurationInput);
+            hoursDuration = int.Parse(hoursDurationInput);
+            description = descriptionTextBox.Text;
+            languageInput = (language)languageComboBox.SelectedValue;
+            selectedDate = datePicker.SelectedDate ?? DateTime.Today;
+            active = false;
+        }
 
-            string description = descriptionTextBox.Text;
-
-            language languageInput = (language)languageComboBox.SelectedValue;
-
-            DateTime selectedDate = datePicker.SelectedDate ?? DateTime.Today;
-
-            ICollection<KeyPoint> keyPoints = new List<KeyPoint>
-            {
-                new KeyPoint(startingPointTextBox.Text, false),
-                new KeyPoint(endingPointTextBox.Text, false)
-            };
-
-            foreach (var textBox in dynamicTextBoxes)
-            {
-                KeyPoint kp = new KeyPoint(textBox.Text, false);
-                keyPoints.Add(kp);
-            }
-
-            List<Model.Image> imageLinks = new List<Model.Image>();
-
-            foreach (var textBox in dynamicImageLinksTextBoxes)
-            {
-                Model.Image image = new Model.Image();
-                image.imageLink = textBox.Text;
-                imageLinks.Add(image);
-            }
-
-            Tour tour = new Tour(name, location, keyPoints, description, languageInput, guestLimit, selectedDate, hoursDuration, imageLinks);
+        private void DoesTourExist(string name, DateTime selectedDate, Tour tour)
+        {
             bool tourExists = TourService.CheckTourExists(name, selectedDate);
             if (!tourExists)
             {
@@ -110,30 +118,48 @@ namespace InitialProject.View
             }
         }
 
+        private List<Model.Image> CreateImageLinks()
+        {
+            List<Model.Image> imageLinks = new List<Model.Image>();
+
+            foreach (var textBox in dynamicImageLinksTextBoxes)
+            {
+                Model.Image image = new Model.Image();
+                image.imageLink = textBox.Text;
+                imageLinks.Add(image);
+            }
+
+            return imageLinks;
+        }
+
+        private ICollection<KeyPoint> CreateKeyPoints()
+        {
+            ICollection<KeyPoint> keyPoints = new List<KeyPoint>
+            {
+                new KeyPoint(startingPointTextBox.Text, false)
+            };
+
+            foreach (var textBox in dynamicTextBoxes)
+            {
+                KeyPoint kp = new KeyPoint(textBox.Text, false);
+                keyPoints.Add(kp);
+            }
+
+            keyPoints.Add(new KeyPoint(endingPointTextBox.Text, false));
+            return keyPoints;
+        }
+
         private void clearInputs()
         {
             datePicker.SelectedDate = null; 
         }
 
-        int disUnit = 1;
         private int checkpointCounter = 1;
         private void addCheckpointButton_Click(object sender, RoutedEventArgs e)
         {
-            // Create new Label
-            Label newLabel = new Label();
-            newLabel.Content = "Checkpoint " + checkpointCounter.ToString();
-            newLabel.Width = addCheckpointButton.ActualWidth / 2 - 10; // Subtract some margin
-
-            // Create new TextBox
-            TextBox newTextBox = new TextBox();
-            newTextBox.Width = addCheckpointButton.ActualWidth / 2 - 10; // Subtract some margin
-
-
-            // Add the new Label and TextBox to a new StackPanel
-            StackPanel newStackPanel = new StackPanel();
-            newStackPanel.Orientation = Orientation.Horizontal;
-            newStackPanel.Children.Add(newLabel);
-            newStackPanel.Children.Add(newTextBox);
+            Label newLabel = CreateNewLabelForKeyPoint();
+            TextBox newTextBox = CreateNewTextBoxForKeyPoint();
+            StackPanel newStackPanel = CreateNewStackPanelWithElementsForKeyPoint(newLabel, newTextBox);
 
             // Add the textbox to the list of dynamic textboxes
             dynamicTextBoxes.Add(newTextBox);
@@ -148,23 +174,37 @@ namespace InitialProject.View
             checkpointCounter++;
         }
 
-        private int imageCounter = 1;
-        private void addImageButton_Click(object sender, RoutedEventArgs e)
+        private static StackPanel CreateNewStackPanelWithElementsForKeyPoint(Label newLabel, TextBox newTextBox)
         {
-            // Create new Label
-            Label newLabel = new Label();
-            newLabel.Content = "Image " + imageCounter.ToString();
-            newLabel.Width = addImageButton.ActualWidth / 2 - 10; // Subtract some margin
-
-            // Create new TextBox
-            TextBox newTextBox = new TextBox();
-            newTextBox.Width = addImageButton.ActualWidth;
-
-            // Add the new Label and TextBox to a new StackPanel
             StackPanel newStackPanel = new StackPanel();
             newStackPanel.Orientation = Orientation.Horizontal;
             newStackPanel.Children.Add(newLabel);
             newStackPanel.Children.Add(newTextBox);
+            return newStackPanel;
+        }
+
+        private TextBox CreateNewTextBoxForKeyPoint()
+        {
+            TextBox newTextBox = new TextBox();
+            newTextBox.Width = addCheckpointButton.ActualWidth / 2 - 10;
+            return newTextBox;
+        }
+
+        private Label CreateNewLabelForKeyPoint()
+        {
+            // Create new Label
+            Label newLabel = new Label();
+            newLabel.Content = "Checkpoint " + checkpointCounter.ToString();
+            newLabel.Width = addCheckpointButton.ActualWidth / 2 - 10;
+            return newLabel;
+        }
+
+        private int imageCounter = 1;
+        private void addImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            Label newLabel = CreateNewLabelForImageLink();
+            TextBox newTextBox = CreateNewTextBoxForImageLink();
+            StackPanel newStackPanel = CreateNewStackPanelWithElementsForImageLink(newLabel, newTextBox);
 
             // Add the textbox to the list of dynamic textboxes
             dynamicImageLinksTextBoxes.Add(newTextBox);
@@ -179,6 +219,29 @@ namespace InitialProject.View
             imageCounter++;
         }
 
+        private static StackPanel CreateNewStackPanelWithElementsForImageLink(Label newLabel, TextBox newTextBox)
+        {
+            StackPanel newStackPanel = new StackPanel();
+            newStackPanel.Orientation = Orientation.Horizontal;
+            newStackPanel.Children.Add(newLabel);
+            newStackPanel.Children.Add(newTextBox);
+            return newStackPanel;
+        }
+
+        private TextBox CreateNewTextBoxForImageLink()
+        {
+            TextBox newTextBox = new TextBox();
+            newTextBox.Width = addImageButton.ActualWidth;
+            return newTextBox;
+        }
+
+        private Label CreateNewLabelForImageLink()
+        {
+            Label newLabel = new Label();
+            newLabel.Content = "Image " + imageCounter.ToString();
+            newLabel.Width = addImageButton.ActualWidth / 2 - 10;
+            return newLabel;
+        }
 
         private void Button_MouseEnter(object sender, MouseEventArgs e)
         {

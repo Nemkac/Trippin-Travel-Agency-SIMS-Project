@@ -3,6 +3,7 @@ using System;
 using InitialProject.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230319133023_addedActiveProperty")]
+    partial class addedActiveProperty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.3");
@@ -102,9 +105,6 @@ namespace InitialProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("bookingId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("cleanness")
                         .HasColumnType("INTEGER");
 
@@ -188,7 +188,7 @@ namespace InitialProject.Migrations
                     b.Property<int>("language")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("location")
+                    b.Property<int>("locationid")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("name")
@@ -202,6 +202,8 @@ namespace InitialProject.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("id");
+
+                    b.HasIndex("locationid");
 
                     b.ToTable("Tour");
                 });
@@ -273,6 +275,17 @@ namespace InitialProject.Migrations
                         .HasForeignKey("tourId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("InitialProject.Model.Tour", b =>
+                {
+                    b.HasOne("InitialProject.Model.TourLocation", "location")
+                        .WithMany()
+                        .HasForeignKey("locationid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("location");
                 });
 
             modelBuilder.Entity("InitialProject.Model.Tour", b =>

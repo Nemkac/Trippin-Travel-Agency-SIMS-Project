@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using InitialProject.Model;
 
 namespace InitialProject.Context
@@ -21,8 +16,12 @@ namespace InitialProject.Context
         public DbSet<GuestRate> GuestRate { get; set; }
 
         // Apsolute paths for every memeber of the team
-        // napisite cije je sta majmuni
+
+        // Aleksa Simeunovic -> Desktop PC
         //public string path = @"C:\Users\ifeel\Documents\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
+
+        // Aleksa Simeunovic -> Laptop
+        // public string path = @"C:\\Users\\aleks\\OneDrive\\Dokumenti\\GitHub\\Trippin-Travel-Agency-SIMS-Project\\Trippin Travel Agency\\InitialProject\\InitialProject\\MyDatabase.sqlite";
         // public string path = @"C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
         public string path = @"C:\Users\Nemanja\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
 

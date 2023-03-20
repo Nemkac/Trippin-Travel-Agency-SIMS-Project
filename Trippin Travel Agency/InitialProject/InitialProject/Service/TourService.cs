@@ -10,13 +10,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace InitialProject.Service
 {
     class TourService
     {
         public TourService() { }
-
         public static TourLocation findLocation(string country, string city)
         {
             DataBaseContext locationContext = new DataBaseContext();
@@ -33,7 +33,6 @@ namespace InitialProject.Service
             TourLocation newLocation = new TourLocation(country, city);
             return newLocation;
         }
-
         public static void Save(Tour tour)
         {
             DataBaseContext saveContext = new DataBaseContext();
@@ -41,7 +40,6 @@ namespace InitialProject.Service
             saveContext.SaveChanges();
             MessageBox.Show("Tour registered succesfuly!");
         }
-
         public static bool CheckTourExists(string name, DateTime date)
         {
             using (var context = new DataBaseContext())
@@ -51,8 +49,6 @@ namespace InitialProject.Service
             }
 
         }
-    
-
         public List<Tour> createTour()
         {
             DataBaseContext context = new DataBaseContext();
@@ -63,7 +59,7 @@ namespace InitialProject.Service
             
             TourLocation location = new TourLocation("Novi Sad", "Serbia");
 
-            tour.location = location;
+            tour.location = location.id;
            
             ICollection<KeyPoint> keyPoints = new List<KeyPoint>
             {
@@ -89,7 +85,6 @@ namespace InitialProject.Service
 
             return dataList;
         }
-
         public TourLocation GetTourLocation(int id)
         {
             DataBaseContext dbContext = new DataBaseContext();
@@ -106,7 +101,6 @@ namespace InitialProject.Service
             }
             return requiredTour;
         }
-
         public TourDTO CreateDTO(Tour tour)
         {
             DataBaseContext dataBaseContext = new DataBaseContext();
@@ -124,7 +118,6 @@ namespace InitialProject.Service
             TourDTO tourDTO = new(tour.id, tour.name, tour.description,tmp.city, tmp.country, keyPoints, tour.language, tour.touristLimit, tour.startDates, tour.hoursDuration);
             return tourDTO;
         }
-
         public List<TourDTO> GetByInputCityName(string cityName)
         {
             DataBaseContext dataBaseContext = new DataBaseContext();
@@ -159,7 +152,6 @@ namespace InitialProject.Service
             }
             return tourDTOs;
         }
-
         public List<TourDTO> GetByInputLanguage(language tourLanguage)
         {
             DataBaseContext dataBaseContext = new DataBaseContext();
@@ -192,7 +184,6 @@ namespace InitialProject.Service
             }
             return tourDTOs;
         }
-
         public List<TourDTO> GetByInputTouristLimit(string limit)
         {
             DataBaseContext dataBaseContext = new DataBaseContext();
@@ -209,6 +200,39 @@ namespace InitialProject.Service
             }
             return tourDTOs;
         }
+        public List<Tour> GetToursToday()
+        {
+            DataBaseContext context = new DataBaseContext();
+            using (context)
+            {
+                // Get tours with startDates equal to today's date
+                DateTime today = DateTime.Today;
+                List<Tour> toursToday = context.Tours
+                    .Where(t => t.startDates.Date == today)
+                    .ToList();
+
+                return toursToday;
+            }
+        }
+        public Tour GetTourByButton(object sender)
+        {
+            Button tourButton = sender as Button;
+            if (tourButton != null)
+            {
+                Tour selectedTour = tourButton.DataContext as Tour;
+                if (selectedTour != null)
+                {
+                    return selectedTour;
+                }
+            }
+            return null;
+        }
+        public bool IsTourFinished(List<KeyPoint> keyPoints)
+        {
+            return keyPoints != null && keyPoints.All(kp => kp.visited);
+        }
+
+
 
     }
 }

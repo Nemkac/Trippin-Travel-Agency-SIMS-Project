@@ -9,10 +9,12 @@
 
     <DockPanel LastChildFill="False" Background="#f5f6fa">
         <!-- Menu bar on the left -->
-        <StackPanel Background ="#40739e" DockPanel.Dock="Left" Width="200">
+        <StackPanel Background ="#8c7ae6" DockPanel.Dock="Left" Width="200">
             <Grid Height="100">
                 <!-- First row for logo -->
-                <Image Source="C:\Users\ifeel\Documents\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\logo.png"
+                <!-- <Image Source="C:\Users\ifeel\Documents\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\logo.png"
+                       Stretch="Uniform" Margin="35"/>-->
+                <Image Source="C:\Users\aleks\OneDrive\Dokumenti\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\logo.png"
                        Stretch="Uniform" Margin="35"/>
             </Grid>
             <Grid Height="50">
