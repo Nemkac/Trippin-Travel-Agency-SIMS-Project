@@ -76,7 +76,7 @@ namespace InitialProject.View
             if (timeSinceDeparture.TotalDays <= 5 && timeSinceDeparture.TotalDays >= 0 && !guestRateService.IsRated(booking.Id)) return true;
             return false;
         }
-
+        
         private void RateGuest(object sender, RoutedEventArgs e)
         {
             DataBaseContext isAlreadyRated = new DataBaseContext();
