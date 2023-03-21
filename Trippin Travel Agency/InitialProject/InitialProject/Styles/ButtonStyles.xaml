@@ -21,14 +21,6 @@
             
        <!--Mouse over style-->
         <Style.Triggers>
-            <!--Button styles on hover-->
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Margin" Value="0, 0, 0, 5"/>
-                <Setter Property="Background" Value="#487eb0"/>
-                <Setter Property="Foreground" Value="#FEFEFF"/>
-                <Setter Property="BorderBrush" Value="#487eb0"/>
-            </Trigger>
-
             <!--Active button style-->
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Margin" Value="0, 0, 0, 5"/>
