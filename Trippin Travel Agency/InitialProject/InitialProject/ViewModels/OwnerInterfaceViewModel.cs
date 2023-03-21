@@ -1,5 +1,6 @@
 ﻿using FontAwesome.Sharp;
 using InitialProject.Repository;
+using InitialProject.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
@@ -63,13 +64,11 @@ namespace InitialProject.ViewModels
         //--> Commands
         public ICommand ShowOwnersBookingViewCommand { get; }
         public ICommand ShowAccommodationRegistrationViewCommand { get; }
-
         public MainViewModel()
         {
             //Initialize commands
             ShowOwnersBookingViewCommand = new ViewModelCommand(ExecuteShowOwnersBookingViewCommand);
             ShowAccommodationRegistrationViewCommand = new ViewModelCommand(ExecuteShowAccommodationRegistrationViewCommand);
-
             //Default view
             ExecuteShowOwnersBookingViewCommand(null);
         }

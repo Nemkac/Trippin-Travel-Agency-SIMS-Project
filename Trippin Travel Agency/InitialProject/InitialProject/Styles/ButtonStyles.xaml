@@ -24,17 +24,17 @@
             <!--Button styles on hover-->
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Margin" Value="0, 0, 0, 5"/>
-                <Setter Property="Background" Value="#051923"/>
+                <Setter Property="Background" Value="#487eb0"/>
                 <Setter Property="Foreground" Value="#FEFEFF"/>
-                <Setter Property="BorderBrush" Value="#051923"/>
+                <Setter Property="BorderBrush" Value="#487eb0"/>
             </Trigger>
 
             <!--Active button style-->
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Margin" Value="0, 0, 0, 5"/>
-                <Setter Property="Background" Value="#051923"/>
+                <Setter Property="Background" Value="#487eb0"/>
                 <Setter Property="Foreground" Value="#FEFEFF"/>
-                <Setter Property="BorderBrush" Value="#051923"/>
+                <Setter Property="BorderBrush" Value="#487eb0"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -50,7 +50,7 @@
     <!--Menu button text-->
     <Style x:Key="menuButtonText" TargetType="TextBlock">
         <Setter Property="Foreground" Value="#FEFEFF" />
-        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="FontFamily" Value="Ubuntu"/>
         <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="FontSize" Value="16.5"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
