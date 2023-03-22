@@ -30,9 +30,9 @@
         <Button Content="Button" HorizontalAlignment="Left" Margin="638,99,0,0" VerticalAlignment="Top" Click="GetByDays"/>
         <Canvas Margin="-31,32,31,-32">
             <DatePicker HorizontalAlignment="Center" VerticalAlignment="Top" Name ="input_starting_date" Height="23" Canvas.Right="350" Canvas.Bottom ="110" />
-            <DatePicker HorizontalAlignment="Center" VerticalAlignment="Top" Name ="input_ending_date" Canvas.Bottom="65" Canvas.Right="350"/>
+            <DatePicker HorizontalAlignment="Center" VerticalAlignment="Top" Name ="input_ending_date" Canvas.Bottom="65" Canvas.Right="350" Canvas.Left="348" Canvas.Top="367"/>
             <Label Content="Starting date" HorizontalAlignment="Center" VerticalAlignment="Top" Height="25" Canvas.Bottom="130" Canvas.Right="365" />
-            <Label Content="Ending date" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Bottom="1" Canvas.Right="365" Canvas.Left="357" Canvas.Top="322"/>
+            <Label Content="Ending date" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Bottom="1" Canvas.Right="365" Canvas.Left="357" Canvas.Top="334"/>
             <Button Content="Check for dates" HorizontalAlignment="Left" Height="42" Margin="613,331,0,0" VerticalAlignment="Top" Width="104" Click="CheckForDates" Canvas.Bottom="70" Canvas.Right="100"/>
             <TextBox HorizontalAlignment="Left" Height="20" Margin="478,342,0,0" TextWrapping="Wrap" Name ="numberOfDays"  VerticalAlignment="Top" Width="92" Canvas.Bottom="90" Canvas.Right="227"/>
             <TextBlock HorizontalAlignment="Left" Margin="492,325,0,0" TextWrapping="Wrap" Text="Days to stay" VerticalAlignment="Top" Canvas.Bottom="120" Canvas.Right="240"/>

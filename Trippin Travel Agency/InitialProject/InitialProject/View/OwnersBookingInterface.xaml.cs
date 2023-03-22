@@ -74,6 +74,15 @@ namespace InitialProject.View
             if (timeSinceDeparture.TotalDays <= 5 && timeSinceDeparture.TotalDays >= 0 && !guestRateService.IsRated(booking.Id)) return true;
             return false;
         }
+
+        private static bool RatePeriodExpired(GuestRateService guestRateService, int bookingId, string departure)
+        {
+            DateTime departureDate = DateTime.ParseExact(departure, "M/d/yyyy", CultureInfo.InvariantCulture);
+            DateTime currentDate = DateTime.Now;
+            TimeSpan timeSinceDeparture = currentDate - departureDate;
+            if (timeSinceDeparture.TotalDays >= 5 && !guestRateService.IsRated(bookingId)) return true;
+            return false;
+        }
         
         private void RateGuest(object sender, RoutedEventArgs e)
         {
@@ -90,8 +99,27 @@ namespace InitialProject.View
                     return;
                 }
             }
+
+            DateTime arrivalDate = DateTime.ParseExact(bookingDTO.arrivalDate, "M/d/yyyy", CultureInfo.InvariantCulture);
+            DateTime currentDate = DateTime.Now;
+            
+            if(arrivalDate > currentDate)
+            {
+                MessageBox.Show("The guest has not yet arrived at the accommodation!");
+                return;
+            }
+
+            GuestRateService guestRateService = new GuestRateService();
+            if (RatePeriodExpired(guestRateService, bookingId, bookingDTO.departureDate))
+            {
+                MessageBox.Show("The guest rating period has expired!");
+                return;
+            }
+
+
             RateGuestInterface rateGuestInterface = new RateGuestInterface(bookingId);
             rateGuestInterface.Show();
+
         }
     }
 }
