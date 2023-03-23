@@ -5,40 +5,59 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" Width="727">
-    <StackPanel Orientation="Horizontal">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="0*"/>
-            </Grid.RowDefinitions>
-            <Label x:Name="label" Content="Accommodation name" HorizontalAlignment="Left" Height="27" Margin="49,26,0,0" VerticalAlignment="Top" Width="165"/>
-            <TextBox x:Name="accommodationNameTB" HorizontalAlignment="Left" Margin="49,58,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="25"/>
-            <Label x:Name="label1" Content="Country" HorizontalAlignment="Left" Margin="69,135,0,0" VerticalAlignment="Top" Height="30" Width="150"/>
-            <ComboBox x:Name="countryComboBox" HorizontalAlignment="Left" Margin="69,169,0,0" VerticalAlignment="Top" Width="150" Height="22" SelectionChanged="countryComboBox_SelectionChanged"/>
-            <Label x:Name="label2" Content="City" HorizontalAlignment="Left" Margin="69,207,0,0" VerticalAlignment="Top" Width="125" Height="26"/>
-            <ComboBox x:Name="cityComboBox" HorizontalAlignment="Left" Margin="69,241,0,0" VerticalAlignment="Top" Width="150" Height="22"/>
-            <Label x:Name="label3" Content="Location" HorizontalAlignment="Left" Margin="49,88,0,0" VerticalAlignment="Top" Width="126" Height="26"/>
-            <Label x:Name="label4" Content="Maximum number of guests" HorizontalAlignment="Left" Margin="282,26,0,0" VerticalAlignment="Top" Width="160" Height="26"/>
-            <TextBox x:Name="guestLimitTB" HorizontalAlignment="Left" Margin="282,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="25"/>
-            <Label x:Name="label5" Content="Minimum days to book" HorizontalAlignment="Left" Margin="282,90,0,0" VerticalAlignment="Top" Width="190" Height="26"/>
-            <TextBox x:Name="minDaysBookedTB" HorizontalAlignment="Left" Margin="282,121,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="25"/>
-            <Label x:Name="label6" Content="Booking cancelation period" HorizontalAlignment="Left" Margin="282,155,0,0" VerticalAlignment="Top" Width="193" Height="26"/>
-            <TextBox x:Name="bookingCancelPeriodTB" HorizontalAlignment="Left" Margin="282,186,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="25"/>
-            <Label x:Name="label7" Content="Accommodation type" HorizontalAlignment="Left" Margin="285,228,0,0" VerticalAlignment="Top" Width="190" Height="26"/>
-            <Button x:Name="saveAccommodation" Click="SaveAccommodation" Content="Save Accommodation" HorizontalAlignment="Left" Margin="49,360,0,0" VerticalAlignment="Top" Width="183" Height="30"/>
-            <Rectangle HorizontalAlignment="Left" Height="170" Margin="49,119,0,0" Stroke="Black" VerticalAlignment="Top" Width="190"/>
-            <RadioButton x:Name="houseRadioButton" Content="House" HorizontalAlignment="Left" Margin="302,268,0,0" VerticalAlignment="Top" Height="14" Width="137"/>
-            <RadioButton x:Name="apartmentRadioButton" Content="Apartment" HorizontalAlignment="Left" Margin="302,296,0,0" VerticalAlignment="Top"/>
-            <RadioButton x:Name="hutRadioButton" Content="Hut" HorizontalAlignment="Left" Margin="302,322,0,0" VerticalAlignment="Top"/>
-            <Rectangle HorizontalAlignment="Left" Height="93" Margin="285,257,0,0" Stroke="Black" VerticalAlignment="Top" Width="187"/>
+             d:DesignHeight="650" Width="710">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="550"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260"/>
+            <ColumnDefinition Width="260"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        </Grid>
-        <StackPanel Orientation="Vertical" Width="336" Margin="0,15,0,0">
-            <Label Content="Insert image" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top"/>
-            <StackPanel x:Name="containerImageStackPanel">
-                <Button x:Name="addImageButton" Content="Add" HorizontalAlignment="Left" Margin="15,0,0,0" Height="30" Width="100" Click="addImageButton_Click" RenderTransformOrigin="0.489,0.521"/>
+        <Border Grid.Row="0" Grid.Column="0" Background="#FCFFFC" CornerRadius="30, 0, 0, 0">
+            <StackPanel Orientation="Vertical">
+                <Label x:Name="label" FontFamily="Ubuntu" FontSize="14" FontWeight="Medium" Content="Accommodation name" HorizontalAlignment="Left" Height="27" Margin="49,26,0,0" VerticalAlignment="Top" Width="165"/>
+                <TextBox x:Name="accommodationNameTB" HorizontalAlignment="Left" Margin="49,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="25"/>
+                <Label x:Name="label1" Content="Country" FontFamily="Ubuntu" FontSize="14" FontWeight="Medium" HorizontalAlignment="Left" Margin="49,45,0,0" VerticalAlignment="Top" Height="30" Width="150"/>
+                <ComboBox x:Name="countryComboBox" HorizontalAlignment="Left" Margin="49,10,0,0" VerticalAlignment="Top" Width="150" Height="22" SelectionChanged="countryComboBox_SelectionChanged"/>
+                <Label x:Name="label2" Content="City" FontFamily="Ubuntu" FontSize="14" FontWeight="Medium" HorizontalAlignment="Left" Margin="49,45,0,0" VerticalAlignment="Top" Width="125" Height="26"/>
+                <ComboBox x:Name="cityComboBox" HorizontalAlignment="Left" Margin="49,10,0,0" VerticalAlignment="Top" Width="150" Height="22"/>
             </StackPanel>
-        </StackPanel>
-    </StackPanel>
+        </Border>
+
+        <Border Grid.Row="0" Grid.Column="1" Background="#FCFFFC">
+            <StackPanel Orientation="Vertical">
+                <Label x:Name="label4" Content="Maximum number of guests" FontFamily="Ubuntu" FontSize="14" FontWeight="Medium" HorizontalAlignment="Left" Margin="49,26,0,0" VerticalAlignment="Top" Width="200" Height="26"/>
+                <TextBox x:Name="guestLimitTB"  HorizontalAlignment="Left" Margin="49,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="25"/>
+                <Label x:Name="label5" Content="Minimum days to book" FontFamily="Ubuntu" FontSize="14" FontWeight="Medium" HorizontalAlignment="Left" Margin="49,36,0,0" VerticalAlignment="Top" Width="190" Height="26"/>
+                <TextBox x:Name="minDaysBookedTB"  HorizontalAlignment="Left" Margin="49,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="25"/>
+                <Label x:Name="label6" Content="Booking cancelation period" FontFamily="Ubuntu" FontSize="14" FontWeight="Medium" HorizontalAlignment="Left" Margin="49,36,0,0" VerticalAlignment="Top" Width="193" Height="26"/>
+                <TextBox x:Name="bookingCancelPeriodTB"  HorizontalAlignment="Left" Margin="49,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="25"/>
+                <Label x:Name="label7" Content="Accommodation type" FontFamily="Ubuntu" FontSize="14" FontWeight="Medium" HorizontalAlignment="Left" Margin="49,36,0,0" VerticalAlignment="Top" Width="190" Height="26"/>
+                <RadioButton x:Name="houseRadioButton" Content="House" FontFamily="Ubuntu" FontSize="13" FontWeight="Medium" HorizontalAlignment="Left" Margin="49,10,0,0" VerticalAlignment="Top" Height="14" Width="137"/>
+                <RadioButton x:Name="apartmentRadioButton" Content="Apartment" FontFamily="Ubuntu" FontSize="13" FontWeight="Medium" HorizontalAlignment="Left" Margin="49,10,0,0" VerticalAlignment="Top"/>
+                <RadioButton x:Name="hutRadioButton" Content="Hut" FontFamily="Ubuntu" FontSize="13" FontWeight="Medium" HorizontalAlignment="Left" Margin="49,10,0,0" VerticalAlignment="Top"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="0" Grid.Column="2" Background="#FCFFFC" CornerRadius="0, 30, 0, 0">
+            <StackPanel Orientation="Vertical" Margin="0,15,0,0" Grid.Row="0" Grid.Column="2">
+                <Label Content="Insert image" FontFamily="Ubuntu" FontSize="13" FontWeight="Medium" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top"/>
+                <StackPanel x:Name="containerImageStackPanel">
+                    <Button x:Name="addImageButton" Style="{StaticResource addButton}" Content="Add" HorizontalAlignment="Left" Margin="15,0,0,0" Height="30" Width="100" Click="addImageButton_Click" RenderTransformOrigin="0.489,0.521"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Grid.ColumnSpan="3" CornerRadius="0, 0, 30, 30" Background="#8C7AE6">
+            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <Button x:Name="saveAccommodation" Style="{StaticResource saveButton}" Grid.Row="1" Margin="49, 0, 0, 0" Click="SaveAccommodation" 
+                        Content="Save Accommodation"/>
+            </StackPanel>
+        </Border>
+
+    </Grid>
 </UserControl>
