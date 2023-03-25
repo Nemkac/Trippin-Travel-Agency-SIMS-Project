@@ -4,8 +4,6 @@ using InitialProject.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InitialProject.Services
 {
@@ -28,9 +26,9 @@ namespace InitialProject.Services
         {
             int guestId;
             DataBaseContext guestIdContext = new DataBaseContext();
-            List<Booking> bookingList = guestIdContext.Bookings.ToList();
+            List<Booking> bookings = guestIdContext.Bookings.ToList();
 
-            foreach(Booking booking in bookingList.ToList()) 
+            foreach(Booking booking in bookings.ToList()) 
             {
                 if(booking.Id ==  bookingId)
                 {
@@ -41,6 +39,26 @@ namespace InitialProject.Services
             return -1;
         }
 
+<<<<<<< Updated upstream:Trippin Travel Agency/InitialProject/InitialProject/Services/BookingService.cs
+=======
+        public string GetGuestName(int bookingId)
+        {
+            UserService userService = new UserService();
+            DataBaseContext bookingContext = new DataBaseContext();
+            List<Booking> bookings = bookingContext.Bookings.ToList();
+            User user = new User();
+
+            foreach(Booking booking  in bookings.ToList())
+            {
+                if(booking.Id == bookingId)
+                {
+                    user = userService.GetById(booking.guestId);
+                }
+            }
+
+            return user.username;
+        }
+>>>>>>> Stashed changes:Trippin Travel Agency/InitialProject/InitialProject/Service/BookingService.cs
         public static void Save(Booking booking)
         {
             DataBaseContext saveContext = new DataBaseContext();
@@ -48,7 +66,7 @@ namespace InitialProject.Services
             saveContext.SaveChanges();
         }
 
-        public static List<string> GetDisplayableDates(List<List<DateTime>> availableDates)
+        public static List<string> FormDisplayableDates(List<List<DateTime>> availableDates)
         {
             List<string> displayableDates = new List<string>();
             foreach (List<DateTime> checkInCheckOut in availableDates)
