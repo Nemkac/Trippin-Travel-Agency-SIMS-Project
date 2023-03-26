@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Xml.Linq;
-using InitialProject.Context;
+﻿using InitialProject.Context;
 using InitialProject.Model;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 namespace InitialProject.Service
 
 {
@@ -19,133 +12,119 @@ namespace InitialProject.Service
         public Accommodation GetById(int id)
         {
             DataBaseContext context = new DataBaseContext();
-            List<Accommodation> dataList = context.Accommodations.ToList();
-            foreach (Accommodation accommodation in dataList.ToList())
-            {
-                if (accommodation.id == id)
-                {
-                    return accommodation;
-                }
-            }
-            return null;
+            List<Accommodation> accommodations = context.Accommodations.ToList();
+            return accommodations.Find(a => a.id == id);
         }
 
-        // Potrebno refaktorisati
-        public List<string> GetLocationList(int id)
+        public List<string> GetAccommodationLocation(int id)
         {
             DataBaseContext context = new DataBaseContext();
-            List<Accommodation> dataList = context.Accommodations.ToList();
+            List<Accommodation> accommodations = context.Accommodations.ToList();
             List<string> countryAndCity = new List<string>();
-            List<AccommodationLocation> locationsData = context.LocationsOfAccommodations.ToList();
+            List<AccommodationLocation> locations = context.LocationsOfAccommodations.ToList();
 
-            foreach (Accommodation accommodation in dataList)
-            {
-                if (accommodation.id == id)
-                {
-                    countryAndCity.Add(accommodation.location.country);
-                    countryAndCity.Add(accommodation.location.city);
-                }
-            }
+            Accommodation accommodation = accommodations.Find(a => a.id == id);
+            countryAndCity.Add(accommodation.location.country);
+            countryAndCity.Add(accommodation.location.city);
             return countryAndCity;
         }
 
-        public List<int> GetByName(string name)
+        public List<int> GetAllByName(string name)
         {
             DataBaseContext context = new DataBaseContext();
-            List<Accommodation> dataList = context.Accommodations.ToList();
-            List<int> filteredList = new List<int>();
-            foreach (Accommodation accommodation in dataList.ToList())
+            List<Accommodation> accommodations = context.Accommodations.ToList();
+            List<int> filtered = new List<int>();
+            foreach (Accommodation accommodation in accommodations.ToList())
             {
                 string nameToUpper = accommodation.name.ToUpper();
                 if (nameToUpper.Contains(name.ToUpper()))
                 {
-                    filteredList.Add(accommodation.id);
+                    filtered.Add(accommodation.id);
                 }
             }
-            return filteredList;
+            return filtered;
         }
 
-        public List<int> GetByCountry(string country)
+        public List<int> GetAllByCountry(string country)
         {
             DataBaseContext context = new DataBaseContext();
-            List<AccommodationLocation> locationsData = context.LocationsOfAccommodations.ToList();
-            List<Accommodation> accommodationsData = context.Accommodations.ToList();
-            List<int> filteredList = new List<int>();
-            foreach (Accommodation accommodation in accommodationsData.ToList())
+            List<AccommodationLocation> locations = context.LocationsOfAccommodations.ToList();
+            List<Accommodation> accommodations = context.Accommodations.ToList();
+            List<int> filtered = new List<int>();
+            foreach (Accommodation accommodation in accommodations.ToList())
             {
 
                 if ((accommodation.location.country.ToUpper()).Contains(country.ToUpper()))
                 {
-                    filteredList.Add(accommodation.id);
+                    filtered.Add(accommodation.id);
                 }
             }
-            return filteredList;
+            return filtered;
         }
 
-        public List<int> GetByCity(string city)
+        public List<int> GetAllByCity(string city)
         {
             DataBaseContext context = new DataBaseContext();
-            List<AccommodationLocation> locationsData = context.LocationsOfAccommodations.ToList();
-            List<Accommodation> accommodationsData = context.Accommodations.ToList();
-            List<int> filteredList = new List<int>();
-            foreach (Accommodation accommodation in accommodationsData.ToList())
+            List<AccommodationLocation> locations = context.LocationsOfAccommodations.ToList();
+            List<Accommodation> accommodations = context.Accommodations.ToList();
+            List<int> filtered = new List<int>();
+            foreach (Accommodation accommodation in accommodations.ToList())
             {
                 if ((accommodation.location.city.ToUpper()).Contains(city.ToUpper()))
                 {
-                    filteredList.Add(accommodation.id);
+                    filtered.Add(accommodation.id);
                 }
             }
-            return filteredList;
+            return filtered;
         }
 
-        public List<int> GetByGuestsNumber(int guestsNumber)
+        public List<int> GetAllByGuestsNumber(int guestsNumber)
         {
             DataBaseContext context = new DataBaseContext();
-            List<Accommodation> dataList = context.Accommodations.ToList();
-            List<int> filteredList = new List<int>();
-            foreach (Accommodation accommodation in dataList.ToList())
+            List<Accommodation> accommodations = context.Accommodations.ToList();
+            List<int> filtered = new List<int>();
+            foreach (Accommodation accommodation in accommodations.ToList())
             {
                 if (accommodation.guestLimit >= guestsNumber)
                 {
-                    filteredList.Add(accommodation.id);
+                    filtered.Add(accommodation.id);
                 }
             }
-            return filteredList;
+            return filtered;
         }
 
-        public List<int> GetByMininumDays(int days)
+        public List<int> GetAllByMininumDays(int days)
         {
             DataBaseContext context = new DataBaseContext();
-            List<Accommodation> dataList = context.Accommodations.ToList();
-            List<int> filteredList = new List<int>();
-            foreach (Accommodation accommodation in dataList.ToList())
+            List<Accommodation> accommodations = context.Accommodations.ToList();
+            List<int> filtered = new List<int>();
+            foreach (Accommodation accommodation in accommodations.ToList())
             {
                 if (accommodation.minDaysBooked <= days)
                 {
-                    filteredList.Add(accommodation.id);
+                    filtered.Add(accommodation.id);
                 }
             }
-            return filteredList;
+            return filtered;
         }
 
-        public List<int> GetByType (string type)
+        public List<int> GetAllByType (string type)
         {
             DataBaseContext context = new DataBaseContext();
-            List<Accommodation> dataList = context.Accommodations.ToList();
-            List<int> filteredList = new List<int>();
-            foreach (Accommodation accommodation in dataList.ToList())
+            List<Accommodation> accommodations = context.Accommodations.ToList();
+            List<int> filtered = new List<int>();
+            foreach (Accommodation accommodation in accommodations.ToList())
             {
                 if ((accommodation.type.ToString().ToUpper()).Contains(type.ToUpper()))
                 {
-                    filteredList.Add(accommodation.id);
+                    filtered.Add(accommodation.id);
                 }
             }
-            return filteredList;
+            return filtered;
         }
 
-        public List<List<DateTime>> GetAvailableDates(Accommodation accommodation, int daysToBook, List<DateTime> dateLimits)
+        public List<List<DateTime>> GetAvailableDatePeriods(Accommodation accommodation, int daysToBook, List<DateTime> dateLimits)
         {
-            // Get date basic properties
             DateTime startingDate;
             int startEndSpan;
             List<List<DateTime>> availablePeriods;
@@ -206,72 +185,64 @@ namespace InitialProject.Service
 
         public List<List<DateTime>> GetAvailableDates(int startEndSpan, int daysToBook, DateTime startingDate, List<List<DateTime>> takenDates)
         {
-            DateTime exactDay;
-            int availablePeriod;
             List<List<DateTime>> availablePeriods = new List<List<DateTime>>();
             for (int i = 0; i <= startEndSpan - daysToBook; i++)
             {
-                availablePeriod = 0;
-                for (int j = i; j < i + daysToBook; j++)
-                {
-                    exactDay = startingDate.AddDays(j);
-
-                    foreach (List<DateTime> bookingsDates in takenDates)
-                    {
-                        if (exactDay >= bookingsDates[0] && exactDay < bookingsDates[1])
-                        {
-                            availablePeriod++;
-                        }
-                    }
-                }
-                if (availablePeriod == 0)
+                if (CheckIfPeriodAvailable(i,daysToBook,takenDates,startingDate))
                 {
                     availablePeriods.Add(new List<DateTime>() { startingDate.AddDays(i), startingDate.AddDays(i + daysToBook) });
+                }
+            }
+            return availablePeriods;
+        } 
+
+        public List<List<DateTime>> SuggestAdditionalDates(int startEndSpan, int daysToBook, DateTime startingDate, List<List<DateTime>> takenDates) 
+        {
+            int periodsFound = 0;
+            List<List<DateTime>> availablePeriods = new List<List<DateTime>>();
+            for (int i = 0; i < startEndSpan - daysToBook + 1095; i++)
+            {
+
+                if (CheckIfPeriodAvailable(i,daysToBook,takenDates,startingDate))
+                {
+                    availablePeriods.Add(new List<DateTime>() { startingDate.AddDays(i), startingDate.AddDays(i + daysToBook) });
+                    periodsFound++;
+                    if (periodsFound == 3) { break; }
                 }
             }
             return availablePeriods;
         }
 
-        // Treba refaktorisati
-        public List<List<DateTime>> SuggestAdditionalDates(int startEndSpan, int daysToBook, DateTime startingDate, List<List<DateTime>> takenDates) 
+        public bool CheckIfPeriodAvailable(int dayIterator, int daysToBook, List<List<DateTime>> takenDates, DateTime startingDate)
         {
-            int periodsFound = 0;
-            DateTime exactDay;
-            int availablePeriod;
-            List<List<DateTime>> availablePeriods = new List<List<DateTime>>();
-            for (int i = 0; i < startEndSpan - daysToBook + 1095; i++)
+            for (int i = dayIterator; i < dayIterator + daysToBook; i++)
             {
-                availablePeriod = 0;
-                for (int j = i; j < i + daysToBook; j++)
+                if(!CheckIfDayAvailable(takenDates, startingDate.AddDays(i)))
                 {
-                    exactDay = startingDate.AddDays(j);
-                    foreach (List<DateTime> bookingsDates in takenDates)
-                    {
-                        if (exactDay >= bookingsDates[0] && exactDay < bookingsDates[1])
-                        {
-                            availablePeriod++;
-                        }
-                    }
-                }
-                if (availablePeriod == 0)
-                {
-                    availablePeriods.Add(new List<DateTime>() { startingDate.AddDays(i), startingDate.AddDays(i + daysToBook) });
-                    periodsFound++;
-                    if (periodsFound == 3)
-                    {
-                        break;
-                    }
+                    return false;
                 }
             }
-            return availablePeriods;
+            return true;
+        }
+
+        public bool CheckIfDayAvailable(List<List<DateTime>> takenDates,DateTime exactDay)
+        {
+            foreach (List<DateTime> bookingsDates in takenDates)
+            {
+                if (exactDay >= bookingsDates[0] && exactDay < bookingsDates[1])
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public static AccommodationLocation GetLocation(string country, string city)
         {
             DataBaseContext locationContext = new DataBaseContext();
-            List<AccommodationLocation> locationsList = locationContext.LocationsOfAccommodations.ToList();
+            List<AccommodationLocation> locations = locationContext.LocationsOfAccommodations.ToList();
 
-            foreach (AccommodationLocation location in locationsList.ToList())
+            foreach (AccommodationLocation location in locations.ToList())
             {
                 if (location.country == country && location.city == city)
                 {

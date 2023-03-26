@@ -4,7 +4,6 @@ using InitialProject.Model;
 using InitialProject.Service;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -28,7 +27,7 @@ namespace InitialProject.View
         public OwnersBookingInterface()
         {
             InitializeComponent();
-            ObservableCollection<BookingDTO> dataGridData = ShowBookings();
+            List<BookingDTO> dataGridData = ShowBookings();
             bookingDataGrid.ItemsSource = dataGridData;
             SendNotification();
         }
@@ -50,12 +49,12 @@ namespace InitialProject.View
             }
         }
 
-        private ObservableCollection<BookingDTO> ShowBookings()
+        private List<BookingDTO> ShowBookings()
         {
             GuestRateService guestRateService = new GuestRateService();
             BookingService bookingService = new BookingService();
             DataBaseContext bookingContext = new DataBaseContext();
-            ObservableCollection<BookingDTO> dataList = new ObservableCollection<BookingDTO>();
+            List<BookingDTO> dataList = new List<BookingDTO>();
             BookingDTO dto = new BookingDTO();
 
             foreach (Booking booking in bookingContext.Bookings.ToList())

@@ -34,8 +34,8 @@
     <!--Menu button icon-->
     <Style x:Key="menuButtonIcon" TargetType="fa:IconImage">
         <Setter Property="Foreground" Value="#FEFEFF"/>
-        <Setter Property="Width" Value="19"/>
-        <Setter Property="Height" Value="19"/>
+        <Setter Property="Width" Value="22"/>
+        <Setter Property="Height" Value="22"/>
         <Setter Property="Margin" Value="35, 0, 20, 0"/>
     </Style>
         
@@ -44,70 +44,10 @@
         <Setter Property="Foreground" Value="#FEFEFF" />
         <Setter Property="FontFamily" Value="Ubuntu"/>
         <Setter Property="FontWeight" Value="Medium"/>
-        <Setter Property="FontSize" Value="14.5"/>
+        <Setter Property="FontSize" Value="16.5"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
-
-    <Style x:Key="saveButton" TargetType="Button">
-        <Setter Property="Background" Value="#4CD137"/>
-        <Setter Property="Foreground" Value="#F4FFF8"/>
-        <Setter Property="FontFamily" Value="Ubuntu"/>
-        <Setter Property="FontSize" Value="17"/>
-        <Setter Property="FontWeight" Value="Light"/>
-        <Setter Property="Width" Value="200"/>
-        <Setter Property="Height" Value="40"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border Background="#4CD137" CornerRadius="20">
-                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="False">
-                <Setter Property="Background" Value="#44BD32"/>
-            </Trigger>
-        </Style.Triggers>
         
-    </Style>
-
-    <Style x:Key="addButton" TargetType="Button">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="#979797"/>
-        <Setter Property="FontFamily" Value="Ubuntu"/>
-        <Setter Property="FontSize" Value="17"/>
-        <Setter Property="FontWeight" Value="Light"/>
-        <Setter Property="Width" Value="100"/>
-        <Setter Property="Height" Value="30"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border Background="Transparent" CornerRadius="10" BorderThickness="0.4" BorderBrush="#979797">
-                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="dataGridButton" TargetType="Button">
-        <Setter Property="Background" Value="#4CD137"/>
-        <Setter Property="Foreground" Value="#F4FFF8"/>
-        <Setter Property="FontFamily" Value="Ubuntu"/>
-        <Setter Property="FontSize" Value="11"/>
-        <Setter Property="FontWeight" Value="Light"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border Background="Transparent" CornerRadius="10" BorderThickness="0.4">
-                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
+        
+        
 </ResourceDictionary>
