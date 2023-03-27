@@ -10,24 +10,10 @@ namespace InitialProject.Service
 {
     public class TourLocationService
     {
-
         public TourLocation GetById(int id) 
-        { 
-            DataBaseContext db = new DataBaseContext();
-            TourLocation matchingTourLocation = new TourLocation();
-
-            foreach(TourLocation tourLocation in db.TourLocation.ToList())
-            {
-                if(tourLocation.id == id)
-                {
-                    matchingTourLocation = tourLocation;
-                }
-
-            }
-
-            return matchingTourLocation;
+        {
+            using DataBaseContext db = new DataBaseContext();
+            return db.TourLocation.SingleOrDefault(tl => tl.id == id);
         }
-
-
     }
 }

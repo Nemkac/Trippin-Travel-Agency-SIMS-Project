@@ -62,7 +62,7 @@ namespace InitialProject.View
             }
             else if (!countryName.Text.Equals(""))
             {
-                List<TourDTO> tourDTOsByCountryName = tourService.GetByCountry(countryName.Text);
+                List<TourDTO> tourDTOsByCountryName = tourService.GetAllByCountry(countryName.Text);
                 this.dataGrid.ItemsSource = tourDTOsByCountryName;
             }
             else if (!duration.Text.Equals(""))
@@ -109,7 +109,7 @@ namespace InitialProject.View
             List<TourDTO> tourDTOs = new List<TourDTO>();   
             int index = selectedTour.id;
             int numberOfGuests = Int32.Parse(NumberOfTourists.Text);
-            int flag =  tourService.BookTour(index, numberOfGuests);
+            int flag =  tourService.Book(index, numberOfGuests);
 
             if (flag == 0)
             {

@@ -12,16 +12,8 @@ namespace InitialProject.Service
     {
         public User GetById(int id)
         {
-            DataBaseContext context = new DataBaseContext();
-            List<User> userList = context.Users.ToList();
-            foreach (User user in userList.ToList())
-            {
-                if (user.id == id)
-                {
-                    return user;
-                }
-            }
-            return null;
+            using DataBaseContext context = new DataBaseContext();
+            return context.Users.SingleOrDefault(u => u.id == id);
         }
     }
 }

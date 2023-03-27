@@ -1,28 +1,22 @@
 ﻿using InitialProject.Context;
 using InitialProject.Model;
-using InitialProject.Repository;
 using InitialProject.DTO;
-using InitialProject.Model;
-using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace InitialProject.Service
 {
     class TourService
     {
         public TourService() { }
-        public static TourLocation Get(string country, string city)
+        public static TourLocation GetTourLocation(string country, string city)
         {
             DataBaseContext locationContext = new DataBaseContext();
-            List<TourLocation> locationsList = locationContext.TourLocation.ToList();
+            List<TourLocation> locations = locationContext.TourLocation.ToList();
 
-            foreach (TourLocation location in locationsList.ToList())
+            foreach (TourLocation location in locations.ToList())
             {
                 if (location.country == country && location.city == city)
                 {
@@ -50,28 +44,17 @@ namespace InitialProject.Service
 
         }
 
-        public TourLocation GetById(int id)
+        public TourLocation GetLocationById(int id)
         {
-            DataBaseContext dbContext = new DataBaseContext();
-            TourLocation requiredTour = new TourLocation();
-
-            List<TourLocation> locations = dbContext.TourLocation.ToList();
-
-            foreach (TourLocation location in locations)
-            {
-                if (location.id == id)
-                {
-                    requiredTour = location;
-                }
-            }
-            return requiredTour;
+            using DataBaseContext dbContext = new DataBaseContext();
+            return dbContext.TourLocation.SingleOrDefault(tl => tl.id == id);
         }
-
+        
         public TourDTO CreateDTO(Tour tour)
         {
             DataBaseContext dataBaseContext = new DataBaseContext();
             string keyPoints = GetKeyPointNames(tour, dataBaseContext);
-            TourLocation tmp = GetById(tour.location);
+            TourLocation tmp = GetLocationById(tour.location);
             TourDTO tourDTO = new(tour.id, tour.name, tour.description, tmp.city, tmp.country, keyPoints, tour.language, tour.touristLimit, tour.startDates, tour.hoursDuration);
             return tourDTO;
         }
@@ -99,7 +82,7 @@ namespace InitialProject.Service
 
             foreach (Tour tour in dataBaseContext.Tours.ToList())
             {
-                TourLocation tourLocation = GetById(tour.location);
+                TourLocation tourLocation = GetLocationById(tour.location);
                 if (tourLocation.city.ToUpper().Contains(cityName.ToUpper()))
                 {
                     tourDTO = CreateDTO(tour);
@@ -108,7 +91,7 @@ namespace InitialProject.Service
             }
             return tourDTOs;
         }
-        public List<TourDTO> GetByCountry(string countryName)
+        public List<TourDTO> GetAllByCountry(string countryName)
         {
             DataBaseContext dataBaseContext = new DataBaseContext();
             List<TourDTO> tourDTOs = new List<TourDTO>();
@@ -116,7 +99,7 @@ namespace InitialProject.Service
 
             foreach (Tour tour in dataBaseContext.Tours.ToList())
             {
-                TourLocation tourLocation = GetById(tour.location);
+                TourLocation tourLocation = GetLocationById(tour.location);
                 if (tourLocation.country.ToUpper().Contains(countryName.ToUpper()))
                 {
                     tourDTO = CreateDTO(tour);
@@ -220,7 +203,7 @@ namespace InitialProject.Service
             {
                 if (tour.name != nameOfFullTour && tour.touristLimit > 0)
                 {
-                    TourLocation tourLocation = GetById(tour.location);
+                    TourLocation tourLocation = GetLocationById(tour.location);
                     if (tourLocation.city.ToUpper().Contains(cityName.ToUpper()))
                     {
                         tourDTO = CreateDTO(tour);
@@ -230,7 +213,7 @@ namespace InitialProject.Service
             }
             return tourDTOs;
         }
-
+        /*
         public int BookTour(int tourIndex, int numberOfTourists)
         {
             DataBaseContext dataBase = new DataBaseContext();
@@ -260,5 +243,23 @@ namespace InitialProject.Service
             }
             return -2; // Error return value
         }
+        */
+
+        public int Book(int tourId, int numberOfTourists)
+        {
+            using DataBaseContext dataBase = new DataBaseContext();
+            Tour tour = dataBase.Tours.SingleOrDefault(t => t.id == tourId);
+
+            if (tour == null) return -2; // Error return value
+            if (tour.touristLimit == 0) return -1; // Tour filled
+            if (tour.touristLimit < numberOfTourists) return 1; // Too many guests for selected tour
+
+            tour.touristLimit -= numberOfTourists;
+            TourReservation tourReservation = new TourReservation(LoggedUser.id, tourId, numberOfTourists);
+            dataBase.TourReservations.Add(tourReservation);
+            dataBase.SaveChanges();
+            return 0; // Tour registered
+        }
+
     }
 }

@@ -20,13 +20,9 @@ namespace InitialProject.Service
         {
             DataBaseContext context = new DataBaseContext();
             List<Accommodation> accommodations = context.Accommodations.ToList();
-            List<string> countryAndCity = new List<string>();
             List<AccommodationLocation> locations = context.LocationsOfAccommodations.ToList();
-
             Accommodation accommodation = accommodations.Find(a => a.id == id);
-            countryAndCity.Add(accommodation.location.country);
-            countryAndCity.Add(accommodation.location.city);
-            return countryAndCity;
+            return new List<string>() { accommodation.location.country, accommodation.location.city };
         }
 
         public List<int> GetAllByName(string name)
@@ -146,9 +142,9 @@ namespace InitialProject.Service
                 takenDates.Add(new List<DateTime>() { DateTime.Parse(booking.arrival), DateTime.Parse(booking.departure) });
             }
 
-            if (GetAvailableDates(startEndSpan, daysToBook, startingDate, takenDates).Count > 0)
+            if (GetAvailableDateSlots(startEndSpan, daysToBook, startingDate, takenDates).Count > 0)
             {
-                return GetAvailableDates(startEndSpan, daysToBook, startingDate, takenDates);
+                return GetAvailableDateSlots(startEndSpan, daysToBook, startingDate, takenDates);
             }
 
             if (SuggestAdditionalDates(startEndSpan, daysToBook, startingDate, takenDates).Count > 0)
@@ -183,17 +179,17 @@ namespace InitialProject.Service
             return sameAccommodationBookings;
         }
 
-        public List<List<DateTime>> GetAvailableDates(int startEndSpan, int daysToBook, DateTime startingDate, List<List<DateTime>> takenDates)
+        public List<List<DateTime>> GetAvailableDateSlots(int startEndSpan, int daysToBook, DateTime startingDate, List<List<DateTime>> takenDates)
         {
-            List<List<DateTime>> availablePeriods = new List<List<DateTime>>();
+            List<List<DateTime>> dateSlots = new List<List<DateTime>>();
             for (int i = 0; i <= startEndSpan - daysToBook; i++)
             {
                 if (CheckIfPeriodAvailable(i,daysToBook,takenDates,startingDate))
                 {
-                    availablePeriods.Add(new List<DateTime>() { startingDate.AddDays(i), startingDate.AddDays(i + daysToBook) });
+                    dateSlots.Add(new List<DateTime>() { startingDate.AddDays(i), startingDate.AddDays(i + daysToBook) });
                 }
             }
-            return availablePeriods;
+            return dateSlots;
         } 
 
         public List<List<DateTime>> SuggestAdditionalDates(int startEndSpan, int daysToBook, DateTime startingDate, List<List<DateTime>> takenDates) 

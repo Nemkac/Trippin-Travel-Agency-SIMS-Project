@@ -13,18 +13,18 @@ namespace InitialProject.DTO
         public string accommodationName { get; set; }
         public string arrivalDate { get; set; }
         public string departureDate { get; set; }  
-        public int stayingPeriod { get; set; }
+        public int daysToStay { get; set; }
 
         public BookingDTO() { }
 
-        public BookingDTO(string guestName, int bookingId, string accommodationName, string arrivalDate, string departureDate, int stayingPeriod)
+        public BookingDTO(string guestName, int bookingId, string accommodationName, string arrivalDate, string departureDate, int daysToStay)
         {
             this.guestName = guestName;
             this.bookingId = bookingId;
             this.accommodationName = accommodationName;
             this.arrivalDate = arrivalDate;
             this.departureDate = departureDate;
-            this.stayingPeriod = stayingPeriod;
+            this.daysToStay = daysToStay;
         }
     }
 }
