@@ -7,12 +7,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="580">
     <Grid>
-        <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="bookingDataGrid">
+        <DataGrid x:Name="bookingDataGrid" d:ItemsSource="{d:SampleData ItemCount=5}">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Rate Guest" Background="#4CD137" BorderThickness="0.7" Click="RateGuest"/>
+                            <Button Content="Rate Guest" Click="RateGuest"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

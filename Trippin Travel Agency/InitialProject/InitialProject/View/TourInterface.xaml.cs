@@ -96,7 +96,7 @@ namespace InitialProject.View
             name = tourNameTextBox.Text;
             string country = countryComboBox.SelectedValue.ToString();
             string city = cityComboBox.SelectedValue.ToString();
-            location = TourService.Get(country, city);
+            location = TourService.GetTourLocation(country, city);
             string guestLimitInput = guestLimitTextBox.Text;
             guestLimit = int.Parse(guestLimitInput);
             string hoursDurationInput = hoursDurationTextBox.Text;

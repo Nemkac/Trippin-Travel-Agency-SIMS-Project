@@ -83,7 +83,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <!--Navigation menu-->
-            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="300"/>
             <!--Content section-->
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -117,12 +117,6 @@
                         <TextBlock Style="{StaticResource menuButtonText}" Text="Bookings"/>
                     </StackPanel>
                 </RadioButton>
-                <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource HoverColor}">
-                    <StackPanel Orientation="Horizontal">
-                        <fa:IconImage Icon="Bell" Style="{StaticResource menuButtonIcon}"/>
-                        <TextBlock Style="{StaticResource menuButtonText}" Text="Notifications"/>
-                    </StackPanel>
-                </RadioButton>
 
 
                 <!--Dark theme-->
@@ -131,7 +125,7 @@
                         Command="{Binding OnlineMode_Command}"
                         CommandParameter="{Binding ElementName=ToggleButton_OnlineMode}"
                         Style="{StaticResource ToggleButtonStyle1}"
-                        HorizontalAlignment="Center" Margin="0, 400, 0, 0">
+                        HorizontalAlignment="Center" Margin="0, 430, 0, 0">
                     <Label Content="DarkMode" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Ubuntu" FontWeight="Medium" Foreground="#FEFEFF" FontSize="16"/>
                 </ToggleButton>
 

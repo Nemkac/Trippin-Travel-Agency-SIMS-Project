@@ -31,7 +31,7 @@ namespace InitialProject.DTO
         public AccommodationDTO(Accommodation accommodation, List<string> location)
         {
             DataBaseContext context = new DataBaseContext();
-            List<AccommodationLocation> locationsData = context.LocationsOfAccommodations.ToList();
+            List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
             this.id = accommodation.id;
             this.name = accommodation.name;
             this.country = location[0];
@@ -39,18 +39,7 @@ namespace InitialProject.DTO
             this.guestLimit= accommodation.guestLimit;
             this.minDaysBooked = accommodation.minDaysBooked;
             this.bookingCancelPeriod = accommodation.bookingCancelPeriodDays;
-            if (accommodation.type == Model.Type.Hut)
-            {
-                this.type = Type.Hut;
-            }
-            if(accommodation.type == Model.Type.House)
-            {
-                this.type = Type.House;
-            }
-            if(accommodation.type == Model.Type.Apartment)
-            {
-                this.type = Type.Apartment;
-            }
+            this.type = (Type)accommodation.type;
         }
     } 
 }

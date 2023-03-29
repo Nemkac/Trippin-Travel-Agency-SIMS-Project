@@ -1,12 +1,9 @@
 ﻿using InitialProject.Context;
 using InitialProject.DTO;
 using InitialProject.Model;
-using InitialProject.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InitialProject.Service
 {
@@ -21,7 +18,7 @@ namespace InitialProject.Service
 
             Accommodation tmpAccommodation = accommodationService.GetById(booking.accommodationId);
             User tmpUser = userService.GetById(booking.guestId);
-            bookingDto = new BookingDTO(tmpUser.username, booking.Id, tmpAccommodation.name, booking.arrival, booking.departure, booking.stayingPeriod);
+            bookingDto = new BookingDTO(tmpUser.username, booking.Id, tmpAccommodation.name, booking.arrival, booking.departure, booking.daysToStay);
             return bookingDto;
         }
         
@@ -29,9 +26,9 @@ namespace InitialProject.Service
         {
             int guestId;
             DataBaseContext guestIdContext = new DataBaseContext();
-            List<Booking> bookingList = guestIdContext.Bookings.ToList();
+            List<Booking> bookings = guestIdContext.Bookings.ToList();
 
-            foreach(Booking booking in bookingList.ToList()) 
+            foreach(Booking booking in bookings.ToList()) 
             {
                 if(booking.Id ==  bookingId)
                 {
@@ -46,10 +43,10 @@ namespace InitialProject.Service
         {
             UserService userService = new UserService();
             DataBaseContext bookingContext = new DataBaseContext();
-            List<Booking> bookingList = bookingContext.Bookings.ToList();
+            List<Booking> bookings = bookingContext.Bookings.ToList();
             User user = new User();
 
-            foreach(Booking booking  in bookingList.ToList())
+            foreach(Booking booking  in bookings.ToList())
             {
                 if(booking.Id == bookingId)
                 {
@@ -66,7 +63,7 @@ namespace InitialProject.Service
             saveContext.SaveChanges();
         }
 
-        public static List<string> GetDisplayableDates(List<List<DateTime>> availableDates)
+        public static List<string> FormDisplayableDates(List<List<DateTime>> availableDates)
         {
             List<string> displayableDates = new List<string>();
             foreach (List<DateTime> checkInCheckOut in availableDates)
