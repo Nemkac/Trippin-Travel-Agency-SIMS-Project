@@ -20,7 +20,7 @@ namespace InitialProject.Service
         {
             DataBaseContext context = new DataBaseContext();
             List<Accommodation> accommodations = context.Accommodations.ToList();
-            List<AccommodationLocation> locations = context.LocationsOfAccommodations.ToList();
+            List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
             Accommodation accommodation = accommodations.Find(a => a.id == id);
             return new List<string>() { accommodation.location.country, accommodation.location.city };
         }
@@ -44,7 +44,7 @@ namespace InitialProject.Service
         public List<int> GetAllByCountry(string country)
         {
             DataBaseContext context = new DataBaseContext();
-            List<AccommodationLocation> locations = context.LocationsOfAccommodations.ToList();
+            List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
             List<Accommodation> accommodations = context.Accommodations.ToList();
             List<int> filtered = new List<int>();
             foreach (Accommodation accommodation in accommodations.ToList())
@@ -61,7 +61,7 @@ namespace InitialProject.Service
         public List<int> GetAllByCity(string city)
         {
             DataBaseContext context = new DataBaseContext();
-            List<AccommodationLocation> locations = context.LocationsOfAccommodations.ToList();
+            List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
             List<Accommodation> accommodations = context.Accommodations.ToList();
             List<int> filtered = new List<int>();
             foreach (Accommodation accommodation in accommodations.ToList())
@@ -236,7 +236,7 @@ namespace InitialProject.Service
         public static AccommodationLocation GetLocation(string country, string city)
         {
             DataBaseContext locationContext = new DataBaseContext();
-            List<AccommodationLocation> locations = locationContext.LocationsOfAccommodations.ToList();
+            List<AccommodationLocation> locations = locationContext.AccommodationLocation.ToList();
 
             foreach (AccommodationLocation location in locations.ToList())
             {

@@ -197,7 +197,7 @@ namespace InitialProject.Service
         {
             DataBaseContext dataBaseContext = new DataBaseContext();
             List<TourDTO> tourDTOs = new List<TourDTO>();
-            TourDTO tourDTO = new TourDTO();
+            //TourDTO tourDTO = new TourDTO();
 
             foreach (Tour tour in dataBaseContext.Tours.ToList())
             {
@@ -206,45 +206,14 @@ namespace InitialProject.Service
                     TourLocation tourLocation = GetLocationById(tour.location);
                     if (tourLocation.city.ToUpper().Contains(cityName.ToUpper()))
                     {
-                        tourDTO = CreateDTO(tour);
-                        tourDTOs.Add(tourDTO);
+                        //tourDTO = CreateDTO(tour);
+                        tourDTOs.Add(CreateDTO(tour));
                     }
                 }
             }
             return tourDTOs;
         }
-        /*
-        public int BookTour(int tourIndex, int numberOfTourists)
-        {
-            DataBaseContext dataBase = new DataBaseContext();
-            List<Tour> allTours = dataBase.Tours.ToList();
-
-            foreach (Tour tour in allTours)
-            {
-                if (tour.id == tourIndex)
-                {
-                    if (tour.touristLimit - numberOfTourists >= 0)
-                    {
-                        tour.touristLimit -= numberOfTourists;
-                        TourReservation tourReservation = new TourReservation(LoggedUser.id, tourIndex, numberOfTourists);
-                        dataBase.Attach(tourReservation);
-                        dataBase.SaveChanges();
-                        return 0; // Tour registered
-                    }
-                    else if (tour.touristLimit > 0)
-                    {
-                        return 1; // Too many guests for selected tour
-                    }
-                    if(tour.touristLimit == 0)
-                    {
-                        return -1; // Tour filled
-                    }
-                }
-            }
-            return -2; // Error return value
-        }
-        */
-
+        
         public int Book(int tourId, int numberOfTourists)
         {
             using DataBaseContext dataBase = new DataBaseContext();

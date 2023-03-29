@@ -14,7 +14,7 @@ namespace InitialProject.Service
         public AccommodationLocation GetById(int id)
         {
             DataBaseContext context = new DataBaseContext();
-            List<AccommodationLocation> locations = context.LocationsOfAccommodations.ToList();
+            List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
             foreach (AccommodationLocation location in locations.ToList())
             {
                 if (location.id == id)

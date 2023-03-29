@@ -10,7 +10,7 @@ namespace InitialProject.Context
         public DbSet<Accommodation> Accommodations { get; set; }    
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<TourLocation> TourLocation { get; set; }  
-        public DbSet<AccommodationLocation> LocationsOfAccommodations { get; set; }
+        public DbSet<AccommodationLocation> AccommodationLocation { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<KeyPoint> KeyPoints { get; set; }
         public DbSet<GuestRate> GuestRate { get; set; }
@@ -19,10 +19,10 @@ namespace InitialProject.Context
         // Apsolute paths for every memeber of the team
 
         // Aleksa Simeunovic -> Desktop PC
-        public string path = @"C:\Users\ifeel\Documents\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
+        // public string path = @"C:\Users\ifeel\Documents\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
 
         // Aleksa Simeunovic -> Laptop
-        // public string path = @"C:\\Users\\aleks\\OneDrive\\Dokumenti\\GitHub\\Trippin-Travel-Agency-SIMS-Project\\Trippin Travel Agency\\InitialProject\\InitialProject\\MyDatabase.sqlite";
+        public string path = @"C:\\Users\\aleks\\OneDrive\\Dokumenti\\GitHub\\Trippin-Travel-Agency-SIMS-Project\\Trippin Travel Agency\\InitialProject\\InitialProject\\MyDatabase.sqlite";
 
         // Nemanja Ranitovic
         // public string path = @"C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";

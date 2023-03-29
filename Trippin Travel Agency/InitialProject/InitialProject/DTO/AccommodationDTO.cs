@@ -31,7 +31,7 @@ namespace InitialProject.DTO
         public AccommodationDTO(Accommodation accommodation, List<string> location)
         {
             DataBaseContext context = new DataBaseContext();
-            List<AccommodationLocation> locations = context.LocationsOfAccommodations.ToList();
+            List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
             this.id = accommodation.id;
             this.name = accommodation.name;
             this.country = location[0];

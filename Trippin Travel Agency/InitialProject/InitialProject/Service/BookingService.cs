@@ -18,7 +18,7 @@ namespace InitialProject.Service
 
             Accommodation tmpAccommodation = accommodationService.GetById(booking.accommodationId);
             User tmpUser = userService.GetById(booking.guestId);
-            bookingDto = new BookingDTO(tmpUser.username, booking.Id, tmpAccommodation.name, booking.arrival, booking.departure, booking.stayingPeriod);
+            bookingDto = new BookingDTO(tmpUser.username, booking.Id, tmpAccommodation.name, booking.arrival, booking.departure, booking.daysToStay);
             return bookingDto;
         }
         

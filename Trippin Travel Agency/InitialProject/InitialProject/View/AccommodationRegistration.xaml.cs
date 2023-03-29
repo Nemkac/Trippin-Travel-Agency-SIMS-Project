@@ -29,7 +29,7 @@ namespace InitialProject.View
         private void FillCountryComboBox()
         {
             DataBaseContext countryContext = new DataBaseContext();
-            List<AccommodationLocation> countryList = countryContext.LocationsOfAccommodations.ToList();
+            List<AccommodationLocation> countryList = countryContext.AccommodationLocation.ToList();
             foreach (AccommodationLocation location in countryList.ToList())
             {
                 if (!countryComboBox.Items.Contains(location.country))
@@ -158,7 +158,7 @@ namespace InitialProject.View
         private void GetCitiesByCountry(string selectedCountry)
         {
             DataBaseContext cityContext = new DataBaseContext();
-            List<AccommodationLocation> cityList = cityContext.LocationsOfAccommodations.ToList();
+            List<AccommodationLocation> cityList = cityContext.AccommodationLocation.ToList();
 
             foreach (AccommodationLocation location in cityList.ToList())
             {

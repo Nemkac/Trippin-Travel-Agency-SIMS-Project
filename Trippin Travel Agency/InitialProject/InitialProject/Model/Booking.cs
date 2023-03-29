@@ -12,21 +12,17 @@ namespace InitialProject.Model
     {
         public int Id { get; set; }
         public int accommodationId { get; set; }
-
         public string arrival { get; set; }
         public string departure { get; set; }
-
-        public int stayingPeriod { get; set; }
-
+        public int daysToStay { get; set; }
         public int guestId { get; set; }    
 
-
-        public Booking(int accommodationId, string arrival, string departure, int stayingPeriod, int guestId)
+        public Booking(int accommodationId, string arrival, string departure, int daysToStay, int guestId)
         {
             this.accommodationId = accommodationId;
             this.arrival = arrival;
             this.departure = departure;
-            this.stayingPeriod = stayingPeriod;
+            this.daysToStay = daysToStay;
             this.guestId = guestId; 
         }
 

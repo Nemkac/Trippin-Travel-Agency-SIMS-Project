@@ -42,8 +42,8 @@ namespace InitialProject.View
 
             foreach (Tour tour in context.Tours.ToList())
             {
-                dto = tourService.CreateDTO(tour);
-                dataList.Add(dto);
+                //dto = tourService.CreateDTO(tour);
+                dataList.Add(tourService.CreateDTO(tour));
             }
 
             this.dataGrid.ItemsSource = dataList;
