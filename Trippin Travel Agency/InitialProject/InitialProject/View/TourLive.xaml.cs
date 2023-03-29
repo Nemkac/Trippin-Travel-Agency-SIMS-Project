@@ -122,15 +122,7 @@ namespace InitialProject.View
         {
             if (MessageBox.Show("Are you sure you want to end the tour?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                RefreshKeyPoints();
-                if (tourService.IsTourFinished(keyPointsList))
-                {
-                    EndTour();
-                }
-                else
-                {
-                    MessageBox.Show("The tour is not finished yet.");
-                }
+                EndTour();
             }
         }
 
@@ -138,8 +130,12 @@ namespace InitialProject.View
         {
             MessageBox.Show("Tour finished");
             Close();
+            DataBaseContext dbContext = new DataBaseContext();
             selectedTour.active = false;
-            TourManager.ActiveTours.Clear();
+            TourManager.ActiveTours.Remove(selectedTour);
+            dbContext.Update(selectedTour);
+            dbContext.SaveChanges();
+
         }
 
         private void KeyPoint_PropertyChanged(object sender, PropertyChangedEventArgs e)

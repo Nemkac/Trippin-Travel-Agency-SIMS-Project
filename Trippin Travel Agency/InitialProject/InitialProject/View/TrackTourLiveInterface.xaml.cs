@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using InitialProject.Service;
+using InitialProject.Context;
 
 namespace InitialProject.View
 {
@@ -55,16 +56,18 @@ namespace InitialProject.View
         private void StartTourButton_Click(object sender, RoutedEventArgs e)
         {
             Tour selectedTour = tourDataGrid.SelectedItem as Tour;
+            DataBaseContext dbContext = new DataBaseContext();
 
             if (selectedTour != null)
             {
-                // Activate the selected tour
                 selectedTour.active = true;
                 TourManager.ActiveTours.Add(selectedTour);
+                dbContext.Update(selectedTour);
+                dbContext.SaveChanges();    
 
                 if (TourManager.ActiveTours.Count > 1)
                 {
-                    // Cannot have more than one active tour
+                    TourManager.ActiveTours.Remove(selectedTour);
                     MessageBox.Show("You cannot have more than one active tour");
                     return;
                 }
