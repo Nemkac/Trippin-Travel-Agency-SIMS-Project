@@ -22,9 +22,9 @@
                 <Label x:Name="label" FontFamily="Ubuntu" FontSize="14" FontWeight="Medium" Content="Accommodation name" HorizontalAlignment="Left" Height="27" Margin="49,26,0,0" VerticalAlignment="Top" Width="165"/>
                 <TextBox x:Name="accommodationNameTB" HorizontalAlignment="Left" Margin="49,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="25"/>
                 <Label x:Name="label1" Content="Country" FontFamily="Ubuntu" FontSize="14" FontWeight="Medium" HorizontalAlignment="Left" Margin="49,45,0,0" VerticalAlignment="Top" Height="30" Width="150"/>
-                <ComboBox x:Name="countryComboBox" HorizontalAlignment="Left" Margin="49,10,0,0" VerticalAlignment="Top" Width="150" Height="22" SelectionChanged="countryComboBox_SelectionChanged"/>
+                <ComboBox x:Name="countryComboBox" HorizontalAlignment="Left" Margin="49,10,0,0" VerticalAlignment="Top" Width="190" Height="22" SelectionChanged="countryComboBox_SelectionChanged"/>
                 <Label x:Name="label2" Content="City" FontFamily="Ubuntu" FontSize="14" FontWeight="Medium" HorizontalAlignment="Left" Margin="49,45,0,0" VerticalAlignment="Top" Width="125" Height="26"/>
-                <ComboBox x:Name="cityComboBox" HorizontalAlignment="Left" Margin="49,10,0,0" VerticalAlignment="Top" Width="150" Height="22"/>
+                <ComboBox x:Name="cityComboBox" HorizontalAlignment="Left" Margin="49,10,0,0" VerticalAlignment="Top" Width="190" Height="22"/>
             </StackPanel>
         </Border>
 
@@ -52,9 +52,9 @@
             </StackPanel>
         </Border>
 
-        <Border Grid.Row="1" Grid.ColumnSpan="3" CornerRadius="0, 0, 30, 30" Background="#8C7AE6">
-            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Left">
-                <Button x:Name="saveAccommodation" Style="{StaticResource saveButton}" Grid.Row="1" Margin="49, 0, 0, 0" Click="SaveAccommodation" 
+        <Border Grid.Row="1" Grid.ColumnSpan="3" CornerRadius="0, 0, 30, 30" Background="#F3F3F3">
+            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Button x:Name="saveAccommodation" Style="{StaticResource saveButton}" Grid.Row="1" Margin="0, 0, 19, 0" Click="SaveAccommodation" 
                         Content="Save Accommodation"/>
             </StackPanel>
         </Border>
