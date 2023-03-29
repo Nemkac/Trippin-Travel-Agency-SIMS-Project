@@ -83,11 +83,11 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <!--Navigation menu-->
-            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="250"/>
             <!--Content section-->
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
+
         <!--Navigation menu-->
         <Border Grid.Column="0" x:Name="Menu">
             <Border.Background>
@@ -117,6 +117,12 @@
                         <TextBlock Style="{StaticResource menuButtonText}" Text="Bookings"/>
                     </StackPanel>
                 </RadioButton>
+                <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource HoverColor}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="Bell" Style="{StaticResource menuButtonIcon}"/>
+                        <TextBlock Style="{StaticResource menuButtonText}" Text="Notifications"/>
+                    </StackPanel>
+                </RadioButton>
 
 
                 <!--Dark theme-->
@@ -125,7 +131,7 @@
                         Command="{Binding OnlineMode_Command}"
                         CommandParameter="{Binding ElementName=ToggleButton_OnlineMode}"
                         Style="{StaticResource ToggleButtonStyle1}"
-                        HorizontalAlignment="Center" Margin="0, 430, 0, 0">
+                        HorizontalAlignment="Center" Margin="0, 400, 0, 0">
                     <Label Content="DarkMode" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Ubuntu" FontWeight="Medium" Foreground="#FEFEFF" FontSize="16"/>
                 </ToggleButton>
 
@@ -139,7 +145,7 @@
                     <GradientStop Color="#F5F6FA" Offset="0"/>
                 </LinearGradientBrush>
             </Border.Background>
-           
+
             <Grid>
                 <Grid.RowDefinitions>
                     <!--Header / Caption-->
@@ -147,26 +153,26 @@
                     <!--Content/Child views-->
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                
+
                 <!--Header/Caption-->
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <!--Caption-->
                     <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
                         <fa:IconImage Icon="{Binding Icon}" Height="20" Width="20" Foreground="#003554" Margin="35, 0, 10, 0"/>
                         <TextBlock Text="{Binding Caption}" Foreground="#003554" FontSize="18" FontWeight="Medium" FontFamily="Ubuntu" VerticalAlignment="Center"/>
                     </StackPanel>
-                    
+
                     <!--User-->
                     <StackPanel Grid.Column="1" Orientation="Horizontal" FlowDirection="RightToLeft" VerticalAlignment="Center" Margin="0, 0, 35, 0">
                         <Label Content="Hello, Nemanja" FontSize="18" FontWeight="Medium" FontFamily="Montserrat" Foreground="#003554"/>
                     </StackPanel>
                 </Grid>
-                
+
                 <!--Content/Child views-->
                 <ContentControl Content="{Binding CurrentChildView}" Grid.Row="1" Margin="25"/>
             </Grid>
