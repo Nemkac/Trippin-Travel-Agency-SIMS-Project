@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp">
 
+    <!-- Menu button -->
     <Style x:Key="menuButton" TargetType="RadioButton">
         <!--Normal button style-->
         <Setter Property="Height" Value="50"/>
@@ -31,12 +32,53 @@
         </Style.Triggers>
     </Style>
 
-    <!--Menu button icon-->
+    <!-- Mobile radio buttons for action bar -->
+    <Style x:Key="mobileMenuButton" TargetType="RadioButton">
+        <!--Normal button style-->
+        <Setter Property="Height" Value="80"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="#f5f6fa"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Width" Value="72"/>
+        <Setter Property="Margin" Value="0,10,0,0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Mobile menu button icon-->
     <Style x:Key="menuButtonIcon" TargetType="fa:IconImage">
-        <Setter Property="Foreground" Value="#FEFEFF"/>
-        <Setter Property="Width" Value="19"/>
-        <Setter Property="Height" Value="19"/>
-        <Setter Property="Margin" Value="35, 0, 20, 0"/>
+        <Setter Property="Foreground" Value="#f5f6fa"/>
+        <Setter Property="Width" Value="35"/>
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=RadioButton}}" Value="True">
+                <Setter Property="Foreground" Value="#fbc531"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Mobile menu label beneath icon -->
+    <Style x:Key="labelBeneathIcon" TargetType="Label">
+        <Setter Property="FontFamily" Value="Ubuntu Bold"/>
+        <Setter Property="Foreground" Value="#f5f6fa"/>
+        <Setter Property="FontSize" Value="10pt"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=RadioButton}}" Value="True">
+                <Setter Property="Foreground" Value="#fbc531"/>
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
 
     <!--Menu button text-->

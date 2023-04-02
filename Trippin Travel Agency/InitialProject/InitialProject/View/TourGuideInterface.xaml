@@ -3,37 +3,85 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:viewModel="clr-namespace:InitialProject.ViewModels"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="TourGuideInterface" Height="768" Width="1366" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Dashboard"
+        Height="750"
+        Width="430"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        SizeToContent="Width">
 
-    <DockPanel LastChildFill="False" Background="#f5f6fa">
-        <!-- Menu bar on the left -->
-        <StackPanel Background ="#8c7ae6" DockPanel.Dock="Left" Width="200">
-            <Grid Height="100">
-                <!-- First row for logo -->
-                <!-- <Image Source="C:\Users\ifeel\Documents\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\logo.png"
-                       Stretch="Uniform" Margin="35"/>-->
-                <Image Source="C:\Users\aleks\OneDrive\Dokumenti\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\logo.png"
-                       Stretch="Uniform" Margin="35"/>
-            </Grid>
-            <Grid Height="50">
-                <!-- Second row for Create Tour button -->
-                <Button Content="Create Tour" Background="#40739e" Foreground="#f5f6fa" Margin="0" 
-                    Height="40" HorizontalAlignment="Stretch" BorderThickness="0"
-                    MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" FontFamily="Poppins" FontSize="16" Click="LeadCreateTour"/>
-            </Grid>
-            <Grid Height="50">
-                <!-- Third row for Track Tour button -->
-                <Button Content="Track Tour Live" Background="#40739e" Foreground="#f5f6fa" Margin="0" 
-                    Height="40" HorizontalAlignment="Stretch" BorderThickness="0"
-                    MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" FontFamily="Poppins" FontSize="16" Click="LeadTrackTourLive"/>
-            </Grid>
-        </StackPanel>
-        <!-- Information at the top -->
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Height="75" Background="#f5f6fa">
-            <Label Content="Hello, Aleksa!" VerticalAlignment="Center" FontFamily="Poppins" FontSize="18" Foreground="#192a56" Margin="1000,0,0,0"/>
-        </StackPanel>
-    </DockPanel>
+    <Window.DataContext>
+        <viewModel:TourGuide_MainViewModel/>
+    </Window.DataContext>
+    
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:TourGuide_DashboardViewModel}">
+            <local:TourGuide_Dashboard/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:TourGuide_ToursViewModel}">
+            <local:TourGuide_Tours/>
+        </DataTemplate>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- ACTION BAR ON THE BOTTOM -->
+        <DockPanel Grid.Row="1"
+                   Background="#273c75"
+                   Height="90"
+                   >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"/>
+                    <ColumnDefinition Width="72"/>
+                    <ColumnDefinition Width="72"/>
+                    <ColumnDefinition Width="72"/>
+                    <ColumnDefinition Width="72"/>
+                    <ColumnDefinition Width="72"/>
+                    <ColumnDefinition Width="35"/>
+                </Grid.ColumnDefinitions>
+                <!-- Tours radio button -->
+                <RadioButton Grid.Column="1"
+                     Style="{StaticResource mobileMenuButton}"
+                     DockPanel.Dock="Left"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                     Command="{Binding ShowTourGuideToursViewCommand}">  
+                     
+                    <StackPanel Orientation="Vertical" Margin="11,0,0,0">
+                        <fa:IconImage Icon="LocationDot" Style="{StaticResource menuButtonIcon}"/>
+                        <Label Content="Tours" Style="{StaticResource labelBeneathIcon}"/>
+                    </StackPanel>
+                    
+                </RadioButton>
 
+                <!-- Requests radio button -->
+                <RadioButton Grid.Column="3" Style="{StaticResource mobileMenuButton}" Tag="{StaticResource HoverColor}" DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Vertical" Margin="0,0,0,0">
+                        <fa:IconImage Icon="ArrowDown" Style="{StaticResource menuButtonIcon}"/>
+                        <Label Content="Requests" Style="{StaticResource labelBeneathIcon}"/>
+                    </StackPanel>
+                </RadioButton>
+                
+                <!-- Profile radio button -->
+                <RadioButton Grid.Column="5" Style="{StaticResource mobileMenuButton}" Tag="{StaticResource HoverColor}" DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Vertical" Margin="11,0,0,0">
+                        <fa:IconImage Icon="UserAlt" Style="{StaticResource menuButtonIcon}"/>
+                        <Label Content="Profile" Style="{StaticResource labelBeneathIcon}"/>
+                    </StackPanel>
+                </RadioButton>
+            </Grid>
+        </DockPanel>
+        
+        <ContentControl Content="{Binding CurrentChildView}" Grid.Row="0"/>
+    </Grid>
 </Window>

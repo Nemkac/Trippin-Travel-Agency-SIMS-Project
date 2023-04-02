@@ -48,6 +48,5 @@ namespace InitialProject.View
                 btn.Foreground = new SolidColorBrush(Color.FromRgb(245, 246, 250));
             }
         }
-
     }
 }
