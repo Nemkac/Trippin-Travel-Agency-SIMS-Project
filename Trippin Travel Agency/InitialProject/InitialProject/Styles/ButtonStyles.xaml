@@ -81,6 +81,32 @@
         </Style.Triggers>
     </Style>
 
+    <!-- Mobile header back button icon-->
+    <Style x:Key="menuBackButtonIcon" TargetType="fa:IconImage">
+        <Setter Property="Foreground" Value="#192a56"/>
+        <Setter Property="Width" Value="35"/>
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Mobile header back label beneath icon -->
+    <Style x:Key="labelBackBeneathIcon" TargetType="Label">
+        <Setter Property="FontFamily" Value="Ubuntu"/>
+        <Setter Property="Foreground" Value="#192a56"/>
+        <Setter Property="FontSize" Value="10pt"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Mobile header main label -->
+    <Style x:Key="labelBackHeader" TargetType="Label">
+        <Setter Property="FontFamily" Value="Ubuntu Bold"/>
+        <Setter Property="Foreground" Value="#192a56"/>
+        <Setter Property="FontSize" Value="30pt"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
+
     <!--Menu button text-->
     <Style x:Key="menuButtonText" TargetType="TextBlock">
         <Setter Property="Foreground" Value="#FEFEFF" />
