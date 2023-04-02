@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="InitialProject.View.TourView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InitialProject.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="1470" d:DesignWidth="1520">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="350"/>
+            <RowDefinition Height="350"/>
+            <RowDefinition Height="490"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="900"/>
+                <ColumnDefinition Width="620"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <Label Content="Filter by country" HorizontalAlignment="Left" Margin="50,10,0,0" VerticalAlignment="Top" Width="244" Height="40" FontSize="20"/>
+                <TextBox HorizontalAlignment="Left" Margin="50,5,0,0" Text = "" TextWrapping="Wrap" Width="244" Name = "countryName"/>
+                <Label Content="Filter by city" HorizontalAlignment="Left" Margin="50,120,0,0" VerticalAlignment="Top" Width="244" Height="40" FontSize="20"/>
+                <TextBox HorizontalAlignment="Left" Margin="50,5,0,0" Text = "" TextWrapping="Wrap" Width="244" Name ="cityName"/>
+                <TextBox HorizontalAlignment="Left" Margin="400,-201,0,0" Text = "" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Name ="duration"/>
+                <Label Content="Filter by duration" HorizontalAlignment="Left" Margin="400,-245,0,0" VerticalAlignment="Top" Width="244" Height="40" FontSize="20"/>
+                <TextBox HorizontalAlignment="Left" Margin="400,-19,0,0" Text = "" VerticalAlignment="Top" Width="100" Name="touristLimit"/>
+                <Label Content="Number of Tourists" Margin="400,-65,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="244" Height="40" FontSize="20"/>
+                <Button Content="Apply filters" HorizontalAlignment="Left" Margin="640,-50,0,0" VerticalAlignment="Top" Height="82" Width="239" Click="ApplyFilters" FontSize="20" Style="{StaticResource addButton}"/>
+                <ComboBox HorizontalAlignment="Left" Margin="640,-235,0,0" Text = "Language" VerticalAlignment="Top" Width="120" Name ="languageBox"/>
+            </StackPanel>
+            
+            <StackPanel Grid.Column="1">
+                <Button Content="Book" HorizontalAlignment="Left" Margin ="15 250 0 0" VerticalAlignment="Center" Style="{StaticResource saveButton}" Click="ReserveTour"/>
+                <TextBox TextWrapping="Wrap" Margin ="15 -200 0 0" Text="" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" Name ="NumberOfTourists"/>
+                <Label Content="No. of tourists" Margin="15 -300 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="244" Height="40" FontSize="20"/>
+                <TextBlock Height="136" TextWrapping="Wrap" Margin="300 -135 0 0" Text="" Width="275" HorizontalAlignment="Left"  VerticalAlignment="Center" Background="#d1e0e0" Name ="TextBlock" FontSize="20" FontFamily="Ubuntu"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <DataGrid x:Name="dataGrid" d:DataContext =""/>
+        </StackPanel>
+    </Grid>
+</UserControl>

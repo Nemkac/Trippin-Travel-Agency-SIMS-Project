@@ -4,34 +4,61 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:viewModel="clr-namespace:InitialProject.ViewModels"
         mc:Ignorable="d"
-        Title="GuestTwoInterface" Height="450" Width="800">
-    <Grid>
-        <Label Content="Welcome guest two!" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,38,0,0"/>
-        <DataGrid x:Name="dataGrid" d:DataContext ="" Margin="87,64,87,238"/>
-        <Canvas>
-            <TextBox Canvas.Bottom="175" HorizontalAlignment="Left" Margin="87,246,0,0" Text = "" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Name = "cityName"/>
-            <Label Canvas.Bottom="192" Content="Filter by city" HorizontalAlignment="Left" Margin="87,215,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
-            <Label Canvas.Bottom="130" Content="Filter by country" HorizontalAlignment="Left" Margin="87,272,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
-            <TextBox Canvas.Bottom="113" HorizontalAlignment="Left" Margin="87,306,0,0" Text = "" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Name ="countryName"/>
-            <Label Canvas.Bottom ="192" Content="Filter by language" HorizontalAlignment="Left" Margin="242,217,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
-            <TextBox Canvas.Bottom="113" HorizontalAlignment="Left" Margin="242,306,0,0" Text = "" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Name ="duration"/>
-            <Label Canvas.Bottom="130" Content="Filter by duration" HorizontalAlignment="Left" Margin="242,275,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
-            <ComboBox Canvas.Bottom="175" HorizontalAlignment="Left" Margin="242,246,0,0" Text = "" VerticalAlignment="Top" Width="120" Name ="languageBox"/>
-            <TextBox Canvas.Bottom ="30" HorizontalAlignment="Left" Text = "" VerticalAlignment="Top" Width="120" Canvas.Left="87" Name="touristLimit"/>
-            <Label Canvas.Bottom ="50" Content="Maximum tourist number" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="26" Canvas.Left="72"/>
-            <Button Canvas.Bottom="190" Content="Apply filters" HorizontalAlignment="Left" Margin="625,255,0,0" VerticalAlignment="Top" Height="33" Width="76" Click="ApplyFilters"/>
-            <Border BorderBrush="Black" BorderThickness="1" Height="101" Canvas.Bottom="30" Canvas.Right="100" Width="220" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox Canvas.Bottom ="95" Canvas.Right="140" TextWrapping="Wrap" Text="" Width="80" RenderTransformOrigin="0.467,3.229" HorizontalAlignment="Left" VerticalAlignment="Center" Name ="NumberOfTourists"/>
-            <Label Canvas.Bottom ="90" Canvas.Right ="220" Content="No. of tourists" HorizontalAlignment="Left" VerticalAlignment="Center" Width="95" Height="30"/>
-            <Button Canvas.Bottom ="70" Canvas.Right="255" Content="Book" HorizontalAlignment="Left" VerticalAlignment="Center" Width="62" Background="BlueViolet" Click="ReserveTour">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-            <TextBlock Height="60" Canvas.Right="105" Canvas.Bottom ="32.5" TextWrapping="Wrap" Text="" Width="145" HorizontalAlignment="Left"  VerticalAlignment="Center" Background="#d1e0e0" Name ="TextBlock"/>
-        </Canvas>
+        Title="GuestTwoInterface" Height="2050" Width="1920">
+    <Window.DataContext>
+        <viewModel:GuestTwoInterfaceViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:TourDisplayViewModel}">
+            <local:TourView/>
+        </DataTemplate>
+    </Window.Resources>
+    <ScrollViewer>
+        <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="220"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="140"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.ColumnSpan="3" Grid.RowSpan="2" Background="#273c75"/>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Background="#273c75" Grid.Column="1">
+            <Image Source="C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\logo.png" Height="120" Width="120"/>
+            <Label Content="Trippin' Travel" VerticalAlignment="Center" FontFamily="Ubuntu" FontSize="60" FontWeight="Medium" Foreground="#f4fff8" Margin="10 0 0 0"/>
+            <Label Content="Fly High" VerticalAlignment="Bottom" FontFamily="Ubuntu" FontSize="28" FontWeight="Light" Foreground="#f4fff8" Margin="10 0 0 20" FontStyle="Italic"/>
+            <fa:IconImage Icon="Inbox" HorizontalAlignment="Right" Style="{StaticResource menuButtonIconWEB}" Margin="700 0 0 0"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Background="#273c75" Grid.Column="1">
+            <Button x:Name="TourView" Content="Tour View" Style="{StaticResource menuButtonWEB}" Command="{Binding ShowTourViewCommand}"/>
+            <Button x:Name="LiveTour" Content="Live Tour" Style="{StaticResource menuButtonWEB}"/>
+            <Button x:Name="CreateYourOwnTour" Content="Create Your Own Tour" Style="{StaticResource menuButtonWEB}" Width="250"/>
+            <Button x:Name="MyRequests" Content="My Requests" Style="{StaticResource menuButtonWEB}"/>
+            <Button x:Name="Coupons" Content="Coupons" Style="{StaticResource menuButtonWEB}"/>
+            <Button x:Name="Account" Content="Account" Style="{StaticResource menuButtonWEB}"/>
+            <Button x:Name="SignOut" Content="Sign Out" Style="{StaticResource menuButtonWEB}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Grid.Column="1">
+            <Image Source="C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\headerImage2.png" Width="1520" Height="220" Stretch="UniformToFill" RenderTransformOrigin="500,500" />
+        </StackPanel>
+       
+        
+        <Border Grid.Row="4" Grid.ColumnSpan="3" Background="#273c75"/>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center">
+            <Label Content="All Rights Reserved®" FontSize="20" Margin="0 20 0 0" FontFamily="Ubuntu" FontWeight="Medium" Foreground="#F4FFF8"/>
+        </StackPanel>
+
+        <ContentControl Content="{Binding CurrentChildView}" Grid.Row="3" Grid.Column="1"/>
     </Grid>
+    </ScrollViewer>
 </Window>

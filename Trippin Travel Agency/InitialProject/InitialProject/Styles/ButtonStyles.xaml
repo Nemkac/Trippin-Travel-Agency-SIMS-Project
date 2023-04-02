@@ -109,5 +109,25 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    
+    <!-- Nemanja WEB -->
+    <Style x:Key="menuButtonIconWEB" TargetType="fa:IconImage">
+        <Setter Property="Foreground" Value="#F4FFF8"/>
+        <Setter Property="Width" Value="64"/>
+        <Setter Property="Height" Value="64"/>
+    </Style>
+
+    <Style x:Key="menuButtonWEB" TargetType="Button">
+        <Setter Property="Foreground" Value="#F4FFF8"/>
+        <Setter Property="Width" Value="140"/>
+        <Setter Property="Height" Value="64"/>
+        <Setter Property="Background" Value="#89a3d6"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontFamily" Value="Ubuntu"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+    </Style>
+    
 
 </ResourceDictionary>
