@@ -208,7 +208,16 @@
                 </Style.Triggers>
             </Style>
 
-
+            <!-- Line delimiter style -->
+            <Style x:Key="mobileDelimiterLine" TargetType="Line">
+                <Setter Property="X1" Value="0"/>
+                <Setter Property="X2" Value="330"/>
+                <Setter Property="Y1" Value="0"/>
+                <Setter Property="Y2" Value="0"/>
+                <Setter Property="Stroke" Value="#353b48"/>
+                <Setter Property="StrokeThickness" Value="1"/>
+                <Setter Property="Margin" Value="0,30,0,0"/>
+            </Style>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/ButtonStyles.xaml"/>
                 <ResourceDictionary Source="/Styles/Colors.xaml"/>

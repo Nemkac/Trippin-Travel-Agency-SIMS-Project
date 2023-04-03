@@ -83,16 +83,25 @@
 
     <!-- Mobile header back button icon-->
     <Style x:Key="menuBackButtonIcon" TargetType="fa:IconImage">
-        <Setter Property="Foreground" Value="#192a56"/>
+        <Setter Property="Foreground" Value="#273c75"/>
         <Setter Property="Width" Value="35"/>
         <Setter Property="Height" Value="35"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
 
+    <!-- Mobile label above textbox icon-->
+    <Style x:Key="labelAboveTextBox" TargetType="Label">
+        <Setter Property="FontFamily" Value="Ubuntu"/>
+        <Setter Property="Foreground" Value="#273c75"/>
+        <Setter Property="FontSize" Value="10pt"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    
     <!-- Mobile header back label beneath icon -->
     <Style x:Key="labelBackBeneathIcon" TargetType="Label">
         <Setter Property="FontFamily" Value="Ubuntu"/>
-        <Setter Property="Foreground" Value="#192a56"/>
+        <Setter Property="Foreground" Value="#273c75"/>
         <Setter Property="FontSize" Value="10pt"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -101,7 +110,7 @@
     <!-- Mobile header main label -->
     <Style x:Key="labelBackHeader" TargetType="Label">
         <Setter Property="FontFamily" Value="Ubuntu Bold"/>
-        <Setter Property="Foreground" Value="#192a56"/>
+        <Setter Property="Foreground" Value="#273c75"/>
         <Setter Property="FontSize" Value="30pt"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
@@ -159,6 +168,28 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style x:Key="leadButton" TargetType="Button">
+        <Setter Property="Background" Value="#273c75"/>
+        <Setter Property="Foreground" Value="#f5f6fa"/>
+        <Setter Property="FontFamily" Value="Ubuntu"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+        <Setter Property="Padding" Value="20"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Margin" Value="0,10,0,0" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="#273c75" CornerRadius="5">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        
     </Style>
 
     <Style x:Key="dataGridButton" TargetType="Button">
