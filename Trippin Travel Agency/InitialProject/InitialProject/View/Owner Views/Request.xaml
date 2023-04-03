@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="InitialProject.View.Owner_Views.Request"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InitialProject.View.Owner_Views"
+             xmlns:viewModel="clr-namespace:InitialProject.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="580">
+
+
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type viewModel:AcceptDenyViewModel}">
+           <local:AcceptDenyRequests/>
+        </DataTemplate>
+    </UserControl.Resources>
+    
+    <Grid>
+        <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="requestsDataGrid">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Details" Foreground="#F4fff8" 
+                                    Background="#4CD137" FontFamily="Ubuntu" 
+                                    BorderBrush="Transparent" 
+                                    Command="{Binding ShowAcceptDenyViewCommand}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <ContentControl Content="{Binding CurrentChildView}" Grid.Column="0" Grid.Row="0"/>
+    </Grid>
+</UserControl>

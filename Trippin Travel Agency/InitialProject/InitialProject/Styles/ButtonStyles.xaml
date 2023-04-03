@@ -24,9 +24,9 @@
             <!--Active button style-->
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Margin" Value="0, 0, 0, 5"/>
-                <Setter Property="Background" Value="#487eb0"/>
+                <Setter Property="Background" Value="#192a56"/>
                 <Setter Property="Foreground" Value="#FEFEFF"/>
-                <Setter Property="BorderBrush" Value="#487eb0"/>
+                <Setter Property="BorderBrush" Value="#192a56"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -60,6 +60,32 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border Background="#4CD137" CornerRadius="20">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="#44BD32"/>
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+
+    <Style x:Key="denyButton" TargetType="Button">
+        <Setter Property="Background" Value="#C23616"/>
+        <Setter Property="Foreground" Value="#F4FFF8"/>
+        <Setter Property="FontFamily" Value="Ubuntu"/>
+        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="#E84118" CornerRadius="20">
                         <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
@@ -108,6 +134,12 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style x:Key="defaultLabel" TargetType="Label">
+        <Setter Property="FontFamily" Value="Ubuntu"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Medium"/>
     </Style>
 
 </ResourceDictionary>

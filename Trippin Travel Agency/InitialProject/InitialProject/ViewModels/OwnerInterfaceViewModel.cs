@@ -1,17 +1,20 @@
 ﻿using FontAwesome.Sharp;
 using InitialProject.Repository;
 using InitialProject.View;
+using InitialProject.View.Owner_Views;
+using InitialProject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace InitialProject.ViewModels
 {
-    public class MainViewModel : ViewModelBase
+    public class OwnerInterfaceViewModel : ViewModelBase
     {
         //Fields
         private ViewModelBase _currentChildView;
@@ -62,25 +65,43 @@ namespace InitialProject.ViewModels
         }
 
         //--> Commands
+        public ICommand ShowAcceptDenyViewCommand { get; }
         public ICommand ShowOwnersBookingViewCommand { get; }
         public ICommand ShowAccommodationRegistrationViewCommand { get; }
-        public MainViewModel()
+        public ICommand ShowRequestViewCommand { get; }
+        public OwnerInterfaceViewModel()
         {
             //Initialize commands
+            ShowAcceptDenyViewCommand = new ViewModelCommand(ExecuteShowAcceptDenyViewCommand);
             ShowOwnersBookingViewCommand = new ViewModelCommand(ExecuteShowOwnersBookingViewCommand);
             ShowAccommodationRegistrationViewCommand = new ViewModelCommand(ExecuteShowAccommodationRegistrationViewCommand);
+            ShowRequestViewCommand = new ViewModelCommand(ExecuteShowRequestViewCommand);
             //Default view
             ExecuteShowOwnersBookingViewCommand(null);
         }
 
-        private void ExecuteShowOwnersBookingViewCommand(object obj)
+        public void ExecuteShowOwnersBookingViewCommand(object obj)
         {
             CurrentChildView = new OwnersBookingDisplayViewModel();
             Caption = "Bookings";
             Icon = IconChar.Bookmark;
         }
 
-        private void ExecuteShowAccommodationRegistrationViewCommand(object obj)
+        public void ExecuteShowAcceptDenyViewCommand(object obj)
+        {
+            CurrentChildView = new AcceptDenyViewModel();
+            Caption = "Requests";
+            Icon = IconChar.ArrowDown;
+        }
+
+        public void ExecuteShowRequestViewCommand(object obj)
+        {
+            CurrentChildView = new RequestViewModel();
+            Caption = "Requests";
+            Icon = IconChar.ArrowDown;
+        }
+
+        public void ExecuteShowAccommodationRegistrationViewCommand(object obj)
         {
             CurrentChildView = new AccommodationRegistrationViewModel();
             Caption = "New Accommodation";
