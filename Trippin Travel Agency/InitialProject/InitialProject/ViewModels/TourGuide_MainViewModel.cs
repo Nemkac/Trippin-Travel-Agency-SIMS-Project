@@ -1,4 +1,5 @@
 ﻿using InitialProject.View;
+using System;
 using System.Windows.Input;
 
 namespace InitialProject.ViewModels
@@ -23,11 +24,13 @@ namespace InitialProject.ViewModels
 
         public ICommand ShowTourGuideDashboardViewCommand { get; }
         public ICommand ShowTourGuideToursViewCommand { get; }
+        public ICommand ShowTourGuideCreateTourViewCommand { get; }
 
         public TourGuide_MainViewModel()
         {
             ShowTourGuideDashboardViewCommand = new ViewModelCommand(ExecuteShowTourGuideDashboardViewCommand);
             ShowTourGuideToursViewCommand = new ViewModelCommand(ExecuteShowTourGuideToursViewCommand);
+            ShowTourGuideCreateTourViewCommand = new ViewModelCommand(ExecuteShowTourGuideCreateTourViewCommand);
             ExecuteShowTourGuideDashboardViewCommand(null);
         }
 
@@ -38,7 +41,12 @@ namespace InitialProject.ViewModels
 
         public void ExecuteShowTourGuideToursViewCommand(object obj)
         {
-            CurrentChildView = new TourGuide_ToursViewModel();
+            CurrentChildView = new TourGuide_ToursViewModel(this);
+        }
+
+        public void ExecuteShowTourGuideCreateTourViewCommand(object obj)
+        {
+            CurrentChildView = new TourGuide_CreateTourViewModel();
         }
     }
 }

@@ -37,7 +37,7 @@
                      VerticalAlignment="Center"
                      HorizontalAlignment="Left"
                      IsChecked="False"
-                     Command="{Binding ShowTourGuideDashboardViewCommand}"
+                     Command="{Binding ShowDashboardCommand}"
                      Width="Auto"
                      Height="Auto"
                      >
@@ -62,11 +62,16 @@
                 <StackPanel Orientation="Vertical"
                             Margin="0,20,0,0">
                     <Label Content="Guide us to new places" Style="{StaticResource labelAboveTextBox}"/>
-                    <StackPanel Orientation="Horizontal"
-                            Margin="0, 5, 0 ,0">
-                        <fa:IconImage Icon="PlusCircle" HorizontalAlignment="Left" Style="{StaticResource menuBackButtonIcon}" Width="45" Height="45"/>
-                        <Label Content="Create tour" FontSize="30" FontFamily="Ubuntu" FontWeight="SemiBold" Margin="10, 0, 0, 0" Style="{StaticResource labelBackHeader}"/>
-                    </StackPanel>
+                    <RadioButton x:Name="createTourButton"
+                                 Style="{StaticResource mobileCreateTourButton}"
+                                 Command="{Binding CreateTourCommand}"
+                                 >
+                        <StackPanel Orientation="Horizontal"
+                                Margin="0, 5, 0 ,0">
+                            <fa:IconImage Icon="PlusCircle" HorizontalAlignment="Left" Style="{StaticResource menuBackButtonIcon}" Width="45" Height="45"/>
+                            <Label Content="Create tour" FontSize="30" FontFamily="Ubuntu" FontWeight="SemiBold" Margin="10, 0, 0, 0" Style="{StaticResource labelBackHeader}"/>
+                        </StackPanel>
+                    </RadioButton>
                     <Line Style="{StaticResource mobileDelimiterLine}"/>
                 </StackPanel>
 

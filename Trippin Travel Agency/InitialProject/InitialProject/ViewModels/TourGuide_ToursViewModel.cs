@@ -8,5 +8,25 @@ namespace InitialProject.ViewModels
 {
     public class TourGuide_ToursViewModel : ViewModelBase
     {
+        public ViewModelCommand ShowDashboardCommand { get; private set; }
+        public ViewModelCommand CreateTourCommand { get; private set; }
+        private readonly TourGuide_MainViewModel _mainViewModel;
+
+        public TourGuide_ToursViewModel(TourGuide_MainViewModel mainViewModel)
+        {
+            _mainViewModel = mainViewModel;
+            ShowDashboardCommand = new ViewModelCommand(ShowDashboard);
+            CreateTourCommand = new ViewModelCommand(CreateTour); 
+        }
+
+        public void ShowDashboard(object obj)
+        {
+            _mainViewModel.ExecuteShowTourGuideDashboardViewCommand(null);
+        }
+
+        public void CreateTour(object obj)
+        {
+            _mainViewModel.ExecuteShowTourGuideCreateTourViewCommand(null);
+        }
     }
 }
