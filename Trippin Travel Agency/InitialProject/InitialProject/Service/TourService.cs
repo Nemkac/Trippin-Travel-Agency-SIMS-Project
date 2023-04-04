@@ -62,15 +62,15 @@ namespace InitialProject.Service
         private static string GetKeyPointNames(Tour tour, DataBaseContext dataBaseContext)
         {
             string keyPoints = "";
-
             foreach (KeyPoint keyPoint in dataBaseContext.KeyPoints.ToList())
             {
                 if (keyPoint.tourId == tour.id)
                 {
-                    keyPoints += keyPoint.name + '\n';
+                    keyPoints += keyPoint.name + ", ";                  
                 }
+                
             }
-
+            keyPoints = keyPoints.Remove(keyPoints.Length - 2); 
             return keyPoints;
         }
 

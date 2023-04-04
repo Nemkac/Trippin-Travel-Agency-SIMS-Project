@@ -128,6 +128,52 @@
         <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
     </Style>
-    
+
+    <Style x:Key="addButtonWEB" TargetType="Button">
+        <Setter Property="Background" Value="#273c75"/>
+        <Setter Property="Foreground" Value="#F4FFF8"/>
+        <Setter Property="FontFamily" Value="Ubuntu"/>
+        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="#273c75" CornerRadius="10" BorderThickness="0.4" BorderBrush="#273c75">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="saveButtonWEB" TargetType="Button">
+        <Setter Property="Background" Value="#4CD137"/>
+        <Setter Property="Foreground" Value="#F4FFF8"/>
+        <Setter Property="FontFamily" Value="Ubuntu"/>
+        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="#4CD137" CornerRadius="20">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="#44BD32"/>
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+
+
 
 </ResourceDictionary>

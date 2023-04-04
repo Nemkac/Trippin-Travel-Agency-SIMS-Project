@@ -38,8 +38,13 @@ namespace InitialProject.ViewModels
 
         private void ExecuteTourViewCommand(object obj)
         {
-            CurrentChildView = new TourDisplayViewModel();
+            CurrentChildView = new TourDisplayViewModel(this);
            
+        }
+        public void ExecuteShowDetailedTourView(object obj) {
+
+            CurrentChildView = new DetailedTourViewModel();
+
         }
     }
 }
