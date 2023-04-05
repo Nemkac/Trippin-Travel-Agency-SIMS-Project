@@ -1,0 +1,21 @@
+﻿<Window x:Class="InitialProject.View.RateAccommodationInterface"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View"
+        mc:Ignorable="d"
+        Title="RateAccommodationInterface" Height="450" Width="800">
+    <Grid>
+        <Button Content="oceni" HorizontalAlignment="Center" Height="41" Margin="0,320,0,0" VerticalAlignment="Top" Width="268" Click="LeaveReview"/>
+        <TextBlock HorizontalAlignment="Left" Height="35" Margin="278,153,0,0" TextWrapping="Wrap" Text="cistoca" VerticalAlignment="Top" Width="113"/>
+        <TextBlock HorizontalAlignment="Left" Height="35" Margin="278,233,0,0" TextWrapping="Wrap" Text="komentar" VerticalAlignment="Top" Width="113"/>
+        <TextBlock HorizontalAlignment="Left" Height="35" Margin="278,193,0,0" TextWrapping="Wrap" Text="vlasnik" VerticalAlignment="Top" Width="113"/>
+        <TextBox HorizontalAlignment="Left" Height="24" Margin="416,153,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="110" Name="cleannessInput"/>
+        <TextBox HorizontalAlignment="Left" Height="24" Margin="416,227,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="110" Name="commentInput"/>
+        <TextBox HorizontalAlignment="Left" Height="24" Margin="416,187,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="110" Name="ownerRateInput"/>
+        <TextBlock HorizontalAlignment="Center" Height="35" Margin="0,71,0,0" TextWrapping="Wrap" Text="ocenjivanje smestaja" VerticalAlignment="Top" Width="112"/>
+        <TextBlock HorizontalAlignment="Left" Height="25" Margin="317,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177" Name = "showBookingId"/>
+
+    </Grid>
+</Window>

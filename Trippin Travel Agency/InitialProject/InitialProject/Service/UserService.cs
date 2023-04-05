@@ -15,5 +15,20 @@ namespace InitialProject.Service
             using DataBaseContext context = new DataBaseContext();
             return context.Users.SingleOrDefault(u => u.id == id);
         }
+
+        public List<Booking> GetBookings(int id)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<Booking> bookings = context.Bookings.ToList();
+            List<Booking> foundBookings = new List<Booking>();
+            foreach (Booking booking in bookings.ToList())
+            {
+                if (booking.guestId == id)
+                {
+                    foundBookings.Add(booking);
+                }
+            }
+            return foundBookings;
+        }
     }
 }

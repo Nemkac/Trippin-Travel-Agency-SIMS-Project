@@ -201,5 +201,11 @@ namespace InitialProject.View
             dateLimits.Add(endingDate);
             return dateLimits;
         }
+
+        private void ShowPastBookings(object sender, RoutedEventArgs e)
+        {
+            PastBookingsInterface pastBookingsInterface = new PastBookingsInterface();
+            pastBookingsInterface.Show();
+        }
     }
 }
