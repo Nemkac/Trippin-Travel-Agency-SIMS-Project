@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,17 @@ namespace InitialProject.View
     /// </summary>
     public partial class DetailedTourView : UserControl
     {
+        public int TourId { get; set;  } 
         public DetailedTourView()
         {
             InitializeComponent();
+            this.Loaded += Window_Loaded;
+    
+        }
+
+        public void Window_Loaded(object sender, RoutedEventArgs e) {
+            this.TextBlock.Text = TourView.DetailedId.ToString();
+            
         }
     }
 }

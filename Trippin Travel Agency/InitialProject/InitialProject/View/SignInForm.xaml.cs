@@ -1,7 +1,11 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Context;
+using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.View;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 
@@ -57,6 +61,18 @@ namespace InitialProject
                     LoggedUser.id = user.id;
                     LoggedUser.username = user.username;
                     LoggedUser.role = user.role;
+
+
+                    DataBaseContext context = new DataBaseContext();
+                    List<Coupon> coupons = context.Coupons.ToList();
+                    DateTime now = DateTime.Now;
+                    foreach (Coupon coupon in coupons) {
+                        if (coupon.exiresOn < now) {
+                            context.Remove(coupon);
+                            context.SaveChanges();
+                        }
+                    }
+
 
                     if (user.role == "Owner")
                     {

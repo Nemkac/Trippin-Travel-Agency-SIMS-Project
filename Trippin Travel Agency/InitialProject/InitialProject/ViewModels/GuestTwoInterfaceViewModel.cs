@@ -29,10 +29,12 @@ namespace InitialProject.ViewModels
 
 
         public ICommand ShowTourViewCommand { get; }
+        public ICommand ShowGuestTwoCoupons { get; }
         public GuestTwoInterfaceViewModel()
         {
             ShowTourViewCommand = new ViewModelCommand(ExecuteTourViewCommand);
             //Default view
+            ShowGuestTwoCoupons = new ViewModelCommand(ExecuteShowGuestTwoCoupons);
 
         }
 
@@ -46,5 +48,11 @@ namespace InitialProject.ViewModels
             CurrentChildView = new DetailedTourViewModel();
 
         }
+
+        public void ExecuteShowGuestTwoCoupons(object obj)
+        { 
+            CurrentChildView = new GuestTwoCouponsViewModel();
+        }
+
     }
 }

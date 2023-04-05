@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:InitialProject.View"
+             xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodels="clr-namespace:InitialProject.ViewModels" 
              mc:Ignorable="d" 
              d:DesignHeight="1470" d:DesignWidth="1520">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="350"/>
@@ -44,7 +45,7 @@
         <GroupBox Header="Tours" FontSize="40" FontFamily="Ubuntu" FontWeight="Medium" Grid.Row="1"/>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <DataGrid x:Name="dataGrid" d:DataContext ="" Width="1500" Height="200" Margin="0 -50 0 0"/>
-            <Button Content="Show images" HorizontalAlignment="Left" Margin="-250,255,0,0" VerticalAlignment="Top" Command="{Binding DetailedTourViewCommand}" Height="82" Width="239" FontSize="20" Style="{StaticResource addButtonWEB}"/>
+            <Button Content="Show images" HorizontalAlignment="Left" Margin="-250,255,0,0" VerticalAlignment="Top"  Height="82" Width="239" FontSize="20" Style="{StaticResource addButtonWEB}" Click="ShowTourDetailedView" Command="{Binding DetailedTourViewCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -5,6 +5,7 @@ using InitialProject.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,6 +25,7 @@ namespace InitialProject.View
     /// </summary>
     public partial class TourView : UserControl
     {
+        public static int DetailedId { get; set; }
         public TourView()
         {
             InitializeComponent();
@@ -123,6 +125,13 @@ namespace InitialProject.View
                 tourDTOs = tourService.GetBookableTours(selectedTour.cityLocation, selectedTour.name);
                 this.dataGrid.ItemsSource = tourDTOs;
             }
+        }
+
+        private void ShowTourDetailedView(object sender, RoutedEventArgs e)
+        {
+            DetailedTourView detailedTourView = new DetailedTourView();
+            TourDTO? tour = this.dataGrid.SelectedItem as TourDTO;
+            DetailedId = tour.id;
         }
     }
 }

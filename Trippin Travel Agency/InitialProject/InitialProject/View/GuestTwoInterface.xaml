@@ -11,14 +11,23 @@
     <Window.DataContext>
         <viewModel:GuestTwoInterfaceViewModel/>
     </Window.DataContext>
+    
     <Window.Resources>
+        
         <DataTemplate DataType="{x:Type viewModel:TourDisplayViewModel}">
             <local:TourView/>
         </DataTemplate>
+        
         <DataTemplate DataType="{x:Type viewModel:DetailedTourViewModel}">
             <local:DetailedTourView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:GuestTwoCouponsViewModel}">
+            <local:GuestTwoCoupons/>
+        </DataTemplate>
+        
     </Window.Resources>
+    
     <ScrollViewer>
         <Grid>
         <Grid.RowDefinitions>
@@ -46,7 +55,7 @@
             <Button x:Name="LiveTour" Content="Live Tour" Style="{StaticResource menuButtonWEB}"/>
             <Button x:Name="CreateYourOwnTour" Content="Create Your Own Tour" Style="{StaticResource menuButtonWEB}" Width="250"/>
             <Button x:Name="MyRequests" Content="My Requests" Style="{StaticResource menuButtonWEB}"/>
-            <Button x:Name="Coupons" Content="Coupons" Style="{StaticResource menuButtonWEB}"/>
+            <Button x:Name="Coupons" Content="Coupons" Style="{StaticResource menuButtonWEB}" Command="{Binding ShowGuestTwoCoupons}"/>
             <Button x:Name="Account" Content="Account" Style="{StaticResource menuButtonWEB}"/>
             <Button x:Name="SignOut" Content="Sign Out" Style="{StaticResource menuButtonWEB}"/>
         </StackPanel>

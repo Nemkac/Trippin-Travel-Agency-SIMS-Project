@@ -16,6 +16,8 @@ namespace InitialProject.Context
         public DbSet<GuestRate> GuestRate { get; set; }
         public DbSet<TourReservation> TourReservations { get; set; }
 
+        public DbSet<Coupon> Coupons { get; set; }  
+
         // Apsolute paths for every memeber of the team
 
         // Aleksa Simeunovic -> Desktop PC

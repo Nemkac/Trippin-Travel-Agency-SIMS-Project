@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.ViewModels
 {
-    public class DetailedTourViewModel : ViewModelBase
+    public class GuestTwoCouponsViewModel : ViewModelBase
     {
 
     }
