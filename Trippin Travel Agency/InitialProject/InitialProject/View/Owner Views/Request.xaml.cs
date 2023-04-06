@@ -6,6 +6,7 @@ using InitialProject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -47,6 +48,19 @@ namespace InitialProject.View.Owner_Views
             }
 
             return dataList;
+        }
+
+        private void GetSelection(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedRow = requestsDataGrid.SelectedItem as RequestDTO;
+            AcceptDenyViewModel acceptDenyViewModel = new AcceptDenyViewModel();
+            //acceptDenyRequests._requestDTO = selectedRow;
+            //string newArrival = selectedRow.newArrival.ToString();
+            //acceptDenyViewModel.NewArrival = newArrival;
+            //MessageBox.Show(acceptDenyViewModel.NewArrival);
+
+            //RequestDTO requestDTO = (RequestDTO)requestsDataGrid.SelectedItem;
+            //acceptDenyRequests._requestDTO = requestDTO;
         }
     }
 }

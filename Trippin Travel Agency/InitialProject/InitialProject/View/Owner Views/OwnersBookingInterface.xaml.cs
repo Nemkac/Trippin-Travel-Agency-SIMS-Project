@@ -120,7 +120,7 @@ namespace InitialProject.View
             RateGuestInterface rateGuestInterface = new RateGuestInterface(bookingId);
             rateGuestInterface.Show();
 
-        }
 
+        }
     }
 }

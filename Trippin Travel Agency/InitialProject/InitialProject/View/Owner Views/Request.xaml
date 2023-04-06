@@ -5,31 +5,33 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.View.Owner_Views"
              xmlns:viewModel="clr-namespace:InitialProject.ViewModels"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="580">
+   
 
-
-    <UserControl.Resources>
-        <DataTemplate DataType="{x:Type viewModel:AcceptDenyViewModel}">
-           <local:AcceptDenyRequests/>
-        </DataTemplate>
-    </UserControl.Resources>
-    
     <Grid>
-        <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="requestsDataGrid">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Details" Foreground="#F4fff8" 
-                                    Background="#4CD137" FontFamily="Ubuntu" 
-                                    BorderBrush="Transparent" 
-                                    Command="{Binding ShowAcceptDenyViewCommand}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-        <ContentControl Content="{Binding CurrentChildView}" Grid.Column="0" Grid.Row="0"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="360"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <DataGrid Style="{DynamicResource DataGridStyle1}" 
+                      CellStyle="{DynamicResource DataGridCellStyle1}" 
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"  
+                      RowStyle="{DynamicResource DataGridRowStyle1}" 
+                      SelectedItem="{Binding SelectedRequest}"
+                      x:Name="requestsDataGrid"/>
+        </StackPanel>
+        <RadioButton Style="{StaticResource mobileCreateTourButton}"
+                             Grid.Row="1" HorizontalAlignment="Right"
+                             VerticalAlignment="Bottom"
+                             Command="{Binding ShowAcceptDenyViewCommand}">
+            <StackPanel Orientation="Horizontal"
+                                Margin="0, 5, 0 ,0">
+                <fa:IconImage Icon="PlusCircle" HorizontalAlignment="Left" Width="35" Height="35" Foreground="#273c75" Margin="0, 0, 0, 10"/>
+                <Label Content="Show Details" FontSize="25" FontFamily="Ubuntu" FontWeight="SemiBold" Margin="0, 0, 10, 10" Foreground="#273c75"/>
+            </StackPanel>
+        </RadioButton>
     </Grid>
 </UserControl>

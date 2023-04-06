@@ -17,7 +17,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Row="0" Grid.Column="0" Background="#FCFFFC" CornerRadius="30, 0, 0, 0">
+        <Border Grid.Row="0" Grid.Column="0"  CornerRadius="30, 0, 0, 0">
             <StackPanel Orientation="Vertical">
                 <Label x:Name="label" FontFamily="Ubuntu" FontSize="14" FontWeight="Medium" Content="Accommodation name" HorizontalAlignment="Left" Height="27" Margin="49,26,0,0" VerticalAlignment="Top" Width="165"/>
                 <TextBox x:Name="accommodationNameTB" HorizontalAlignment="Left" Margin="49,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="25"/>
@@ -28,7 +28,7 @@
             </StackPanel>
         </Border>
 
-        <Border Grid.Row="0" Grid.Column="1" Background="#FCFFFC">
+        <Border Grid.Row="0" Grid.Column="1" >
             <StackPanel Orientation="Vertical">
                 <Label x:Name="label4" Content="Maximum number of guests" FontFamily="Ubuntu" FontSize="14" FontWeight="Medium" HorizontalAlignment="Left" Margin="49,26,0,0" VerticalAlignment="Top" Width="200" Height="26"/>
                 <TextBox x:Name="guestLimitTB"  HorizontalAlignment="Left" Margin="49,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="25"/>
@@ -43,7 +43,7 @@
             </StackPanel>
         </Border>
 
-        <Border Grid.Row="0" Grid.Column="2" Background="#FCFFFC" CornerRadius="0, 30, 0, 0">
+        <Border Grid.Row="0" Grid.Column="2" CornerRadius="0, 30, 0, 0">
             <StackPanel Orientation="Vertical" Margin="0,15,0,0" Grid.Row="0" Grid.Column="2">
                 <Label Content="Insert image" FontFamily="Ubuntu" FontSize="13" FontWeight="Medium" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top"/>
                 <StackPanel x:Name="containerImageStackPanel">
@@ -52,7 +52,7 @@
             </StackPanel>
         </Border>
 
-        <Border Grid.Row="1" Grid.ColumnSpan="3" CornerRadius="0, 0, 30, 30" Background="#F3F3F3">
+        <Border Grid.Row="1" Grid.ColumnSpan="3" CornerRadius="0, 0, 30, 30">
             <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Right">
                 <Button x:Name="saveAccommodation" Style="{StaticResource saveButton}" Grid.Row="1" Margin="0, 0, 19, 0" Click="SaveAccommodation" 
                         Content="Save Accommodation"/>

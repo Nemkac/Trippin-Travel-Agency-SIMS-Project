@@ -90,13 +90,14 @@ namespace InitialProject.ViewModels
         public void ExecuteShowAcceptDenyViewCommand(object obj)
         {
             CurrentChildView = new AcceptDenyViewModel();
+     
             Caption = "Requests";
             Icon = IconChar.ArrowDown;
         }
 
         public void ExecuteShowRequestViewCommand(object obj)
         {
-            CurrentChildView = new RequestViewModel();
+            CurrentChildView = new RequestViewModel(this);
             Caption = "Requests";
             Icon = IconChar.ArrowDown;
         }

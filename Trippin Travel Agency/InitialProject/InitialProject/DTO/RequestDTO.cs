@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.DTO
 {
-    class RequestDTO
+    public class RequestDTO
     {
         public string guestName { get; set; }
         public int bookingId { get; set; }
