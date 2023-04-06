@@ -202,10 +202,10 @@ namespace InitialProject.View
             return dateLimits;
         }
 
-        private void ShowPastBookings(object sender, RoutedEventArgs e)
+        private void GoToBookings(object sender, RoutedEventArgs e)
         {
-            PastBookingsInterface pastBookingsInterface = new PastBookingsInterface();
-            pastBookingsInterface.Show();
+            FutureBookingsInterface futureBookingsInterface = new FutureBookingsInterface();
+            futureBookingsInterface.Show();
         }
     }
 }

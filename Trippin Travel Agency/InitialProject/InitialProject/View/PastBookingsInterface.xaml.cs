@@ -35,7 +35,7 @@ namespace InitialProject.View
         {
             DataBaseContext context = new DataBaseContext();
             UserService userService = new UserService();
-            List<Booking> bookings = userService.GetBookings(LoggedUser.id);
+            List<Booking> bookings = userService.GetGuestsPastBookings(LoggedUser.id);
             this.pastBookingsGrid.ItemsSource = bookings;
         }
 

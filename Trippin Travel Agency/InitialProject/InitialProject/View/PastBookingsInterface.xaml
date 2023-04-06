@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="PastBookingsInterface" Height="450" Width="800">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Height="25" Margin="337,87,0,0" TextWrapping="Wrap" Text="prethodni bukinzi" VerticalAlignment="Top" Width="103"/>
-        <DataGrid HorizontalAlignment="Left" Height="216" Margin="142,143,0,0" VerticalAlignment="Top" Width="511" Name ="pastBookingsGrid"/>
-        <Button Content="Go to rate" HorizontalAlignment="Left" Height="34" Margin="324,371,0,0" VerticalAlignment="Top" Width="130" Click= "ShowRateInterface"/>
+        <TextBlock HorizontalAlignment="Left" Height="25" Margin="335,71,0,0" TextWrapping="Wrap" Text="My previous bookings" VerticalAlignment="Top" Width="162"/>
+        <DataGrid HorizontalAlignment="Left" Height="216" Margin="160,0,0,0" VerticalAlignment="Center" Width="512" Name ="pastBookingsGrid"/>
+        <Button Content="Leave a review" HorizontalAlignment="Left" Height="34" Margin="160,347,0,0" VerticalAlignment="Top" Width="130" Click= "ShowRateInterface"/>
 
     </Grid>
 </Window>

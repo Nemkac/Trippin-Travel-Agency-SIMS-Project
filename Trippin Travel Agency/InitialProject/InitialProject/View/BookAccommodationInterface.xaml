@@ -12,16 +12,17 @@
             <RowDefinition Height="111*"/>
         </Grid.RowDefinitions>
         <Canvas>
-            <TextBlock HorizontalAlignment="Left" Height="23" Margin="102,146,0,0" TextWrapping="Wrap" Text="Number of guests :" VerticalAlignment="Top" Width="164" FontSize="18" Grid.Row="1" Canvas.Bottom="-185" Canvas.Left="0"/>
-            <TextBlock HorizontalAlignment="Left" Height="45" Margin="123,47,0,0" TextWrapping="Wrap" Text="Almost there !" FontSize="30" VerticalAlignment="Top" Width="246" Canvas.Bottom="90" Canvas.Left="-20"/>
-            <TextBlock HorizontalAlignment="Left" Height="23" Margin="102,121,0,0" TextWrapping="Wrap" Text="Please select :" VerticalAlignment="Top" Width="132" FontSize="20" Canvas.Bottom="65" Canvas.Left="0"/>
+            <TextBlock HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="Number of guests :" VerticalAlignment="Top" Width="164" FontSize="18" Grid.Row="1" Canvas.Bottom="-185" Canvas.Left="519" Canvas.Top="336"/>
+            <TextBlock HorizontalAlignment="Left" Height="45" TextWrapping="Wrap" Text="Almost there !" FontSize="30" VerticalAlignment="Top" Width="246" Canvas.Bottom="90" Canvas.Left="516" Canvas.Top="31"/>
+            <TextBlock HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Please select :" VerticalAlignment="Top" Width="132" FontSize="20" Canvas.Bottom="65" Canvas.Left="519" Canvas.Top="94"/>
 
 
-            <DataGrid HorizontalAlignment="Left" Height="187" Margin="102,149,0,0" VerticalAlignment="Top" Width="238" Name ="dataGrid" Grid.RowSpan="2" Canvas.Bottom="-130" Canvas.Left="1"/>
-            <TextBox HorizontalAlignment="Left" Margin="266,144,0,0" TextWrapping="Wrap" Name ="numberOfGuests"  VerticalAlignment="Top" Width="55" Height="34" Grid.Row="1" Canvas.Bottom="-185" Canvas.Left="10"/>
-            <TextBlock HorizontalAlignment="Left" Height="218" Margin="493,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="272" Name ="successfullyBooked" Grid.RowSpan="2" Canvas.Top="0" Canvas.Left="-10"/>
-            <Button Content="Book" HorizontalAlignment="Left" Height="66" Margin="364,202,0,0" VerticalAlignment="Top" Width="91" Name ="BookAccommodation" Click="BookAccommodation_Click" Grid.RowSpan="2" FontSize="15" Canvas.Bottom="-60" Canvas.Left="10"/>
+            <DataGrid HorizontalAlignment="Left" Height="187" VerticalAlignment="Top" Width="238" Name ="dataGrid" Grid.RowSpan="2" Canvas.Bottom="-130" Canvas.Left="520" Canvas.Top="125"/>
+            <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" Name ="numberOfGuests"  VerticalAlignment="Top" Width="55" Height="34" Grid.Row="1" Canvas.Bottom="-185" Canvas.Left="693" Canvas.Top="325"/>
+            <TextBlock HorizontalAlignment="Center" Height="218" TextWrapping="Wrap" VerticalAlignment="Top" Width="272" Name ="successfullyBooked" Grid.RowSpan="2" Canvas.Top="134" Canvas.Left="483"/>
+            <Button Content="Book" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="90" Name ="BookAccommodation" Click="BookAccommodation_Click" Grid.RowSpan="2" FontSize="15" Canvas.Bottom="-60" Canvas.Left="594" Canvas.Top="372"/>
             <TextBlock HorizontalAlignment="Left" Height="73" Margin="364,82,0,0" Grid.Row="1" TextWrapping="Wrap" Name="warningText" VerticalAlignment="Top" Width="91" Canvas.Bottom="60" Canvas.Left="5"/>
         </Canvas>
+        <TextBlock HorizontalAlignment="Left" Height="33" Margin="111,0,0,0" TextWrapping="Wrap" Text="Accommodation Info" VerticalAlignment="Center" Width="190"/>
     </Grid>
 </Window>

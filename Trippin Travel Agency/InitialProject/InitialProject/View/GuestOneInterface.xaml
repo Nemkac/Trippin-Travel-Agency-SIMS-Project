@@ -7,6 +7,19 @@
         mc:Ignorable="d"
         Title="GuestOneInterface" Height="450" Width="800">
     <Grid>
+        <Canvas Margin="-31,32,31,-32">
+            <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" x:Name ="input_starting_date" Height="23" Canvas.Right="350" Canvas.Bottom ="110" Canvas.Left="641" Canvas.Top="134" />
+            <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" x:Name ="input_ending_date" Canvas.Bottom="65" Canvas.Right="350" Canvas.Left="641" Canvas.Top="205"/>
+            <Label Content="Starting date" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Canvas.Bottom="130" Canvas.Right="365" Canvas.Left="650" Canvas.Top="112" />
+            <Label Content="Ending date" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Bottom="1" Canvas.Right="365" Canvas.Left="650" Canvas.Top="172"/>
+            <Button Content="Check for dates" HorizontalAlignment="Left" Height="42" VerticalAlignment="Top" Width="104" Click="CheckForDates" Canvas.Bottom="70" Canvas.Right="100" Canvas.Left="643" Canvas.Top="330"/>
+            <TextBox HorizontalAlignment="Left" Height="20" TextWrapping="Wrap" x:Name ="numberOfDays"  VerticalAlignment="Top" Width="92" Canvas.Bottom="90" Canvas.Right="227" Canvas.Left="643" Canvas.Top="282"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Days to stay" VerticalAlignment="Top" Canvas.Bottom="120" Canvas.Right="240" Canvas.Left="658" Canvas.Top="256"/>
+            <TextBlock HorizontalAlignment="Left" Height="51" Margin="472,367,0,0" TextWrapping="Wrap" x:Name="warningText" VerticalAlignment="Top" Width="130" Canvas.Bottom="40" Canvas.Right="205"/>
+            <Button Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ShowAccommodations" Canvas.Right ="20" Canvas.Bottom="275" Canvas.Left="72" Canvas.Top="183"/>
+            <Button Content="bukinzi" Height="35" Canvas.Left="314" Canvas.Top="343" Width="68" Click="GoToBookings"/>
+
+        </Canvas>
         <Label Content="Welcome!" FontSize ="35" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,-14,0,0"/>
         <Label Content="Name" HorizontalAlignment="Left" Margin="122,32,0,0" VerticalAlignment="Top"/>
         <Label Content="City" HorizontalAlignment="Left" Margin="309,32,0,0" VerticalAlignment="Top"/>
@@ -14,31 +27,19 @@
         <Label Content="Type" HorizontalAlignment="Left" Margin="420,32,0,0" VerticalAlignment="Top"/>
         <Label Content="No.of guests" HorizontalAlignment="Left" Margin="514,32,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.396"/>
         <Label Content="No.of days" HorizontalAlignment="Left" Margin="623,32,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.58"/>
-        <DataGrid x:Name="dataGrid" Margin ="102,134,108,156"/>
-        <TextBox HorizontalAlignment="Left" Margin="100,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="85" Height="35" Name="input_name" />
-        <TextBox HorizontalAlignment="Left" Margin="206,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="60" Height="35" RenderTransformOrigin="0.147,0.03" Name="input_country"/>
-        <TextBox HorizontalAlignment="Left" Margin="383,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="112" Height="35" Name="input_type"/>
-        <TextBox HorizontalAlignment="Left" Margin="519,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="68" Name="input_guests" Height="35"/>
-        <TextBox HorizontalAlignment="Left" Margin="624,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="64" Name="input_days" Height="35"/>
-        <TextBox HorizontalAlignment="Left" Margin="284,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Height="35" Name="input_city"/>
-        <TextBlock HorizontalAlignment="Left" Margin="57,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="656" Name="debuger"/>
+        <DataGrid x:Name="dataGrid" Margin ="102,134,233,73"/>
+        <TextBox HorizontalAlignment="Left" Margin="100,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="85" Height="35" x:Name="input_name" />
+        <TextBox HorizontalAlignment="Left" Margin="206,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="60" Height="35" RenderTransformOrigin="0.147,0.03" x:Name="input_country"/>
+        <TextBox HorizontalAlignment="Left" Margin="383,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="112" Height="35" x:Name="input_type"/>
+        <TextBox HorizontalAlignment="Left" Margin="519,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="68" x:Name="input_guests" Height="35"/>
+        <TextBox HorizontalAlignment="Left" Margin="624,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="64" x:Name="input_days" Height="35"/>
+        <TextBox HorizontalAlignment="Left" Margin="284,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Height="35" x:Name="input_city"/>
+        <TextBlock HorizontalAlignment="Left" Margin="57,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="656" x:Name="debuger"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="122,99,0,0" VerticalAlignment="Top" Click="GetByName"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="218,98,0,0" VerticalAlignment="Top" Click="GetByCountry"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="304,99,0,0" VerticalAlignment="Top" Click="GetByCity"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="414,99,0,0" VerticalAlignment="Top" Click="GetByType"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="536,98,0,0" VerticalAlignment="Top" Click="GetByGuests"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="638,99,0,0" VerticalAlignment="Top" Click="GetByDays"/>
-        <Canvas Margin="-31,32,31,-32">
-            <DatePicker HorizontalAlignment="Center" VerticalAlignment="Top" Name ="input_starting_date" Height="23" Canvas.Right="350" Canvas.Bottom ="110" />
-            <DatePicker HorizontalAlignment="Center" VerticalAlignment="Top" Name ="input_ending_date" Canvas.Bottom="65" Canvas.Right="350" Canvas.Left="348" Canvas.Top="367"/>
-            <Label Content="Starting date" HorizontalAlignment="Center" VerticalAlignment="Top" Height="25" Canvas.Bottom="130" Canvas.Right="365" />
-            <Label Content="Ending date" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Bottom="1" Canvas.Right="365" Canvas.Left="357" Canvas.Top="334"/>
-            <Button Content="Check for dates" HorizontalAlignment="Left" Height="42" Margin="613,331,0,0" VerticalAlignment="Top" Width="104" Click="CheckForDates" Canvas.Bottom="70" Canvas.Right="100"/>
-            <TextBox HorizontalAlignment="Left" Height="20" Margin="478,342,0,0" TextWrapping="Wrap" Name ="numberOfDays"  VerticalAlignment="Top" Width="92" Canvas.Bottom="90" Canvas.Right="227"/>
-            <TextBlock HorizontalAlignment="Left" Margin="492,325,0,0" TextWrapping="Wrap" Text="Days to stay" VerticalAlignment="Top" Canvas.Bottom="120" Canvas.Right="240"/>
-            <TextBlock HorizontalAlignment="Left" Height="51" Margin="472,367,0,0" TextWrapping="Wrap" Name="warningText" VerticalAlignment="Top" Width="130" Canvas.Bottom="40" Canvas.Right="205"/>
-            <Button Content="Refresh" HorizontalAlignment="Left" Margin="702,198,0,0" VerticalAlignment="Top" Click="ShowAccommodations" Canvas.Right ="20" Canvas.Bottom="275"/>
-            <Button Content="stari bukinzi" Canvas.Left="120" Canvas.Top="313" Height="33" Width="67" Click="ShowPastBookings"/>
-        </Canvas>
     </Grid>
 </Window>
