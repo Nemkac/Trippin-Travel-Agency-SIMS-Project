@@ -45,22 +45,24 @@ namespace InitialProject.View.Owner_Views
             {
                 dto = bookingService.CreateRequestDTO(bookingDelaymentRequest);
                 dataList.Add(dto);
-            }
 
+            }
+            
             return dataList;
         }
 
         private void GetSelection(object sender, SelectionChangedEventArgs e)
         {
             var selectedRow = requestsDataGrid.SelectedItem as RequestDTO;
-            AcceptDenyViewModel acceptDenyViewModel = new AcceptDenyViewModel();
-            //acceptDenyRequests._requestDTO = selectedRow;
-            //string newArrival = selectedRow.newArrival.ToString();
-            //acceptDenyViewModel.NewArrival = newArrival;
-            //MessageBox.Show(acceptDenyViewModel.NewArrival);
 
-            //RequestDTO requestDTO = (RequestDTO)requestsDataGrid.SelectedItem;
-            //acceptDenyRequests._requestDTO = requestDTO;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            RequestDTO? selectedRequest = this.requestsDataGrid.SelectedItem as RequestDTO;
+            DataBaseContext requestContext = new DataBaseContext();
+            requestContext.SelectedRequestTransfers.Add(selectedRequest);
+            requestContext.SaveChanges();
         }
     }
 }

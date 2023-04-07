@@ -13,24 +13,25 @@ namespace InitialProject.ViewModels
 {
     public class RequestViewModel : ViewModelBase
     {
-        private RequestDTO _selectedRequest;
-        public RequestDTO SelectedRequest
-        {
-            get => _selectedRequest;
-            set
-            {
-                _selectedRequest = value;
-                OnPropertyChanged("SelectedRequest");
-            }
-        }
-
         public ViewModelCommand ShowAcceptDenyViewCommand { get; private set; }
         private readonly OwnerInterfaceViewModel _mainViewModel;
+
+        private RequestViewModel() {}
 
         public RequestViewModel(OwnerInterfaceViewModel mainViewModel)
         {
             _mainViewModel = mainViewModel;
             ShowAcceptDenyViewCommand = new ViewModelCommand(ShowAcceptDenyView);
+        }
+
+        public RequestDTO SelectedRequest
+        {
+            get => _mainViewModel.RequestDataGridSelectedItem;
+            set
+            {
+                _mainViewModel.RequestDataGridSelectedItem = value;
+                OnPropertyChanged(nameof(SelectedRequest));
+            }
         }
 
         public void ShowAcceptDenyView(object obj)

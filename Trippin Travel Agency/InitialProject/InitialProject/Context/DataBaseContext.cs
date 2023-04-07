@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using InitialProject.Model;
+using InitialProject.DTO;
 
 namespace InitialProject.Context
 {
@@ -16,6 +17,7 @@ namespace InitialProject.Context
         public DbSet<GuestRate> GuestRate { get; set; }
         public DbSet<TourReservation> TourReservations { get; set; }
         public DbSet<BookingDelaymentRequest> BookingDelaymentRequests { get; set; }
+        public DbSet<RequestDTO> SelectedRequestTransfers { get; set; }
 
         // Apsolute paths for every memeber of the team
 

@@ -107,6 +107,7 @@ namespace InitialProject.Service
 
             return user.username;
         }
+
         public static void Save(Booking booking)
         {
             DataBaseContext saveContext = new DataBaseContext();

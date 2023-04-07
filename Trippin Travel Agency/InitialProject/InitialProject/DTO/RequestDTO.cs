@@ -8,6 +8,7 @@ namespace InitialProject.DTO
 {
     public class RequestDTO
     {
+        public int id { get; set; }
         public string guestName { get; set; }
         public int bookingId { get; set; }
         public int accommodationId { get; set; }

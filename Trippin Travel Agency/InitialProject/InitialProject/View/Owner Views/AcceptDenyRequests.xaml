@@ -4,20 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.View.Owner_Views"
-             xmlns:viewModel="clr-namespace:InitialProject.ViewModels"
+             xmlns:viewModel="clr-namespace:InitialProject.ViewModels" d:DataContext="{d:DesignInstance Type=viewModel:AcceptDenyViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="710">
 
-    <UserControl.DataContext>
-        <viewModel:AcceptDenyViewModel/>
-    </UserControl.DataContext>
-
-    <UserControl.Resources>
-        <DataTemplate DataType="{x:Type viewModel:AcceptDenyViewModel}">
-            <local:AcceptDenyRequests/>
-        </DataTemplate>
-    </UserControl.Resources>
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="275"/>
@@ -35,11 +25,13 @@
                     <Label Content="Accommodation Name:" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="49,26,0,0" VerticalAlignment="Top" Width="165"/>
                     <Label Content="Location:" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="49,26,0,0" VerticalAlignment="Top" Width="165"/>
                     <Label Content="Accommodation type:" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="49,26,0,0" VerticalAlignment="Top" Width="165"/>
+                    <Label Content="Booking ID: " Style="{StaticResource defaultLabel}" HorizontalAlignment="Left" Height="27" Margin="49,26,0,0" VerticalAlignment="Top" Width="165"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Vertical">
-                    <TextBlock x:Name="AccommodationNameTextBlock" Margin="0,26,0,0" Height="27" VerticalAlignment="Top" Width="265"/>
-                    <TextBlock x:Name="LocationTextBlock"  Margin="0,26,0,0" Height="27" VerticalAlignment="Top" Width="265"/>
-                    <TextBlock x:Name="AccommodationTypeTextBlock" Margin="0,26,0,0" Height="27" VerticalAlignment="Top" Width="265"/>
+                    <TextBlock x:Name="AccommodationNameTextBlock" Margin="0,28,0,0" Height="27" VerticalAlignment="Top" Width="265" FontFamily="Ubuntu" FontSize="16" FontWeight="Light"/>
+                    <TextBlock x:Name="LocationTextBlock"  Margin="0,26,0,0" Height="27" VerticalAlignment="Top" Width="265" FontFamily="Ubuntu" FontSize="16" FontWeight="Light"/>
+                    <TextBlock x:Name="AccommodationTypeTextBlock" Margin="0,26,0,0" Height="27" VerticalAlignment="Top" Width="265" FontFamily="Ubuntu" FontSize="16" FontWeight="Light"/>
+                    <TextBlock x:Name="BookingIdTextBlock" Margin="0,26,0,0" Height="27" VerticalAlignment="Top" Width="265" FontFamily="Ubuntu" FontSize="16" FontWeight="Light"/>
                 </StackPanel>
                 <Separator Grid.ColumnSpan="2" Background="Black" Width="612" Margin="49, 170, 0, 0"/>
             </Grid>
@@ -61,7 +53,7 @@
                         </StackPanel>
                         <Separator Grid.ColumnSpan="2" Background="Black" Width="612" Margin="49, 70, 0, 0"/>
                         <StackPanel Orientation="Horizontal" Grid.Column="1">
-                            <TextBlock x:Name="GuestTextBlock" Height="27" VerticalAlignment="Center" Margin="30 0 0 0" Width="265"/>
+                            <TextBlock x:Name="GuestTextBlock" Height="27" VerticalAlignment="Center" Margin="30 0 0 0" Width="265" FontFamily="Ubuntu" FontSize="16" FontWeight="Light"/>
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -72,16 +64,16 @@
                             <ColumnDefinition Width="360"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Orientation="Vertical" Grid.Column="0">
-                            <Label Content="Old Arrival:" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="49,56,0,0" VerticalAlignment="Top" Width="105"/>
-                            <TextBlock x:Name="OldArrivalTextBlock" Margin="0,-25,20,0" Height="27" HorizontalAlignment="Right" Width="165"/>
+                            <Label Content="Old Arrival:" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="49,57,0,0" VerticalAlignment="Top" Width="105"/>
+                            <TextBlock x:Name="OldArrivalTextBlock" Text="{Binding OldArrival}" Margin="0,-24,20,0" Height="27" HorizontalAlignment="Right" Width="165" FontFamily="Ubuntu" FontSize="16" FontWeight="Light"/>
                             <Label Content="Old Departure:" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="49,26,0,0" VerticalAlignment="Top" Width="110" />
-                            <TextBlock x:Name="OldDepartureTextBlock" Margin="0,-25,20,0" Height="27" HorizontalAlignment="Right" Width="165"/>
+                            <TextBlock x:Name="OldDepartureTextBlock" Margin="0,-24,20,0" Height="27" HorizontalAlignment="Right" Width="165" FontFamily="Ubuntu" FontSize="16" FontWeight="Light"/>
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Grid.Column="1">
                             <Label Content="New Arrival:" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="0,56,0,0" VerticalAlignment="Top" Width="105"/>
-                            <TextBlock x:Name="NewArrivalTextBlock" Text="{Binding SelectedRequest.newArrival}" Margin="0,-25,70,0" Height="27" HorizontalAlignment="Right" Width="165"/>
+                            <TextBlock x:Name="NewArrivalTextBlock" Margin="0,-24,70,0" Height="27" HorizontalAlignment="Right" Width="165" FontFamily="Ubuntu" FontSize="16" FontWeight="Light"/>
                             <Label Content="New Departure:" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="0,26,0,0" VerticalAlignment="Top" Width="120"/>
-                            <TextBlock x:Name="NewDepartureTextBlock" Margin="0,-25,70,0" Height="27" HorizontalAlignment="Right" Width="165"/>
+                            <TextBlock x:Name="NewDepartureTextBlock" Margin="0,-24,70,0" Height="27" HorizontalAlignment="Right" Width="165" FontFamily="Ubuntu" FontSize="16" FontWeight="Light"/>
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -91,13 +83,15 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="325"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="325"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0" Orientation="Horizontal">
-                    <Button Content="Deny" Margin="49 0 0 0" VerticalAlignment="Center" Style="{StaticResource denyButton}"/>
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2">
+                    <Button Content="Deny" Margin="49 0 0 0" VerticalAlignment="Center" Style="{StaticResource denyButton}" Width="150" Click="DenyRequest" />
+                    <TextBlock x:Name="DenyFeedback" Margin="0 10 0 0" Width="160" Height="30"/>
                 </StackPanel>
-                <StackPanel Grid.Column="1" Orientation="Horizontal">
-                    <Button Content="Accept" Margin="145 0 0 0" VerticalAlignment="Center" Style="{StaticResource saveButton}"/>
+                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                    <TextBlock x:Name="AcceptFeedBack" Margin="15 10 0 0" Width="160" Height="30" FontSize="17" Foreground="#4CD137"/>
+                    <Button Content="Accept" Margin="0 0 0 0" VerticalAlignment="Center" Style="{StaticResource saveButton}" Width="150" Click="AcceptRequest"/>
                 </StackPanel>
             </Grid>
         </Border>

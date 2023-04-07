@@ -1,4 +1,5 @@
 ﻿using FontAwesome.Sharp;
+using InitialProject.DTO;
 using InitialProject.Repository;
 using InitialProject.View;
 using InitialProject.View.Owner_Views;
@@ -20,6 +21,8 @@ namespace InitialProject.ViewModels
         private ViewModelBase _currentChildView;
         private string _caption;
         private IconChar _icon;
+
+        private RequestDTO _requestDataGridSelectedItem;
 
         //Properties
         public ViewModelBase CurrentChildView
@@ -64,6 +67,16 @@ namespace InitialProject.ViewModels
             }
         }
 
+        public RequestDTO RequestDataGridSelectedItem
+        {
+            get { return _requestDataGridSelectedItem; }
+            set
+            {
+                _requestDataGridSelectedItem = value;
+                OnPropertyChanged(nameof(RequestDataGridSelectedItem));
+            }
+        }
+
         //--> Commands
         public ICommand ShowAcceptDenyViewCommand { get; }
         public ICommand ShowOwnersBookingViewCommand { get; }
@@ -89,7 +102,7 @@ namespace InitialProject.ViewModels
 
         public void ExecuteShowAcceptDenyViewCommand(object obj)
         {
-            CurrentChildView = new AcceptDenyViewModel();
+            CurrentChildView = new AcceptDenyViewModel(this, _requestDataGridSelectedItem);
      
             Caption = "Requests";
             Icon = IconChar.ArrowDown;

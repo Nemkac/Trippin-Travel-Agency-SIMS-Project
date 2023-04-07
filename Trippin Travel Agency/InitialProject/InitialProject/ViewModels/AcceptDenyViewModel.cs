@@ -3,6 +3,7 @@ using InitialProject.View.Owner_Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,14 +12,25 @@ namespace InitialProject.ViewModels
 {
     public class AcceptDenyViewModel : ViewModelBase
     {
-        private RequestDTO _selectedRequest;
-        public RequestDTO SelectedRequest
+
+        private readonly OwnerInterfaceViewModel _mainViewModel;
+        private readonly RequestDTO _selectedRequest;
+
+        public AcceptDenyViewModel(OwnerInterfaceViewModel mainViewModel, RequestDTO selectedRequest)
         {
-            get { return _selectedRequest; }
+            _mainViewModel = mainViewModel;
+            _selectedRequest = selectedRequest;
+        }
+
+        private string _oldArrival;
+
+        public string OldArrival
+        {
+            get { return _oldArrival; }
             set
             {
-                _selectedRequest = value;
-                OnPropertyChanged(nameof(SelectedRequest));
+                _oldArrival = _selectedRequest.oldArrival.ToString();
+                OnPropertyChanged(nameof(OldArrival));
             }
         }
     }
