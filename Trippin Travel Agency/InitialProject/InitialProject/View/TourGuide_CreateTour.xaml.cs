@@ -23,14 +23,6 @@ namespace InitialProject.View
         public TourGuide_CreateTour()
         {
             InitializeComponent();
-            // Get the TourGuide_CreateTour instance
-            var createTourControl = this.Parent as TourGuide_CreateTour;
-
-            // Find the addCheckpointButton RadioButton
-            var addCheckpointButton = createTourControl.FindName("addCheckpointButton") as RadioButton;
-
-            // Find the containerKeyPoints StackPanel
-            var containerKeyPoints = createTourControl.FindName("containerKeyPoints") as StackPanel;
         }
 
         // Lists used for creating dynamic TextBox elements for both images and key points
@@ -55,6 +47,16 @@ namespace InitialProject.View
             newStackPanel.Margin = new Thickness(buttonMargin.Left, 10, 0, 0);
 
             checkpointCounter++;
+            ResetRadioButton(sender);
+        }
+
+        private static void ResetRadioButton(object sender)
+        {
+            RadioButton radioButton = sender as RadioButton;
+            if (radioButton != null)
+            {
+                radioButton.IsChecked = false;
+            }
         }
 
         private static StackPanel CreateNewStackPanelWithElementsForKeyPoint(Label newLabel, TextBox newTextBox)

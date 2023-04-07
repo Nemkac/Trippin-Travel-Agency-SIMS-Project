@@ -144,7 +144,7 @@
                 </StackPanel>
 
 
-                <!-- Location GroupBox -->
+                <!-- KeyPoints GroupBox -->
                 <GroupBox Header="Key Points"
                           Style="{StaticResource labelGroupBox}"
                           Margin="0,20,0,500"
@@ -176,7 +176,6 @@
                         <!-- Add checkpoint -->
                         <RadioButton x:Name="addCheckpointButton"
                                  Style="{StaticResource mobileCreateTourButton}"
-                                 Command="{Binding CreateTourCommand}"
                                  HorizontalAlignment="Center"
                                  Checked="addKeyPoint_IfChecked"
                                  >
