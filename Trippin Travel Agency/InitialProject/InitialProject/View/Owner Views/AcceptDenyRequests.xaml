@@ -87,10 +87,10 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2">
                     <Button Content="Deny" Margin="49 0 0 0" VerticalAlignment="Center" Style="{StaticResource denyButton}" Width="150" Click="DenyRequest" />
-                    <TextBlock x:Name="DenyFeedback" Margin="0 10 0 0" Width="160" Height="30"/>
+                    <TextBlock x:Name="DenyFeedback" Margin="0 10 0 0" Width="160" Height="30" FontSize="17" Foreground="#C23616" FontFamily="Ubuntu" />
                 </StackPanel>
                 <StackPanel Grid.Column="2" Orientation="Horizontal">
-                    <TextBlock x:Name="AcceptFeedBack" Margin="15 10 0 0" Width="160" Height="30" FontSize="17" Foreground="#4CD137"/>
+                    <TextBlock x:Name="AcceptFeedBack" Margin="15 10 0 0" Width="160" Height="30" FontSize="17" Foreground="#4CD137" FontFamily="Ubuntu"/>
                     <Button Content="Accept" Margin="0 0 0 0" VerticalAlignment="Center" Style="{StaticResource saveButton}" Width="150" Click="AcceptRequest"/>
                 </StackPanel>
             </Grid>

@@ -66,29 +66,41 @@ namespace InitialProject.View.Owner_Views
             List<Booking> bookings = bookingContext.Bookings.ToList();
             List<RequestDTO> selectedRequest = acceptContext.SelectedRequestTransfers.ToList();
 
-            foreach (Booking booking in bookings.ToList()) { 
-                if(booking.Id == selectedRequest.First().bookingId)
+            UpdateChanges(bookingContext, bookings, selectedRequest);
+
+            DataBaseContext requestContext = new DataBaseContext();
+            List<BookingDelaymentRequest> bookingDelaymentRequests = requestContext.BookingDelaymentRequests.ToList();
+
+            RemoveRequest(selectedRequest, requestContext, bookingDelaymentRequests);
+
+            AcceptFeedBack.Text = "Request accepted!";
+            acceptContext.SelectedRequestTransfers.Remove(acceptContext.SelectedRequestTransfers.First());
+            acceptContext.SaveChanges();
+        }
+
+        private static void RemoveRequest(List<RequestDTO> selectedRequest, DataBaseContext requestContext, List<BookingDelaymentRequest> bookingDelaymentRequests)
+        {
+            foreach (BookingDelaymentRequest request in bookingDelaymentRequests.ToList())
+            {
+                if (request.bookingId == selectedRequest.First().bookingId)
+                {
+                    requestContext.BookingDelaymentRequests.Remove(request);
+                    requestContext.SaveChanges();
+                }
+            }
+        }
+
+        private static void UpdateChanges(DataBaseContext bookingContext, List<Booking> bookings, List<RequestDTO> selectedRequest)
+        {
+            foreach (Booking booking in bookings.ToList())
+            {
+                if (booking.Id == selectedRequest.First().bookingId)
                 {
                     booking.arrival = selectedRequest.First().newArrival.ToString("M/dd/yyyy");
                     booking.departure = selectedRequest.First().newDeparture.ToString("M/dd/yyyy");
                     bookingContext.SaveChanges();
                 }
             }
-
-            DataBaseContext requestContext = new DataBaseContext();
-            List<BookingDelaymentRequest> bookingDelaymentRequests = requestContext.BookingDelaymentRequests.ToList();
-
-            foreach(BookingDelaymentRequest request in bookingDelaymentRequests.ToList()) {
-                if(request.bookingId == selectedRequest.First().bookingId)
-                {
-                    requestContext.BookingDelaymentRequests.Remove(request);
-                    requestContext.SaveChanges();
-                }
-            }
-
-            AcceptFeedBack.Text = "Request accepted!";
-            acceptContext.SelectedRequestTransfers.Remove(acceptContext.SelectedRequestTransfers.First());
-            acceptContext.SaveChanges();
         }
 
         private void DenyRequest(object sender, RoutedEventArgs e)
@@ -98,16 +110,9 @@ namespace InitialProject.View.Owner_Views
             DataBaseContext requestContext = new DataBaseContext();
             List<BookingDelaymentRequest> bookingDelaymentRequests = requestContext.BookingDelaymentRequests.ToList();
 
-            foreach (BookingDelaymentRequest request in bookingDelaymentRequests.ToList())
-            {
-                if (request.bookingId == selectedRequest.First().bookingId)
-                {
-                    requestContext.BookingDelaymentRequests.Remove(request);
-                    requestContext.SaveChanges();
-                }
-            }
+            RemoveRequest(selectedRequest, requestContext, bookingDelaymentRequests);
 
-            AcceptFeedBack.Text = "Request denied!";
+            DenyFeedback.Text = "Request denied!";
             acceptContext.SelectedRequestTransfers.Remove(acceptContext.SelectedRequestTransfers.First());
             acceptContext.SaveChanges();
         }
