@@ -43,7 +43,7 @@ namespace InitialProject.View
             foreach(Coupon coup in coupons) {
                 if (coup.userId == LoggedUser.id) {
                     counter += 1;
-                    dataList.Add(new CouponDTO("Coupon" + counter, coup.exiresOn));
+                    dataList.Add(new CouponDTO(coup.id,"Coupon" + counter, coup.exiresOn));
                 }
             }
             this.dataGrid.ItemsSource = dataList;   

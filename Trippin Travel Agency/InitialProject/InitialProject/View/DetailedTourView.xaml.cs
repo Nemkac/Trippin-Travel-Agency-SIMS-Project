@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InitialProject.Context;
+using InitialProject.Model.TransferModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -25,12 +27,17 @@ namespace InitialProject.View
         public DetailedTourView()
         {
             InitializeComponent();
-            this.Loaded += Window_Loaded;
+            this.Loaded += WindowLoaded;
     
         }
 
-        public void Window_Loaded(object sender, RoutedEventArgs e) {
-            this.TextBlock.Text = TourView.DetailedId.ToString();
+        public void WindowLoaded(object sender, RoutedEventArgs e) {
+
+            DataBaseContext context = new DataBaseContext();
+            List<DetailedTourViewTransfer> requests = context.detailedTourViewTransfers.ToList();
+            this.TextBlock.Text = requests.First().tourId.ToString();
+            context.detailedTourViewTransfers.Remove(requests.First());
+            context.SaveChanges();
             
         }
     }

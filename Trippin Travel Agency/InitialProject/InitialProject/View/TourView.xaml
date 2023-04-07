@@ -6,6 +6,8 @@
              xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodels="clr-namespace:InitialProject.ViewModels" 
              mc:Ignorable="d" 
              d:DesignHeight="1470" d:DesignWidth="1520">
+
+    
     
     <Grid>
         <Grid.RowDefinitions>
@@ -35,7 +37,7 @@
                 
             <GroupBox Header="Booking section" FontSize="40" FontFamily="Ubuntu" FontWeight="Medium" Grid.Column="1"/>
             <StackPanel Grid.Column="1">
-                <Button Content="Book" HorizontalAlignment="Left" Margin ="22 255 0 0" VerticalAlignment="Center" Style="{StaticResource saveButtonWEB}" Click="ReserveTour" Height="82" Width="239"/>
+                <Button Content="Book" HorizontalAlignment="Left" Margin ="22 255 0 0" VerticalAlignment="Center" Style="{StaticResource saveButtonWEB}"  Click="ReserveTour"  Command="{Binding BookingConfirmationViewCommand}"  Height="82" Width="239"/>
                 <TextBox TextWrapping="Wrap" Margin ="22 -250 0 0" Text="" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" Name ="NumberOfTourists"/>
                 <Label Content="No. of tourists" Margin="22 -350 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="244" Height="40" FontSize="20"/>
                 <TextBlock Height="136" TextWrapping="Wrap" Margin="300 -135 0 0" Text="" Width="275" HorizontalAlignment="Left"  VerticalAlignment="Center" Background="#d1e0e0" Name ="TextBlock" FontSize="20" FontFamily="Ubuntu"/>
@@ -47,5 +49,9 @@
             <DataGrid x:Name="dataGrid" d:DataContext ="" Width="1500" Height="200" Margin="0 -50 0 0"/>
             <Button Content="Show images" HorizontalAlignment="Left" Margin="-250,255,0,0" VerticalAlignment="Top"  Height="82" Width="239" FontSize="20" Style="{StaticResource addButtonWEB}" Click="ShowTourDetailedView" Command="{Binding DetailedTourViewCommand}"/>
         </StackPanel>
+            
+       
+            
     </Grid>
+        
 </UserControl>

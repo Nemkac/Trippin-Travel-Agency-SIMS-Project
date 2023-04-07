@@ -1,7 +1,9 @@
 ﻿using InitialProject.Context;
 using InitialProject.DTO;
 using InitialProject.Model;
+using InitialProject.Model.TransferModels;
 using InitialProject.Service;
+using InitialProject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -108,30 +110,56 @@ namespace InitialProject.View
             int index = selectedTour.id;
             int numberOfGuests = Int32.Parse(NumberOfTourists.Text);
             int flag = tourService.Book(index, numberOfGuests);
+            TourDisplayViewModel.CanExecute = false;
 
             if (flag == 0)
             {
                 this.TextBlock.Text = "You have booked the selected tour.";
+                TourBookingTransfer tourBookingTransfer = new TourBookingTransfer(
+                 selectedTour.id,
+                 selectedTour.name,
+                 selectedTour.description,
+                 selectedTour.cityLocation,
+                 selectedTour.countryLocation,
+                 selectedTour.keypoints,
+                 selectedTour.language,
+                 selectedTour.touristLimit,
+                 selectedTour.startDates,
+                 selectedTour.touristLimit,
+                 numberOfGuests
+                );
+                DataBaseContext context = new DataBaseContext();
+                context.tourBookingTransfers.Add(tourBookingTransfer);
+                context.SaveChanges();
+                TourDisplayViewModel.CanExecute = true;
             }
             else if (flag == 1)
             {
                 this.TextBlock.Text = "Not enough room for desired number of tourists. Number of spots left for this tour: " + selectedTour.touristLimit;
                 tourDTOs = tourService.GetPreviouslySelected(selectedTour.id);
                 this.dataGrid.ItemsSource = tourDTOs;
+                TourDisplayViewModel.CanExecute = false;
             }
             else if (flag == -1)
             {
                 this.TextBlock.Text = "This tour is full. Here are some other tours in the same location.";
                 tourDTOs = tourService.GetBookableTours(selectedTour.cityLocation, selectedTour.name);
                 this.dataGrid.ItemsSource = tourDTOs;
+                TourDisplayViewModel.CanExecute = false;
             }
+            
         }
 
         private void ShowTourDetailedView(object sender, RoutedEventArgs e)
         {
-            DetailedTourView detailedTourView = new DetailedTourView();
-            TourDTO? tour = this.dataGrid.SelectedItem as TourDTO;
-            DetailedId = tour.id;
+            
+            TourDTO? tour = this.dataGrid.SelectedItem as TourDTO;      
+            DataBaseContext context = new DataBaseContext();
+            DetailedTourViewTransfer detailedTourViewTransfer = new DetailedTourViewTransfer(tour.id);
+            context.detailedTourViewTransfers.Add(detailedTourViewTransfer);
+            context.SaveChanges();
+            //DetailedTourView detailedTourView = new DetailedTourView(); OVO NISAM PROVERIO MOZDA NE RADI ZBOG OVOGA AKO NESTO NE RADI.
+
         }
     }
 }

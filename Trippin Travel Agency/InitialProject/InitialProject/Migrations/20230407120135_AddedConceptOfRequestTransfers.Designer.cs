@@ -3,6 +3,7 @@ using System;
 using InitialProject.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230407120135_AddedConceptOfRequestTransfers")]
+    partial class AddedConceptOfRequestTransfers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.3");
@@ -279,52 +282,6 @@ namespace InitialProject.Migrations
                     b.HasKey("id");
 
                     b.ToTable("detailedTourViewTransfers");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.TransferModels.TourBookingTransfer", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("cityLocation")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("countryLocation")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("hoursDuration")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("keypoints")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("language")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("numberOfGuests")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("startDates")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("touristLimit")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("id");
-
-                    b.ToTable("tourBookingTransfers");
                 });
 
             modelBuilder.Entity("InitialProject.Model.User", b =>

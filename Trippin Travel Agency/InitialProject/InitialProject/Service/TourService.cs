@@ -66,11 +66,11 @@ namespace InitialProject.Service
             {
                 if (keyPoint.tourId == tour.id)
                 {
-                    keyPoints += keyPoint.name + ", ";                  
+                    keyPoints += keyPoint.name + ", \n";                  
                 }
                 
             }
-            keyPoints = keyPoints.Remove(keyPoints.Length - 2); 
+            keyPoints = keyPoints.Remove(keyPoints.Length - 3); 
             return keyPoints;
         }
 
@@ -222,11 +222,6 @@ namespace InitialProject.Service
             if (tour == null) return -2; // Error return value
             if (tour.touristLimit == 0) return -1; // Tour filled
             if (tour.touristLimit < numberOfTourists) return 1; // Too many guests for selected tour
-
-            tour.touristLimit -= numberOfTourists;
-            TourReservation tourReservation = new TourReservation(LoggedUser.id, tourId, numberOfTourists);
-            dataBase.TourReservations.Add(tourReservation);
-            dataBase.SaveChanges();
             return 0; // Tour registered
         }
 

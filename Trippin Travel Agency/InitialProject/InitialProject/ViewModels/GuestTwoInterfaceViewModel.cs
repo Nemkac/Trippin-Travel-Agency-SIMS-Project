@@ -30,6 +30,8 @@ namespace InitialProject.ViewModels
 
         public ICommand ShowTourViewCommand { get; }
         public ICommand ShowGuestTwoCoupons { get; }
+        public ICommand ShowBookingConfirmation { get; }
+
         public GuestTwoInterfaceViewModel()
         {
             ShowTourViewCommand = new ViewModelCommand(ExecuteTourViewCommand);
@@ -52,6 +54,11 @@ namespace InitialProject.ViewModels
         public void ExecuteShowGuestTwoCoupons(object obj)
         { 
             CurrentChildView = new GuestTwoCouponsViewModel();
+        }
+
+        public void ExecuteShowBookingConfirmation(object obj) 
+        {
+            CurrentChildView = new TourConfirmationViewModel(); // OVO MENJAJ NA NOVO IZBACIVANJE 
         }
 
     }

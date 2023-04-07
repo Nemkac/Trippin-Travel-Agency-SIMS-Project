@@ -25,6 +25,10 @@
         <DataTemplate DataType="{x:Type viewModel:GuestTwoCouponsViewModel}">
             <local:GuestTwoCoupons/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:TourConfirmationViewModel}">
+            <local:TourConfirmationView/>
+        </DataTemplate>
         
     </Window.Resources>
     
