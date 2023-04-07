@@ -24,9 +24,9 @@
             <!--Active button style-->
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Margin" Value="0, 0, 0, 5"/>
-                <Setter Property="Background" Value="#487eb0"/>
+                <Setter Property="Background" Value="#192a56"/>
                 <Setter Property="Foreground" Value="#FEFEFF"/>
-                <Setter Property="BorderBrush" Value="#487eb0"/>
+                <Setter Property="BorderBrush" Value="#192a56"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -74,6 +74,32 @@
 
     </Style>
 
+    <Style x:Key="denyButton" TargetType="Button">
+        <Setter Property="Background" Value="#C23616"/>
+        <Setter Property="Foreground" Value="#F4FFF8"/>
+        <Setter Property="FontFamily" Value="Ubuntu"/>
+        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="#E84118" CornerRadius="20">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="#44BD32"/>
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+
     <Style x:Key="addButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="#979797"/>
@@ -103,6 +129,45 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border Background="Transparent" CornerRadius="10" BorderThickness="0.4">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="defaultLabel" TargetType="Label">
+        <Setter Property="FontFamily" Value="Ubuntu"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+    </Style>
+
+    <Style x:Key="mobileCreateTourButton" TargetType="RadioButton">
+        <!--Normal button style-->
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="detailsButton" TargetType="Button">
+        <Setter Property="Background" Value="#192a56"/>
+        <Setter Property="FontFamily" Value="Ubuntu"/>
+        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="Width" Value="220"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="#192a56" CornerRadius="10" BorderThickness="0.4" BorderBrush="#192a56">
                         <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>

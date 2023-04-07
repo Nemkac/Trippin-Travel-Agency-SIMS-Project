@@ -59,7 +59,7 @@ namespace InitialProject.View
 
             foreach (Booking booking in bookingContext.Bookings.ToList())
             {
-                dto = bookingService.CreateDTO(booking);
+                dto = bookingService.CreateBookingDTO(booking);
                 dataList.Add(dto);
             }
 
@@ -119,6 +119,7 @@ namespace InitialProject.View
 
             RateGuestInterface rateGuestInterface = new RateGuestInterface(bookingId);
             rateGuestInterface.Show();
+
 
         }
     }

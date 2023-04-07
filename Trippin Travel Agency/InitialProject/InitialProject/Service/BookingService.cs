@@ -1,15 +1,22 @@
-﻿using InitialProject.Context;
+using InitialProject.Context;
 using InitialProject.DTO;
 using InitialProject.Model;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace InitialProject.Service
 {
     class BookingService
     {
-        public BookingDTO CreateDTO(Booking booking)
+        public Booking GetById(int bookingId)
+        {
+            using DataBaseContext context = new DataBaseContext();
+            return context.Bookings.SingleOrDefault(b => b.Id == bookingId);
+        }
+
+        public BookingDTO CreateBookingDTO(Booking booking)
         {
             UserService userService = new UserService();
             AccommodationService accommodationService = new AccommodationService();
@@ -44,6 +51,50 @@ namespace InitialProject.Service
             return null;
         }
         
+        public RequestDTO CreateRequestDTO(BookingDelaymentRequest bookingDelaymentRequest)
+        {
+            UserService userService = new UserService();
+            DataBaseContext dtoContext = new DataBaseContext();
+            RequestDTO requestDto = new RequestDTO();
+
+            Booking tmpBooking = GetById(bookingDelaymentRequest.bookingId);
+            User tmpUser = userService.GetById(tmpBooking.guestId);
+
+            DateTime oldArrival = DateTime.ParseExact(tmpBooking.arrival, "M/d/yyyy", CultureInfo.InvariantCulture);
+            DateTime oldDeparture = DateTime.ParseExact(tmpBooking.departure, "M/d/yyyy", CultureInfo.InvariantCulture);
+            string isPossible = "No";
+            if (IsDelaymentPossible(bookingDelaymentRequest.newArrival, bookingDelaymentRequest.newDeparture, tmpBooking.accommodationId)) isPossible = "Yes";
+            requestDto = new RequestDTO(tmpUser.username, tmpBooking.Id, tmpBooking.accommodationId, oldArrival, oldDeparture, bookingDelaymentRequest.newArrival, bookingDelaymentRequest.newDeparture, isPossible);
+
+            return requestDto;
+        }
+
+        private bool IsDelaymentPossible(DateTime newArrival, DateTime newDeparture, int accommodationId)
+        { 
+            DataBaseContext datesContext = new DataBaseContext();
+            List<Booking> bookingDates = datesContext.Bookings.ToList();
+
+            foreach (var booking in bookingDates.Where(x => x.accommodationId == accommodationId))
+            {
+                var tmpArrival = DateTime.ParseExact(booking.arrival, "M/d/yyyy", CultureInfo.InvariantCulture);
+                var tmpDeparture = DateTime.ParseExact(booking.departure, "M/d/yyyy", CultureInfo.InvariantCulture);
+
+                if (CheckDaysOverlaping(newArrival, newDeparture, tmpArrival, tmpDeparture))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private static bool CheckDaysOverlaping(DateTime newArrival, DateTime newDeparture, DateTime tmpArrival, DateTime tmpDeparture)
+        {
+            return (tmpArrival <= newArrival && tmpDeparture >= newArrival) ||
+                                (newDeparture >= tmpArrival && newDeparture <= tmpDeparture) ||
+                                (newArrival <= tmpArrival && newDeparture >= tmpDeparture);
+        }
+
         public int GetGuestId(int bookingId)
         {
             int guestId;
@@ -78,6 +129,7 @@ namespace InitialProject.Service
 
             return user.username;
         }
+
         public static void Save(Booking booking)
         {
             DataBaseContext saveContext = new DataBaseContext();
