@@ -23,6 +23,12 @@ namespace InitialProject.View
 
         }
 
+        private void LeadTrackTourLive(object sender, RoutedEventArgs e)
+        {
+            TrackTourLiveInterface TrackTourLiveInterface = new TrackTourLiveInterface();
+            TrackTourLiveInterface.Show();
+
+        }
         private void FillCountryComboBox()
         {
             DataBaseContext countryToursContext = new DataBaseContext();
@@ -36,14 +42,6 @@ namespace InitialProject.View
                 }
             }
         }
-
-        private void LeadTrackTourLive(object sender, RoutedEventArgs e)
-        {
-            TrackTourLiveInterface TrackTourLiveInterface = new TrackTourLiveInterface();
-            TrackTourLiveInterface.Show();
-
-        }
-
         private void countryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cityComboBox.Items.Clear();
@@ -51,7 +49,6 @@ namespace InitialProject.View
 
             GetCitiesByCountry(selectedCountry);
         }
-
         private void GetCitiesByCountry(string selectedCountry)
         {
             DataBaseContext cityContext = new DataBaseContext();

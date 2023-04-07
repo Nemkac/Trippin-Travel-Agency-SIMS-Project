@@ -2,6 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp">
 
-    
+    <Style x:Key="CustomCalendarStyle" TargetType="Calendar">
+        <Setter Property="Foreground" Value="#273c75"/>
+        <Setter Property="Background" Value="#f5f6fa"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="Ubuntu"/>
+    </Style>
 
 </ResourceDictionary>

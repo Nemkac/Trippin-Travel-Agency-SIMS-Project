@@ -25,12 +25,14 @@ namespace InitialProject.ViewModels
         public ICommand ShowTourGuideDashboardViewCommand { get; }
         public ICommand ShowTourGuideToursViewCommand { get; }
         public ICommand ShowTourGuideCreateTourViewCommand { get; }
+        public ICommand ShowTourGuideToursTodayViewCommand { get; }
 
         public TourGuide_MainViewModel()
         {
             ShowTourGuideDashboardViewCommand = new ViewModelCommand(ExecuteShowTourGuideDashboardViewCommand);
             ShowTourGuideToursViewCommand = new ViewModelCommand(ExecuteShowTourGuideToursViewCommand);
             ShowTourGuideCreateTourViewCommand = new ViewModelCommand(ExecuteShowTourGuideCreateTourViewCommand);
+            ShowTourGuideToursTodayViewCommand = new ViewModelCommand(ExecuteShowTourGuideToursTodayViewCommand);
             ExecuteShowTourGuideDashboardViewCommand(null);
         }
 
@@ -46,7 +48,11 @@ namespace InitialProject.ViewModels
 
         public void ExecuteShowTourGuideCreateTourViewCommand(object obj)
         {
-            CurrentChildView = new TourGuide_CreateTourViewModel();
+            CurrentChildView = new TourGuide_CreateTourViewModel(this);
+        }
+        public void ExecuteShowTourGuideToursTodayViewCommand(object obj)
+        {
+            CurrentChildView = new TourGuide_ToursTodayViewModel(this);
         }
     }
 }
