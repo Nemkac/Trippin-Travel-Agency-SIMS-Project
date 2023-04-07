@@ -8,12 +8,6 @@
              xmlns:local="clr-namespace:InitialProject.View"
              mc:Ignorable="d" 
              d:DesignHeight="660" d:DesignWidth="430">
-
-    <UserControl.Resources>
-        <DataTemplate DataType="{x:Type viewModel:TourGuide_DashboardViewModel}">
-            <local:TourGuide_Dashboard/>
-        </DataTemplate>
-    </UserControl.Resources>
     
     <Grid>
         <Grid.RowDefinitions>

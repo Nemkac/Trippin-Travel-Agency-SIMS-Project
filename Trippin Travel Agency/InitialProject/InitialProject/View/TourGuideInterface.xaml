@@ -23,8 +23,13 @@
         <DataTemplate DataType="{x:Type viewModel:TourGuide_DashboardViewModel}">
             <local:TourGuide_Dashboard/>
         </DataTemplate>
+        
         <DataTemplate DataType="{x:Type viewModel:TourGuide_ToursViewModel}">
             <local:TourGuide_Tours/>
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type viewModel:TourGuide_CreateTourViewModel}">
+            <local:TourGuide_CreateTour/>
         </DataTemplate>
     </Window.Resources>
     

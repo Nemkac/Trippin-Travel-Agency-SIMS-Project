@@ -218,6 +218,23 @@
                 <Setter Property="StrokeThickness" Value="1"/>
                 <Setter Property="Margin" Value="0,30,0,0"/>
             </Style>
+            
+            <!-- Mobile TextBox style -->
+            <Style x:Key="mobileTextBox" TargetType="TextBox">
+                <Setter Property="Height" Value="40"/>
+                <Setter Property="Margin" Value="0,10,0,0" />
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontFamily" Value="Ubuntu"/>
+            </Style>
+
+            <!-- Mobile ComboBox style -->
+            <Style x:Key="mobileComboBox" TargetType="ComboBox">
+                <Setter Property="Height" Value="40"/>
+                <Setter Property="Margin" Value="0,10,0,0" />
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontFamily" Value="Ubuntu"/>
+            </Style>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/ButtonStyles.xaml"/>
                 <ResourceDictionary Source="/Styles/Colors.xaml"/>

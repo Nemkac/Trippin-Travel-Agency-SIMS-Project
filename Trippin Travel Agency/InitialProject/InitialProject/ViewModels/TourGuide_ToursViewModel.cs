@@ -28,5 +28,6 @@ namespace InitialProject.ViewModels
         {
             _mainViewModel.ExecuteShowTourGuideCreateTourViewCommand(null);
         }
+
     }
 }

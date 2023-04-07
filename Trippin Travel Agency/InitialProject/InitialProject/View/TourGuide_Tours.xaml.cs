@@ -18,9 +18,9 @@ namespace InitialProject.View
     /// <summary>
     /// Interaction logic for TourGuide_Tours.xaml
     /// </summary>
-    public partial class TourGuide_CreateTour : UserControl
+    public partial class TourGuide_Tours : UserControl
     {
-        public TourGuide_CreateTour()
+        public TourGuide_Tours()
         {
             InitializeComponent(); 
         }
