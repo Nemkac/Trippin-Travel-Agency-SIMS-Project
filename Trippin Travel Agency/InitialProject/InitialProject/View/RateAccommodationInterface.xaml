@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="RateAccommodationInterface" Height="450" Width="800">
+        Title="RateAccommodationInterface" Height="800" Width="1500" WindowState="Maximized">
     <Grid>
         <Button Content="oceni" HorizontalAlignment="Center" Height="41" Margin="0,320,0,0" VerticalAlignment="Top" Width="268" Click="LeaveReview"/>
         <TextBlock HorizontalAlignment="Left" Height="35" Margin="278,153,0,0" TextWrapping="Wrap" Text="cistoca" VerticalAlignment="Top" Width="113"/>

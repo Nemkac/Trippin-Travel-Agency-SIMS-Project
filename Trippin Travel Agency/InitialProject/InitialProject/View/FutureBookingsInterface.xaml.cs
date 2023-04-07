@@ -39,20 +39,23 @@ namespace InitialProject.View
         private void ShowPastBookings(object sender, RoutedEventArgs e)
         {
             PastBookingsInterface pastBookingsInterface = new PastBookingsInterface();
+            this.Close();
             pastBookingsInterface.Show();
         }
 
         private void DeleteBooking(object sender, RoutedEventArgs e)
         {
-            DataBaseContext context = new DataBaseContext();
-            List<Booking> bookings = context.Bookings.ToList();
-            // brisanje bukinga
+            BookingService bookingService = new BookingService();
+            bookingService.Delete((Booking)futureBookingsGrid.SelectedItem);
+            UserService userService = new UserService();
+            futureBookingsGrid.ItemsSource = userService.GetGuestsFutureBookings(LoggedUser.id);
         }
 
         private void GoToBookingDelayment(object sender, RoutedEventArgs e)
         {
             SendBookingDelaymentInterface sendBookingDelaymentInterface = new SendBookingDelaymentInterface();
             sendBookingDelaymentInterface.SetAttribures((Booking)futureBookingsGrid.SelectedItem);
+            this.Close();
             sendBookingDelaymentInterface.Show();
         }
 

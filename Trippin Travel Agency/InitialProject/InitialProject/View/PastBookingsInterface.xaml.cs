@@ -43,6 +43,7 @@ namespace InitialProject.View
         {
             RateAccommodationInterface RateAccommodationInterface = new RateAccommodationInterface();
             RateAccommodationInterface.SetAttributes(((Booking)pastBookingsGrid.SelectedItem).Id);
+            this.Close();
             RateAccommodationInterface.Show();
         }
     }

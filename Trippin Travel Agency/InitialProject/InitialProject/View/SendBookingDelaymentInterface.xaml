@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="SendBookingDelaymentInterface" Height="450" Width="800">
+        Title="SendBookingDelaymentInterface" Height="800" Width="1500">
     <Grid>
         <TextBlock HorizontalAlignment="Left" Height="42" Margin="214,156,0,0" TextWrapping="Wrap" Text="novi dolazak" VerticalAlignment="Top" Width="186"/>
         <TextBlock HorizontalAlignment="Left" Height="42" Margin="214,232,0,0" TextWrapping="Wrap" Text="novi odlazak" VerticalAlignment="Top" Width="186"/>

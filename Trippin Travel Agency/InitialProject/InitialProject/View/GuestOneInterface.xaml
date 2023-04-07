@@ -5,41 +5,78 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="GuestOneInterface" Height="450" Width="800">
-    <Grid>
-        <Canvas Margin="-31,32,31,-32">
-            <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" x:Name ="input_starting_date" Height="23" Canvas.Right="350" Canvas.Bottom ="110" Canvas.Left="641" Canvas.Top="134" />
-            <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" x:Name ="input_ending_date" Canvas.Bottom="65" Canvas.Right="350" Canvas.Left="641" Canvas.Top="205"/>
-            <Label Content="Starting date" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Canvas.Bottom="130" Canvas.Right="365" Canvas.Left="650" Canvas.Top="112" />
-            <Label Content="Ending date" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Bottom="1" Canvas.Right="365" Canvas.Left="650" Canvas.Top="172"/>
-            <Button Content="Check for dates" HorizontalAlignment="Left" Height="42" VerticalAlignment="Top" Width="104" Click="CheckForDates" Canvas.Bottom="70" Canvas.Right="100" Canvas.Left="643" Canvas.Top="330"/>
-            <TextBox HorizontalAlignment="Left" Height="20" TextWrapping="Wrap" x:Name ="numberOfDays"  VerticalAlignment="Top" Width="92" Canvas.Bottom="90" Canvas.Right="227" Canvas.Left="643" Canvas.Top="282"/>
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Days to stay" VerticalAlignment="Top" Canvas.Bottom="120" Canvas.Right="240" Canvas.Left="658" Canvas.Top="256"/>
-            <TextBlock HorizontalAlignment="Left" Height="51" Margin="472,367,0,0" TextWrapping="Wrap" x:Name="warningText" VerticalAlignment="Top" Width="130" Canvas.Bottom="40" Canvas.Right="205"/>
-            <Button Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ShowAccommodations" Canvas.Right ="20" Canvas.Bottom="275" Canvas.Left="72" Canvas.Top="183"/>
-            <Button Content="bukinzi" Height="35" Canvas.Left="314" Canvas.Top="343" Width="68" Click="GoToBookings"/>
-
-        </Canvas>
-        <Label Content="Welcome!" FontSize ="35" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,-14,0,0"/>
-        <Label Content="Name" HorizontalAlignment="Left" Margin="122,32,0,0" VerticalAlignment="Top"/>
-        <Label Content="City" HorizontalAlignment="Left" Margin="309,32,0,0" VerticalAlignment="Top"/>
-        <Label Content="Country" HorizontalAlignment="Left" Margin="206,32,0,0" VerticalAlignment="Top"/>
-        <Label Content="Type" HorizontalAlignment="Left" Margin="420,32,0,0" VerticalAlignment="Top"/>
-        <Label Content="No.of guests" HorizontalAlignment="Left" Margin="514,32,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.396"/>
-        <Label Content="No.of days" HorizontalAlignment="Left" Margin="623,32,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.58"/>
-        <DataGrid x:Name="dataGrid" Margin ="102,134,233,73"/>
-        <TextBox HorizontalAlignment="Left" Margin="100,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="85" Height="35" x:Name="input_name" />
-        <TextBox HorizontalAlignment="Left" Margin="206,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="60" Height="35" RenderTransformOrigin="0.147,0.03" x:Name="input_country"/>
-        <TextBox HorizontalAlignment="Left" Margin="383,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="112" Height="35" x:Name="input_type"/>
-        <TextBox HorizontalAlignment="Left" Margin="519,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="68" x:Name="input_guests" Height="35"/>
-        <TextBox HorizontalAlignment="Left" Margin="624,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="64" x:Name="input_days" Height="35"/>
-        <TextBox HorizontalAlignment="Left" Margin="284,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Height="35" x:Name="input_city"/>
-        <TextBlock HorizontalAlignment="Left" Margin="57,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="656" x:Name="debuger"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="122,99,0,0" VerticalAlignment="Top" Click="GetByName"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="218,98,0,0" VerticalAlignment="Top" Click="GetByCountry"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="304,99,0,0" VerticalAlignment="Top" Click="GetByCity"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="414,99,0,0" VerticalAlignment="Top" Click="GetByType"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="536,98,0,0" VerticalAlignment="Top" Click="GetByGuests"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="638,99,0,0" VerticalAlignment="Top" Click="GetByDays"/>
+        Title="GuestOneInterface" Height="900" Width="1600" WindowState="Maximized" Background="#f5f6fa">
+    <Grid Margin="10,-1,-10,1">
+        <DataGrid x:Name="dataGrid" Margin ="48,411,418,102" FontFamily="ubuntu" FontSize="22" Foreground="#FF192A56" BorderBrush="#FF192A56" Background="White" FontWeight="Bold"/>
+        <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" x:Name ="input_starting_date" Height="33" Width="170" Margin="1263,435,0,0" FontFamily="ubuntu" FontSize="22" Background="#FF192A56" RenderTransformOrigin="0.5,0.5" >
+            <DatePicker.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform X="0"/>
+                </TransformGroup>
+            </DatePicker.RenderTransform>
+        </DatePicker>
+        <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" x:Name ="input_ending_date"  Height="31" Width="170" Margin="1261,514,0,0" FontFamily="ubuntu" FontSize="22" Background="#FF192A56"/>
+        <Label Content="Starting date" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35"  Width="145" Margin="1275,402,0,0" FontFamily="Ubuntu" FontSize="22" />
+        <Label Content="Ending date" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="37" Width="143" Margin="1283,486,0,0" FontFamily="Ubuntu" FontSize="22"/>
+        <Button Content="Check for dates" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="174" Click="CheckForDates" Margin="1264,665,0,0" FontFamily="ubuntu" FontSize="20" Background="#FF273C75" Foreground="White"/>
+        <TextBox HorizontalAlignment="Left" Height="27" TextWrapping="Wrap" x:Name ="numberOfDays"  VerticalAlignment="Top" Width="154" Margin="1272,598,0,0" FontFamily="ubuntu" FontSize="22" />
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Days to stay" VerticalAlignment="Top"  Height="30" Width="128" Margin="1286,571,0,0" FontFamily="ubuntu" FontSize="22"/>
+        <TextBlock HorizontalAlignment="Left" Height="52" TextWrapping="Wrap" x:Name="warningText" VerticalAlignment="Top" Width="130" Margin="1514,802,0,0" FontFamily="ubuntu"/>
+        <Button Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ShowAccommodations" Margin="104,367,0,0" FontFamily="ubuntu"/>
+        <Button Content="bukinzi" Height="15" Width="68" Click="GoToBookings" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,365,0,0" RenderTransformOrigin="0.462,0.727" FontFamily="Ubuntu"/>
+        <GroupBox Height="221" Header="Search by"  Width="1475" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,139,0,0" FontFamily="ubuntu" FontSize="36" FontWeight="Bold" Foreground="#FF192A56" BorderThickness="5" BorderBrush="#192a56" Opacity="1" RenderTransformOrigin="0,0">
+            <GroupBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform X="0"/>
+                </TransformGroup>
+            </GroupBox.RenderTransform>
+        </GroupBox>
+        <Label Content="Welcome !" FontSize ="72" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,26,0,0" FontFamily="ubuntu" FontWeight="Bold" Foreground="#192a56"/>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="111,193,0,0" VerticalAlignment="Top" Width="73" FontFamily="ubuntu" FontSize="24"/>
+        <Label Content="City" HorizontalAlignment="Left" Margin="590,191,0,0" VerticalAlignment="Top" Width="60" FontFamily="ubuntu" FontSize="24"/>
+        <Label Content="Country" HorizontalAlignment="Left" Margin="338,189,0,0" VerticalAlignment="Top" Width="109" FontFamily="ubuntu" FontSize="24"/>
+        <Label Content="Type" HorizontalAlignment="Left" Margin="840,195,0,0" VerticalAlignment="Top" Width="74" FontFamily="ubuntu" FontSize="24"/>
+        <Label Content="No.of guests" HorizontalAlignment="Left" Margin="1065,197,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.396" Width="165" FontFamily="ubuntu" FontSize="24"/>
+        <Label Content="No.of days" HorizontalAlignment="Left" Margin="1306,197,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.58" Width="152" FontFamily="ubuntu" FontSize="24"/>
+        <TextBox HorizontalAlignment="Left" Margin="72,237,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="150" Height="45" x:Name="input_name" FontFamily="Ubuntu" />
+        <TextBox HorizontalAlignment="Left" Margin="310,239,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="150" Height="45" RenderTransformOrigin="0.147,0.03" x:Name="input_country" FontFamily="ubuntu"/>
+        <TextBox HorizontalAlignment="Left" Margin="800,237,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="150" Height="45" x:Name="input_type" FontFamily="ubuntu"/>
+        <TextBox HorizontalAlignment="Left" Margin="1069,237,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="150" Height="45" x:Name="input_guests" FontFamily="ubuntu"/>
+        <TextBox HorizontalAlignment="Left" Margin="1296,237,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="150" Height="45" x:Name="input_days" FontFamily="ubuntu"/>
+        <TextBox HorizontalAlignment="Left" Margin="545,237,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Height="45" x:Name="input_city" FontFamily="ubuntu"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="116,311,0,0" VerticalAlignment="Top" Click="GetByName" Width="68" BorderBrush="#FF080808" FontFamily="ubuntu"  Background="{x:Null}" FontSize="20"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="358,311,0,0" VerticalAlignment="Top" Click="GetByCountry" Width="68" FontFamily="ubuntu" FontSize="20"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="582,311,0,0" VerticalAlignment="Top" Click="GetByCity" Width="68" FontFamily="ubuntu" FontSize="20"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="846,311,0,0" VerticalAlignment="Top" Click="GetByType" Width="69" FontFamily="ubuntu" FontSize="20"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="1114,311,0,0" VerticalAlignment="Top" Click="GetByGuests" Width="68" FontFamily="ubuntu" FontSize="20"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="1340,311,0,0" VerticalAlignment="Top" Click="GetByDays" Width="68" FontFamily="ubuntu" FontSize="20"/>
+        <Rectangle x:Name="rectangle1" Fill="Black" Margin="-91,155,91,729" RenderTransformOrigin="0.5,0.5" >
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <GroupBox Header="Navigator" Margin="1031,1,26,687" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="5" BorderBrush="#192a56" >
+            <StackPanel>
+                <TextBlock Width="459"><Run Text="Press CTRL+N for program map" FontFamily="ubuntu"/></TextBlock>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="Help" Margin="34,-7,1153,691" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="5" BorderBrush="#192a56">
+            <StackPanel>
+                <TextBlock Height="39"><Run Text="Press CTRL+H for help"/></TextBlock>
+            </StackPanel>
+        </GroupBox>
+        <Rectangle HorizontalAlignment="Left" Height="82" Margin="-30,730,0,0" Fill ="#273c75" Stroke="Black" VerticalAlignment="Top" Width="1674"/>
+        <TextBlock HorizontalAlignment="Left" Height="72" Margin="609,730,0,0" TextWrapping="Wrap" Text="Trippin' Travel" VerticalAlignment="Top" Width="325" Foreground="white" FontSize="48" FontWeight="Bold" />
     </Grid>
 </Window>

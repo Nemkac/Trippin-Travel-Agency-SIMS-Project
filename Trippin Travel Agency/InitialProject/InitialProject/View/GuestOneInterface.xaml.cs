@@ -205,6 +205,7 @@ namespace InitialProject.View
         private void GoToBookings(object sender, RoutedEventArgs e)
         {
             FutureBookingsInterface futureBookingsInterface = new FutureBookingsInterface();
+            this.Close();
             futureBookingsInterface.Show();
         }
     }

@@ -22,6 +22,13 @@ namespace InitialProject.Service
             return bookingDto;
         }
 
+        public void Delete(Booking booking)
+        {
+            DataBaseContext context = new DataBaseContext();
+            context.Remove(booking);
+            context.SaveChanges();
+        }
+
         public Booking GetById(int bookingId)
         {
             DataBaseContext guestIdContext = new DataBaseContext();
