@@ -147,8 +147,9 @@
                 <!-- KeyPoints GroupBox -->
                 <GroupBox Header="Key Points"
                           Style="{StaticResource labelGroupBox}"
-                          Margin="0,20,0,500"
-                          Height="Auto">
+                          Margin="0,20,0,0"
+                          Height="Auto"
+                          Padding="0,0,0,20">
                     <StackPanel Orientation="Vertical"
                                 x:Name="containerKeyPoints">
                         <!-- Starting and ending point -->
@@ -193,7 +194,19 @@
                         </RadioButton>
                     </StackPanel>
                 </GroupBox>
-                    
+
+                <!-- Date picker -->
+                <StackPanel Orientation="Vertical"
+                            Margin="0,20,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Date"
+                               Style="{StaticResource labelAboveTextBox}"
+                               />
+                    </StackPanel>
+                    <Calendar HorizontalAlignment="Stretch"/>
+                </StackPanel>
+
+
             </StackPanel>
         </ScrollViewer>
         <ContentControl Content="{Binding CurrentChildView}" Grid.RowSpan="3" Grid.ColumnSpan="3"/>

@@ -30,6 +30,8 @@ namespace InitialProject.View
         List<TextBox> dynamicImageLinksTextBoxes = new List<TextBox>();
 
         private int checkpointCounter = 1;
+        private StackPanel lastCreatedStackPanel;
+
         private void addKeyPoint_IfChecked(object sender, RoutedEventArgs e)
         {
             Label newLabel = CreateNewLabelForKeyPoint();
@@ -39,15 +41,29 @@ namespace InitialProject.View
             // Add the textbox to the list of dynamic textboxes
             dynamicTextBoxes.Add(newTextBox);
 
-            // Add the new StackPanel below the button
+            // Remove the previous StackPanel
+            RemovePreviousStackPanel();
+
+            // Add the new StackPanel in the same place
             containerKeyPoints.Children.Insert(containerKeyPoints.Children.IndexOf(addCheckpointButton) + 1, newStackPanel);
 
+            // Store the last created StackPanel
+            lastCreatedStackPanel = newStackPanel;
+
             // Update the Margin of the new StackPanel to align it with the button
-            Thickness buttonMargin = addCheckpointButton.Margin;
-            newStackPanel.Margin = new Thickness(buttonMargin.Left, 10, 0, 0);
+            newStackPanel.Margin = new Thickness(15, 10, 0, 0);
 
             checkpointCounter++;
             ResetRadioButton(sender);
+        }
+
+        private void RemovePreviousStackPanel()
+        {
+            if (lastCreatedStackPanel != null)
+            {
+                containerKeyPoints.Children.Remove(lastCreatedStackPanel);
+                lastCreatedStackPanel = null;
+            }
         }
 
         private static void ResetRadioButton(object sender)
@@ -64,6 +80,7 @@ namespace InitialProject.View
             StackPanel newStackPanel = new StackPanel();
             newStackPanel.Orientation = Orientation.Horizontal;
             newStackPanel.Children.Add(newLabel);
+            newTextBox.Margin = new Thickness(20, 0, 0, 0);
             newStackPanel.Children.Add(newTextBox);
             return newStackPanel;
         }
@@ -71,16 +88,15 @@ namespace InitialProject.View
         private TextBox CreateNewTextBoxForKeyPoint()
         {
             TextBox newTextBox = new TextBox();
-            newTextBox.Width = addCheckpointButton.ActualWidth / 2 - 10;
+            newTextBox.Width = 170;
             return newTextBox;
         }
 
         private Label CreateNewLabelForKeyPoint()
         {
-            // Create new Label
             Label newLabel = new Label();
             newLabel.Content = "Checkpoint " + checkpointCounter.ToString();
-            newLabel.Width = addCheckpointButton.ActualWidth / 2 - 10;
+            newLabel.MinWidth = addCheckpointButton.ActualWidth / 2 - 10;
             return newLabel;
         }
 
