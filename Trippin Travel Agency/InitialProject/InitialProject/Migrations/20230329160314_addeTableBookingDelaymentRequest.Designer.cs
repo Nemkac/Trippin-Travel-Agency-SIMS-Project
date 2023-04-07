@@ -3,6 +3,7 @@ using System;
 using InitialProject.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,49 +11,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230329160314_addeTableBookingDelaymentRequest")]
+    partial class addeTableBookingDelaymentRequest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.3");
-
-            modelBuilder.Entity("InitialProject.DTO.RequestDTO", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("accommodationId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("bookingId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("guestName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("newArrival")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("newDeparture")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("oldArrival")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("oldDeparture")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("possible")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("id");
-
-                    b.ToTable("SelectedRequestTransfers");
-                });
 
             modelBuilder.Entity("InitialProject.Model.Accommodation", b =>
                 {

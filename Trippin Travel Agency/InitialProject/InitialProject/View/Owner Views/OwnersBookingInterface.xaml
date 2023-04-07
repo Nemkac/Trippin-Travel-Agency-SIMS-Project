@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.View"
+             xmlns:viewModel="clr-namespace:InitialProject.View.Owner_Views"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="580">
     <Grid>
@@ -12,7 +13,7 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Rate Guest" Background="#4CD137" BorderThickness="0.7" Click="RateGuest"/>
+                            <Button Content="Rate Guest" Foreground="#F4fff8" Background="#4CD137" FontFamily="Ubuntu" BorderBrush="Transparent" Click="RateGuest"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
