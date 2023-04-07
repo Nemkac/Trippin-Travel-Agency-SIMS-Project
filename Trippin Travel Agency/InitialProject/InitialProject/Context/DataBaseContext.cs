@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using InitialProject.Model;
+using InitialProject.DTO;
 
 namespace InitialProject.Context
 {
@@ -16,6 +17,9 @@ namespace InitialProject.Context
         public DbSet<GuestRate> GuestRate { get; set; }
         public DbSet<TourReservation> TourReservations { get; set; }
         public DbSet<BookingDelaymentRequest> BookingDelaymentRequests { get; set; }
+        public DbSet<RequestDTO> SelectedRequestTransfers { get; set; }
+
+        public DbSet<AccommodationRate> AccommodationRates { get; set; }    
 
         // Apsolute paths for every memeber of the team
 
@@ -29,10 +33,10 @@ namespace InitialProject.Context
         // public string path = @"C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
 
         // Nemanja Todorovic
-        // public string path = @"C:\Users\Nemanja\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
+        public string path = @"C:\Users\Nemanja\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
 
         // Vladimir Blanusa lap
-        public string path = @"C:\Users\abc\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
+        // public string path = @"C:\Users\abc\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
 
         // Vladimir BLanusa pc
         // public string path = @"C:\Users\vlada\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";

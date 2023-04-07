@@ -105,6 +105,30 @@ namespace InitialProject.Migrations
                     b.ToTable("AccommodationLocation");
                 });
 
+            modelBuilder.Entity("InitialProject.Model.AccommodationRate", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("bookingId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("cleanness")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("comment")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ownerRate")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("AccommodationRates");
+                });
+
             modelBuilder.Entity("InitialProject.Model.Booking", b =>
                 {
                     b.Property<int>("Id")

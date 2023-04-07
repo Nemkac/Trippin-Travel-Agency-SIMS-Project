@@ -11,14 +11,51 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20230329144533_TableRenameAccommodationLocation")]
-    partial class TableRenameAccommodationLocation
+    [Migration("20230407220723_Cp2MigrationMerge")]
+    partial class Cp2MigrationMerge
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.3");
+
+            modelBuilder.Entity("InitialProject.DTO.RequestDTO", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("accommodationId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("bookingId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("guestName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("newArrival")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("newDeparture")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("oldArrival")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("oldDeparture")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("possible")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("id");
+
+                    b.ToTable("SelectedRequestTransfers");
+                });
 
             modelBuilder.Entity("InitialProject.Model.Accommodation", b =>
                 {
@@ -97,6 +134,33 @@ namespace InitialProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Bookings");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.BookingDelaymentRequest", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("bookingId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("comment")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("newArrival")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("newDeparture")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("status")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("BookingDelaymentRequests");
                 });
 
             modelBuilder.Entity("InitialProject.Model.GuestRate", b =>

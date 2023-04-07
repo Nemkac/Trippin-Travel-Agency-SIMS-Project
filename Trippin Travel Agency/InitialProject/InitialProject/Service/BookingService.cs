@@ -36,7 +36,7 @@ namespace InitialProject.Service
             context.SaveChanges();
         }
 
-        public Booking GetById(int bookingId)
+        /*public Booking GetById(int bookingId)
         {
             DataBaseContext guestIdContext = new DataBaseContext();
             List<Booking> bookings = guestIdContext.Bookings.ToList();
@@ -49,7 +49,7 @@ namespace InitialProject.Service
                 }
             }
             return null;
-        }
+        }*/
         
         public RequestDTO CreateRequestDTO(BookingDelaymentRequest bookingDelaymentRequest)
         {
