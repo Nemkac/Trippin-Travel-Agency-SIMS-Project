@@ -29,6 +29,10 @@
         <DataTemplate DataType="{x:Type viewModel:TourConfirmationViewModel}">
             <local:TourConfirmationView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:JoinLiveTourViewModel}">
+            <local:JoinLiveTourView/>
+        </DataTemplate>
         
     </Window.Resources>
     
@@ -56,7 +60,7 @@
         
         <StackPanel Grid.Row="1" Orientation="Horizontal" Background="#273c75" Grid.Column="1">
             <Button x:Name="TourView" Content="Tour View" Style="{StaticResource menuButtonWEB}" Command="{Binding ShowTourViewCommand}"/>
-            <Button x:Name="LiveTour" Content="Live Tour" Style="{StaticResource menuButtonWEB}"/>
+            <Button x:Name="LiveTour" Content="Live Tour" Style="{StaticResource menuButtonWEB}" Command="{Binding ShowLiveTour}"/>
             <Button x:Name="CreateYourOwnTour" Content="Create Your Own Tour" Style="{StaticResource menuButtonWEB}" Width="250"/>
             <Button x:Name="MyRequests" Content="My Requests" Style="{StaticResource menuButtonWEB}"/>
             <Button x:Name="Coupons" Content="Coupons" Style="{StaticResource menuButtonWEB}" Command="{Binding ShowGuestTwoCoupons}"/>

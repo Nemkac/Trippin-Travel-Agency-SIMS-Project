@@ -36,13 +36,13 @@
         </GroupBox>
       
         <StackPanel Orientation="Horizontal" Margin="0 40 0 0" Grid.Column="1" Height="750">
-            <Button Width="250" Margin="25 -600 0 0" FontFamily="Ubuntu" FontSize="28" Height="120" Style="{StaticResource addButtonWEB}" Click="FinishBooking">
+            <Button Width="250" Margin="25 -600 0 0" FontFamily="Ubuntu" FontSize="28" Height="120" Style="{StaticResource addButtonWEB}" Click="FinishBooking" Name ="FinishBookingButton" Command="{Binding ShowTourViewCommand}">
                 <TextBlock Text="Finish booking" TextWrapping="Wrap" TextAlignment="Center"/>
             </Button>
             <Button Width="250" Margin="-250 -300 0 0" FontFamily="Ubuntu" FontSize="28" Height="120" Style="{StaticResource saveButtonWEB}">
                 <TextBlock Text="Generate booking confirmation" TextWrapping="Wrap" TextAlignment="Center"/>
             </Button>
-            <Button Width="250" Margin="-250 150 0 0" FontFamily="Ubuntu" FontSize="28" Height="120" Content="Cancel Booking"  Style="{StaticResource cancelButtonWEB}" Click="CancelBooking"/>
+            <Button Width="250" Margin="-250 150 0 0" FontFamily="Ubuntu" FontSize="28" Height="120" Content="Cancel Booking"  Style="{StaticResource cancelButtonWEB}" Click="CancelBooking" Name="CancelBookingButton"/>
         </StackPanel>
 
         <GroupBox Header="My Coupons" Grid.Column="2" FontFamily="Ubuntu" FontSize="40" FontWeight="Heavy">

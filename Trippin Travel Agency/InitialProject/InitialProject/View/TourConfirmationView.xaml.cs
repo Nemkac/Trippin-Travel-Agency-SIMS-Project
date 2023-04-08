@@ -32,22 +32,9 @@ namespace InitialProject.View
 
         public void WindowLoaded(object sender, RoutedEventArgs e) 
         {
+
+            ShowCoupons();
             DataBaseContext context = new DataBaseContext();
-            List<Coupon> coupons = context.Coupons.ToList();
-
-            List<CouponDTO> dataList = new List<CouponDTO>();
-            int counter = 0;
-            foreach (Coupon coup in coupons)
-            {
-                if (coup.userId == LoggedUser.id)
-                {
-                    counter += 1;
-                    dataList.Add(new CouponDTO(coup.id, "Coupon" + counter, coup.exiresOn));
-                }
-            }
-            this.CouponsDataGrid.ItemsSource = dataList;
-
-
             TourBookingTransfer tourBookingTransfer = context.tourBookingTransfers.First();
             this.TourNameLabel.Content = tourBookingTransfer.name;
             this.CityLabel.Content = tourBookingTransfer.cityLocation;
@@ -76,6 +63,27 @@ namespace InitialProject.View
 
             context.tourBookingTransfers.Remove(tourBookingTransfer);
             context.SaveChanges();
+            ShowCoupons();
+            this.CancelBookingButton.IsEnabled = false;
+            this.FinishBookingButton.IsEnabled = false;
+
+        }
+        public void ShowCoupons() {
+
+            DataBaseContext context = new DataBaseContext();
+            List<Coupon> coupons = context.Coupons.ToList();
+
+            List<CouponDTO> dataList = new List<CouponDTO>();
+            int counter = 0;
+            foreach (Coupon coup in coupons)
+            {
+                if (coup.userId == LoggedUser.id)
+                {
+                    counter += 1;
+                    dataList.Add(new CouponDTO(coup.id, "Coupon" + counter, coup.exiresOn));
+                }
+            }
+            this.CouponsDataGrid.ItemsSource = dataList;
         }
 
         private void CancelBooking(object sender, RoutedEventArgs e)
@@ -84,6 +92,9 @@ namespace InitialProject.View
             TourBookingTransfer tourBookingTransfer = context.tourBookingTransfers.First();
             context.tourBookingTransfers.Remove(tourBookingTransfer);
             context.SaveChanges();
+            this.FinishBookingButton.IsEnabled = false;
+            this.CancelBookingButton.IsEnabled = false;
+
         }
     }
 }

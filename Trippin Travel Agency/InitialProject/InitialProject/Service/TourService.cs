@@ -59,7 +59,7 @@ namespace InitialProject.Service
             return tourDTO;
         }
 
-        private static string GetKeyPointNames(Tour tour, DataBaseContext dataBaseContext)
+        public string GetKeyPointNames(Tour tour, DataBaseContext dataBaseContext)
         {
             string keyPoints = "";
             foreach (KeyPoint keyPoint in dataBaseContext.KeyPoints.ToList())
@@ -71,6 +71,17 @@ namespace InitialProject.Service
                 
             }
             keyPoints = keyPoints.Remove(keyPoints.Length - 3); 
+            return keyPoints;
+        }
+
+        public List<KeyPoint> GetKeyPoints(int tourId, DataBaseContext dataBaseContext)
+        {
+            List<KeyPoint> keyPoints = new List<KeyPoint>();
+            foreach (KeyPoint keyPoint in dataBaseContext.KeyPoints.ToList()) {
+                if (keyPoint.tourId == tourId) { 
+                    keyPoints.Add(keyPoint);
+                }
+            }
             return keyPoints;
         }
 
@@ -223,6 +234,19 @@ namespace InitialProject.Service
             if (tour.touristLimit == 0) return -1; // Tour filled
             if (tour.touristLimit < numberOfTourists) return 1; // Too many guests for selected tour
             return 0; // Tour registered
+        }
+
+        public Tour GetByID(int tourId) { 
+            
+            using DataBaseContext dataBase = new DataBaseContext();
+
+            foreach (Tour tour in dataBase.Tours.ToList()) { 
+                if(tour.id == tourId) {
+                    return tour;
+                }            
+            }
+
+            return null;
         }
 
     }

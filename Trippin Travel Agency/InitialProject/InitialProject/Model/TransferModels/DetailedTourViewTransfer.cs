@@ -17,8 +17,7 @@ namespace InitialProject.Model.TransferModels
         public int tourId { get; set; }
 
         public DetailedTourViewTransfer(int tourId)
-        {
-            
+        {            
             this.tourId = tourId;
         }
     }
