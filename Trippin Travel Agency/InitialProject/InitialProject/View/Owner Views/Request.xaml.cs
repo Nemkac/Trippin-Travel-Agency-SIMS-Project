@@ -30,8 +30,8 @@ namespace InitialProject.View.Owner_Views
         public Request()
         {
             InitializeComponent();
-            List<RequestDTO> dataGridData = ShowRequests();
-            requestsDataGrid.ItemsSource = dataGridData;
+            List<RequestDTO> requestDataGridData = ShowRequests();
+            requestsDataGrid.ItemsSource = requestDataGridData;
         }
 
         private List<RequestDTO> ShowRequests()

@@ -16,8 +16,6 @@ namespace InitialProject.ViewModels
         public ViewModelCommand ShowAcceptDenyViewCommand { get; private set; }
         private readonly OwnerInterfaceViewModel _mainViewModel;
 
-        private RequestViewModel() {}
-
         public RequestViewModel(OwnerInterfaceViewModel mainViewModel)
         {
             _mainViewModel = mainViewModel;

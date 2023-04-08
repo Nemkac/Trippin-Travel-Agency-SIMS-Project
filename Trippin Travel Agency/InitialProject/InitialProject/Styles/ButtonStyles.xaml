@@ -31,12 +31,53 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="headerButton" TargetType="RadioButton">
+        <!--Normal button style-->
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="#f4fff8"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border Background="{TemplateBinding Background}" BorderThickness="4, 0, 0, 0" BorderBrush="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!--Mouse over style-->
+        <Style.Triggers>
+            <!--Active button style-->
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="#e1b12c"/>
+                <Setter Property="BorderBrush" Value="#e1b12c"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <!--Menu button icon-->
     <Style x:Key="menuButtonIcon" TargetType="fa:IconImage">
         <Setter Property="Foreground" Value="#FEFEFF"/>
         <Setter Property="Width" Value="19"/>
         <Setter Property="Height" Value="19"/>
         <Setter Property="Margin" Value="35, 0, 20, 0"/>
+    </Style>
+
+    <!--Header button icon-->
+    <Style x:Key="HeaderButtonIcon" TargetType="fa:IconImage">
+        <Setter Property="Foreground" Value="#192a56"/>
+        <Setter Property="Width" Value="25"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=RadioButton}}" Value="True">
+                <Setter Property="Foreground" Value="#fbc531"/>
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
 
     <!--Menu button text-->
@@ -140,6 +181,7 @@
         <Setter Property="FontFamily" Value="Ubuntu"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Foreground" Value="#192a56"/>
     </Style>
 
     <Style x:Key="mobileCreateTourButton" TargetType="RadioButton">

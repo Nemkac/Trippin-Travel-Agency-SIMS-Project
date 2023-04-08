@@ -12,7 +12,7 @@ namespace InitialProject.Model
         public int cleanness { get; set; }
         public int respectingRules { get; set; }
         public string comment { get; set; }
-        public int overallRating { get; set; }  
+        public float overallRating { get; set; }  
         public int userId { get; set; }
         public int bookingId { get; set; }
 

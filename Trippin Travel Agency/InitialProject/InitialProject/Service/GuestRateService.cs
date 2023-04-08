@@ -33,5 +33,33 @@ namespace InitialProject.Service
 
             return false;
         }
+
+        //Ovo ide u AccommodationRateService
+        public void FormDisplayableRates(List<AccommodationRate> accommodationRates, List<GuestRate> guestRates, List<AccommodationRate> ratesForDisplay)
+        {
+            foreach (GuestRate guestRate in guestRates.ToList())
+            {
+                foreach (AccommodationRate accommodationRate in accommodationRates.ToList())
+                {
+                    if (accommodationRate.bookingId == guestRate.bookingId)
+                    {
+                        ratesForDisplay.Add(accommodationRate);
+                    }
+                }
+            }
+        }
+
+        public decimal CalculateTotalRating(List<AccommodationRate> availableRates)
+        {
+            int ratesSum = 0;
+            int numOfRates = availableRates.Count;
+            foreach (AccommodationRate item in availableRates)
+            {
+                ratesSum = ratesSum + item.cleanness + item.ownerRate;
+            }
+
+            decimal totalRating = Math.Round((decimal)ratesSum / numOfRates, 2);
+            return totalRating;
+        }
     }
 }

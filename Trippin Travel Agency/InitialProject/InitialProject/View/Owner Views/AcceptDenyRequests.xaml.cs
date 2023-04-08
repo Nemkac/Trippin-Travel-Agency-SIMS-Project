@@ -76,6 +76,7 @@ namespace InitialProject.View.Owner_Views
             AcceptFeedBack.Text = "Request accepted!";
             acceptContext.SelectedRequestTransfers.Remove(acceptContext.SelectedRequestTransfers.First());
             acceptContext.SaveChanges();
+            ClearInput();
         }
 
         private static void RemoveRequest(List<RequestDTO> selectedRequest, DataBaseContext requestContext, List<BookingDelaymentRequest> bookingDelaymentRequests)
@@ -115,6 +116,22 @@ namespace InitialProject.View.Owner_Views
             DenyFeedback.Text = "Request denied!";
             acceptContext.SelectedRequestTransfers.Remove(acceptContext.SelectedRequestTransfers.First());
             acceptContext.SaveChanges();
+            ClearInput();
+            Button button = sender as Button;
+            button.IsEnabled = false;
+        }
+
+        private void ClearInput()
+        {
+            NewArrivalTextBlock.Text = string.Empty;
+            NewDepartureTextBlock.Text = string.Empty;
+            OldArrivalTextBlock.Text = string.Empty;
+            OldDepartureTextBlock.Text = string.Empty;
+            AccommodationNameTextBlock.Text = string.Empty;
+            LocationTextBlock.Text = string.Empty;
+            AccommodationTypeTextBlock.Text = string.Empty;
+            GuestTextBlock.Text = string.Empty;
+            BookingIdTextBlock.Text = string.Empty;
         }
     }
 }
