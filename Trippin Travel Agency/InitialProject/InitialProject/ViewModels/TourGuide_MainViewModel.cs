@@ -1,5 +1,6 @@
 ﻿using InitialProject.View;
 using System;
+using System.Windows;
 using System.Windows.Input;
 
 namespace InitialProject.ViewModels
@@ -26,6 +27,7 @@ namespace InitialProject.ViewModels
         public ICommand ShowTourGuideToursViewCommand { get; }
         public ICommand ShowTourGuideCreateTourViewCommand { get; }
         public ICommand ShowTourGuideToursTodayViewCommand { get; }
+        public ICommand ShowTourGuideTourLiveViewCommand { get; }
 
         public TourGuide_MainViewModel()
         {
@@ -33,6 +35,7 @@ namespace InitialProject.ViewModels
             ShowTourGuideToursViewCommand = new ViewModelCommand(ExecuteShowTourGuideToursViewCommand);
             ShowTourGuideCreateTourViewCommand = new ViewModelCommand(ExecuteShowTourGuideCreateTourViewCommand);
             ShowTourGuideToursTodayViewCommand = new ViewModelCommand(ExecuteShowTourGuideToursTodayViewCommand);
+            ShowTourGuideTourLiveViewCommand = new ViewModelCommand(ExecuteShowTourGuideTourLiveViewCommand);
             ExecuteShowTourGuideDashboardViewCommand(null);
         }
 
@@ -40,12 +43,10 @@ namespace InitialProject.ViewModels
         {
             CurrentChildView = new TourGuide_DashboardViewModel();
         }
-
         public void ExecuteShowTourGuideToursViewCommand(object obj)
         {
             CurrentChildView = new TourGuide_ToursViewModel(this);
         }
-
         public void ExecuteShowTourGuideCreateTourViewCommand(object obj)
         {
             CurrentChildView = new TourGuide_CreateTourViewModel(this);
@@ -53,6 +54,10 @@ namespace InitialProject.ViewModels
         public void ExecuteShowTourGuideToursTodayViewCommand(object obj)
         {
             CurrentChildView = new TourGuide_ToursTodayViewModel(this);
+        }
+        public void ExecuteShowTourGuideTourLiveViewCommand(object obj)
+        {
+            CurrentChildView = new TourGuide_TourLiveViewModel(this);
         }
     }
 }

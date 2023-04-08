@@ -141,6 +141,15 @@
         <Setter Property="VerticalAlignment" Value="Top"/>
     </Style>
 
+    <!-- Mobile header main textblock -->
+    <Style x:Key="headerTextBlock" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Ubuntu Bold"/>
+        <Setter Property="Foreground" Value="#273c75"/>
+        <Setter Property="FontSize" Value="30pt"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
+
     <!--Menu button text-->
     <Style x:Key="menuButtonText" TargetType="TextBlock">
         <Setter Property="Foreground" Value="#FEFEFF" />

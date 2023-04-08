@@ -20,16 +20,16 @@ namespace InitialProject.View
 {
     public partial class TourGuide_ToursToday : UserControl
     {
-        private readonly TourGuide_ToursTodayViewModel _viewModel;
+        //private readonly TourGuide_ToursTodayViewModel _viewModel;
 
         public TourGuide_ToursToday()
         {
             InitializeComponent();
 
             // Instantiate TourGuide_MainViewModel
-            TourGuide_MainViewModel mainViewModel = new TourGuide_MainViewModel();
+            // TourGuide_MainViewModel mainViewModel = new TourGuide_MainViewModel();
 
-            DataContext = _viewModel = new TourGuide_ToursTodayViewModel(mainViewModel);
+            //DataContext = _viewModel = new TourGuide_ToursTodayViewModel(mainViewModel);
 
             TourService tourService = new TourService();
             List<Tour> toursToday = tourService.GetToursToday();
@@ -45,12 +45,11 @@ namespace InitialProject.View
 
             tourDataGrid.ItemsSource = tourData;
 
-            tourDataGrid.SelectionChanged += TourDataGrid_SelectionChanged;
+            //tourDataGrid.SelectionChanged += TourDataGrid_SelectionChanged;
         }
 
-        private void TourDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        /*private void TourDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Get the selected tour from the DataGrid
             dynamic selectedTour = tourDataGrid.SelectedItem;
             if (selectedTour != null)
             {
@@ -58,8 +57,8 @@ namespace InitialProject.View
                 Tour selectedTourObject = new Tour { id = selectedTourId, name = selectedTour.name };
                 DataBaseContext dbContext = new DataBaseContext();
                 Tour tour = dbContext.Tours.FirstOrDefault(t => t.id == selectedTourId);
-                _viewModel.SelectedTourName = selectedTour.name; // Update SelectedTourName property
+                _viewModel.SelectedTourName = selectedTour.name;
             }
-        }
+        }*/
     }
 }

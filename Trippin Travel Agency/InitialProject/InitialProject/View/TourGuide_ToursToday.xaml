@@ -12,11 +12,7 @@
              d:DesignHeight="750"
              d:DesignWidth="430"
              x:Name="toursTodayControl">
-    
-    <UserControl.DataContext>
-        <vm:TourGuide_ToursTodayViewModel/>
-    </UserControl.DataContext>
-    
+
     <Grid Background="White">
         <Grid.RowDefinitions>
             <!-- Margin -->
@@ -40,7 +36,7 @@
                      VerticalAlignment="Center"
                      HorizontalAlignment="Left"
                      IsChecked="False"
-                     Command="{Binding ShowToursCommand}"
+                     Command="{Binding ShowToursCommands}"
                      Width="Auto"
                      Height="Auto"
                      >
@@ -137,6 +133,8 @@
                     Style="{StaticResource acceptButton}"
                     Width="150"
                     DockPanel.Dock="Left"
+                    x:Name="startTourLiveButton"
+                    Command="{Binding ShowTourLiveCommand}"
                     />
 
                     <Button Content="Show images"

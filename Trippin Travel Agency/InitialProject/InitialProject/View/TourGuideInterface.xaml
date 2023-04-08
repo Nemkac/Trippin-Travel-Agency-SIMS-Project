@@ -20,6 +20,7 @@
     </Window.DataContext>
     
     <Window.Resources>
+        
         <DataTemplate DataType="{x:Type viewModel:TourGuide_DashboardViewModel}">
             <local:TourGuide_Dashboard/>
         </DataTemplate>
@@ -35,6 +36,11 @@
         <DataTemplate DataType="{x:Type viewModel:TourGuide_ToursTodayViewModel}">
             <local:TourGuide_ToursToday/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:TourGuide_TourLiveViewModel}">
+            <local:TourGuide_TourLive/>
+        </DataTemplate>
+        
     </Window.Resources>
     
     <Grid>
