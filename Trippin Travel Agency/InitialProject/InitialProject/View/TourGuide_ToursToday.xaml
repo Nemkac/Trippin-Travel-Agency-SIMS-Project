@@ -84,6 +84,7 @@
                           AutoGenerateColumns="False"
                           Width="330"
                           BorderThickness="0"
+                          SelectedValue="{Binding SelectedTour, Mode=TwoWay}"
                           >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Id" Binding="{Binding id}" Width="*"/>
@@ -130,12 +131,15 @@
                 <!-- Buttons -->
                 <DockPanel>
                     <Button Content="Start tour"
-                    Style="{StaticResource acceptButton}"
-                    Width="150"
-                    DockPanel.Dock="Left"
-                    x:Name="startTourLiveButton"
-                    Command="{Binding ShowTourLiveCommand}"
-                    />
+                        Style="{StaticResource acceptButton}"
+                        Width="150"
+                        DockPanel.Dock="Left"
+                        x:Name="startTourLiveButton"
+                        Command="{Binding ShowTourLiveCommand}"
+                        CommandParameter="{Binding SelectedTour.id}"
+                      />  
+
+
 
                     <Button Content="Show images"
                     Style="{StaticResource showImagesButton}"

@@ -26,6 +26,7 @@ namespace InitialProject.View
         {
             InitializeComponent();
 
+
             // Instantiate TourGuide_MainViewModel
             // TourGuide_MainViewModel mainViewModel = new TourGuide_MainViewModel();
 

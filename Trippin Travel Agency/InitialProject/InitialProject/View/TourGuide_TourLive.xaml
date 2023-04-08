@@ -49,7 +49,7 @@
                 </StackPanel>
 
             </RadioButton>
-            <TextBlock     Text="Cacak Expresssssssssss"
+            <TextBlock     Text="{Binding SelectedTour.name}"
                            TextTrimming="CharacterEllipsis"
                            MaxWidth="270"
                            Style="{StaticResource headerTextBlock}"

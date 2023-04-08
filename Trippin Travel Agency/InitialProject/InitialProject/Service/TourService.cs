@@ -231,6 +231,11 @@ namespace InitialProject.Service
             dataBase.SaveChanges();
             return 0; // Tour registered
         }
+        public Tour GetById(int id)
+        {
+            using DataBaseContext dbContext = new DataBaseContext();
+            return dbContext.Tours.SingleOrDefault(t => t.id == id);
+        }
 
     }
 }

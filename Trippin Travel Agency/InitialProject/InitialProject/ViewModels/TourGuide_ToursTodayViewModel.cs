@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InitialProject.Model;
+using InitialProject.Service;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,22 +12,24 @@ namespace InitialProject.ViewModels
 {
     public class TourGuide_ToursTodayViewModel : ViewModelBase
     {
-        /*private string ?_selectedTourName { get; set;  }
 
-        public string SelectedTourName
+        private object _selectedTour;
+        public object SelectedTour
         {
-            get { return _selectedTourName; }
+            get { return _selectedTour; }
             set
             {
-                _selectedTourName = value;
-                OnPropertyChanged(nameof(SelectedTourName));
+                _selectedTour = value;
+                OnPropertyChanged(nameof(SelectedTour));
+                MessageBox.Show(SelectedTour.ToString());
             }
-        }*/
+        }
 
         public ViewModelCommand ShowToursCommands { get; private set; }
         public ViewModelCommand ShowTourLiveCommand { get; private set; }
 
         private readonly TourGuide_MainViewModel _mainViewModel;
+        private readonly TourService tourService; 
 
         public TourGuide_ToursTodayViewModel(TourGuide_MainViewModel mainViewModel)
         {
@@ -41,10 +45,26 @@ namespace InitialProject.ViewModels
             _mainViewModel.ExecuteShowTourGuideToursViewCommand(null);
             
         }
-        public void ShowTourLive(object obj)
+        public void ShowTourLive(object tourid)
         {
-            _mainViewModel.ExecuteShowTourGuideTourLiveViewCommand(null);
+            if (tourid != null)
+            {
+                _mainViewModel.ExecuteShowTourGuideTourLiveViewCommand((int)tourid);
+            }
+            else
+            {
+                MessageBox.Show("There is no selected tour.");
+            }
         }
+
+
+
+
+
+
+
+
+
     }
 
 }

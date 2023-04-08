@@ -1,4 +1,5 @@
-﻿using InitialProject.View;
+﻿using InitialProject.Model;
+using InitialProject.View;
 using System;
 using System.Windows;
 using System.Windows.Input;
@@ -55,9 +56,13 @@ namespace InitialProject.ViewModels
         {
             CurrentChildView = new TourGuide_ToursTodayViewModel(this);
         }
-        public void ExecuteShowTourGuideTourLiveViewCommand(object obj)
+        public void ExecuteShowTourGuideTourLiveViewCommand(object tourid)
         {
-            CurrentChildView = new TourGuide_TourLiveViewModel(this);
+            int tourId = (int)tourid;
+            MessageBox.Show(tourId.ToString());
+            CurrentChildView = new TourGuide_TourLiveViewModel(this, tourId);
         }
+
+
     }
 }
