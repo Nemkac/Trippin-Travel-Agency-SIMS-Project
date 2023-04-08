@@ -53,6 +53,13 @@ namespace InitialProject.View
             {
                 accommodationsDTO.Add(new AccommodationDTO(accommodation,accommodationService.GetAccommodationLocation(accommodation.id)));
             }
+            input_name.Clear();
+            input_country.Clear();
+            input_city.Clear();
+            input_type.Clear();
+            input_guests.Clear();
+            input_days.Clear();
+
             this.dataGrid.ItemsSource = accommodationsDTO;
         }
 
