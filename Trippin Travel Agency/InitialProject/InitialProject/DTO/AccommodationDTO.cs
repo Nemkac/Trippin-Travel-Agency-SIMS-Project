@@ -15,7 +15,7 @@ namespace InitialProject.DTO
         House,
         Hut
     }
-    class AccommodationDTO
+    public class AccommodationDTO
     {
         public int id { get; set; }
         public string name{ get; set; }

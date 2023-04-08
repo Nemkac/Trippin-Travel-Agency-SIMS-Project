@@ -1,14 +1,29 @@
 ﻿using InitialProject.Context;
+using InitialProject.DTO;
 using InitialProject.Model;
+using InitialProject.View;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+
 namespace InitialProject.Service
 
 {
     public class AccommodationService
     {
+        public List<Accommodation> ConvertDtoToInitial(List<AccommodationDTO> accommodationDTOs)
+        {
+            List<Accommodation> accommodations = new List<Accommodation>();
+            foreach(AccommodationDTO dto in accommodationDTOs)
+            {
+                accommodations.Add(GetById(dto.id));
+            }
+            return accommodations;
+        }
+
         public Accommodation GetById(int id)
         {
             DataBaseContext context = new DataBaseContext();
@@ -28,9 +43,10 @@ namespace InitialProject.Service
         public List<int> GetAllByName(string name)
         {
             DataBaseContext context = new DataBaseContext();
-            List<Accommodation> accommodations = context.Accommodations.ToList();
+            GuestOneInterface guestOneInterface = new GuestOneInterface();
             List<int> filtered = new List<int>();
-            foreach (Accommodation accommodation in accommodations.ToList())
+            List<Accommodation> accommodations = context.Accommodations.ToList();
+            foreach (Accommodation accommodation in accommodations)
             {
                 string nameToUpper = accommodation.name.ToUpper();
                 if (nameToUpper.Contains(name.ToUpper()))
@@ -45,16 +61,16 @@ namespace InitialProject.Service
         {
             DataBaseContext context = new DataBaseContext();
             List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
-            List<Accommodation> accommodations = context.Accommodations.ToList();
             List<int> filtered = new List<int>();
-            foreach (Accommodation accommodation in accommodations.ToList())
+            List<Accommodation> accommodations = context.Accommodations.ToList();
+            foreach (Accommodation accommodation in accommodations)
             {
-
-                if ((accommodation.location.country.ToUpper()).Contains(country.ToUpper()))
+                if (GetAccommodationLocation(accommodation.id)[0].ToUpper().Contains(country.ToUpper()))
                 {
                     filtered.Add(accommodation.id);
                 }
             }
+            GuestOneInterface guestOneInterface = new GuestOneInterface();
             return filtered;
         }
 
@@ -117,6 +133,23 @@ namespace InitialProject.Service
                 }
             }
             return filtered;
+        }
+
+        public List<Accommodation> GetMatching(List<int> allAccommodations, List<Accommodation> accommodationsToCheck)
+        {
+            List<Accommodation> matchingAccommodations = new List<Accommodation>();
+            DataBaseContext context = new DataBaseContext();
+            foreach(Accommodation accommodationToCheck in accommodationsToCheck)
+            {
+                foreach(int accommodation in allAccommodations)
+                {
+                    if(accommodationToCheck.id == accommodation)
+                    {
+                        matchingAccommodations.Add(GetById(accommodationToCheck.id));
+                    }
+                }
+            }
+            return matchingAccommodations;
         }
 
         public List<List<DateTime>> GetAvailableDatePeriods(Accommodation accommodation, int daysToBook, List<DateTime> dateLimits)

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="GuestOneInterface" Height="800" Width="1500" WindowState="Maximized">
+        Title="GuestOneInterface" Height="800" Width="1500" >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="106*"/>

@@ -20,6 +20,8 @@ using InitialProject.Service;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using System.Configuration;
 using InitialProject.DTO;
+using System.Diagnostics;
+using System.Xml.Linq;
 
 namespace InitialProject.View
 {
@@ -34,7 +36,6 @@ namespace InitialProject.View
 
         public Accommodation selectedAccommodation = new Accommodation();
         public DateTime selectedDate = new DateTime();
-
 
         public GuestOneInterface()
         {
@@ -55,34 +56,16 @@ namespace InitialProject.View
             this.dataGrid.ItemsSource = accommodationsDTO;
         }
 
-        private void GetByName(object sender, RoutedEventArgs e)
+        private void GetByName(object sender, KeyEventArgs k)
         {
+            string input = input_name.Text + k.Key.ToString();
             AccommodationService accommodationService = new AccommodationService();
-            List<int> byName = accommodationService.GetAllByName(input_name.Text);
-            List<Accommodation> foundResults = new List<Accommodation>();
-            for (int i = 0; i < byName.Count(); i++)
-            {
-                foundResults.Add(accommodationService.GetById(byName[i]));
-            }
-            List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
-            foreach (Accommodation accommodation in foundResults)
-            {
-                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetAccommodationLocation(accommodation.id)));
-            }
-            this.dataGrid.ItemsSource = accommodationsDTO;
+            List<AccommodationDTO> dtos = new List<AccommodationDTO>();
+            dtos = dataGrid.ItemsSource as List<AccommodationDTO>;
+            List<Accommodation> accommodations = accommodationService.ConvertDtoToInitial(dtos);
 
-        }
-
-        private void GetByCountry(object sender, RoutedEventArgs e)
-        {
-            AccommodationService accommodationService = new AccommodationService();
-            AccommodationLocationService locationService = new AccommodationLocationService();
-            List<int> byCountry = accommodationService.GetAllByCountry(input_country.Text);
-            List<Accommodation> foundResults = new List<Accommodation>();
-            for (int i = 0; i < byCountry.Count(); i++)
-            {
-                foundResults.Add(accommodationService.GetById(byCountry[i]));
-            }
+            List<int> byName = accommodationService.GetAllByName(input);
+            List<Accommodation> foundResults = accommodationService.GetMatching(byName, accommodations);
             List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
             foreach (Accommodation accommodation in foundResults)
             {
@@ -91,16 +74,16 @@ namespace InitialProject.View
             this.dataGrid.ItemsSource = accommodationsDTO;
         }
 
-        private void GetByCity(object sender, RoutedEventArgs e)
+        private void GetByCountry(object sender, KeyEventArgs k)
         {
+            string input = input_country.Text + k.Key.ToString();
             AccommodationService accommodationService = new AccommodationService();
-            AccommodationLocationService locationService = new AccommodationLocationService();
-            List<int> byCity = accommodationService.GetAllByCity(input_city.Text);
-            List<Accommodation> foundResults = new List<Accommodation>();
-            for (int i = 0; i < byCity.Count(); i++)
-            {
-                foundResults.Add(accommodationService.GetById(byCity[i]));
-            }
+            List<AccommodationDTO> dtos = new List<AccommodationDTO>();
+            dtos = dataGrid.ItemsSource as List<AccommodationDTO>;
+            List<Accommodation> accommodations = accommodationService.ConvertDtoToInitial(dtos);
+
+            List<int> byCountry = accommodationService.GetAllByCountry(input);
+            List<Accommodation> foundResults = accommodationService.GetMatching(byCountry, accommodations);
             List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
             foreach (Accommodation accommodation in foundResults)
             {
@@ -109,15 +92,16 @@ namespace InitialProject.View
             this.dataGrid.ItemsSource = accommodationsDTO;
         }
 
-        private void GetByType(object sender, RoutedEventArgs e)
+        private void GetByCity(object sender, KeyEventArgs k)
         {
+            string input = input_country.Text + k.Key.ToString();
             AccommodationService accommodationService = new AccommodationService();
-            List<int> byType = accommodationService.GetAllByType(input_type.Text);
-            List<Accommodation> foundResults = new List<Accommodation>();
-            for (int i = 0; i < byType.Count(); i++)
-            {
-                foundResults.Add(accommodationService.GetById(byType[i]));
-            }
+            List<AccommodationDTO> dtos = new List<AccommodationDTO>();
+            dtos = dataGrid.ItemsSource as List<AccommodationDTO>;
+            List<Accommodation> accommodations = accommodationService.ConvertDtoToInitial(dtos);
+
+            List<int> byCity = accommodationService.GetAllByCity(input);
+            List<Accommodation> foundResults = accommodationService.GetMatching(byCity, accommodations);
             List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
             foreach (Accommodation accommodation in foundResults)
             {
@@ -126,15 +110,16 @@ namespace InitialProject.View
             this.dataGrid.ItemsSource = accommodationsDTO;
         }
 
-        private void GetByGuests(object sender, RoutedEventArgs e)
+        private void GetByType(object sender, KeyEventArgs k)
         {
+            string input = input_country.Text + k.Key.ToString();
             AccommodationService accommodationService = new AccommodationService();
-            List<int> byGuests = accommodationService.GetAllByGuestsNumber(int.Parse(input_guests.Text));
-            List<Accommodation> foundResults = new List<Accommodation>();
-            for (int i = 0; i < byGuests.Count(); i++)
-            {
-                foundResults.Add(accommodationService.GetById(byGuests[i]));
-            }
+            List<AccommodationDTO> dtos = new List<AccommodationDTO>();
+            dtos = dataGrid.ItemsSource as List<AccommodationDTO>;
+            List<Accommodation> accommodations = accommodationService.ConvertDtoToInitial(dtos);
+
+            List<int> byType = accommodationService.GetAllByType(input);
+            List<Accommodation> foundResults = accommodationService.GetMatching(byType, accommodations);
             List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
             foreach (Accommodation accommodation in foundResults)
             {
@@ -143,15 +128,34 @@ namespace InitialProject.View
             this.dataGrid.ItemsSource = accommodationsDTO;
         }
 
-        private void GetByDays(object sender, RoutedEventArgs e)
+        private void GetByGuests(object sender, KeyEventArgs k)
         {
+            string input = input_guests.Text + k.Key.ToString()[1];
             AccommodationService accommodationService = new AccommodationService();
-            List<int> byDays = accommodationService.GetAllByMininumDays(int.Parse(input_days.Text));
-            List<Accommodation> foundResults = new List<Accommodation>();
-            for (int i = 0; i < byDays.Count(); i++)
+            List<AccommodationDTO> dtos = new List<AccommodationDTO>();
+            dtos = dataGrid.ItemsSource as List<AccommodationDTO>;
+            List<Accommodation> accommodations = accommodationService.ConvertDtoToInitial(dtos);
+
+            List<int> byGuests = accommodationService.GetAllByGuestsNumber(int.Parse(input));
+            List<Accommodation> foundResults = accommodationService.GetMatching(byGuests, accommodations);
+            List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
+            foreach (Accommodation accommodation in foundResults)
             {
-                foundResults.Add(accommodationService.GetById(byDays[i]));
+                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetAccommodationLocation(accommodation.id)));
             }
+            this.dataGrid.ItemsSource = accommodationsDTO;
+        }
+
+        private void GetByDays(object sender, KeyEventArgs k)
+        {
+            string input = input_days.Text + k.Key.ToString()[1];
+            AccommodationService accommodationService = new AccommodationService();
+            List<AccommodationDTO> dtos = new List<AccommodationDTO>();
+            dtos = dataGrid.ItemsSource as List<AccommodationDTO>;
+            List<Accommodation> accommodations = accommodationService.ConvertDtoToInitial(dtos);
+
+            List<int> byDays = accommodationService.GetAllByMininumDays(int.Parse(input));
+            List<Accommodation> foundResults = accommodationService.GetMatching(byDays, accommodations);
             List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
             foreach (Accommodation accommodation in foundResults)
             {

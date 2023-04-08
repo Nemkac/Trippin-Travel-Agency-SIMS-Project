@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="PastBookingsInterface" Height="800" Width="1500" WindowState="Maximized">
+        Title="PastBookingsInterface" Height="800" Width="1500">
     <Grid>
         <TextBlock HorizontalAlignment="Left" Height="25" Margin="335,71,0,0" TextWrapping="Wrap" Text="My previous bookings" VerticalAlignment="Top" Width="162"/>
         <DataGrid HorizontalAlignment="Left" Height="216" Margin="160,0,0,0" VerticalAlignment="Center" Width="512" Name ="pastBookingsGrid"/>

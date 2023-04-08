@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="FutureBookingsInterface" Height="800" Width="1500" WindowState="Maximized">
+        Title="FutureBookingsInterface" Height="800" Width="1500" >
     <Grid>
         <DataGrid HorizontalAlignment="Left" Height="189" Margin="220,52,0,0" VerticalAlignment="Top" Width="416" Name ="futureBookingsGrid" />
         <Button Content="Send a delayment request" HorizontalAlignment="Left" Height="25" Margin="354,271,0,0" VerticalAlignment="Top" Width="144" Click="GoToBookingDelayment"/>
