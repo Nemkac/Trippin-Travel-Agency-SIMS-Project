@@ -5,11 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Service;
 using InitialProject.Model;
+using InitialProject.Context;
+using InitialProject.Model.TransferModels;
+using System.Windows;
 
 namespace InitialProject.ViewModels
 {
     public class TourGuide_TourLiveViewModel : ViewModelBase
     {
+        private readonly TourService tourService = new TourService();
         private TourGuide_MainViewModel _mainViewModel;
 
         public TourGuide_MainViewModel MainViewModel
@@ -29,6 +33,18 @@ namespace InitialProject.ViewModels
         public void ShowToursToday(object obj)
         {
             _mainViewModel.ExecuteShowTourGuideToursTodayViewCommand(null);
+        }
+
+        public void EndTour(Tour tour)
+        {
+            MessageBox.Show("Tour finished");
+            //Close();
+            DataBaseContext dbContext = new DataBaseContext();
+            tour.active = false;
+            TourManager.ActiveTours.Remove(tour);
+            dbContext.Update(tour);
+            dbContext.SaveChanges();
+
         }
     }
 }

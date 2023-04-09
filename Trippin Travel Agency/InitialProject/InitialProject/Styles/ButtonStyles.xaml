@@ -246,6 +246,27 @@
         </Setter>
     </Style>
 
+    <Style x:Key="denyButton" TargetType="Button">
+        <Setter Property="Background" Value="#e84118"/>
+        <Setter Property="Foreground" Value="#f5f6fa"/>
+        <Setter Property="FontFamily" Value="Ubuntu"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+        <Setter Property="Padding" Value="20"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Margin" Value="0,10,0,0" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="#e84118" CornerRadius="5">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="showImagesButton" TargetType="Button">
         <Setter Property="Background" Value="#fbc531"/>
         <Setter Property="Foreground" Value="#192a56"/>
