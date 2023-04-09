@@ -77,6 +77,8 @@ namespace InitialProject.View.Owner_Views
             acceptContext.SelectedRequestTransfers.Remove(acceptContext.SelectedRequestTransfers.First());
             acceptContext.SaveChanges();
             ClearInput();
+            Button button = sender as Button;
+            button.IsEnabled = false;
         }
 
         private static void RemoveRequest(List<RequestDTO> selectedRequest, DataBaseContext requestContext, List<BookingDelaymentRequest> bookingDelaymentRequests)

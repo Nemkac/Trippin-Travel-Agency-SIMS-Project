@@ -69,6 +69,7 @@ namespace InitialProject.ViewModels
         public ICommand ShowOwnersBookingViewCommand { get; }
         public ICommand ShowAccommodationRegistrationViewCommand { get; }
         public ICommand ShowRequestViewCommand { get; }
+        public ICommand ShowNotificationsViewCommand { get; }
         public OwnerInterfaceViewModel()
         {
             //Initialize commands
@@ -78,6 +79,7 @@ namespace InitialProject.ViewModels
             ShowRequestViewCommand = new ViewModelCommand(ExecuteShowRequestViewCommand);
             ShowProfileViewCommand = new ViewModelCommand(ExecuteShowProfileViewCommand);
             ShowReviewsViewCommand = new ViewModelCommand(ExecuteShowReviewsViewCommand);
+            ShowNotificationsViewCommand = new ViewModelCommand(ExecuteShowNotificationsViewCommand);
             //Default view
             ExecuteShowOwnersBookingViewCommand(null);
         }
@@ -116,6 +118,12 @@ namespace InitialProject.ViewModels
         {
             CurrentChildView = new ReviewsViewModel();
             Caption = "Reviews";
+        }
+
+        public void ExecuteShowNotificationsViewCommand(object obj)
+        {
+            CurrentChildView = new NotificationsViewModel();
+            Caption = "Notifications";
         }
     }
 }
