@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using InitialProject.Service;
 using InitialProject.Context;
+using System;
 
 namespace InitialProject.View
 {
@@ -14,9 +15,9 @@ namespace InitialProject.View
         public TrackTourLiveInterface()
         {
             InitializeComponent();
-            TourService tourService = new TourService();
-            List<Tour> toursToday = tourService.GetToursToday();
-            tourDataGrid.ItemsSource = toursToday;
+            /*TourService tourService = new TourService();
+            List<String> toursToday = tourService.GetToursToday();
+            tourDataGrid.ItemsSource = toursToday;*/
         }
 
         private void LeadCreateTour(object sender, RoutedEventArgs e)

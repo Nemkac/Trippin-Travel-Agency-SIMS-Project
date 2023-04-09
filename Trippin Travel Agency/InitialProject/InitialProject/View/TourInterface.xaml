@@ -99,7 +99,13 @@
 
             </StackPanel>
             <StackPanel x:Name="containerStackPanel">
-                <Button x:Name ="addCheckpointButton" Content="Add checkpoint in between" HorizontalAlignment="Center" Margin="15" VerticalAlignment="Top" Width="250" Height="50" Click="addCheckpointButton_Click"/>
+                <Button x:Name ="addCheckpointButton"
+                        Content="Add checkpoint in between"
+                        HorizontalAlignment="Center"
+                        Margin="15"
+                        VerticalAlignment="Top"
+                        Width="250" Height="50"
+                        Click="addCheckpointButton_Click"/>
             </StackPanel>
         </StackPanel>
         <!-- Images -->

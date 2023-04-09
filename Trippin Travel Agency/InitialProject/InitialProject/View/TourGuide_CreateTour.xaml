@@ -1,0 +1,295 @@
+﻿<UserControl x:Class="InitialProject.View.TourGuide_CreateTour"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:viewModel="clr-namespace:InitialProject.ViewModels"
+             xmlns:local="clr-namespace:InitialProject.Model"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="2000"
+             d:DesignWidth="430"
+             x:Name="createTourControl"
+             >
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:language"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </UserControl.Resources>
+    
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <!-- Margin -->
+            <RowDefinition Height="20"/>
+            <!-- Header -->
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- Header -->
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+            <RadioButton x:Name="backButton"
+                     Grid.Column="1"
+                     Grid.Row="1"
+                     Style="{StaticResource mobileMenuButton}"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Left"
+                     IsChecked="False"
+                     Command="{Binding ShowToursCommand}"
+                     Width="Auto"
+                     Height="Auto"
+                     >
+
+                <StackPanel Orientation="Vertical" Margin="-5,0,0,0">
+                    <fa:IconImage Icon="ArrowLeft" Style="{StaticResource menuBackButtonIcon}"/>
+                    <Label Content="Tours" Style="{StaticResource labelBackBeneathIcon}"/>
+                </StackPanel>
+
+            </RadioButton>
+            <Label Content="Create tour" Style="{StaticResource labelBackHeader}" Margin="10,0,0,0"/>
+        </StackPanel>
+
+        <ScrollViewer VerticalScrollBarVisibility="Hidden"
+                      Grid.Row="2"
+                      Grid.Column="1">
+            <!-- Content -->
+            <StackPanel Orientation="Vertical"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="0,0,0,20">
+
+                <!-- Start demo -->
+                <StackPanel Orientation="Vertical"
+                            Margin="0,20,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="QuestionCircle" HorizontalAlignment="Left" Style="{StaticResource menuBackButtonIcon}" Width="15" Height="15" Foreground="#718093"/>
+                        <Label Content="Click the 'Start demo' button to see Create Tour &#x0a;in action and learn how it functions."
+                               Style="{StaticResource labelAboveTextBox}"
+                               Foreground="#718093"
+                               Margin="10,0,0,0"
+                               />
+                    </StackPanel>
+                    <Button Content="Start demo" Style="{StaticResource leadButton}"/>
+                    <Line Style="{StaticResource mobileDelimiterLine}"/>
+                </StackPanel>
+
+                <!-- Name -->
+                <StackPanel Orientation="Vertical"
+                            Margin="0,20,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Name"
+                               Style="{StaticResource labelAboveTextBox}"
+                               />
+                    </StackPanel>
+                    <TextBox Style="{StaticResource mobileTextBox}"
+                             x:Name="tourNameTextBox"
+                             />
+                </StackPanel>
+                
+                <!-- Location GroupBox -->
+                <GroupBox Header="Location"
+                          Style="{StaticResource labelGroupBox}"
+                          Margin="0,20,0,0">
+                <!-- GroupBox content -->
+                <StackPanel Orientation="Horizontal">
+                    <!-- Country ComboBox -->
+                    <StackPanel Margin="20">
+                        <Label Content="Country" Style="{StaticResource labelAboveTextBox}"/>
+                        <ComboBox Width="100"
+                                   Style="{StaticResource mobileComboBox}"
+                                   Height="30"
+                                   x:Name="tourCountryComboBox"
+                                   SelectionChanged="tourCountryComboBox_SelectionChanged"
+                                   />
+                    </StackPanel>
+
+                     <!-- City ComboBox -->
+                     <StackPanel Margin="55,20,20,20">
+                        <Label Content="City"
+                               Style="{StaticResource labelAboveTextBox}"
+                                   
+                                   />
+                        <ComboBox Width="100"
+                                  Style="{StaticResource mobileComboBox}"
+                                  Height="30"
+                                  x:Name="tourCityComboBox"
+                                  />
+                    </StackPanel>
+                </StackPanel>
+                </GroupBox>
+
+                <!-- Maximum number of guests -->
+                <StackPanel Orientation="Vertical"
+                            Margin="0,20,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Maximum number of guests"
+                               Style="{StaticResource labelAboveTextBox}"
+                               />
+                    </StackPanel>
+                    <TextBox Style="{StaticResource mobileTextBox}"
+                             x:Name="tourMaximumNumberOfGuestsTextBox"
+                             />
+                </StackPanel>
+            
+                <!-- Duration (hours) -->
+                <StackPanel Orientation="Vertical"
+                            Margin="0,20,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Duration (hours)"
+                               Style="{StaticResource labelAboveTextBox}"
+                               />
+                    </StackPanel>
+                    <TextBox Style="{StaticResource mobileTextBox}"
+                             x:Name="tourDurationTextBox"
+                             />
+                </StackPanel>
+
+                <!-- Language -->
+                <StackPanel Orientation="Vertical"
+                            Margin="0,20,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Language"
+                               Style="{StaticResource labelAboveTextBox}"
+                               />
+                    </StackPanel>
+                    <ComboBox Style="{StaticResource mobileComboBox}"
+                              ItemsSource="{Binding Source={StaticResource dataFromEnum}}"
+                              x:Name="tourLanguageComboBox"
+                              />
+                </StackPanel>
+                    
+                <!-- KeyPoints GroupBox -->
+                <GroupBox Header="Key Points"
+                          Style="{StaticResource labelGroupBox}"
+                          Margin="0,20,0,0"
+                          Height="Auto"
+                          Padding="0,0,0,20">
+                    <StackPanel Orientation="Vertical"
+                                x:Name="containerKeyPoints">
+                        <!-- Starting and ending point -->
+                        <StackPanel Orientation="Horizontal">
+                            <!-- Starting point -->
+                            <StackPanel Margin="20">
+                                <Label Content="Starting point" Style="{StaticResource labelAboveTextBox}"/>
+                                <TextBox Width="100"
+                                   Style="{StaticResource mobileTextBox}"
+                                   Height="30"
+                                   x:Name="tourStartingPointTextBox"
+                                   />
+                            </StackPanel>
+                            <!-- Ending point -->
+                            <StackPanel Margin="55,20,20,20">
+                                <Label Content="Ending point"
+                                   Style="{StaticResource labelAboveTextBox}"
+                                   
+                                   />
+                                <TextBox Width="100"
+                                   Style="{StaticResource mobileTextBox}"
+                                   Height="30"
+                                   x:Name="tourEndingPointTextBox"
+                                   />
+                            </StackPanel>
+                        </StackPanel>
+                        <!-- Add checkpoint -->
+                        <RadioButton x:Name="addCheckpointButton"
+                                 Style="{StaticResource mobileCreateTourButton}"
+                                 HorizontalAlignment="Center"
+                                 Checked="addKeyPoint_IfChecked"
+                                 >
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="0, 5, 0 ,0"
+                                        >
+                                <fa:IconImage Icon="PlusCircle" HorizontalAlignment="Left" Style="{StaticResource menuBackButtonIcon}" Width="25" Height="25"/>
+                                <Label Content="Add checkpoint"
+                                       FontSize="18"
+                                       FontFamily="Ubuntu"
+                                       FontWeight="SemiBold"
+                                       Margin="10, 0, 0, 0"
+                                       Style="{StaticResource labelBackHeader}"/>
+                            </StackPanel>
+                        </RadioButton>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- Date picker -->
+                <StackPanel Orientation="Vertical"
+                            Margin="0,20,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Date"
+                                        Style="{StaticResource labelAboveTextBox}"
+               />
+                    </StackPanel>
+                    <Viewbox Width="330">
+                        <Calendar x:Name="tourCalendar"
+                                    HorizontalAlignment="Stretch"
+                                    Style="{StaticResource CustomCalendarStyle}"
+                                    />
+                    </Viewbox>
+                </StackPanel>
+
+                <!-- Images GroupBox -->
+                <GroupBox Header="Images"
+                          Style="{StaticResource labelGroupBox}"
+                          Margin="0,20,0,0"
+                          Height="Auto"
+                          Padding="10">
+                    <StackPanel Orientation="Vertical"
+                                x:Name="containerImages">
+                        <!-- Add image -->
+                        <RadioButton x:Name="addimageButton"
+                                 Style="{StaticResource mobileCreateTourButton}"
+                                 HorizontalAlignment="Center"
+                                 Checked="addImage_IfChecked"
+                                 >
+                            <!-- Button -->
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="0, 5, 0 ,0"
+                                        >
+                                <fa:IconImage Icon="PlusCircle"
+                                              HorizontalAlignment="Left"
+                                              Style="{StaticResource menuBackButtonIcon}"
+                                              Width="25" Height="25"/>
+                                <Label Content="Add image"
+                                       FontSize="18"
+                                       FontFamily="Ubuntu"
+                                       FontWeight="SemiBold"
+                                       Margin="10, 0, 0, 0"
+                                       Style="{StaticResource labelBackHeader}"/>
+                            </StackPanel>
+                        </RadioButton>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- Description -->
+                <StackPanel Orientation="Vertical"
+                            Margin="0,20,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Description"
+                               Style="{StaticResource labelAboveTextBox}"
+                               />
+                    </StackPanel>
+                    <TextBox Style="{StaticResource mobileTextBox}"
+                             Height="150"
+                             x:Name="tourDescriptionTextBox"
+                             />
+                </StackPanel>
+                <Button Content="Save"
+                        Style="{StaticResource acceptButton}"
+                        Margin="0,20,0,0"
+                        Click="Save"
+                        />
+
+            </StackPanel>
+        </ScrollViewer>
+        <ContentControl Content="{Binding CurrentChildView}" Grid.RowSpan="3" Grid.ColumnSpan="3"/>
+        
+    </Grid>
+</UserControl>

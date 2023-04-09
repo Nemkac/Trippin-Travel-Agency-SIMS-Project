@@ -68,6 +68,7 @@ namespace InitialProject
                     else if (user.role == "TourGuide")
                     {
                         tourGuideInterface.Show();
+
                     }
                     else if (user.role == "GuestTwo")
                     {

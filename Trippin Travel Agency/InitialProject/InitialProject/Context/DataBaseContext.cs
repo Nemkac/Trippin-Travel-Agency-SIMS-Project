@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using InitialProject.Model;
 using InitialProject.DTO;
+using System.Security.Policy;
+using InitialProject.Model.TransferModels;
 
 namespace InitialProject.Context
 {
@@ -20,6 +22,8 @@ namespace InitialProject.Context
         public DbSet<RequestDTO> SelectedRequestTransfers { get; set; }
 
         public DbSet<AccommodationRate> AccommodationRates { get; set; }    
+        public DbSet<TourLiveViewTransfer> TourLiveViewTransfers { get; set; }
+        public DbSet<TourMessage> TourMessages { get; set; }
 
         // Apsolute paths for every memeber of the team
 

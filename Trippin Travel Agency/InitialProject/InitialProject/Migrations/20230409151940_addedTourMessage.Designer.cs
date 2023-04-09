@@ -3,6 +3,7 @@ using System;
 using InitialProject.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,49 +11,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230409151940_addedTourMessage")]
+    partial class addedTourMessage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.3");
-
-            modelBuilder.Entity("InitialProject.DTO.RequestDTO", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("accommodationId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("bookingId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("guestName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("newArrival")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("newDeparture")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("oldArrival")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("oldDeparture")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("possible")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("id");
-
-                    b.ToTable("SelectedRequestTransfers");
-                });
 
             modelBuilder.Entity("InitialProject.Model.Accommodation", b =>
                 {
@@ -105,30 +71,6 @@ namespace InitialProject.Migrations
                     b.ToTable("AccommodationLocation");
                 });
 
-            modelBuilder.Entity("InitialProject.Model.AccommodationRate", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("bookingId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("cleanness")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("comment")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("ownerRate")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("id");
-
-                    b.ToTable("AccommodationRates");
-                });
-
             modelBuilder.Entity("InitialProject.Model.Booking", b =>
                 {
                     b.Property<int>("Id")
@@ -157,33 +99,6 @@ namespace InitialProject.Migrations
                     b.ToTable("Bookings");
                 });
 
-            modelBuilder.Entity("InitialProject.Model.BookingDelaymentRequest", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("bookingId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("comment")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("newArrival")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("newDeparture")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("status")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("id");
-
-                    b.ToTable("BookingDelaymentRequests");
-                });
-
             modelBuilder.Entity("InitialProject.Model.GuestRate", b =>
                 {
                     b.Property<int>("id")
@@ -200,8 +115,8 @@ namespace InitialProject.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<float>("overallRating")
-                        .HasColumnType("REAL");
+                    b.Property<int>("overallRating")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("respectingRules")
                         .HasColumnType("INTEGER");
@@ -351,13 +266,7 @@ namespace InitialProject.Migrations
                     b.Property<int>("guestId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("guestJoined")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("guestNumber")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("guideConfirmed")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("tourId")
@@ -387,18 +296,6 @@ namespace InitialProject.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("email")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("firstName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("lastName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("password")
                         .IsRequired()

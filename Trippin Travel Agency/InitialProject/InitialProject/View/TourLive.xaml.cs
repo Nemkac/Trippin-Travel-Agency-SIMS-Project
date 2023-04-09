@@ -26,7 +26,6 @@ namespace InitialProject.View
             DataContext = selectedTour;
 
             LoadKeyPoints();
-            SubscribeToKeyPointChanges();
             DisplayKeyPoints();
             UpdateFirstKeyPointToVisited();
         }
@@ -129,7 +128,7 @@ namespace InitialProject.View
         private void EndTour()
         {
             MessageBox.Show("Tour finished");
-            Close();
+            //Close();
             DataBaseContext dbContext = new DataBaseContext();
             selectedTour.active = false;
             TourManager.ActiveTours.Remove(selectedTour);

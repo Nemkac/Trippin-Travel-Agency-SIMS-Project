@@ -1,34 +1,37 @@
-﻿using InitialProject.Model;
-using System.Windows;
+﻿using InitialProject.Context;
+using InitialProject.Model;
+using InitialProject.Service;
 using System;
-using InitialProject.Context;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
-using InitialProject.Service;
-using System.Collections;
-using Microsoft.Win32;
-using System.IO;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace InitialProject.View
 {
-    public partial class TourInterface : Window
+    /// <summary>
+    /// Interaction logic for TourGuide_Tours.xaml
+    /// </summary>
+    public partial class TourGuide_CreateTour : UserControl
     {
-        public TourInterface()
+        public TourGuide_CreateTour()
         {
             InitializeComponent();
             FillCountryComboBox();
-
         }
 
-        private void LeadTrackTourLive(object sender, RoutedEventArgs e)
-        {
-            TrackTourLiveInterface TrackTourLiveInterface = new TrackTourLiveInterface();
-            TrackTourLiveInterface.Show();
+        List<TextBox> dynamicTextBoxes = new List<TextBox>();
+        List<TextBox> dynamicImageLinksTextBoxes = new List<TextBox>();
 
-        }
         private void FillCountryComboBox()
         {
             DataBaseContext countryToursContext = new DataBaseContext();
@@ -36,16 +39,16 @@ namespace InitialProject.View
             List<TourLocation> countryList = countryToursContext.TourLocation.ToList();
             foreach (TourLocation location in countryList.ToList())
             {
-                if (!countryComboBox.Items.Contains(location.country))
+                if (!tourCountryComboBox.Items.Contains(location.country))
                 {
-                    countryComboBox.Items.Add(location.country);
+                    tourCountryComboBox.Items.Add(location.country);
                 }
             }
         }
-        private void countryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void tourCountryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            cityComboBox.Items.Clear();
-            string selectedCountry = countryComboBox.SelectedValue.ToString();
+            tourCityComboBox.Items.Clear();
+            string selectedCountry = tourCountryComboBox.SelectedValue.ToString();
 
             GetCitiesByCountry(selectedCountry);
         }
@@ -58,17 +61,17 @@ namespace InitialProject.View
             {
                 if (location.country.ToString() == selectedCountry)
                 {
-                    if (!cityComboBox.Items.Contains(location.city))
+                    if (!tourCityComboBox.Items.Contains(location.city))
                     {
-                        cityComboBox.Items.Add(location.city);
+                        tourCityComboBox.Items.Add(location.city);
                     }
                 }
             }
         }
 
-        // Lists used for creating dynamic TextBox elements for both images and key points
-        List<TextBox> dynamicTextBoxes = new List<TextBox>();
-        List<TextBox> dynamicImageLinksTextBoxes = new List<TextBox>();
+        // TOUR SAVING
+
+
         private void Save(object sender, RoutedEventArgs e)
         {
             string name, description;
@@ -91,16 +94,16 @@ namespace InitialProject.View
         private void CreateTourBasicProperties(out string name, out TourLocation location, out int guestLimit, out int hoursDuration, out string description, out language languageInput, out DateTime selectedDate, out bool active)
         {
             name = tourNameTextBox.Text;
-            string country = countryComboBox.SelectedValue.ToString();
-            string city = cityComboBox.SelectedValue.ToString();
+            string country = tourCountryComboBox.SelectedValue.ToString();
+            string city = tourCityComboBox.SelectedValue.ToString();
             location = TourService.GetTourLocation(country, city);
-            string guestLimitInput = guestLimitTextBox.Text;
+            string guestLimitInput = tourMaximumNumberOfGuestsTextBox.Text;
             guestLimit = int.Parse(guestLimitInput);
-            string hoursDurationInput = hoursDurationTextBox.Text;
+            string hoursDurationInput = tourDurationTextBox.Text;
             hoursDuration = int.Parse(hoursDurationInput);
-            description = descriptionTextBox.Text;
-            languageInput = (language)languageComboBox.SelectedValue;
-            selectedDate = datePicker.SelectedDate ?? DateTime.Today;
+            description = tourDescriptionTextBox.Text;
+            languageInput = (language)tourLanguageComboBox.SelectedValue;
+            selectedDate = tourCalendar.SelectedDate ?? DateTime.Today;
             active = false;
         }
 
@@ -138,7 +141,7 @@ namespace InitialProject.View
         {
             ICollection<KeyPoint> keyPoints = new List<KeyPoint>
             {
-                new KeyPoint(startingPointTextBox.Text, false)
+                new KeyPoint(tourStartingPointTextBox.Text, false)
             };
 
             foreach (var textBox in dynamicTextBoxes)
@@ -147,17 +150,21 @@ namespace InitialProject.View
                 keyPoints.Add(kp);
             }
 
-            keyPoints.Add(new KeyPoint(endingPointTextBox.Text, false));
+            keyPoints.Add(new KeyPoint(tourEndingPointTextBox.Text, false));
             return keyPoints;
         }
 
         private void clearInputs()
         {
-            datePicker.SelectedDate = null; 
+            tourCalendar.SelectedDate = null;
         }
 
+        // CHECKPOINTS 
+
         private int checkpointCounter = 1;
-        private void addCheckpointButton_Click(object sender, RoutedEventArgs e)
+        private StackPanel lastCreatedStackPanelKeyPoints;
+
+        private void addKeyPoint_IfChecked(object sender, RoutedEventArgs e)
         {
             Label newLabel = CreateNewLabelForKeyPoint();
             TextBox newTextBox = CreateNewTextBoxForKeyPoint();
@@ -166,14 +173,38 @@ namespace InitialProject.View
             // Add the textbox to the list of dynamic textboxes
             dynamicTextBoxes.Add(newTextBox);
 
-            // Add the new StackPanel below the button
-            containerStackPanel.Children.Insert(containerStackPanel.Children.IndexOf(addCheckpointButton) + 1, newStackPanel);
+            // Remove the previous StackPanel
+            RemovePreviousStackPanelKeyPoints();
+
+            // Add the new StackPanel in the same place
+            containerKeyPoints.Children.Insert(containerKeyPoints.Children.IndexOf(addCheckpointButton) + 1, newStackPanel);
+
+            // Store the last created StackPanel
+            lastCreatedStackPanelKeyPoints = newStackPanel;
 
             // Update the Margin of the new StackPanel to align it with the button
-            Thickness buttonMargin = addCheckpointButton.Margin;
-            newStackPanel.Margin = new Thickness(buttonMargin.Left, 10, 0, 0);
+            newStackPanel.Margin = new Thickness(15, 10, 0, 0);
 
             checkpointCounter++;
+            ResetRadioButton(sender);
+        }
+
+        private void RemovePreviousStackPanelKeyPoints()
+        {
+            if (lastCreatedStackPanelKeyPoints != null)
+            {
+                containerKeyPoints.Children.Remove(lastCreatedStackPanelKeyPoints);
+                lastCreatedStackPanelKeyPoints = null;
+            }
+        }
+
+        private static void ResetRadioButton(object sender)
+        {
+            RadioButton radioButton = sender as RadioButton;
+            if (radioButton != null)
+            {
+                radioButton.IsChecked = false;
+            }
         }
 
         private static StackPanel CreateNewStackPanelWithElementsForKeyPoint(Label newLabel, TextBox newTextBox)
@@ -181,6 +212,7 @@ namespace InitialProject.View
             StackPanel newStackPanel = new StackPanel();
             newStackPanel.Orientation = Orientation.Horizontal;
             newStackPanel.Children.Add(newLabel);
+            newTextBox.Margin = new Thickness(20, 0, 0, 0);
             newStackPanel.Children.Add(newTextBox);
             return newStackPanel;
         }
@@ -188,42 +220,51 @@ namespace InitialProject.View
         private TextBox CreateNewTextBoxForKeyPoint()
         {
             TextBox newTextBox = new TextBox();
-            newTextBox.Width = addCheckpointButton.ActualWidth / 2 - 10;
+            newTextBox.Width = 170;
             return newTextBox;
         }
 
         private Label CreateNewLabelForKeyPoint()
         {
-            // Create new Label
             Label newLabel = new Label();
             newLabel.Content = "Checkpoint " + checkpointCounter.ToString();
-            newLabel.Width = addCheckpointButton.ActualWidth / 2 - 10;
+            newLabel.MinWidth = addCheckpointButton.ActualWidth / 2 - 10;
             return newLabel;
         }
 
+        // IMAGES 
+
         private int imageCounter = 1;
-        private void addImageButton_Click(object sender, RoutedEventArgs e)
+        private StackPanel lastCreatedStackPanelImages;
+
+        private void RemovePreviousStackPanelImages()
+        {
+            if (lastCreatedStackPanelImages != null)
+            {
+                containerImages.Children.Remove(lastCreatedStackPanelImages);
+                lastCreatedStackPanelImages = null;
+            }
+        }
+
+        private void addImage_IfChecked(object sender, RoutedEventArgs e)
         {
             Label newLabel = CreateNewLabelForImageLink();
             TextBox newTextBox = CreateNewTextBoxForImageLink();
             StackPanel newStackPanel = CreateNewStackPanelWithElementsForImageLink(newLabel, newTextBox);
 
-            // Add the textbox to the list of dynamic textboxes
             dynamicImageLinksTextBoxes.Add(newTextBox);
-
-            // Add the new StackPanel below the button
-            containerImageStackPanel.Children.Insert(containerImageStackPanel.Children.IndexOf(addImageButton) + 1, newStackPanel);
-
-            // Update the Margin of the new StackPanel to align it with the button
-            Thickness buttonMargin = addImageButton.Margin;
-            newStackPanel.Margin = new Thickness(buttonMargin.Left, 10, 0, 0);
+            RemovePreviousStackPanelImages();
+            containerImages.Children.Insert(containerImages.Children.IndexOf(addimageButton) + 1, newStackPanel);
+            lastCreatedStackPanelImages = newStackPanel;
 
             imageCounter++;
+            ResetRadioButton(sender);
         }
 
         private static StackPanel CreateNewStackPanelWithElementsForImageLink(Label newLabel, TextBox newTextBox)
         {
             StackPanel newStackPanel = new StackPanel();
+            newStackPanel.Margin = new Thickness(10);
             newStackPanel.Orientation = Orientation.Horizontal;
             newStackPanel.Children.Add(newLabel);
             newStackPanel.Children.Add(newTextBox);
@@ -233,7 +274,7 @@ namespace InitialProject.View
         private TextBox CreateNewTextBoxForImageLink()
         {
             TextBox newTextBox = new TextBox();
-            newTextBox.Width = addImageButton.ActualWidth;
+            newTextBox.Width = 200;
             return newTextBox;
         }
 
@@ -241,30 +282,9 @@ namespace InitialProject.View
         {
             Label newLabel = new Label();
             newLabel.Content = "Image " + imageCounter.ToString();
-            newLabel.Width = addImageButton.ActualWidth / 2 - 10;
+            newLabel.MinWidth = addimageButton.ActualWidth / 2 - 10;
             return newLabel;
-        }
-
-        private void Button_MouseEnter(object sender, MouseEventArgs e)
-        {
-            Button btn = sender as Button;
-            if (btn != null)
-            {
-                btn.Background = new SolidColorBrush(Color.FromRgb(255, 0, 208));
-                btn.Foreground = new SolidColorBrush(Color.FromRgb(64, 115, 158));
-            }
-        }
-
-        private void Button_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Button btn = sender as Button;
-            if (btn != null)
-            {
-                btn.Background = new SolidColorBrush(Color.FromRgb(64, 115, 158));
-                btn.Foreground = new SolidColorBrush(Color.FromRgb(245, 246, 250));
-            }
         }
 
     }
 }
-
