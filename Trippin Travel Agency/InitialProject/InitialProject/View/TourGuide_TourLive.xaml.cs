@@ -24,7 +24,6 @@ namespace InitialProject.View
             InitializeComponent();
             this.Loaded += tourDataLoaded;
         }
-        
         public void tourDataLoaded(object sender, RoutedEventArgs e)
         {
             DataBaseContext context = new DataBaseContext();
@@ -97,7 +96,6 @@ namespace InitialProject.View
                 tourLiveViewModel.EndTour(tour);
             }
         }
-
         public void endTourButton_Click(object sender, RoutedEventArgs e)
         {
             DataBaseContext context = new DataBaseContext();
