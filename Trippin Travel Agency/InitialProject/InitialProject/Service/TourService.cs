@@ -233,7 +233,7 @@ namespace InitialProject.Service
         }
         public TourReservationsTodayDTO createTourReservationsTodayDTO(TourReservation tr)
         {
-            TourReservationsTodayDTO tourReservationsTodayDTO = new TourReservationsTodayDTO(tr.id, tr.guestJoined=false);
+            TourReservationsTodayDTO tourReservationsTodayDTO = new TourReservationsTodayDTO(tr.id);
             return tourReservationsTodayDTO;
         }
         public List<TourReservation> GetTourReservationsById(int tourId)
@@ -245,10 +245,11 @@ namespace InitialProject.Service
                 if(tr.tourId == tourId)
                 {
                     reservations.Add(tr);
-                    MessageBox.Show(tourId.ToString());
                 }
             }
             return reservations;
         }
+
+
     }
 }

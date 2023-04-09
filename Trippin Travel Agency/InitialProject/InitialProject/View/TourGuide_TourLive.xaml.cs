@@ -18,7 +18,9 @@ namespace InitialProject.View
     public partial class TourGuide_TourLive : UserControl
     {
         private readonly List<KeyPoint> keyPointsList = new List<KeyPoint>();
+        List<TourReservationsTodayDTO> tourReservationDtosToday = new List<TourReservationsTodayDTO>();
         private readonly TourService tourService = new TourService();
+        private readonly TourReservationService tourReservationService = new TourReservationService();
         private readonly TourGuide_TourLiveViewModel tourLiveViewModel = new TourGuide_TourLiveViewModel();
         public TourGuide_TourLive()
         {
@@ -35,16 +37,10 @@ namespace InitialProject.View
             context.Update(tour);
             context.SaveChanges(); 
             this.headerTextBlock.Text = tour.name;
-            //List<TourReservation> reservations = tourService.GetTourReservationsById(tour.id); ;
-            ////this.guestReservationsDataGrid.ItemsSource = tourService.GetTourReservationsById(tour.id);
-            //this.guestReservationsDataGrid.ItemsSource = reservations;
-            //this.guestReservationsDataGrid.ItemsSource = tourService.GetTourReservationsById(tour.id);
-            //this.guestReservationsDataGrid.ItemsSource = reservations;
             List<TourReservation> reservations = tourService.GetTourReservationsById(tour.id);
-            List<TourReservationsTodayDTO> tourReservationDtosToday = new List<TourReservationsTodayDTO>();
             foreach (TourReservation tr in reservations)
             {
-                tourReservationDtosToday.Add(tourService.createTourReservationsTodayDTO(tr));
+                tourReservationDtosToday.Add(tourReservationService.transformTourReservationToDTO(tr));
             }
             guestReservationsDataGrid.ItemsSource = tourReservationDtosToday;
             LoadKeyPoints(tour);
@@ -110,6 +106,22 @@ namespace InitialProject.View
                 tourLiveViewModel.EndTour(tour);
             }
         }
+
+        public void GuideConfirmed_ButtonClick(object sender, RoutedEventArgs e)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<TourLiveViewTransfer> requests = context.TourLiveViewTransfers.ToList();
+            Tour tour = tourService.GetById(requests.Last().tourId);
+            var selectedReservation = (TourReservationsTodayDTO)guestReservationsDataGrid.SelectedItem;
+            TourReservation tr = tourReservationService.GetById(selectedReservation.id);
+            tr.guideConfirmed = true; 
+            using (var db = new DataBaseContext())
+            {
+                db.TourReservations.Update(tr);
+                db.SaveChanges();
+            }
+            RefreshTourReservations(tour);  
+        }
         public void endTourButton_Click(object sender, RoutedEventArgs e)
         {
             DataBaseContext context = new DataBaseContext();
@@ -128,6 +140,17 @@ namespace InitialProject.View
                 keyPointsList.AddRange(db.KeyPoints.Where(kp => kp.tourId == tour.id));
             }
             keyPointsDataGrid.Items.Refresh();
+        }
+        private void RefreshTourReservations(Tour tour)
+        {
+            List<TourReservationsTodayDTO> dtos = new List<TourReservationsTodayDTO>();
+            List<TourReservation> reservations = tourService.GetTourReservationsById(tour.id);
+            foreach (TourReservation tr in reservations)
+            {
+                dtos.Add(tourReservationService.transformTourReservationToDTO(tr));
+            }
+
+            guestReservationsDataGrid.ItemsSource = dtos;
         }
 
     }

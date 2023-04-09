@@ -189,12 +189,23 @@
                             </Style>
                         </DataGrid.ColumnHeaderStyle>
                     </DataGrid>
-                    <!-- End tour button -->
-                    <Button Content="End tour"
+                    <StackPanel Orientation="Horizontal">
+                        <!-- End tour button -->
+                        <Button Content="End tour"
                             Style="{StaticResource denyButton}"
                             Click="endTourButton_Click"
                             Command="{Binding ShowToursTodayCommand}"
+                            Width="150"
+                            Margin="0, 20, 0, 0"
                             />
+                        <!-- Visited button -->
+                        <Button Content="Guest Arrieved"
+                            Style="{StaticResource acceptButton}"
+                            Click="GuideConfirmed_ButtonClick"
+                            Width="150"
+                            Margin="30, 20, 0, 0"
+                            />
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

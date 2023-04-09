@@ -11,11 +11,13 @@ namespace InitialProject.DTO
     {
         public int id { get; set; }
         public bool guestJoined { get; set; }
+        public bool guideConfirmed { get; set; }
 
-        public TourReservationsTodayDTO(int id, bool guestJoined)
+        public TourReservationsTodayDTO(int id)
         {
             this.id = id;
-            this.guestJoined = guestJoined;
+            this.guestJoined = false;
+            this.guideConfirmed = false;
         }
 
         public TourReservationsTodayDTO()
