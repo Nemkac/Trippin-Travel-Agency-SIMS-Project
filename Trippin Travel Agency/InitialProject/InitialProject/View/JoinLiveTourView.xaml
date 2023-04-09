@@ -213,9 +213,15 @@
                 
                 <TextBox Width="450" Height="150" Margin="-165 15 0 0"/>
 
-                <Button Style="{StaticResource addButtonWEB}" Width="150" Height="100" Margin="500 -150 0 0" Content="Submit" FontFamily="Ubuntu" FontSize="28" FontWeight="Medium"/>
-
-
+                <Button Style="{StaticResource addButtonWEB}" 
+                        Width="150" 
+                        Height="100" 
+                        Margin="500 -150 0 0" 
+                        Content="Submit" 
+                        FontFamily="Ubuntu" 
+                        FontSize="28" 
+                        FontWeight="Medium" 
+                        Name="SubmitButton" Click="SubmitRating"/>
 
             </StackPanel>
         </GroupBox>

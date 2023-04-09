@@ -34,7 +34,7 @@ namespace InitialProject.View
             DataBaseContext context = new DataBaseContext();
             TourService tourService = new TourService();    
             Tour activeTour = tourService.GetActiveTour(context);
-            
+            this.SubmitButton.IsEnabled = false;
             if (activeTour != null)
             {
                 this.TourNameLabel.Content = activeTour.name;
@@ -53,7 +53,8 @@ namespace InitialProject.View
                         break;
                     }
                 }
-            }
+            CheckForAttendanceConfirmation(context, activeTour);
+            }            
         }
         
 
@@ -71,5 +72,23 @@ namespace InitialProject.View
                 }
             }
         }
+
+        public void CheckForAttendanceConfirmation(DataBaseContext context, Tour activeTour)
+        {
+            foreach (TourReservation reservation in context.TourReservations.ToList())
+            {
+                if (reservation.guideConfirmed == true) { 
+                    this.SubmitButton.IsEnabled = true;
+                }
+            }
+        }
+
+        public void SubmitRating(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Klik");
+        }
+
+        
+
     }
 }

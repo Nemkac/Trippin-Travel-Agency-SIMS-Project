@@ -52,7 +52,15 @@ namespace InitialProject.View
 
         private void OpenMessage(object sender, RoutedEventArgs e)
         {
-
+            TourMessage tourMessage = this.dataGrid.SelectedItem as TourMessage;
+            DataBaseContext context = new DataBaseContext();
+            if (tourMessage != null)
+            {
+                TourAttendance tourAttendance = new TourAttendance(tourMessage.tourId,tourMessage.keyPointId,tourMessage.guestId);
+                context.TourAttendances.Add(tourAttendance);
+                context.TourMessages.Remove(tourMessage);
+                context.SaveChanges();
+            }
         }
     }
 }
