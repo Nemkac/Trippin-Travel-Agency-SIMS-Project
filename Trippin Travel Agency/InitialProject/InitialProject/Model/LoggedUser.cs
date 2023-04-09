@@ -12,6 +12,10 @@ namespace InitialProject.Model
 
         public static string username { get; set; }
 
+        public static string firstName { get; set; }
+        public static string lastName { get; set; }
+        public static string email { get; set; }
+
         public static string role { get; set; }
 
     }

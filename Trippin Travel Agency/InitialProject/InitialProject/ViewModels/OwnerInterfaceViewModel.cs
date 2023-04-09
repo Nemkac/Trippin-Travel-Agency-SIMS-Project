@@ -20,7 +20,6 @@ namespace InitialProject.ViewModels
         //Fields
         private ViewModelBase _currentChildView;
         private string _caption;
-        private IconChar _icon;
 
         private RequestDTO _requestDataGridSelectedItem;
 
@@ -53,20 +52,6 @@ namespace InitialProject.ViewModels
             }
         }
 
-        public IconChar Icon
-        {
-            get
-            {
-                return _icon;
-            }
-
-            set
-            {
-                _icon = value;
-                OnPropertyChanged(nameof(Icon));
-            }
-        }
-
         public RequestDTO RequestDataGridSelectedItem
         {
             get { return _requestDataGridSelectedItem; }
@@ -79,9 +64,12 @@ namespace InitialProject.ViewModels
 
         //--> Commands
         public ICommand ShowAcceptDenyViewCommand { get; }
+        public ICommand ShowReviewsViewCommand { get; }
+        public ICommand ShowProfileViewCommand { get; }
         public ICommand ShowOwnersBookingViewCommand { get; }
         public ICommand ShowAccommodationRegistrationViewCommand { get; }
         public ICommand ShowRequestViewCommand { get; }
+        public ICommand ShowNotificationsViewCommand { get; }
         public OwnerInterfaceViewModel()
         {
             //Initialize commands
@@ -89,6 +77,9 @@ namespace InitialProject.ViewModels
             ShowOwnersBookingViewCommand = new ViewModelCommand(ExecuteShowOwnersBookingViewCommand);
             ShowAccommodationRegistrationViewCommand = new ViewModelCommand(ExecuteShowAccommodationRegistrationViewCommand);
             ShowRequestViewCommand = new ViewModelCommand(ExecuteShowRequestViewCommand);
+            ShowProfileViewCommand = new ViewModelCommand(ExecuteShowProfileViewCommand);
+            ShowReviewsViewCommand = new ViewModelCommand(ExecuteShowReviewsViewCommand);
+            ShowNotificationsViewCommand = new ViewModelCommand(ExecuteShowNotificationsViewCommand);
             //Default view
             ExecuteShowOwnersBookingViewCommand(null);
         }
@@ -97,29 +88,42 @@ namespace InitialProject.ViewModels
         {
             CurrentChildView = new OwnersBookingDisplayViewModel();
             Caption = "Bookings";
-            Icon = IconChar.Bookmark;
         }
 
         public void ExecuteShowAcceptDenyViewCommand(object obj)
         {
             CurrentChildView = new AcceptDenyViewModel(this, _requestDataGridSelectedItem);
-     
             Caption = "Requests";
-            Icon = IconChar.ArrowDown;
         }
 
         public void ExecuteShowRequestViewCommand(object obj)
         {
             CurrentChildView = new RequestViewModel(this);
             Caption = "Requests";
-            Icon = IconChar.ArrowDown;
         }
 
         public void ExecuteShowAccommodationRegistrationViewCommand(object obj)
         {
             CurrentChildView = new AccommodationRegistrationViewModel();
             Caption = "New Accommodation";
-            Icon = IconChar.Plus;
+        }
+
+        public void ExecuteShowProfileViewCommand(object obj)
+        {
+            CurrentChildView = new ProfileViewModel(this);
+            Caption = "Profile";
+        }
+
+        public void ExecuteShowReviewsViewCommand(object obj)
+        {
+            CurrentChildView = new ReviewsViewModel();
+            Caption = "Reviews";
+        }
+
+        public void ExecuteShowNotificationsViewCommand(object obj)
+        {
+            CurrentChildView = new NotificationsViewModel();
+            Caption = "Notifications";
         }
     }
 }

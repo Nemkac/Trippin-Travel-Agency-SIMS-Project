@@ -32,6 +32,18 @@
             <owner:AcceptDenyRequests/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModel:ProfileViewModel}">
+            <owner:ProfileView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:ReviewsViewModel}">
+            <owner:ReviewsView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:NotificationsViewModel}">
+            <owner:NotificationsView/>
+        </DataTemplate>
+
         <Style x:Key="ButtonFocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -113,23 +125,56 @@
                 </StackPanel>
 
                 <!--Menu buttons-->
-                <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource HoverColor}" Command="{Binding ShowAccommodationRegistrationViewCommand}">
+                <RadioButton Style="{StaticResource menuButton}" 
+                             Tag="{StaticResource HoverColor}" 
+                             Command="{Binding ShowAccommodationRegistrationViewCommand}" 
+                             GroupName="MainWindowButtons">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Plus" Style="{StaticResource menuButtonIcon}"/>
                         <TextBlock Style="{StaticResource menuButtonText}" Text="New Accommodation"/>
                     </StackPanel>
                 </RadioButton>
-                <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource HoverColor}" Command="{Binding ShowOwnersBookingViewCommand}" IsChecked="True">
+                <RadioButton Style="{StaticResource menuButton}" 
+                             Tag="{StaticResource HoverColor}" 
+                             Command="{Binding ShowOwnersBookingViewCommand}" 
+                             GroupName="MainWindowButtons"
+                             IsChecked="True">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Bookmark" Style="{StaticResource menuButtonIcon}"/>
                         <TextBlock Style="{StaticResource menuButtonText}" Text="Bookings"/>
                     </StackPanel>
                 </RadioButton>
-
-                <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource HoverColor}" Command="{Binding ShowRequestViewCommand}" >
+                <RadioButton Style="{StaticResource menuButton}" 
+                             Tag="{StaticResource HoverColor}" 
+                             GroupName="MainWindowButtons">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="BuildingUser" Style="{StaticResource menuButtonIcon}"/>
+                        <TextBlock Style="{StaticResource menuButtonText}" Text="My Accommodations"/>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton Style="{StaticResource menuButton}" 
+                             Tag="{StaticResource HoverColor}" 
+                             Command="{Binding ShowRequestViewCommand}" 
+                             GroupName="MainWindowButtons">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="ArrowDown" Style="{StaticResource menuButtonIcon}"/>
                         <TextBlock Style="{StaticResource menuButtonText}" Text="Requests"/>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton Style="{StaticResource menuButton}" 
+                             Tag="{StaticResource HoverColor}" 
+                             GroupName="MainWindowButtons">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="Gear" Style="{StaticResource menuButtonIcon}"/>
+                        <TextBlock Style="{StaticResource menuButtonText}" Text="Renovations"/>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton Style="{StaticResource menuButton}" 
+                             Tag="{StaticResource HoverColor}" 
+                             GroupName="MainWindowButtons">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="Comment" Style="{StaticResource menuButtonIcon}"/>
+                        <TextBlock Style="{StaticResource menuButtonText}" Text="Forum"/>
                     </StackPanel>
                 </RadioButton>
 
@@ -139,7 +184,7 @@
                         Command="{Binding OnlineMode_Command}"
                         CommandParameter="{Binding ElementName=ToggleButton_OnlineMode}"
                         Style="{StaticResource ToggleButtonStyle1}"
-                        HorizontalAlignment="Center" Margin="0, 400, 0, 0">
+                        HorizontalAlignment="Center" Margin="0, 250, 0, 0">
                     <Label Content="DarkMode" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Ubuntu" FontWeight="Medium" Foreground="#FEFEFF" FontSize="16"/>
                 </ToggleButton>
 
@@ -157,7 +202,7 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <!--Header / Caption-->
-                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="55"/>
                     <!--Content/Child views-->
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
@@ -170,14 +215,27 @@
                     </Grid.ColumnDefinitions>
 
                     <!--Caption-->
-                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
-                        <fa:IconImage Icon="{Binding Icon}" Height="20" Width="20" Foreground="#003554" Margin="35, 0, 10, 0"/>
-                        <TextBlock Text="{Binding Caption}" Foreground="#003554" FontSize="18" FontWeight="Medium" FontFamily="Ubuntu" VerticalAlignment="Center"/>
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Bottom">
+                   
+                        <TextBlock Text="{Binding Caption}" Foreground="#003554" FontSize="28" FontWeight="Medium" FontFamily="Ubuntu" VerticalAlignment="Center" Margin="30 0 0 0"/>
                     </StackPanel>
 
                     <!--User-->
-                    <StackPanel Grid.Column="1" Orientation="Horizontal" FlowDirection="RightToLeft" VerticalAlignment="Center" Margin="0, 0, 35, 0">
-                        <Label Content="Hello, Nemanja" FontSize="18" FontWeight="Medium" FontFamily="Montserrat" Foreground="#003554"/>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" FlowDirection="LeftToRight" VerticalAlignment="Bottom" Margin="0, 14, 35, 0" HorizontalAlignment="Right">
+                        <RadioButton Style="{StaticResource headerButton}" IsChecked="False"
+                                     GroupName="MainWindowButtons" Margin="0 0 10 0"
+                                     Command="{Binding ShowNotificationsViewCommand}">
+                            <fa:IconImage Icon="Bell" Style="{StaticResource HeaderButtonIcon}"/>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource headerButton}" IsChecked="False"
+                                     GroupName="MainWindowButtons" Margin="0 0 10 0"
+                                     Command="{Binding ShowProfileViewCommand}">
+                            <fa:IconImage Icon="User" Style="{StaticResource HeaderButtonIcon}"/>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource headerButton}" IsChecked="False"
+                                     GroupName="MainWindowButtons">
+                            <fa:IconImage Icon="PowerOff" Style="{StaticResource HeaderButtonIcon}"/>
+                        </RadioButton>
                     </StackPanel>
                 </Grid>
 

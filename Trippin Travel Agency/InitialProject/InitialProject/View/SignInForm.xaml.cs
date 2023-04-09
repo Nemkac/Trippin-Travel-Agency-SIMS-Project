@@ -57,6 +57,9 @@ namespace InitialProject
                     LoggedUser.id = user.id;
                     LoggedUser.username = user.username;
                     LoggedUser.role = user.role;
+                    LoggedUser.firstName = user.firstName;
+                    LoggedUser.lastName = user.lastName;
+                    LoggedUser.email = user.email;
 
                     if (user.role == "Owner")
                     {
