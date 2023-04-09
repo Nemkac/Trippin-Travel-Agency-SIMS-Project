@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace InitialProject.Migrations
 {
     /// <inheritdoc />
-    public partial class Cp2MigrationMerge : Migration
+    public partial class blabla1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,6 +23,22 @@ namespace InitialProject.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AccommodationLocation", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AccommodationRates",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    bookingId = table.Column<int>(type: "INTEGER", nullable: false),
+                    cleanness = table.Column<int>(type: "INTEGER", nullable: false),
+                    ownerRate = table.Column<int>(type: "INTEGER", nullable: false),
+                    comment = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AccommodationRates", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -68,7 +84,7 @@ namespace InitialProject.Migrations
                     cleanness = table.Column<int>(type: "INTEGER", nullable: false),
                     respectingRules = table.Column<int>(type: "INTEGER", nullable: false),
                     comment = table.Column<string>(type: "TEXT", nullable: false),
-                    overallRating = table.Column<int>(type: "INTEGER", nullable: false),
+                    overallRating = table.Column<float>(type: "REAL", nullable: false),
                     userId = table.Column<int>(type: "INTEGER", nullable: false),
                     bookingId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
@@ -154,6 +170,9 @@ namespace InitialProject.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     username = table.Column<string>(type: "TEXT", nullable: false),
                     password = table.Column<string>(type: "TEXT", nullable: false),
+                    firstName = table.Column<string>(type: "TEXT", nullable: false),
+                    lastName = table.Column<string>(type: "TEXT", nullable: false),
+                    email = table.Column<string>(type: "TEXT", nullable: false),
                     role = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -255,6 +274,9 @@ namespace InitialProject.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AccommodationRates");
+
             migrationBuilder.DropTable(
                 name: "BookingDelaymentRequests");
 

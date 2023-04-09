@@ -15,14 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="MyDatabase.sqlite" />
     <None Remove="View\GuestOne Views\splu.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="MyDatabase.sqlite">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>

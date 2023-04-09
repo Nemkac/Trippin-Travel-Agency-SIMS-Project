@@ -46,7 +46,7 @@ namespace InitialProject.View.Owner_Views
             List<AccommodationRate> accommodationRates = accommodationRateContext.AccommodationRates.ToList();
             int numOfRates = accommodationRates.Count;
 
-            if (numOfRates >= 50)
+            if (numOfRates >= 1)
             {
                 if (totalRating < (decimal)9.5)
                 {

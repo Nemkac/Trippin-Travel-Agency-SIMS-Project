@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20230407222428_AddedACcommodationRate")]
-    partial class AddedACcommodationRate
+    [Migration("20230409204459_blabla1")]
+    partial class blabla1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -203,8 +203,8 @@ namespace InitialProject.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("overallRating")
-                        .HasColumnType("INTEGER");
+                    b.Property<float>("overallRating")
+                        .HasColumnType("REAL");
 
                     b.Property<int>("respectingRules")
                         .HasColumnType("INTEGER");
@@ -346,6 +346,18 @@ namespace InitialProject.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("firstName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("lastName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("password")
                         .IsRequired()

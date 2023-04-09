@@ -53,12 +53,19 @@ namespace InitialProject.Service
         {
             int ratesSum = 0;
             int numOfRates = availableRates.Count;
+            decimal totalRating;
             foreach (AccommodationRate item in availableRates)
             {
                 ratesSum = ratesSum + item.cleanness + item.ownerRate;
             }
 
-            decimal totalRating = Math.Round((decimal)ratesSum / numOfRates, 2);
+            if(numOfRates == 0)
+            {
+                totalRating = 0;
+                return totalRating;
+            }
+
+            totalRating = Math.Round((decimal)ratesSum / numOfRates, 2);
             return totalRating;
         }
     }
