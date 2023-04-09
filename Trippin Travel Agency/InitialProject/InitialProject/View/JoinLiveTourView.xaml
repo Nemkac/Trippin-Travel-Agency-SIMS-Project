@@ -59,7 +59,14 @@
                        Margin="380 -550 0 0"
                        HorizontalAlignment="Center"
                        Name ="KeyPointLabel"/>
-                <Button Width="200" Height="100" Margin="350 -350 0 0" Style="{StaticResource saveButtonWEB}" FontSize="32" FontWeight="Medium" FontFamily="Ubuntu">
+                <Button Width="200" 
+                        Height="100" 
+                        Margin="350 -350 0 0"
+                        Style="{StaticResource saveButtonWEB}" 
+                        FontSize="32" 
+                        FontWeight="Medium" 
+                        FontFamily="Ubuntu"
+                        Click="JoinTour">
 
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Check" Width="35" Margin="15 0 0 0"/>

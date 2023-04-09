@@ -49,24 +49,27 @@ namespace InitialProject.View
         {
             DataBaseContext context = new DataBaseContext();
             CouponDTO? selectedCoupon = this.CouponsDataGrid.SelectedItem as CouponDTO;
+
             foreach (Coupon coupon in context.Coupons.ToList()) {
                 if (selectedCoupon != null && coupon.id == selectedCoupon.id) { 
                     context.Coupons.Remove(coupon);
                 }
             }
+
             TourBookingTransfer tourBookingTransfer = context.tourBookingTransfers.First();
             Tour tour = context.Tours.SingleOrDefault(t => t.id == tourBookingTransfer.id);
             tour.touristLimit -= tourBookingTransfer.numberOfGuests;
             TourReservation tourReservation = new TourReservation(LoggedUser.id, tour.id, tourBookingTransfer.numberOfGuests);
+
+
             context.TourReservations.Add(tourReservation);
             context.SaveChanges();
-
             context.tourBookingTransfers.Remove(tourBookingTransfer);
             context.SaveChanges();
+
             ShowCoupons();
             this.CancelBookingButton.IsEnabled = false;
             this.FinishBookingButton.IsEnabled = false;
-
         }
         public void ShowCoupons() {
 

@@ -36,18 +36,25 @@ namespace InitialProject.View
             this.AccountTypeLabel.Content = "Account type:  " + LoggedUser.role;
             
             DataBaseContext context = new DataBaseContext();
+            LoadCoupons(context);
+        }
+
+
+
+        public void LoadCoupons(DataBaseContext context) {
             List<Coupon> coupons = context.Coupons.ToList();
 
             List<CouponDTO> dataList = new List<CouponDTO>();
             int counter = 0;
-            foreach(Coupon coup in coupons) {
-                if (coup.userId == LoggedUser.id) {
+            foreach (Coupon coup in coupons)
+            {
+                if (coup.userId == LoggedUser.id)
+                {
                     counter += 1;
-                    dataList.Add(new CouponDTO(coup.id,"Coupon" + counter, coup.exiresOn));
+                    dataList.Add(new CouponDTO(coup.id, "Coupon" + counter, coup.exiresOn));
                 }
             }
-            this.dataGrid.ItemsSource = dataList;   
+            this.dataGrid.ItemsSource = dataList;
         }
-
     }
 }

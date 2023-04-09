@@ -33,21 +33,8 @@ namespace InitialProject.View
             
             DataBaseContext context = new DataBaseContext();
             TourService tourService = new TourService();    
-            Tour activeTour = null;
-            List<Tour> bookedTours = new List<Tour>();  
-
-            foreach (TourReservation reservation in context.TourReservations.ToList()) {
-                if (reservation.guestId == LoggedUser.id) {
-                    bookedTours.Add(tourService.GetByID(reservation.tourId));
-                }
-            }
-            foreach (Tour tour in bookedTours) {
-                if (tour.active) {
-                    activeTour = tour;
-                    break;
-                }
-            }
-
+            Tour activeTour = tourService.GetActiveTour(context);
+            
             if (activeTour != null)
             {
                 this.TourNameLabel.Content = activeTour.name;
@@ -65,6 +52,22 @@ namespace InitialProject.View
                         this.KeyPointLabel.Content =  "'" + keyPoint.name + "'";
                         break;
                     }
+                }
+            }
+        }
+        
+
+        private void JoinTour(object sender, RoutedEventArgs e)
+        {
+            DataBaseContext context = new DataBaseContext();
+            TourService tourService = new TourService();
+            Tour activeTour = tourService.GetActiveTour(context);
+
+            foreach (TourReservation tourReservation in context.TourReservations.ToList()) {
+                if (tourReservation.tourId == activeTour.id)
+                { 
+                    tourReservation.guestJoined = true;
+                    context.SaveChanges();
                 }
             }
         }

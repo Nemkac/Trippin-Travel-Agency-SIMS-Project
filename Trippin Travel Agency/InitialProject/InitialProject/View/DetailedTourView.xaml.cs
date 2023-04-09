@@ -35,9 +35,8 @@ namespace InitialProject.View
 
             DataBaseContext context = new DataBaseContext();
             List<DetailedTourViewTransfer> requests = context.detailedTourViewTransfers.ToList();
-            this.TextBlock.Text = requests.First().tourId.ToString();
-            context.detailedTourViewTransfers.Remove(requests.First());
-            context.SaveChanges();
+            this.TextBlock.Text = requests.Last().tourId.ToString();
+           
             
         }
     }

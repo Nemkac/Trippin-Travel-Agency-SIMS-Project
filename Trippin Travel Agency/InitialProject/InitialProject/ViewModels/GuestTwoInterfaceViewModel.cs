@@ -31,6 +31,7 @@ namespace InitialProject.ViewModels
         public ICommand ShowTourViewCommand { get; }
         public ICommand ShowGuestTwoCoupons { get; }
         public ICommand ShowBookingConfirmation { get; }
+        public ICommand ShowGuestTwoMessages { get; }
         
         public ICommand ShowLiveTour { get; }
 
@@ -42,6 +43,8 @@ namespace InitialProject.ViewModels
             ShowGuestTwoCoupons = new ViewModelCommand(ExecuteShowGuestTwoCoupons);
 
             ShowLiveTour = new ViewModelCommand(ExecuteShowLiveTour);
+
+            ShowGuestTwoMessages = new ViewModelCommand(ExecuteShowGuestTwoMessages);
 
         }
 
@@ -69,6 +72,11 @@ namespace InitialProject.ViewModels
         public void ExecuteShowLiveTour(object obj)
         { 
             CurrentChildView = new JoinLiveTourViewModel();
+        }
+
+        public void ExecuteShowGuestTwoMessages(object obj)
+        {
+            CurrentChildView = new GuestTwoMesagesViewModel();
         }
 
     }

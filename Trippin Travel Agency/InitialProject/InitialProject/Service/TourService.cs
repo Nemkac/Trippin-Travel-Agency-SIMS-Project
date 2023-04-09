@@ -249,5 +249,25 @@ namespace InitialProject.Service
             return null;
         }
 
+        public Tour GetActiveTour(DataBaseContext context) {
+            Tour tour = new Tour();
+            List<Tour> bookedTours = new List<Tour>();
+            foreach (TourReservation reservation in context.TourReservations.ToList())
+            {
+                if (reservation.guestId == LoggedUser.id)
+                {
+                    bookedTours.Add(GetByID(reservation.tourId));
+                }
+            }
+            foreach (Tour t in bookedTours)
+            {
+                if (t.active)
+                {
+                    tour = t;
+                    break;
+                }
+            }
+            return tour;
+        }
     }
 }

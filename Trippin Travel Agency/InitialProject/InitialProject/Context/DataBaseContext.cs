@@ -23,6 +23,9 @@ namespace InitialProject.Context
 
         public DbSet<TourBookingTransfer> tourBookingTransfers { get; set; }
 
+        public DbSet<TourMessage> TourMessages { get; set; }    
+
+
         // Apsolute paths for every memeber of the team
 
         // Aleksa Simeunovic -> Desktop PC
