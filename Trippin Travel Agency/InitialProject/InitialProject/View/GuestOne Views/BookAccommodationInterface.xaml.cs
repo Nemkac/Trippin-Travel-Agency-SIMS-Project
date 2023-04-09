@@ -34,7 +34,17 @@ namespace InitialProject.View
 
         public void ShowBookings(dynamic result)
         {
+            AccommodationService accommodationService = new AccommodationService();
+            Accommodation accommodation = accommodationService.GetById(accommodationId);
+            AccommodationRateService accommodationRateService = new AccommodationRateService();
+            string accommodationInfoLabels = string.Empty;
+            string accommodationInfo = string.Empty;
+            accommodationInfoLabels = "Accommodation name:" + "\n\nCountry:" + "\n\nCity:" + "\n\nMaximum number of guests:" + "\n\nRating out of 10:";
+            accommodationInfo = accommodation.name + "\n\n" + accommodationService.GetAccommodationLocation(accommodationId)[0] + "\n\n" + accommodationService.GetAccommodationLocation(accommodationId)[1] + "\n\n" + accommodation.guestLimit + "\n\n" + accommodationRateService.GetAccommodationAverageRate(accommodationId);
             dataGrid.ItemsSource = result;
+            accommodationInfoLabelsBlock.Text = accommodationInfoLabels;
+            accommodationInfoBlock.Text = accommodationInfo;
+
         }
         public void SetAttributes(int accommodationId, int userId)
         {
@@ -61,11 +71,6 @@ namespace InitialProject.View
         {
             Booking booking = new Booking(accommodationId, arrival, departure, (DateTime.Parse(departure).Subtract(DateTime.Parse(arrival))).Days, userId);
             Service.BookingService.Save(booking);
-            string report = "";
-            report = "Accommodations name :" + accommodationService.GetById(accommodationId).name + "\nAccommodation id : " + accommodationId + "\nGuests id : " + userId;
-            report += "\nArrival : " + arrival + "\nDeparture : " + departure + "\nDays : " + (DateTime.Parse(departure).Subtract(DateTime.Parse(arrival))).Days;
-            report += "\nNo.of guests : " + guestsNumber + "\nAccommodation successfully booked !";
-            successfullyBooked.Text = report;
         }
 
         private void GetBasicAccommodationBookingProperties(out AccommodationService accommodationService, out string arrival, out string departure, out string guestsNumber)

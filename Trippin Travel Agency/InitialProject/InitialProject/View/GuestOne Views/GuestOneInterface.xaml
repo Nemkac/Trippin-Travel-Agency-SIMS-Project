@@ -11,8 +11,8 @@
             <RowDefinition Height="15*"/>
             <RowDefinition Height="34*"/>
         </Grid.RowDefinitions>
-        <DataGrid x:Name="dataGrid" Margin ="35,171,418,102" FontFamily="ubuntu" FontSize="22" Foreground="#FF192A56" BorderBrush="#FF192A56" Background="White" FontWeight="Medium" Grid.Row="1" />
-        <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" x:Name ="input_starting_date" Height="33" Width="170" Margin="1182,173,0,0" FontFamily="ubuntu" FontSize="22" Background="#FF192A56" RenderTransformOrigin="0.5,0.5" Grid.Row="1" >
+        <DataGrid x:Name="dataGrid" Margin ="35,171,338,102" FontFamily="ubuntu" FontSize="22" Foreground="#FF192A56" BorderBrush="#FF192A56" Background="White" FontWeight="Medium" Grid.Row="1" />
+        <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" x:Name ="input_starting_date" Height="33" Width="170" Margin="1182,173,0,0" FontFamily="ubuntu" FontSize="18" Background="#FF192A56" RenderTransformOrigin="0.5,0.5" Grid.Row="1" >
             <DatePicker.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -22,14 +22,14 @@
                 </TransformGroup>
             </DatePicker.RenderTransform>
         </DatePicker>
-        <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" x:Name ="input_ending_date"  Height="31" Width="170" Margin="1180,252,0,0" FontFamily="ubuntu" FontSize="22" Background="#FF192A56" Grid.Row="1"/>
-        <Label Content="Starting date" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35"  Width="145" Margin="1194,140,0,0" FontFamily="Ubuntu" FontSize="22" Grid.Row="1" FontWeight="medium" />
-        <Label Content="Ending date" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="37" Width="143" Margin="1202,224,0,0" FontFamily="Ubuntu" FontSize="22" Grid.Row="1" FontWeight="medium"/>
-        <Button Content="Check for dates" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="174" Click="CheckForDates" Margin="1183,389,0,0" FontFamily="ubuntu" FontSize="20" Background="#FF273C75" Foreground="White" Grid.Row="1"/>
+        <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" x:Name ="input_ending_date"  Height="31" Width="170" Margin="1180,252,0,0" FontFamily="ubuntu" FontSize="18" Background="#FF192A56" Grid.Row="1"/>
+        <Label Content="Starting date" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35"  Width="145" Margin="1194,140,0,0" FontFamily="Ubuntu" FontSize="22" Grid.Row="1" FontWeight="medium" Foreground="#FF192A56" />
+        <Label Content="Ending date" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="37" Width="143" Margin="1202,224,0,0" FontFamily="Ubuntu" FontSize="22" Grid.Row="1" FontWeight="medium" Foreground="#FF192A56"/>
+        <Button Content="Check for dates" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="174" Click="CheckForDates" Margin="1183,389,0,0" FontFamily="ubuntu" FontSize="20" Background="#FF273C75" Foreground="White" Grid.Row="1" FontWeight="Medium"/>
         <TextBox HorizontalAlignment="Left" Height="45" TextWrapping="Wrap" x:Name ="numberOfDays"  VerticalAlignment="Top" Width="90" Margin="1222,329,0,0" FontFamily="ubuntu" FontSize="22" Grid.Row="1" TextAlignment="Center" VerticalContentAlignment="Center"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Days to stay" VerticalAlignment="Top"  Height="30" Width="128" Margin="1205,299,0,0" FontFamily="ubuntu" FontSize="22" Grid.Row="1" FontWeight="medium"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Days to stay" VerticalAlignment="Top"  Height="30" Width="128" Margin="1205,299,0,0" FontFamily="ubuntu" FontSize="22" Grid.Row="1" FontWeight="medium" Foreground="#FF192A56"/>
         <TextBlock HorizontalAlignment="Left" Height="52" TextWrapping="Wrap" x:Name="warningText" VerticalAlignment="Top" Width="130" Margin="1514,562,0,0" FontFamily="ubuntu" Grid.Row="1"/>
-        <Button Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ShowAccommodations" Margin="104,127,0,0" FontFamily="ubuntu" Grid.Row="1"/>
+        <Button Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ShowAccommodations" Margin="111,123,0,0" FontFamily="ubuntu" Grid.Row="1"/>
         <Button Content="bukinzi" Height="15" Width="68" Click="GoToBookings" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,125,0,0" RenderTransformOrigin="0.462,0.727" FontFamily="Ubuntu" Grid.Row="1"/>
         <GroupBox Height="200" Header="Search by"  Width="1419" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,139,0,0" FontFamily="ubuntu" FontSize="36" FontWeight="Bold" Foreground="#FF192A56" BorderThickness="3" BorderBrush="#192a56" Opacity="1" RenderTransformOrigin="0,0" Grid.RowSpan="2">
             <GroupBox.RenderTransform>
@@ -41,13 +41,13 @@
                 </TransformGroup>
             </GroupBox.RenderTransform>
         </GroupBox>
-        <Label Content="Welcome !" FontSize ="72" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,14,0,0" FontFamily="ubuntu" FontWeight="Bold" Foreground="#192a56"/>
-        <Label Content="Name" HorizontalAlignment="Left" Margin="100,191,0,0" VerticalAlignment="Top" Width="79" FontFamily="ubuntu" FontSize="24" FontWeight="medium"/>
-        <Label Content="City" HorizontalAlignment="Left" Margin="566,189,0,0" VerticalAlignment="Top" Width="60" FontFamily="ubuntu" FontSize="24" FontWeight="medium"/>
-        <Label Content="Country" HorizontalAlignment="Left" Margin="313,187,0,0" VerticalAlignment="Top" Width="109" FontFamily="ubuntu" FontSize="24" FontWeight="medium"/>
-        <Label Content="Type" HorizontalAlignment="Left" Margin="808,193,0,0" VerticalAlignment="Top" Width="74" FontFamily="ubuntu" FontSize="24" FontWeight="medium"/>
-        <Label Content="No.of guests" HorizontalAlignment="Left" Margin="1017,192,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.396" Width="165" FontFamily="ubuntu" FontSize="24" FontWeight="medium"/>
-        <Label Content="No.of days" HorizontalAlignment="Left" Margin="1266,192,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.58" Width="152" FontFamily="ubuntu" FontSize="24" FontWeight="medium"/>
+        <Label Content="Welcome!" FontSize ="72" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,14,0,0" FontFamily="ubuntu" FontWeight="Bold" Foreground="#192a56"/>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="100,191,0,0" VerticalAlignment="Top" Width="79" FontFamily="ubuntu" FontSize="24" FontWeight="medium" Foreground="#FF192A56"/>
+        <Label Content="City" HorizontalAlignment="Left" Margin="566,189,0,0" VerticalAlignment="Top" Width="60" FontFamily="ubuntu" FontSize="24" FontWeight="medium" Foreground="#FF192A56"/>
+        <Label Content="Country" HorizontalAlignment="Left" Margin="313,187,0,0" VerticalAlignment="Top" Width="109" FontFamily="ubuntu" FontSize="24" FontWeight="medium" Foreground="#FF192A56"/>
+        <Label Content="Type" HorizontalAlignment="Left" Margin="808,193,0,0" VerticalAlignment="Top" Width="74" FontFamily="ubuntu" FontSize="24" FontWeight="medium" Foreground="#FF192A56"/>
+        <Label Content="No.of guests" HorizontalAlignment="Left" Margin="1017,192,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.396" Width="165" FontFamily="ubuntu" FontSize="24" FontWeight="medium" Foreground="#FF192A56"/>
+        <Label Content="No.of days" HorizontalAlignment="Left" Margin="1266,192,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.58" Width="152" FontFamily="ubuntu" FontSize="24" FontWeight="medium" Foreground="#FF192A56"/>
         <TextBox HorizontalAlignment="Left" Margin="61,237,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="150" Height="61" x:Name="input_name" TextAlignment="Center" FontFamily="Ubuntu" Grid.RowSpan="2" FontSize="22" VerticalContentAlignment="Center" KeyDown="GetByName"/>
         <TextBox HorizontalAlignment="Left" Margin="285,240,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="150" Height="60" RenderTransformOrigin="0.147,0.03" x:Name="input_country" TextAlignment="Center" FontFamily="ubuntu" Grid.RowSpan="2" FontSize="22" VerticalContentAlignment="Center" KeyDown="GetByCountry"/>
         <TextBox HorizontalAlignment="Left" Margin="768,237,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="150" Height="61" x:Name="input_type" TextAlignment="Center" FontFamily="ubuntu" Grid.RowSpan="2" FontSize="22" VerticalContentAlignment="Center" KeyDown="GetByType"/>
@@ -55,22 +55,13 @@
         <TextBox HorizontalAlignment="Left" Margin="1256,237,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="150" Height="61" x:Name="input_days" TextAlignment="Center" FontFamily="ubuntu" Grid.RowSpan="2" FontSize="22" VerticalContentAlignment="Center" KeyDown="GetByDays"/>
         <TextBox HorizontalAlignment="Left" Margin="521,237,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Height="61" x:Name="input_city" TextAlignment="Center" FontFamily="ubuntu" Grid.RowSpan="2" FontSize="22" VerticalContentAlignment="Center" KeyDown="GetByCity"/>
 
-        <Rectangle x:Name="rectangle1" Fill="#273c75" Margin="-9,127,9,101" RenderTransformOrigin="0.5,0.5" >
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
-        </Rectangle>
+
         <GroupBox Header="Navigator" Margin="985,1,26,130" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
             <StackPanel>
                 <TextBlock Width="478" FontWeight="medium"><Run Text="Press CTRL+N for program map" FontFamily="ubuntu"/></TextBlock>
             </StackPanel>
         </GroupBox>
-        <GroupBox Header="Help" Margin="35,0,1114,138" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
+        <GroupBox Header="Help" Margin="29,0,1120,138" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
             <StackPanel>
                 <TextBlock Height="39" FontWeight="medium"><Run Text="Press CTRL+H for help"/></TextBlock>
             </StackPanel>
@@ -78,5 +69,7 @@
         <Rectangle HorizontalAlignment="Left" Height="65" Margin="-30,468,0,0" Fill ="#273c75" Stroke="Black" VerticalAlignment="Top" Width="1674" Grid.Row="1"/>
         <TextBlock HorizontalAlignment="Left" Height="72" Margin="609,462,0,0" TextWrapping="Wrap" Text="Trippin' Travel" VerticalAlignment="Top" Width="325" Foreground="white" FontSize="48" FontWeight="Bold" Grid.Row="1" />
         <TextBlock HorizontalAlignment="Left" Height="25" Margin="435,127,0,0" Grid.Row="1" TextWrapping="Wrap" Name="debug"  VerticalAlignment="Top" Width="279"/>
+        <Button Content="zahtevi zodlaganje" HorizontalAlignment="Left" Height="25" Margin="179,127,0,0" Grid.Row="1" VerticalAlignment="Top" Width="117" Click="GoToBookingDelaymentRequests"/>
+        <Rectangle HorizontalAlignment="Left" Height="5" Margin="28,0,0,0" Stroke="#FF192A56" VerticalAlignment="Center" Width="1434" Fill="#192a56"/>
     </Grid>
 </Window>

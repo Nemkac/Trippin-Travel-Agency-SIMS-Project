@@ -31,6 +31,22 @@ namespace InitialProject.Service
             return allBookings;
         }
 
+        public List<BookingDelaymentRequest> GetBookingDelaymentRequests(int id)
+        {
+            DataBaseContext context = new DataBaseContext();
+            BookingService bookingService = new BookingService();
+            List<BookingDelaymentRequest> bookingDelaymentRequests = context.BookingDelaymentRequests.ToList();
+            List<BookingDelaymentRequest> foundBookingDelaymentRequests = new List<BookingDelaymentRequest>();
+            foreach(BookingDelaymentRequest bookingDelaymentRequest in bookingDelaymentRequests)
+            {
+                if ((bookingService.GetById(bookingDelaymentRequest.bookingId)).guestId == id)
+                {
+                    foundBookingDelaymentRequests.Add(bookingDelaymentRequest);
+                }
+            }
+            return foundBookingDelaymentRequests;
+        }
+
         public List<Booking> GetGuestsPastBookings(int id)
         {
             DataBaseContext context = new DataBaseContext();

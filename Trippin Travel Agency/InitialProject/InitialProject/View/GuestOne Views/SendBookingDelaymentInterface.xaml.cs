@@ -31,6 +31,8 @@ namespace InitialProject.View
         public void SetAttribures(Booking selectedBooking)
         {
             this.selectedBooking = selectedBooking;
+            bookingInfoLabelsBlock.Text = "Booking ID:" + "\n\nInitial arrival date" + "\n\nInitiral departure date:";
+            bookingInfoBlock.Text = selectedBooking.Id + "\n\n" + selectedBooking.arrival + "\n\n" + selectedBooking.departure;
         }
 
         private void SendBookingDelaymentRequest(object sender, RoutedEventArgs e)

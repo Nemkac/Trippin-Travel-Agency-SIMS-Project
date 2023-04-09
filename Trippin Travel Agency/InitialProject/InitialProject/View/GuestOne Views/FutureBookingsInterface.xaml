@@ -1,0 +1,33 @@
+﻿<Window x:Class="InitialProject.View.FutureBookingsInterface"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View"
+        mc:Ignorable="d"
+        Title="FutureBookingsInterface" Height="800" Width="1500" >
+    <Grid>
+        <GroupBox HorizontalAlignment="Center" Height="432" Header="My upcoming bookings" Margin="0,141,0,0" VerticalAlignment="Top" Width="1032" FontFamily="ubuntu" FontSize="36" FontWeight="Medium" Foreground="#FF192A56" BorderThickness="3" BorderBrush="#192a56"/>
+
+        <DataGrid HorizontalAlignment="Center" Height="246" Margin="0,201,0,0" VerticalAlignment="Top" Width="868" x:Name ="futureBookingsGrid" FontFamily="ubuntu" FontSize="22" Foreground="#FF192A56" BorderBrush="#FF192A56" Background="White" FontWeight="Medium"/>
+        <Button Content="Send a delayment request" HorizontalAlignment="Left" Height="57" Margin="638,481,0,0" VerticalAlignment="Top" Width="262" Click="GoToBookingDelayment" FontFamily="ubuntu" FontSize="20" Background="#FF273C75" Foreground="White" FontWeight="Medium"/>
+        <Button Content="Cancel booking" HorizontalAlignment="Left" Height="57" Margin="1032,481,0,0" VerticalAlignment="Top" Width="152" Click="DeleteBooking" FontFamily="ubuntu" FontSize="20" Background="#FF273C75" Foreground="White" FontWeight="Medium"/>
+        <Button Content="My previous bookings" HorizontalAlignment="Left" Height="57" Margin="638,601,0,0" VerticalAlignment="Top" Width="262" Click="ShowPastBookings" FontFamily="ubuntu" FontSize="20" Background="#FF273C75" Foreground="White" FontWeight="Medium"/>
+        <Button Content="Show detailed" HorizontalAlignment="Left" Height="57" Margin="316,481,0,0" VerticalAlignment="Top" Width="154" Click="ShowDetailed" FontFamily="ubuntu" FontSize="20" Background="#FF273C75" Foreground="White" FontWeight="Medium"/>
+        <Label Content="" FontSize ="72" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,14,0,0" FontFamily="ubuntu" FontWeight="Bold" Foreground="#192a56"/>
+        <GroupBox Header="Navigator" Margin="985,1,26,662" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
+            <StackPanel>
+                <TextBlock Width="478" FontWeight="medium"><Run Text="Press CTRL+N for program map" FontFamily="ubuntu"/></TextBlock>
+            </StackPanel>
+        </GroupBox>
+        <Rectangle HorizontalAlignment="Left" Height="65" Margin="-30,708,0,0" Fill ="#273c75" Stroke="Black" VerticalAlignment="Top" Width="1674"/>
+        <TextBlock HorizontalAlignment="Left" Height="72" Margin="609,702,0,0" TextWrapping="Wrap" Text="Trippin' Travel" VerticalAlignment="Top" Width="325" Foreground="white" FontSize="48" FontWeight="Bold" />
+        <GroupBox Header="Help" Margin="35,0,1114,662" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
+            <StackPanel>
+                <TextBlock Height="39" FontWeight="medium"><Run Text="Press CTRL+H for help"/></TextBlock>
+            </StackPanel>
+        </GroupBox>
+        <Label Content="Here Soon" FontSize ="64" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,24,0,0" FontFamily="ubuntu" FontWeight="Bold" Foreground="#192a56"/>
+        <Rectangle HorizontalAlignment="Left" Height="5" Margin="35,120,0,0" Stroke="#FF192A56" VerticalAlignment="Top" Width="1435" Fill="#192a56"/>
+    </Grid>
+</Window>

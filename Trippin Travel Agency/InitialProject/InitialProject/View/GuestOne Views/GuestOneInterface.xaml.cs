@@ -101,7 +101,7 @@ namespace InitialProject.View
 
         private void GetByCity(object sender, KeyEventArgs k)
         {
-            string input = input_country.Text + k.Key.ToString();
+            string input = input_city.Text + k.Key.ToString();
             AccommodationService accommodationService = new AccommodationService();
             List<AccommodationDTO> dtos = new List<AccommodationDTO>();
             dtos = dataGrid.ItemsSource as List<AccommodationDTO>;
@@ -119,7 +119,7 @@ namespace InitialProject.View
 
         private void GetByType(object sender, KeyEventArgs k)
         {
-            string input = input_country.Text + k.Key.ToString();
+            string input = input_type.Text + k.Key.ToString();
             AccommodationService accommodationService = new AccommodationService();
             List<AccommodationDTO> dtos = new List<AccommodationDTO>();
             dtos = dataGrid.ItemsSource as List<AccommodationDTO>;
@@ -187,7 +187,11 @@ namespace InitialProject.View
                 BookAccommodationInterface BookAccommodationInterface = new BookAccommodationInterface();
                 BookAccommodationInterface.SetAttributes(selectedAccommodation.id,LoggedUser.id);
                 BookAccommodationInterface.ShowBookings(result);
+                BookAccommodationInterface.WindowStartupLocation = WindowStartupLocation.Manual;
+                BookAccommodationInterface.Left = this.Left;
+                BookAccommodationInterface.Top = this.Top;
                 BookAccommodationInterface.Show();
+                this.Close();
             }
         }
 
@@ -216,8 +220,21 @@ namespace InitialProject.View
         private void GoToBookings(object sender, RoutedEventArgs e)
         {
             FutureBookingsInterface futureBookingsInterface = new FutureBookingsInterface();
+            futureBookingsInterface.WindowStartupLocation = WindowStartupLocation.Manual;
+            futureBookingsInterface.Left = this.Left;
+            futureBookingsInterface.Top = this.Top;
             this.Close();
             futureBookingsInterface.Show();
+        }
+
+        private void GoToBookingDelaymentRequests(object sender, RoutedEventArgs e)
+        {
+            GuestsBookingDelaymentRequestsInterface guestsBookingDelaymentRequestsInterface = new GuestsBookingDelaymentRequestsInterface();
+            guestsBookingDelaymentRequestsInterface.WindowStartupLocation = WindowStartupLocation.Manual;
+            guestsBookingDelaymentRequestsInterface.Left = this.Left;
+            guestsBookingDelaymentRequestsInterface.Top = this.Top;
+            this.Close();
+            guestsBookingDelaymentRequestsInterface.Show();
         }
     }
 }

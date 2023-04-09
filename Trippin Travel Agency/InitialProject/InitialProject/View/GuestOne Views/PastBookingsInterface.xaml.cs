@@ -43,6 +43,9 @@ namespace InitialProject.View
         {
             RateAccommodationInterface RateAccommodationInterface = new RateAccommodationInterface();
             RateAccommodationInterface.SetAttributes(((Booking)pastBookingsGrid.SelectedItem).Id);
+            RateAccommodationInterface.WindowStartupLocation = WindowStartupLocation.Manual;
+            RateAccommodationInterface.Left = this.Left;
+            RateAccommodationInterface.Top = this.Top;
             this.Close();
             RateAccommodationInterface.Show();
         }

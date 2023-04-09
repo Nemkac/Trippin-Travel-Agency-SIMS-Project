@@ -31,13 +31,12 @@ namespace InitialProject.View
         public void SetAttributes(int bookingId)
         {
             this.bookingId = bookingId;
-            showBookingId.Text = bookingId.ToString();
         }
         
         private void LeaveReview(object sender, RoutedEventArgs e)
         {
             AccommodationRateService accommodationRateService = new AccommodationRateService();
-            AccommodationRate accommodationRate = new AccommodationRate(bookingId, int.Parse(cleannessInput.Text), int.Parse(ownerRateInput.Text), commentInput.Text);
+            AccommodationRate accommodationRate = new AccommodationRate(bookingId, Convert.ToInt32(cleannesInput.Value), Convert.ToInt32(ownerRateInput.Value), commentInput.Text);
             AccommodationRateService.Save(accommodationRate);        
         }
     }

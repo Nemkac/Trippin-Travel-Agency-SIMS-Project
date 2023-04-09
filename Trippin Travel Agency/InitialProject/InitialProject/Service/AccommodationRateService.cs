@@ -16,5 +16,23 @@ namespace InitialProject.Service
             saveContext.Attach(accommodationRate);
             saveContext.SaveChanges();
         }
+
+        public double GetAccommodationAverageRate(int accommodationId)
+        {
+            DataBaseContext context = new DataBaseContext();
+            BookingService bookingService = new BookingService();
+            List<AccommodationRate> rates = context.AccommodationRates.ToList();
+            double averageRate = 0.0;
+            int ratesCounter = 0;
+            foreach(AccommodationRate rate in rates)
+            {
+                if (bookingService.GetById(rate.bookingId).accommodationId == accommodationId)
+                {
+                    averageRate += rate.cleanness + rate.ownerRate;
+                    ratesCounter++;
+                }
+            }
+            return averageRate / (ratesCounter * 2);
+        }
     }
 }

@@ -39,6 +39,10 @@ namespace InitialProject.View
         private void ShowPastBookings(object sender, RoutedEventArgs e)
         {
             PastBookingsInterface pastBookingsInterface = new PastBookingsInterface();
+            pastBookingsInterface.WindowStartupLocation = WindowStartupLocation.Manual;
+            pastBookingsInterface.Left = this.Left;
+            pastBookingsInterface.Top = this.Top;
+            this.Close();
             this.Close();
             pastBookingsInterface.Show();
         }
@@ -55,6 +59,9 @@ namespace InitialProject.View
         {
             SendBookingDelaymentInterface sendBookingDelaymentInterface = new SendBookingDelaymentInterface();
             sendBookingDelaymentInterface.SetAttribures((Booking)futureBookingsGrid.SelectedItem);
+            sendBookingDelaymentInterface.WindowStartupLocation = WindowStartupLocation.Manual;
+            sendBookingDelaymentInterface.Left = this.Left;
+            sendBookingDelaymentInterface.Top = this.Top;
             this.Close();
             sendBookingDelaymentInterface.Show();
         }
