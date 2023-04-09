@@ -14,6 +14,8 @@ namespace InitialProject.Model
         public int cleanness { get; set; }
         public int ownerRate { get; set; }
         public string comment { get; set; }
+        public List<Image> images { get; set; }
+
         public AccommodationRate() { }
 
         public AccommodationRate(int bookingId, int cleanness, int ownerRate, string comment)
@@ -22,6 +24,7 @@ namespace InitialProject.Model
             this.cleanness = cleanness;
             this.ownerRate = ownerRate;
             this.comment = comment;
+            this.images = null;
         }
 
     }

@@ -35,8 +35,8 @@
                 BorderBrush="Transparent" Click="Button_Click">
             <StackPanel Orientation="Horizontal"
                                 Margin="0, 0, 0 ,0">
-                <fa:IconImage Icon="PlusCircle" HorizontalAlignment="Left" Width="30" Height="30" Foreground="#F4FFF8"/>
-                <Label Content="Show Details" FontSize="25" FontFamily="Ubuntu" FontWeight="SemiBold" Foreground="#F4FFF8"/>
+                <fa:IconImage Icon="PlusCircle" HorizontalAlignment="Left" Width="23" Height="23" Foreground="#F4FFF8" VerticalAlignment="Center" Margin="0 3 0 0"/>
+                <Label VerticalAlignment="Center" Content="Show Details" FontSize="25" FontFamily="Ubuntu" FontWeight="Regular" Foreground="#F4FFF8" Margin="10 0 0 0"/>
             </StackPanel>
         </Button>
         <ContentControl Content="{Binding CurrentChildView}"/>

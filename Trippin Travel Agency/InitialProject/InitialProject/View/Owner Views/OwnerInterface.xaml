@@ -130,7 +130,7 @@
                              Command="{Binding ShowAccommodationRegistrationViewCommand}" 
                              GroupName="MainWindowButtons">
                     <StackPanel Orientation="Horizontal">
-                        <fa:IconImage Icon="Plus" Style="{StaticResource menuButtonIcon}"/>
+                        <fa:IconImage Icon="Plus" Style="{StaticResource menuButtonIconTablet}"/>
                         <TextBlock Style="{StaticResource menuButtonText}" Text="New Accommodation"/>
                     </StackPanel>
                 </RadioButton>
@@ -140,7 +140,7 @@
                              GroupName="MainWindowButtons"
                              IsChecked="True">
                     <StackPanel Orientation="Horizontal">
-                        <fa:IconImage Icon="Bookmark" Style="{StaticResource menuButtonIcon}"/>
+                        <fa:IconImage Icon="Bookmark" Style="{StaticResource menuButtonIconTablet}"/>
                         <TextBlock Style="{StaticResource menuButtonText}" Text="Bookings"/>
                     </StackPanel>
                 </RadioButton>
@@ -148,7 +148,7 @@
                              Tag="{StaticResource HoverColor}" 
                              GroupName="MainWindowButtons">
                     <StackPanel Orientation="Horizontal">
-                        <fa:IconImage Icon="BuildingUser" Style="{StaticResource menuButtonIcon}"/>
+                        <fa:IconImage Icon="BuildingUser" Style="{StaticResource menuButtonIconTablet}"/>
                         <TextBlock Style="{StaticResource menuButtonText}" Text="My Accommodations"/>
                     </StackPanel>
                 </RadioButton>
@@ -157,7 +157,7 @@
                              Command="{Binding ShowRequestViewCommand}" 
                              GroupName="MainWindowButtons">
                     <StackPanel Orientation="Horizontal">
-                        <fa:IconImage Icon="ArrowDown" Style="{StaticResource menuButtonIcon}"/>
+                        <fa:IconImage Icon="ArrowDown" Style="{StaticResource menuButtonIconTablet}"/>
                         <TextBlock Style="{StaticResource menuButtonText}" Text="Requests"/>
                     </StackPanel>
                 </RadioButton>
@@ -165,7 +165,7 @@
                              Tag="{StaticResource HoverColor}" 
                              GroupName="MainWindowButtons">
                     <StackPanel Orientation="Horizontal">
-                        <fa:IconImage Icon="Gear" Style="{StaticResource menuButtonIcon}"/>
+                        <fa:IconImage Icon="Gear" Style="{StaticResource menuButtonIconTablet}"/>
                         <TextBlock Style="{StaticResource menuButtonText}" Text="Renovations"/>
                     </StackPanel>
                 </RadioButton>
@@ -173,7 +173,7 @@
                              Tag="{StaticResource HoverColor}" 
                              GroupName="MainWindowButtons">
                     <StackPanel Orientation="Horizontal">
-                        <fa:IconImage Icon="Comment" Style="{StaticResource menuButtonIcon}"/>
+                        <fa:IconImage Icon="Comment" Style="{StaticResource menuButtonIconTablet}"/>
                         <TextBlock Style="{StaticResource menuButtonText}" Text="Forum"/>
                     </StackPanel>
                 </RadioButton>
