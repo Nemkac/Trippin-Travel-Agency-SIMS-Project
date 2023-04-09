@@ -16,7 +16,7 @@ namespace InitialProject.Service
             return context.Users.SingleOrDefault(u => u.id == id);
         }
 
-        public List<Booking> GetAllGuestsBookings(int id)
+        public List<Booking> GetGuestsBookings(int id)
         {
             DataBaseContext context = new DataBaseContext();
             List<Booking> bookings = context.Bookings.ToList();
@@ -46,6 +46,47 @@ namespace InitialProject.Service
             }
             return foundBookingDelaymentRequests;
         }
+
+        public List<BookingDelaymentRequest> GetResolvedBookingDelaymentRequests()
+        {
+            DataBaseContext context = new DataBaseContext();
+            BookingService bookingService = new BookingService();
+            List<BookingDelaymentRequest> bookingDelaymentRequests = context.BookingDelaymentRequests.ToList();
+            List<BookingDelaymentRequest> foundRequests = new List<BookingDelaymentRequest>();
+            foreach (BookingDelaymentRequest bookingDelaymentRequest in bookingDelaymentRequests)
+            {
+                if (bookingService.GetById(bookingDelaymentRequest.bookingId).guestId == LoggedUser.id && (bookingDelaymentRequest.status == Status.Accepted || bookingDelaymentRequest.status == Status.Denied))
+                {
+                    foundRequests.Add(bookingDelaymentRequest);
+                }
+            }
+            if (foundRequests.Count > 0)
+            {
+                return foundRequests;
+            }
+            return null;
+        }
+
+        public List<BookingDelaymentRequest> GetPendingBookingDelaymentRequests()
+        {
+            DataBaseContext context = new DataBaseContext();
+            BookingService bookingService = new BookingService();
+            List<BookingDelaymentRequest> bookingDelaymentRequests = context.BookingDelaymentRequests.ToList();
+            List<BookingDelaymentRequest> foundRequests = new List<BookingDelaymentRequest>();
+            foreach (BookingDelaymentRequest bookingDelaymentRequest in bookingDelaymentRequests)
+            {
+                if (bookingService.GetById(bookingDelaymentRequest.bookingId).guestId == LoggedUser.id && bookingDelaymentRequest.status == Status.Pending)
+                {
+                    foundRequests.Add(bookingDelaymentRequest);
+                }
+            }
+            if (foundRequests.Count > 0)
+            {
+                return foundRequests;
+            }
+            return null;
+        }
+
 
         public List<Booking> GetGuestsPastBookings(int id)
         {

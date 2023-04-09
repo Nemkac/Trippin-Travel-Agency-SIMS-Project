@@ -7,10 +7,11 @@
         mc:Ignorable="d"
         Title="GuestsBookingDelaymentRequestsInterface" Height="800" Width="1500">
     <Grid>
-        <GroupBox HorizontalAlignment="Left" Height="494" Header="My date delayment requests" Margin="332,0,0,0" VerticalAlignment="Center" Width="950" FontFamily="ubuntu" FontSize="36" FontWeight="Bold" Foreground="#FF192A56" BorderThickness="3" BorderBrush="#192a56"/>
 
-        <DataGrid HorizontalAlignment="Left" Height="378" Margin="398,215,0,0" VerticalAlignment="Top" Width="695" x:Name="bookingDelaymentRequestsGrid" FontFamily="ubuntu" FontSize="22" Foreground="#FF192A56" BorderBrush="#FF192A56" Background="White" FontWeight="Medium"/>
-        <Label Content="Welcome!" FontSize ="72" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,14,0,0" FontFamily="ubuntu" FontWeight="Bold" Foreground="#192a56"/>
+        <GroupBox HorizontalAlignment="Left" Height="517" Header="Resolved requests" Margin="772,147,0,0" VerticalAlignment="Top" Width="696" FontFamily="ubuntu" FontSize="36" FontWeight="Bold" Foreground="#FF192A56" BorderThickness="3" BorderBrush="#192a56"/>
+
+        <DataGrid HorizontalAlignment="Left" Height="305" Margin="807,213,0,0" VerticalAlignment="Top" Width="636" x:Name="resolvedRequestsGrid" FontFamily="ubuntu" FontSize="18" Foreground="#FF192A56" BorderBrush="#FF192A56" Background="White" FontWeight="Medium" TextBlock.TextAlignment="Center" MinRowHeight="50" />
+        <Label Content="My requests" FontSize ="64" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,16,0,0" FontFamily="ubuntu" FontWeight="Bold" Foreground="#192a56"/>
         <GroupBox Header="Navigator" Margin="985,1,26,665" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
             <StackPanel>
                 <TextBlock Width="478" FontWeight="medium"><Run Text="Press CTRL+N for program map" FontFamily="ubuntu"/></TextBlock>
@@ -24,6 +25,13 @@
             </StackPanel>
         </GroupBox>
         <Rectangle HorizontalAlignment="Left" Height="5" Margin="28,119,0,0" Stroke="#FF192A56" VerticalAlignment="Top" Width="1434" Fill="#192a56"/>
+        <Button Content="Check a comment" HorizontalAlignment="Left" Height="44" Margin="859,558,0,0" VerticalAlignment="Top" Width="232" FontFamily="ubuntu" FontSize="24" Background="#FF273C75" Foreground="White" FontWeight="Medium" Click="ShowResolvedRequestComment" RenderTransformOrigin="0.642,0.524"/>
+        <Button Content="Got it!" HorizontalAlignment="Left" Height="44" Margin="1168,558,0,0" VerticalAlignment="Top" Width="232" FontFamily="ubuntu" FontSize="24" Background="#FF273C75" Foreground="White" FontWeight="Medium" Click="DeleteResolvedRequest"/>
+        <GroupBox HorizontalAlignment="Left" Height="517" Header="Pending requests" Margin="43,147,0,0" VerticalAlignment="Top" Width="696" FontFamily="ubuntu" FontSize="36" FontWeight="Bold" Foreground="#FF192A56" BorderThickness="3" BorderBrush="#192a56"/>
+        <DataGrid HorizontalAlignment="Left" Height="305" Margin="73,213,0,0" VerticalAlignment="Top" Width="636" Name="pendingRequestsGrid" FontFamily="ubuntu" FontSize="18" Foreground="#FF192A56" BorderBrush="#FF192A56" Background="White" FontWeight="Medium" TextBlock.TextAlignment="Center" MinRowHeight="50" />
+        <Button Content="Check a comment" HorizontalAlignment="Left" Height="44" Margin="117,558,0,0" VerticalAlignment="Top" Width="232" FontFamily="ubuntu" FontSize="24" Background="#FF273C75" Foreground="White" FontWeight="Medium" Click="ShowPendingRequestComment"/>
+        <Button Content="Cancel request" HorizontalAlignment="Left" Height="44" Margin="426,558,0,0" VerticalAlignment="Top" Width="232" FontFamily="ubuntu" FontSize="24" Background="#FF273C75" Foreground="White" FontWeight="Medium" Click="DeletePendingRequest"/>
+        <TextBlock HorizontalAlignment="Left" Height="62" Margin="911,611,0,0" TextWrapping="Wrap" Text="By pressing Got it! you are removing selected request from history and you won't get notification for it any more" VerticalAlignment="Top" Width="418" FontSize="16" TextAlignment="center" Foreground="#FF5F5656" FontFamily="ubuntu"/>
 
     </Grid>
 </Window>

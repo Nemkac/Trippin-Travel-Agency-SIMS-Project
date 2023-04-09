@@ -31,7 +31,7 @@
         <TextBlock HorizontalAlignment="Left" Height="52" TextWrapping="Wrap" x:Name="warningText" VerticalAlignment="Top" Width="130" Margin="1514,562,0,0" FontFamily="ubuntu" Grid.Row="1"/>
         <Button Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ShowAccommodations" Margin="111,123,0,0" FontFamily="ubuntu" Grid.Row="1"/>
         <Button Content="bukinzi" Height="15" Width="68" Click="GoToBookings" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,125,0,0" RenderTransformOrigin="0.462,0.727" FontFamily="Ubuntu" Grid.Row="1"/>
-        <GroupBox Height="200" Header="Search by"  Width="1419" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,139,0,0" FontFamily="ubuntu" FontSize="36" FontWeight="Bold" Foreground="#FF192A56" BorderThickness="3" BorderBrush="#192a56" Opacity="1" RenderTransformOrigin="0,0" Grid.RowSpan="2">
+        <GroupBox Height="200" Header="Search by"  Width="1419" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,139,0,0" FontFamily="ubuntu" FontSize="36" FontWeight="Bold" Foreground="#FF192A56" BorderThickness="3" BorderBrush="#192a56" Opacity="1" RenderTransformOrigin="0,0" Grid.RowSpan="2" Background="#EDF0FF">
             <GroupBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

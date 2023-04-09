@@ -35,21 +35,6 @@ namespace InitialProject.Service
             context.Remove(booking);
             context.SaveChanges();
         }
-
-        /*public Booking GetById(int bookingId)
-        {
-            DataBaseContext guestIdContext = new DataBaseContext();
-            List<Booking> bookings = guestIdContext.Bookings.ToList();
-
-            foreach (Booking booking in bookings.ToList())
-            {
-                if (booking.Id == bookingId)
-                {
-                    return booking;
-                }
-            }
-            return null;
-        }*/
         
         public RequestDTO CreateRequestDTO(BookingDelaymentRequest bookingDelaymentRequest)
         {
@@ -148,6 +133,11 @@ namespace InitialProject.Service
                 displayableDates.Add(date);
             }
             return displayableDates;
+        }
+
+        public bool CheckIfValidForRating(Booking booking)
+        {
+            return !(DateTime.Today.Subtract(DateTime.Parse(booking.departure)).Days > 5);
         }
     }
 }

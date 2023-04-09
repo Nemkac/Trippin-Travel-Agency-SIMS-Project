@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="PastBookingsInterface" Height="800" Width="1500">
     <Grid>
-        <GroupBox HorizontalAlignment="Center" Height="432" Header="My upcoming bookings" Margin="0,160,0,0" VerticalAlignment="Top" Width="1032" FontFamily="ubuntu" FontSize="36" FontWeight="Bold" Foreground="#FF192A56" BorderThickness="3" BorderBrush="#192a56"/>
+        <GroupBox HorizontalAlignment="Center" Height="432" Header="My previous bookings" Margin="0,160,0,0" VerticalAlignment="Top" Width="1032" FontFamily="ubuntu" FontSize="36" FontWeight="Bold" Foreground="#FF192A56" BorderThickness="3" BorderBrush="#192a56"/>
         <Button Content="Leave a review" HorizontalAlignment="Left" Height="57" Margin="407,503,0,0" VerticalAlignment="Top" Width="266" Click= "ShowRateInterface" FontFamily="ubuntu" FontSize="20" Background="#FF273C75" Foreground="White" FontWeight="Medium"/>
         <Label Content="Booking archive" FontSize ="64" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="473,27,0,0" FontFamily="ubuntu" FontWeight="Bold" Foreground="#192a56"/>
         <GroupBox Header="Navigator" Margin="985,1,26,665" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
@@ -25,6 +25,7 @@
         <Rectangle HorizontalAlignment="Left" Height="5" Margin="28,119,0,0" Stroke="#FF192A56" VerticalAlignment="Top" Width="1434" Fill="#192a56"/>
         <DataGrid HorizontalAlignment="Center" Height="253" Margin="0,220,0,0" VerticalAlignment="Top" Width="868" x:Name ="pastBookingsGrid" FontFamily="ubuntu" FontSize="22" Foreground="#FF192A56" BorderBrush="#FF192A56" Background="White" FontWeight="Medium"/>
         <Button Content="Suggest a renovation idea" HorizontalAlignment="Left" Height="57" Margin="862,503,0,0" VerticalAlignment="Top" Width="266" Click= "ShowRateInterface" FontFamily="ubuntu" FontSize="20" Background="#FF273C75" Foreground="White" FontWeight="Medium"/>
+        <TextBlock HorizontalAlignment="Left" Height="57" Margin="268,503,0,0" TextWrapping="Wrap" Name="warningBlock" VerticalAlignment="Top" Width="118"/>
 
     </Grid>
 </Window>

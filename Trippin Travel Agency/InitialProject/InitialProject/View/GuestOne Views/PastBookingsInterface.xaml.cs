@@ -40,14 +40,21 @@ namespace InitialProject.View
         }
 
         private void ShowRateInterface(object sender, RoutedEventArgs e)
-        {
-            RateAccommodationInterface RateAccommodationInterface = new RateAccommodationInterface();
-            RateAccommodationInterface.SetAttributes(((Booking)pastBookingsGrid.SelectedItem).Id);
-            RateAccommodationInterface.WindowStartupLocation = WindowStartupLocation.Manual;
-            RateAccommodationInterface.Left = this.Left;
-            RateAccommodationInterface.Top = this.Top;
-            this.Close();
-            RateAccommodationInterface.Show();
+        {   
+            BookingService bookingService = new BookingService();
+            if (bookingService.CheckIfValidForRating((Booking)pastBookingsGrid.SelectedItem))
+            {
+                RateAccommodationInterface RateAccommodationInterface = new RateAccommodationInterface();
+                RateAccommodationInterface.SetAttributes(((Booking)pastBookingsGrid.SelectedItem).Id);
+                RateAccommodationInterface.WindowStartupLocation = WindowStartupLocation.Manual;
+                RateAccommodationInterface.Left = this.Left;
+                RateAccommodationInterface.Top = this.Top;
+                this.Close();
+                RateAccommodationInterface.Show();
+            } else
+            {
+                warningBlock.Text = "proslo vise od 5 dana";
+            }
         }
     }
 }
