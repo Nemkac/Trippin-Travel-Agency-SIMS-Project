@@ -84,7 +84,6 @@
                           AutoGenerateColumns="False"
                           Width="330"
                           BorderThickness="0"
-                          SelectedValue="{Binding SelectedTour, Mode=TwoWay}"
                           >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Id" Binding="{Binding id}" Width="*"/>
@@ -135,8 +134,8 @@
                         Width="150"
                         DockPanel.Dock="Left"
                         x:Name="startTourLiveButton"
+                        Click="startTourClick"
                         Command="{Binding ShowTourLiveCommand}"
-                        CommandParameter="{Binding SelectedTour.id}"
                       />  
 
 

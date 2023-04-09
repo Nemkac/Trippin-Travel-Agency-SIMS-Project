@@ -237,5 +237,11 @@ namespace InitialProject.Service
             return dbContext.Tours.SingleOrDefault(t => t.id == id);
         }
 
+        public ToursTodayDTO createToursTodayDTO (Tour tour)
+        {
+            ToursTodayDTO toursTodayDTO = new ToursTodayDTO(tour.id, tour.name, tour.language); 
+            return toursTodayDTO;
+        }
+
     }
 }

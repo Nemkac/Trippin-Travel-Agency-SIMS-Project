@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using InitialProject.Model;
+using System.Security.Policy;
+using InitialProject.Model.TransferModels;
 
 namespace InitialProject.Context
 {
@@ -15,6 +17,7 @@ namespace InitialProject.Context
         public DbSet<KeyPoint> KeyPoints { get; set; }
         public DbSet<GuestRate> GuestRate { get; set; }
         public DbSet<TourReservation> TourReservations { get; set; }
+        public DbSet<TourLiveViewTransfer> TourLiveViewTransfers { get; set; }
 
         // Apsolute paths for every memeber of the team
 

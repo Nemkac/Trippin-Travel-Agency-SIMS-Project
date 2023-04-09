@@ -1,5 +1,7 @@
 ﻿using InitialProject.Context;
+using InitialProject.DTO;
 using InitialProject.Model;
+using InitialProject.Model.TransferModels;
 using InitialProject.Service;
 using InitialProject.ViewModels;
 using System;
@@ -20,46 +22,27 @@ namespace InitialProject.View
 {
     public partial class TourGuide_ToursToday : UserControl
     {
-        //private readonly TourGuide_ToursTodayViewModel _viewModel;
-
         public TourGuide_ToursToday()
         {
             InitializeComponent();
-
-
-            // Instantiate TourGuide_MainViewModel
-            // TourGuide_MainViewModel mainViewModel = new TourGuide_MainViewModel();
-
-            //DataContext = _viewModel = new TourGuide_ToursTodayViewModel(mainViewModel);
-
             TourService tourService = new TourService();
             List<Tour> toursToday = tourService.GetToursToday();
+            List<ToursTodayDTO> tourDtosToday = new List<ToursTodayDTO>();
+            foreach (Tour t in toursToday)
+            {
+                tourDtosToday.Add(tourService.createToursTodayDTO(t));
+            }
+            tourDataGrid.ItemsSource = tourDtosToday;
 
-            // Select only the columns you want to show in the DataGrid
-            var tourData = from tour in toursToday
-                           select new
-                           {
-                               tour.id,
-                               tour.name,
-                               tour.language
-                           };
-
-            tourDataGrid.ItemsSource = tourData;
-
-            //tourDataGrid.SelectionChanged += TourDataGrid_SelectionChanged;
         }
 
-        /*private void TourDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void startTourClick(object sender, RoutedEventArgs e)
         {
-            dynamic selectedTour = tourDataGrid.SelectedItem;
-            if (selectedTour != null)
-            {
-                int selectedTourId = selectedTour.id;
-                Tour selectedTourObject = new Tour { id = selectedTourId, name = selectedTour.name };
-                DataBaseContext dbContext = new DataBaseContext();
-                Tour tour = dbContext.Tours.FirstOrDefault(t => t.id == selectedTourId);
-                _viewModel.SelectedTourName = selectedTour.name;
-            }
-        }*/
+            ToursTodayDTO tourData = tourDataGrid.SelectedItem as ToursTodayDTO;
+            DataBaseContext dataBaseContext = new DataBaseContext();
+            TourLiveViewTransfer tourLiveViewTransfer = new TourLiveViewTransfer(tourData.id); 
+            dataBaseContext.TourLiveViewTransfers.Add(tourLiveViewTransfer);
+            dataBaseContext.SaveChanges(); 
+        }
     }
 }

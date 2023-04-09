@@ -56,11 +56,9 @@ namespace InitialProject.ViewModels
         {
             CurrentChildView = new TourGuide_ToursTodayViewModel(this);
         }
-        public void ExecuteShowTourGuideTourLiveViewCommand(object tourid)
+        public void ExecuteShowTourGuideTourLiveViewCommand(object obj)
         {
-            int tourId = (int)tourid;
-            MessageBox.Show(tourId.ToString());
-            CurrentChildView = new TourGuide_TourLiveViewModel(this, tourId);
+            CurrentChildView = new TourGuide_TourLiveViewModel(this);
         }
 
 
