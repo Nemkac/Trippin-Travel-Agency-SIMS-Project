@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace InitialProject.Migrations
 {
     /// <inheritdoc />
-    public partial class blabla1 : Migration
+    public partial class DatabaseSetup : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -134,6 +134,19 @@ namespace InitialProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TourLiveViewTransfers",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    tourId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TourLiveViewTransfers", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TourLocation",
                 columns: table => new
                 {
@@ -148,6 +161,22 @@ namespace InitialProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TourMessages",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    message = table.Column<string>(type: "TEXT", nullable: false),
+                    tourId = table.Column<int>(type: "INTEGER", nullable: false),
+                    guestId = table.Column<int>(type: "INTEGER", nullable: false),
+                    keyPointId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TourMessages", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TourReservations",
                 columns: table => new
                 {
@@ -155,7 +184,9 @@ namespace InitialProject.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     guestId = table.Column<int>(type: "INTEGER", nullable: false),
                     tourId = table.Column<int>(type: "INTEGER", nullable: false),
-                    guestNumber = table.Column<int>(type: "INTEGER", nullable: false)
+                    guestNumber = table.Column<int>(type: "INTEGER", nullable: false),
+                    guestJoined = table.Column<bool>(type: "INTEGER", nullable: false),
+                    guideConfirmed = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -296,7 +327,13 @@ namespace InitialProject.Migrations
                 name: "SelectedRequestTransfers");
 
             migrationBuilder.DropTable(
+                name: "TourLiveViewTransfers");
+
+            migrationBuilder.DropTable(
                 name: "TourLocation");
+
+            migrationBuilder.DropTable(
+                name: "TourMessages");
 
             migrationBuilder.DropTable(
                 name: "TourReservations");

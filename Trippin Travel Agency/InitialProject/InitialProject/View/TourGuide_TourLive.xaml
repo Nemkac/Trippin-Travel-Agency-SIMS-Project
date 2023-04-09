@@ -192,7 +192,7 @@
                     <StackPanel Orientation="Horizontal">
                         <!-- End tour button -->
                         <Button Content="End tour"
-                            Style="{StaticResource denyButton}"
+                            Style="{StaticResource denyButtonMobile}"
                             Click="endTourButton_Click"
                             Command="{Binding ShowToursTodayCommand}"
                             Width="150"

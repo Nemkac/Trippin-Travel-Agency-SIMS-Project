@@ -16,13 +16,6 @@
 
   <ItemGroup>
     <None Remove="Assets\tours-white.svg" />
-    <None Remove="MyDatabase.sqlite" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="MyDatabase.sqlite">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>

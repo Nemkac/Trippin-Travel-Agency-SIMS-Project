@@ -313,7 +313,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="denyButton" TargetType="Button">
+    <Style x:Key="denyButtonMobile" TargetType="Button">
         <Setter Property="Background" Value="#e84118"/>
         <Setter Property="Foreground" Value="#f5f6fa"/>
         <Setter Property="FontFamily" Value="Ubuntu"/>
@@ -377,21 +377,6 @@
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="Foreground" Value="#192a56"/>
-    </Style>
-
-    <Style x:Key="mobileCreateTourButton" TargetType="RadioButton">
-        <!--Normal button style-->
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="RadioButton">
-                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding Background}">
-                        <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
     </Style>
 
     <Style x:Key="detailsButton" TargetType="Button">
