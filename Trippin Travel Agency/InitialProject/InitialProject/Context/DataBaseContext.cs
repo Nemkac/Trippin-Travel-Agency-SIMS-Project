@@ -18,6 +18,7 @@ namespace InitialProject.Context
         public DbSet<GuestRate> GuestRate { get; set; }
         public DbSet<TourReservation> TourReservations { get; set; }
         public DbSet<TourLiveViewTransfer> TourLiveViewTransfers { get; set; }
+        public DbSet<TourMessage> TourMessages { get; set; }
 
         // Apsolute paths for every memeber of the team
 

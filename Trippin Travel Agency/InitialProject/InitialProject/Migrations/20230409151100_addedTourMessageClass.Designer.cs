@@ -3,6 +3,7 @@ using System;
 using InitialProject.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230409151100_addedTourMessageClass")]
+    partial class addedTourMessageClass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.3");
@@ -230,30 +233,6 @@ namespace InitialProject.Migrations
                     b.ToTable("TourLocation");
                 });
 
-            modelBuilder.Entity("InitialProject.Model.TourMessage", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("guestId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("keyPointId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("message")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("tourId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("id");
-
-                    b.ToTable("TourMessages");
-                });
-
             modelBuilder.Entity("InitialProject.Model.TourReservation", b =>
                 {
                     b.Property<int>("id")
@@ -263,13 +242,7 @@ namespace InitialProject.Migrations
                     b.Property<int>("guestId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("guestJoined")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("guestNumber")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("guideConfirmed")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("tourId")

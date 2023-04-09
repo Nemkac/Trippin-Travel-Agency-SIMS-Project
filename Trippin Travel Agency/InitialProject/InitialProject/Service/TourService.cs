@@ -43,13 +43,11 @@ namespace InitialProject.Service
             }
 
         }
-
         public TourLocation GetLocationById(int id)
         {
             using DataBaseContext dbContext = new DataBaseContext();
             return dbContext.TourLocation.SingleOrDefault(tl => tl.id == id);
         }
-        
         public TourDTO CreateDTO(Tour tour)
         {
             DataBaseContext dataBaseContext = new DataBaseContext();
@@ -58,7 +56,6 @@ namespace InitialProject.Service
             TourDTO tourDTO = new(tour.id, tour.name, tour.description, tmp.city, tmp.country, keyPoints, tour.language, tour.touristLimit, tour.startDates, tour.hoursDuration);
             return tourDTO;
         }
-
         private static string GetKeyPointNames(Tour tour, DataBaseContext dataBaseContext)
         {
             string keyPoints = "";
@@ -73,7 +70,6 @@ namespace InitialProject.Service
 
             return keyPoints;
         }
-
         public List<TourDTO> GetByCity(string cityName)
         {
             DataBaseContext dataBaseContext = new DataBaseContext();
@@ -169,14 +165,10 @@ namespace InitialProject.Service
                 return toursToday;
             }
         }
-
-
-
         public bool IsTourFinished(List<KeyPoint> keyPoints)
         {
             return keyPoints != null && keyPoints.All(kp => kp.visited);
         }
-
         public List<TourDTO> GetPreviouslySelected(int id)
         {
             DataBaseContext dataBaseContext = new DataBaseContext();
@@ -194,7 +186,6 @@ namespace InitialProject.Service
             }
             return tourDTOs;
         }
-
         public List<TourDTO> GetBookableTours(string cityName, string nameOfFullTour)
         {
             DataBaseContext dataBaseContext = new DataBaseContext();
@@ -215,7 +206,6 @@ namespace InitialProject.Service
             }
             return tourDTOs;
         }
-        
         public int Book(int tourId, int numberOfTourists)
         {
             using DataBaseContext dataBase = new DataBaseContext();
@@ -236,12 +226,29 @@ namespace InitialProject.Service
             using DataBaseContext dbContext = new DataBaseContext();
             return dbContext.Tours.SingleOrDefault(t => t.id == id);
         }
-
         public ToursTodayDTO createToursTodayDTO (Tour tour)
         {
             ToursTodayDTO toursTodayDTO = new ToursTodayDTO(tour.id, tour.name, tour.language); 
             return toursTodayDTO;
         }
-
+        public TourReservationsTodayDTO createTourReservationsTodayDTO(TourReservation tr)
+        {
+            TourReservationsTodayDTO tourReservationsTodayDTO = new TourReservationsTodayDTO(tr.id, tr.guestJoined=false);
+            return tourReservationsTodayDTO;
+        }
+        public List<TourReservation> GetTourReservationsById(int tourId)
+        {
+            List<TourReservation> reservations = new List<TourReservation>();
+            DataBaseContext dataBaseContext = new DataBaseContext();
+            foreach(TourReservation tr in dataBaseContext.TourReservations.ToList())
+            {
+                if(tr.tourId == tourId)
+                {
+                    reservations.Add(tr);
+                    MessageBox.Show(tourId.ToString());
+                }
+            }
+            return reservations;
+        }
     }
 }

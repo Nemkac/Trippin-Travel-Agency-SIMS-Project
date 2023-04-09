@@ -1,4 +1,5 @@
 ﻿using InitialProject.Context;
+using InitialProject.DTO;
 using InitialProject.Model;
 using InitialProject.Model.TransferModels;
 using InitialProject.Service;
@@ -22,8 +23,9 @@ namespace InitialProject.View
         public TourGuide_TourLive()
         {
             InitializeComponent();
-            this.Loaded += tourDataLoaded;
+            this.Loaded += tourDataLoaded;    
         }
+        
         public void tourDataLoaded(object sender, RoutedEventArgs e)
         {
             DataBaseContext context = new DataBaseContext();
@@ -33,6 +35,18 @@ namespace InitialProject.View
             context.Update(tour);
             context.SaveChanges(); 
             this.headerTextBlock.Text = tour.name;
+            //List<TourReservation> reservations = tourService.GetTourReservationsById(tour.id); ;
+            ////this.guestReservationsDataGrid.ItemsSource = tourService.GetTourReservationsById(tour.id);
+            //this.guestReservationsDataGrid.ItemsSource = reservations;
+            //this.guestReservationsDataGrid.ItemsSource = tourService.GetTourReservationsById(tour.id);
+            //this.guestReservationsDataGrid.ItemsSource = reservations;
+            List<TourReservation> reservations = tourService.GetTourReservationsById(tour.id);
+            List<TourReservationsTodayDTO> tourReservationDtosToday = new List<TourReservationsTodayDTO>();
+            foreach (TourReservation tr in reservations)
+            {
+                tourReservationDtosToday.Add(tourService.createTourReservationsTodayDTO(tr));
+            }
+            guestReservationsDataGrid.ItemsSource = tourReservationDtosToday;
             LoadKeyPoints(tour);
             SubscribeToKeyPointChanges();
             DisplayKeyPoints();
