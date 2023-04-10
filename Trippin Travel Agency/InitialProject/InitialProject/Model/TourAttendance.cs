@@ -6,30 +6,25 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Model
 {
-    public class TourMessage
+    public class TourAttendance
     {
-        public int id {  get; set; }    
-
-        public string message { get; set; }
+        public int id {  get; set; }
 
         public int tourId { get; set; }
 
-        public int guestId { get; set; }    
-
         public int keyPointId { get; set; }
 
+        public int guestID { get; set; }
         public int numberOfGuests { get; set; }
 
-        public TourMessage(int id, int tourId, int guestId, int keyPointId, int numberOfGuests)
+        public TourAttendance(int tourId, int keyPointId, int guestID, int numberOfGuests)
         {
-            this.id = id;
-            this.message = "Vodič je potvrdio vaše prisustvo na turi :";
             this.tourId = tourId;
-            this.guestId = guestId;
             this.keyPointId = keyPointId;
+            this.guestID = guestID;
             this.numberOfGuests = numberOfGuests;
         }
 
-        public TourMessage() { }
+        public TourAttendance() { } 
     }
 }

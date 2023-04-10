@@ -56,18 +56,30 @@ namespace InitialProject.Service
             TourDTO tourDTO = new(tour.id, tour.name, tour.description, tmp.city, tmp.country, keyPoints, tour.language, tour.touristLimit, tour.startDates, tour.hoursDuration);
             return tourDTO;
         }
-        private static string GetKeyPointNames(Tour tour, DataBaseContext dataBaseContext)
+
+        public string GetKeyPointNames(Tour tour, DataBaseContext dataBaseContext)
         {
             string keyPoints = "";
-
             foreach (KeyPoint keyPoint in dataBaseContext.KeyPoints.ToList())
             {
                 if (keyPoint.tourId == tour.id)
                 {
-                    keyPoints += keyPoint.name + '\n';
+                    keyPoints += keyPoint.name + ", \n";                  
+                }
+                
+            }
+            keyPoints = keyPoints.Remove(keyPoints.Length - 3); 
+            return keyPoints;
+        }
+
+        public List<KeyPoint> GetKeyPoints(int tourId, DataBaseContext dataBaseContext)
+        {
+            List<KeyPoint> keyPoints = new List<KeyPoint>();
+            foreach (KeyPoint keyPoint in dataBaseContext.KeyPoints.ToList()) {
+                if (keyPoint.tourId == tourId) { 
+                    keyPoints.Add(keyPoint);
                 }
             }
-
             return keyPoints;
         }
         public List<TourDTO> GetByCity(string cityName)
@@ -214,11 +226,6 @@ namespace InitialProject.Service
             if (tour == null) return -2; // Error return value
             if (tour.touristLimit == 0) return -1; // Tour filled
             if (tour.touristLimit < numberOfTourists) return 1; // Too many guests for selected tour
-
-            tour.touristLimit -= numberOfTourists;
-            TourReservation tourReservation = new TourReservation(LoggedUser.id, tourId, numberOfTourists);
-            dataBase.TourReservations.Add(tourReservation);
-            dataBase.SaveChanges();
             return 0; // Tour registered
         }
         public Tour GetById(int id)
@@ -251,5 +258,38 @@ namespace InitialProject.Service
         }
 
 
+        public Tour GetByID(int tourId) { 
+            
+            using DataBaseContext dataBase = new DataBaseContext();
+
+            foreach (Tour tour in dataBase.Tours.ToList()) { 
+                if(tour.id == tourId) {
+                    return tour;
+                }            
+            }
+
+            return null;
+        }
+
+        public Tour GetActiveTour(DataBaseContext context) {
+            Tour tour = new Tour();
+            List<Tour> bookedTours = new List<Tour>();
+            foreach (TourReservation reservation in context.TourReservations.ToList())
+            {
+                if (reservation.guestId == LoggedUser.id)
+                {
+                    bookedTours.Add(GetByID(reservation.tourId));
+                }
+            }
+            foreach (Tour t in bookedTours)
+            {
+                if (t.active)
+                {
+                    tour = t;
+                    break;
+                }
+            }
+            return tour;
+        }
     }
 }

@@ -379,6 +379,108 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    
+    <!-- Nemanja WEB -->
+    <Style x:Key="menuButtonIconWEB" TargetType="fa:IconImage">
+        <Setter Property="Foreground" Value="#F4FFF8"/>
+        <Setter Property="Width" Value="64"/>
+        <Setter Property="Height" Value="64"/>
+    </Style>
+
+    <Style x:Key="menuButtonWEB" TargetType="Button">
+        <Setter Property="Foreground" Value="#F4FFF8"/>
+        <Setter Property="Width" Value="140"/>
+        <Setter Property="Height" Value="64"/>
+        <Setter Property="Background" Value="#89a3d6"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontFamily" Value="Ubuntu"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+    </Style>
+
+    <Style x:Key="addButtonWEB" TargetType="Button">
+        <Setter Property="Background" Value="#273c75"/>
+        <Setter Property="Foreground" Value="#F4FFF8"/>
+        <Setter Property="FontFamily" Value="Ubuntu"/>
+        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="#273c75" CornerRadius="10" BorderThickness="0.4" BorderBrush="#273c75">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="saveButtonWEB" TargetType="Button">
+        <Setter Property="Background" Value="#4CD137"/>
+        <Setter Property="Foreground" Value="#F4FFF8"/>
+        <Setter Property="FontFamily" Value="Ubuntu"/>
+        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="#4CD137" CornerRadius="20">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="#44BD32"/>
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+
+    <Style x:Key="cancelButtonWEB" TargetType="Button">
+        <Setter Property="Background" Value="#c23616"/>
+        <Setter Property="Foreground" Value="#F4FFF8"/>
+        <Setter Property="FontFamily" Value="Ubuntu"/>
+        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="#c23616" CornerRadius="10" BorderThickness="0.4" BorderBrush="#273c75">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="openMessageButtonWEB" TargetType="Button">
+        <Setter Property="Background" Value="#273c75"/>
+        <Setter Property="Foreground" Value="#F4FFF8"/>
+        <Setter Property="FontFamily" Value="Ubuntu"/>
+        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="#273c75" CornerRadius="20" BorderThickness="0.4" BorderBrush="#273c75">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 
     <Style x:Key="defaultLabel" TargetType="Label">
         <Setter Property="FontFamily" Value="Ubuntu"/>
