@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20230410111035_CP24thMerge")]
-    partial class CP24thMerge
+    [Migration("20230410204126_DatabaseReconstruct")]
+    partial class DatabaseReconstruct
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -246,12 +246,12 @@ namespace InitialProject.Migrations
                     b.Property<int?>("Accommodationid")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("Tourid")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("imageLink")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("tourId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("id");
 
@@ -259,7 +259,7 @@ namespace InitialProject.Migrations
 
                     b.HasIndex("Accommodationid");
 
-                    b.HasIndex("Tourid");
+                    b.HasIndex("tourId");
 
                     b.ToTable("Images");
                 });
@@ -300,6 +300,9 @@ namespace InitialProject.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("guideId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("hoursDuration")
                         .HasColumnType("INTEGER");
 
@@ -322,6 +325,33 @@ namespace InitialProject.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Tour");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.TourAndGuideRate", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("contentRating")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("guestId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("guideKnowledgeRating")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("guideLanguageUsageRating")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("personalComment")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("id");
+
+                    b.ToTable("TourAndGuideRates");
                 });
 
             modelBuilder.Entity("InitialProject.Model.TourAttendance", b =>
@@ -417,6 +447,23 @@ namespace InitialProject.Migrations
                     b.HasKey("id");
 
                     b.ToTable("TourReservations");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.TransferModels.BookingTransfer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("bookingId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("guestId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SelectedRatingNotificationTransfer");
                 });
 
             modelBuilder.Entity("InitialProject.Model.TransferModels.DetailedTourViewTransfer", b =>
@@ -551,7 +598,9 @@ namespace InitialProject.Migrations
 
                     b.HasOne("InitialProject.Model.Tour", null)
                         .WithMany("imageLinks")
-                        .HasForeignKey("Tourid");
+                        .HasForeignKey("tourId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("InitialProject.Model.KeyPoint", b =>

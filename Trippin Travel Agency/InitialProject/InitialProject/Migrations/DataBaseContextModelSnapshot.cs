@@ -446,6 +446,23 @@ namespace InitialProject.Migrations
                     b.ToTable("TourReservations");
                 });
 
+            modelBuilder.Entity("InitialProject.Model.TransferModels.BookingTransfer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("bookingId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("guestId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SelectedRatingNotificationTransfer");
+                });
+
             modelBuilder.Entity("InitialProject.Model.TransferModels.DetailedTourViewTransfer", b =>
                 {
                     b.Property<int>("id")
@@ -504,21 +521,6 @@ namespace InitialProject.Migrations
                     b.HasKey("id");
 
                     b.ToTable("tourBookingTransfers");
-            modelBuilder.Entity("InitialProject.Model.TransferModels.BookingTransfer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("bookingId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("guestId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SelectedRatingNotificationTransfer");
                 });
 
             modelBuilder.Entity("InitialProject.Model.TransferModels.TourLiveViewTransfer", b =>
