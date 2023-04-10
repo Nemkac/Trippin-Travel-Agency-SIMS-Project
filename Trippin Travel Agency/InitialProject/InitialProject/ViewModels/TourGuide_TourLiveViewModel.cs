@@ -40,6 +40,7 @@ namespace InitialProject.ViewModels
             MessageBox.Show("Tour finished");
             DataBaseContext dbContext = new DataBaseContext();
             tour.active = false;
+            tour.finished = true;
             TourManager.ActiveTours.Remove(tour);
             dbContext.Update(tour);
             dbContext.SaveChanges();

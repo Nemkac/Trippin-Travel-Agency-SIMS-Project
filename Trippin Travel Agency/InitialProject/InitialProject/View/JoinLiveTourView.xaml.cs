@@ -160,7 +160,9 @@ namespace InitialProject.View
             comment = this.CommentBox.Text;
 
             DataBaseContext context = new DataBaseContext();
-            TourAndGuideRate tourAndGuideRate = new TourAndGuideRate(LoggedUser.id,guideKnowledge,guideLanguageUsage,contentRating,comment);
+            TourService tourService = new TourService();
+            Tour activeTour = tourService.GetActiveTour(context);
+            TourAndGuideRate tourAndGuideRate = new TourAndGuideRate(LoggedUser.id,activeTour.id,guideKnowledge,guideLanguageUsage,contentRating,comment,activeTour.guideId);
             context.TourAndGuideRates.Add(tourAndGuideRate);
             context.SaveChanges();
             this.SubmitButton.IsEnabled = false;

@@ -44,7 +44,15 @@
         <DataTemplate DataType="{x:Type viewModel:TourGuide_FutureToursViewModel}">
             <local:TourGuide_FutureTours/>
         </DataTemplate>
-        
+
+        <DataTemplate DataType="{x:Type viewModel:TourGuide_FinishedToursViewModel}">
+            <local:TourGuide_FinishedTours/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:TourGuide_FinishedTourDataViewModel}">
+            <local:TourGuide_FinishedTourData/>
+        </DataTemplate>
+
     </Window.Resources>
     
     <Grid>

@@ -3,6 +3,7 @@ using System;
 using InitialProject.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230410173913_addedFinishedField")]
+    partial class addedFinishedField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.3");
@@ -350,12 +353,6 @@ namespace InitialProject.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("tourGuideId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("tourId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("valid")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("id");

@@ -112,8 +112,8 @@
                         <fa:IconImage Icon="Check" HorizontalAlignment="Left" Style="{StaticResource menuBackButtonIcon}" Width="15" Height="15"/>
                         <Label Content="Finished tours" Style="{StaticResource labelAboveTextBox}"/>
                     </StackPanel>
-                    <Button Content="Show finished tours" Style="{StaticResource leadButton}"/>
-                    <Line Style="{StaticResource mobileDelimiterLine}"/>
+                    <Button Content="Show finished tours" Style="{StaticResource leadButton}"
+                            Command="{Binding ShowFinishedToursCommand}"/>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
