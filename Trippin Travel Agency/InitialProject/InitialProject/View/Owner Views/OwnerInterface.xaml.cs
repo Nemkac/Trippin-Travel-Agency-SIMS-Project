@@ -25,7 +25,6 @@ namespace InitialProject.View
 
     public partial class OwnerInterface : Window
     {
-
         public OwnerInterface()
         {
             InitializeComponent();

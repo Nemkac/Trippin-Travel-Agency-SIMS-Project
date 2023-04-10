@@ -7,6 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="710">
     <Grid>
-        <ListBox x:Name="notificationsListBox" FontFamily="Ubuntu" FontSize="24"/>
+        <ListBox x:Name="notificationsListBox" FontFamily="Ubuntu" FontSize="24" SelectionChanged="ShowGuestRatingInterface"/>
+        <ContentControl Content="{Binding CurrentChildView}"/>
     </Grid>
 </UserControl>

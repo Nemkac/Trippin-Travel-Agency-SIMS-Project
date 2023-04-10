@@ -1,5 +1,9 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Context;
+using InitialProject.Model;
+using InitialProject.Model.TransferModels;
 using InitialProject.Service;
+using InitialProject.ViewModels;
+using SharpVectors.Dom;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,20 +16,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace InitialProject.View
+namespace InitialProject.View.Owner_Views
 {
     /// <summary>
-    /// Interaction logic for RateGuestInterface.xaml
+    /// Interaction logic for RateGuestView.xaml
     /// </summary>
-    public partial class RateGuestInterface : Window
+    public partial class RateGuestView : UserControl
     {
-        private int bookingId;
-        public RateGuestInterface(int bookingId)
+        public int bookingId { get; set; }
+        public RateGuestView()
         {
             InitializeComponent();
-            this.bookingId = bookingId;
+            DataBaseContext ratingContext = new DataBaseContext();
+            BookingTransfer transferedBooking = ratingContext.SelectedRatingNotificationTransfer.First();
+            this.bookingId = transferedBooking.bookingId;
         }
 
         private void SaveRate(object sender, RoutedEventArgs e)
@@ -34,20 +41,23 @@ namespace InitialProject.View
             int cleannessRate = GetCleanness();
             int rulesRate = GetRulesRespecting();
             string comment = commentTB.Text;
-            int guestId = bookingService.GetGuestId(bookingId);
-            GuestRate newGuestRate = new GuestRate(cleannessRate, rulesRate, comment, guestId, bookingId);
+            int guestId = bookingService.GetGuestId(this.bookingId);
+            GuestRate newGuestRate = new GuestRate(cleannessRate, rulesRate, comment, guestId, this.bookingId);
             GuestRateService.Save(newGuestRate);
-            this.Close();
+            DataBaseContext transferedBooking = new DataBaseContext();
+            transferedBooking.SelectedRatingNotificationTransfer.Remove(transferedBooking.SelectedRatingNotificationTransfer.First());
+            transferedBooking.SaveChanges();
+            saveFeedback.Text = "Rating successfully saved!";
         }
 
         private int GetCleanness()
         {
             int cleannessRate;
-            if(cleannesRateRadioButton1.IsChecked == true)
+            if (cleannesRateRadioButton1.IsChecked == true)
             {
                 cleannessRate = 1;
             }
-            else if(cleannesRateRadioButton2.IsChecked == true)
+            else if (cleannesRateRadioButton2.IsChecked == true)
             {
                 cleannessRate = 2;
             }
@@ -64,7 +74,7 @@ namespace InitialProject.View
                 cleannessRate = 5;
             }
 
-            return cleannessRate;  
+            return cleannessRate;
         }
 
         private int GetRulesRespecting()

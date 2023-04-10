@@ -31,6 +31,7 @@ namespace InitialProject.Context
 
 
 
+        public DbSet<BookingTransfer> SelectedRatingNotificationTransfer { get; set; }
 
         // Apsolute paths for every memeber of the team
 

@@ -44,6 +44,10 @@
             <owner:NotificationsView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModel:RateGuestViewModel}">
+            <owner:RateGuestView/>
+        </DataTemplate>
+
         <Style x:Key="ButtonFocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -225,7 +229,7 @@
                         <RadioButton Style="{StaticResource headerButton}" IsChecked="False"
                                      GroupName="MainWindowButtons" Margin="0 0 10 0"
                                      Command="{Binding ShowNotificationsViewCommand}">
-                            <fa:IconImage Icon="Bell" Style="{StaticResource HeaderButtonIcon}"/>
+                            <fa:IconImage x:Name="notificationIcon" Icon="Bell" Style="{StaticResource HeaderButtonIcon}"/>
                         </RadioButton>
                         <RadioButton Style="{StaticResource headerButton}" IsChecked="False"
                                      GroupName="MainWindowButtons" Margin="0 0 10 0"
