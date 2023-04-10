@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20230409225855_AccommodationRateImages")]
-    partial class AccommodationRateImages
+    [Migration("20230410201009_DatabaseSetup")]
+    partial class DatabaseSetup
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -374,6 +374,23 @@ namespace InitialProject.Migrations
                     b.HasKey("id");
 
                     b.ToTable("TourReservations");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.TransferModels.BookingTransfer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("bookingId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("guestId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SelectedRatingNotificationTransfer");
                 });
 
             modelBuilder.Entity("InitialProject.Model.TransferModels.TourLiveViewTransfer", b =>

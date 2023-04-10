@@ -94,6 +94,20 @@ namespace InitialProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SelectedRatingNotificationTransfer",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    bookingId = table.Column<int>(type: "INTEGER", nullable: false),
+                    guestId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SelectedRatingNotificationTransfer", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SelectedRequestTransfers",
                 columns: table => new
                 {
@@ -263,12 +277,18 @@ namespace InitialProject.Migrations
                     id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     imageLink = table.Column<string>(type: "TEXT", nullable: false),
+                    AccommodationRateid = table.Column<int>(type: "INTEGER", nullable: true),
                     Accommodationid = table.Column<int>(type: "INTEGER", nullable: true),
                     Tourid = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Images", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Images_AccommodationRates_AccommodationRateid",
+                        column: x => x.AccommodationRateid,
+                        principalTable: "AccommodationRates",
+                        principalColumn: "id");
                     table.ForeignKey(
                         name: "FK_Images_Accommodations_Accommodationid",
                         column: x => x.Accommodationid,
@@ -292,6 +312,11 @@ namespace InitialProject.Migrations
                 column: "Accommodationid");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Images_AccommodationRateid",
+                table: "Images",
+                column: "AccommodationRateid");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Images_Tourid",
                 table: "Images",
                 column: "Tourid");
@@ -306,9 +331,6 @@ namespace InitialProject.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AccommodationRates");
-
-            migrationBuilder.DropTable(
                 name: "BookingDelaymentRequests");
 
             migrationBuilder.DropTable(
@@ -322,6 +344,9 @@ namespace InitialProject.Migrations
 
             migrationBuilder.DropTable(
                 name: "KeyPoints");
+
+            migrationBuilder.DropTable(
+                name: "SelectedRatingNotificationTransfer");
 
             migrationBuilder.DropTable(
                 name: "SelectedRequestTransfers");
@@ -340,6 +365,9 @@ namespace InitialProject.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "AccommodationRates");
 
             migrationBuilder.DropTable(
                 name: "Accommodations");

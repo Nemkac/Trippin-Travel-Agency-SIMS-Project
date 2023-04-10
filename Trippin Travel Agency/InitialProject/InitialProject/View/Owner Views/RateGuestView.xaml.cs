@@ -1,5 +1,6 @@
 ﻿using InitialProject.Context;
 using InitialProject.Model;
+using InitialProject.Model.TransferModels;
 using InitialProject.Service;
 using InitialProject.ViewModels;
 using SharpVectors.Dom;
@@ -30,8 +31,8 @@ namespace InitialProject.View.Owner_Views
         {
             InitializeComponent();
             DataBaseContext ratingContext = new DataBaseContext();
-            Booking transferedBooking = ratingContext.SelectedRatingNotificationTransfer.First();
-            this.bookingId = transferedBooking.Id;
+            BookingTransfer transferedBooking = ratingContext.SelectedRatingNotificationTransfer.First();
+            this.bookingId = transferedBooking.bookingId;
         }
 
         private void SaveRate(object sender, RoutedEventArgs e)
@@ -45,6 +46,7 @@ namespace InitialProject.View.Owner_Views
             GuestRateService.Save(newGuestRate);
             DataBaseContext transferedBooking = new DataBaseContext();
             transferedBooking.SelectedRatingNotificationTransfer.Remove(transferedBooking.SelectedRatingNotificationTransfer.First());
+            transferedBooking.SaveChanges();
             saveFeedback.Text = "Rating successfully saved!";
         }
 

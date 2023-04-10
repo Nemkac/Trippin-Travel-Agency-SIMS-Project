@@ -1,5 +1,6 @@
 ﻿using InitialProject.Context;
 using InitialProject.Model;
+using InitialProject.Model.TransferModels;
 using InitialProject.Service;
 using InitialProject.ViewModels;
 using System;
@@ -73,12 +74,13 @@ namespace InitialProject.View.Owner_Views
         {
             DataBaseContext transferContext = new DataBaseContext();
             DataBaseContext ratingContext = new DataBaseContext();
-            Booking selectedBookingRatingNotification = bookingService.GetById(bookingId);
+            Booking selectedBooking = bookingService.GetById(bookingId);
 
             var transfers = transferContext.SelectedRatingNotificationTransfer.ToList();
             transferContext.SelectedRatingNotificationTransfer.RemoveRange(transfers);
             transferContext.SaveChanges();
 
+            BookingTransfer selectedBookingRatingNotification = new BookingTransfer(selectedBooking.Id, selectedBooking.guestId);
             ratingContext.SelectedRatingNotificationTransfer.Add(selectedBookingRatingNotification);
             ratingContext.SaveChanges();
         }

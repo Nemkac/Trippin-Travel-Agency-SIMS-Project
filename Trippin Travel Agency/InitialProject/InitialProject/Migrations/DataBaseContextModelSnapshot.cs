@@ -154,7 +154,7 @@ namespace InitialProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Booking");
+                    b.ToTable("Bookings");
                 });
 
             modelBuilder.Entity("InitialProject.Model.BookingDelaymentRequest", b =>
@@ -371,6 +371,23 @@ namespace InitialProject.Migrations
                     b.HasKey("id");
 
                     b.ToTable("TourReservations");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.TransferModels.BookingTransfer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("bookingId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("guestId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SelectedRatingNotificationTransfer");
                 });
 
             modelBuilder.Entity("InitialProject.Model.TransferModels.TourLiveViewTransfer", b =>

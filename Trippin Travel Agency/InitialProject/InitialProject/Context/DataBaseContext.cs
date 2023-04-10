@@ -23,7 +23,7 @@ namespace InitialProject.Context
         public DbSet<AccommodationRate> AccommodationRates { get; set; }    
         public DbSet<TourLiveViewTransfer> TourLiveViewTransfers { get; set; }
         public DbSet<TourMessage> TourMessages { get; set; }
-        public DbSet<Booking> SelectedRatingNotificationTransfer { get; set; }
+        public DbSet<BookingTransfer> SelectedRatingNotificationTransfer { get; set; }
 
         // Apsolute paths for every memeber of the team
 
