@@ -56,7 +56,7 @@ namespace InitialProject.View
             DataBaseContext context = new DataBaseContext();
             if (tourMessage != null)
             {
-                TourAttendance tourAttendance = new TourAttendance(tourMessage.tourId,tourMessage.keyPointId,tourMessage.guestId);
+                TourAttendance tourAttendance = new TourAttendance(tourMessage.tourId,tourMessage.keyPointId,tourMessage.guestId,tourMessage.numberOfGuests);
                 context.TourAttendances.Add(tourAttendance);
                 context.TourMessages.Remove(tourMessage);
                 context.SaveChanges();

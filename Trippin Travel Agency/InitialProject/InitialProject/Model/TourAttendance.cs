@@ -15,12 +15,14 @@ namespace InitialProject.Model
         public int keyPointId { get; set; }
 
         public int guestID { get; set; }
+        public int numberOfGuests { get; set; }
 
-        public TourAttendance(int tourId, int keyPointId, int guestID)
+        public TourAttendance(int tourId, int keyPointId, int guestID, int numberOfGuests)
         {
             this.tourId = tourId;
             this.keyPointId = keyPointId;
             this.guestID = guestID;
+            this.numberOfGuests = numberOfGuests;
         }
 
         public TourAttendance() { } 
