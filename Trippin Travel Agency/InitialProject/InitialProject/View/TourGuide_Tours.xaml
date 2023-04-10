@@ -83,7 +83,8 @@
                 <StackPanel Orientation="Vertical"
                             Margin="0,20,0,0">
                     <Label Content="Future tours" Style="{StaticResource labelAboveTextBox}"/>
-                    <Button Content="Show future tours" Style="{StaticResource leadButton}"/>
+                    <Button Content="Show future tours" Style="{StaticResource leadButton}"
+                            Command="{Binding FutureToursCommand}"/>
                     <Line Style="{StaticResource mobileDelimiterLine}"/>
                 </StackPanel>
 

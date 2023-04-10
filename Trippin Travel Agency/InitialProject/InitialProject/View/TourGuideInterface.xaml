@@ -40,6 +40,10 @@
         <DataTemplate DataType="{x:Type viewModel:TourGuide_TourLiveViewModel}">
             <local:TourGuide_TourLive/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:TourGuide_FutureToursViewModel}">
+            <local:TourGuide_FutureTours/>
+        </DataTemplate>
         
     </Window.Resources>
     
