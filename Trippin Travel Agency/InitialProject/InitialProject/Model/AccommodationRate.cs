@@ -18,14 +18,13 @@ namespace InitialProject.Model
 
         public AccommodationRate() { }
 
-        public AccommodationRate(int bookingId, int cleanness, int ownerRate, string comment)
+        public AccommodationRate(int bookingId, int cleanness, int ownerRate, string comment, List<Image> images)
         {
             this.bookingId = bookingId;
             this.cleanness = cleanness;
             this.ownerRate = ownerRate;
             this.comment = comment;
-            this.images = null;
+            this.images = images;
         }
-
     }
 }

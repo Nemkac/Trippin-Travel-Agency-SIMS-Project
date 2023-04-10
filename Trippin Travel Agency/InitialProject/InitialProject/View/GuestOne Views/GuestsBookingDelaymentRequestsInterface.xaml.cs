@@ -107,6 +107,8 @@ namespace InitialProject.View
             UserService userService = new UserService();
             BookingDelaymentRequestService bookingDelaymentRequestService = new BookingDelaymentRequestService();
             bookingDelaymentRequestService.Delete(userService.GetResolvedBookingDelaymentRequests()[selectedRowIndex]);
+            ShowDelaymentRequests(sender, e);
+
         }
 
         private void DeletePendingRequest(object sender, RoutedEventArgs e)
@@ -115,6 +117,8 @@ namespace InitialProject.View
             UserService userService = new UserService();
             BookingDelaymentRequestService bookingDelaymentRequestService = new BookingDelaymentRequestService();
             bookingDelaymentRequestService.Delete(userService.GetPendingBookingDelaymentRequests()[selectedRowIndex]);
+            ShowDelaymentRequests(sender, e);
+
         }
     }
 }

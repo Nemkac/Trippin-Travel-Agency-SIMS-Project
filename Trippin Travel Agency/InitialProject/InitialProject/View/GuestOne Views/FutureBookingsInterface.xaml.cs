@@ -50,9 +50,14 @@ namespace InitialProject.View
         private void DeleteBooking(object sender, RoutedEventArgs e)
         {
             BookingService bookingService = new BookingService();
-            bookingService.Delete((Booking)futureBookingsGrid.SelectedItem);
             UserService userService = new UserService();
+            BookingCancelationMessageService BookingCancelationMessageService = new BookingCancelationMessageService();
+            Booking booking = (Booking)futureBookingsGrid.SelectedItem;
+            bookingService.Delete(booking);
             futureBookingsGrid.ItemsSource = userService.GetGuestsFutureBookings(LoggedUser.id);
+            string message = "Booking with ID: " + booking.Id + " has been canceled.";
+            BookingCancelationMessage bookingCancelationMessage = new BookingCancelationMessage(message, booking.Id);
+            BookingCancelationMessageService.Save(bookingCancelationMessage);
         }
 
         private void GoToBookingDelayment(object sender, RoutedEventArgs e)

@@ -31,7 +31,7 @@
         <DataGrid HorizontalAlignment="Left" Height="305" Margin="73,213,0,0" VerticalAlignment="Top" Width="636" Name="pendingRequestsGrid" FontFamily="ubuntu" FontSize="18" Foreground="#FF192A56" BorderBrush="#FF192A56" Background="White" FontWeight="Medium" TextBlock.TextAlignment="Center" MinRowHeight="50" />
         <Button Content="Check a comment" HorizontalAlignment="Left" Height="44" Margin="117,558,0,0" VerticalAlignment="Top" Width="232" FontFamily="ubuntu" FontSize="24" Background="#FF273C75" Foreground="White" FontWeight="Medium" Click="ShowPendingRequestComment"/>
         <Button Content="Cancel request" HorizontalAlignment="Left" Height="44" Margin="426,558,0,0" VerticalAlignment="Top" Width="232" FontFamily="ubuntu" FontSize="24" Background="#FF273C75" Foreground="White" FontWeight="Medium" Click="DeletePendingRequest"/>
-        <TextBlock HorizontalAlignment="Left" Height="62" Margin="911,611,0,0" TextWrapping="Wrap" Text="By pressing Got it! you are removing selected request from history and you won't get notification for it any more" VerticalAlignment="Top" Width="418" FontSize="16" TextAlignment="center" Foreground="#FF5F5656" FontFamily="ubuntu"/>
+        <TextBlock HorizontalAlignment="Left" Height="62" Margin="911,611,0,0" TextWrapping="Wrap" Text="By pressing Got it! you are removing selected request from history and you won't get reminders for it any more" VerticalAlignment="Top" Width="418" FontSize="16" TextAlignment="center" Foreground="#FF5F5656" FontFamily="ubuntu"/>
 
     </Grid>
 </Window>

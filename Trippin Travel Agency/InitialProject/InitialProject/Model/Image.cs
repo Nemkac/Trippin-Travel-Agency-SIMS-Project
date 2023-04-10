@@ -19,5 +19,11 @@ namespace InitialProject.Model
             this.imageLink = imageLink;
             this.tourId = tourId;
         }*/
+
+        public Image() { }
+        public Image(String imageLink)
+        {
+            this.imageLink = imageLink;
+        }
     }
 }
