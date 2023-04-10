@@ -38,7 +38,6 @@ namespace InitialProject.ViewModels
         public void EndTour(Tour tour)
         {
             MessageBox.Show("Tour finished");
-            //Close();
             DataBaseContext dbContext = new DataBaseContext();
             tour.active = false;
             TourManager.ActiveTours.Remove(tour);

@@ -177,6 +177,19 @@ namespace InitialProject.Service
                 return toursToday;
             }
         }
+        public List<Tour> GetFutureTours()
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                DateTime today = DateTime.Today;
+                DateTime tomorrow = today.AddDays(1);
+                List<Tour> futureTours = context.Tours
+                    .Where(t => t.startDates.Date >= tomorrow)
+                    .ToList();
+
+                return futureTours;
+            }
+        }
         public bool IsTourFinished(List<KeyPoint> keyPoints)
         {
             return keyPoints != null && keyPoints.All(kp => kp.visited);
@@ -238,6 +251,11 @@ namespace InitialProject.Service
             ToursTodayDTO toursTodayDTO = new ToursTodayDTO(tour.id, tour.name, tour.language); 
             return toursTodayDTO;
         }
+        public FutureToursDTO createFutureToursDTO(Tour tour)
+        {
+            FutureToursDTO futureToursDTO = new FutureToursDTO(tour.id, tour.name, tour.language);
+            return futureToursDTO;
+        }
         public TourReservationsTodayDTO createTourReservationsTodayDTO(TourReservation tr)
         {
             TourReservationsTodayDTO tourReservationsTodayDTO = new TourReservationsTodayDTO(tr.id);
@@ -291,5 +309,11 @@ namespace InitialProject.Service
             }
             return tour;
         }
+
+        public KeyPoint GetNextUnvisitedKeyPoint(List<KeyPoint> keyPointsList)
+        {
+            return keyPointsList.FirstOrDefault(kp => kp.visited == false);
+        }
+
     }
 }

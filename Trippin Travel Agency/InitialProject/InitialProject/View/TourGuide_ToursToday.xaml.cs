@@ -26,11 +26,8 @@ namespace InitialProject.View
         {
             InitializeComponent();
             TourService tourService = new TourService();
-            //lista obicnih 
             List<Tour> toursToday = tourService.GetToursToday();
-            //lista dtova 
             List<ToursTodayDTO> tourDtosToday = new List<ToursTodayDTO>();
-            // prolazak kroz listu obicnih i stavljanje u listu dtova
 
             foreach (Tour t in toursToday)
             {

@@ -3,6 +3,7 @@ using System;
 using InitialProject.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230410144908_imagesTableChange")]
+    partial class imagesTableChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.3");
@@ -297,9 +300,6 @@ namespace InitialProject.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("guideId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("hoursDuration")
                         .HasColumnType("INTEGER");
 
@@ -322,33 +322,6 @@ namespace InitialProject.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Tour");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.TourAndGuideRate", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("contentRating")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("guestId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("guideKnowledgeRating")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("guideLanguageUsageRating")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("personalComment")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("id");
-
-                    b.ToTable("TourAndGuideRates");
                 });
 
             modelBuilder.Entity("InitialProject.Model.TourAttendance", b =>
