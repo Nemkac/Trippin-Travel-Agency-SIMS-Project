@@ -12,5 +12,11 @@ namespace InitialProject.Model
     {
         public int id { get; set; }
         public String imageLink { get; set; }
+
+        public Image() { }
+        public Image(String imageLink)
+        {
+            this.imageLink = imageLink;
+        }
     }
 }
