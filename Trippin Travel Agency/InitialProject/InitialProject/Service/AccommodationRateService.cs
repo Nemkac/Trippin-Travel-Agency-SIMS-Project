@@ -22,11 +22,11 @@ namespace InitialProject.Service
             DataBaseContext context = new DataBaseContext();
             BookingService bookingService = new BookingService();
             List<AccommodationRate> rates = context.AccommodationRates.ToList();
-            double averageRate = 0.0;
+            double averageRate = 0;
             int ratesCounter = 0;
             foreach(AccommodationRate rate in rates)
             {
-                if (bookingService.GetById(rate.bookingId).accommodationId == accommodationId)
+                if (bookingService.GetById(rate.bookingId) != null && bookingService.GetById(rate.bookingId).accommodationId == accommodationId)
                 {
                     averageRate += rate.cleanness + rate.ownerRate;
                     ratesCounter++;
