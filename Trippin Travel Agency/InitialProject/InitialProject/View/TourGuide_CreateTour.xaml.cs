@@ -86,7 +86,7 @@ namespace InitialProject.View
 
             List<Model.Image> imageLinks = CreateImageLinks();
 
-            Tour tour = new Tour(name, location.id, keyPoints, description, languageInput, guestLimit, selectedDate, hoursDuration, imageLinks, active);
+            Tour tour = new Tour(name, location.id, keyPoints, description, languageInput, guestLimit, selectedDate, hoursDuration, imageLinks, active,LoggedUser.id);
 
             DoesTourExist(name, selectedDate, tour);
         }

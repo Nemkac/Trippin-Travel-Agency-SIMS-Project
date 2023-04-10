@@ -87,7 +87,13 @@
                        Content="You can submit some images that you took at the tour"/>
 
                 <TextBox Width="350" Height="36" Margin="-1050 0 0 0"/>
-                <Button Width="100" Height="36" Content="Upload" Style="{StaticResource addButtonWEB}" Margin="-500 0 0 0"/>
+                <Button Width="100"
+                        Height="36" 
+                        Content="Upload"
+                        Style="{StaticResource addButtonWEB}" 
+                        Margin="-500 0 0 0" 
+                        Click="UploadPhoto"
+                        Name="UploadPhotoButton"/>
             </StackPanel>
         </GroupBox>
 
@@ -211,7 +217,13 @@
                 
                 <Separator/>
                 
-                <TextBox Width="450" Height="150" Margin="-165 15 0 0"/>
+                <TextBox Width="450" 
+                         Height="150" 
+                         Margin="-165 15 0 0" 
+                         Name="CommentBox"
+                         FontFamily="Ubuntu"
+                         FontSize="20"
+                         FontWeight="Medium"/>
 
                 <Button Style="{StaticResource addButtonWEB}" 
                         Width="150" 

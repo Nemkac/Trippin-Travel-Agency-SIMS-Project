@@ -20,17 +20,15 @@ namespace InitialProject.Context
         public DbSet<TourReservation> TourReservations { get; set; }
         public DbSet<BookingDelaymentRequest> BookingDelaymentRequests { get; set; }
         public DbSet<RequestDTO> SelectedRequestTransfers { get; set; }
-
         public DbSet<AccommodationRate> AccommodationRates { get; set; }    
         public DbSet<TourLiveViewTransfer> TourLiveViewTransfers { get; set; }
-
         public DbSet<DetailedTourViewTransfer> detailedTourViewTransfers { get; set; }
         public DbSet<Coupon> Coupons { get; set; }  
         public DbSet<TourMessage> TourMessages { get; set; }
-
         public DbSet<TourAttendance> TourAttendances { get; set; }
-
         public DbSet<TourBookingTransfer> tourBookingTransfers { get; set; }
+        public DbSet<TourAndGuideRate> TourAndGuideRates { get; set; }  
+
 
 
 
