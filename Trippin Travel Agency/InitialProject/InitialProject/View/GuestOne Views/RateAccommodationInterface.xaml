@@ -34,13 +34,6 @@
         <TextBlock HorizontalAlignment="Left" Height="32" Margin="1216,236,0,0" TextWrapping="Wrap" Text="{Binding ElementName=cleannesInput, Path = Value, StringFormat={}{0:N0}}" VerticalAlignment="Top" Width="22" FontFamily="ubuntu" FontSize="22" FontWeight="medium" Foreground="#FF192A56"/>
         <TextBlock HorizontalAlignment="Left" Height="32" Margin="1216,349,0,0" TextWrapping="Wrap" Text="{Binding ElementName=ownerRateInput, Path = Value, StringFormat={}{0:N0}}" VerticalAlignment="Top" Width="22" FontFamily="ubuntu" FontSize="22" FontWeight="medium" Foreground="#FF192A56"/>
         <TextBox HorizontalAlignment="Left" Height="54" Margin="898,489,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="296" x:Name="commentInput_Copy" TextAlignment="Center" FontFamily="ubuntu" FontSize="22" VerticalContentAlignment="Center"/>
-        <Button  HorizontalAlignment="Left" Height="34" Margin="1216,499,0,0" VerticalAlignment="Top" Width="36" BorderBrush="White">
-            <Button.Background>
-                <ImageBrush ImageSource="/View/GuestOne Views/splu.png"/>
-            </Button.Background>
-            <Button.Foreground>
-                <ImageBrush ImageSource="/View/GuestOne Views/splu.png"/>
-            </Button.Foreground>
-        </Button>
+        <Button  HorizontalAlignment="Left" Height="34" Margin="1216,499,0,0" VerticalAlignment="Top" Width="36" BorderBrush="White"/>
     </Grid>
 </Window>
