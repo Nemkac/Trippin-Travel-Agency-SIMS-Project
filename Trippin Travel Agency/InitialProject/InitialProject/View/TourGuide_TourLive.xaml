@@ -97,7 +97,7 @@
                           >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Binding="{Binding name}" Width="*"/>
-                            <DataGridCheckBoxColumn Header="Visited" Binding="{Binding visited}" Width="*"/>
+                            <DataGridTextColumn Header="Visited" Binding="{Binding visited}" Width="*"/>
                         </DataGrid.Columns>
                         <DataGrid.CellStyle>
                             <Style TargetType="{x:Type DataGridCell}">

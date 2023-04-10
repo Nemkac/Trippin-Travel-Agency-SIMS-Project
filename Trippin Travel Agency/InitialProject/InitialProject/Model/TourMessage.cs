@@ -20,9 +20,8 @@ namespace InitialProject.Model
 
         public int numberOfGuests { get; set; }
 
-        public TourMessage(int id, int tourId, int guestId, int keyPointId, int numberOfGuests)
+        public TourMessage(int tourId, int guestId, int keyPointId, int numberOfGuests)
         {
-            this.id = id;
             this.message = "Vodič je potvrdio vaše prisustvo na turi :";
             this.tourId = tourId;
             this.guestId = guestId;

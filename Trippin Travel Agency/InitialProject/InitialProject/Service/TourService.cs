@@ -291,5 +291,11 @@ namespace InitialProject.Service
             }
             return tour;
         }
+
+        public KeyPoint GetNextUnvisitedKeyPoint(List<KeyPoint> keyPointsList)
+        {
+            return keyPointsList.FirstOrDefault(kp => kp.visited == false);
+        }
+
     }
 }

@@ -30,9 +30,9 @@ namespace InitialProject.View
         
         public void tourDataLoaded(object sender, RoutedEventArgs e)
         {
-            DataBaseContext context = new DataBaseContext();
-            List<TourLiveViewTransfer> requests = context.TourLiveViewTransfers.ToList();
-            Tour tour = tourService.GetById(requests.Last().tourId);
+            DataBaseContext context;
+            Tour tour;
+            GetExact(out context, out tour);
             tour.active = true;
             context.Update(tour);
             context.SaveChanges(); 
@@ -93,9 +93,9 @@ namespace InitialProject.View
                 db.SaveChanges();
             }
 
-            DataBaseContext context = new DataBaseContext();
-            List<TourLiveViewTransfer> requests = context.TourLiveViewTransfers.ToList();
-            Tour tour = tourService.GetById(requests.Last().tourId);
+            DataBaseContext context;
+            Tour tour;
+            GetExact(out context, out tour);
             tour.active = true;
             context.Update(tour);
             context.SaveChanges();
@@ -109,24 +109,47 @@ namespace InitialProject.View
 
         public void GuideConfirmed_ButtonClick(object sender, RoutedEventArgs e)
         {
-            DataBaseContext context = new DataBaseContext();
-            List<TourLiveViewTransfer> requests = context.TourLiveViewTransfers.ToList();
-            Tour tour = tourService.GetById(requests.Last().tourId);
+            DataBaseContext context;
+            Tour tour;
+            GetExact(out context, out tour);
             var selectedReservation = (TourReservationsTodayDTO)guestReservationsDataGrid.SelectedItem;
             TourReservation tr = tourReservationService.GetById(selectedReservation.id);
-            tr.guideConfirmed = true; 
-            using (var db = new DataBaseContext())
+            if (tr.guestJoined == true)
             {
-                db.TourReservations.Update(tr);
-                db.SaveChanges();
+                CreateMessage(context, tour, tr);
+                tr.guideConfirmed = true;
+                context.TourReservations.Update(tr);
+                context.SaveChanges();
+                RefreshTourReservations(tour);
             }
-            RefreshTourReservations(tour);  
+            else
+            {
+                MessageBox.Show("Guest must join in order to check him as arrived.");
+            }
         }
+
+        private void GetExact(out DataBaseContext context, out Tour tour)
+        {
+            context = new DataBaseContext();
+            List<TourLiveViewTransfer> requests = context.TourLiveViewTransfers.ToList();
+            tour = tourService.GetById(requests.Last().tourId);
+        }
+
+        private void CreateMessage(DataBaseContext context, Tour tour, TourReservation tr)
+        {
+            KeyPoint nextKeyPoint = tourService.GetNextUnvisitedKeyPoint(keyPointsList);
+            if (nextKeyPoint != null)
+            {
+                TourMessage message = new TourMessage(tour.id, tr.guestId, nextKeyPoint.id, tr.guestNumber);
+                context.Add(message);
+            }
+        }
+
         public void endTourButton_Click(object sender, RoutedEventArgs e)
         {
-            DataBaseContext context = new DataBaseContext();
-            List<TourLiveViewTransfer> requests = context.TourLiveViewTransfers.ToList();
-            Tour tour = tourService.GetById(requests.Last().tourId);
+            DataBaseContext context;
+            Tour tour;
+            GetExact(out context, out tour);
             if (MessageBox.Show("Are you sure you want to end the tour?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 tourLiveViewModel.EndTour(tour);
