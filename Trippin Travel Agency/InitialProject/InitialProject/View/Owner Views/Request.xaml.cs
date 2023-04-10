@@ -57,7 +57,7 @@ namespace InitialProject.View.Owner_Views
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ShowDetails(object sender, RoutedEventArgs e)
         {
             RequestDTO? selectedRequest = this.requestsDataGrid.SelectedItem as RequestDTO;
             DataBaseContext requestContext = new DataBaseContext();
