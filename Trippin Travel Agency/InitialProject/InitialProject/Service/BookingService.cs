@@ -14,8 +14,8 @@ namespace InitialProject.Service
         {
             using DataBaseContext context = new DataBaseContext();
             return context.Bookings.SingleOrDefault(b => b.Id == bookingId);
-        }
-
+        } 
+        
         public BookingDTO CreateBookingDTO(Booking booking)
         {
             UserService userService = new UserService();

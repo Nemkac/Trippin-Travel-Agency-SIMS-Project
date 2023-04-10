@@ -26,6 +26,5 @@ namespace InitialProject.Model
             this.comment = comment;
             this.images = images;
         }
-
     }
 }
