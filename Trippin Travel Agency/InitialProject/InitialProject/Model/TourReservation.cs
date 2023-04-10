@@ -20,10 +20,6 @@ namespace InitialProject.Model
         
         public bool guideConfirmed { get; set; }
 
-        public bool guestJoined { get; set; }
-
-        public bool guideConfirmed { get; set; }
-
         public TourReservation(int guestId, int tourId, int guestNumber)
         {
             this.guestId = guestId;

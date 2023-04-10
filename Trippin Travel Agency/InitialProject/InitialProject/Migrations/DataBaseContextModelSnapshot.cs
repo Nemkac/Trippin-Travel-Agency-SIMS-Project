@@ -184,6 +184,23 @@ namespace InitialProject.Migrations
                     b.ToTable("BookingDelaymentRequests");
                 });
 
+            modelBuilder.Entity("InitialProject.Model.Coupon", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("exiresOn")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("userId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Coupons");
+                });
+
             modelBuilder.Entity("InitialProject.Model.GuestRate", b =>
                 {
                     b.Property<int>("id")
@@ -304,6 +321,29 @@ namespace InitialProject.Migrations
                     b.ToTable("Tour");
                 });
 
+            modelBuilder.Entity("InitialProject.Model.TourAttendance", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("guestID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("keyPointId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("numberOfGuests")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("tourId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("TourAttendances");
+                });
+
             modelBuilder.Entity("InitialProject.Model.TourLocation", b =>
                 {
                     b.Property<int>("id")
@@ -339,6 +379,9 @@ namespace InitialProject.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("numberOfGuests")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("tourId")
                         .HasColumnType("INTEGER");
 
@@ -371,6 +414,66 @@ namespace InitialProject.Migrations
                     b.HasKey("id");
 
                     b.ToTable("TourReservations");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.TransferModels.DetailedTourViewTransfer", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("tourId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("detailedTourViewTransfers");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.TransferModels.TourBookingTransfer", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("cityLocation")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("countryLocation")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("hoursDuration")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("keypoints")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("language")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("numberOfGuests")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("startDates")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("touristLimit")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("tourBookingTransfers");
                 });
 
             modelBuilder.Entity("InitialProject.Model.TransferModels.TourLiveViewTransfer", b =>
