@@ -25,6 +25,7 @@ namespace InitialProject.View
     {
 
         public List<Model.Image> imageUrls = new List<Model.Image>();
+        public int imageCounter = 0;
 
         public int bookingId;
         public RateAccommodationInterface()
@@ -42,6 +43,15 @@ namespace InitialProject.View
             Model.Image image = new Model.Image(imageBlock.Text);
             imageUrls.Add(image);
             imageBlock.Clear();
+            imageCounter++;
+            if (imageCounter == 1)
+            {
+                imageCounterBlock.Text = "You have added 1 image";
+            }
+            if (imageCounter > 1)
+            {
+                imageCounterBlock.Text = "You have added " + imageCounter + " images";
+            }
         }
 
         private void LeaveReview(object sender, RoutedEventArgs e)

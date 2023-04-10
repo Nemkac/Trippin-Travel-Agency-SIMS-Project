@@ -36,5 +36,6 @@
         <TextBox HorizontalAlignment="Left" Height="54" Margin="898,489,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="296" Name="imageBlock" TextAlignment="Center" FontFamily="ubuntu" FontSize="22" VerticalContentAlignment="Center"/>
         <Button Content="+" HorizontalAlignment="Left" Height="35" Margin="1216,499,0,0" VerticalAlignment="Top" Width="35" FontSize="28" TextBlock.TextAlignment="Center" FontFamily="ubuntu"  Background="#FF273C75" Foreground="White" FontWeight="Medium" Click="GetImageUrlInput" />
         <TextBlock HorizontalAlignment="Left" Height="38" Margin="496,595,0,0" TextWrapping="Wrap" Name="debug" VerticalAlignment="Top" Width="116"/>
+        <TextBlock HorizontalAlignment="Left" Height="26" Margin="898,548,0,0" TextWrapping="Wrap" Name = "imageCounterBlock"  VerticalAlignment="Top" Width="296" FontFamily="ubuntu" FontSize="17" FontWeight="medium" Foreground="#FF5E6169" TextAlignment="Center"/>
     </Grid>
 </Window>
