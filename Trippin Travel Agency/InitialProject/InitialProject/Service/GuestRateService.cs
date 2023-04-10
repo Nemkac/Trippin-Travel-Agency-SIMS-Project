@@ -16,7 +16,6 @@ namespace InitialProject.Service
             DataBaseContext saveContext = new DataBaseContext();
             saveContext.Attach(guestRate);
             saveContext.SaveChanges();
-            MessageBox.Show("Guest rating successful!");
         }
 
         public bool IsRated(int bookingId)

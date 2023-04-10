@@ -20,10 +20,10 @@ namespace InitialProject.Context
         public DbSet<TourReservation> TourReservations { get; set; }
         public DbSet<BookingDelaymentRequest> BookingDelaymentRequests { get; set; }
         public DbSet<RequestDTO> SelectedRequestTransfers { get; set; }
-
         public DbSet<AccommodationRate> AccommodationRates { get; set; }    
         public DbSet<TourLiveViewTransfer> TourLiveViewTransfers { get; set; }
         public DbSet<TourMessage> TourMessages { get; set; }
+        public DbSet<Booking> SelectedRatingNotificationTransfer { get; set; }
 
         // Apsolute paths for every memeber of the team
 

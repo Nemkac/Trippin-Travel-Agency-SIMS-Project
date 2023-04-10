@@ -1,5 +1,7 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Context;
+using InitialProject.Model;
 using InitialProject.Service;
+using InitialProject.ViewModels;
 using SharpVectors.Dom;
 using System;
 using System.Collections.Generic;
@@ -23,9 +25,13 @@ namespace InitialProject.View.Owner_Views
     /// </summary>
     public partial class RateGuestView : UserControl
     {
+        public int bookingId { get; set; }
         public RateGuestView()
         {
             InitializeComponent();
+            DataBaseContext ratingContext = new DataBaseContext();
+            Booking transferedBooking = ratingContext.SelectedRatingNotificationTransfer.First();
+            this.bookingId = transferedBooking.Id;
         }
 
         private void SaveRate(object sender, RoutedEventArgs e)
@@ -34,9 +40,12 @@ namespace InitialProject.View.Owner_Views
             int cleannessRate = GetCleanness();
             int rulesRate = GetRulesRespecting();
             string comment = commentTB.Text;
-            int guestId = bookingService.GetGuestId(bookingId);
-            GuestRate newGuestRate = new GuestRate(cleannessRate, rulesRate, comment, guestId, bookingId);
+            int guestId = bookingService.GetGuestId(this.bookingId);
+            GuestRate newGuestRate = new GuestRate(cleannessRate, rulesRate, comment, guestId, this.bookingId);
             GuestRateService.Save(newGuestRate);
+            DataBaseContext transferedBooking = new DataBaseContext();
+            transferedBooking.SelectedRatingNotificationTransfer.Remove(transferedBooking.SelectedRatingNotificationTransfer.First());
+            saveFeedback.Text = "Rating successfully saved!";
         }
 
         private int GetCleanness()

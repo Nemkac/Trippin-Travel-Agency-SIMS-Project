@@ -61,6 +61,12 @@ namespace InitialProject.View.Owner_Views
         {
             RequestDTO? selectedRequest = this.requestsDataGrid.SelectedItem as RequestDTO;
             DataBaseContext requestContext = new DataBaseContext();
+            DataBaseContext transferContext = new DataBaseContext();
+
+            var transfers = transferContext.SelectedRequestTransfers.ToList();
+            transferContext.SelectedRequestTransfers.RemoveRange(transfers);
+            transferContext.SaveChanges();
+
             requestContext.SelectedRequestTransfers.Add(selectedRequest);
             requestContext.SaveChanges();
         }

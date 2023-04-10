@@ -122,8 +122,14 @@ namespace InitialProject.ViewModels
 
         public void ExecuteShowNotificationsViewCommand(object obj)
         {
-            CurrentChildView = new NotificationsViewModel();
+            CurrentChildView = new NotificationsViewModel(this);
             Caption = "Notifications";
+        }
+
+        public void ExecuteShowGuestRatingCommand(object obj)
+        {
+            CurrentChildView = new RateGuestViewModel();
+            Caption = "Rate Guest";
         }
     }
 }

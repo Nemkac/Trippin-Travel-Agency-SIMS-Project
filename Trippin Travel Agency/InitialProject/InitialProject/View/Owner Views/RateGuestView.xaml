@@ -54,23 +54,23 @@
 
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <Viewbox Width="30" Height="30" Margin="0 0 5 0">
-                <RadioButton x:Name="rulesRateRadioButton1" GroupName="Cleanness"/>
+                <RadioButton x:Name="rulesRateRadioButton1" GroupName="RulesRespecting"/>
             </Viewbox>
             <Label Content="1" Style="{StaticResource defaultLabel}" FontSize="20" VerticalAlignment="Center"/>
             <Viewbox Width="30" Height="30" Margin="5 0 5 0">
-                <RadioButton x:Name="rulesRateRadioButton2" GroupName="Cleanness"/>
+                <RadioButton x:Name="rulesRateRadioButton2" GroupName="RulesRespecting"/>
             </Viewbox>
             <Label Content="2" Style="{StaticResource defaultLabel}" FontSize="20" VerticalAlignment="Center"/>
             <Viewbox Width="30" Height="30" Margin="5 0 5 0">
-                <RadioButton x:Name="rulesRateRadioButton3" GroupName="Cleanness"/>
+                <RadioButton x:Name="rulesRateRadioButton3" GroupName="RulesRespecting"/>
             </Viewbox>
             <Label Content="3" Style="{StaticResource defaultLabel}" FontSize="20" VerticalAlignment="Center"/>
             <Viewbox Width="30" Height="30" Margin="5 0 5 0">
-                <RadioButton x:Name="rulesRateRadioButton4" GroupName="Cleanness"/>
+                <RadioButton x:Name="rulesRateRadioButton4" GroupName="RulesRespecting"/>
             </Viewbox>
             <Label Content="4" Style="{StaticResource defaultLabel}" FontSize="20" VerticalAlignment="Center"/>
             <Viewbox Width="30" Height="30" Margin="5 0 0 0">
-                <RadioButton x:Name="rulesRateRadioButton5" GroupName="Cleanness"/>
+                <RadioButton x:Name="rulesRateRadioButton5" GroupName="RulesRespecting"/>
             </Viewbox>
             <Label Content="5" Style="{StaticResource defaultLabel}" FontSize="20" VerticalAlignment="Center"/>
         </StackPanel>
@@ -86,11 +86,12 @@
         <StackPanel Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal">
             <TextBlock x:Name="saveFeedback" 
                    VerticalAlignment="Center"
-                   Height="30" Width="250" Margin="210 0 10 0"/>
+                   Height="30" Width="200" Margin="260 10 10 0" FontSize="17" Foreground="#4CD137" FontFamily="Ubuntu"/>
             <Button Content="Save Rating" 
                 Grid.Row="3" Grid.ColumnSpan="3"
                 VerticalAlignment="Center"
-                Style="{StaticResource saveButton}"/>
+                Style="{StaticResource saveButton}"
+                Click="SaveRate"/>
         </StackPanel>
     </Grid>
 </UserControl>

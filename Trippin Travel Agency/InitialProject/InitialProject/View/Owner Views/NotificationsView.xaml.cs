@@ -1,6 +1,7 @@
 ﻿using InitialProject.Context;
 using InitialProject.Model;
 using InitialProject.Service;
+using InitialProject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -52,6 +53,34 @@ namespace InitialProject.View.Owner_Views
             TimeSpan timeSinceDeparture = currentDate - departureDate;
             if (timeSinceDeparture.TotalDays <= 5 && timeSinceDeparture.TotalDays >= 0 && !guestRateService.IsRated(booking.Id)) return true;
             return false;
+        }
+
+        private void ShowGuestRatingInterface(object sender, SelectionChangedEventArgs e)
+        {
+            if (notificationsListBox.SelectedItem != null)
+            {
+                BookingService bookingService = new BookingService();
+                string selectedItem = notificationsListBox.SelectedItem.ToString().TrimEnd('!');
+                int bookingId = int.Parse(selectedItem.Substring(selectedItem.LastIndexOf(": ") + 2));
+
+                TransferSelectedBooking(bookingService, bookingId);
+
+                (DataContext as NotificationsViewModel)?.ShowGuestRatingView(null);
+            }
+        }
+
+        private static void TransferSelectedBooking(BookingService bookingService, int bookingId)
+        {
+            DataBaseContext transferContext = new DataBaseContext();
+            DataBaseContext ratingContext = new DataBaseContext();
+            Booking selectedBookingRatingNotification = bookingService.GetById(bookingId);
+
+            var transfers = transferContext.SelectedRatingNotificationTransfer.ToList();
+            transferContext.SelectedRatingNotificationTransfer.RemoveRange(transfers);
+            transferContext.SaveChanges();
+
+            ratingContext.SelectedRatingNotificationTransfer.Add(selectedBookingRatingNotification);
+            ratingContext.SaveChanges();
         }
     }
 }
