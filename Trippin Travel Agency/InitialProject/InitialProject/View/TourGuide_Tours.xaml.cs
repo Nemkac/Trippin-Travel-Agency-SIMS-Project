@@ -41,20 +41,75 @@ namespace InitialProject.View
         {
             int? selectedYear = GetSelectedYear();
 
-            var mostVisitedTour = GetMostVisitedTour(selectedYear);
+            DataBaseContext attendanceContext = new DataBaseContext();
+            DataBaseContext yearsContext = new DataBaseContext();
+            List<Tour> tours = yearsContext.Tours.ToList();
+            List<TourAttendance> attendances = attendanceContext.TourAttendances.ToList();
+            List<int> mostVisitedTours = new List<int>();
 
-            // Update the tour statistics labels
-            if (mostVisitedTour != null)
+            if (!GetSelectedAllTime())
             {
-                statisticsTourName.Content = mostVisitedTour.name;
-                statisticsVisitedBy.Content = $"{mostVisitedTour.touristLimit} guests";
-                statisticsDate.Content = mostVisitedTour.startDates.ToString("MMM dd, yyyy");
-            }
-            else
-            {
-                statisticsTourName.Content = "N/A";
-                statisticsVisitedBy.Content = "N/A";
-                statisticsDate.Content = "N/A";
+                foreach (Tour tour in tours)
+                {
+                    if (tour.startDates.Year == selectedYear)
+                    {
+                        foreach (TourAttendance att in attendances)
+                        {
+                            if (tour.id == att.tourId)
+                            {
+                                mostVisitedTours.Add(att.numberOfGuests);
+                            }
+                        }
+                    }
+                }
+
+                int maxAttendance = mostVisitedTours.Max();
+                int maxTourId;
+
+                foreach (TourAttendance attendance in attendances)
+                {
+                    if (attendance.numberOfGuests == maxAttendance)
+                    {
+                        maxTourId = attendance.tourId;
+                        statisticsVisitedBy.Content = attendance.numberOfGuests;
+                        foreach (Tour tour in tours)
+                        {
+                            if (tour.id == maxTourId)
+                            {
+                                statisticsTourName.Content = tour.name;
+                                statisticsDate.Content = tour.startDates.Date;
+                            }
+                        }
+                    }
+                }
+            } else {
+                foreach (Tour tour in tours)
+                {
+                    foreach (TourAttendance att in attendances)
+                    {
+                        mostVisitedTours.Add(att.numberOfGuests);
+                    }
+                }
+
+                int maxAttendance = mostVisitedTours.Max();
+                int maxTourId;
+
+                foreach (TourAttendance attendance in attendances)
+                {
+                    if (attendance.numberOfGuests == maxAttendance)
+                    {
+                        maxTourId = attendance.tourId;
+                        statisticsVisitedBy.Content = attendance.numberOfGuests;
+                        foreach (Tour tour in tours)
+                        {
+                            if (tour.id == maxTourId)
+                            {
+                                statisticsTourName.Content = tour.name;
+                                statisticsDate.Content = tour.startDates.Date;
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -69,24 +124,14 @@ namespace InitialProject.View
             return selectedYear;
         }
 
-        private Tour GetMostVisitedTour(int? year)
+        private bool GetSelectedAllTime()
         {
-            using (var db = new DataBaseContext())
+            if(yearComboBox.SelectedItem.ToString() == "All time")
             {
-                var query = from tour in db.Tours
-                            join attendance in db.TourAttendances on tour.id equals attendance.tourId
-                            where year == null || tour.startDates.Year == year
-                            group attendance by tour into g
-                            orderby g.Sum(a => a.numberOfGuests) descending
-                            select new
-                            {
-                                Tour = g.Key,
-                                TotalGuests = g.Sum(a => a.numberOfGuests)
-                            };
-
-                var result = query.FirstOrDefault();
-                return result?.Tour;
+                return true;
             }
+
+            return false;
         }
 
         private void ShowTourStatisticsButton_Click(object sender, RoutedEventArgs e)
