@@ -58,7 +58,6 @@ namespace InitialProject.View
             string message = "Booking with ID: " + booking.Id + " has been canceled.";
             BookingCancelationMessage bookingCancelationMessage = new BookingCancelationMessage(message, booking.Id);
             BookingCancelationMessageService.Save(bookingCancelationMessage);
-
             DataBaseContext canceledContext = new DataBaseContext();
             CanceledBooking canceledBooking = new CanceledBooking(booking.Id);
             canceledContext.CanceledBookings.Add(canceledBooking);

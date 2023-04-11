@@ -185,15 +185,20 @@ namespace InitialProject.View
             }
             else
             {
-                BookAccommodationInterface BookAccommodationInterface = new BookAccommodationInterface();
-                BookAccommodationInterface.SetAttributes(selectedAccommodation.id,LoggedUser.id);
-                BookAccommodationInterface.ShowBookings(result);
-                BookAccommodationInterface.WindowStartupLocation = WindowStartupLocation.Manual;
-                BookAccommodationInterface.Left = this.Left;
-                BookAccommodationInterface.Top = this.Top;
-                BookAccommodationInterface.Show();
-                this.Close();
+                ShowBookInterface(result);
             }
+        }
+
+        private void ShowBookInterface(dynamic result)
+        {
+            BookAccommodationInterface BookAccommodationInterface = new BookAccommodationInterface();
+            BookAccommodationInterface.SetAttributes(selectedAccommodation.id, LoggedUser.id);
+            BookAccommodationInterface.ShowBookings(result);
+            BookAccommodationInterface.WindowStartupLocation = WindowStartupLocation.Manual;
+            BookAccommodationInterface.Left = this.Left;
+            BookAccommodationInterface.Top = this.Top;
+            BookAccommodationInterface.Show();
+            this.Close();
         }
 
         private void GetBasicDatesProperties(object sender, RoutedEventArgs e, out int daysToBook, out List<string> displayableDates)
@@ -247,23 +252,28 @@ namespace InitialProject.View
                 List<DelaymentRequestUpdate> delaymentRequestUpdates = new List<DelaymentRequestUpdate>();
                 foreach (BookingDelaymentRequest bookingDelaymentRequest in userService.GetResolvedBookingDelaymentRequests())
                 {
-                    List<string> output = bookingDelaymentRequestService.GetTextOutput(bookingDelaymentRequest);
-                    DelaymentRequestUpdate delaymentRequestUpdate = new DelaymentRequestUpdate();
-                    delaymentRequestUpdate.messageBlock.Text = "Your booking delayment request has been " + output[0];
-                    delaymentRequestUpdate.requestsUpdateBlockLabels.Text = "Booking ID: " + "\n\nAccommodation name:" + "\n\nDesired arrival" + "\n\nDesired departure";
-                    delaymentRequestUpdate.requestsUpdateBlock.Text = output[1] + "\n\n" + output[2] + "\n\n" + output[3] + "\n\n" + output[4];
-                    delaymentRequestUpdate.WindowStartupLocation = WindowStartupLocation.Manual;
-                    delaymentRequestUpdate.Left = this.Left + (this.Width - delaymentRequestUpdate.Width) / 2;
-                    delaymentRequestUpdate.Top = this.Top + (this.Height - delaymentRequestUpdate.Height) / 2;
-                    delaymentRequestUpdate.SetAttributes(bookingDelaymentRequest);
-                    delaymentRequestUpdate.Topmost = true;
-                    delaymentRequestUpdates.Add(delaymentRequestUpdate);
+                    FIllRequestUpdateComment(bookingDelaymentRequestService, delaymentRequestUpdates, bookingDelaymentRequest);
                 }
-                foreach(DelaymentRequestUpdate delaymentRequestUpdate in delaymentRequestUpdates)
+                foreach (DelaymentRequestUpdate delaymentRequestUpdate in delaymentRequestUpdates)
                 {
                     delaymentRequestUpdate.Show();
                 }
             }
+        }
+
+        private void FIllRequestUpdateComment(BookingDelaymentRequestService bookingDelaymentRequestService, List<DelaymentRequestUpdate> delaymentRequestUpdates, BookingDelaymentRequest bookingDelaymentRequest)
+        {
+            List<string> output = bookingDelaymentRequestService.GetTextOutput(bookingDelaymentRequest);
+            DelaymentRequestUpdate delaymentRequestUpdate = new DelaymentRequestUpdate();
+            delaymentRequestUpdate.messageBlock.Text = "Your booking delayment request has been " + output[0];
+            delaymentRequestUpdate.requestsUpdateBlockLabels.Text = "Booking ID: " + "\n\nAccommodation name:" + "\n\nDesired arrival" + "\n\nDesired departure";
+            delaymentRequestUpdate.requestsUpdateBlock.Text = output[1] + "\n\n" + output[2] + "\n\n" + output[3] + "\n\n" + output[4];
+            delaymentRequestUpdate.WindowStartupLocation = WindowStartupLocation.Manual;
+            delaymentRequestUpdate.Left = this.Left + (this.Width - delaymentRequestUpdate.Width) / 2;
+            delaymentRequestUpdate.Top = this.Top + (this.Height - delaymentRequestUpdate.Height) / 2;
+            delaymentRequestUpdate.SetAttributes(bookingDelaymentRequest);
+            delaymentRequestUpdate.Topmost = true;
+            delaymentRequestUpdates.Add(delaymentRequestUpdate);
         }
     }
 }
