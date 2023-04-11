@@ -12,7 +12,7 @@ namespace InitialProject.Model
     {
         public int id { get; set; }
         public String imageLink { get; set; }
-        public int tourId { get; set; }
+        public Nullable<int> tourId { get; set; }
 
         /*public Image(int id, String imageLink, int tourId) { 
             this.id = id;
@@ -21,9 +21,10 @@ namespace InitialProject.Model
         }*/
 
         public Image() { }
-        public Image(String imageLink)
+        public Image(String imageLink, Nullable<int> tourId)
         {
             this.imageLink = imageLink;
+            this.tourId = tourId;
         }
     }
 }

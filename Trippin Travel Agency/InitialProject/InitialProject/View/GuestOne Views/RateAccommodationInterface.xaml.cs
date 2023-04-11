@@ -40,7 +40,7 @@ namespace InitialProject.View
 
         private void GetImageUrlInput(object sender, RoutedEventArgs e)
         {
-            Model.Image image = new Model.Image(imageBlock.Text);
+            Model.Image image = new Model.Image(imageBlock.Text, null);
             imageUrls.Add(image);
             imageBlock.Clear();
             imageCounter++;
