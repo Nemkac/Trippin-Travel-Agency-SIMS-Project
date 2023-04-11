@@ -14,12 +14,6 @@ namespace InitialProject.Model
         public String imageLink { get; set; }
         public Nullable<int> tourId { get; set; }
 
-        /*public Image(int id, String imageLink, int tourId) { 
-            this.id = id;
-            this.imageLink = imageLink;
-            this.tourId = tourId;
-        }*/
-
         public Image() { }
         public Image(String imageLink, Nullable<int> tourId)
         {
