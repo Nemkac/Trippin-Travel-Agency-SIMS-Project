@@ -24,7 +24,7 @@
                       CellStyle="{DynamicResource DataGridCellStyle1}" 
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"  
                       RowStyle="{DynamicResource DataGridRowStyle1}" 
-                      SelectedItem="{Binding SelectedRequest, Mode=TwoWay}"
+                      Grid.Row="0"
                       x:Name="requestsDataGrid"/>
         </StackPanel>
         <Button Style="{StaticResource detailsButton}"
