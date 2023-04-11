@@ -3,6 +3,7 @@ using System;
 using InitialProject.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230411125758_test1")]
+    partial class test1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
@@ -154,8 +157,6 @@ namespace InitialProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("accommodationId");
-
                     b.ToTable("Bookings");
                 });
 
@@ -200,8 +201,6 @@ namespace InitialProject.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("id");
-
-                    b.HasIndex("bookingId");
 
                     b.ToTable("BookingDelaymentRequests");
                 });
@@ -620,24 +619,6 @@ namespace InitialProject.Migrations
                         .IsRequired();
 
                     b.Navigation("location");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.Booking", b =>
-                {
-                    b.HasOne("InitialProject.Model.Accommodation", null)
-                        .WithMany()
-                        .HasForeignKey("accommodationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("InitialProject.Model.BookingDelaymentRequest", b =>
-                {
-                    b.HasOne("InitialProject.Model.Booking", null)
-                        .WithMany()
-                        .HasForeignKey("bookingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("InitialProject.Model.Image", b =>

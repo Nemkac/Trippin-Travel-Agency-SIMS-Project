@@ -44,18 +44,38 @@ namespace InitialProject.Context
         // public string path = @"C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
 
         // Nemanja Todorovic
-         public string path = @"C:\Users\Nemanja\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
+        // public string path = @"C:\Users\Nemanja\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
 
         // Vladimir Blanusa lap
         // public string path = @"C:\Users\abc\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
 
         // Vladimir BLanusa pc
-        // public string path = @"C:\Users\vlada\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
+         public string path = @"C:\Users\vlada\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite($"Data Source={path}");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<BookingDelaymentRequest>()
+                .HasOne<Booking>()
+                .WithMany()
+                .HasForeignKey(bookingDelaymentRequest => bookingDelaymentRequest.bookingId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Booking>()
+                .HasOne<Accommodation>()
+                .WithMany()
+                .HasForeignKey(booking => booking.accommodationId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+        }
+
     }
 }
