@@ -43,41 +43,62 @@ namespace InitialProject.View
 
             if (resolvedDelaymentRequests != null)
             {
-                var resolvedDelaymentsToGrid = from bookingDelaymentRequest in resolvedDelaymentRequests
-                                               select new
-                                               {
-                                                   bookingId = bookingDelaymentRequest.bookingId,
-                                                   accommodationService.GetById(bookingService.GetById(bookingDelaymentRequest.bookingId).accommodationId).name,
-                                                   desiredArrival = bookingDelaymentRequest.newArrival.ToString().Substring(0, 9),
-                                                   desiredDeparture = bookingDelaymentRequest.newDeparture.ToString().Substring(0, 9),
-                                                   bookingDelaymentRequest.status
-                                               };
-                this.resolvedRequestsGrid.ItemsSource = resolvedDelaymentsToGrid;
+                FillResolvedRequestsGrid(bookingService, accommodationService, resolvedDelaymentRequests);
 
+            } else
+            {
+                resolvedRequestsGrid.ItemsSource = null;
             }
 
             if (pendingDelaymentRequests != null)
             {
-                var pendingDelaymentsToGrid = from bookingDelaymentRequest in pendingDelaymentRequests
-                                              select new
-                                              {
-                                                  bookingId = bookingDelaymentRequest.bookingId,
-                                                  accommodationService.GetById(bookingService.GetById(bookingDelaymentRequest.bookingId).accommodationId).name,
-                                                  desiredArrival = bookingDelaymentRequest.newArrival.ToString().Substring(0, 9),
-                                                  desiredDeparture = bookingDelaymentRequest.newDeparture.ToString().Substring(0, 9),
-                                                  bookingDelaymentRequest.status
-                                              };
-                this.pendingRequestsGrid.ItemsSource = pendingDelaymentsToGrid;
+                FillPendingRequestsGrid(bookingService, accommodationService, pendingDelaymentRequests);
+            } else
+            {
+                pendingRequestsGrid.ItemsSource = null;
             }
+        }
+
+        private void FillPendingRequestsGrid(BookingService bookingService, AccommodationService accommodationService, List<BookingDelaymentRequest> pendingDelaymentRequests)
+        {
+            var pendingDelaymentsToGrid = from bookingDelaymentRequest in pendingDelaymentRequests
+                                          select new
+                                          {
+                                              bookingId = bookingDelaymentRequest.bookingId,
+                                              accommodationService.GetById(bookingService.GetById(bookingDelaymentRequest.bookingId).accommodationId).name,
+                                              desiredArrival = bookingDelaymentRequest.newArrival.ToString().Substring(0, 9),
+                                              desiredDeparture = bookingDelaymentRequest.newDeparture.ToString().Substring(0, 9),
+                                              bookingDelaymentRequest.status
+                                          };
+            this.pendingRequestsGrid.ItemsSource = pendingDelaymentsToGrid;
+        }
+
+        private void FillResolvedRequestsGrid(BookingService bookingService, AccommodationService accommodationService, List<BookingDelaymentRequest> resolvedDelaymentRequests)
+        {
+            var resolvedDelaymentsToGrid = from bookingDelaymentRequest in resolvedDelaymentRequests
+                                           select new
+                                           {
+                                               bookingId = bookingDelaymentRequest.bookingId,
+                                               accommodationService.GetById(bookingService.GetById(bookingDelaymentRequest.bookingId).accommodationId).name,
+                                               desiredArrival = bookingDelaymentRequest.newArrival.ToString().Substring(0, 9),
+                                               desiredDeparture = bookingDelaymentRequest.newDeparture.ToString().Substring(0, 9),
+                                               bookingDelaymentRequest.status
+                                           };
+            this.resolvedRequestsGrid.ItemsSource = resolvedDelaymentsToGrid;
         }
 
         private void ShowResolvedRequestComment(object sender, RoutedEventArgs e)
         {
             DelaymentRequestComment delaymentRequestComment = new DelaymentRequestComment();
             UserService userService = new UserService();
-            
-            int selectedRowIndex  = resolvedRequestsGrid.SelectedIndex;
 
+            int selectedRowIndex = resolvedRequestsGrid.SelectedIndex;
+
+            OpenResolvedtRequestComment(delaymentRequestComment, userService, selectedRowIndex);
+        }
+
+        private void OpenResolvedtRequestComment(DelaymentRequestComment delaymentRequestComment, UserService userService, int selectedRowIndex)
+        {
             delaymentRequestComment.WindowStartupLocation = WindowStartupLocation.Manual;
             delaymentRequestComment.Left = this.Left + (this.Width - delaymentRequestComment.Width) / 2;
             delaymentRequestComment.Top = this.Top + (this.Height - delaymentRequestComment.Height) / 2;
@@ -93,6 +114,11 @@ namespace InitialProject.View
 
             int selectedRowIndex = pendingRequestsGrid.SelectedIndex;
 
+            OpenPendingRequestComment(delaymentRequestComment, userService, selectedRowIndex);
+        }
+
+        private void OpenPendingRequestComment(DelaymentRequestComment delaymentRequestComment, UserService userService, int selectedRowIndex)
+        {
             delaymentRequestComment.WindowStartupLocation = WindowStartupLocation.Manual;
             delaymentRequestComment.Left = this.Left + (this.Width - delaymentRequestComment.Width) / 2;
             delaymentRequestComment.Top = this.Top + (this.Height - delaymentRequestComment.Height) / 2;

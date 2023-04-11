@@ -67,13 +67,20 @@ namespace InitialProject.View
 
         private void GoToBookingDelayment(object sender, RoutedEventArgs e)
         {
-            SendBookingDelaymentInterface sendBookingDelaymentInterface = new SendBookingDelaymentInterface();
-            sendBookingDelaymentInterface.SetAttribures((Booking)futureBookingsGrid.SelectedItem);
-            sendBookingDelaymentInterface.WindowStartupLocation = WindowStartupLocation.Manual;
-            sendBookingDelaymentInterface.Left = this.Left;
-            sendBookingDelaymentInterface.Top = this.Top;
-            this.Close();
-            sendBookingDelaymentInterface.Show();
+            AccommodationService accommodationService = new AccommodationService();
+            if ((DateTime.Parse((((Booking)futureBookingsGrid.SelectedItem).arrival)).Subtract(DateTime.Today)).Days >= (accommodationService.GetById(((Booking)futureBookingsGrid.SelectedItem).accommodationId)).bookingCancelPeriodDays)
+            {
+                SendBookingDelaymentInterface sendBookingDelaymentInterface = new SendBookingDelaymentInterface();
+                sendBookingDelaymentInterface.SetAttribures((Booking)futureBookingsGrid.SelectedItem);
+                sendBookingDelaymentInterface.WindowStartupLocation = WindowStartupLocation.Manual;
+                sendBookingDelaymentInterface.Left = this.Left;
+                sendBookingDelaymentInterface.Top = this.Top;
+                this.Close();
+                sendBookingDelaymentInterface.Show();
+            } else
+            {
+                warningBlock.Text = "ne moze";
+            }
         }
 
         private void ShowDetailed(object sender, RoutedEventArgs e)
