@@ -34,6 +34,26 @@ namespace InitialProject.View.Owner_Views
 
         private void SendNotification()
         {
+            GuestNotRatedNotification();
+            BookingCanceledNotification();
+        }
+
+        public void BookingCanceledNotification()
+        {
+            DataBaseContext canceledContext = new DataBaseContext();
+            List<CanceledBooking> canceledBookings = canceledContext.CanceledBookings.ToList();
+
+            foreach(CanceledBooking booking in canceledBookings.ToList())
+            {
+                if(booking.seen == false)
+                {
+                    notificationsListBox.Items.Add($"Booking {booking.bookingId} has been canceled!");
+                }
+            }
+        }
+
+        private void GuestNotRatedNotification()
+        {
             GuestRateService guestRateService = new GuestRateService();
             DataBaseContext bookingContext = new DataBaseContext();
             BookingService bookingService = new BookingService();
