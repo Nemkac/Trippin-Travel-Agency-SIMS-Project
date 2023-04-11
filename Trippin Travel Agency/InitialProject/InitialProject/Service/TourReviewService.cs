@@ -14,7 +14,7 @@ namespace InitialProject.Service
     {
         public TourAndGuideRateDTO transformTourReviewToDTO(TourAndGuideRate tagr, int kpid )
         {
-            TourAndGuideRateDTO tourReviewsDTO = new TourAndGuideRateDTO(tagr.id, kpid, tagr.guestId, tagr.guideKnowledgeRating, tagr.guideLanguageUsageRating, tagr.contentRating);
+            TourAndGuideRateDTO tourReviewsDTO = new TourAndGuideRateDTO(tagr.id, kpid, tagr.guestId, tagr.guideKnowledgeRating, tagr.guideLanguageUsageRating, tagr.contentRating, tagr.valid);
             return tourReviewsDTO;
         }
 

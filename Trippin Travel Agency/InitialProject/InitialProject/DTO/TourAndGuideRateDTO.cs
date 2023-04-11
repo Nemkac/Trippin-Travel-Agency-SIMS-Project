@@ -17,7 +17,7 @@ namespace InitialProject.DTO
         public int contentRating { get; set; }
         public bool valid { get; set; }
 
-        public TourAndGuideRateDTO(int id, int keyPointId, int guestId, int guideKnowledgeRating, int guideLanguageUsageRating, int contentRating)
+        public TourAndGuideRateDTO(int id, int keyPointId, int guestId, int guideKnowledgeRating, int guideLanguageUsageRating, int contentRating, bool valid)
         {
             this.id = id;
             this.keyPointId = keyPointId;
@@ -25,7 +25,7 @@ namespace InitialProject.DTO
             this.guideKnowledgeRating = guideKnowledgeRating;
             this.guideLanguageUsageRating = guideLanguageUsageRating;
             this.contentRating = contentRating;
-            this.valid = true;
+            this.valid = valid;
         }
 
         public TourAndGuideRateDTO()
