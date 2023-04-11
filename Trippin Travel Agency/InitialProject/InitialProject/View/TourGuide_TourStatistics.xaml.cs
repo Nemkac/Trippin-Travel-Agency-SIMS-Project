@@ -1,4 +1,5 @@
 ﻿using InitialProject.Context;
+using InitialProject.DTO;
 using InitialProject.Model;
 using InitialProject.Service;
 using System;
@@ -26,8 +27,11 @@ namespace InitialProject.View
         public TourGuide_TourStatistics()
         {
             InitializeComponent();
+            DataBaseContext tourStatisticsDto = new DataBaseContext();
+            TourStatisticsDTO transferedTour = tourStatisticsDto.TourStatisticsTransfer.First();
+            statisticsTourName.Content = transferedTour.tourName;
+            statisticsVisitedBy.Content = transferedTour.numberOfGuests;
+            statisticsDate.Content = transferedTour.startDate;
         }
-        
-
     }
 }

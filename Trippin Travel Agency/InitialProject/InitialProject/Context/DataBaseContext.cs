@@ -28,6 +28,7 @@ namespace InitialProject.Context
         public DbSet<TourAttendance> TourAttendances { get; set; }
         public DbSet<TourBookingTransfer> tourBookingTransfers { get; set; }
         public DbSet<TourAndGuideRate> TourAndGuideRates { get; set; }  
+        public DbSet<TourStatisticsDTO> TourStatisticsTransfer { get; set; }
 
 
 

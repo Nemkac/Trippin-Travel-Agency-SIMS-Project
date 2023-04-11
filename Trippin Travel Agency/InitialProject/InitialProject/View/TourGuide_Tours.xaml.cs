@@ -1,4 +1,5 @@
 ﻿using InitialProject.Context;
+using InitialProject.DTO;
 using InitialProject.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -41,12 +42,20 @@ namespace InitialProject.View
         {
             int? selectedYear = GetSelectedYear();
 
+            //Brisanje eventualno postojeceg sadrzaja iz tabele pre prosledjivanja na drugi interfejs
+            DataBaseContext transferContext = new DataBaseContext();
+            List<TourStatisticsDTO> transfetTableData = transferContext.TourStatisticsTransfer.ToList();
+            transferContext.TourStatisticsTransfer.RemoveRange(transfetTableData);
+            transferContext.SaveChanges();
+
             DataBaseContext attendanceContext = new DataBaseContext();
             DataBaseContext yearsContext = new DataBaseContext();
             List<Tour> tours = yearsContext.Tours.ToList();
             List<TourAttendance> attendances = attendanceContext.TourAttendances.ToList();
             List<int> mostVisitedTours = new List<int>();
 
+
+            TourStatisticsDTO statisticsToShow = new TourStatisticsDTO();
             if (!GetSelectedAllTime())
             {
                 foreach (Tour tour in tours)
@@ -62,26 +71,36 @@ namespace InitialProject.View
                         }
                     }
                 }
+                
+                /*Treba resiti slucaj kada se selektuje godina za koju ne postoji tura. Kada se selektuje odredjena godina
+                 prosledjuje se i tourId u transfer tabelu. */
+
 
                 int maxAttendance = mostVisitedTours.Max();
                 int maxTourId;
+
+                statisticsToShow.numberOfGuests = maxAttendance;
 
                 foreach (TourAttendance attendance in attendances)
                 {
                     if (attendance.numberOfGuests == maxAttendance)
                     {
                         maxTourId = attendance.tourId;
-                        statisticsVisitedBy.Content = attendance.numberOfGuests;
+                        statisticsToShow.tourId = maxTourId;
                         foreach (Tour tour in tours)
                         {
                             if (tour.id == maxTourId)
                             {
-                                statisticsTourName.Content = tour.name;
-                                statisticsDate.Content = tour.startDates.Date;
+                                statisticsToShow.tourName = tour.name;
+                                statisticsToShow.startDate = tour.startDates;
                             }
                         }
                     }
                 }
+
+                transferContext.TourStatisticsTransfer.Add(statisticsToShow);
+                transferContext.SaveChanges();
+
             } else {
                 foreach (Tour tour in tours)
                 {
@@ -93,23 +112,28 @@ namespace InitialProject.View
 
                 int maxAttendance = mostVisitedTours.Max();
                 int maxTourId;
+                statisticsToShow.numberOfGuests = maxAttendance;
 
                 foreach (TourAttendance attendance in attendances)
                 {
                     if (attendance.numberOfGuests == maxAttendance)
                     {
                         maxTourId = attendance.tourId;
+                        statisticsToShow.tourId = maxTourId;
                         statisticsVisitedBy.Content = attendance.numberOfGuests;
                         foreach (Tour tour in tours)
                         {
                             if (tour.id == maxTourId)
                             {
-                                statisticsTourName.Content = tour.name;
-                                statisticsDate.Content = tour.startDates.Date;
+                                statisticsToShow.tourName = tour.name;
+                                statisticsToShow.startDate = tour.startDates;
                             }
                         }
                     }
                 }
+
+                transferContext.TourStatisticsTransfer.Add(statisticsToShow);
+                transferContext.SaveChanges();
             }
         }
 
