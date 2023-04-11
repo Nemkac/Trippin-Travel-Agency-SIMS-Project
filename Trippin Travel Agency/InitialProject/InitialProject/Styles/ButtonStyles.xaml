@@ -149,6 +149,15 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
+    <!-- Mobile label for display-->
+    <Style x:Key="labelForDisplay" TargetType="Label">
+        <Setter Property="FontFamily" Value="Ubuntu"/>
+        <Setter Property="Foreground" Value="#273c75"/>
+        <Setter Property="FontSize" Value="18pt"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
     <!-- Mobile label for GroupBox -->
     <Style x:Key="labelGroupBox" TargetType="GroupBox">
         <Setter Property="FontFamily" Value="Ubuntu"/>

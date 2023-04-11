@@ -87,8 +87,35 @@
                             Command="{Binding FutureToursCommand}"/>
                     <Line Style="{StaticResource mobileDelimiterLine}"/>
                 </StackPanel>
-
+                
                 <!-- What is a best one? -->
+
+                <!-- Tour data / statistics -->
+                <StackPanel x:Name="tourStatisticsStackPanel">
+                    <!-- Tour name -->
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Tour name: "
+                               Style="{StaticResource labelForDisplay}"/>
+                        <Label x:Name="statisticsTourName"
+                               Style="{StaticResource labelForDisplay}"/>
+                    </StackPanel>
+
+                    <!-- Tour name -->
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Visited by: "
+                               Style="{StaticResource labelForDisplay}"/>
+                        <Label x:Name="statisticsVisitedBy"
+                               Style="{StaticResource labelForDisplay}"/>
+                    </StackPanel>
+
+                    <!-- Tour name -->
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Date: "
+                               Style="{StaticResource labelForDisplay}"/>
+                        <Label x:Name="statisticsDate"
+                               Style="{StaticResource labelForDisplay}"/>
+                    </StackPanel>
+                </StackPanel>
                 <StackPanel Orientation="Vertical"
                             Margin="0,20,0,0">
                     <DockPanel>
@@ -97,11 +124,14 @@
                                DockPanel.Dock="Left"/>
                         <ComboBox DockPanel.Dock="Right"
                                   Width="120"
-                                  Margin="84,0,0,0">
+                                  Margin="84,0,0,0"
+                                  x:Name="yearComboBox"
+                                  >
                             
                         </ComboBox>
                     </DockPanel>
-                    <Button Content="Show statistics" Style="{StaticResource leadButton}"/>
+                    <Button Content="Show statistics" Style="{StaticResource leadButton}"
+                            Click="ShowTourStatisticsButton_Click"/>
                     <Line Style="{StaticResource mobileDelimiterLine}"/>
                 </StackPanel>
 

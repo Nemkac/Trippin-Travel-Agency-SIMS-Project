@@ -13,6 +13,7 @@ namespace InitialProject.ViewModels
         public ViewModelCommand ToursTodayCommand { get; private set; }
         public ViewModelCommand FutureToursCommand { get; private set; }
         public ViewModelCommand ShowFinishedToursCommand { get; private set; }
+        public ViewModelCommand ShowTourStatisticsCommand { get; private set; }
 
         private readonly TourGuide_MainViewModel _mainViewModel;
 
@@ -24,6 +25,7 @@ namespace InitialProject.ViewModels
             ToursTodayCommand = new ViewModelCommand(ToursToday);
             FutureToursCommand = new ViewModelCommand(FutureTours);
             ShowFinishedToursCommand = new ViewModelCommand(FinishedTours);
+            ShowTourStatisticsCommand = new ViewModelCommand(TourStatistics);
         }
 
         public void ShowDashboard(object obj)
@@ -47,6 +49,10 @@ namespace InitialProject.ViewModels
         public void FinishedTours(object obj)
         {
             _mainViewModel.ExecuteShowTourGuideFinishedToursViewCommand(null);
+        }
+        public void TourStatistics(object obj)
+        {
+            _mainViewModel.ExecuteShowTourGuideTourStatisticsViewCommand(null);
         }
     }
 }
