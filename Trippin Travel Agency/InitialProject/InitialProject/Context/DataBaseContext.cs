@@ -73,8 +73,6 @@ namespace InitialProject.Context
                 .WithMany()
                 .HasForeignKey(booking => booking.accommodationId)
                 .OnDelete(DeleteBehavior.Cascade);
-
-
         }
 
     }
