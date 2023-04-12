@@ -71,7 +71,7 @@ namespace InitialProject.View.Owner_Views
             DataBaseContext requestContext = new DataBaseContext();
             List<BookingDelaymentRequest> bookingDelaymentRequests = requestContext.BookingDelaymentRequests.ToList();
 
-            RemoveRequest(selectedRequest, requestContext, bookingDelaymentRequests);
+            UpdateAcceptedRequestStatus(selectedRequest, requestContext, bookingDelaymentRequests);
 
             AcceptFeedBack.Text = "Request accepted!";
             acceptContext.SelectedRequestTransfers.Remove(acceptContext.SelectedRequestTransfers.First());
@@ -81,13 +81,29 @@ namespace InitialProject.View.Owner_Views
             button.IsEnabled = false;
         }
 
-        private static void RemoveRequest(List<RequestDTO> selectedRequest, DataBaseContext requestContext, List<BookingDelaymentRequest> bookingDelaymentRequests)
+        private static void UpdateDeniedRequestStatus(List<RequestDTO> selectedRequest, DataBaseContext requestContext, List<BookingDelaymentRequest> bookingDelaymentRequests)
         {
             foreach (BookingDelaymentRequest request in bookingDelaymentRequests.ToList())
             {
                 if (request.bookingId == selectedRequest.First().bookingId)
                 {
-                    requestContext.BookingDelaymentRequests.Remove(request);
+                    request.status = Status.Denied;
+                    //requestContext.BookingDelaymentRequests.Remove(request);
+                    requestContext.BookingDelaymentRequests.Update(request);
+                    requestContext.SaveChanges();
+                }
+            }
+        }
+
+        private static void UpdateAcceptedRequestStatus(List<RequestDTO> selectedRequest, DataBaseContext requestContext, List<BookingDelaymentRequest> bookingDelaymentRequests)
+        {
+            foreach (BookingDelaymentRequest request in bookingDelaymentRequests.ToList())
+            {
+                if (request.bookingId == selectedRequest.First().bookingId)
+                {
+                    request.status = Status.Accepted;
+                    //requestContext.BookingDelaymentRequests.Remove(request);
+                    requestContext.BookingDelaymentRequests.Update(request);
                     requestContext.SaveChanges();
                 }
             }
@@ -113,7 +129,7 @@ namespace InitialProject.View.Owner_Views
             DataBaseContext requestContext = new DataBaseContext();
             List<BookingDelaymentRequest> bookingDelaymentRequests = requestContext.BookingDelaymentRequests.ToList();
 
-            RemoveRequest(selectedRequest, requestContext, bookingDelaymentRequests);
+            UpdateDeniedRequestStatus(selectedRequest, requestContext, bookingDelaymentRequests);
 
             DenyFeedback.Text = "Request denied!";
             acceptContext.SelectedRequestTransfers.Remove(acceptContext.SelectedRequestTransfers.First());

@@ -43,9 +43,11 @@ namespace InitialProject.View.Owner_Views
 
             foreach (BookingDelaymentRequest bookingDelaymentRequest in requestContext.BookingDelaymentRequests.ToList())
             {
-                dto = bookingService.CreateRequestDTO(bookingDelaymentRequest);
-                dataList.Add(dto);
-
+                if (bookingDelaymentRequest.status == Status.Pending)
+                {
+                    dto = bookingService.CreateRequestDTO(bookingDelaymentRequest);
+                    dataList.Add(dto);
+                }
             }
             
             return dataList;
