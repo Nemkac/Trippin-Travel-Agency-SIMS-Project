@@ -15,9 +15,8 @@ namespace InitialProject.Model
 
         public DateTime exiresOn { get; set; }
 
-        public Coupon(int id, int userId, DateTime exiresOn)
+        public Coupon(int userId, DateTime exiresOn)
         {
-            this.id = id;
             this.userId = userId;
             this.exiresOn = exiresOn;
         }

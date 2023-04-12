@@ -87,8 +87,29 @@
                             Command="{Binding FutureToursCommand}"/>
                     <Line Style="{StaticResource mobileDelimiterLine}"/>
                 </StackPanel>
-
+                
                 <!-- What is a best one? -->
+
+                <!-- Tour data / statistics -->
+                <StackPanel x:Name="tourStatisticsStackPanel">
+                    <!-- Tour name -->
+                    <StackPanel Orientation="Horizontal">
+                        <Label x:Name="statisticsTourName"
+                               Style="{StaticResource labelForDisplay}"/>
+                    </StackPanel>
+
+                    <!-- Tour name -->
+                    <StackPanel Orientation="Horizontal">
+                        <Label x:Name="statisticsVisitedBy"
+                               Style="{StaticResource labelForDisplay}"/>
+                    </StackPanel>
+
+                    <!-- Tour name -->
+                    <StackPanel Orientation="Horizontal">
+                        <Label x:Name="statisticsDate"
+                               Style="{StaticResource labelForDisplay}"/>
+                    </StackPanel>
+                </StackPanel>
                 <StackPanel Orientation="Vertical"
                             Margin="0,20,0,0">
                     <DockPanel>
@@ -97,11 +118,15 @@
                                DockPanel.Dock="Left"/>
                         <ComboBox DockPanel.Dock="Right"
                                   Width="120"
-                                  Margin="84,0,0,0">
+                                  Margin="84,0,0,0"
+                                  x:Name="yearComboBox"
+                                  >
                             
                         </ComboBox>
                     </DockPanel>
-                    <Button Content="Show statistics" Style="{StaticResource leadButton}"/>
+                    <Button Content="Show statistics" Style="{StaticResource leadButton}"
+                            Click="ShowTourStatisticsButton_Click"
+                            Command="{Binding ShowTourStatisticsCommand}"/>
                     <Line Style="{StaticResource mobileDelimiterLine}"/>
                 </StackPanel>
 
@@ -112,8 +137,8 @@
                         <fa:IconImage Icon="Check" HorizontalAlignment="Left" Style="{StaticResource menuBackButtonIcon}" Width="15" Height="15"/>
                         <Label Content="Finished tours" Style="{StaticResource labelAboveTextBox}"/>
                     </StackPanel>
-                    <Button Content="Show finished tours" Style="{StaticResource leadButton}"/>
-                    <Line Style="{StaticResource mobileDelimiterLine}"/>
+                    <Button Content="Show finished tours" Style="{StaticResource leadButton}"
+                            Command="{Binding ShowFinishedToursCommand}"/>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

@@ -165,7 +165,13 @@
                     <DataGrid x:Name="guestReservationsDataGrid"
                           Width="330"
                           BorderThickness="0"
+                          AutoGenerateColumns="False"
                           >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding id}" Width="*"/>
+                            <DataGridTextColumn Header="Joined" Binding="{Binding guestJoined}" Width="*"/>
+                            <DataGridTextColumn Header="Confirmed" Binding="{Binding guideConfirmed}" Width="*"/>
+                        </DataGrid.Columns>
                         <DataGrid.CellStyle>
                             <Style TargetType="{x:Type DataGridCell}">
                                 <Setter Property="FontFamily" Value="Ubuntu"/>

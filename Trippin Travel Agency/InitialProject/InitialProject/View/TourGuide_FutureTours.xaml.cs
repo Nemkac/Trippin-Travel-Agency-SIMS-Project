@@ -75,7 +75,16 @@ namespace InitialProject.View
                         dataBaseContext.TourReservations.RemoveRange(dataBaseContext.TourReservations.Where(tr => tr.tourId == tourToDelete.id));
 
                         dataBaseContext.Tours.Remove(tourToDelete);
-                        dataBaseContext.SaveChanges();
+                        
+                        foreach(TourReservation tr in dataBaseContext.TourReservations.ToList())
+                        {
+                            if(tr.id == tourToDelete.id)
+                            {
+                                Coupon coupon = new Coupon(tr.guestId, DateTime.Now.AddYears(1));
+                                dataBaseContext.Coupons.Add(coupon);
+                                dataBaseContext.SaveChanges();
+                            }
+                        }
 
                         MessageBox.Show("Tour has been cancelled.");
 
