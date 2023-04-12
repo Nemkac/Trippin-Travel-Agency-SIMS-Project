@@ -190,6 +190,18 @@ namespace InitialProject.Service
                 return futureTours;
             }
         }
+        public List<Tour> GetFinishedTours()
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                List<Tour> finishedTours = context.Tours
+                    .Where(t => t.finished == true)
+                    .ToList();
+
+                return finishedTours;
+            }
+        }
+
         public bool IsTourFinished(List<KeyPoint> keyPoints)
         {
             return keyPoints != null && keyPoints.All(kp => kp.visited);
@@ -256,6 +268,11 @@ namespace InitialProject.Service
             FutureToursDTO futureToursDTO = new FutureToursDTO(tour.id, tour.name, tour.language);
             return futureToursDTO;
         }
+        public FinishedTourDTO createFinishedToursDTO(Tour tour)
+        {
+            FinishedTourDTO finishedTourDTO = new FinishedTourDTO(tour.id, tour.name, tour.language);
+            return finishedTourDTO;
+        }
         public TourReservationsTodayDTO createTourReservationsTodayDTO(TourReservation tr)
         {
             TourReservationsTodayDTO tourReservationsTodayDTO = new TourReservationsTodayDTO(tr.id);
@@ -273,6 +290,20 @@ namespace InitialProject.Service
                 }
             }
             return reservations;
+        }
+
+        public List<TourAndGuideRate> GetTourRatingsById(int tourId)
+        {
+            List<TourAndGuideRate> reviews = new List<TourAndGuideRate>();
+            DataBaseContext dataBaseContext = new DataBaseContext();
+            foreach (TourAndGuideRate tagr in dataBaseContext.TourAndGuideRates.ToList())
+            {
+                if (tagr.tourId == tourId)
+                {
+                    reviews.Add(tagr);
+                }
+            }
+            return reviews;
         }
 
 

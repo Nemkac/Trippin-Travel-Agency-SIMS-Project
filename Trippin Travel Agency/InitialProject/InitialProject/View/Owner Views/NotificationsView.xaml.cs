@@ -3,6 +3,7 @@ using InitialProject.Model;
 using InitialProject.Model.TransferModels;
 using InitialProject.Service;
 using InitialProject.ViewModels;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -76,9 +77,16 @@ namespace InitialProject.View.Owner_Views
             return false;
         }
 
-        private void ShowGuestRatingInterface(object sender, SelectionChangedEventArgs e)
+        private void HandleSelections(object sender, SelectionChangedEventArgs e)
         {
-            if (notificationsListBox.SelectedItem != null)
+            int canceledBookingId = MarkCanceledBookingNotificationAsSeen();
+
+            ShowGuestRatingView(canceledBookingId);
+        }
+
+        private void ShowGuestRatingView(int canceledBookingId)
+        {
+            if (notificationsListBox.SelectedItem != null && canceledBookingId == -1)
             {
                 BookingService bookingService = new BookingService();
                 string selectedItem = notificationsListBox.SelectedItem.ToString().TrimEnd('!');
@@ -88,6 +96,41 @@ namespace InitialProject.View.Owner_Views
 
                 (DataContext as NotificationsViewModel)?.ShowGuestRatingView(null);
             }
+        }
+
+        private int MarkCanceledBookingNotificationAsSeen()
+        {
+            if(notificationsListBox.SelectedItem == null)
+            {
+                return -1;
+            }
+            string canceledBookingNotification = notificationsListBox.SelectedItem.ToString();
+            int index = canceledBookingNotification.IndexOf(' ');
+            string bookingIdString = canceledBookingNotification.Substring(index + 1, canceledBookingNotification.IndexOf(' ', index + 1) - index - 1);
+
+            int canceledBookingId;
+            bool isBookingIdValid = int.TryParse(bookingIdString, out canceledBookingId);
+
+            if (!isBookingIdValid)
+            {
+                return -1;
+            }
+
+            DataBaseContext canceledContext = new DataBaseContext();
+            List<CanceledBooking> canceledBookings = canceledContext.CanceledBookings.ToList();
+            foreach (CanceledBooking canceledBooking in canceledBookings.ToList())
+            {
+                if (canceledBooking.bookingId == canceledBookingId)
+                {
+                    canceledBooking.seen = true;
+                    canceledContext.CanceledBookings.Update(canceledBooking);
+                    canceledContext.SaveChanges();
+                }
+            }
+
+            notificationsListBox.Items.Remove(notificationsListBox.SelectedItem);
+
+            return canceledBookingId;
         }
 
         private static void TransferSelectedBooking(BookingService bookingService, int bookingId)

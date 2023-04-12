@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="InitialProject.View.TourGuide_ToursToday"
+﻿<UserControl x:Class="InitialProject.View.TourGuide_FinishedTourData"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,12 +7,12 @@
              xmlns:viewModel="clr-namespace:InitialProject.ViewModels"
              xmlns:local="clr-namespace:InitialProject.Model"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             xmlns:vm="clr-namespace:InitialProject.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="750"
              d:DesignWidth="430"
-             x:Name="toursTodayControl">
-
+             x:Name="createTourControl"
+             >
+    
     <Grid Background="White">
         <Grid.RowDefinitions>
             <!-- Margin -->
@@ -36,23 +36,31 @@
                      VerticalAlignment="Center"
                      HorizontalAlignment="Left"
                      IsChecked="False"
-                     Command="{Binding ShowToursCommands}"
+                     Command="{Binding ShowFinishedToursCommand}"
                      Width="Auto"
                      Height="Auto"
                      >
 
                 <StackPanel Orientation="Vertical" Margin="-5,0,0,0">
                     <fa:IconImage Icon="ArrowLeft" Style="{StaticResource menuBackButtonIcon}"/>
-                    <Label Content="Tours" Style="{StaticResource labelBackBeneathIcon}"/>
+                    <Label Content="Finished t." Style="{StaticResource labelBackBeneathIcon}"
+                           />
                 </StackPanel>
 
             </RadioButton>
-            <Label Content="Tours today" Style="{StaticResource labelBackHeader}" Margin="10,0,0,0"/>
+            <TextBlock     Text=""
+                           TextTrimming="CharacterEllipsis"
+                           MaxWidth="270"
+                           Style="{StaticResource headerTextBlock}"
+                           Margin="10,0,0,0"
+                           x:Name="headerTextBlock"
+                           />
         </StackPanel>
 
         <ScrollViewer VerticalScrollBarVisibility="Hidden"
                       Grid.Row="2"
                       Grid.Column="1">
+
             <!-- Content -->
             <StackPanel Orientation="Vertical"
                         Grid.Row="2"
@@ -80,15 +88,19 @@
                 </StackPanel>
 
                 <!-- All tours -->
-                <DataGrid x:Name="tourDataGrid"
-                          AutoGenerateColumns="False"
+                <DataGrid x:Name="reviewsDataGrid"
                           Width="330"
                           BorderThickness="0"
+                          AutoGenerateColumns="False"
                           >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Id" Binding="{Binding id}" Width="*"/>
-                        <DataGridTextColumn Header="Name" Binding="{Binding name}" Width="*"/>
-                        <DataGridTextColumn Header="Language" Binding="{Binding language}" Width="*"/>
+                        <DataGridTextColumn Header="Id" Binding="{Binding id}" Width="30"/>
+                        <DataGridTextColumn Header="KP" Binding="{Binding keyPointId}" Width="30"/>
+                        <DataGridTextColumn Header="Guest" Binding="{Binding guestId}" Width="46"/>
+                        <DataGridTextColumn Header="Knowledge" Binding="{Binding guideKnowledgeRating}" Width="*"/>
+                        <DataGridTextColumn Header="Language" Binding="{Binding guideLanguageUsageRating}" Width="*"/>
+                        <DataGridTextColumn Header="Content" Binding="{Binding contentRating}" Width="*"/>
+                        <DataGridTextColumn Header="Valid" Binding="{Binding valid}" Width="40"/>
                     </DataGrid.Columns>
                     <DataGrid.CellStyle>
                         <Style TargetType="{x:Type DataGridCell}">
@@ -114,43 +126,15 @@
                     </DataGrid.ColumnHeaderStyle>
                 </DataGrid>
 
-                <!-- Labels --> 
-                <Label Content="Selected tour"
-                       Style="{StaticResource labelBackHeader}"
-                       Margin="0,20, 0, 0"
-                       FontSize="32"
-                       HorizontalAlignment="Center"
-                       />
-                <Label Content="{Binding SelectedTourName}"
-                       Style="{StaticResource labelAboveTextBox}"
-                       HorizontalAlignment="Center"
-                       x:Name="tourNameContainer"
-                       />
+                <!-- Report button -->
 
-                <!-- Buttons -->
-                <DockPanel>
-                    <Button Content="Start tour"
-                        Style="{StaticResource acceptButton}"
-                        Width="150"
-                        DockPanel.Dock="Left"
-                        x:Name="startTourLiveButton"
-                        Click="startTourClick"
-                        Command="{Binding ShowTourLiveCommand}"
-                      />  
-
-
-
-                    <Button Content="Show images"
-                    Style="{StaticResource showImagesButton}"
-                    HorizontalAlignment="Right"
-                    Width="150"
-                    DockPanel.Dock="Right"/>
-
-                </DockPanel>
-
+                <Button Content="Report"
+                        Style="{StaticResource denyButtonMobile}"
+                        Margin="0,20,0,0"
+                        Click="report_ButtonClick"
+                        />
 
             </StackPanel>
-            
         </ScrollViewer>
         <ContentControl Content="{Binding CurrentChildView}" Grid.RowSpan="3" Grid.ColumnSpan="3"/>
         

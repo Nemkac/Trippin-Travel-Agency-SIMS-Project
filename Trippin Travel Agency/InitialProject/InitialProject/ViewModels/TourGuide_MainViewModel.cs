@@ -30,6 +30,9 @@ namespace InitialProject.ViewModels
         public ICommand ShowTourGuideToursTodayViewCommand { get; }
         public ICommand ShowTourGuideTourLiveViewCommand { get; }
         public ICommand ShowTourGuideFutureToursViewCommand { get; }
+        public ICommand ShowTourGuideFinishedToursViewCommand { get; }
+        public ICommand ShowTourGuideTourDataViewCommand { get; }
+        public ICommand ShowTourGuideTourStatisticsViewCommand { get; }
 
         public TourGuide_MainViewModel()
         {
@@ -39,6 +42,9 @@ namespace InitialProject.ViewModels
             ShowTourGuideToursTodayViewCommand = new ViewModelCommand(ExecuteShowTourGuideToursTodayViewCommand);
             ShowTourGuideTourLiveViewCommand = new ViewModelCommand(ExecuteShowTourGuideTourLiveViewCommand);
             ShowTourGuideFutureToursViewCommand = new ViewModelCommand(ExecuteShowTourGuideFutureToursViewCommand);
+            ShowTourGuideFinishedToursViewCommand = new ViewModelCommand(ExecuteShowTourGuideFinishedToursViewCommand);
+            ShowTourGuideTourDataViewCommand = new ViewModelCommand(ExecuteShowTourGuideTourDataViewCommand);
+            ShowTourGuideTourStatisticsViewCommand = new ViewModelCommand(ExecuteShowTourGuideTourStatisticsViewCommand);
             ExecuteShowTourGuideDashboardViewCommand(null);
         }
 
@@ -65,6 +71,19 @@ namespace InitialProject.ViewModels
         public void ExecuteShowTourGuideFutureToursViewCommand(object obj)
         {
             CurrentChildView = new TourGuide_FutureToursViewModel(this);
+        }
+        public void ExecuteShowTourGuideFinishedToursViewCommand(object obj)
+        {
+            CurrentChildView = new TourGuide_FinishedToursViewModel(this);
+        }
+        
+        public void ExecuteShowTourGuideTourDataViewCommand(object obj)
+        {
+            CurrentChildView = new TourGuide_FinishedTourDataViewModel(this);
+        }
+        public void ExecuteShowTourGuideTourStatisticsViewCommand(object obj)
+        {
+            CurrentChildView = new TourGuide_TourStatisticsViewModel(this);
         }
 
 

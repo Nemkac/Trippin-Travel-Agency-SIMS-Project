@@ -8,7 +8,19 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="580">
     <Grid>
-        <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="bookingDataGrid"/>
-
+        <DataGrid Style="{DynamicResource DataGridStyle1}" 
+                  CellStyle="{DynamicResource DataGridCellStyle1}" 
+                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="bookingDataGrid" 
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Guest" Binding="{Binding guestName}" Width="95"/>
+                <DataGridTextColumn Header="Booking Id" Binding="{Binding bookingId}" Width="115"/>
+                <DataGridTextColumn Header="Accommodation" Binding="{Binding accommodationName }" Width="155"/>
+                <DataGridTextColumn Header="Arrival" Binding="{Binding arrivalDate }" Width="115"/>
+                <DataGridTextColumn Header="Departure" Binding="{Binding departureDate }" Width="115"/>
+                <DataGridTextColumn Header="Days" Binding="{Binding daysToStay }" Width="75"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

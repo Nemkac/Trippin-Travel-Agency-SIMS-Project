@@ -24,8 +24,18 @@
                       CellStyle="{DynamicResource DataGridCellStyle1}" 
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"  
                       RowStyle="{DynamicResource DataGridRowStyle1}" 
-                      SelectedItem="{Binding SelectedRequest, Mode=TwoWay}"
-                      x:Name="requestsDataGrid"/>
+                      Grid.Row="0"
+                      x:Name="requestsDataGrid" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Guest" Binding="{Binding guestName}" Width="80"/>
+                    <DataGridTextColumn Header="Booking" Binding="{Binding bookingId}" Width="81"/>
+                    <DataGridTextColumn Header="Old Arrival" Binding="{Binding oldArrival}" Width="110"/>
+                    <DataGridTextColumn Header="Old Departure" Binding="{Binding oldDeparture}" Width="120"/>
+                    <DataGridTextColumn Header="New Arrival" Binding="{Binding newArrival}" Width="110"/>
+                    <DataGridTextColumn Header="New Departure" Binding="{Binding newDeparture}" Width="120"/>
+                    <DataGridTextColumn Header="Possible" Binding="{Binding possible}" Width="80"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </StackPanel>
         <Button Style="{StaticResource detailsButton}"
                 Grid.Row="1" HorizontalAlignment="Right"
