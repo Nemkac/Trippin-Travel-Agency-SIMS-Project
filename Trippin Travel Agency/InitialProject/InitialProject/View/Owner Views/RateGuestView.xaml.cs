@@ -1,6 +1,7 @@
 ﻿using InitialProject.Context;
 using InitialProject.Model;
 using InitialProject.Model.TransferModels;
+using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.ViewModels;
 using SharpVectors.Dom;
@@ -26,6 +27,8 @@ namespace InitialProject.View.Owner_Views
     /// </summary>
     public partial class RateGuestView : UserControl
     {
+        GuestRateRepository rateRepository = new GuestRateRepository();
+
         public int bookingId { get; set; }
         public RateGuestView()
         {
@@ -43,7 +46,8 @@ namespace InitialProject.View.Owner_Views
             string comment = commentTB.Text;
             int guestId = bookingService.GetGuestId(this.bookingId);
             GuestRate newGuestRate = new GuestRate(cleannessRate, rulesRate, comment, guestId, this.bookingId);
-            GuestRateService.Save(newGuestRate);
+            //GuestRateService.Save(newGuestRate);
+            rateRepository.Save(newGuestRate);
             DataBaseContext transferedBooking = new DataBaseContext();
             transferedBooking.SelectedRatingNotificationTransfer.Remove(transferedBooking.SelectedRatingNotificationTransfer.First());
             transferedBooking.SaveChanges();

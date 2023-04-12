@@ -1,6 +1,8 @@
 ﻿using InitialProject.Context;
 using InitialProject.DTO;
+using InitialProject.Interfaces;
 using InitialProject.Model;
+using InitialProject.Repository;
 using InitialProject.View;
 using System;
 using System.Collections.Generic;

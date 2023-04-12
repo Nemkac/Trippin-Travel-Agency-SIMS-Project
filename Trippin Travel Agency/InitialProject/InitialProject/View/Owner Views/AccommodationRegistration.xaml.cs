@@ -1,5 +1,7 @@
 ﻿using InitialProject.Context;
+using InitialProject.Interfaces;
 using InitialProject.Model;
+using InitialProject.Repository;
 using InitialProject.Service;
 using System;
 using System.Collections.Generic;
@@ -28,6 +30,7 @@ namespace InitialProject.View
 
         private void FillCountryComboBox()
         {
+            //List<AccommodationLocation> countryList = _accommodationService.GetAllLocations();
             DataBaseContext countryContext = new DataBaseContext();
             List<AccommodationLocation> countryList = countryContext.AccommodationLocation.ToList();
             foreach (AccommodationLocation location in countryList.ToList())

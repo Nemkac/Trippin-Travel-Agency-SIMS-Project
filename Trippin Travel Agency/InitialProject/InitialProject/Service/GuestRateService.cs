@@ -1,4 +1,5 @@
 ﻿using InitialProject.Context;
+using InitialProject.Interfaces;
 using InitialProject.Model;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,12 @@ namespace InitialProject.Service
 {
     class GuestRateService
     {
-        public static void Save(GuestRate guestRate)
+        /*public static void Save(GuestRate guestRate)
         {
             DataBaseContext saveContext = new DataBaseContext();
             saveContext.Attach(guestRate);
             saveContext.SaveChanges();
-        }
+        }*/
 
         public bool IsRated(int bookingId)
         {
