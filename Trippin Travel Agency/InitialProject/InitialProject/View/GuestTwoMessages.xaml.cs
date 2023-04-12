@@ -58,7 +58,7 @@ namespace InitialProject.View
             {
                 TourAttendance tourAttendance = new TourAttendance(tourMessage.tourId,tourMessage.keyPointId,tourMessage.guestId,tourMessage.numberOfGuests);
                 context.TourAttendances.Add(tourAttendance);
-                context.TourMessages.Remove(tourMessage);
+               // context.TourMessages.Remove(tourMessage);
                 context.SaveChanges();
             }
         }
