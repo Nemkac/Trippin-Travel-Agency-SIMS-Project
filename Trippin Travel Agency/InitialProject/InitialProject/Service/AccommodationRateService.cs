@@ -34,5 +34,19 @@ namespace InitialProject.Service
             }
             return averageRate / (ratesCounter * 2);
         }
+
+        public bool isPreviouslyRated(int bookingId)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<AccommodationRate> accommodationRates = context.AccommodationRates.ToList();
+            foreach(AccommodationRate accommodationRate in accommodationRates)
+            {
+                if(accommodationRate.bookingId == bookingId)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

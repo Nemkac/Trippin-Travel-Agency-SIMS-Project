@@ -29,5 +29,6 @@
         </GroupBox>
         <Label Content="Here Soon" FontSize ="64" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,24,0,0" FontFamily="ubuntu" FontWeight="Bold" Foreground="#192a56"/>
         <Rectangle HorizontalAlignment="Left" Height="5" Margin="35,120,0,0" Stroke="#FF192A56" VerticalAlignment="Top" Width="1435" Fill="#192a56"/>
+        <TextBlock HorizontalAlignment="Left" Height="57" Margin="412,601,0,0" TextWrapping="Wrap" Name="warningBlock"  VerticalAlignment="Top" Width="146"/>
     </Grid>
 </Window>
