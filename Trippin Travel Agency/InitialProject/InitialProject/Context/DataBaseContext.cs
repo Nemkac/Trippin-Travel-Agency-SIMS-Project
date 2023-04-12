@@ -61,5 +61,25 @@ namespace InitialProject.Context
         {
             optionsBuilder.UseSqlite($"Data Source={path}");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<BookingDelaymentRequest>()
+                .HasOne<Booking>()
+                .WithMany()
+                .HasForeignKey(bookingDelaymentRequest => bookingDelaymentRequest.bookingId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Booking>()
+                .HasOne<Accommodation>()
+                .WithMany()
+                .HasForeignKey(booking => booking.accommodationId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+        }
+
     }
 }

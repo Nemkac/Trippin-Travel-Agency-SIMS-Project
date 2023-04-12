@@ -3,6 +3,7 @@ using System;
 using InitialProject.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230411130953_test3")]
+    partial class test3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
@@ -52,30 +55,6 @@ namespace InitialProject.Migrations
                     b.HasKey("id");
 
                     b.ToTable("SelectedRequestTransfers");
-                });
-
-            modelBuilder.Entity("InitialProject.DTO.TourStatisticsDTO", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("numberOfGuests")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("startDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("tourId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("tourName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("id");
-
-                    b.ToTable("TourStatisticsTransfer");
                 });
 
             modelBuilder.Entity("InitialProject.Model.Accommodation", b =>
@@ -360,9 +339,6 @@ namespace InitialProject.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("finished")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("guideId")
                         .HasColumnType("INTEGER");
 
@@ -411,15 +387,6 @@ namespace InitialProject.Migrations
                     b.Property<string>("personalComment")
                         .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("tourGuideId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("tourId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("valid")
-                        .HasColumnType("INTEGER");
 
                     b.HasKey("id");
 
