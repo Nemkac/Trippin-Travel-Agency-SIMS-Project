@@ -35,7 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="View\TourGuide_Tours.xaml.cs">
+    <Compile Update="View\TourGuideViews\TourGuide_Tours.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
