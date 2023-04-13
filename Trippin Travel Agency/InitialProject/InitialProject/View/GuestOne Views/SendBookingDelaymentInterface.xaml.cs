@@ -1,5 +1,6 @@
 ﻿using InitialProject.Context;
 using InitialProject.Model;
+using InitialProject.Repository;
 using InitialProject.Service;
 using System;
 using System.Collections.Generic;
@@ -23,9 +24,12 @@ namespace InitialProject.View
     public partial class SendBookingDelaymentInterface : Window
     {
         Booking selectedBooking = new Booking();
+        private BookingDelaymentRequestService bookingDelaymentRequestService;
         public SendBookingDelaymentInterface()
         {
             InitializeComponent();
+            BookingDelaymentRequestRepository bookingDelaymentRequestRepository = new BookingDelaymentRequestRepository();
+            this.bookingDelaymentRequestService = new BookingDelaymentRequestService(bookingDelaymentRequestRepository);
         }
 
         public void SetAttribures(Booking selectedBooking)
@@ -39,7 +43,6 @@ namespace InitialProject.View
         {
             DataBaseContext context = new DataBaseContext();
             List<Booking> bookings = context.Bookings.ToList();
-            BookingDelaymentRequestService bookingDelaymentRequestService = new BookingDelaymentRequestService();
             BookingDelaymentRequest bookingDelaymentRequest = new BookingDelaymentRequest(selectedBooking.Id, newArrival.SelectedDate.Value,newDeparture.SelectedDate.Value, Status.Pending, new string(""));
             BookingDelaymentRequestService.Save(bookingDelaymentRequest);
         }

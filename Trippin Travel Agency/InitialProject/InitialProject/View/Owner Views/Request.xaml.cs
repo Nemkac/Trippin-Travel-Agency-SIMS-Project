@@ -1,6 +1,7 @@
 ﻿using InitialProject.Context;
 using InitialProject.DTO;
 using InitialProject.Model;
+using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.ViewModels;
 using System;
@@ -27,16 +28,19 @@ namespace InitialProject.View.Owner_Views
     /// </summary>
     public partial class Request : UserControl
     {
+        private BookingService bookingService;
         public Request()
         {
             InitializeComponent();
             List<RequestDTO> requestDataGridData = ShowRequests();
             requestsDataGrid.ItemsSource = requestDataGridData;
+            BookingRepository bookingRepository = new BookingRepository();
+            this.bookingService = new BookingService(bookingRepository);
         }
 
         private List<RequestDTO> ShowRequests()
         {
-            BookingService bookingService = new BookingService();
+            //BookingService bookingService = new BookingService();
             DataBaseContext requestContext = new DataBaseContext();
             List<RequestDTO> dataList = new List<RequestDTO>();
             RequestDTO dto = new RequestDTO();

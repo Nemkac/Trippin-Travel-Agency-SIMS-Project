@@ -1,0 +1,14 @@
+﻿using InitialProject.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InitialProject.Repository
+{
+    public class BookingDelaymentRequestRepository : IBookingDelaymentRequestRepository
+    {
+        public BookingDelaymentRequestRepository() { }
+    }
+}

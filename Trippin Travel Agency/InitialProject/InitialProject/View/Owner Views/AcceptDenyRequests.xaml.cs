@@ -1,6 +1,7 @@
 ﻿using InitialProject.Context;
 using InitialProject.DTO;
 using InitialProject.Model;
+using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.ViewModels;
 using System;
@@ -27,11 +28,17 @@ namespace InitialProject.View.Owner_Views
     /// </summary>
     public partial class AcceptDenyRequests : UserControl
     {
-
+        //private readonly AccommodationService accommodationService = new(new AccommodationRepository());
+        private BookingService bookingService;
+        private AccommodationService accommodationService;
         public AcceptDenyRequests()
         {
             InitializeComponent();
             this.Loaded += DisplayData;
+            BookingRepository bookingRepository = new BookingRepository();
+            this.bookingService = new BookingService(bookingRepository);
+            AccommodationRepository accommodationRepository = new AccommodationRepository();
+            this.accommodationService = new AccommodationService(accommodationRepository);
         }
 
         public void DisplayData(object sender, RoutedEventArgs e)
@@ -47,8 +54,8 @@ namespace InitialProject.View.Owner_Views
             this.OldDepartureTextBlock.Text = requests.First().oldDeparture.ToString();
             this.NewArrivalTextBlock.Text = requests.First().newArrival.ToString();
             NewDepartureTextBlock.Text = requests.First().newDeparture.ToString();
-            BookingService bookingService = new BookingService();
-            AccommodationService accommodationService = new AccommodationService();
+            //BookingService bookingService = new BookingService();
+            //AccommodationService accommodationService = new AccommodationService();
             GuestTextBlock.Text = bookingService.GetGuestName(requests.First().bookingId);
             Booking booking = bookingService.GetById(requests.First().bookingId);
             AccommodationNameTextBlock.Text = (accommodationService.GetById(booking.accommodationId)).name;

@@ -1,6 +1,7 @@
 ﻿using InitialProject.Context;
 using InitialProject.Model;
 using InitialProject.Model.TransferModels;
+using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.ViewModels;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -27,10 +28,17 @@ namespace InitialProject.View.Owner_Views
     /// </summary>
     public partial class NotificationsView : UserControl
     {
+        private AccommodationService accommodationService;
+        private AccommodationRepository accommodationRepository;
+        private BookingService bookingService;
         public NotificationsView()
         {
             InitializeComponent();
             SendNotification();
+            this.accommodationRepository = new AccommodationRepository();
+            this.accommodationService = new AccommodationService(accommodationRepository);
+            BookingRepository bookingRepository = new BookingRepository();
+            this.bookingService = new BookingService(bookingRepository);
         }
 
         private void SendNotification()
@@ -57,7 +65,7 @@ namespace InitialProject.View.Owner_Views
         {
             GuestRateService guestRateService = new GuestRateService();
             DataBaseContext bookingContext = new DataBaseContext();
-            BookingService bookingService = new BookingService();
+            //BookingService bookingService = new BookingService();
             foreach (Booking booking in bookingContext.Bookings.ToList())
             {
                 if (ValidForNotification(guestRateService, booking))
@@ -88,7 +96,7 @@ namespace InitialProject.View.Owner_Views
         {
             if (notificationsListBox.SelectedItem != null && canceledBookingId == -1)
             {
-                BookingService bookingService = new BookingService();
+                //BookingService bookingService = new BookingService();
                 string selectedItem = notificationsListBox.SelectedItem.ToString().TrimEnd('!');
                 int bookingId = int.Parse(selectedItem.Substring(selectedItem.LastIndexOf(": ") + 2));
 

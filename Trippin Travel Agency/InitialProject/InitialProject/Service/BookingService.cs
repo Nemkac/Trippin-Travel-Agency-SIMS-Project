@@ -1,6 +1,8 @@
 using InitialProject.Context;
 using InitialProject.DTO;
+using InitialProject.Interfaces;
 using InitialProject.Model;
+using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,6 +12,18 @@ namespace InitialProject.Service
 {
     class BookingService
     {
+        private readonly IBookingRepository iBookingRepository;
+        private AccommodationService accommodationService;
+        private IAccommodationRepository accommodationRepository;
+
+        public BookingService(IBookingRepository iBookingRepository)
+        {
+            this.iBookingRepository = iBookingRepository;
+            this.accommodationRepository = new AccommodationRepository();
+            this.accommodationService = new AccommodationService(accommodationRepository);
+
+        }
+
         public Booking GetById(int bookingId)
         {
             using DataBaseContext context = new DataBaseContext();
@@ -19,11 +33,10 @@ namespace InitialProject.Service
         public BookingDTO CreateBookingDTO(Booking booking)
         {
             UserService userService = new UserService();
-            AccommodationService accommodationService = new AccommodationService();
             DataBaseContext dtoContext = new DataBaseContext();
             BookingDTO bookingDto = new BookingDTO();
 
-            Accommodation tmpAccommodation = accommodationService.GetById(booking.accommodationId);
+            Accommodation tmpAccommodation = this.accommodationService.GetById(booking.accommodationId);
             User tmpUser = userService.GetById(booking.guestId);
             bookingDto = new BookingDTO(tmpUser.username, booking.Id, tmpAccommodation.name, booking.arrival, booking.departure, booking.daysToStay);
             return bookingDto;

@@ -16,6 +16,13 @@ namespace InitialProject.Service
 {
     public class AccommodationService
     {
+        private readonly IAccommodationRepository iAccommodationRepository;
+
+        public AccommodationService(IAccommodationRepository iAccommodationRepository)
+        {
+            this.iAccommodationRepository = iAccommodationRepository;
+        }
+
         public List<Accommodation> ConvertDtoToInitial(List<AccommodationDTO> accommodationDTOs)
         {
             List<Accommodation> accommodations = new List<Accommodation>();
@@ -42,23 +49,6 @@ namespace InitialProject.Service
             return new List<string>() { accommodation.location.country, accommodation.location.city };
         }
 
-        public List<int> GetAllByName(string name)
-        {
-            DataBaseContext context = new DataBaseContext();
-            GuestOneInterface guestOneInterface = new GuestOneInterface();
-            List<int> filtered = new List<int>();
-            List<Accommodation> accommodations = context.Accommodations.ToList();
-            foreach (Accommodation accommodation in accommodations)
-            {
-                string nameToUpper = accommodation.name.ToUpper();
-                if (nameToUpper.Contains(name.ToUpper()))
-                {
-                    filtered.Add(accommodation.id);
-                }
-            }
-            return filtered;
-        }
-
         public List<int> GetAllByCountry(string country)
         {
             DataBaseContext context = new DataBaseContext();
@@ -73,67 +63,6 @@ namespace InitialProject.Service
                 }
             }
             GuestOneInterface guestOneInterface = new GuestOneInterface();
-            return filtered;
-        }
-
-        public List<int> GetAllByCity(string city)
-        {
-            DataBaseContext context = new DataBaseContext();
-            List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
-            List<Accommodation> accommodations = context.Accommodations.ToList();
-            List<int> filtered = new List<int>();
-            foreach (Accommodation accommodation in accommodations.ToList())
-            {
-                if ((accommodation.location.city.ToUpper()).Contains(city.ToUpper()))
-                {
-                    filtered.Add(accommodation.id);
-                }
-            }
-            return filtered;
-        }
-
-        public List<int> GetAllByGuestsNumber(int guestsNumber)
-        {
-            DataBaseContext context = new DataBaseContext();
-            List<Accommodation> accommodations = context.Accommodations.ToList();
-            List<int> filtered = new List<int>();
-            foreach (Accommodation accommodation in accommodations.ToList())
-            {
-                if (accommodation.guestLimit >= guestsNumber)
-                {
-                    filtered.Add(accommodation.id);
-                }
-            }
-            return filtered;
-        }
-
-        public List<int> GetAllByMininumDays(int days)
-        {
-            DataBaseContext context = new DataBaseContext();
-            List<Accommodation> accommodations = context.Accommodations.ToList();
-            List<int> filtered = new List<int>();
-            foreach (Accommodation accommodation in accommodations.ToList())
-            {
-                if (accommodation.minDaysBooked <= days)
-                {
-                    filtered.Add(accommodation.id);
-                }
-            }
-            return filtered;
-        }
-
-        public List<int> GetAllByType (string type)
-        {
-            DataBaseContext context = new DataBaseContext();
-            List<Accommodation> accommodations = context.Accommodations.ToList();
-            List<int> filtered = new List<int>();
-            foreach (Accommodation accommodation in accommodations.ToList())
-            {
-                if ((accommodation.type.ToString().ToUpper()).Contains(type.ToUpper()))
-                {
-                    filtered.Add(accommodation.id);
-                }
-            }
             return filtered;
         }
 

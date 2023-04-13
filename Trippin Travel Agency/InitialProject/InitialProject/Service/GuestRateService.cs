@@ -12,12 +12,12 @@ namespace InitialProject.Service
 {
     class GuestRateService
     {
-        /*public static void Save(GuestRate guestRate)
+        public static void Save(GuestRate guestRate)
         {
             DataBaseContext saveContext = new DataBaseContext();
             saveContext.Attach(guestRate);
             saveContext.SaveChanges();
-        }*/
+        }
 
         public bool IsRated(int bookingId)
         {

@@ -1,5 +1,6 @@
 ﻿using InitialProject.Context;
 using InitialProject.Model;
+using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,15 @@ namespace InitialProject.Service
 {
     class UserService
     {
+        private AccommodationService accommodationService;
+        private BookingService bookingService;
+        public UserService() {
+            BookingRepository bookingRepository = new BookingRepository();
+            this.bookingService = new BookingService(bookingRepository);
+            AccommodationRepository accommodationRepository = new AccommodationRepository();
+            this.accommodationService = new AccommodationService(accommodationRepository);
+        }
+
         public User GetById(int id)
         {
             using DataBaseContext context = new DataBaseContext();
@@ -34,7 +44,7 @@ namespace InitialProject.Service
         public List<BookingDelaymentRequest> GetBookingDelaymentRequests(int id)
         {
             DataBaseContext context = new DataBaseContext();
-            BookingService bookingService = new BookingService();
+            //BookingService bookingService = new BookingService();
             List<BookingDelaymentRequest> bookingDelaymentRequests = context.BookingDelaymentRequests.ToList();
             List<BookingDelaymentRequest> foundBookingDelaymentRequests = new List<BookingDelaymentRequest>();
             foreach(BookingDelaymentRequest bookingDelaymentRequest in bookingDelaymentRequests)
@@ -50,7 +60,7 @@ namespace InitialProject.Service
         public List<BookingDelaymentRequest> GetResolvedBookingDelaymentRequests()
         {
             DataBaseContext context = new DataBaseContext();
-            BookingService bookingService = new BookingService();
+            //BookingService bookingService = new BookingService();
             List<BookingDelaymentRequest> bookingDelaymentRequests = context.BookingDelaymentRequests.ToList();
             List<BookingDelaymentRequest> foundRequests = new List<BookingDelaymentRequest>();
             foreach (BookingDelaymentRequest bookingDelaymentRequest in bookingDelaymentRequests)
@@ -70,7 +80,7 @@ namespace InitialProject.Service
         public List<BookingDelaymentRequest> GetPendingBookingDelaymentRequests()
         {
             DataBaseContext context = new DataBaseContext();
-            BookingService bookingService = new BookingService();
+            //BookingService bookingService = new BookingService();
             List<BookingDelaymentRequest> bookingDelaymentRequests = context.BookingDelaymentRequests.ToList();
             List<BookingDelaymentRequest> foundRequests = new List<BookingDelaymentRequest>();
             foreach (BookingDelaymentRequest bookingDelaymentRequest in bookingDelaymentRequests)
@@ -123,7 +133,7 @@ namespace InitialProject.Service
             DataBaseContext context = new DataBaseContext();
             List<Booking> bookings = context.Bookings.ToList();
             List<Booking> delayableBookings = new List<Booking>();
-            AccommodationService accommodationService = new AccommodationService();
+            //AccommodationService accommodationService = new AccommodationService();
             bool ifDelayable = false;
             foreach (Booking booking in bookings.ToList())
             {

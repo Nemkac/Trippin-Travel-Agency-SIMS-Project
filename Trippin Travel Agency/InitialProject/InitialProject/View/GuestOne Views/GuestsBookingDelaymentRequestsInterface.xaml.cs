@@ -1,5 +1,6 @@
 ﻿using InitialProject.Context;
 using InitialProject.Model;
+using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.View.GuestOne_Views;
 using System;
@@ -25,19 +26,26 @@ namespace InitialProject.View
     /// </summary>
     public partial class GuestsBookingDelaymentRequestsInterface : Window
     {
+        private BookingDelaymentRequestService bookingDelaymentRequestService;
+        private AccommodationRepository accommodationRepository;
+        private BookingService bookingService;
+        private AccommodationService accommodationService;
         public GuestsBookingDelaymentRequestsInterface()
         {
             InitializeComponent();
             this.Loaded += ShowDelaymentRequests;
+            this.accommodationRepository = new AccommodationRepository();
+            this.accommodationService = new AccommodationService(accommodationRepository);
+            BookingRepository bookingRepository = new BookingRepository();
+            this.bookingService = new BookingService(bookingRepository);
+            BookingDelaymentRequestRepository bookingDelaymentRequestRepository = new BookingDelaymentRequestRepository();
+            this.bookingDelaymentRequestService = new BookingDelaymentRequestService(bookingDelaymentRequestRepository);
         }
 
         public void ShowDelaymentRequests(object sender, RoutedEventArgs e)
         {
             DataBaseContext context = new DataBaseContext();
             UserService userService = new UserService();
-            BookingDelaymentRequestService bookingDelaymentRequestService = new BookingDelaymentRequestService(); 
-            BookingService bookingService = new BookingService();
-            AccommodationService accommodationService = new AccommodationService();
             List<BookingDelaymentRequest> resolvedDelaymentRequests = userService.GetResolvedBookingDelaymentRequests();
             List<BookingDelaymentRequest> pendingDelaymentRequests = userService.GetPendingBookingDelaymentRequests();
 
@@ -131,7 +139,6 @@ namespace InitialProject.View
         {
             int selectedRowIndex = resolvedRequestsGrid.SelectedIndex;
             UserService userService = new UserService();
-            BookingDelaymentRequestService bookingDelaymentRequestService = new BookingDelaymentRequestService();
             bookingDelaymentRequestService.Delete(userService.GetResolvedBookingDelaymentRequests()[selectedRowIndex]);
             ShowDelaymentRequests(sender, e);
 
@@ -141,7 +148,6 @@ namespace InitialProject.View
         {
             int selectedRowIndex = pendingRequestsGrid.SelectedIndex;
             UserService userService = new UserService();
-            BookingDelaymentRequestService bookingDelaymentRequestService = new BookingDelaymentRequestService();
             bookingDelaymentRequestService.Delete(userService.GetPendingBookingDelaymentRequests()[selectedRowIndex]);
             ShowDelaymentRequests(sender, e);
 

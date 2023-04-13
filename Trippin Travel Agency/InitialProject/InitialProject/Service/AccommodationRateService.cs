@@ -1,5 +1,6 @@
 ﻿using InitialProject.Context;
 using InitialProject.Model;
+using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,17 @@ namespace InitialProject.Service
 {
     internal class AccommodationRateService
     {
+        private BookingService bookingService;
+        private AccommodationService accommodationService;
+
+        public AccommodationRateService()
+        {
+            BookingRepository bookingRepository = new BookingRepository();
+            this.bookingService = new BookingService(bookingRepository);
+            AccommodationRepository accommodationRepository = new AccommodationRepository();
+            this.accommodationService = new AccommodationService(accommodationRepository);
+        }
+
         public static void Save(AccommodationRate accommodationRate)
         {
             DataBaseContext saveContext = new DataBaseContext();
@@ -20,7 +32,6 @@ namespace InitialProject.Service
         public double GetAccommodationAverageRate(int accommodationId)
         {
             DataBaseContext context = new DataBaseContext();
-            BookingService bookingService = new BookingService();
             List<AccommodationRate> rates = context.AccommodationRates.ToList();
             double averageRate = 0;
             int ratesCounter = 0;

@@ -1,6 +1,7 @@
 ﻿using InitialProject.Context;
 using InitialProject.DTO;
 using InitialProject.Model;
+using InitialProject.Repository;
 using InitialProject.Service;
 using System;
 using System.Collections.Generic;
@@ -24,19 +25,22 @@ namespace InitialProject.View
 
     public partial class OwnersBookingInterface : UserControl
     {
+        private readonly BookingService bookingService;
         public OwnersBookingInterface()
         {
             InitializeComponent();
             List<BookingDTO> dataGridData = ShowBookings();
             bookingDataGrid.ItemsSource = dataGridData;
+            BookingRepository bookingRepository = new BookingRepository();
+            this.bookingService = new BookingService(bookingRepository);
         }
 
         private List<BookingDTO> ShowBookings()
         {
             GuestRateService guestRateService = new GuestRateService();
-            BookingService bookingService = new BookingService();
             DataBaseContext bookingContext = new DataBaseContext();
             List<BookingDTO> dataList = new List<BookingDTO>();
+            BookingService bookingService = new BookingService(new BookingRepository());
             BookingDTO dto = new BookingDTO();
 
             foreach (Booking booking in bookingContext.Bookings.ToList())

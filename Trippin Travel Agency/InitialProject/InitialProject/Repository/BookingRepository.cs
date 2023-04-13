@@ -1,6 +1,4 @@
-﻿using InitialProject.Context;
-using InitialProject.Interfaces;
-using InitialProject.Model;
+﻿using InitialProject.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    internal class GuestRateRepository : IGuestRateRepository
+    public class BookingRepository : IBookingRepository
     {
     }
 }

@@ -16,7 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Model;
-
+using InitialProject.Repository;
 
 namespace InitialProject.View
 {
@@ -25,10 +25,16 @@ namespace InitialProject.View
     /// </summary>
     public partial class PastBookingsInterface : Window
     {
+        private BookingService bookingService;
+        private AccommodationService accommodationService;
         public PastBookingsInterface()
         {
             InitializeComponent();
             this.Loaded += ShowPastBookings;
+            BookingRepository bookingRepository = new BookingRepository();
+            this.bookingService = new BookingService(bookingRepository);
+            AccommodationRepository accommodationRepository = new AccommodationRepository();
+            this.accommodationService = new AccommodationService(accommodationRepository);
         }
 
         private void ShowPastBookings(object sender, RoutedEventArgs e)
@@ -41,7 +47,6 @@ namespace InitialProject.View
 
         private void ShowRateInterface(object sender, RoutedEventArgs e)
         {   
-            BookingService bookingService = new BookingService();
             AccommodationRateService accommodationRateService = new AccommodationRateService();
             if (bookingService.CheckIfValidForRating((Booking)pastBookingsGrid.SelectedItem) && !accommodationRateService.isPreviouslyRated(((Booking)pastBookingsGrid.SelectedItem).Id))
             {

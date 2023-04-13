@@ -1,6 +1,8 @@
 ﻿using InitialProject.Context;
 using InitialProject.Context;
+using InitialProject.Interfaces;
 using InitialProject.Model;
+using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +13,21 @@ namespace InitialProject.Service
 {
     internal class BookingDelaymentRequestService
     {
+        private readonly IBookingDelaymentRequestRepository iBookingDelaymentRequestRepository;
+        private AccommodationService accommodationService;
+        private AccommodationRepository accommodationRepository;
+        private BookingService bookingService;
+
+        public BookingDelaymentRequestService(IBookingDelaymentRequestRepository iBookingDelaymentRequestRepository)
+        {
+            this.iBookingDelaymentRequestRepository = iBookingDelaymentRequestRepository;
+            this.accommodationRepository = new AccommodationRepository();
+            this.accommodationService = new AccommodationService(accommodationRepository);
+            BookingRepository bookingRepository = new BookingRepository();
+            this.bookingService = new BookingService(bookingRepository);
+
+        }
+
         public BookingDelaymentRequest GetById(int bookingDelaymentRequstId)
         {
             using DataBaseContext context = new DataBaseContext();
@@ -28,8 +45,6 @@ namespace InitialProject.Service
         {
             string outcome = string.Empty;
             List<string> output = new List<string>();
-            BookingService bookingService = new BookingService();
-            AccommodationService accommodationService = new AccommodationService();
             Booking booking = bookingService.GetById(bookingDelaymentRequest.bookingId);
             Accommodation accommodation = accommodationService.GetById(booking.accommodationId);
             if (bookingDelaymentRequest.status == Status.Accepted)

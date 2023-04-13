@@ -14,8 +14,7 @@ using System.Windows.Shapes;
 using InitialProject.Service;
 using InitialProject.Model;
 using InitialProject.Context;
-
-
+using InitialProject.Repository;
 
 namespace InitialProject.View
 {
@@ -24,10 +23,17 @@ namespace InitialProject.View
     /// </summary>
     public partial class FutureBookingsInterface : Window
     {
+
+        private BookingService bookingService;
+        private AccommodationService accommodationService;
         public FutureBookingsInterface()
         {
             InitializeComponent();
             this.Loaded += ShowFutureBookings;
+            BookingRepository bookingRepository = new BookingRepository();
+            this.bookingService = new BookingService(bookingRepository);
+            AccommodationRepository accommodationRepository = new AccommodationRepository();
+            this.accommodationService = new AccommodationService(accommodationRepository);
         }
 
         public void ShowFutureBookings(object sender, RoutedEventArgs e)
@@ -49,7 +55,6 @@ namespace InitialProject.View
 
         private void DeleteBooking(object sender, RoutedEventArgs e)
         {
-            BookingService bookingService = new BookingService();
             UserService userService = new UserService();
             BookingCancelationMessageService BookingCancelationMessageService = new BookingCancelationMessageService();
             Booking booking = (Booking)futureBookingsGrid.SelectedItem;
@@ -66,7 +71,6 @@ namespace InitialProject.View
 
         private void GoToBookingDelayment(object sender, RoutedEventArgs e)
         {
-            AccommodationService accommodationService = new AccommodationService();
             if ((DateTime.Parse((((Booking)futureBookingsGrid.SelectedItem).arrival)).Subtract(DateTime.Today)).Days >= (accommodationService.GetById(((Booking)futureBookingsGrid.SelectedItem).accommodationId)).bookingCancelPeriodDays)
             {
                 SendBookingDelaymentInterface sendBookingDelaymentInterface = new SendBookingDelaymentInterface();
