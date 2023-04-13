@@ -203,5 +203,23 @@ namespace InitialProject.Repository
                 return finishedTours;
             }
         }
+
+        public List<TourDTO> GetPreviouslySelected(int id)
+        {
+            DataBaseContext dataBaseContext = new DataBaseContext();
+            List<TourDTO> tourDTOs = new List<TourDTO>();
+            TourDTO tourDTO = new TourDTO();
+
+            foreach (Tour tour in dataBaseContext.Tours.ToList())
+            {
+                if (tour.id == id)
+                {
+                    tourDTO = CreateTourDTO(tour);
+                    tourDTOs.Add(tourDTO);
+                    break;
+                }
+            }
+            return tourDTOs;
+        }
     }
 }

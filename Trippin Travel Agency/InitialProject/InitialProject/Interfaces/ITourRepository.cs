@@ -24,5 +24,6 @@ namespace InitialProject.Interfaces
         public List<Tour> GetAllToursToday();
         public List<Tour> GetAllFutureTours();
         public List<Tour> GetAllFinishedTours();
+        public List<TourDTO> GetPreviouslySelected(int id);
     }
 }

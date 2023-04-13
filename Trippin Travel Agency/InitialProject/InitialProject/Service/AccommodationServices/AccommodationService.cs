@@ -35,7 +35,7 @@ namespace InitialProject.Service.AccommodationServices
 
         public Accommodation GetById(int id)
         {
-            return iAccommodationRepository.GetById(id);
+            return this.iAccommodationRepository.GetById(id);
         }
 
         public List<string> GetAccommodationLocation(int id)

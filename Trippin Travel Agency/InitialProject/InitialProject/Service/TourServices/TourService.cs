@@ -96,26 +96,12 @@ namespace InitialProject.Service.TourServices
         }
         public List<TourDTO> GetPreviouslySelected(int id)
         {
-            DataBaseContext dataBaseContext = new DataBaseContext();
-            List<TourDTO> tourDTOs = new List<TourDTO>();
-            TourDTO tourDTO = new TourDTO();
-
-            foreach (Tour tour in dataBaseContext.Tours.ToList())
-            {
-                if (tour.id == id)
-                {
-                    tourDTO = CreateDTO(tour);
-                    tourDTOs.Add(tourDTO);
-                    break;
-                }
-            }
-            return tourDTOs;
+            return this.iTourRepository.GetPreviouslySelected(id);
         }
         public List<TourDTO> GetBookableTours(string cityName, string nameOfFullTour)
         {
             DataBaseContext dataBaseContext = new DataBaseContext();
             List<TourDTO> tourDTOs = new List<TourDTO>();
-            //TourDTO tourDTO = new TourDTO();
 
             foreach (Tour tour in dataBaseContext.Tours.ToList())
             {
@@ -124,7 +110,6 @@ namespace InitialProject.Service.TourServices
                     TourLocation tourLocation = GetLocationById(tour.location);
                     if (tourLocation.city.ToUpper().Contains(cityName.ToUpper()))
                     {
-                        //tourDTO = CreateDTO(tour);
                         tourDTOs.Add(CreateDTO(tour));
                     }
                 }
