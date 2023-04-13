@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InitialProject.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,8 @@ namespace InitialProject.Interfaces
 {
     public interface IBookingDelaymentRequestRepository
     {
+        public BookingDelaymentRequest GetById(int bookingDelaymentRequstId);
+        public void Save(BookingDelaymentRequest bookingDelaymentRequest);
+        public void Delete(BookingDelaymentRequest bookingDelaymentRequest);
     }
 }

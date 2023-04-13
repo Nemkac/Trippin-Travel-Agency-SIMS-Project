@@ -30,15 +30,12 @@ namespace InitialProject.Service
 
         public BookingDelaymentRequest GetById(int bookingDelaymentRequstId)
         {
-            using DataBaseContext context = new DataBaseContext();
-            return context.BookingDelaymentRequests.SingleOrDefault(b => b.id == bookingDelaymentRequstId);
+            return this.iBookingDelaymentRequestRepository.GetById(bookingDelaymentRequstId);
         }
 
-        public static void Save(BookingDelaymentRequest bookingDelaymentRequest)
+        public void Save(BookingDelaymentRequest bookingDelaymentRequest)
         {
-            DataBaseContext saveContext = new DataBaseContext();
-            saveContext.Attach(bookingDelaymentRequest);
-            saveContext.SaveChanges();
+            this.iBookingDelaymentRequestRepository.Save(bookingDelaymentRequest);
         }
 
         public List<string> GetTextOutput(BookingDelaymentRequest bookingDelaymentRequest)
@@ -65,9 +62,7 @@ namespace InitialProject.Service
 
         public void Delete(BookingDelaymentRequest bookingDelaymentRequest)
         {
-            DataBaseContext context = new DataBaseContext();
-            context.Remove(bookingDelaymentRequest);
-            context.SaveChanges();
+            this.iBookingDelaymentRequestRepository.Delete(bookingDelaymentRequest);
         }
     }
 }

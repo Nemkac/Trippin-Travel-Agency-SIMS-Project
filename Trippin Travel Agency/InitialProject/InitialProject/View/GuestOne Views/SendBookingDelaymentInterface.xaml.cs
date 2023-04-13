@@ -44,7 +44,7 @@ namespace InitialProject.View
             DataBaseContext context = new DataBaseContext();
             List<Booking> bookings = context.Bookings.ToList();
             BookingDelaymentRequest bookingDelaymentRequest = new BookingDelaymentRequest(selectedBooking.Id, newArrival.SelectedDate.Value,newDeparture.SelectedDate.Value, Status.Pending, new string(""));
-            BookingDelaymentRequestService.Save(bookingDelaymentRequest);
+            bookingDelaymentRequestService.Save(bookingDelaymentRequest);
         }
     }
 }
