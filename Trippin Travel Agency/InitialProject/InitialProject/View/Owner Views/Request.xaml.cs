@@ -7,6 +7,7 @@ using InitialProject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,7 +41,8 @@ namespace InitialProject.View.Owner_Views
 
         private List<RequestDTO> ShowRequests()
         {
-            //BookingService bookingService = new BookingService();
+            BookingRepository bookingRepository = new BookingRepository();
+            this.bookingService = new BookingService(bookingRepository);
             DataBaseContext requestContext = new DataBaseContext();
             List<RequestDTO> dataList = new List<RequestDTO>();
             RequestDTO dto = new RequestDTO();
@@ -49,7 +51,7 @@ namespace InitialProject.View.Owner_Views
             {
                 if (bookingDelaymentRequest.status == Status.Pending)
                 {
-                    dto = bookingService.CreateRequestDTO(bookingDelaymentRequest);
+                    dto = this.bookingService.CreateRequestDTO(bookingDelaymentRequest);
                     dataList.Add(dto);
                 }
             }

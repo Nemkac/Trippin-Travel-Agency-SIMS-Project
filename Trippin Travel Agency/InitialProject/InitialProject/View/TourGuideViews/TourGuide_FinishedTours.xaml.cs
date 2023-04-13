@@ -2,6 +2,7 @@
 using InitialProject.DTO;
 using InitialProject.Model;
 using InitialProject.Model.TransferModels;
+using InitialProject.Repository;
 using InitialProject.Service;
 using System;
 using System.Collections.Generic;
@@ -25,11 +26,12 @@ namespace InitialProject.View
     /// </summary>
     public partial class TourGuide_FinishedTours : UserControl
     {
+        private TourService tourService;
         public TourGuide_FinishedTours()
         {
             InitializeComponent();
-            TourService tourService = new TourService();
-            List<Tour> finishedTours = tourService.GetFinishedTours();
+            this.tourService = new(new TourRepository());
+            List<Tour> finishedTours = this.tourService.GetAllFinishedTours();
             List<FinishedTourDTO> finishedToursDtos = new List<FinishedTourDTO>();
             
             foreach(Tour t in finishedTours)

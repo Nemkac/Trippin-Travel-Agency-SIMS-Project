@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InitialProject.ViewModels
+namespace InitialProject.ViewModels.OwnerViewModels
 {
     public class ProfileViewModel : ViewModelBase
     {

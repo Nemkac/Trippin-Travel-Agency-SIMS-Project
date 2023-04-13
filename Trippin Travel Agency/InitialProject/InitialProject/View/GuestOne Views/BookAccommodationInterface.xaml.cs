@@ -29,18 +29,20 @@ namespace InitialProject.View
         public int accommodationId;
         public int userId;
         private BookingService bookingService;
-        private readonly AccommodationService accommodationService = new(new AccommodationRepository());
+        private AccommodationService accommodationService;
+        private AccommodationRateService accommodationRateService;
         public BookAccommodationInterface()
         {
             InitializeComponent();
             BookingRepository bookingRepository = new BookingRepository();
             this.bookingService = new BookingService(bookingRepository);
+            this.accommodationService = new(new AccommodationRepository());
+            this.accommodationRateService = new(new AccommodationRateRepository());
         }
 
         public void ShowBookings(dynamic result)
         {
             Accommodation accommodation = accommodationService.GetById(accommodationId);
-            AccommodationRateService accommodationRateService = new AccommodationRateService();
             string accommodationInfoLabels = string.Empty;
             string accommodationInfo = string.Empty;
             accommodationInfoLabels = "Accommodation name:" + "\n\nCountry:" + "\n\nCity:" + "\n\nMaximum number of guests:" + "\n\nRating out of 10:";

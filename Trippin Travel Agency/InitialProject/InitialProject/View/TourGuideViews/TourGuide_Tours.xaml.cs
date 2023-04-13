@@ -43,10 +43,7 @@ namespace InitialProject.View
             int? selectedYear = GetSelectedYear();
 
             //Brisanje eventualno postojeceg sadrzaja iz tabele pre prosledjivanja na drugi interfejs
-            DataBaseContext transferContext = new DataBaseContext();
-            List<TourStatisticsDTO> transfetTableData = transferContext.TourStatisticsTransfer.ToList();
-            transferContext.TourStatisticsTransfer.RemoveRange(transfetTableData);
-            transferContext.SaveChanges();
+            DataBaseContext transferContext = RemoveTransferedTours();
 
             DataBaseContext attendanceContext = new DataBaseContext();
             DataBaseContext yearsContext = new DataBaseContext();
@@ -71,7 +68,7 @@ namespace InitialProject.View
                         }
                     }
                 }
-                
+
                 /*Treba resiti slucaj kada se selektuje godina za koju ne postoji tura. Kada se selektuje odredjena godina
                  prosledjuje se i tourId u transfer tabelu. */
 
@@ -101,7 +98,9 @@ namespace InitialProject.View
                 transferContext.TourStatisticsTransfer.Add(statisticsToShow);
                 transferContext.SaveChanges();
 
-            } else {
+            }
+            else
+            {
                 foreach (Tour tour in tours)
                 {
                     foreach (TourAttendance att in attendances)
@@ -135,6 +134,15 @@ namespace InitialProject.View
                 transferContext.TourStatisticsTransfer.Add(statisticsToShow);
                 transferContext.SaveChanges();
             }
+        }
+
+        private static DataBaseContext RemoveTransferedTours()
+        {
+            DataBaseContext transferContext = new DataBaseContext();
+            List<TourStatisticsDTO> transfetTableData = transferContext.TourStatisticsTransfer.ToList();
+            transferContext.TourStatisticsTransfer.RemoveRange(transfetTableData);
+            transferContext.SaveChanges();
+            return transferContext;
         }
 
         private int? GetSelectedYear()

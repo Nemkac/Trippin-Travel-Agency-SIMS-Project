@@ -1,6 +1,7 @@
 ﻿using InitialProject.Context;
 using InitialProject.DTO;
 using InitialProject.Model;
+using InitialProject.Repository;
 using InitialProject.Service;
 using System;
 using System.Collections.Generic;
@@ -24,16 +25,17 @@ namespace InitialProject.View
     /// </summary>
     public partial class TourGuide_FutureTours : UserControl
     {
+        private TourService tourService;
         public TourGuide_FutureTours()
         {
             InitializeComponent();
-            TourService tourService = new TourService();
-            List<Tour> futureTours = tourService.GetFutureTours();
+            this.tourService = new(new TourRepository());
+            List<Tour> futureTours = tourService.GetAllFutureTours();
             List<FutureToursDTO> futureToursDtos = new List<FutureToursDTO>();
             
             foreach (Tour tour in futureTours)
             {
-                futureToursDtos.Add(tourService.createFutureToursDTO(tour)); 
+                futureToursDtos.Add(this.tourService.createFutureToursDTO(tour)); 
             }
             futureToursDataGrid.ItemsSource = futureToursDtos;
         }
@@ -104,13 +106,12 @@ namespace InitialProject.View
 
         private void RefreshFutureToursDataGrid()
         {
-            TourService tourService = new TourService();
-            List<Tour> futureTours = tourService.GetFutureTours();
+            List<Tour> futureTours = this.tourService.GetAllFutureTours();
             List<FutureToursDTO> futureToursDtos = new List<FutureToursDTO>();
 
             foreach (Tour tour in futureTours)
             {
-                futureToursDtos.Add(tourService.createFutureToursDTO(tour));
+                futureToursDtos.Add(this.tourService.createFutureToursDTO(tour));
             }
             futureToursDataGrid.ItemsSource = futureToursDtos;
         }

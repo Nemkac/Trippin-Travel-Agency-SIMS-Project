@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace InitialProject.ViewModels
+namespace InitialProject.ViewModels.OwnerViewModels
 {
     internal class NotificationsViewModel : ViewModelBase
     {

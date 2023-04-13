@@ -27,6 +27,7 @@ namespace InitialProject.View
     {
         private BookingService bookingService;
         private AccommodationService accommodationService;
+        private AccommodationRateService accommodationRateService;
         public PastBookingsInterface()
         {
             InitializeComponent();
@@ -35,6 +36,7 @@ namespace InitialProject.View
             this.bookingService = new BookingService(bookingRepository);
             AccommodationRepository accommodationRepository = new AccommodationRepository();
             this.accommodationService = new AccommodationService(accommodationRepository);
+            this.accommodationRateService = new AccommodationRateService(new AccommodationRateRepository());
         }
 
         private void ShowPastBookings(object sender, RoutedEventArgs e)
@@ -47,7 +49,6 @@ namespace InitialProject.View
 
         private void ShowRateInterface(object sender, RoutedEventArgs e)
         {   
-            AccommodationRateService accommodationRateService = new AccommodationRateService();
             if (bookingService.CheckIfValidForRating((Booking)pastBookingsGrid.SelectedItem) && !accommodationRateService.isPreviouslyRated(((Booking)pastBookingsGrid.SelectedItem).Id))
             {
                 RateAccommodationInterface RateAccommodationInterface = new RateAccommodationInterface();

@@ -5,35 +5,30 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using InitialProject.Interfaces;
+using InitialProject.Repository;
 
 namespace InitialProject.Service
 {
     class TourService
     {
-        public TourService() { }
-        public static TourLocation GetTourLocation(string country, string city)
-        {
-            DataBaseContext locationContext = new DataBaseContext();
-            List<TourLocation> locations = locationContext.TourLocation.ToList();
-
-            foreach (TourLocation location in locations.ToList())
-            {
-                if (location.country == country && location.city == city)
-                {
-                    return location;
-                }
-            }
-
-            TourLocation newLocation = new TourLocation(country, city);
-            return newLocation;
+        private readonly ITourRepository iTourRepository;
+        private TourLocationService tourLocationService;
+        private TourReservationService tourReservationService;
+        public TourService(ITourRepository iTourRepository) { 
+            this.iTourRepository = iTourRepository;
+            this.tourLocationService = new(new TourLocationRepository());
+            this.tourReservationService = new(new TourReservationRepository());
         }
-        public static void Save(Tour tour)
+        public TourLocation GetTourLocation(string country, string city)
         {
-            DataBaseContext saveContext = new DataBaseContext();
-            saveContext.Attach(tour);
-            saveContext.SaveChanges();
-            MessageBox.Show("Tour registered succesfuly!");
+            return this.tourLocationService.GetTourLocationByCountryAndCity(country, city);
         }
+        public void Save(Tour tour)
+        {
+            this.iTourRepository.Save(tour);
+        }
+
         public static bool CheckExistence(string name, DateTime date)
         {
             using (var context = new DataBaseContext())
@@ -45,161 +40,53 @@ namespace InitialProject.Service
         }
         public TourLocation GetLocationById(int id)
         {
-            using DataBaseContext dbContext = new DataBaseContext();
-            return dbContext.TourLocation.SingleOrDefault(tl => tl.id == id);
+            return this.tourLocationService.GetById(id);
         }
         public TourDTO CreateDTO(Tour tour)
         {
-            DataBaseContext dataBaseContext = new DataBaseContext();
-            string keyPoints = GetKeyPointNames(tour, dataBaseContext);
-            TourLocation tmp = GetLocationById(tour.location);
-            TourDTO tourDTO = new(tour.id, tour.name, tour.description, tmp.city, tmp.country, keyPoints, tour.language, tour.touristLimit, tour.startDates, tour.hoursDuration);
-            return tourDTO;
+            return this.iTourRepository.CreateTourDTO(tour);
         }
 
         public string GetKeyPointNames(Tour tour, DataBaseContext dataBaseContext)
         {
-            string keyPoints = "";
-            foreach (KeyPoint keyPoint in dataBaseContext.KeyPoints.ToList())
-            {
-                if (keyPoint.tourId == tour.id)
-                {
-                    keyPoints += keyPoint.name + ", \n";                  
-                }
-                
-            }
-            keyPoints = keyPoints.Remove(keyPoints.Length - 3); 
-            return keyPoints;
+            return this.iTourRepository.GetKeyPointNames(tour, dataBaseContext);
         }
 
         public List<KeyPoint> GetKeyPoints(int tourId, DataBaseContext dataBaseContext)
         {
-            List<KeyPoint> keyPoints = new List<KeyPoint>();
-            foreach (KeyPoint keyPoint in dataBaseContext.KeyPoints.ToList()) {
-                if (keyPoint.tourId == tourId) { 
-                    keyPoints.Add(keyPoint);
-                }
-            }
-            return keyPoints;
+            return this.iTourRepository.GetTourKeyPoints(tourId, dataBaseContext);
         }
-        public List<TourDTO> GetByCity(string cityName)
+        public List<TourDTO> GetAllByCity(string cityName)
         {
-            DataBaseContext dataBaseContext = new DataBaseContext();
-            List<TourDTO> tourDTOs = new List<TourDTO>();
-            TourDTO tourDTO = new TourDTO();
-
-            foreach (Tour tour in dataBaseContext.Tours.ToList())
-            {
-                TourLocation tourLocation = GetLocationById(tour.location);
-                if (tourLocation.city.ToUpper().Contains(cityName.ToUpper()))
-                {
-                    tourDTO = CreateDTO(tour);
-                    tourDTOs.Add(tourDTO);
-                }
-            }
-            return tourDTOs;
+            return this.iTourRepository.GetAllByCity(cityName);
         }
         public List<TourDTO> GetAllByCountry(string countryName)
         {
-            DataBaseContext dataBaseContext = new DataBaseContext();
-            List<TourDTO> tourDTOs = new List<TourDTO>();
-            TourDTO tourDTO = new TourDTO();
-
-            foreach (Tour tour in dataBaseContext.Tours.ToList())
-            {
-                TourLocation tourLocation = GetLocationById(tour.location);
-                if (tourLocation.country.ToUpper().Contains(countryName.ToUpper()))
-                {
-                    tourDTO = CreateDTO(tour);
-                    tourDTOs.Add(tourDTO);
-                }
-            }
-            return tourDTOs;
+            return this.iTourRepository.GetAllByCountry(countryName);
         }
-        public List<TourDTO> GetByLanguage(language tourLanguage)
+        public List<TourDTO> GetAllByLanguage(language tourLanguage)
         {
-            DataBaseContext dataBaseContext = new DataBaseContext();
-            List<TourDTO> tourDTOs = new List<TourDTO>();
-            TourDTO tourDTO = new TourDTO();
-
-            foreach (Tour tour in dataBaseContext.Tours.ToList())
-            {
-                if (tour.language == tourLanguage)
-                {
-                    tourDTO = CreateDTO(tour);
-                    tourDTOs.Add(tourDTO);
-                }
-            }
-            return tourDTOs;
+            return this.iTourRepository.GetAllByLanguage(tourLanguage);
         }
-        public List<TourDTO> GetByDuration(string duration)
+        public List<TourDTO> GetAllByDuration(string duration)
         {
-            DataBaseContext dataBaseContext = new DataBaseContext();
-            List<TourDTO> tourDTOs = new List<TourDTO>();
-            TourDTO tourDTO = new TourDTO();
-
-            foreach (Tour tour in dataBaseContext.Tours.ToList())
-            {
-                if (tour.hoursDuration == Int32.Parse(duration))
-                {
-                    tourDTO = CreateDTO(tour);
-                    tourDTOs.Add(tourDTO);
-                }
-            }
-            return tourDTOs;
+            return this.iTourRepository.GetAllByDuration(duration);
         }
-        public List<TourDTO> GetByTouristLimit(string limit)
+        public List<TourDTO> GetAllByTouristLimit(string limit)
         {
-            DataBaseContext dataBaseContext = new DataBaseContext();
-            List<TourDTO> tourDTOs = new List<TourDTO>();
-            TourDTO tourDTO = new TourDTO();
-
-            foreach (Tour tour in dataBaseContext.Tours.ToList())
-            {
-                if (tour.touristLimit == Int32.Parse(limit))
-                {
-                    tourDTO = CreateDTO(tour);
-                    tourDTOs.Add(tourDTO);
-                }
-            }
-            return tourDTOs;
+            return this.iTourRepository.GetAllByTouristLimit(limit);
         }
-        public List<Tour> GetToursToday()
+        public List<Tour> GetAllToursToday()
         {
-            DataBaseContext context = new DataBaseContext();
-            using (context)
-            {
-                DateTime today = DateTime.Today;
-                List<Tour> toursToday = context.Tours
-                    .Where(t => t.startDates.Date == today)
-                    .ToList();
-
-                return toursToday;
-            }
+            return this.iTourRepository.GetAllToursToday();  
         }
-        public List<Tour> GetFutureTours()
+        public List<Tour> GetAllFutureTours()
         {
-            using (DataBaseContext context = new DataBaseContext())
-            {
-                DateTime today = DateTime.Today;
-                DateTime tomorrow = today.AddDays(1);
-                List<Tour> futureTours = context.Tours
-                    .Where(t => t.startDates.Date >= tomorrow)
-                    .ToList();
-
-                return futureTours;
-            }
+            return this.iTourRepository.GetAllFutureTours();
         }
-        public List<Tour> GetFinishedTours()
+        public List<Tour> GetAllFinishedTours()
         {
-            using (DataBaseContext context = new DataBaseContext())
-            {
-                List<Tour> finishedTours = context.Tours
-                    .Where(t => t.finished == true)
-                    .ToList();
-
-                return finishedTours;
-            }
+            return this.iTourRepository.GetAllFinishedTours();
         }
 
         public bool IsTourFinished(List<KeyPoint> keyPoints)
@@ -255,8 +142,7 @@ namespace InitialProject.Service
         }
         public Tour GetById(int id)
         {
-            using DataBaseContext dbContext = new DataBaseContext();
-            return dbContext.Tours.SingleOrDefault(t => t.id == id);
+            return this.iTourRepository.GetById(id);
         }
         public ToursTodayDTO createToursTodayDTO (Tour tour)
         {
@@ -280,16 +166,7 @@ namespace InitialProject.Service
         }
         public List<TourReservation> GetTourReservationsById(int tourId)
         {
-            List<TourReservation> reservations = new List<TourReservation>();
-            DataBaseContext dataBaseContext = new DataBaseContext();
-            foreach(TourReservation tr in dataBaseContext.TourReservations.ToList())
-            {
-                if(tr.tourId == tourId)
-                {
-                    reservations.Add(tr);
-                }
-            }
-            return reservations;
+            return this.tourReservationService.GetAllById(tourId);
         }
 
         public List<TourAndGuideRate> GetTourRatingsById(int tourId)
@@ -307,17 +184,9 @@ namespace InitialProject.Service
         }
 
 
-        public Tour GetByID(int tourId) { 
-            
-            using DataBaseContext dataBase = new DataBaseContext();
+        public Tour GetByID(int tourId) {
 
-            foreach (Tour tour in dataBase.Tours.ToList()) { 
-                if(tour.id == tourId) {
-                    return tour;
-                }            
-            }
-
-            return null;
+            return this.iTourRepository.GetById(tourId);
         }
 
         public Tour GetActiveTour(DataBaseContext context) {

@@ -2,6 +2,7 @@
 using InitialProject.DTO;
 using InitialProject.Model;
 using InitialProject.Model.TransferModels;
+using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.ViewModels;
 using System;
@@ -28,15 +29,16 @@ namespace InitialProject.View
     public partial class TourView : UserControl
     {
         public static int DetailedId { get; set; }
+        private TourService tourService;
         public TourView()
         {
             InitializeComponent();
             this.Loaded += Window_Loaded;
+            this.tourService = new(new TourRepository());
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.languageBox.ItemsSource = Enum.GetValues(typeof(language)).Cast<language>();
-            TourService tourService = new TourService();
             DataBaseContext context = new DataBaseContext();
             List<TourDTO> dataList = new List<TourDTO>();
             TourDTO dto = new TourDTO();
@@ -44,46 +46,45 @@ namespace InitialProject.View
             foreach (Tour tour in context.Tours.ToList())
             {
                 //dto = tourService.CreateDTO(tour);
-                dataList.Add(tourService.CreateDTO(tour));
+                dataList.Add(this.tourService.CreateDTO(tour));
             }
 
             this.dataGrid.ItemsSource = dataList;
         }
         private void ApplyFilters(object sender, RoutedEventArgs e)
         {
-            TourService tourService = new TourService();
             DataBaseContext context = new DataBaseContext();
 
             if (!cityName.Text.Equals(""))
             {
-                List<TourDTO> tourDTOsByCityName = tourService.GetByCity(cityName.Text);
+                List<TourDTO> tourDTOsByCityName = this.tourService.GetAllByCity(cityName.Text);
                 this.dataGrid.ItemsSource = tourDTOsByCityName;
 
             }
             else if (!countryName.Text.Equals(""))
             {
-                List<TourDTO> tourDTOsByCountryName = tourService.GetAllByCountry(countryName.Text);
+                List<TourDTO> tourDTOsByCountryName = this.tourService.GetAllByCountry(countryName.Text);
                 this.dataGrid.ItemsSource = tourDTOsByCountryName;
             }
             else if (!duration.Text.Equals(""))
             {
-                List<TourDTO> tourDTOsByDuration = tourService.GetByDuration(duration.Text);
+                List<TourDTO> tourDTOsByDuration = this.tourService.GetAllByDuration(duration.Text);
                 this.dataGrid.ItemsSource = tourDTOsByDuration;
             }
             else if (!touristLimit.Text.Equals(""))
             {
-                List<TourDTO> tourDTOsByTouristLimit = tourService.GetByTouristLimit(touristLimit.Text);
+                List<TourDTO> tourDTOsByTouristLimit = this.tourService.GetAllByTouristLimit(touristLimit.Text);
                 this.dataGrid.ItemsSource = tourDTOsByTouristLimit;
             }
             else if (languageBox.SelectedIndex > -1)
             {
-                List<TourDTO> tourDTOsByLanguage = tourService.GetByLanguage((language)languageBox.Items[languageBox.SelectedIndex]);
+                List<TourDTO> tourDTOsByLanguage = this.tourService.GetAllByLanguage((language)languageBox.Items[languageBox.SelectedIndex]);
                 languageBox.SelectedIndex = -1;
                 this.dataGrid.ItemsSource = tourDTOsByLanguage;
             }
             else
             {
-                List<TourDTO> dataList = GetTourDtos(tourService, context);
+                List<TourDTO> dataList = GetTourDtos(this.tourService, context);
                 this.dataGrid.ItemsSource = dataList;
             }
         }
@@ -104,12 +105,11 @@ namespace InitialProject.View
 
         private void ReserveTour(object sender, RoutedEventArgs e)
         {
-            TourService tourService = new TourService();
             TourDTO selectedTour = (TourDTO)this.dataGrid.SelectedItem;
             List<TourDTO> tourDTOs = new List<TourDTO>();
             int index = selectedTour.id;
             int numberOfGuests = Int32.Parse(NumberOfTourists.Text);
-            int flag = tourService.Book(index, numberOfGuests);
+            int flag = this.tourService.Book(index, numberOfGuests);
             TourDisplayViewModel.CanExecute = false;
 
             if (flag == 0)
@@ -136,14 +136,14 @@ namespace InitialProject.View
             else if (flag == 1)
             {
                 this.TextBlock.Text = "Not enough room for desired number of tourists. Number of spots left for this tour: " + selectedTour.touristLimit;
-                tourDTOs = tourService.GetPreviouslySelected(selectedTour.id);
+                tourDTOs = this.tourService.GetPreviouslySelected(selectedTour.id);
                 this.dataGrid.ItemsSource = tourDTOs;
                 TourDisplayViewModel.CanExecute = false;
             }
             else if (flag == -1)
             {
                 this.TextBlock.Text = "This tour is full. Here are some other tours in the same location.";
-                tourDTOs = tourService.GetBookableTours(selectedTour.cityLocation, selectedTour.name);
+                tourDTOs = this.tourService.GetBookableTours(selectedTour.cityLocation, selectedTour.name);
                 this.dataGrid.ItemsSource = tourDTOs;
                 TourDisplayViewModel.CanExecute = false;
             }

@@ -4,7 +4,7 @@ using InitialProject.Model;
 using InitialProject.Model.TransferModels;
 using InitialProject.Repository;
 using InitialProject.Service;
-using InitialProject.ViewModels;
+using InitialProject.ViewModels.OwnerViewModels;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;

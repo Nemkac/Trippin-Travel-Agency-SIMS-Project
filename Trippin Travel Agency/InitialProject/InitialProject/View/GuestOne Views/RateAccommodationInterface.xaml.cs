@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using InitialProject.Model;
 using System.Diagnostics;
 using InitialProject.Context;
+using InitialProject.Repository;
 
 namespace InitialProject.View
 {
@@ -28,9 +29,12 @@ namespace InitialProject.View
         public int imageCounter = 0;
 
         public int bookingId;
+        private AccommodationRateService accommodationRateService;
+
         public RateAccommodationInterface()
         {
             InitializeComponent();
+            this.accommodationRateService = new AccommodationRateService(new AccommodationRateRepository());
         }
 
         public void SetAttributes(int bookingId)
@@ -56,9 +60,8 @@ namespace InitialProject.View
 
         private void LeaveReview(object sender, RoutedEventArgs e)
         {
-            AccommodationRateService accommodationRateService = new AccommodationRateService();
             AccommodationRate accommodationRate = new AccommodationRate(bookingId, Convert.ToInt32(cleannesInput.Value), Convert.ToInt32(ownerRateInput.Value), commentInput.Text, imageUrls);
-            AccommodationRateService.Save(accommodationRate);
+            this.accommodationRateService.Save(accommodationRate);
         }
     }
 }

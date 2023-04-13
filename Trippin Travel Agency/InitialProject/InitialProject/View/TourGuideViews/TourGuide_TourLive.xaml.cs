@@ -2,6 +2,7 @@
 using InitialProject.DTO;
 using InitialProject.Model;
 using InitialProject.Model.TransferModels;
+using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.ViewModels;
 using Microsoft.EntityFrameworkCore;
@@ -19,13 +20,15 @@ namespace InitialProject.View
     {
         private readonly List<KeyPoint> keyPointsList = new List<KeyPoint>();
         List<TourReservationsTodayDTO> tourReservationDtosToday = new List<TourReservationsTodayDTO>();
-        private readonly TourService tourService = new TourService();
-        private readonly TourReservationService tourReservationService = new TourReservationService();
+        private readonly TourService tourService;
+        private readonly TourReservationService tourReservationService;
         private readonly TourGuide_TourLiveViewModel tourLiveViewModel = new TourGuide_TourLiveViewModel();
         public TourGuide_TourLive()
         {
             InitializeComponent();
-            this.Loaded += tourDataLoaded;    
+            this.Loaded += tourDataLoaded;
+            this.tourReservationService = new(new TourReservationRepository());
+            this.tourService = new(new TourRepository());
         }
         
         public void tourDataLoaded(object sender, RoutedEventArgs e)
@@ -37,7 +40,7 @@ namespace InitialProject.View
             context.Update(tour);
             context.SaveChanges(); 
             this.headerTextBlock.Text = tour.name;
-            List<TourReservation> reservations = tourService.GetTourReservationsById(tour.id);
+            List<TourReservation> reservations = this.tourService.GetTourReservationsById(tour.id);
             foreach (TourReservation tr in reservations)
             {
                 tourReservationDtosToday.Add(tourReservationService.transformTourReservationToDTO(tr));
@@ -101,7 +104,7 @@ namespace InitialProject.View
             context.SaveChanges();
 
             RefreshKeyPoints(tour);
-            if (tourService.IsTourFinished(keyPointsList))
+            if (this.tourService.IsTourFinished(keyPointsList))
             {
                 tourLiveViewModel.EndTour(tour);
             }
@@ -132,7 +135,7 @@ namespace InitialProject.View
         {
             context = new DataBaseContext();
             List<TourLiveViewTransfer> requests = context.TourLiveViewTransfers.ToList();
-            tour = tourService.GetById(requests.Last().tourId);
+            tour = this.tourService.GetById(requests.Last().tourId);
         }
 
         private void CreateMessage(DataBaseContext context, Tour tour, TourReservation tr)
@@ -167,7 +170,7 @@ namespace InitialProject.View
         private void RefreshTourReservations(Tour tour)
         {
             List<TourReservationsTodayDTO> dtos = new List<TourReservationsTodayDTO>();
-            List<TourReservation> reservations = tourService.GetTourReservationsById(tour.id);
+            List<TourReservation> reservations = this.tourService.GetTourReservationsById(tour.id);
             foreach (TourReservation tr in reservations)
             {
                 dtos.Add(tourReservationService.transformTourReservationToDTO(tr));

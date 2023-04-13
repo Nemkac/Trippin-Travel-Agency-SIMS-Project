@@ -8,12 +8,13 @@ using InitialProject.Model;
 using InitialProject.Context;
 using InitialProject.Model.TransferModels;
 using System.Windows;
+using InitialProject.Repository;
 
 namespace InitialProject.ViewModels
 {
     public class TourGuide_TourLiveViewModel : ViewModelBase
     {
-        private readonly TourService tourService = new TourService();
+        private readonly TourService tourService = new(new TourRepository());
         private TourGuide_MainViewModel _mainViewModel;
 
         public TourGuide_MainViewModel MainViewModel

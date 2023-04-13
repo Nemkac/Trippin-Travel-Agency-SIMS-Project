@@ -1,5 +1,6 @@
 ﻿using InitialProject.Context;
 using InitialProject.Model;
+using InitialProject.Repository;
 using InitialProject.Service;
 using System;
 using System.Collections.Generic;
@@ -23,24 +24,25 @@ namespace InitialProject.View
     /// </summary>
     public partial class JoinLiveTourView : UserControl
     {
+        private TourService tourService;
         public JoinLiveTourView()
         {
             InitializeComponent();
             this.Loaded += LoadTourInfo;
+            this.tourService = new(new TourRepository());
         }
 
         public void LoadTourInfo(object sender, RoutedEventArgs e) { 
             
             DataBaseContext context = new DataBaseContext();
-            TourService tourService = new TourService();    
-            Tour activeTour = tourService.GetActiveTour(context);
+            Tour activeTour = this.tourService.GetActiveTour(context);
 
             this.SubmitButton.IsEnabled = false;
             this.CommentBox.IsEnabled = false;
             if (activeTour != null)
             {
                 this.TourNameLabel.Content = activeTour.name;
-                List<KeyPoint> keyPoints = tourService.GetKeyPoints(activeTour.id,context);
+                List<KeyPoint> keyPoints = this.tourService.GetKeyPoints(activeTour.id,context);
                 var keyPointFilter = from keyPoint in keyPoints
                                      select new
                                      {
@@ -63,8 +65,7 @@ namespace InitialProject.View
         private void JoinTour(object sender, RoutedEventArgs e)
         {
             DataBaseContext context = new DataBaseContext();
-            TourService tourService = new TourService();
-            Tour activeTour = tourService.GetActiveTour(context);
+            Tour activeTour = this.tourService.GetActiveTour(context);
 
             foreach (TourReservation tourReservation in context.TourReservations.ToList()) {
                 if (tourReservation.tourId == activeTour.id)
@@ -160,8 +161,7 @@ namespace InitialProject.View
             comment = this.CommentBox.Text;
 
             DataBaseContext context = new DataBaseContext();
-            TourService tourService = new TourService();
-            Tour activeTour = tourService.GetActiveTour(context);
+            Tour activeTour = this.tourService.GetActiveTour(context);
             TourAndGuideRate tourAndGuideRate = new TourAndGuideRate(LoggedUser.id,activeTour.id,guideKnowledge,guideLanguageUsage,contentRating,comment,activeTour.guideId);
             context.TourAndGuideRates.Add(tourAndGuideRate);
             context.SaveChanges();

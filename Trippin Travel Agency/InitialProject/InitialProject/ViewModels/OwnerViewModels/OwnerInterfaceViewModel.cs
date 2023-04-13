@@ -3,7 +3,6 @@ using InitialProject.DTO;
 using InitialProject.Repository;
 using InitialProject.View;
 using InitialProject.View.Owner_Views;
-using InitialProject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
@@ -13,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace InitialProject.ViewModels
+namespace InitialProject.ViewModels.OwnerViewModels
 {
     public class OwnerInterfaceViewModel : ViewModelBase
     {

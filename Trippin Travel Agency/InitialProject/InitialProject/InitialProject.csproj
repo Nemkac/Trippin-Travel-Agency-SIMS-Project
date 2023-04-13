@@ -42,6 +42,8 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="ViewModels\GuestTwoViewModels\" />
+    <Folder Include="ViewModels\TourGuideViewModels\" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 ﻿using InitialProject.Context;
 using InitialProject.DTO;
+using InitialProject.Interfaces;
 using InitialProject.Model;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,16 @@ namespace InitialProject.Service
 {
     class TourReservationService
     {
+        private readonly ITourReservationRepository iTourReservationRepository;
+
+        public TourReservationService(ITourReservationRepository iTourReservationRepository)
+        {
+            this.iTourReservationRepository = iTourReservationRepository;
+        }
+
         public TourReservation GetById(int id)
         {
-            using DataBaseContext dbContext = new DataBaseContext();
-            return dbContext.TourReservations.SingleOrDefault(t => t.id == id);
+            return this.iTourReservationRepository.GetById(id);
         }
 
         public TourReservationsTodayDTO transformTourReservationToDTO(TourReservation tourReservation) 
@@ -25,6 +32,11 @@ namespace InitialProject.Service
             tourReservationsTodayDTO.guideConfirmed= tourReservation.guideConfirmed;
             
             return tourReservationsTodayDTO;
+        }
+
+        public List<TourReservation> GetAllById(int tourId)
+        {
+            return this.iTourReservationRepository.GetAllById(tourId);
         }
     }
 }

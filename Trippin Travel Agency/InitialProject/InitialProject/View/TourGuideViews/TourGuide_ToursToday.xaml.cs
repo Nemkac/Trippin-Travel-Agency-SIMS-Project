@@ -2,6 +2,7 @@
 using InitialProject.DTO;
 using InitialProject.Model;
 using InitialProject.Model.TransferModels;
+using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.ViewModels;
 using System;
@@ -22,16 +23,17 @@ namespace InitialProject.View
 {
     public partial class TourGuide_ToursToday : UserControl
     {
+        private TourService tourService;
         public TourGuide_ToursToday()
         {
             InitializeComponent();
-            TourService tourService = new TourService();
-            List<Tour> toursToday = tourService.GetToursToday();
+            this.tourService = new(new TourRepository());
+            List<Tour> toursToday = tourService.GetAllToursToday();
             List<ToursTodayDTO> tourDtosToday = new List<ToursTodayDTO>();
 
             foreach (Tour t in toursToday)
             {
-                tourDtosToday.Add(tourService.createToursTodayDTO(t));
+                tourDtosToday.Add(this.tourService.createToursTodayDTO(t));
             }
             tourDataGrid.ItemsSource = tourDtosToday;
         }

@@ -1,4 +1,5 @@
 ﻿using InitialProject.Context;
+using InitialProject.Interfaces;
 using InitialProject.Model;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,20 @@ namespace InitialProject.Service
 {
     public class TourLocationService
     {
+        private readonly ITourLocationRepository iTourLocationRepository;
+        public TourLocationService(ITourLocationRepository iTourLocationRepository)
+        {
+            this.iTourLocationRepository = iTourLocationRepository;
+        }
+
         public TourLocation GetById(int id) 
         {
-            using DataBaseContext db = new DataBaseContext();
-            return db.TourLocation.SingleOrDefault(tl => tl.id == id);
+            return this.iTourLocationRepository.GetById(id);
+        }
+
+        public TourLocation GetTourLocationByCountryAndCity(string country, string city)
+        {
+            return this.iTourLocationRepository.GetTourLocationByCountryAndCity(country, city);
         }
     }
 }

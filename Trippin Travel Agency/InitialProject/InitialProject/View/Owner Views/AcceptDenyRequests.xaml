@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.View.Owner_Views"
-             xmlns:viewModel="clr-namespace:InitialProject.ViewModels" d:DataContext="{d:DesignInstance Type=viewModel:AcceptDenyViewModel}"
+             xmlns:viewModel="clr-namespace:InitialProject.ViewModels.OwnerViewModels" d:DataContext="{d:DesignInstance Type=viewModel:AcceptDenyViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="710">
 

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InitialProject.ViewModels
+namespace InitialProject.ViewModels.OwnerViewModels
 {
-    class OwnersBookingDisplayViewModel : ViewModelBase
+    public class ReviewsViewModel : ViewModelBase
     {
     }
 }

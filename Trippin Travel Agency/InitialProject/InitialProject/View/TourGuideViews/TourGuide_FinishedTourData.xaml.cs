@@ -2,6 +2,7 @@
 using InitialProject.DTO;
 using InitialProject.Model;
 using InitialProject.Model.TransferModels;
+using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.ViewModels;
 using System;
@@ -26,7 +27,7 @@ namespace InitialProject.View
     /// </summary>
     public partial class TourGuide_FinishedTourData : UserControl
     {
-        private readonly TourService tourService = new TourService();
+        private readonly TourService tourService;
         private readonly MessageService messageService = new MessageService();
 
         private readonly TourReviewService tourReviewService = new TourReviewService();
@@ -35,13 +36,14 @@ namespace InitialProject.View
         {
             InitializeComponent();
             this.Loaded += tourDataLoaded;
+            this.tourService = new(new TourRepository());
         }
 
         public void tourDataLoaded(object sender, RoutedEventArgs e)
         {
             DataBaseContext context = new DataBaseContext();
             List<TourLiveViewTransfer> requests = context.TourLiveViewTransfers.ToList();
-            Tour tour = tourService.GetById(requests.Last().tourId);
+            Tour tour = this.tourService.GetById(requests.Last().tourId);
             TourMessage message = messageService.GetByTourId(tour.id);
             this.headerTextBlock.Text = tour.name;
             List<TourAndGuideRateDTO> finishedTourReviewDtos = new List<TourAndGuideRateDTO>();
@@ -60,7 +62,7 @@ namespace InitialProject.View
         {
             DataBaseContext context = new DataBaseContext();
             List<TourLiveViewTransfer> requests = context.TourLiveViewTransfers.ToList();
-            Tour tour = tourService.GetById(requests.Last().tourId);
+            Tour tour = this.tourService.GetById(requests.Last().tourId);
             var selectedReview = (TourAndGuideRateDTO)reviewsDataGrid.SelectedItem;
             TourAndGuideRate tagr = tourReviewService.GetById(selectedReview.id);
             tagr.valid = false; 

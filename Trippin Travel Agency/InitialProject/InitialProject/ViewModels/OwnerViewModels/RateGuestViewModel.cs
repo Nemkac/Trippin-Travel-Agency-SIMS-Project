@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
-namespace InitialProject.ViewModels
+namespace InitialProject.ViewModels.OwnerViewModels
 {
-    public class AccommodationRegistrationViewModel : ViewModelBase
+    public class RateGuestViewModel : ViewModelBase
     {
     }
 }

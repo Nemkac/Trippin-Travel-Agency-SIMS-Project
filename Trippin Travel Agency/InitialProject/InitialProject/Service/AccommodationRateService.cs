@@ -1,4 +1,5 @@
 ﻿using InitialProject.Context;
+using InitialProject.Interfaces;
 using InitialProject.Model;
 using InitialProject.Repository;
 using System;
@@ -12,21 +13,21 @@ namespace InitialProject.Service
     internal class AccommodationRateService
     {
         private readonly BookingService bookingService = new(new BookingRepository());
+        private readonly IAccommodationRateRepository iAccommodationRateRepository;
         private AccommodationService accommodationService;
 
-        public AccommodationRateService()
+        public AccommodationRateService(IAccommodationRateRepository iAccommodationRateRepository)
         {
+            this.iAccommodationRateRepository = iAccommodationRateRepository;
             BookingRepository bookingRepository = new BookingRepository();
             this.bookingService = new BookingService(bookingRepository);
             AccommodationRepository accommodationRepository = new AccommodationRepository();
             this.accommodationService = new AccommodationService(accommodationRepository);
         }
 
-        public static void Save(AccommodationRate accommodationRate)
+        public void Save(AccommodationRate accommodationRate)
         {
-            DataBaseContext saveContext = new DataBaseContext();
-            saveContext.Attach(accommodationRate);
-            saveContext.SaveChanges();
+            this.iAccommodationRateRepository.Save(accommodationRate);
         }
 
         public double GetAccommodationAverageRate(int accommodationId)

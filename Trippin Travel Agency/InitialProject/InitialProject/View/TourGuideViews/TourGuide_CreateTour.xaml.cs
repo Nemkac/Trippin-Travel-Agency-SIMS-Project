@@ -1,5 +1,6 @@
 ﻿using InitialProject.Context;
 using InitialProject.Model;
+using InitialProject.Repository;
 using InitialProject.Service;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,12 @@ namespace InitialProject.View
     /// </summary>
     public partial class TourGuide_CreateTour : UserControl
     {
+        private TourService tourService;
         public TourGuide_CreateTour()
         {
             InitializeComponent();
             FillCountryComboBox();
+            this.tourService = new(new TourRepository());
         }
 
         List<TextBox> dynamicTextBoxes = new List<TextBox>();
@@ -96,7 +99,7 @@ namespace InitialProject.View
             name = tourNameTextBox.Text;
             string country = tourCountryComboBox.SelectedValue.ToString();
             string city = tourCityComboBox.SelectedValue.ToString();
-            location = TourService.GetTourLocation(country, city);
+            location = this.tourService.GetTourLocation(country, city);
             string guestLimitInput = tourMaximumNumberOfGuestsTextBox.Text;
             guestLimit = int.Parse(guestLimitInput);
             string hoursDurationInput = tourDurationTextBox.Text;
@@ -112,7 +115,7 @@ namespace InitialProject.View
             bool tourExists = TourService.CheckExistence(name, selectedDate);
             if (!tourExists)
             {
-                TourService.Save(tour);
+                this.tourService.Save(tour);
                 clearInputs();
             }
             else
