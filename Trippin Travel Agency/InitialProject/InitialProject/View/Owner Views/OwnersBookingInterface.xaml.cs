@@ -26,6 +26,7 @@ namespace InitialProject.View
     public partial class OwnersBookingInterface : UserControl
     {
         private readonly BookingService bookingService;
+        private GuestRateService guestRateService;
         public OwnersBookingInterface()
         {
             InitializeComponent();
@@ -33,11 +34,12 @@ namespace InitialProject.View
             bookingDataGrid.ItemsSource = dataGridData;
             BookingRepository bookingRepository = new BookingRepository();
             this.bookingService = new BookingService(bookingRepository);
+            this.guestRateService = new(new GuestRateRepository());
         }
 
         private List<BookingDTO> ShowBookings()
         {
-            GuestRateService guestRateService = new GuestRateService();
+            //GuestRateService guestRateService = new GuestRateService();
             DataBaseContext bookingContext = new DataBaseContext();
             List<BookingDTO> dataList = new List<BookingDTO>();
             BookingService bookingService = new BookingService(new BookingRepository());

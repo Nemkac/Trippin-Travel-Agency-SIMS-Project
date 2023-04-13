@@ -1,5 +1,6 @@
 ﻿using InitialProject.Context;
 using InitialProject.Model;
+using InitialProject.Repository;
 using InitialProject.Service;
 using System;
 using System.Collections.Generic;
@@ -24,11 +25,11 @@ namespace InitialProject.View.Owner_Views
     /// </summary>
     public partial class ReviewsView : UserControl
     {
-
+        private GuestRateService guestRateService;
         public ReviewsView()
         {
             InitializeComponent();
-            GuestRateService guestRateService = new GuestRateService();
+            this.guestRateService = new GuestRateService(new GuestRateRepository());
             List<AccommodationRate> dataGridData = ShowReviews();
 
             var reviewsData = from review in dataGridData
@@ -51,7 +52,7 @@ namespace InitialProject.View.Owner_Views
         {
             DataBaseContext accommodationRateContext = new DataBaseContext();
             DataBaseContext guestRateContext = new DataBaseContext();
-            GuestRateService guestRateService = new GuestRateService();
+            //GuestRateService guestRateService = new GuestRateService();
 
             List<AccommodationRate> accommodationRates = accommodationRateContext.AccommodationRates.ToList();
             List<GuestRate> guestRates = guestRateContext.GuestRate.ToList();

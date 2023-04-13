@@ -1,4 +1,5 @@
 ﻿using InitialProject.Context;
+using InitialProject.Interfaces;
 using InitialProject.Model;
 using InitialProject.Model.TransferModels;
 using InitialProject.Repository;
@@ -31,6 +32,7 @@ namespace InitialProject.View.Owner_Views
         private AccommodationService accommodationService;
         private AccommodationRepository accommodationRepository;
         private BookingService bookingService;
+        private GuestRateService guestRateService;
         public NotificationsView()
         {
             InitializeComponent();
@@ -39,6 +41,7 @@ namespace InitialProject.View.Owner_Views
             this.accommodationService = new AccommodationService(accommodationRepository);
             BookingRepository bookingRepository = new BookingRepository();
             this.bookingService = new BookingService(bookingRepository);
+            this.guestRateService = new(new GuestRateRepository());
         }
 
         private void SendNotification()
@@ -63,12 +66,11 @@ namespace InitialProject.View.Owner_Views
 
         private void GuestNotRatedNotification()
         {
-            GuestRateService guestRateService = new GuestRateService();
+            BookingService bookingService = new BookingService(new BookingRepository());
             DataBaseContext bookingContext = new DataBaseContext();
-            //BookingService bookingService = new BookingService();
             foreach (Booking booking in bookingContext.Bookings.ToList())
             {
-                if (ValidForNotification(guestRateService, booking))
+                if (ValidForNotification(booking))
                 {
                     string guestUsername = bookingService.GetGuestName(booking.Id);
                     notificationsListBox.Items.Add($"Guest {guestUsername} has not been rated yet for booking: " + $"{booking.Id}!");
@@ -76,8 +78,9 @@ namespace InitialProject.View.Owner_Views
             }
         }
 
-        private static bool ValidForNotification(GuestRateService guestRateService, Booking booking)
+        private static bool ValidForNotification(Booking booking)
         {
+            GuestRateService guestRateService = new(new GuestRateRepository());
             DateTime departureDate = DateTime.ParseExact(booking.departure, "M/d/yyyy", CultureInfo.InvariantCulture);
             DateTime currentDate = DateTime.Now;
             TimeSpan timeSinceDeparture = currentDate - departureDate;
@@ -96,7 +99,6 @@ namespace InitialProject.View.Owner_Views
         {
             if (notificationsListBox.SelectedItem != null && canceledBookingId == -1)
             {
-                //BookingService bookingService = new BookingService();
                 string selectedItem = notificationsListBox.SelectedItem.ToString().TrimEnd('!');
                 int bookingId = int.Parse(selectedItem.Substring(selectedItem.LastIndexOf(": ") + 2));
 

@@ -1,5 +1,6 @@
 ﻿using InitialProject.Context;
 using InitialProject.Model;
+using InitialProject.Repository;
 using InitialProject.Service;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,12 @@ namespace InitialProject.View.Owner_Views
     /// </summary>
     public partial class ProfileView : UserControl
     {
+        private GuestRateService guestRateService;
         public ProfileView()
         {
             InitializeComponent();
-            GuestRateService guestRateService = new GuestRateService(); 
+            //GuestRateService guestRateService = new GuestRateService(); 
+            this.guestRateService = new(new GuestRateRepository());
             this.UsernameTextBlock.Text = LoggedUser.username;
             this.FirstNameTextBlock.Text = LoggedUser.firstName;
             this.LastNameTextBlock.Text = LoggedUser.lastName;
@@ -67,7 +70,7 @@ namespace InitialProject.View.Owner_Views
         {
             DataBaseContext accommodationRateContext = new DataBaseContext();
             DataBaseContext guestRateContext = new DataBaseContext();
-            GuestRateService guestRateService = new GuestRateService();
+            GuestRateService guestRateService = new(new GuestRateRepository());
 
             List<AccommodationRate> accommodationRates = accommodationRateContext.AccommodationRates.ToList();
             List<GuestRate> guestRates = guestRateContext.GuestRate.ToList();

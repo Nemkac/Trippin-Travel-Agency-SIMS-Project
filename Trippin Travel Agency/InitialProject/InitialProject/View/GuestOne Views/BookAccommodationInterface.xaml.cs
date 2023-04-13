@@ -83,7 +83,7 @@ namespace InitialProject.View
         private void Book(AccommodationService accommodationService, string arrival, string departure, string guestsNumber)
         {
             Booking booking = new Booking(accommodationId, arrival, departure, (DateTime.Parse(departure).Subtract(DateTime.Parse(arrival))).Days, userId);
-            Service.BookingService.Save(booking);
+            bookingService.Save(booking);
         }
     }
 }

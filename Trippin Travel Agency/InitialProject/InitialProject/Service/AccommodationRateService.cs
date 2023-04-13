@@ -11,7 +11,7 @@ namespace InitialProject.Service
 {
     internal class AccommodationRateService
     {
-        private BookingService bookingService;
+        private readonly BookingService bookingService = new(new BookingRepository());
         private AccommodationService accommodationService;
 
         public AccommodationRateService()
@@ -35,7 +35,7 @@ namespace InitialProject.Service
             List<AccommodationRate> rates = context.AccommodationRates.ToList();
             double averageRate = 0;
             int ratesCounter = 0;
-            foreach(AccommodationRate rate in rates)
+            foreach (AccommodationRate rate in rates)
             {
                 if (bookingService.GetById(rate.bookingId) != null && bookingService.GetById(rate.bookingId).accommodationId == accommodationId)
                 {

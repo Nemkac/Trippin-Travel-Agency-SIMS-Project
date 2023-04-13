@@ -35,9 +35,7 @@ namespace InitialProject.Service
 
         public Accommodation GetById(int id)
         {
-            DataBaseContext context = new DataBaseContext();
-            List<Accommodation> accommodations = context.Accommodations.ToList();
-            return accommodations.Find(a => a.id == id);
+            return this.iAccommodationRepository.GetById(id);
         }
 
         public List<string> GetAccommodationLocation(int id)
@@ -130,17 +128,9 @@ namespace InitialProject.Service
             sameAccommodationBookings = GetAccommodationsBookings(bookings, accommodation);
         }
 
-        public List<Booking> GetAccommodationsBookings(List<Booking> bookings, Accommodation accommodation) 
+        public List<Booking> GetAccommodationsBookings(List<Booking> bookings, Accommodation accommodation)
         {
-            List<Booking> sameAccommodationBookings = new List<Booking>();
-            foreach (Booking booking in bookings)
-            {
-                if (booking.accommodationId == accommodation.id)
-                {
-                    sameAccommodationBookings.Add(booking);
-                }
-            }
-            return sameAccommodationBookings;
+            return this.iAccommodationRepository.GetAccommodationsBookings(bookings, accommodation);
         }
 
         public List<List<DateTime>> GetAvailableDateSlots(int startEndSpan, int daysToBook, DateTime startingDate, List<List<DateTime>> takenDates)
@@ -214,14 +204,10 @@ namespace InitialProject.Service
             return newLocation;
         }
 
-        public static void Save(Accommodation accommodation)
+        public void Save(Accommodation accommodation)
         {
-            DataBaseContext saveContext = new DataBaseContext();
-            saveContext.Attach(accommodation);
-            saveContext.SaveChanges();
-            MessageBox.Show("Accommodation registered succesfuly!");
+            this.iAccommodationRepository.Save(accommodation);
         }
-
     }
 }
 

@@ -10,7 +10,6 @@ namespace InitialProject.Service
 {
     class AccommodationLocationService
     {
-
         public AccommodationLocation GetById(int id)
         {
             DataBaseContext context = new DataBaseContext();

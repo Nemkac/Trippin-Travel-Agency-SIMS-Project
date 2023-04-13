@@ -26,9 +26,8 @@ namespace InitialProject.Service
 
         public Booking GetById(int bookingId)
         {
-            using DataBaseContext context = new DataBaseContext();
-            return context.Bookings.SingleOrDefault(b => b.Id == bookingId);
-        } 
+            return this.iBookingRepository.GetById(bookingId);
+        }
         
         public BookingDTO CreateBookingDTO(Booking booking)
         {
@@ -44,9 +43,7 @@ namespace InitialProject.Service
 
         public void Delete(Booking booking)
         {
-            DataBaseContext context = new DataBaseContext();
-            context.Remove(booking);
-            context.SaveChanges();
+            this.iBookingRepository.Delete(booking);
         }
         
         public RequestDTO CreateRequestDTO(BookingDelaymentRequest bookingDelaymentRequest)
@@ -55,7 +52,7 @@ namespace InitialProject.Service
             DataBaseContext dtoContext = new DataBaseContext();
             RequestDTO requestDto = new RequestDTO();
 
-            Booking tmpBooking = GetById(bookingDelaymentRequest.bookingId);
+            Booking tmpBooking = this.iBookingRepository.GetById(bookingDelaymentRequest.bookingId);
             User tmpUser = userService.GetById(tmpBooking.guestId);
 
             DateTime oldArrival = DateTime.ParseExact(tmpBooking.arrival, "M/d/yyyy", CultureInfo.InvariantCulture);
@@ -95,44 +92,17 @@ namespace InitialProject.Service
 
         public int GetGuestId(int bookingId)
         {
-            int guestId;
-            DataBaseContext guestIdContext = new DataBaseContext();
-            List<Booking> bookings = guestIdContext.Bookings.ToList();
-
-            foreach(Booking booking in bookings.ToList()) 
-            {
-                if(booking.Id ==  bookingId)
-                {
-                    guestId = booking.guestId;
-                    return guestId;
-                }
-            }
-            return -1;
+            return this.iBookingRepository.GetGuestId(bookingId);
         }
 
         public string GetGuestName(int bookingId)
         {
-            UserService userService = new UserService();
-            DataBaseContext bookingContext = new DataBaseContext();
-            List<Booking> bookings = bookingContext.Bookings.ToList();
-            User user = new User();
-
-            foreach(Booking booking  in bookings.ToList())
-            {
-                if(booking.Id == bookingId)
-                {
-                    user = userService.GetById(booking.guestId);
-                }
-            }
-
-            return user.username;
+            return this.iBookingRepository.GetGuestName(bookingId);
         }
 
-        public static void Save(Booking booking)
+        public void Save(Booking booking)
         {
-            DataBaseContext saveContext = new DataBaseContext();
-            saveContext.Attach(booking);
-            saveContext.SaveChanges();
+            this.iBookingRepository.Save(booking);
         }
 
         public static List<string> FormDisplayableDates(List<List<DateTime>> availableDates)

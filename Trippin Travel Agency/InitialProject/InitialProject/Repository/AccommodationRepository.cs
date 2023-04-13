@@ -7,13 +7,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace InitialProject.Repository
 {
     public class AccommodationRepository : IAccommodationRepository
     {
         public AccommodationRepository() { }
-
+        public Accommodation GetById(int id)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<Accommodation> accommodations = context.Accommodations.ToList();
+            return accommodations.Find(a => a.id == id);
+        }
         public List<int> GetAllByName(string name)
         {
             DataBaseContext context = new DataBaseContext();
@@ -90,6 +96,26 @@ namespace InitialProject.Repository
                 }
             }
             return filtered;
+        }
+        public List<Booking> GetAccommodationsBookings(List<Booking> bookings, Accommodation accommodation)
+        {
+            List<Booking> sameAccommodationBookings = new List<Booking>();
+            foreach (Booking booking in bookings)
+            {
+                if (booking.accommodationId == accommodation.id)
+                {
+                    sameAccommodationBookings.Add(booking);
+                }
+            }
+            return sameAccommodationBookings;
+        }
+
+        public void Save(Accommodation accommodation)
+        {
+            DataBaseContext saveContext = new DataBaseContext();
+            saveContext.Attach(accommodation);
+            saveContext.SaveChanges();
+            MessageBox.Show("Accommodation registered succesfuly!");
         }
     }
 }

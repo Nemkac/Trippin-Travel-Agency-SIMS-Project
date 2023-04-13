@@ -29,6 +29,7 @@ namespace InitialProject.View.Owner_Views
     {
         GuestRateRepository rateRepository = new GuestRateRepository();
         private BookingService bookingService;
+        private GuestRateService guestRateService;
 
         public int bookingId { get; set; }
         public RateGuestView()
@@ -39,6 +40,7 @@ namespace InitialProject.View.Owner_Views
             this.bookingId = transferedBooking.bookingId;
             BookingRepository bookingRepository = new BookingRepository();
             this.bookingService = new BookingService(bookingRepository);
+            this.guestRateService = new(rateRepository);
         }
 
         private void SaveRate(object sender, RoutedEventArgs e)
@@ -49,7 +51,7 @@ namespace InitialProject.View.Owner_Views
             string comment = commentTB.Text;
             int guestId = bookingService.GetGuestId(this.bookingId);
             GuestRate newGuestRate = new GuestRate(cleannessRate, rulesRate, comment, guestId, this.bookingId);
-            GuestRateService.Save(newGuestRate);
+            guestRateService.Save(newGuestRate);
             DataBaseContext transferedBooking = new DataBaseContext();
             transferedBooking.SelectedRatingNotificationTransfer.Remove(transferedBooking.SelectedRatingNotificationTransfer.First());
             transferedBooking.SaveChanges();

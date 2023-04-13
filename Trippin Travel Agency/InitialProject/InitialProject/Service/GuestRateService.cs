@@ -12,26 +12,21 @@ namespace InitialProject.Service
 {
     class GuestRateService
     {
-        public static void Save(GuestRate guestRate)
+        private readonly IGuestRateRepository iGuestRateRepository;
+
+        public GuestRateService(IGuestRateRepository iGuestRateRepository)
         {
-            DataBaseContext saveContext = new DataBaseContext();
-            saveContext.Attach(guestRate);
-            saveContext.SaveChanges();
+            this.iGuestRateRepository = iGuestRateRepository;
+        }
+
+        public void Save(GuestRate guestRate)
+        {
+            this.iGuestRateRepository.Save(guestRate);
         }
 
         public bool IsRated(int bookingId)
         {
-            DataBaseContext ratedBookingContext = new DataBaseContext();
-            List<GuestRate> ratedGuests = ratedBookingContext.GuestRate.ToList();
-            foreach (GuestRate guestRate in ratedGuests.ToList())
-            {
-                if (guestRate.bookingId == bookingId)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return this.iGuestRateRepository.IsGuestRated(bookingId);
         }
 
         //Ovo ide u AccommodationRateService

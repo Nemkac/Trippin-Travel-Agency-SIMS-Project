@@ -22,10 +22,12 @@ namespace InitialProject.View
 {
     public partial class AccommodationRegistration : UserControl
     {
+        private AccommodationService accommodationService;
         public AccommodationRegistration()
         {
             InitializeComponent();
             FillCountryComboBox();
+            this.accommodationService = new(new AccommodationRepository());
         }
 
         private void FillCountryComboBox()
@@ -54,7 +56,7 @@ namespace InitialProject.View
             List<Model.Image> imageLinks = CreateImageLinks();
 
             Accommodation accommodation = new Accommodation(name, location, guestLimit, minDaysBooked, bookingCancelPeriod, type, imageLinks);
-            AccommodationService.Save(accommodation);
+            accommodationService.Save(accommodation);
             ClearInputs();
         }
 
