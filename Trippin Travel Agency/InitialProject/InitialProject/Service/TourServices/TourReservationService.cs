@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InitialProject.Service
+namespace InitialProject.Service.TourServices
 {
     class TourReservationService
     {
@@ -21,22 +21,22 @@ namespace InitialProject.Service
 
         public TourReservation GetById(int id)
         {
-            return this.iTourReservationRepository.GetById(id);
+            return iTourReservationRepository.GetById(id);
         }
 
-        public TourReservationsTodayDTO transformTourReservationToDTO(TourReservation tourReservation) 
+        public TourReservationsTodayDTO transformTourReservationToDTO(TourReservation tourReservation)
         {
             TourReservationsTodayDTO tourReservationsTodayDTO = new TourReservationsTodayDTO();
-            tourReservationsTodayDTO.id= tourReservation.id;
-            tourReservationsTodayDTO.guestJoined= tourReservation.guestJoined;
-            tourReservationsTodayDTO.guideConfirmed= tourReservation.guideConfirmed;
-            
+            tourReservationsTodayDTO.id = tourReservation.id;
+            tourReservationsTodayDTO.guestJoined = tourReservation.guestJoined;
+            tourReservationsTodayDTO.guideConfirmed = tourReservation.guideConfirmed;
+
             return tourReservationsTodayDTO;
         }
 
         public List<TourReservation> GetAllById(int tourId)
         {
-            return this.iTourReservationRepository.GetAllById(tourId);
+            return iTourReservationRepository.GetAllById(tourId);
         }
     }
 }

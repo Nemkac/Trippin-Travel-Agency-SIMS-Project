@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InitialProject.Service
+namespace InitialProject.Service.TourServices
 {
     public class TourLocationService
     {
@@ -17,14 +17,14 @@ namespace InitialProject.Service
             this.iTourLocationRepository = iTourLocationRepository;
         }
 
-        public TourLocation GetById(int id) 
+        public TourLocation GetById(int id)
         {
-            return this.iTourLocationRepository.GetById(id);
+            return iTourLocationRepository.GetById(id);
         }
 
         public TourLocation GetTourLocationByCountryAndCity(string country, string city)
         {
-            return this.iTourLocationRepository.GetTourLocationByCountryAndCity(country, city);
+            return iTourLocationRepository.GetTourLocationByCountryAndCity(country, city);
         }
     }
 }

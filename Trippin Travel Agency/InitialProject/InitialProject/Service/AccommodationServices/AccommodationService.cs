@@ -11,7 +11,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace InitialProject.Service
+namespace InitialProject.Service.AccommodationServices
 
 {
     public class AccommodationService
@@ -26,7 +26,7 @@ namespace InitialProject.Service
         public List<Accommodation> ConvertDtoToInitial(List<AccommodationDTO> accommodationDTOs)
         {
             List<Accommodation> accommodations = new List<Accommodation>();
-            foreach(AccommodationDTO dto in accommodationDTOs)
+            foreach (AccommodationDTO dto in accommodationDTOs)
             {
                 accommodations.Add(GetById(dto.id));
             }
@@ -35,7 +35,7 @@ namespace InitialProject.Service
 
         public Accommodation GetById(int id)
         {
-            return this.iAccommodationRepository.GetById(id);
+            return iAccommodationRepository.GetById(id);
         }
 
         public List<string> GetAccommodationLocation(int id)
@@ -68,11 +68,11 @@ namespace InitialProject.Service
         {
             List<Accommodation> matchingAccommodations = new List<Accommodation>();
             DataBaseContext context = new DataBaseContext();
-            foreach(Accommodation accommodationToCheck in accommodationsToCheck)
+            foreach (Accommodation accommodationToCheck in accommodationsToCheck)
             {
-                foreach(int accommodation in allAccommodations)
+                foreach (int accommodation in allAccommodations)
                 {
-                    if(accommodationToCheck.id == accommodation)
+                    if (accommodationToCheck.id == accommodation)
                     {
                         matchingAccommodations.Add(GetById(accommodationToCheck.id));
                     }
@@ -122,7 +122,7 @@ namespace InitialProject.Service
             List<Booking> bookings = context.Bookings.ToList();
             startingDate = dateLimits[0];
             DateTime endingDate = dateLimits[1];
-            startEndSpan = (endingDate.Subtract(startingDate)).Days;
+            startEndSpan = endingDate.Subtract(startingDate).Days;
             availablePeriods = new List<List<DateTime>>();
             sameAccommodationBookings = new List<Booking>();
             sameAccommodationBookings = GetAccommodationsBookings(bookings, accommodation);
@@ -130,7 +130,7 @@ namespace InitialProject.Service
 
         public List<Booking> GetAccommodationsBookings(List<Booking> bookings, Accommodation accommodation)
         {
-            return this.iAccommodationRepository.GetAccommodationsBookings(bookings, accommodation);
+            return iAccommodationRepository.GetAccommodationsBookings(bookings, accommodation);
         }
 
         public List<List<DateTime>> GetAvailableDateSlots(int startEndSpan, int daysToBook, DateTime startingDate, List<List<DateTime>> takenDates)
@@ -138,22 +138,22 @@ namespace InitialProject.Service
             List<List<DateTime>> dateSlots = new List<List<DateTime>>();
             for (int i = 0; i <= startEndSpan - daysToBook; i++)
             {
-                if (CheckIfPeriodAvailable(i,daysToBook,takenDates,startingDate))
+                if (CheckIfPeriodAvailable(i, daysToBook, takenDates, startingDate))
                 {
                     dateSlots.Add(new List<DateTime>() { startingDate.AddDays(i), startingDate.AddDays(i + daysToBook) });
                 }
             }
             return dateSlots;
-        } 
+        }
 
-        public List<List<DateTime>> SuggestAdditionalDates(int startEndSpan, int daysToBook, DateTime startingDate, List<List<DateTime>> takenDates) 
+        public List<List<DateTime>> SuggestAdditionalDates(int startEndSpan, int daysToBook, DateTime startingDate, List<List<DateTime>> takenDates)
         {
             int periodsFound = 0;
             List<List<DateTime>> availablePeriods = new List<List<DateTime>>();
             for (int i = 0; i < startEndSpan - daysToBook + 1095; i++)
             {
 
-                if (CheckIfPeriodAvailable(i,daysToBook,takenDates,startingDate))
+                if (CheckIfPeriodAvailable(i, daysToBook, takenDates, startingDate))
                 {
                     availablePeriods.Add(new List<DateTime>() { startingDate.AddDays(i), startingDate.AddDays(i + daysToBook) });
                     periodsFound++;
@@ -167,7 +167,7 @@ namespace InitialProject.Service
         {
             for (int i = dayIterator; i < dayIterator + daysToBook; i++)
             {
-                if(!CheckIfDayAvailable(takenDates, startingDate.AddDays(i)))
+                if (!CheckIfDayAvailable(takenDates, startingDate.AddDays(i)))
                 {
                     return false;
                 }
@@ -175,7 +175,7 @@ namespace InitialProject.Service
             return true;
         }
 
-        public bool CheckIfDayAvailable(List<List<DateTime>> takenDates,DateTime exactDay)
+        public bool CheckIfDayAvailable(List<List<DateTime>> takenDates, DateTime exactDay)
         {
             foreach (List<DateTime> bookingsDates in takenDates)
             {
@@ -206,7 +206,7 @@ namespace InitialProject.Service
 
         public void Save(Accommodation accommodation)
         {
-            this.iAccommodationRepository.Save(accommodation);
+            iAccommodationRepository.Save(accommodation);
         }
     }
 }

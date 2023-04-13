@@ -1,7 +1,9 @@
 ﻿using InitialProject.Context;
 using InitialProject.Model;
 using InitialProject.Repository;
-using InitialProject.Service;
+using InitialProject.Service.AccommodationServices;
+using InitialProject.Service.BookingServices;
+using InitialProject.Service.GuestServices;
 using InitialProject.WPF.View.GuestOne_Views;
 using System;
 using System.Collections.Generic;

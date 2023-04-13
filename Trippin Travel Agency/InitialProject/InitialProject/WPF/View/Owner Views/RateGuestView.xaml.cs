@@ -2,7 +2,8 @@
 using InitialProject.Model;
 using InitialProject.Model.TransferModels;
 using InitialProject.Repository;
-using InitialProject.Service;
+using InitialProject.Service.BookingServices;
+using InitialProject.Service.GuestServices;
 using InitialProject.WPF.ViewModels;
 using SharpVectors.Dom;
 using System;

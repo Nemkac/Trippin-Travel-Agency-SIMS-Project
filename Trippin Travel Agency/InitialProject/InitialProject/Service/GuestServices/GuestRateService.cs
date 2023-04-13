@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace InitialProject.Service
+namespace InitialProject.Service.GuestServices
 {
     class GuestRateService
     {
@@ -21,12 +21,12 @@ namespace InitialProject.Service
 
         public void Save(GuestRate guestRate)
         {
-            this.iGuestRateRepository.Save(guestRate);
+            iGuestRateRepository.Save(guestRate);
         }
 
         public bool IsRated(int bookingId)
         {
-            return this.iGuestRateRepository.IsGuestRated(bookingId);
+            return iGuestRateRepository.IsGuestRated(bookingId);
         }
 
         //Ovo ide u AccommodationRateService
@@ -54,7 +54,7 @@ namespace InitialProject.Service
                 ratesSum = ratesSum + item.cleanness + item.ownerRate;
             }
 
-            if(numOfRates == 0)
+            if (numOfRates == 0)
             {
                 totalRating = 0;
                 return totalRating;

@@ -3,7 +3,7 @@ using InitialProject.DTO;
 using InitialProject.Model;
 using InitialProject.Model.TransferModels;
 using InitialProject.Repository;
-using InitialProject.Service;
+using InitialProject.Service.TourServices;
 using InitialProject.WPF.ViewModels;
 using System;
 using System.Collections.Generic;

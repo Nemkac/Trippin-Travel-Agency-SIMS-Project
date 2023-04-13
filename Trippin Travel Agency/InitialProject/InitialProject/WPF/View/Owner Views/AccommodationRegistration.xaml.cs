@@ -2,7 +2,7 @@
 using InitialProject.Interfaces;
 using InitialProject.Model;
 using InitialProject.Repository;
-using InitialProject.Service;
+using InitialProject.Service.AccommodationServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;

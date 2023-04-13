@@ -16,10 +16,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Dapper;
 using InitialProject.Model;
-using InitialProject.Service;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using System.Configuration;
 using InitialProject.Repository;
+using InitialProject.Service.AccommodationServices;
+using InitialProject.Service.BookingServices;
 
 namespace InitialProject.WPF.View.GuestOne_Views
 {

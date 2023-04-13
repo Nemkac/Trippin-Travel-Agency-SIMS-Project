@@ -1,7 +1,7 @@
 ﻿using InitialProject.Context;
 using InitialProject.Model;
 using InitialProject.Repository;
-using InitialProject.Service;
+using InitialProject.Service.BookingServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;

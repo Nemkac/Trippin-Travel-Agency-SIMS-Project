@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace InitialProject.Service
+namespace InitialProject.Service.TourServices
 {
     public class TourReviewService
     {
-        public TourAndGuideRateDTO transformTourReviewToDTO(TourAndGuideRate tagr, int kpid )
+        public TourAndGuideRateDTO transformTourReviewToDTO(TourAndGuideRate tagr, int kpid)
         {
             TourAndGuideRateDTO tourReviewsDTO = new TourAndGuideRateDTO(tagr.id, kpid, tagr.guestId, tagr.guideKnowledgeRating, tagr.guideLanguageUsageRating, tagr.contentRating, tagr.valid);
             return tourReviewsDTO;
@@ -26,16 +26,16 @@ namespace InitialProject.Service
 
         public List<TourAndGuideRate> GetReviewsById(int tourid)
         {
-            List<TourAndGuideRate> reviews = new List<TourAndGuideRate>(); 
+            List<TourAndGuideRate> reviews = new List<TourAndGuideRate>();
             DataBaseContext context = new DataBaseContext();
-            foreach(TourAndGuideRate tagr in context.TourAndGuideRates.ToList())
-            { 
-                if(tagr.tourId == tourid)
+            foreach (TourAndGuideRate tagr in context.TourAndGuideRates.ToList())
+            {
+                if (tagr.tourId == tourid)
                 {
                     reviews.Add(tagr);
                 }
             }
-            return reviews; 
+            return reviews;
         }
     }
 }

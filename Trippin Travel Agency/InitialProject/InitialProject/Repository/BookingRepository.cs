@@ -1,7 +1,7 @@
 ﻿using InitialProject.Context;
 using InitialProject.Interfaces;
 using InitialProject.Model;
-using InitialProject.Service;
+using InitialProject.Service.GuestServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;

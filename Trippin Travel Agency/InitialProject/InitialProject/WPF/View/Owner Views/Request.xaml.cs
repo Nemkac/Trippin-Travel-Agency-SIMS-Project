@@ -2,7 +2,7 @@
 using InitialProject.DTO;
 using InitialProject.Model;
 using InitialProject.Repository;
-using InitialProject.Service;
+using InitialProject.Service.BookingServices;
 using InitialProject.WPF.ViewModels;
 using System;
 using System.Collections.Generic;

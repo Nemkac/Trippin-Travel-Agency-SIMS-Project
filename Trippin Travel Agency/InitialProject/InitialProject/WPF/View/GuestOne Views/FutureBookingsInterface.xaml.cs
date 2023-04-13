@@ -11,10 +11,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using InitialProject.Service;
 using InitialProject.Model;
 using InitialProject.Context;
 using InitialProject.Repository;
+using InitialProject.Service.AccommodationServices;
+using InitialProject.Service.BookingServices;
+using InitialProject.Service.GuestServices;
 
 namespace InitialProject.WPF.View.GuestOne_Views
 {

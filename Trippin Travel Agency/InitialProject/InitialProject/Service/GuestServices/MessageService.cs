@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 
-namespace InitialProject.Service
+namespace InitialProject.Service.GuestServices
 {
     public class MessageService
     {

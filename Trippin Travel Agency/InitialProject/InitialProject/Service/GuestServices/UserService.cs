@@ -1,23 +1,26 @@
 ﻿using InitialProject.Context;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Service.AccommodationServices;
+using InitialProject.Service.BookingServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InitialProject.Service
+namespace InitialProject.Service.GuestServices
 {
     class UserService
     {
         private AccommodationService accommodationService;
         private BookingService bookingService;
-        public UserService() {
+        public UserService()
+        {
             BookingRepository bookingRepository = new BookingRepository();
-            this.bookingService = new BookingService(bookingRepository);
+            bookingService = new BookingService(bookingRepository);
             AccommodationRepository accommodationRepository = new AccommodationRepository();
-            this.accommodationService = new AccommodationService(accommodationRepository);
+            accommodationService = new AccommodationService(accommodationRepository);
         }
 
         public User GetById(int id)
@@ -47,9 +50,9 @@ namespace InitialProject.Service
             //BookingService bookingService = new BookingService();
             List<BookingDelaymentRequest> bookingDelaymentRequests = context.BookingDelaymentRequests.ToList();
             List<BookingDelaymentRequest> foundBookingDelaymentRequests = new List<BookingDelaymentRequest>();
-            foreach(BookingDelaymentRequest bookingDelaymentRequest in bookingDelaymentRequests)
+            foreach (BookingDelaymentRequest bookingDelaymentRequest in bookingDelaymentRequests)
             {
-                if ((bookingService.GetById(bookingDelaymentRequest.bookingId)).guestId == id)
+                if (bookingService.GetById(bookingDelaymentRequest.bookingId).guestId == id)
                 {
                     foundBookingDelaymentRequests.Add(bookingDelaymentRequest);
                 }
@@ -118,7 +121,7 @@ namespace InitialProject.Service
             DataBaseContext context = new DataBaseContext();
             List<Booking> bookings = context.Bookings.ToList();
             List<Booking> futureBookings = new List<Booking>();
-            foreach(Booking booking in bookings.ToList())
+            foreach (Booking booking in bookings.ToList())
             {
                 if (booking.guestId == id && DateTime.Parse(booking.arrival) > DateTime.Today)
                 {
@@ -137,7 +140,7 @@ namespace InitialProject.Service
             bool ifDelayable = false;
             foreach (Booking booking in bookings.ToList())
             {
-                ifDelayable = (accommodationService.GetById(booking.accommodationId)).bookingCancelPeriodDays <= (DateTime.Parse(booking.arrival)).Subtract(DateTime.Today).Days;
+                ifDelayable = accommodationService.GetById(booking.accommodationId).bookingCancelPeriodDays <= DateTime.Parse(booking.arrival).Subtract(DateTime.Today).Days;
                 if (booking.guestId == id && ifDelayable)
                 {
                     delayableBookings.Add(booking);

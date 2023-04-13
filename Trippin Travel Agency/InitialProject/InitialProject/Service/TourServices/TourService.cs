@@ -8,25 +8,26 @@ using System.Windows;
 using InitialProject.Interfaces;
 using InitialProject.Repository;
 
-namespace InitialProject.Service
+namespace InitialProject.Service.TourServices
 {
     class TourService
     {
         private readonly ITourRepository iTourRepository;
         private TourLocationService tourLocationService;
         private TourReservationService tourReservationService;
-        public TourService(ITourRepository iTourRepository) { 
+        public TourService(ITourRepository iTourRepository)
+        {
             this.iTourRepository = iTourRepository;
-            this.tourLocationService = new(new TourLocationRepository());
-            this.tourReservationService = new(new TourReservationRepository());
+            tourLocationService = new(new TourLocationRepository());
+            tourReservationService = new(new TourReservationRepository());
         }
         public TourLocation GetTourLocation(string country, string city)
         {
-            return this.tourLocationService.GetTourLocationByCountryAndCity(country, city);
+            return tourLocationService.GetTourLocationByCountryAndCity(country, city);
         }
         public void Save(Tour tour)
         {
-            this.iTourRepository.Save(tour);
+            iTourRepository.Save(tour);
         }
 
         public static bool CheckExistence(string name, DateTime date)
@@ -40,53 +41,53 @@ namespace InitialProject.Service
         }
         public TourLocation GetLocationById(int id)
         {
-            return this.tourLocationService.GetById(id);
+            return tourLocationService.GetById(id);
         }
         public TourDTO CreateDTO(Tour tour)
         {
-            return this.iTourRepository.CreateTourDTO(tour);
+            return iTourRepository.CreateTourDTO(tour);
         }
 
         public string GetKeyPointNames(Tour tour, DataBaseContext dataBaseContext)
         {
-            return this.iTourRepository.GetKeyPointNames(tour, dataBaseContext);
+            return iTourRepository.GetKeyPointNames(tour, dataBaseContext);
         }
 
         public List<KeyPoint> GetKeyPoints(int tourId, DataBaseContext dataBaseContext)
         {
-            return this.iTourRepository.GetTourKeyPoints(tourId, dataBaseContext);
+            return iTourRepository.GetTourKeyPoints(tourId, dataBaseContext);
         }
         public List<TourDTO> GetAllByCity(string cityName)
         {
-            return this.iTourRepository.GetAllByCity(cityName);
+            return iTourRepository.GetAllByCity(cityName);
         }
         public List<TourDTO> GetAllByCountry(string countryName)
         {
-            return this.iTourRepository.GetAllByCountry(countryName);
+            return iTourRepository.GetAllByCountry(countryName);
         }
         public List<TourDTO> GetAllByLanguage(language tourLanguage)
         {
-            return this.iTourRepository.GetAllByLanguage(tourLanguage);
+            return iTourRepository.GetAllByLanguage(tourLanguage);
         }
         public List<TourDTO> GetAllByDuration(string duration)
         {
-            return this.iTourRepository.GetAllByDuration(duration);
+            return iTourRepository.GetAllByDuration(duration);
         }
         public List<TourDTO> GetAllByTouristLimit(string limit)
         {
-            return this.iTourRepository.GetAllByTouristLimit(limit);
+            return iTourRepository.GetAllByTouristLimit(limit);
         }
         public List<Tour> GetAllToursToday()
         {
-            return this.iTourRepository.GetAllToursToday();  
+            return iTourRepository.GetAllToursToday();
         }
         public List<Tour> GetAllFutureTours()
         {
-            return this.iTourRepository.GetAllFutureTours();
+            return iTourRepository.GetAllFutureTours();
         }
         public List<Tour> GetAllFinishedTours()
         {
-            return this.iTourRepository.GetAllFinishedTours();
+            return iTourRepository.GetAllFinishedTours();
         }
 
         public bool IsTourFinished(List<KeyPoint> keyPoints)
@@ -142,11 +143,11 @@ namespace InitialProject.Service
         }
         public Tour GetById(int id)
         {
-            return this.iTourRepository.GetById(id);
+            return iTourRepository.GetById(id);
         }
-        public ToursTodayDTO createToursTodayDTO (Tour tour)
+        public ToursTodayDTO createToursTodayDTO(Tour tour)
         {
-            ToursTodayDTO toursTodayDTO = new ToursTodayDTO(tour.id, tour.name, tour.language); 
+            ToursTodayDTO toursTodayDTO = new ToursTodayDTO(tour.id, tour.name, tour.language);
             return toursTodayDTO;
         }
         public FutureToursDTO createFutureToursDTO(Tour tour)
@@ -166,7 +167,7 @@ namespace InitialProject.Service
         }
         public List<TourReservation> GetTourReservationsById(int tourId)
         {
-            return this.tourReservationService.GetAllById(tourId);
+            return tourReservationService.GetAllById(tourId);
         }
 
         public List<TourAndGuideRate> GetTourRatingsById(int tourId)
@@ -184,12 +185,14 @@ namespace InitialProject.Service
         }
 
 
-        public Tour GetByID(int tourId) {
+        public Tour GetByID(int tourId)
+        {
 
-            return this.iTourRepository.GetById(tourId);
+            return iTourRepository.GetById(tourId);
         }
 
-        public Tour GetActiveTour(DataBaseContext context) {
+        public Tour GetActiveTour(DataBaseContext context)
+        {
             Tour tour = new Tour();
             List<Tour> bookedTours = new List<Tour>();
             foreach (TourReservation reservation in context.TourReservations.ToList())

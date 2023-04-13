@@ -3,12 +3,14 @@ using InitialProject.DTO;
 using InitialProject.Interfaces;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Service.AccommodationServices;
+using InitialProject.Service.GuestServices;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace InitialProject.Service
+namespace InitialProject.Service.BookingServices
 {
     class BookingService
     {
@@ -19,23 +21,23 @@ namespace InitialProject.Service
         public BookingService(IBookingRepository iBookingRepository)
         {
             this.iBookingRepository = iBookingRepository;
-            this.accommodationRepository = new AccommodationRepository();
-            this.accommodationService = new AccommodationService(accommodationRepository);
+            accommodationRepository = new AccommodationRepository();
+            accommodationService = new AccommodationService(accommodationRepository);
 
         }
 
         public Booking GetById(int bookingId)
         {
-            return this.iBookingRepository.GetById(bookingId);
+            return iBookingRepository.GetById(bookingId);
         }
-        
+
         public BookingDTO CreateBookingDTO(Booking booking)
         {
             UserService userService = new UserService();
             DataBaseContext dtoContext = new DataBaseContext();
             BookingDTO bookingDto = new BookingDTO();
 
-            Accommodation tmpAccommodation = this.accommodationService.GetById(booking.accommodationId);
+            Accommodation tmpAccommodation = accommodationService.GetById(booking.accommodationId);
             User tmpUser = userService.GetById(booking.guestId);
             bookingDto = new BookingDTO(tmpUser.username, booking.Id, tmpAccommodation.name, booking.arrival, booking.departure, booking.daysToStay);
             return bookingDto;
@@ -43,16 +45,16 @@ namespace InitialProject.Service
 
         public void Delete(Booking booking)
         {
-            this.iBookingRepository.Delete(booking);
+            iBookingRepository.Delete(booking);
         }
-        
+
         public RequestDTO CreateRequestDTO(BookingDelaymentRequest bookingDelaymentRequest)
         {
             UserService userService = new UserService();
             DataBaseContext dtoContext = new DataBaseContext();
             RequestDTO requestDto = new RequestDTO();
 
-            Booking tmpBooking = this.iBookingRepository.GetById(bookingDelaymentRequest.bookingId);
+            Booking tmpBooking = iBookingRepository.GetById(bookingDelaymentRequest.bookingId);
             User tmpUser = userService.GetById(tmpBooking.guestId);
 
             DateTime oldArrival = DateTime.ParseExact(tmpBooking.arrival, "M/d/yyyy", CultureInfo.InvariantCulture);
@@ -65,7 +67,7 @@ namespace InitialProject.Service
         }
 
         private bool IsDelaymentPossible(DateTime newArrival, DateTime newDeparture, int accommodationId)
-        { 
+        {
             DataBaseContext datesContext = new DataBaseContext();
             List<Booking> bookingDates = datesContext.Bookings.ToList();
 
@@ -85,24 +87,24 @@ namespace InitialProject.Service
 
         private static bool CheckDaysOverlaping(DateTime newArrival, DateTime newDeparture, DateTime tmpArrival, DateTime tmpDeparture)
         {
-            return (tmpArrival <= newArrival && tmpDeparture >= newArrival) ||
-                                (newDeparture >= tmpArrival && newDeparture <= tmpDeparture) ||
-                                (newArrival <= tmpArrival && newDeparture >= tmpDeparture);
+            return tmpArrival <= newArrival && tmpDeparture >= newArrival ||
+                                newDeparture >= tmpArrival && newDeparture <= tmpDeparture ||
+                                newArrival <= tmpArrival && newDeparture >= tmpDeparture;
         }
 
         public int GetGuestId(int bookingId)
         {
-            return this.iBookingRepository.GetGuestId(bookingId);
+            return iBookingRepository.GetGuestId(bookingId);
         }
 
         public string GetGuestName(int bookingId)
         {
-            return this.iBookingRepository.GetGuestName(bookingId);
+            return iBookingRepository.GetGuestName(bookingId);
         }
 
         public void Save(Booking booking)
         {
-            this.iBookingRepository.Save(booking);
+            iBookingRepository.Save(booking);
         }
 
         public static List<string> FormDisplayableDates(List<List<DateTime>> availableDates)

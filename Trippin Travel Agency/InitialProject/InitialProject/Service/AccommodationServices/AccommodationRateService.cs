@@ -2,13 +2,14 @@
 using InitialProject.Interfaces;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Service.BookingServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InitialProject.Service
+namespace InitialProject.Service.AccommodationServices
 {
     internal class AccommodationRateService
     {
@@ -20,14 +21,14 @@ namespace InitialProject.Service
         {
             this.iAccommodationRateRepository = iAccommodationRateRepository;
             BookingRepository bookingRepository = new BookingRepository();
-            this.bookingService = new BookingService(bookingRepository);
+            bookingService = new BookingService(bookingRepository);
             AccommodationRepository accommodationRepository = new AccommodationRepository();
-            this.accommodationService = new AccommodationService(accommodationRepository);
+            accommodationService = new AccommodationService(accommodationRepository);
         }
 
         public void Save(AccommodationRate accommodationRate)
         {
-            this.iAccommodationRateRepository.Save(accommodationRate);
+            iAccommodationRateRepository.Save(accommodationRate);
         }
 
         public double GetAccommodationAverageRate(int accommodationId)
@@ -51,9 +52,9 @@ namespace InitialProject.Service
         {
             DataBaseContext context = new DataBaseContext();
             List<AccommodationRate> accommodationRates = context.AccommodationRates.ToList();
-            foreach(AccommodationRate accommodationRate in accommodationRates)
+            foreach (AccommodationRate accommodationRate in accommodationRates)
             {
-                if(accommodationRate.bookingId == bookingId)
+                if (accommodationRate.bookingId == bookingId)
                 {
                     return true;
                 }

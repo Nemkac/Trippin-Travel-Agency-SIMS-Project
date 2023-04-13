@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InitialProject.Service;
 using InitialProject.Model;
 using InitialProject.Context;
 using InitialProject.Model.TransferModels;
 using System.Windows;
 using InitialProject.Repository;
+using InitialProject.Service.TourServices;
 
 namespace InitialProject.WPF.ViewModels
 {

@@ -1,5 +1,4 @@
-﻿using InitialProject.Service;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +15,7 @@ using InitialProject.Model;
 using System.Diagnostics;
 using InitialProject.Context;
 using InitialProject.Repository;
+using InitialProject.Service.AccommodationServices;
 
 namespace InitialProject.WPF.View.GuestOne_Views
 {

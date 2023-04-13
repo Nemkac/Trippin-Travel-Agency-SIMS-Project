@@ -16,7 +16,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Dapper;
 using InitialProject.Model;
-using InitialProject.Service;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using System.Configuration;
 using InitialProject.DTO;
@@ -24,6 +23,9 @@ using System.Diagnostics;
 using System.Xml.Linq;
 using InitialProject.WPF.View.GuestOne_Views;
 using InitialProject.Repository;
+using InitialProject.Service.AccommodationServices;
+using InitialProject.Service.BookingServices;
+using InitialProject.Service.GuestServices;
 
 namespace InitialProject.WPF.View.GuestOne_Views
 {
@@ -213,7 +215,7 @@ namespace InitialProject.WPF.View.GuestOne_Views
             List<DateTime> dateLimits = GetDateLimits(sender, e);
             daysToBook = (int.Parse(numberOfDays.Text));
             List<List<DateTime>> availableDates = accommodationService.GetAvailableDatePeriods(accommodation, daysToBook, dateLimits);
-            displayableDates = Service.BookingService.FormDisplayableDates(availableDates);
+            displayableDates = BookingService.FormDisplayableDates(availableDates);
         }
 
         private List<DateTime> GetDateLimits(object sender, RoutedEventArgs e)

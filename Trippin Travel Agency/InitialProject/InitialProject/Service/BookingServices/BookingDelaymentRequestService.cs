@@ -3,13 +3,14 @@ using InitialProject.Context;
 using InitialProject.Interfaces;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Service.AccommodationServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InitialProject.Service
+namespace InitialProject.Service.BookingServices
 {
     internal class BookingDelaymentRequestService
     {
@@ -21,21 +22,21 @@ namespace InitialProject.Service
         public BookingDelaymentRequestService(IBookingDelaymentRequestRepository iBookingDelaymentRequestRepository)
         {
             this.iBookingDelaymentRequestRepository = iBookingDelaymentRequestRepository;
-            this.accommodationRepository = new AccommodationRepository();
-            this.accommodationService = new AccommodationService(accommodationRepository);
+            accommodationRepository = new AccommodationRepository();
+            accommodationService = new AccommodationService(accommodationRepository);
             BookingRepository bookingRepository = new BookingRepository();
-            this.bookingService = new BookingService(bookingRepository);
+            bookingService = new BookingService(bookingRepository);
 
         }
 
         public BookingDelaymentRequest GetById(int bookingDelaymentRequstId)
         {
-            return this.iBookingDelaymentRequestRepository.GetById(bookingDelaymentRequstId);
+            return iBookingDelaymentRequestRepository.GetById(bookingDelaymentRequstId);
         }
 
         public void Save(BookingDelaymentRequest bookingDelaymentRequest)
         {
-            this.iBookingDelaymentRequestRepository.Save(bookingDelaymentRequest);
+            iBookingDelaymentRequestRepository.Save(bookingDelaymentRequest);
         }
 
         public List<string> GetTextOutput(BookingDelaymentRequest bookingDelaymentRequest)
@@ -62,7 +63,7 @@ namespace InitialProject.Service
 
         public void Delete(BookingDelaymentRequest bookingDelaymentRequest)
         {
-            this.iBookingDelaymentRequestRepository.Delete(bookingDelaymentRequest);
+            iBookingDelaymentRequestRepository.Delete(bookingDelaymentRequest);
         }
     }
 }

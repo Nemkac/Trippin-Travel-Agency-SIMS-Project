@@ -2,7 +2,7 @@
 using InitialProject.DTO;
 using InitialProject.Interfaces;
 using InitialProject.Model;
-using InitialProject.Service;
+using InitialProject.Service.TourServices;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
