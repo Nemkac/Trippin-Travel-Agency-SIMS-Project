@@ -1,4 +1,4 @@
-﻿using InitialProject.View;
+﻿using InitialProject.WPF.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;

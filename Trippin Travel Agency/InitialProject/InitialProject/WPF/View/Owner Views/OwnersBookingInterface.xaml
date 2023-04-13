@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="InitialProject.WPF.View.Owner_Views.OwnersBookingInterface"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InitialProject.WPF.View.Owner_Views"
+             xmlns:viewModel="clr-namespace:InitialProject.WPF.ViewModels.OwnerViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="580">
+    <Grid>
+        <DataGrid Style="{DynamicResource DataGridStyle1}" 
+                  CellStyle="{DynamicResource DataGridCellStyle1}" 
+                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="bookingDataGrid" 
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Guest" Binding="{Binding guestName}" Width="95"/>
+                <DataGridTextColumn Header="Booking Id" Binding="{Binding bookingId}" Width="115"/>
+                <DataGridTextColumn Header="Accommodation" Binding="{Binding accommodationName }" Width="155"/>
+                <DataGridTextColumn Header="Arrival" Binding="{Binding arrivalDate }" Width="115"/>
+                <DataGridTextColumn Header="Departure" Binding="{Binding departureDate }" Width="115"/>
+                <DataGridTextColumn Header="Days" Binding="{Binding daysToStay }" Width="75"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

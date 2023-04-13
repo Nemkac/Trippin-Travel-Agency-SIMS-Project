@@ -35,15 +35,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="View\TourGuideViews\TourGuide_Tours.xaml.cs">
+    <Compile Update="WPF\View\TourGuideViews\TourGuide_Tours.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="ViewModels\GuestTwoViewModels\" />
-    <Folder Include="ViewModels\TourGuideViewModels\" />
+    <Folder Include="WPF\ViewModels\GuestTwoViewModels\" />
   </ItemGroup>
 
 </Project>

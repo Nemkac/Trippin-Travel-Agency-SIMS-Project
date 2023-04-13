@@ -1,0 +1,221 @@
+﻿<UserControl x:Class="InitialProject.WPF.View.TourGuideViews.TourGuide_TourLive"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:viewModel="clr-namespace:InitialProject.WPF.ViewModels"
+             xmlns:local="clr-namespace:InitialProject.Model"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:vm="clr-namespace:InitialProject.WPF.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="750"
+             d:DesignWidth="430"
+             x:Name="tourLiveControl">
+
+    <Grid Background="#f5f6fa">
+        <Grid.RowDefinitions>
+            <!-- Margin -->
+            <RowDefinition Height="20"/>
+            <!-- Header -->
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Header -->
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" x:Name="headerStackPanel">
+            <RadioButton x:Name="backButton"
+                     Grid.Column="1"
+                     Grid.Row="1"
+                     Style="{StaticResource mobileMenuButton}"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Left"
+                     IsChecked="False"
+                     Command="{Binding ShowToursTodayCommand}"
+                     Width="Auto"
+                     Height="Auto"
+                     >
+
+                <StackPanel Orientation="Vertical" Margin="-5,0,0,0">
+                    <fa:IconImage Icon="ArrowLeft" Style="{StaticResource menuBackButtonIcon}"/>
+                    <Label Content="T. Today"
+                           Style="{StaticResource labelBackBeneathIcon}"
+                           />
+                </StackPanel>
+
+            </RadioButton>
+            <TextBlock     Text=""
+                           TextTrimming="CharacterEllipsis"
+                           MaxWidth="270"
+                           Style="{StaticResource headerTextBlock}"
+                           Margin="10,0,0,0"
+                           x:Name="headerTextBlock"
+                           /> 
+        </StackPanel>
+        
+        <ScrollViewer VerticalScrollBarVisibility="Hidden"
+                      Grid.Row="2"
+                      Grid.Column="1">
+
+            <!-- Content -->
+            <StackPanel Orientation="Vertical"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="0,0,0,20"
+                        Width="Auto"
+                        >
+
+                <!-- Live tracking text helper -->
+                <StackPanel Orientation="Vertical"
+                            Margin="0,0,0,10">
+                    <!-- Choose a tour and click a button beneath -->
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+                        <fa:IconImage Icon="Location"
+                                      HorizontalAlignment="Left"
+                                      Style="{StaticResource menuBackButtonIcon}"
+                                      Width="15" Height="15" Foreground="#353b48"/>
+                        <Label Content="Live tracking"
+                               Style="{StaticResource labelAboveTextBox}"
+                               Foreground="#353b48"
+                               Margin="10,0,0,0"
+                               />
+                    </StackPanel>
+                </StackPanel>
+                <!-- All tours -->
+                <StackPanel x:Name="keyPointsStackPanel"
+                            Height="Auto">
+                    <DataGrid x:Name="keyPointsDataGrid"
+                          AutoGenerateColumns="False"
+                          Width="330"
+                          BorderThickness="0"
+                          >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" Binding="{Binding name}" Width="*"/>
+                            <DataGridTextColumn Header="Visited" Binding="{Binding visited}" Width="*"/>
+                        </DataGrid.Columns>
+                        <DataGrid.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}">
+                                <Setter Property="FontFamily" Value="Ubuntu"/>
+                                <Setter Property="FontSize" Value="16"/>
+                            </Style>
+                        </DataGrid.CellStyle>
+                        <DataGrid.RowStyle>
+                            <Style TargetType="{x:Type DataGridRow}">
+                                <Setter Property="BorderThickness" Value="0"/>
+                            </Style>
+                        </DataGrid.RowStyle>
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="FontFamily" Value="Ubuntu"/>
+                                <Setter Property="FontSize" Value="12"/>
+                                <Setter Property="Padding" Value="6"/>
+                                <Setter Property="Background" Value="#273c75"/>
+                                <Setter Property="Foreground" Value="#f5f6fa"/>
+
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+                    </DataGrid>
+                    <!-- Choose a checkpoint text helper -->
+                    <StackPanel Orientation="Vertical"
+                            Margin="0,15,0,5">
+                        <!-- Choose a tour and click a button beneath -->
+                        <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+                            <fa:IconImage Icon="Fingerprint"
+                                      HorizontalAlignment="Left"
+                                      Style="{StaticResource menuBackButtonIcon}"
+                                      Width="15" Height="15" Foreground="#353b48"/>
+                            <Label Content="Choose a checkpoint and click a button beneath"
+                               Style="{StaticResource labelAboveTextBox}"
+                               Foreground="#353b48"
+                               Margin="10,0,0,0"
+                               />
+                        </StackPanel>
+                    </StackPanel>
+                    <!-- View checkpoint button -->
+                    <Button Content="Visit checkpoint"
+                            Style="{StaticResource showImagesButton}"
+                            Click="VisitCheckpointButton_Click"
+                            />
+                    <!-- Guests on tour text helper -->
+                    <StackPanel Orientation="Vertical"
+                            Margin="0,15,0,5">
+                        <!-- Choose a tour and click a button beneath -->
+                        <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+                            <fa:IconImage Icon="PeopleGroup"
+                                      HorizontalAlignment="Left"
+                                      Style="{StaticResource menuBackButtonIcon}"
+                                      Width="15" Height="15" Foreground="#353b48"/>
+                            <Label Content="Guests on tour"
+                               Style="{StaticResource labelAboveTextBox}"
+                               Foreground="#353b48"
+                               Margin="10,0,0,0"
+                               />
+                        </StackPanel>
+                    </StackPanel>
+                    <!-- Reservations datagrid -->
+                    <DataGrid x:Name="guestReservationsDataGrid"
+                          Width="330"
+                          BorderThickness="0"
+                          AutoGenerateColumns="False"
+                          >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding id}" Width="*"/>
+                            <DataGridTextColumn Header="Joined" Binding="{Binding guestJoined}" Width="*"/>
+                            <DataGridTextColumn Header="Confirmed" Binding="{Binding guideConfirmed}" Width="*"/>
+                        </DataGrid.Columns>
+                        <DataGrid.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}">
+                                <Setter Property="FontFamily" Value="Ubuntu"/>
+                                <Setter Property="FontSize" Value="16"/>
+                            </Style>
+                        </DataGrid.CellStyle>
+                        <DataGrid.RowStyle>
+                            <Style TargetType="{x:Type DataGridRow}">
+                                <Setter Property="BorderThickness" Value="0"/>
+                            </Style>
+                        </DataGrid.RowStyle>
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="FontFamily" Value="Ubuntu"/>
+                                <Setter Property="FontSize" Value="12"/>
+                                <Setter Property="Padding" Value="6"/>
+                                <Setter Property="Background" Value="#273c75"/>
+                                <Setter Property="Foreground" Value="#f5f6fa"/>
+
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+                    </DataGrid>
+                    <StackPanel Orientation="Horizontal">
+                        <!-- End tour button -->
+                        <Button Content="End tour"
+                            Style="{StaticResource denyButtonMobile}"
+                            Click="endTourButton_Click"
+                            Command="{Binding ShowToursTodayCommand}"
+                            Width="150"
+                            Margin="0, 20, 0, 0"
+                            />
+                        <!-- Visited button -->
+                        <Button Content="Guest Arrieved"
+                            Style="{StaticResource acceptButton}"
+                            Click="GuideConfirmed_ButtonClick"
+                            Width="150"
+                            Margin="30, 20, 0, 0"
+                            />
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+        <ContentControl Content="{Binding CurrentChildView}" Grid.RowSpan="3" Grid.ColumnSpan="3"/>
+        
+    </Grid>
+</UserControl>

@@ -1,7 +1,7 @@
 ﻿using InitialProject.Context;
 using InitialProject.Interfaces;
 using InitialProject.Model;
-using InitialProject.View;
+using InitialProject.WPF.View.GuestOne_Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;

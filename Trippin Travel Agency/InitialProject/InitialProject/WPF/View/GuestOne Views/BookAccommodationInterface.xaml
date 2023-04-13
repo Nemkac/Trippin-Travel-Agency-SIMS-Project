@@ -1,0 +1,42 @@
+﻿<Window x:Class="InitialProject.WPF.View.GuestOne_Views.BookAccommodationInterface"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
+        mc:Ignorable="d"
+        Title="GuestOneInterface" Height="800" Width="1500" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="106*"/>
+            <RowDefinition Height="111*"/>
+        </Grid.RowDefinitions>
+        <Canvas>
+            <GroupBox Height="332" Header="Pick arrival and departure dates" Canvas.Left="659" Canvas.Top="184" Width="647" FontFamily="ubuntu" FontSize="36" FontWeight="Bold" Foreground="#FF192A56" BorderThickness="3" BorderBrush="#192a56" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Height="36" TextWrapping="Wrap" Text="Number of guests :" VerticalAlignment="Top" Width="202" Grid.Row="1" Canvas.Bottom="-185" Canvas.Left="836" Canvas.Top="541" FontFamily="Ubuntu" FontSize="22" FontWeight="Bold" Foreground="#FF192A56"/>
+
+
+            <DataGrid Height="225" VerticalAlignment="Center" Width="507" x:Name ="dataGrid" Grid.RowSpan="2" Canvas.Bottom="-130" Canvas.Left="709" Canvas.Top="250" FontFamily="ubuntu" FontSize="32" Foreground="#FF192A56" BorderBrush="#FF192A56" Background="White" FontWeight="Medium" HeadersVisibility="None" FrozenColumnCount="300" ColumnWidth="500" TextBlock.TextAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" x:Name ="numberOfGuests"  VerticalAlignment="Top" Width="73" Height="38" Grid.Row="1" Canvas.Bottom="-185" Canvas.Left="1046" Canvas.Top="535" FontFamily="ubuntu" FontSize="22" TextAlignment="Center" VerticalContentAlignment="Center"/>
+            <Button Content="Book" HorizontalAlignment="Left" Height="48" VerticalAlignment="Center" Width="114" x:Name ="BookAccommodation" Click="BookAccommodation_Click" Grid.RowSpan="2" Canvas.Bottom="-60" Canvas.Left="902" Canvas.Top="594" FontFamily="ubuntu" FontSize="24" Background="#FF273C75" Foreground="White" FontWeight="Medium"/>
+            <TextBlock HorizontalAlignment="Left" Height="73" Margin="364,82,0,0" Grid.Row="1" TextWrapping="Wrap" x:Name="warningText" VerticalAlignment="Top" Width="91" Canvas.Bottom="60" Canvas.Left="5"/>
+            <GroupBox Height="459" Header="Accommodation info" Canvas.Left="194" Canvas.Top="183" Width="378" FontFamily="ubuntu" FontSize="36" FontWeight="Bold" Foreground="#FF192A56" BorderThickness="3" BorderBrush="#192a56" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBlock Height="242" Canvas.Left="227" TextWrapping="Wrap" Name="accommodationInfoBlock"  Canvas.Top="251" Width="305" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" LineHeight="24" FontFamily="Ubuntu" FontSize="20"/>
+            <TextBlock Height="242" Canvas.Left="227" TextWrapping="Wrap" Name="accommodationInfoLabelsBlock"  Canvas.Top="231" Width="305" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" LineHeight="24" Foreground="#FF192A56" FontFamily="Ubuntu" FontSize="20" FontWeight="Bold" />
+        </Canvas>
+        <Label Content="Almost there!" FontSize ="64" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="532,23,0,0" FontFamily="ubuntu" FontWeight="Bold" Foreground="#192a56"/>
+        <GroupBox Header="Navigator" Margin="985,1,26,273" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
+            <StackPanel>
+                <TextBlock Width="478" FontWeight="medium"><Run Text="Press CTRL+N for program map" FontFamily="ubuntu"/></TextBlock>
+            </StackPanel>
+        </GroupBox>
+        <Rectangle HorizontalAlignment="Left" Height="65" Margin="-30,325,0,0" Fill ="#273c75" Stroke="Black" VerticalAlignment="Top" Width="1544" Grid.Row="1"/>
+        <TextBlock HorizontalAlignment="Left" Height="72" Margin="609,319,0,0" TextWrapping="Wrap" Text="Trippin' Travel" VerticalAlignment="Top" Width="325" Foreground="white" FontSize="48" FontWeight="Bold" Grid.Row="1" />
+        <GroupBox Header="Help" Margin="35,0,1114,281" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
+            <StackPanel>
+                <TextBlock Height="39" FontWeight="medium"><Run Text="Press CTRL+H for help"/></TextBlock>
+            </StackPanel>
+        </GroupBox>
+        <Rectangle HorizontalAlignment="Left" Height="5" Margin="28,119,0,0" Stroke="#FF192A56" VerticalAlignment="Top" Width="1434" Fill="#192a56"/>
+    </Grid>
+</Window>

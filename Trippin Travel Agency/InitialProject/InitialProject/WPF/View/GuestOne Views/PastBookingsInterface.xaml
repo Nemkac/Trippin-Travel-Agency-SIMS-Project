@@ -1,0 +1,31 @@
+﻿<Window x:Class="InitialProject.WPF.View.GuestOne_Views.PastBookingsInterface"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
+        mc:Ignorable="d"
+        Title="PastBookingsInterface" Height="800" Width="1500">
+    <Grid>
+        <GroupBox HorizontalAlignment="Center" Height="432" Header="My previous bookings" Margin="0,160,0,0" VerticalAlignment="Top" Width="1032" FontFamily="ubuntu" FontSize="36" FontWeight="Bold" Foreground="#FF192A56" BorderThickness="3" BorderBrush="#192a56"/>
+        <Button Content="Leave a review" HorizontalAlignment="Left" Height="57" Margin="407,503,0,0" VerticalAlignment="Top" Width="266" Click= "ShowRateInterface" FontFamily="ubuntu" FontSize="20" Background="#FF273C75" Foreground="White" FontWeight="Medium"/>
+        <Label Content="Booking archive" FontSize ="64" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="473,27,0,0" FontFamily="ubuntu" FontWeight="Bold" Foreground="#192a56"/>
+        <GroupBox Header="Navigator" Margin="985,1,26,665" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
+            <StackPanel>
+                <TextBlock Width="478" FontWeight="medium"><Run Text="Press CTRL+N for program map" FontFamily="ubuntu"/></TextBlock>
+            </StackPanel>
+        </GroupBox>
+        <Rectangle HorizontalAlignment="Left" Height="65" Margin="-30,708,0,0" Fill ="#273c75" Stroke="Black" VerticalAlignment="Top" Width="1674"/>
+        <TextBlock HorizontalAlignment="Left" Height="72" Margin="609,702,0,0" TextWrapping="Wrap" Text="Trippin' Travel" VerticalAlignment="Top" Width="325" Foreground="white" FontSize="48" FontWeight="Bold" />
+        <GroupBox Header="Help" Margin="35,0,1114,665" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
+            <StackPanel>
+                <TextBlock Height="39" FontWeight="medium"><Run Text="Press CTRL+H for help"/></TextBlock>
+            </StackPanel>
+        </GroupBox>
+        <Rectangle HorizontalAlignment="Left" Height="5" Margin="28,119,0,0" Stroke="#FF192A56" VerticalAlignment="Top" Width="1434" Fill="#192a56"/>
+        <DataGrid HorizontalAlignment="Center" Height="253" Margin="0,220,0,0" VerticalAlignment="Top" Width="868" x:Name ="pastBookingsGrid" FontFamily="ubuntu" FontSize="22" Foreground="#FF192A56" BorderBrush="#FF192A56" Background="White" FontWeight="Medium"/>
+        <Button Content="Suggest a renovation idea" HorizontalAlignment="Left" Height="57" Margin="862,503,0,0" VerticalAlignment="Top" Width="266" Click= "ShowRateInterface" FontFamily="ubuntu" FontSize="20" Background="#FF273C75" Foreground="White" FontWeight="Medium"/>
+        <TextBlock HorizontalAlignment="Left" Height="57" Margin="268,503,0,0" TextWrapping="Wrap" Name="warningBlock" VerticalAlignment="Top" Width="118"/>
+
+    </Grid>
+</Window>
