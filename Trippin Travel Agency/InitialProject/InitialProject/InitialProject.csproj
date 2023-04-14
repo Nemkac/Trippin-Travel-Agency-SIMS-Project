@@ -35,6 +35,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="WPF\View\TourGuideViews\TourGuide_Requests.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="WPF\View\TourGuideViews\TourGuide_Tours.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
