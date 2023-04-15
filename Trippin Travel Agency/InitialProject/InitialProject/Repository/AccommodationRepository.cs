@@ -117,5 +117,37 @@ namespace InitialProject.Repository
             saveContext.SaveChanges();
             MessageBox.Show("Accommodation registered succesfuly!");
         }
+
+        public List<Accommodation> GetOwnersAccommodations(int id)
+        {
+            DataBaseContext accommodationContext = new DataBaseContext();
+            List<Accommodation> accommodations = new List<Accommodation>();
+            foreach (Accommodation accommodation in accommodationContext.Accommodations.ToList())
+            {
+                if(accommodation.ownerId == id)
+                {
+                    accommodations.Add(accommodation);
+                }
+            }
+
+            return accommodations;
+        }
+
+        public AccommodationLocation GetNewLocation(string country, string city)
+        {
+            DataBaseContext locationContext = new DataBaseContext();
+            List<AccommodationLocation> locations = locationContext.AccommodationLocation.ToList();
+
+            foreach (AccommodationLocation location in locations.ToList())
+            {
+                if (location.country == country && location.city == city)
+                {
+                    return location;
+                }
+            }
+
+            AccommodationLocation newLocation = new AccommodationLocation(country, city);
+            return newLocation;
+        }
     }
 }

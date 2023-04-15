@@ -20,6 +20,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
     {
         //Fields
         private ViewModelBase _currentChildView;
+        private ViewModelBase _secondChildView;
         private string _caption;
 
         private RequestDTO _requestDataGridSelectedItem;
@@ -36,6 +37,20 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             {
                 _currentChildView = value;
                 OnPropertyChanged(nameof(CurrentChildView));
+            }
+        }
+
+        public ViewModelBase SecondChildView
+        {
+            get
+            {
+                return _secondChildView;
+            }
+
+            set
+            {
+                _secondChildView = value;
+                OnPropertyChanged(nameof(SecondChildView));
             }
         }
 
@@ -71,6 +86,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public ICommand ShowAccommodationRegistrationViewCommand { get; }
         public ICommand ShowRequestViewCommand { get; }
         public ICommand ShowNotificationsViewCommand { get; }
+        public ICommand ShowMyBookingsCommand { get; }
+        public ICommand ShowOurRecommendationsCommand { get; }
         public OwnerInterfaceViewModel()
         {
             //Initialize commands
@@ -81,8 +98,10 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ShowProfileViewCommand = new ViewModelCommand(ExecuteShowProfileViewCommand);
             ShowReviewsViewCommand = new ViewModelCommand(ExecuteShowReviewsViewCommand);
             ShowNotificationsViewCommand = new ViewModelCommand(ExecuteShowNotificationsViewCommand);
+            ShowMyBookingsCommand = new ViewModelCommand(ExecuteShowMyBookingsCommand);
+            ShowOurRecommendationsCommand = new ViewModelCommand(ExecuteShowOurRecommendationsViewCommand);
             //Default view
-            ExecuteShowOwnersBookingViewCommand(null);
+            ExecuteShowMyBookingsCommand(null);
         }
 
         public void ExecuteShowOwnersBookingViewCommand(object obj)
@@ -131,6 +150,17 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             CurrentChildView = new RateGuestViewModel();
             Caption = "Rate Guest";
+        }
+
+        public void ExecuteShowMyBookingsCommand(object obj)
+        {
+            CurrentChildView = new AccommodationStatisticsViewModel(this);
+            Caption = "My Accommodations";
+        }
+        public void ExecuteShowOurRecommendationsViewCommand(object obj)
+        {
+            SecondChildView = new OurRecommendationsViewModel();
+            Caption = "My Accommodations";
         }
     }
 }

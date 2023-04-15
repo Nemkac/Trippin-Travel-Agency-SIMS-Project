@@ -17,10 +17,12 @@ namespace InitialProject.Service.AccommodationServices
     public class AccommodationService
     {
         private readonly IAccommodationRepository iAccommodationRepository;
+        private AccommodationLocationService accommodationLocationService;
 
         public AccommodationService(IAccommodationRepository iAccommodationRepository)
         {
             this.iAccommodationRepository = iAccommodationRepository;
+            this.accommodationLocationService = new AccommodationLocationService();
         }
 
         public List<Accommodation> ConvertDtoToInitial(List<AccommodationDTO> accommodationDTOs)
@@ -187,26 +189,26 @@ namespace InitialProject.Service.AccommodationServices
             return true;
         }
 
-        public static AccommodationLocation GetLocation(string country, string city)
+        public AccommodationLocation GetLocation(string country, string city)
         {
-            DataBaseContext locationContext = new DataBaseContext();
-            List<AccommodationLocation> locations = locationContext.AccommodationLocation.ToList();
-
-            foreach (AccommodationLocation location in locations.ToList())
-            {
-                if (location.country == country && location.city == city)
-                {
-                    return location;
-                }
-            }
-
-            AccommodationLocation newLocation = new AccommodationLocation(country, city);
-            return newLocation;
+            return this.iAccommodationRepository.GetNewLocation(country, city);
         }
 
         public void Save(Accommodation accommodation)
         {
             iAccommodationRepository.Save(accommodation);
+        }
+
+        public List<Accommodation> GetAccommodationsByOwnerId(int id)
+        {
+            return this.iAccommodationRepository.GetOwnersAccommodations(id);
+        }
+
+        public AccommodationStatisticsDTO CreateAccommodationStatisticsDTO(Accommodation accommodation)
+        {
+            List<string> location = this.GetAccommodationLocation(accommodation.id);
+            AccommodationStatisticsDTO dto = new AccommodationStatisticsDTO(accommodation, location);
+            return dto;
         }
     }
 }

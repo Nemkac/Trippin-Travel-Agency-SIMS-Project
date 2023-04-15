@@ -48,6 +48,14 @@
             <owner:RateGuestView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModel:AccommodationStatisticsViewModel}">
+            <owner:AccommodationsStatisticsView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:OurRecommendationsViewModel}">
+            <owner:OurRecommendationView/>
+        </DataTemplate>
+
         <Style x:Key="ButtonFocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -57,6 +65,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
         <LinearGradientBrush x:Key="ButtonNormalBackground" EndPoint="0,1" StartPoint="0,0">
             <GradientStop Color="#F3F3F3" Offset="0"/>
             <GradientStop Color="#EBEBEB" Offset="0.5"/>
@@ -141,16 +150,17 @@
                 <RadioButton Style="{StaticResource menuButton}" 
                              Tag="{StaticResource HoverColor}" 
                              Command="{Binding ShowOwnersBookingViewCommand}" 
-                             GroupName="MainWindowButtons"
-                             IsChecked="True">
+                             GroupName="MainWindowButtons">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Bookmark" Style="{StaticResource menuButtonIconTablet}"/>
                         <TextBlock Style="{StaticResource menuButtonText}" Text="Bookings"/>
                     </StackPanel>
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}" 
-                             Tag="{StaticResource HoverColor}" 
-                             GroupName="MainWindowButtons">
+                             Tag="{StaticResource HoverColor}"
+                             Command="{Binding ShowMyBookingsCommand}"
+                             GroupName="MainWindowButtons"
+                             IsChecked="True">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="BuildingUser" Style="{StaticResource menuButtonIconTablet}"/>
                         <TextBlock Style="{StaticResource menuButtonText}" Text="My Accommodations"/>

@@ -1,0 +1,130 @@
+﻿<UserControl x:Class="InitialProject.WPF.View.Owner_Views.OurRecommendationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InitialProject.WPF.View.Owner_Views"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             mc:Ignorable="d" 
+             d:DesignHeight="350" d:DesignWidth="710">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <fa:IconImage Icon="StarHalfAlt" Width="35" Height="35" Foreground="#192a56"/>
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="15 0 0 0">
+                <Label Content="Our Recommendations" 
+                       Style="{StaticResource defaultLabel}"
+                       FontWeight="Bold" FontSize="28"/>
+                <Label Content="Based on most and least popular locations" 
+                       Style="{StaticResource defaultLabel}"
+                       FontWeight="Light" FontSize="14"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="0 0 0 20">
+            <Border Grid.Column="1"
+                Grid.Row="2"
+                Width="340"
+                Height="190"
+                CornerRadius="0, 25, 25, 25">
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="C:\Users\Nemanja\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\mitrovica.jpg">
+                            <ImageBrush.RelativeTransform>
+                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                            </ImageBrush.RelativeTransform>
+                        </ImageBrush>
+                    </Grid.Background>
+                    <Grid.OpacityMask>
+                        <VisualBrush>
+                            <VisualBrush.Visual>
+                                <Border Width="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}"
+                            Height="{Binding ActualHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}"
+                            Background="Black"
+                            CornerRadius="0, 25, 25, 25" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Grid.OpacityMask>
+                    <Rectangle Fill="#80000000" />
+                    <Label Content="Sremska Mitrovica"
+                       FontSize="34"
+                       FontFamily="Ubuntu"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Margin="20, -20, 0, 0"/>
+                    <Label Content="Most popular location"
+                       FontSize="21"
+                       FontFamily="Ubuntu"
+                       FontWeight="Light"
+                       Foreground="White"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Margin="20, 40, 0, 0"/>
+                    <Button Style="{StaticResource acceptButton}"
+                        Content="Open new accommodation"
+                        Width="183"
+                        HorizontalAlignment="Left"
+                        Margin="20, 120, 0, 0"
+                        Height="40">
+
+                    </Button>
+                </Grid>
+            </Border>
+            <Border Grid.Column="1"
+                Grid.Row="2"
+                Width="340"
+                Height="190"
+                Margin="30 0 0 0"
+                CornerRadius="0, 25, 25, 25">
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="C:\Users\Nemanja\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\madrid.jpg">
+                            <ImageBrush.RelativeTransform>
+                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                            </ImageBrush.RelativeTransform>
+                        </ImageBrush>
+                    </Grid.Background>
+                    <Grid.OpacityMask>
+                        <VisualBrush>
+                            <VisualBrush.Visual>
+                                <Border Width="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}"
+                            Height="{Binding ActualHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}"
+                            Background="Black"
+                            CornerRadius="25, 0, 25, 25" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Grid.OpacityMask>
+                    <Rectangle Fill="#80000000" />
+                    <Label Content="Madrid"
+                       FontSize="34"
+                       FontFamily="Ubuntu"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Margin="20, -20, 0, 0"/>
+                    <Label Content="Least popular location"
+                       FontSize="21"
+                       FontFamily="Ubuntu"
+                       FontWeight="Light"
+                       Foreground="White"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Margin="20, 40, 0, 0"/>
+                    <Button Style="{StaticResource denyButtonMobile}"
+                        Content="Close existing accommodation"
+                        Width="183"
+                        HorizontalAlignment="Left"
+                        Margin="20, 120, 0, 0"
+                        Height="40">
+
+                    </Button>
+                </Grid>
+            </Border>
+        </StackPanel>
+    </Grid>
+</UserControl>
