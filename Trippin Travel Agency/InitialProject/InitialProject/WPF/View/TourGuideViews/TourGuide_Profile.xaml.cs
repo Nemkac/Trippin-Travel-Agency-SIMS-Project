@@ -27,5 +27,12 @@ namespace InitialProject.WPF.View.TourGuideViews
         {
             InitializeComponent();
         }
+
+        private void Logout_ButtonClick(object sender, RoutedEventArgs e)
+        {
+            Window.GetWindow(this)?.Close();
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
+        }
     }
 }

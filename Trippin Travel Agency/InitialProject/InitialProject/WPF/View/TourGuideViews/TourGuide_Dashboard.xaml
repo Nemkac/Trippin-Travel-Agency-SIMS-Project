@@ -35,9 +35,10 @@
         </StackPanel>
         <StackPanel Grid.Row="2"
                     Grid.Column="1"
-                    Margin="0, -40, 0, 0"
+                    Margin="0, -25, 0, 0"
                     >
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal"
+                   Margin="6, 0, 0, 0">
                 <fa:IconImage Icon="Star" HorizontalAlignment="Left" Style="{StaticResource menuBackButtonIcon}" Width="15" Height="15"/>
                 <Label Content="Our recommendation"
                    Foreground="#273c75"
@@ -58,7 +59,7 @@
         Grid.Row="2"
         Width="Auto"
         Height="200"
-        CornerRadius="20">
+        CornerRadius="0, 25, 25, 25">
             <Grid>
                 <Grid.Background>
                     <ImageBrush ImageSource="pack://application:,,,/Assets/fruska-gora.jpg">
@@ -73,7 +74,7 @@
                             <Border Width="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}"
                             Height="{Binding ActualHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}"
                             Background="Black"
-                            CornerRadius="20" />
+                            CornerRadius="0, 25, 25, 25" />
                         </VisualBrush.Visual>
                     </VisualBrush>
                 </Grid.OpacityMask>
@@ -96,7 +97,7 @@
                        VerticalAlignment="Center"
                        Margin="20, 40, 0, 0"
                 />
-                <Button Style="{StaticResource acceptButton}"
+                <Button Style="{StaticResource denyButtonMobile}"
                         Content="Create"
                         Width="83"
                         HorizontalAlignment="Left"
