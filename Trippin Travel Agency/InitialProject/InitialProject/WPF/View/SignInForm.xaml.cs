@@ -12,7 +12,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
-
+using InitialProject.WPF.ViewModels;
 
 namespace InitialProject.WPF
 {
@@ -88,6 +88,7 @@ namespace InitialProject.WPF
                     else if (user.role == "TourGuide")
                     {
                         tourGuideInterface.Show();
+
 
                     }
                     else if (user.role == "GuestTwo")

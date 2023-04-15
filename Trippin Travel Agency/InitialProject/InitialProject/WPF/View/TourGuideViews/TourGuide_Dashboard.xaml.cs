@@ -1,4 +1,6 @@
-﻿using System.Configuration;
+﻿using InitialProject.Model;
+using InitialProject.WPF.ViewModels;
+using System.Configuration;
 using System.Data.SQLite;
 using System.Windows.Controls;
 
@@ -12,30 +14,7 @@ namespace InitialProject.WPF.View.TourGuideViews
         public TourGuide_Dashboard()
         {
             InitializeComponent();
-            //username = GetUsername(loggedInUserId);
-            //DataContext = this;
+            DataContext = new TourGuide_DashboardViewModel();
         }
-        /*private string GetUsername(int userId)
-        {
-            string connectionString = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
-
-            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
-            {
-                connection.Open();
-                using (SQLiteCommand command = new SQLiteCommand("SELECT username FROM Users WHERE id = @userId", connection))
-                {
-                    command.Parameters.AddWithValue("@userId", userId);
-
-                    using (SQLiteDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            return reader["username"].ToString();
-                        }
-                    }
-                }
-            }
-            return string.Empty;
-        }*/
     }
 }

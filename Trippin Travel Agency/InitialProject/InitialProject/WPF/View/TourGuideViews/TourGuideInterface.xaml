@@ -73,6 +73,10 @@
             <local:TourGuide_RequestStatistics/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModel:TourGuide_ProfileViewModel}">
+            <local:TourGuide_Profile/>
+        </DataTemplate>
+
     </Window.Resources>
     
     <Grid>
@@ -125,7 +129,13 @@
                 </RadioButton>
                 
                 <!-- Profile radio button -->
-                <RadioButton Grid.Column="5" Style="{StaticResource mobileMenuButton}" Tag="{StaticResource HoverColor}" DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <RadioButton Grid.Column="5" Style="{StaticResource mobileMenuButton}"
+                             Tag="{StaticResource HoverColor}"
+                             DockPanel.Dock="Left"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Center"
+                             Command="{Binding ShowTourGuideProfileViewCommand}"
+                             >
                     <StackPanel Orientation="Vertical" Margin="11,0,0,0">
                         <fa:IconImage Icon="UserAlt" Style="{StaticResource menuButtonIcon}"/>
                         <Label Content="Profile" Style="{StaticResource labelBeneathIcon}"/>

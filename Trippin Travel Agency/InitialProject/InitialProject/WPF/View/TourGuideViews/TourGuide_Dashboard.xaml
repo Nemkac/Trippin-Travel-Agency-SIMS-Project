@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.WPF.View.TourGuideViews"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              d:DesignHeight="660" d:DesignWidth="430">
     <Grid>
@@ -32,9 +33,84 @@
                        Margin="0,5,0,0"
                        />
         </StackPanel>
-
-        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Background="#192a56">
-
+        <StackPanel Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="0, -40, 0, 0"
+                    >
+            <StackPanel Orientation="Horizontal">
+                <fa:IconImage Icon="Star" HorizontalAlignment="Left" Style="{StaticResource menuBackButtonIcon}" Width="15" Height="15"/>
+                <Label Content="Our recommendation"
+                   Foreground="#273c75"
+                   FontSize="21"
+                   FontFamily="Ubuntu"
+                   FontWeight="SemiBold"
+                   />
+            </StackPanel>
+            <Label Content="Based on tourist reviews"
+                   Foreground="#273c75"
+                   FontSize="14"
+                   FontFamily="Ubuntu"
+                   FontWeight="Light"
+                   Margin="0,-10, 0, 0"
+                   />
         </StackPanel>
+        <Border Grid.Column="1"
+        Grid.Row="2"
+        Width="Auto"
+        Height="200"
+        CornerRadius="20">
+            <Grid>
+                <Grid.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/Assets/fruska-gora.jpg">
+                        <ImageBrush.RelativeTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                        </ImageBrush.RelativeTransform>
+                    </ImageBrush>
+                </Grid.Background>
+                <Grid.OpacityMask>
+                    <VisualBrush>
+                        <VisualBrush.Visual>
+                            <Border Width="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}"
+                            Height="{Binding ActualHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}"
+                            Background="Black"
+                            CornerRadius="20" />
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </Grid.OpacityMask>
+                <Rectangle Fill="#80000000" />
+                <Label Content="Fruška gora"
+                       FontSize="36"
+                       FontFamily="Ubuntu"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Margin="20, -20, 0, 0"
+                />
+                <Label Content="800 requests"
+                       FontSize="21"
+                       FontFamily="Ubuntu"
+                       FontWeight="Light"
+                       Foreground="White"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Margin="20, 40, 0, 0"
+                />
+                <Button Style="{StaticResource acceptButton}"
+                        Content="Create"
+                        Width="83"
+                        HorizontalAlignment="Left"
+                        Margin="20, 120, 0, 0"
+                        Height="40"
+                        
+                        >
+                    
+                </Button>
+            </Grid>
+        </Border>
+
+
+
+
     </Grid>
 </UserControl>
