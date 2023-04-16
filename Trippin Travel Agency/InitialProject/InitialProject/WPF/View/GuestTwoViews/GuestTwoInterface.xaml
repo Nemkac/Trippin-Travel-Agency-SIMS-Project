@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View.GuestTwoViews"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-        xmlns:viewModel="clr-namespace:InitialProject.WPF.ViewModels"
+        xmlns:viewModel="clr-namespace:InitialProject.WPF.ViewModels.GuestTwoViewModels"
         mc:Ignorable="d"
         Title="GuestTwoInterface" Height="2050" Width="1920">
     <Window.DataContext>
@@ -37,6 +37,10 @@
         <DataTemplate DataType="{x:Type viewModel:GuestTwoMesagesViewModel }">
             <local:GuestTwoMessages/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:CreateYourOwnTourViewModel }">
+            <local:CreateYourOwnTourView/>
+        </DataTemplate>
         
     </Window.Resources>
     
@@ -67,7 +71,7 @@
         <StackPanel Grid.Row="1" Orientation="Horizontal" Background="#273c75" Grid.Column="1">
             <Button x:Name="TourView" Content="Tour View" Style="{StaticResource menuButtonWEB}" Command="{Binding ShowTourViewCommand}"/>
             <Button x:Name="LiveTour" Content="Live Tour" Style="{StaticResource menuButtonWEB}" Command="{Binding ShowLiveTour}"/>
-            <Button x:Name="CreateYourOwnTour" Content="Create Your Own Tour" Style="{StaticResource menuButtonWEB}" Width="250"/>
+            <Button x:Name="CreateYourOwnTour" Content="Create Your Own Tour" Style="{StaticResource menuButtonWEB}" Width="250" Command="{Binding ShowCreateYourOwnTour}"/>
             <Button x:Name="MyRequests" Content="My Requests" Style="{StaticResource menuButtonWEB}"/>
             <Button x:Name="Coupons" Content="Coupons" Style="{StaticResource menuButtonWEB}" Command="{Binding ShowGuestTwoCoupons}"/>
             <Button x:Name="Account" Content="Account" Style="{StaticResource menuButtonWEB}"/>

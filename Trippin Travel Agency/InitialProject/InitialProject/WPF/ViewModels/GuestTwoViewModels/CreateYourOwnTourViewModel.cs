@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 {
-    public class GuestTwoMesagesViewModel : ViewModelBase
+    public class CreateYourOwnTourViewModel : ViewModelBase
     {
     }
 }

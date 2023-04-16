@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using InitialProject.WPF.ViewModels;
 
-namespace InitialProject.WPF.ViewModels
+namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 {
 
     public class TourDisplayViewModel : ViewModelBase

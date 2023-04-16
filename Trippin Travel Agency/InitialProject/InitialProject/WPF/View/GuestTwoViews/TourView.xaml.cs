@@ -4,7 +4,7 @@ using InitialProject.Model;
 using InitialProject.Model.TransferModels;
 using InitialProject.Repository;
 using InitialProject.Service.TourServices;
-using InitialProject.WPF.ViewModels;
+using InitialProject.WPF.ViewModels.GuestTwoViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

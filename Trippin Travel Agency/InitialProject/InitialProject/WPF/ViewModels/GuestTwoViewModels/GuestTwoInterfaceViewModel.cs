@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using System.Windows.Input;
 using InitialProject.WPF.ViewModels;
+using InitialProject.WPF.ViewModels.GuestTwoViewModels;
 
-namespace InitialProject.WPF.ViewModels
+namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 {
     public class GuestTwoInterfaceViewModel : ViewModelBase
     {
@@ -33,8 +34,9 @@ namespace InitialProject.WPF.ViewModels
         public ICommand ShowGuestTwoCoupons { get; }
         public ICommand ShowBookingConfirmation { get; }
         public ICommand ShowGuestTwoMessages { get; }
-
         public ICommand ShowLiveTour { get; }
+        public ICommand ShowCreateYourOwnTour { get; }
+
 
 
         public GuestTwoInterfaceViewModel()
@@ -46,6 +48,8 @@ namespace InitialProject.WPF.ViewModels
             ShowLiveTour = new ViewModelCommand(ExecuteShowLiveTour);
 
             ShowGuestTwoMessages = new ViewModelCommand(ExecuteShowGuestTwoMessages);
+
+            ShowCreateYourOwnTour = new ViewModelCommand(ExecuteShowCreateTourOwnTourCommand);
 
         }
 
@@ -79,6 +83,11 @@ namespace InitialProject.WPF.ViewModels
         public void ExecuteShowGuestTwoMessages(object obj)
         {
             CurrentChildView = new GuestTwoMesagesViewModel();
+        }
+
+        public void ExecuteShowCreateTourOwnTourCommand(object obj)
+        {
+            CurrentChildView = new CreateYourOwnTourViewModel();
         }
 
     }

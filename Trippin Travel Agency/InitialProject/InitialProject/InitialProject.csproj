@@ -42,7 +42,6 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="WPF\ViewModels\GuestTwoViewModels\" />
   </ItemGroup>
 
 </Project>
