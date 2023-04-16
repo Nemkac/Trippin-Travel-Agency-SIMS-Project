@@ -79,7 +79,15 @@ namespace InitialProject.WPF
                             context.SaveChanges();
                         }
                     }
-
+                    
+                    foreach (TourRequest tourRequest in context.TourRequests.ToList())
+                    {
+                        if (DateTime.Now >= tourRequest.endDate.AddHours(-48))
+                        {
+                            context.Remove(tourRequest);
+                            context.SaveChanges();
+                        }
+                    }
 
                     if (user.role == "Owner")
                     {

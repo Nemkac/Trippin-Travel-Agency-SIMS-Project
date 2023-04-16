@@ -1,6 +1,7 @@
 ﻿using InitialProject.Context;
 using InitialProject.Interfaces;
 using InitialProject.Model;
+using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,5 +27,11 @@ namespace InitialProject.Service.TourServices
         {
             return iTourLocationRepository.GetTourLocationByCountryAndCity(country, city);
         }
+
+        public List<TourLocation> GetAllTourLocations()
+        {
+            return iTourLocationRepository.GetAllTourLocations();
+        }
+
     }
 }

@@ -89,7 +89,6 @@ namespace InitialProject.Service.TourServices
         {
             return iTourRepository.GetAllFinishedTours();
         }
-
         public bool IsTourFinished(List<KeyPoint> keyPoints)
         {
             return keyPoints != null && keyPoints.All(kp => kp.visited);

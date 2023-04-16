@@ -35,5 +35,11 @@ namespace InitialProject.Repository
             TourLocation newLocation = new TourLocation(country, city);
             return newLocation;
         }
+
+        public List<TourLocation> GetAllTourLocations() {
+            DataBaseContext locationContext = new DataBaseContext();
+            List<TourLocation> locations = locationContext.TourLocation.ToList();
+            return locations;
+        }
     }
 }

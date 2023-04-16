@@ -32,6 +32,7 @@ namespace InitialProject.Context
         public DbSet<CanceledBooking> CanceledBookings { get; set; }
         public DbSet<BookingCancelationMessage> BookingCancelationMessages { get; set; }
         public DbSet<TourStatisticsDTO> TourStatisticsTransfer { get; set; }
+        public DbSet<TourRequest> TourRequests { get; set; }
 
 
 
