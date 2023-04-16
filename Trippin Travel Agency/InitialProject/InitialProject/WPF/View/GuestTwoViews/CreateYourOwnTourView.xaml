@@ -25,13 +25,15 @@
                   FontSize="40" 
                   FontWeight="Medium" 
                   Grid.ColumnSpan="2" 
-                  Grid.RowSpan="2"/>
+                  Grid.RowSpan="2"
+                  Foreground="#192a56"/>
         <GroupBox Header="Location" 
                       FontFamily="Ubuntu" 
                       FontSize="20" 
                       FontWeight="Medium" 
                       Margin="-330 50 0 0" 
-                      Width="400">
+                      Width="400"
+                      Foreground="#192a56">
             
             <StackPanel Grid.Row="0" Grid.Column="0">
                 
@@ -112,7 +114,8 @@
                       FontSize="36"
                       FontWeight="Medium"
                       Grid.Row="1" 
-                      Grid.Column="0">
+                      Grid.Column="0"
+                      Foreground="#192a56">
             <StackPanel Grid.Row="1" Grid.Column="0">
 
                 <Viewbox

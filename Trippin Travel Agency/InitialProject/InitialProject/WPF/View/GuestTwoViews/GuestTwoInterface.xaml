@@ -49,7 +49,7 @@
     </Window.Resources>
     
     <ScrollViewer>
-        <Grid>
+        <Grid Background="#F5F6FA">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>

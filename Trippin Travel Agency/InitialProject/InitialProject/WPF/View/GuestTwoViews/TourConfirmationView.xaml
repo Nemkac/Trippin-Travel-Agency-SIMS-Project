@@ -15,7 +15,7 @@
             <ColumnDefinition Width="600"/>
         </Grid.ColumnDefinitions>
 
-        <GroupBox Header="Tour preview" FontSize="40" FontFamily="Ubuntu" FontWeight="Heavy">
+        <GroupBox Header="Tour preview" FontSize="40" FontFamily="Ubuntu" FontWeight="Heavy" Foreground="#192a56">
             <StackPanel Margin ="0 0 0 0" Orientation="Vertical" Grid.Column="0" Height="750">
                 <Label Content="Tour Name:" Margin="-365 15 0 0" FontFamily="Ubuntu" FontSize="28" FontWeight="Medium" Width="200" Height="48"/>
                 <Label Content="" Margin="160 -50 0 0" FontFamily="Ubuntu" FontSize="28" FontWeight="Medium" Width="400" Height="48" Name="TourNameLabel"/>
@@ -45,7 +45,7 @@
             <Button Width="250" Margin="-250 150 0 0" FontFamily="Ubuntu" FontSize="28" Height="120" Content="Cancel Booking"  Style="{StaticResource cancelButtonWEB}" Click="CancelBooking" Name="CancelBookingButton"/>
         </StackPanel>
 
-        <GroupBox Header="My Coupons" Grid.Column="2" FontFamily="Ubuntu" FontSize="40" FontWeight="Heavy">
+        <GroupBox Header="My Coupons" Grid.Column="2" FontFamily="Ubuntu" FontSize="40" FontWeight="Heavy" Foreground="#192a56">
             <StackPanel Grid.Column="2">
             <DataGrid x:Name="CouponsDataGrid" d:DataContext ="" Width="550" Height="700" Margin="0 30 0 0" FontWeight="Medium" FontSize="28"/>
         </StackPanel>
