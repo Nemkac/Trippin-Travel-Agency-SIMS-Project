@@ -9,10 +9,12 @@ namespace InitialProject.Interfaces
 {
     public interface IBookingRepository
     {
+        public List<Booking> GetAll();
         public Booking GetById(int bookingId);
         public void Delete(Booking booking);
         public int GetGuestId(int bookingId);
         public string GetGuestName(int bookingId);
         public void Save(Booking booking);
+        public List<CanceledBooking> GetAllCanceledBookings();
     }
 }

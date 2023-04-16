@@ -88,6 +88,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public ICommand ShowNotificationsViewCommand { get; }
         public ICommand ShowMyBookingsCommand { get; }
         public ICommand ShowOurRecommendationsCommand { get; }
+        public ICommand ShowAnnualStatisticsCommand { get; }
         public OwnerInterfaceViewModel()
         {
             //Initialize commands
@@ -160,6 +161,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public void ExecuteShowOurRecommendationsViewCommand(object obj)
         {
             SecondChildView = new OurRecommendationsViewModel();
+            Caption = "My Accommodations";
+        }
+        public void ExecuteShowAnnualStatisticsCommand(object obj)
+        {
+            CurrentChildView = new AccommodationAnnualStatisticsViewModel();
             Caption = "My Accommodations";
         }
     }

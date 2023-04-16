@@ -1,5 +1,7 @@
-﻿using InitialProject.DTO;
+﻿using InitialProject.Context;
+using InitialProject.DTO;
 using InitialProject.Model;
+using InitialProject.Model.TransferModels;
 using InitialProject.Repository;
 using InitialProject.Service.AccommodationServices;
 using System;
@@ -45,6 +47,23 @@ namespace InitialProject.WPF.View.Owner_Views
             }
 
             return accommodationsToShow;
+        }
+
+        private void ShowDetails(object sender, RoutedEventArgs e)
+        {
+            AccommodationStatisticsDTO? selectedAccommodation = this.MyAccommodationsDataGrid.SelectedItem as AccommodationStatisticsDTO;
+            DataBaseContext annualTransferContext = new DataBaseContext();
+            DataBaseContext transferContext = new DataBaseContext();
+
+            var transfers = transferContext.AccommodationAnnualStatisticsTransfer.ToList();
+            transferContext.AccommodationAnnualStatisticsTransfer.RemoveRange(transfers);
+            transferContext.SaveChanges();
+
+            AnnualAccommodationTransfer accommodationToTransfer = new AnnualAccommodationTransfer(
+                selectedAccommodation.accommodationId, selectedAccommodation.accommodationName, selectedAccommodation.location, selectedAccommodation.guestLimit);
+
+            annualTransferContext.AccommodationAnnualStatisticsTransfer.Add(accommodationToTransfer);
+            annualTransferContext.SaveChanges();
         }
     }
 }

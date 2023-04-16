@@ -26,17 +26,24 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         }
 
         public ICommand ShowOurRecommendationsViewCommand { get; private set; }
+        public ViewModelCommand ShowAnnualStatisticsViewCommand { get; private set; }
 
         public AccommodationStatisticsViewModel(OwnerInterfaceViewModel mainViewModel)
         {
             _mainViewModel = mainViewModel;
             ShowOurRecommendationsViewCommand = new ViewModelCommand(ExecuteShowOurRecommendationsViewCommand);
+            ShowAnnualStatisticsViewCommand = new ViewModelCommand(ShowAnnualStatistics);
             ExecuteShowOurRecommendationsViewCommand(null);
         }
 
         public void ExecuteShowOurRecommendationsViewCommand(object obj)
         {
             SecondChildView = new OurRecommendationsViewModel();
+        }
+
+        public void ShowAnnualStatistics(object obj)
+        { 
+            _mainViewModel.ExecuteShowAnnualStatisticsCommand(null);
         }
     }
 }

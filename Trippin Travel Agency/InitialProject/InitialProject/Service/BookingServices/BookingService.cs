@@ -26,9 +26,18 @@ namespace InitialProject.Service.BookingServices
 
         }
 
+        public List<CanceledBooking> GetAllCanceledBookings()
+        {
+            return this.iBookingRepository.GetAllCanceledBookings();
+        }
+        public List<Booking> GetAllBookings()
+        {
+            return this.iBookingRepository.GetAll();
+        }
+
         public Booking GetById(int bookingId)
         {
-            return iBookingRepository.GetById(bookingId);
+            return this.iBookingRepository.GetById(bookingId);
         }
 
         public BookingDTO CreateBookingDTO(Booking booking)
@@ -45,7 +54,7 @@ namespace InitialProject.Service.BookingServices
 
         public void Delete(Booking booking)
         {
-            iBookingRepository.Delete(booking);
+            this.iBookingRepository.Delete(booking);
         }
 
         public RequestDTO CreateRequestDTO(BookingDelaymentRequest bookingDelaymentRequest)
@@ -94,17 +103,17 @@ namespace InitialProject.Service.BookingServices
 
         public int GetGuestId(int bookingId)
         {
-            return iBookingRepository.GetGuestId(bookingId);
+            return this.iBookingRepository.GetGuestId(bookingId);
         }
 
         public string GetGuestName(int bookingId)
         {
-            return iBookingRepository.GetGuestName(bookingId);
+            return this.iBookingRepository.GetGuestName(bookingId);
         }
 
         public void Save(Booking booking)
         {
-            iBookingRepository.Save(booking);
+            this.iBookingRepository.Save(booking);
         }
 
         public static List<string> FormDisplayableDates(List<List<DateTime>> availableDates)

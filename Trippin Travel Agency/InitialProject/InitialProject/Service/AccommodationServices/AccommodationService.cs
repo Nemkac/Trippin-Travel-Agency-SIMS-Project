@@ -30,7 +30,7 @@ namespace InitialProject.Service.AccommodationServices
             List<Accommodation> accommodations = new List<Accommodation>();
             foreach (AccommodationDTO dto in accommodationDTOs)
             {
-                accommodations.Add(GetById(dto.id));
+                accommodations.Add(GetById(dto.accommodationId));
             }
             return accommodations;
         }

@@ -56,6 +56,10 @@
             <owner:OurRecommendationView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModel:AccommodationAnnualStatisticsViewModel}">
+            <owner:AccommodationsAnnualStatisticsView/>
+        </DataTemplate>
+
         <Style x:Key="ButtonFocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>

@@ -1,11 +1,7 @@
-﻿using System;
+﻿using InitialProject.Context;
+using InitialProject.Model;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using InitialProject.Model;
-using InitialProject.Context;
-using System.ComponentModel.DataAnnotations;
 
 namespace InitialProject.DTO
 {
@@ -17,7 +13,7 @@ namespace InitialProject.DTO
     }
     public class AccommodationDTO
     {
-        public int id { get; set; }
+        public int accommodationId { get; set; }
         public string name{ get; set; }
         public string country{ get; set; }
         public string city{ get; set; }
@@ -32,7 +28,7 @@ namespace InitialProject.DTO
         {
             DataBaseContext context = new DataBaseContext();
             List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
-            this.id = accommodation.id;
+            this.accommodationId = accommodation.id;
             this.name = accommodation.name;
             this.country = location[0];
             this.city = location[1];

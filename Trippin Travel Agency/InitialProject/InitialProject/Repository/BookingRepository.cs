@@ -14,6 +14,12 @@ namespace InitialProject.Repository
     {
         public BookingRepository() { }
 
+        public List<Booking> GetAll()
+        {
+            DataBaseContext bookingContext = new DataBaseContext();
+            List<Booking> bookings = bookingContext.Bookings.ToList();
+            return bookings;
+        }
         public Booking GetById(int bookingId)
         {
             using DataBaseContext context = new DataBaseContext();
@@ -66,6 +72,12 @@ namespace InitialProject.Repository
             DataBaseContext saveContext = new DataBaseContext();
             saveContext.Attach(booking);
             saveContext.SaveChanges();
+        }
+        public List<CanceledBooking> GetAllCanceledBookings()
+        {
+            DataBaseContext canceledContext = new DataBaseContext();
+            List<CanceledBooking> canceledBookings = canceledContext.CanceledBookings.ToList();
+            return canceledBookings;
         }
     }
 }

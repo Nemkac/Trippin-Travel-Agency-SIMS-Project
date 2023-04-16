@@ -94,7 +94,7 @@
                                 <Border Width="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}"
                             Height="{Binding ActualHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}"
                             Background="Black"
-                            CornerRadius="25, 0, 25, 25" />
+                            CornerRadius="0, 25, 25, 25" />
                             </VisualBrush.Visual>
                         </VisualBrush>
                     </Grid.OpacityMask>
