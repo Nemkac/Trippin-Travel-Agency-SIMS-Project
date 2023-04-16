@@ -5,8 +5,43 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.WPF.View.GuestTwoViews"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="1470" d:DesignWidth="1520">
     <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="500"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="760"/>
+            <ColumnDefinition Width="760"/>
+        </Grid.ColumnDefinitions>
+
+
+        <GroupBox Header="Create your own tour" FontFamily="Ubuntu" FontSize="40" FontWeight="Heavy"  Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="0">
             
+            
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="0">
+            
+            
+            
+                </StackPanel>
+
+
+                <StackPanel Grid.Row="0" Grid.Column="1">
+            
+            
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="1">
+
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
     </Grid>
 </UserControl>
