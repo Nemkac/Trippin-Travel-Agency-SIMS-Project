@@ -73,7 +73,7 @@ namespace InitialProject.WPF.View.GuestTwoViews
             }
             if (toursCounter > 0)
             {
-                double percentage = ((double)acceptedToursCounter / toursCounter) * 100;
+                double percentage = Math.Round(((double)acceptedToursCounter / toursCounter) * 100,2);
                 acceptedToursPercentage += percentage.ToString() + "%";
             }
             return acceptedToursPercentage;
@@ -105,7 +105,7 @@ namespace InitialProject.WPF.View.GuestTwoViews
             }
             if (tourCounter > 0) 
             {
-                averageNumberOfPeople = ((double)numberOfPeopleInTour / acceptedToursCounter).ToString();
+                averageNumberOfPeople = Math.Round(((double)numberOfPeopleInTour / acceptedToursCounter),2).ToString();
             }
             return averageNumberOfPeople;
         }
@@ -134,7 +134,7 @@ namespace InitialProject.WPF.View.GuestTwoViews
             }
             if (toursCounter > 0)
             {
-                double percentage = ((double)declinedToursCounter / toursCounter) * 100;
+                double percentage = Math.Round(((double)declinedToursCounter / toursCounter) * 100,2);
                 declinedToursPercentage += percentage.ToString() + "%";
             }
             return declinedToursPercentage;

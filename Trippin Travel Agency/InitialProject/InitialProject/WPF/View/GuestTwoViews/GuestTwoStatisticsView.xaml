@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.WPF.View.GuestTwoViews"
               xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:lc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="1470" d:DesignWidth="1520">
     <Grid>
