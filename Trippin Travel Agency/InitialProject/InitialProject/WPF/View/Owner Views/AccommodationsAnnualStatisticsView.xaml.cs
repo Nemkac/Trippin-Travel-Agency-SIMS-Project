@@ -1,7 +1,9 @@
 ﻿using InitialProject.Context;
+using InitialProject.DTO;
 using InitialProject.Model;
 using InitialProject.Model.TransferModels;
 using InitialProject.Repository;
+using InitialProject.Service.AccommodationServices;
 using InitialProject.Service.BookingServices;
 using System;
 using System.Collections.Generic;
@@ -18,6 +20,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LiveCharts;
+using LiveCharts.Wpf;
 
 namespace InitialProject.WPF.View.Owner_Views
 {
@@ -28,11 +32,18 @@ namespace InitialProject.WPF.View.Owner_Views
     {
         private BookingService bookingService;
         private AnnualAccommodationTransfer transferedAccommodation;
-        private int numberOfBookings, numberOfCancelations, numberOfDelayments, numberOfRenovationSuggestions;
+        private AccommodationService accommodationService = new(new AccommodationRepository());
+
+        public SeriesCollection SeriesCollection { get; set; }
+        public string[] BarLabels { get; set; }
+        public Func<double, string> Formatter { get; set; }
+        
         public AccommodationsAnnualStatisticsView()
         {
             InitializeComponent();
             FillYearComboBox();
+            ShowTransferedAccommodationsStatistics();
+            ShowAccommodationsDetails();
             DataBaseContext transferContext = new DataBaseContext();
             this.transferedAccommodation = transferContext.AccommodationAnnualStatisticsTransfer.First();
             this.accommodationNameTextBlock.Text = transferedAccommodation.accommodationName;
@@ -43,40 +54,111 @@ namespace InitialProject.WPF.View.Owner_Views
         {
             for (int year = 2015; year <= 2023; year++)
             {
-                yearComboBox.Items.Add(year.ToString());
+                yearComboBox.Items.Add(year);
             }
         }
 
         private void ShowTransferedAccommodationsStatistics()
         {
+            BookingService bookingService = new(new BookingRepository());
+
             List<int> yearList = new List<int>();
-            for(int year = 2015; year <= 2023; year++)
+            for (int year = 2023; year >= 2015; year -= 1)
             {
                 yearList.Add(year);
             }
 
-            List<Booking> bookings = this.bookingService.GetAllBookings();
-            List<CanceledBooking> canceledBookings = this.bookingService.GetAllCanceledBookings();
+            DataBaseContext transferContext = new DataBaseContext();
+            AnnualAccommodationTransfer transferedAccommodation = transferContext.AccommodationAnnualStatisticsTransfer.First();
+            List<Booking> bookings = bookingService.GetAllBookings();
+            List<CanceledBooking> canceledBookings = bookingService.GetAllCanceledBookings();
+            List<DelayedBookings> delayedBookings = bookingService.GetAllDelayedBookings();
+            List<AccommodationsAnnualStatisticsDTO> dataToShow = new List<AccommodationsAnnualStatisticsDTO>();
 
-            foreach(int year in yearList)
+            GetStatisticsForYearRange(yearList, transferedAccommodation, bookings, canceledBookings, delayedBookings, dataToShow);
+            annualStatisticsDataGrid.ItemsSource = dataToShow;
+        }
+
+        private void GetStatisticsForYearRange(List<int> yearList, AnnualAccommodationTransfer transferedAccommodation, List<Booking> bookings, List<CanceledBooking> canceledBookings, List<DelayedBookings> delayedBookings, List<AccommodationsAnnualStatisticsDTO> dataToShow)
+        {
+            BookingService bookingService = new(new BookingRepository());
+            foreach (int year in yearList)
             {
-                foreach(Booking booking in bookings)
-                {
-                    DateTime arrivalDate = DateTime.ParseExact(booking.arrival, "M/d/yyyy", CultureInfo.InvariantCulture);
-                    if(year == arrivalDate.Year)
-                    {
-                        this.numberOfBookings++;
-                    }
-                }
+                int numberOfBookings = 0;
+                int numberOfCancelations = 0;
+                int numberOfDelayments = 0;
+                numberOfBookings = bookingService.GetNumberOfBookingsInYearRange(transferedAccommodation, bookings, year, numberOfBookings);
 
-                foreach(CanceledBooking canceledBooking in canceledBookings)
-                {
-                    Booking booking = this.bookingService.GetById(canceledBooking.bookingId);
-                    //Treba proveriti arrival izvucenog bookinga itd itd.
-                    //Booking kada se otkaze ne treba brisati iz tabele bookings vec treba staviti polje canceled u tabelu booking tipa bool.
-                    //Ako je false prikazuje se i obradjuje ga guestOne, ako je true ja ovde racunam to a guestOne ga ne prikazuje.
-                }
+                numberOfCancelations = bookingService.GetNumberOfCanceledBookingsInYearRange(transferedAccommodation, canceledBookings, year, numberOfCancelations);
+
+                numberOfDelayments = bookingService.GetNumberOfDelayedBookingsInYearRange(transferedAccommodation, delayedBookings, year, numberOfDelayments);
+
+                AccommodationsAnnualStatisticsDTO dto = new AccommodationsAnnualStatisticsDTO(year, numberOfBookings, numberOfCancelations, numberOfDelayments);
+                dataToShow.Add(dto);
             }
+        }
+
+        private void yearComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            BookingService bookingService = new(new BookingRepository());
+            int selectedYear = (int)yearComboBox.SelectedItem;
+            int numberOfBookings = 0;
+            int numberOfCancelations = 0;
+            int numberOfDelayments = 0;
+
+            DataBaseContext transferContext = new DataBaseContext();
+            AnnualAccommodationTransfer transferedAccommodation = transferContext.AccommodationAnnualStatisticsTransfer.First();
+            List<Booking> bookings = bookingService.GetAllBookings();
+            List<CanceledBooking> canceledBookings = bookingService.GetAllCanceledBookings();
+            List<DelayedBookings> delayedBookings = bookingService.GetAllDelayedBookings();
+            List<AccommodationsAnnualStatisticsDTO> dataToShow = new List<AccommodationsAnnualStatisticsDTO>();
+
+            numberOfBookings = bookingService.CountAccommodationsBookingsPerYear(selectedYear, numberOfBookings, transferedAccommodation, bookings);
+
+            numberOfCancelations = bookingService.CountAccommodationsCanceledBookingsForYear(selectedYear, numberOfCancelations, transferedAccommodation, canceledBookings);
+
+            numberOfDelayments = bookingService.CountAccommodationsDelayedBookingsForYear(selectedYear, numberOfDelayments, transferedAccommodation, delayedBookings);
+
+            AccommodationsAnnualStatisticsDTO dto = new AccommodationsAnnualStatisticsDTO(selectedYear, numberOfBookings, numberOfCancelations, numberOfDelayments);
+            dataToShow.Add(dto);
+            annualStatisticsDataGrid.ItemsSource = dataToShow;
+
+            SeriesCollection = new SeriesCollection
+            {
+                new ColumnSeries
+                {
+                    Title="Bookings",
+                    Values = new ChartValues<int>{numberOfBookings}
+                }
+            };
+
+            SeriesCollection.Add(new ColumnSeries
+            {
+                Title = "Cancelations",
+                Values = new ChartValues<int> {numberOfCancelations}
+            });
+
+            SeriesCollection.Add(new ColumnSeries
+            {
+                Title = "Delayments",
+                Values = new ChartValues<int> { numberOfDelayments }
+            });
+
+            BarLabels = new[] { "Number of:" };
+            Formatter = value => value.ToString("N");
+
+            DataContext = this;
+        }
+
+        public void ShowAccommodationsDetails()
+        {
+            DataBaseContext transferContext = new DataBaseContext();
+            AnnualAccommodationTransfer transferedAccommodation = transferContext.AccommodationAnnualStatisticsTransfer.First();
+            accommodationDetailsNameTextBlock.Text = transferedAccommodation.accommodationName;
+            accommodationDetailsLocationTextBlock.Text = transferedAccommodation.location;
+            accommodationDetailsGuestLimitTextBlock.Text = transferedAccommodation.maxNumOfGuests.ToString();
+            Accommodation accommodation = this.accommodationService.GetById(transferedAccommodation.accommodationId);
+            accommodationDetailsTypeTextBlock.Text = accommodation.type.ToString();
         }
     }
 }

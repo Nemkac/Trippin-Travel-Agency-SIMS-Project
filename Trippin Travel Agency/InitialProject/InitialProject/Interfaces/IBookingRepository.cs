@@ -16,5 +16,6 @@ namespace InitialProject.Interfaces
         public string GetGuestName(int bookingId);
         public void Save(Booking booking);
         public List<CanceledBooking> GetAllCanceledBookings();
+        public List<DelayedBookings> GetAllDelayedBookings();
     }
 }

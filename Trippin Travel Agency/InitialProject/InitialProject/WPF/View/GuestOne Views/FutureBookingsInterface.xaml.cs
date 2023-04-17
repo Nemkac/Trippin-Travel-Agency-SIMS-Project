@@ -17,6 +17,7 @@ using InitialProject.Repository;
 using InitialProject.Service.AccommodationServices;
 using InitialProject.Service.BookingServices;
 using InitialProject.Service.GuestServices;
+using System.Globalization;
 
 namespace InitialProject.WPF.View.GuestOne_Views
 {
@@ -66,7 +67,8 @@ namespace InitialProject.WPF.View.GuestOne_Views
             BookingCancelationMessage bookingCancelationMessage = new BookingCancelationMessage(message, booking.Id);
             BookingCancelationMessageService.Save(bookingCancelationMessage);
             DataBaseContext canceledContext = new DataBaseContext();
-            CanceledBooking canceledBooking = new CanceledBooking(booking.Id);
+            DateTime plannedArrival = DateTime.ParseExact(booking.arrival, "M/d/yyyy", CultureInfo.InvariantCulture);
+            CanceledBooking canceledBooking = new CanceledBooking(booking.Id, booking.accommodationId ,plannedArrival);
             canceledContext.CanceledBookings.Add(canceledBooking);
             canceledContext.SaveChanges();
         }

@@ -2,6 +2,7 @@ using InitialProject.Context;
 using InitialProject.DTO;
 using InitialProject.Interfaces;
 using InitialProject.Model;
+using InitialProject.Model.TransferModels;
 using InitialProject.Repository;
 using InitialProject.Service.AccommodationServices;
 using InitialProject.Service.GuestServices;
@@ -34,7 +35,10 @@ namespace InitialProject.Service.BookingServices
         {
             return this.iBookingRepository.GetAll();
         }
-
+        public List<DelayedBookings> GetAllDelayedBookings()
+        {
+            return this.iBookingRepository.GetAllDelayedBookings();
+        }
         public Booking GetById(int bookingId)
         {
             return this.iBookingRepository.GetById(bookingId);
@@ -132,6 +136,86 @@ namespace InitialProject.Service.BookingServices
         public bool CheckIfValidForRating(Booking booking)
         {
             return !(DateTime.Today.Subtract(DateTime.Parse(booking.departure)).Days > 5);
+        }
+
+        public int CountAccommodationsDelayedBookingsForYear(int selectedYear, int numberOfDelayments, AnnualAccommodationTransfer transferedAccommodation, List<DelayedBookings> delayedBookings)
+        {
+            foreach (DelayedBookings delayedBooking in delayedBookings)
+            {
+                if (selectedYear == delayedBooking.previousArrival.Year && delayedBooking.accommodationId == transferedAccommodation.accommodationId)
+                {
+                    numberOfDelayments++;
+                }
+            }
+
+            return numberOfDelayments;
+        }
+
+        public int CountAccommodationsCanceledBookingsForYear(int selectedYear, int numberOfCancelations, AnnualAccommodationTransfer transferedAccommodation, List<CanceledBooking> canceledBookings)
+        {
+            foreach (CanceledBooking canceledBooking in canceledBookings)
+            {
+                if (selectedYear == canceledBooking.plannedArrival.Year && canceledBooking.accommodationId == transferedAccommodation.accommodationId)
+                {
+                    numberOfCancelations++;
+                }
+            }
+
+            return numberOfCancelations;
+        }
+
+        public int CountAccommodationsBookingsPerYear(int selectedYear, int numberOfBookings, AnnualAccommodationTransfer transferedAccommodation, List<Booking> bookings)
+        {
+            foreach (Booking booking in bookings)
+            {
+                DateTime arrivalDate = DateTime.ParseExact(booking.arrival, "M/d/yyyy", CultureInfo.InvariantCulture);
+                if (selectedYear == arrivalDate.Year && booking.accommodationId == transferedAccommodation.accommodationId)
+                {
+                    numberOfBookings++;
+                }
+            }
+
+            return numberOfBookings;
+        }
+
+        public int GetNumberOfDelayedBookingsInYearRange(AnnualAccommodationTransfer transferedAccommodation, List<DelayedBookings> delayedBookings, int year, int numberOfDelayments)
+        {
+            foreach (DelayedBookings delayedBooking in delayedBookings)
+            {
+                if (year == delayedBooking.previousArrival.Year && delayedBooking.accommodationId == transferedAccommodation.accommodationId)
+                {
+                    numberOfDelayments++;
+                }
+            }
+
+            return numberOfDelayments;
+        }
+
+        public int GetNumberOfCanceledBookingsInYearRange(AnnualAccommodationTransfer transferedAccommodation, List<CanceledBooking> canceledBookings, int year, int numberOfCancelations)
+        {
+            foreach (CanceledBooking canceledBooking in canceledBookings)
+            {
+                if (year == canceledBooking.plannedArrival.Year && canceledBooking.accommodationId == transferedAccommodation.accommodationId)
+                {
+                    numberOfCancelations++;
+                }
+            }
+
+            return numberOfCancelations;
+        }
+
+        public int GetNumberOfBookingsInYearRange(AnnualAccommodationTransfer transferedAccommodation, List<Booking> bookings, int year, int numberOfBookings)
+        {
+            foreach (Booking booking in bookings)
+            {
+                DateTime arrivalDate = DateTime.ParseExact(booking.arrival, "M/d/yyyy", CultureInfo.InvariantCulture);
+                if (year == arrivalDate.Year && booking.accommodationId == transferedAccommodation.accommodationId)
+                {
+                    numberOfBookings++;
+                }
+            }
+
+            return numberOfBookings;
         }
     }
 }

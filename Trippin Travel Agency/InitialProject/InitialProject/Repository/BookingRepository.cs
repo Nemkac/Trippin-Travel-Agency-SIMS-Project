@@ -79,5 +79,11 @@ namespace InitialProject.Repository
             List<CanceledBooking> canceledBookings = canceledContext.CanceledBookings.ToList();
             return canceledBookings;
         }
+        public List<DelayedBookings> GetAllDelayedBookings()
+        {
+            DataBaseContext delayedContext = new DataBaseContext();
+            List<DelayedBookings> delayedBookings = delayedContext.DelayedBookings.ToList();
+            return delayedBookings;
+        }
     }
 }

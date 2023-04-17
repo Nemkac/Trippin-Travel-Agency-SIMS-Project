@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -88,7 +89,6 @@ namespace InitialProject.WPF.View.Owner_Views
 
         private static void UpdateDeniedRequestStatus(List<RequestDTO> selectedRequest, DataBaseContext requestContext, List<BookingDelaymentRequest> bookingDelaymentRequests)
         {
-            DataBaseContext delayedContext = new DataBaseContext();
             foreach (BookingDelaymentRequest request in bookingDelaymentRequests.ToList())
             {
                 if (request.bookingId == selectedRequest.First().bookingId)
@@ -97,15 +97,14 @@ namespace InitialProject.WPF.View.Owner_Views
                     //requestContext.BookingDelaymentRequests.Remove(request);
                     requestContext.BookingDelaymentRequests.Update(request);
                     requestContext.SaveChanges();
-                    DelayedBookings delayedBooking = new DelayedBookings(request.bookingId);
-                    delayedContext.DelayedBookings.Add(delayedBooking);
-                    delayedContext.SaveChanges();
                 }
             }
         }
 
         private static void UpdateAcceptedRequestStatus(List<RequestDTO> selectedRequest, DataBaseContext requestContext, List<BookingDelaymentRequest> bookingDelaymentRequests)
         {
+            BookingService bookingService = new(new BookingRepository());
+            DataBaseContext delayedContext = new DataBaseContext();
             foreach (BookingDelaymentRequest request in bookingDelaymentRequests.ToList())
             {
                 if (request.bookingId == selectedRequest.First().bookingId)
@@ -114,6 +113,11 @@ namespace InitialProject.WPF.View.Owner_Views
                     //requestContext.BookingDelaymentRequests.Remove(request);
                     requestContext.BookingDelaymentRequests.Update(request);
                     requestContext.SaveChanges();
+                    Booking booking = bookingService.GetById(request.bookingId);
+                    DateTime oldArrival = DateTime.ParseExact(booking.arrival, "M/d/yyyy", CultureInfo.InvariantCulture);
+                    DelayedBookings delayedBooking = new DelayedBookings(request.bookingId, booking.accommodationId, oldArrival);
+                    delayedContext.DelayedBookings.Add(delayedBooking);
+                    delayedContext.SaveChanges();
                 }
             }
         }

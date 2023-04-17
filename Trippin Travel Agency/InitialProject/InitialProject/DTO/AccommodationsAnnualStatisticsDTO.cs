@@ -15,13 +15,13 @@ namespace InitialProject.DTO
         public int numberOfDelayments { get; set; }
         public int numberOfRenovationSuggestions { get; set; }
 
-        public AccommodationsAnnualStatisticsDTO(int year, int numberOfBookings, int numberOfCancelations, int numberOfDelayments, int numberOfRenovationSuggestions)
+        public AccommodationsAnnualStatisticsDTO(int year, int numberOfBookings, int numberOfCancelations, int numberOfDelayments)
         {
             this.year = year;
             this.numberOfBookings = numberOfBookings;
             this.numberOfCancelations = numberOfCancelations;
             this.numberOfDelayments = numberOfDelayments;
-            this.numberOfRenovationSuggestions = numberOfRenovationSuggestions;
+            //this.numberOfRenovationSuggestions = numberOfRenovationSuggestions;
         }
     }
 }
