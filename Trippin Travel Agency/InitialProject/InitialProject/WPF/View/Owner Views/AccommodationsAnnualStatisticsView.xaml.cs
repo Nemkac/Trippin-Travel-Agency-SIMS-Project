@@ -160,5 +160,23 @@ namespace InitialProject.WPF.View.Owner_Views
             Accommodation accommodation = this.accommodationService.GetById(transferedAccommodation.accommodationId);
             accommodationDetailsTypeTextBlock.Text = accommodation.type.ToString();
         }
+
+        private void ShowDetails(object sender, RoutedEventArgs e)
+        {
+            AccommodationsAnnualStatisticsDTO? selectedAccommodation = annualStatisticsDataGrid.SelectedItem as AccommodationsAnnualStatisticsDTO;
+            DataBaseContext monthlyTransferContext = new DataBaseContext();
+            DataBaseContext transferContext = new DataBaseContext();
+            DataBaseContext transferedAnnualAccommodation = new DataBaseContext();
+            AnnualAccommodationTransfer transferedAccommodation = transferedAnnualAccommodation.AccommodationAnnualStatisticsTransfer.First();
+
+            var transfers = transferContext.AccommodationsMonthlyStatisticsTransfer.ToList();
+            transferContext.AccommodationsMonthlyStatisticsTransfer.RemoveRange(transfers);
+            transferContext.SaveChanges();
+
+            MonthlyAccommodationTransfer monthlyAccommodationTransfer = new MonthlyAccommodationTransfer(selectedAccommodation.year, transferedAccommodation.accommodationId);
+            monthlyTransferContext.AccommodationsMonthlyStatisticsTransfer.Add(monthlyAccommodationTransfer);
+            monthlyTransferContext.SaveChanges();
+            MessageBox.Show(monthlyAccommodationTransfer.accommodationId.ToString());
+        }
     }
 }

@@ -64,7 +64,7 @@
             <Button Style="{StaticResource detailsButton}"
                 Grid.Row="1" HorizontalAlignment="Right"
                 BorderBrush="Transparent" 
-                Margin="490 0 0 0">
+                Margin="490 0 0 0" Click="ShowDetails">
                 <StackPanel Orientation="Horizontal"
                                 Margin="0, 0, 0 ,0">
                     <fa:IconImage Icon="PlusCircle" HorizontalAlignment="Left" Width="23" Height="23" Foreground="#F4FFF8" VerticalAlignment="Center" Margin="0 2 0 0"/>

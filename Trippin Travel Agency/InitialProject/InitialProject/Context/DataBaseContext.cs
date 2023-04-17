@@ -34,6 +34,7 @@ namespace InitialProject.Context
         public DbSet<TourStatisticsDTO> TourStatisticsTransfer { get; set; }
         public DbSet<DelayedBookings> DelayedBookings { get; set; }
         public DbSet<AnnualAccommodationTransfer> AccommodationAnnualStatisticsTransfer { get; set; }
+        public DbSet<MonthlyAccommodationTransfer> AccommodationsMonthlyStatisticsTransfer { get; set; } 
 
 
 

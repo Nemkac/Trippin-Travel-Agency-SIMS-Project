@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="InitialProject.WPF.View.Owner_Views.AccommodationsMonthlyStatisticsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InitialProject.WPF.View.Owner_Views"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:lc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="710">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="260"/>
+            <RowDefinition Height="260"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Top">
+            <TextBlock x:Name="accommodationNameTextBlock"  FontFamily="Ubuntu" 
+                       Width="Auto" FontSize="20" FontWeight="Light" Margin="5 0 0 0" 
+                       VerticalAlignment="Center" Foreground="#192a56"/>
+            <Label Content="monthly statistics"  FontFamily="Ubuntu"
+                           FontSize="20" FontWeight="Light" VerticalAlignment="Center" 
+                           Foreground="#192a56"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <Label Content="Show statistics for month"  FontFamily="Ubuntu"
+                           FontSize="20" FontWeight="Regular" VerticalAlignment="Center" 
+                           Foreground="#192a56"/>
+            <ComboBox x:Name="monthComboBox" Width="120" Height="30" Margin="15 0 0 0" SelectionChanged="monthComboBox_SelectionChanged"/>
+            <Button Style="{StaticResource showImagesButton}"
+                Grid.Row="1" HorizontalAlignment="Right"
+                BorderBrush="Transparent" Width="220" Height="35" Margin="105 0 0 0">
+                <StackPanel Orientation="Horizontal"
+                                Margin="0, 0, 0 ,0">
+                    <fa:IconImage Icon="FilePdf" HorizontalAlignment="Left" Width="20" Height="20" Foreground="#192a56" VerticalAlignment="Center" Margin="0 2 0 0"/>
+                    <Label VerticalAlignment="Center" Foreground="#192a56" Content="Generate report" FontSize="20" FontFamily="Ubuntu" FontWeight="Regular"  Margin="10 0 0 0"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <ScrollViewer HorizontalScrollBarVisibility="Hidden" Grid.Row="2">
+            <StackPanel Grid.Row="2">
+                <DataGrid Style="{DynamicResource DataGridStyle1}" 
+                  CellStyle="{DynamicResource DataGridCellStyle1}" 
+                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="monthlyStatisticsDataGrid" 
+                  AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Year" Binding="{Binding year}" Width="70"/>
+                        <DataGridTextColumn Header="No. of bookings" Binding="{Binding numberOfBookings}" Width="Auto"/>
+                        <DataGridTextColumn Header="No. of cancelations" Binding="{Binding numberOfCancelations}" Width="Auto"/>
+                        <DataGridTextColumn Header="No. of delayments" Binding="{Binding numberOfDelayments}" Width="Auto"/>
+                        <DataGridTextColumn Header="No. of renovation suggestions" Width="Auto"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0 10 0 0">
+        </StackPanel>
+    </Grid>
+</UserControl>
