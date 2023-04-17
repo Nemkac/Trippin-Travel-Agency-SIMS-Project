@@ -84,7 +84,7 @@ namespace InitialProject.WPF
                     {
                         if (DateTime.Now >= tourRequest.endDate.AddHours(-48))
                         {
-                            context.Remove(tourRequest);
+                            tourRequest.status = TourRequestStatus.Invalid;
                             context.SaveChanges();
                         }
                     }

@@ -23,7 +23,7 @@
             </StackPanel>
 
             <StackPanel Grid.Column="1">
-                <Label Content="" FontSize="60" Margin="25 0 0 0" Name="UsernameLabel" FontFamily="Ubuntu" FontWeight="Medium"/>
+                <Label Content="" FontSize="60" Margin="25 0 0 0" Name="UsernameLabel" FontFamily="Ubuntu" FontWeight="Medium" Foreground="#273c75"/>
                 <Label Content="Number of coupons" Margin ="-945 30 0 0" FontSize="24" FontFamily="Ubuntu" FontWeight="Light" Width="225"/>
                 <Label Content="Tours visited" Margin ="-450 -38 0 0 " FontSize="24" FontFamily="Ubuntu" FontWeight="Light" Width="225"/>
                 <Label Content="" FontSize="24" Margin ="-1119 0 0 0" FontFamily="Ubuntu" FontWeight="Light" Width="50" Name="CouponNumberLabel"/>

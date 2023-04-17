@@ -1,9 +1,10 @@
-﻿<UserControl x:Class="InitialProject.WPF.View.GuestTwoViews.GuestTwoMessages"
+﻿<UserControl x:Class="InitialProject.WPF.View.GuestTwoViews.GuestTwoStatisticsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.WPF.View.GuestTwoViews"
+              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="1470" d:DesignWidth="1520">
     <Grid>
@@ -37,24 +38,49 @@
                 <ColumnDefinition Width="1220"/>
             </Grid.ColumnDefinitions>
 
-            <GroupBox Header="Info" FontSize="28" FontFamily="Ubuntu" FontWeight="Light" Height="287" VerticalAlignment="Top" Foreground="#192a56">
+            <GroupBox Header="Info" FontSize="28" FontFamily="Ubuntu" FontWeight="Heavy" Height="287" VerticalAlignment="Top" Foreground="#192a56">
                 <StackPanel Grid.Column="0">
+                    <Label Name="NameLastName" Margin ="15 15 0 0" FontSize="20" FontFamily="Ubuntu" FontWeight="Medium"/>
                     <Label Name="UsernameLabel2" Margin ="15 15 0 0" FontSize="20" FontFamily="Ubuntu" FontWeight="Medium"/>
                     <Label Name="AccountTypeLabel" Margin ="15 15 0 0" FontSize="20" FontFamily="Ubuntu" FontWeight="Medium"/>
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="My messages" Margin ="0 -5 0 0" Grid.Column="1" Height="810" Width="1200" HorizontalAlignment="Left" FontSize="40" FontFamily="Ubuntu" FontWeight="Light" Foreground="#192a56">
-                <StackPanel Grid.Column="1" Margin="15 0 0 0" Height="765" Width="1150" HorizontalAlignment="Left" Orientation="Vertical">
-                    <DataGrid x:Name="dataGrid" d:DataContext ="" Width="1125" Height="550" Margin="0 50 0 0" FontSize="28" FontFamily="Ubuntu"/>
-                    <Button Width="350"
-                            Height="130"
-                            Style="{StaticResource openMessageButtonWEB}"
-                            Margin="775 15 0 0" 
-                            Content="Open" 
-                            FontSize="32" 
-                            FontFamily="Ubuntu" 
-                            FontWeight="Heavy" Click="OpenMessage"/>
+            <GroupBox Header="My statistics" Margin ="0 0 0 0" Grid.Column="1" Height="1000" Width="1200" HorizontalAlignment="Left" FontSize="40" FontFamily="Ubuntu" FontWeight="Heavy" Foreground="#192a56" Grid.RowSpan="3">
+                <StackPanel Grid.Column="1" Margin="15 -150 0 0" Height="765" Width="1150" HorizontalAlignment="Left" Orientation="Vertical">
+                    <Label Width="700" 
+                           Height="40"
+                           Margin="-350 25 0 0"
+                           FontSize="20"
+                           FontFamily="Ubuntu"
+                           FontWeight="Medium"
+                           Name="AcceptedToursLabel"/>
+                    <Label Width="700" 
+                           Height="40"
+                           Margin="-350 25 0 0"
+                           FontSize="20"
+                           FontFamily="Ubuntu"
+                           FontWeight="Medium"
+                           Name="AverageNumberOfPeopleLabel"/>
+                    <Label Width="700" 
+                           Height="40"
+                           Margin="-350 50 0 0"
+                           FontSize="20"
+                           FontFamily="Ubuntu"
+                           FontWeight="Medium"
+                           Name="DeclinedToursLabel"/>
+                    <xctk:WatermarkComboBox Width="300"
+                                            Height="50"
+                                            FontWeight="Light"
+                                            FontFamily="Ubuntu"
+                                            FontSize="20"                                            
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Margin="800 -350 0 0"
+                                            Watermark="Select the year"
+                                            Name="YearsComboBox"
+                                            SelectionChanged="ComboBoxSelectedYear"
+                                            />
                 </StackPanel>
             </GroupBox>
         </Grid>

@@ -42,9 +42,10 @@ namespace InitialProject.WPF.View.GuestTwoViews
             List<TourRequest> requests = new List<TourRequest>();
             foreach (TourRequest request in context.TourRequests.ToList())
             {
-
-                requests.Add(request);
-                
+                if (LoggedUser.id == request.guestId)
+                {
+                    requests.Add(request);
+                }
             }
             this.dataGrid.ItemsSource = requests;
         }

@@ -87,7 +87,8 @@ namespace InitialProject.WPF.View.GuestTwoViews
                                                               (language)LanguageComboBox.SelectedItem,
                                                               (DateTime)StartDate.SelectedDate,
                                                               (DateTime)EndDate.SelectedDate,
-                                                              (string)DescriptionTextBox.Text);
+                                                              (string)DescriptionTextBox.Text,
+                                                              LoggedUser.id);
                     DataBaseContext context = new DataBaseContext();
                     context.TourRequests.Add(tourRequest);
                     context.SaveChanges();

@@ -23,8 +23,9 @@ namespace InitialProject.Model
         public DateTime endDate { get; set; }
         public string description { get; set; }
         public TourRequestStatus status { get; set; }
+        public int guestId { get; set; }
 
-        public TourRequest(string city, string country, int numberOfTourists, language language, DateTime startDate, DateTime endDate, string description)
+        public TourRequest(string city, string country, int numberOfTourists, language language, DateTime startDate, DateTime endDate, string description, int guestId)
         {
             this.city = city;
             this.country = country;
@@ -34,6 +35,7 @@ namespace InitialProject.Model
             this.endDate = endDate;
             this.description = description;
             this.status = TourRequestStatus.OnHold;
+            this.guestId = guestId;
         }
     }
 }
