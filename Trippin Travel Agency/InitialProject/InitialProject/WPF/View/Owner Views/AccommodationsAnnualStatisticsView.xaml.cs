@@ -37,7 +37,8 @@ namespace InitialProject.WPF.View.Owner_Views
         public SeriesCollection SeriesCollection { get; set; }
         public string[] BarLabels { get; set; }
         public Func<double, string> Formatter { get; set; }
-        
+        public Func<double, string> YAxisLabelFormatter { get; set; }
+
         public AccommodationsAnnualStatisticsView()
         {
             InitializeComponent();
@@ -56,6 +57,7 @@ namespace InitialProject.WPF.View.Owner_Views
             {
                 yearComboBox.Items.Add(year);
             }
+            yearComboBox.Items.Add("All Time");
         }
 
         private void ShowTransferedAccommodationsStatistics()
@@ -101,53 +103,75 @@ namespace InitialProject.WPF.View.Owner_Views
         private void yearComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             BookingService bookingService = new(new BookingRepository());
-            int selectedYear = (int)yearComboBox.SelectedItem;
-            int numberOfBookings = 0;
-            int numberOfCancelations = 0;
-            int numberOfDelayments = 0;
 
-            DataBaseContext transferContext = new DataBaseContext();
-            AnnualAccommodationTransfer transferedAccommodation = transferContext.AccommodationAnnualStatisticsTransfer.First();
-            List<Booking> bookings = bookingService.GetAllBookings();
-            List<CanceledBooking> canceledBookings = bookingService.GetAllCanceledBookings();
-            List<DelayedBookings> delayedBookings = bookingService.GetAllDelayedBookings();
-            List<AccommodationsAnnualStatisticsDTO> dataToShow = new List<AccommodationsAnnualStatisticsDTO>();
-
-            numberOfBookings = bookingService.CountAccommodationsBookingsPerYear(selectedYear, numberOfBookings, transferedAccommodation, bookings);
-
-            numberOfCancelations = bookingService.CountAccommodationsCanceledBookingsForYear(selectedYear, numberOfCancelations, transferedAccommodation, canceledBookings);
-
-            numberOfDelayments = bookingService.CountAccommodationsDelayedBookingsForYear(selectedYear, numberOfDelayments, transferedAccommodation, delayedBookings);
-
-            AccommodationsAnnualStatisticsDTO dto = new AccommodationsAnnualStatisticsDTO(selectedYear, numberOfBookings, numberOfCancelations, numberOfDelayments);
-            dataToShow.Add(dto);
-            annualStatisticsDataGrid.ItemsSource = dataToShow;
-
-            SeriesCollection = new SeriesCollection
+            if (yearComboBox.SelectedItem.ToString() != "All Time")
             {
-                new ColumnSeries
+                int selectedYear = (int)yearComboBox.SelectedItem;
+                int numberOfBookings = 0;
+                int numberOfCancelations = 0;
+                int numberOfDelayments = 0;
+
+                DataBaseContext transferContext = new DataBaseContext();
+                AnnualAccommodationTransfer transferedAccommodation = transferContext.AccommodationAnnualStatisticsTransfer.First();
+                List<Booking> bookings = bookingService.GetAllBookings();
+                List<CanceledBooking> canceledBookings = bookingService.GetAllCanceledBookings();
+                List<DelayedBookings> delayedBookings = bookingService.GetAllDelayedBookings();
+                List<AccommodationsAnnualStatisticsDTO> dataToShow = new List<AccommodationsAnnualStatisticsDTO>();
+
+                numberOfBookings = bookingService.CountAccommodationsBookingsForYear(selectedYear, numberOfBookings, transferedAccommodation, bookings);
+
+                numberOfCancelations = bookingService.CountAccommodationsCanceledBookingsForYear(selectedYear, numberOfCancelations, transferedAccommodation, canceledBookings);
+
+                numberOfDelayments = bookingService.CountAccommodationsDelayedBookingsForYear(selectedYear, numberOfDelayments, transferedAccommodation, delayedBookings);
+
+                AccommodationsAnnualStatisticsDTO dto = new AccommodationsAnnualStatisticsDTO(selectedYear, numberOfBookings, numberOfCancelations, numberOfDelayments);
+                dataToShow.Add(dto);
+                annualStatisticsDataGrid.ItemsSource = dataToShow;
+
+                YAxisLabelFormatter = value => value.ToString("#.##");
+
+                if (SeriesCollection == null)
                 {
-                    Title="Bookings",
-                    Values = new ChartValues<int>{numberOfBookings}
+                    SeriesCollection = new SeriesCollection
+                {
+                    new ColumnSeries
+                    {
+                        Title="Bookings",
+                        Values = new ChartValues<int>{numberOfBookings}
+                    },
+                    new ColumnSeries
+                    {
+                        Title = "Cancelations",
+                        Values = new ChartValues<int> { numberOfCancelations }
+                    },
+                    new ColumnSeries
+                    {
+                        Title = "Delayments",
+                        Values = new ChartValues<int> { numberOfDelayments }
+                    },
+                };
+
+                    DataContext = this;
                 }
-            };
+                else
+                {
+                    ((ColumnSeries)SeriesCollection[0]).Values[0] = numberOfBookings;
+                    ((ColumnSeries)SeriesCollection[1]).Values[0] = numberOfCancelations;
+                    ((ColumnSeries)SeriesCollection[2]).Values[0] = numberOfDelayments;
+                }
 
-            SeriesCollection.Add(new ColumnSeries
+                BarLabels = new[] { "Number of: " };
+                Formatter = value => value.ToString("N");
+
+                DataContext = this;
+
+            }
+            else
             {
-                Title = "Cancelations",
-                Values = new ChartValues<int> {numberOfCancelations}
-            });
-
-            SeriesCollection.Add(new ColumnSeries
-            {
-                Title = "Delayments",
-                Values = new ChartValues<int> { numberOfDelayments }
-            });
-
-            BarLabels = new[] { "Number of:" };
-            Formatter = value => value.ToString("N");
-
-            DataContext = this;
+                ShowTransferedAccommodationsStatistics();
+                return;
+            }
+            
         }
 
         public void ShowAccommodationsDetails()
@@ -176,7 +200,6 @@ namespace InitialProject.WPF.View.Owner_Views
             MonthlyAccommodationTransfer monthlyAccommodationTransfer = new MonthlyAccommodationTransfer(selectedAccommodation.year, transferedAccommodation.accommodationId);
             monthlyTransferContext.AccommodationsMonthlyStatisticsTransfer.Add(monthlyAccommodationTransfer);
             monthlyTransferContext.SaveChanges();
-            MessageBox.Show(monthlyAccommodationTransfer.accommodationId.ToString());
         }
     }
 }

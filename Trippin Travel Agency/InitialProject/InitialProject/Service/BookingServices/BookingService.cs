@@ -164,7 +164,7 @@ namespace InitialProject.Service.BookingServices
             return numberOfCancelations;
         }
 
-        public int CountAccommodationsBookingsPerYear(int selectedYear, int numberOfBookings, AnnualAccommodationTransfer transferedAccommodation, List<Booking> bookings)
+        public int CountAccommodationsBookingsForYear(int selectedYear, int numberOfBookings, AnnualAccommodationTransfer transferedAccommodation, List<Booking> bookings)
         {
             foreach (Booking booking in bookings)
             {

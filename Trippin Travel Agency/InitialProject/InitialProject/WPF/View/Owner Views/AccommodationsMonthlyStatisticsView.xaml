@@ -49,17 +49,29 @@
                   RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="monthlyStatisticsDataGrid" 
                   AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Year" Binding="{Binding year}" Width="70"/>
+                        <DataGridTextColumn Header="Month" Binding="{Binding month}" Width="95"/>
                         <DataGridTextColumn Header="No. of bookings" Binding="{Binding numberOfBookings}" Width="Auto"/>
                         <DataGridTextColumn Header="No. of cancelations" Binding="{Binding numberOfCancelations}" Width="Auto"/>
                         <DataGridTextColumn Header="No. of delayments" Binding="{Binding numberOfDelayments}" Width="Auto"/>
-                        <DataGridTextColumn Header="No. of renovation suggestions" Width="Auto"/>
+                        <DataGridTextColumn Header="No. of renovation sugg." Width="Auto"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
         </ScrollViewer>
 
         <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0 10 0 0">
+            <lc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Bottom" Width="350" x:Name="MonthlyStatisticsBarChart">
+                <lc:CartesianChart.AxisX>
+                    <lc:Axis Labels="{Binding BarLabels}"/>
+                </lc:CartesianChart.AxisX>
+                <lc:CartesianChart.AxisY>
+                    <lc:Axis Title="Value" LabelFormatter="{Binding YAxisLabelFormatter}">
+                        <lc:Axis.Separator>
+                            <lc:Separator Step="1"/>
+                        </lc:Axis.Separator>
+                    </lc:Axis>
+                </lc:CartesianChart.AxisY>
+            </lc:CartesianChart>
         </StackPanel>
     </Grid>
 </UserControl>
