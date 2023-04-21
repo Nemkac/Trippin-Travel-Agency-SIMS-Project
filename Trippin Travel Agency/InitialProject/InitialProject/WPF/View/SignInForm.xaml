@@ -26,7 +26,7 @@
             <ColumnDefinition Width="520"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\Nemanja\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\login-background.jpg">
+            <ImageBrush ImageSource="C:\Users\aleks\OneDrive\Dokumenti\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\login-background.jpg">
                 <ImageBrush.RelativeTransform>
                     <ScaleTransform ScaleX="1" ScaleY="1" />
                 </ImageBrush.RelativeTransform>
@@ -133,12 +133,11 @@
                     Grid.Column="2"
                     VerticalAlignment="Center"
                     >
-            <Image Source="C:\Users\Nemanja\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\logo.png"
+            <Image Source="C:\Users\aleks\OneDrive\Dokumenti\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\logo.png"
                            Width="130"
                            Height="70"
                            Margin="0, 0, 0, 30"
                            />
-
             <TextBlock Text="Trippin Travel"
                    HorizontalAlignment="Center"
                    Foreground="#f5f6fa"
