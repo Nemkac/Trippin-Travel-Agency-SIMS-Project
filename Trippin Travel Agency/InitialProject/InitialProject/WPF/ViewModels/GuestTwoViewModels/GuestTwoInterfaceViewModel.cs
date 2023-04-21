@@ -36,7 +36,8 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
         public ICommand ShowGuestTwoMessages { get; }
         public ICommand ShowLiveTour { get; }
         public ICommand ShowCreateYourOwnTour { get; }
-
+        public ICommand ShowGuestTwoRequests { get; }
+        public ICommand ShowGuestTwoStatistics { get; }
 
 
         public GuestTwoInterfaceViewModel()
@@ -50,6 +51,10 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             ShowGuestTwoMessages = new ViewModelCommand(ExecuteShowGuestTwoMessages);
 
             ShowCreateYourOwnTour = new ViewModelCommand(ExecuteShowCreateTourOwnTourCommand);
+
+            ShowGuestTwoRequests = new ViewModelCommand(ExecuteShowGuestTwoRequests);
+
+            ShowGuestTwoStatistics = new ViewModelCommand(ExecuteShowGuestTwoStatistics);
 
         }
 
@@ -88,6 +93,15 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
         public void ExecuteShowCreateTourOwnTourCommand(object obj)
         {
             CurrentChildView = new CreateYourOwnTourViewModel();
+        }
+        public void ExecuteShowGuestTwoRequests(object obj)
+        {
+            CurrentChildView = new GuestTwoRequestsViewModel(); 
+        }
+
+        public void ExecuteShowGuestTwoStatistics(object obj)
+        {
+            CurrentChildView = new GuestTwoStatisticsViewModel();
         }
 
     }

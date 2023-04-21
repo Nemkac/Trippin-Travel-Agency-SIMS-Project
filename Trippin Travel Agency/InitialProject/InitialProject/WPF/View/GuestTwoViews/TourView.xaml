@@ -21,7 +21,7 @@
                 <ColumnDefinition Width="900"/>
                 <ColumnDefinition Width="620"/>
             </Grid.ColumnDefinitions>
-            <GroupBox Header="Search by these parameters" FontSize="40" FontFamily="Ubuntu" FontWeight="Medium"/>
+            <GroupBox Header="Search by these parameters" FontSize="40" FontFamily="Ubuntu" FontWeight="Medium" Foreground="#192a56"/>
             <StackPanel Grid.Column="0">
                 <Label Content="Filter by country" HorizontalAlignment="Left" Margin="50,60,0,0" VerticalAlignment="Top" Width="244" Height="40" FontSize="20"/>
                 <TextBox HorizontalAlignment="Left" Margin="50,5,0,0" Text = "" TextWrapping="Wrap" Width="244" Name = "countryName"/>
@@ -35,8 +35,8 @@
                 <ComboBox HorizontalAlignment="Left" Margin="640,-235,0,0" Text = "Language" VerticalAlignment="Top" Width="120" Name ="languageBox"/>
       
             </StackPanel>
-                
-            <GroupBox Header="Booking section" FontSize="40" FontFamily="Ubuntu" FontWeight="Medium" Grid.Column="1"/>
+
+            <GroupBox Header="Booking section" FontSize="40" FontFamily="Ubuntu" FontWeight="Medium" Grid.Column="1" Foreground="#192a56"/>
             <StackPanel Grid.Column="1">
                 <Button Content="Book" HorizontalAlignment="Left" Margin ="22 255 0 0" VerticalAlignment="Center" Style="{StaticResource saveButtonWEB}"  Click="ReserveTour"  Command="{Binding BookingConfirmationViewCommand}"  Height="82" Width="239"/>
                 <TextBox TextWrapping="Wrap" Margin ="22 -250 0 0" Text="" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" Name ="NumberOfTourists"/>
@@ -44,11 +44,44 @@
                 <TextBlock Height="136" TextWrapping="Wrap" Margin="300 -135 0 0" Text="" Width="275" HorizontalAlignment="Left"  VerticalAlignment="Center" Background="#d1e0e0" Name ="TextBlock" FontSize="20" FontFamily="Ubuntu"/>
             </StackPanel>
         </Grid>
-        
-        <GroupBox Header="Tours" FontSize="40" FontFamily="Ubuntu" FontWeight="Medium" Grid.Row="1"/>
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <DataGrid x:Name="dataGrid" d:DataContext ="" Width="1500" Height="200" Margin="0 -50 0 0"/>
-            <Button Content="Show images" HorizontalAlignment="Left" Margin="-250,255,0,0" VerticalAlignment="Top"  Height="82" Width="239" FontSize="20" Style="{StaticResource addButtonWEB}" Click="ShowTourDetailedView" Command="{Binding DetailedTourViewCommand}"/>
+
+        <GroupBox Header="Tours" FontSize="40" FontFamily="Ubuntu" FontWeight="Medium" Grid.Row="1" Grid.RowSpan="2" Height="600" Margin="0 -190 0 0" Foreground="#192a56"/>
+        <StackPanel Grid.Row="1" Grid.RowSpan="2" Orientation="Horizontal">
+            <DataGrid x:Name="dataGrid"
+                      d:DataContext ="" 
+                      Width="1400" 
+                      Height="500" 
+                      Margin="55 -150 0 0"
+                      Style="{DynamicResource DataGridStyle1}" 
+                      CellStyle="{DynamicResource DataGridCellStyle1}" 
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                      RowStyle="{DynamicResource DataGridRowStyle1}"
+                      AutoGenerateColumns="False"
+                      FontSize="20">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding name}" Width="auto"/>
+                    <DataGridTextColumn Header="City" Binding="{Binding cityLocation}" Width="auto"/>
+                    <DataGridTextColumn Header="Country" Binding="{Binding countryLocation }" Width="auto"/>
+                    <DataGridTextColumn Header="Key points" Binding="{Binding keypoints }" Width="auto"/>
+                    <DataGridTextColumn Header="Language" Binding="{Binding language }" Width="auto"/>
+                    <DataGridTextColumn Header="Spots remaining" Binding="{Binding touristLimit }" Width="auto"/>
+                    <DataGridTextColumn Header="Duration in hours" Binding="{Binding hoursDuration }" Width="auto"/>
+                    <DataGridTextColumn Header="Description" Binding="{Binding description }" Width="*"/>
+
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+            <Button Content="Show images" 
+                    HorizontalAlignment="Left" 
+                    Margin="-250,635,0,0" 
+                    VerticalAlignment="Top"  
+                    Height="82" Width="239" 
+                    FontSize="20" Style="{StaticResource imagesButtonWeb}" 
+                    Click="ShowTourDetailedView" 
+                    Grid.Row="2"
+                    Command="{Binding DetailedTourViewCommand}"/>
         </StackPanel>
             
        

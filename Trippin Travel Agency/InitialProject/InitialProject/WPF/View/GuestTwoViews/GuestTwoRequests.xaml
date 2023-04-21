@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="InitialProject.WPF.View.GuestTwoViews.GuestTwoMessages"
+﻿<UserControl x:Class="InitialProject.WPF.View.GuestTwoViews.GuestTwoRequests"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -44,17 +44,9 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="My messages" Margin ="0 -5 0 0" Grid.Column="1" Height="810" Width="1200" HorizontalAlignment="Left" FontSize="40" FontFamily="Ubuntu" FontWeight="Light" Foreground="#192a56">
+            <GroupBox Header="Tours i suggested" Margin ="0 -400 0 0" Grid.Column="1" Height="400" Width="1200" HorizontalAlignment="Left" FontSize="40" FontFamily="Ubuntu" FontWeight="Light" Foreground="#192a56">
                 <StackPanel Grid.Column="1" Margin="15 0 0 0" Height="765" Width="1150" HorizontalAlignment="Left" Orientation="Vertical">
-                    <DataGrid x:Name="dataGrid" d:DataContext ="" Width="1125" Height="550" Margin="0 50 0 0" FontSize="28" FontFamily="Ubuntu"/>
-                    <Button Width="350"
-                            Height="130"
-                            Style="{StaticResource openMessageButtonWEB}"
-                            Margin="775 15 0 0" 
-                            Content="Open" 
-                            FontSize="32" 
-                            FontFamily="Ubuntu" 
-                            FontWeight="Heavy" Click="OpenMessage"/>
+                    <DataGrid x:Name="dataGrid" d:DataContext ="" Width="1125" Height="300" Margin="0 50 0 0" FontSize="20" FontFamily="Ubuntu" HorizontalAlignment="Center"/>
                 </StackPanel>
             </GroupBox>
         </Grid>

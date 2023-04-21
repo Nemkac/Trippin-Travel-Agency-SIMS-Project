@@ -41,11 +41,19 @@
         <DataTemplate DataType="{x:Type viewModel:CreateYourOwnTourViewModel }">
             <local:CreateYourOwnTourView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:GuestTwoRequestsViewModel}">
+            <local:GuestTwoRequests/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:GuestTwoStatisticsViewModel}">
+            <local:GuestTwoStatisticsView/>
+        </DataTemplate>
         
     </Window.Resources>
     
     <ScrollViewer>
-        <Grid>
+        <Grid Background="#F5F6FA">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>
@@ -72,9 +80,9 @@
             <Button x:Name="TourView" Content="Tour View" Style="{StaticResource menuButtonWEB}" Command="{Binding ShowTourViewCommand}"/>
             <Button x:Name="LiveTour" Content="Live Tour" Style="{StaticResource menuButtonWEB}" Command="{Binding ShowLiveTour}"/>
             <Button x:Name="CreateYourOwnTour" Content="Create Your Own Tour" Style="{StaticResource menuButtonWEB}" Width="250" Command="{Binding ShowCreateYourOwnTour}"/>
-            <Button x:Name="MyRequests" Content="My Requests" Style="{StaticResource menuButtonWEB}"/>
+            <Button x:Name="MyRequests" Content="My Requests" Style="{StaticResource menuButtonWEB}" Command="{Binding ShowGuestTwoRequests}"/>
             <Button x:Name="Coupons" Content="Coupons" Style="{StaticResource menuButtonWEB}" Command="{Binding ShowGuestTwoCoupons}"/>
-            <Button x:Name="Account" Content="Account" Style="{StaticResource menuButtonWEB}"/>
+            <Button x:Name="Account" Content="Account" Style="{StaticResource menuButtonWEB}" Command="{Binding ShowGuestTwoStatistics}"/>
             <Button x:Name="SignOut" Content="Sign Out" Style="{StaticResource menuButtonWEB}"/>
         </StackPanel>
 
