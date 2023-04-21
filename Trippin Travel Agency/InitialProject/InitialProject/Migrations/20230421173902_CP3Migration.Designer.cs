@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20230416005753_DelayedBookingsTable")]
-    partial class DelayedBookingsTable
+    [Migration("20230421173902_CP3Migration")]
+    partial class CP3Migration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -242,8 +242,14 @@ namespace InitialProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("accommodationId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("bookingId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("plannedArrival")
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("seen")
                         .HasColumnType("INTEGER");
@@ -276,8 +282,14 @@ namespace InitialProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("accommodationId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("bookingId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("previousArrival")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("id");
 
@@ -515,6 +527,47 @@ namespace InitialProject.Migrations
                     b.ToTable("TourMessages");
                 });
 
+            modelBuilder.Entity("InitialProject.Model.TourRequest", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("city")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("country")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("endDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("guestId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("language")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("numberOfTourists")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("startDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("status")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("TourRequests");
+                });
+
             modelBuilder.Entity("InitialProject.Model.TourReservation", b =>
                 {
                     b.Property<int>("id")
@@ -536,9 +589,37 @@ namespace InitialProject.Migrations
                     b.Property<int>("tourId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("withVoucher")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("id");
 
                     b.ToTable("TourReservations");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.TransferModels.AnnualAccommodationTransfer", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("accommodationId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("accommodationName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("location")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("maxNumOfGuests")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("AccommodationAnnualStatisticsTransfer");
                 });
 
             modelBuilder.Entity("InitialProject.Model.TransferModels.BookingTransfer", b =>
@@ -570,6 +651,23 @@ namespace InitialProject.Migrations
                     b.HasKey("id");
 
                     b.ToTable("detailedTourViewTransfers");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.TransferModels.MonthlyAccommodationTransfer", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("accommodationId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("selectedYear")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("AccommodationsMonthlyStatisticsTransfer");
                 });
 
             modelBuilder.Entity("InitialProject.Model.TransferModels.TourBookingTransfer", b =>
@@ -636,6 +734,9 @@ namespace InitialProject.Migrations
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("age")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("email")

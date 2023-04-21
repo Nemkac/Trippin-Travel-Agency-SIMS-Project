@@ -6,11 +6,27 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace InitialProject.Migrations
 {
     /// <inheritdoc />
-    public partial class CP2 : Migration
+    public partial class CP3Migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "AccommodationAnnualStatisticsTransfer",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    accommodationId = table.Column<int>(type: "INTEGER", nullable: false),
+                    accommodationName = table.Column<string>(type: "TEXT", nullable: false),
+                    location = table.Column<string>(type: "TEXT", nullable: false),
+                    maxNumOfGuests = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AccommodationAnnualStatisticsTransfer", x => x.id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AccommodationLocation",
                 columns: table => new
@@ -42,6 +58,20 @@ namespace InitialProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AccommodationsMonthlyStatisticsTransfer",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    selectedYear = table.Column<int>(type: "INTEGER", nullable: false),
+                    accommodationId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AccommodationsMonthlyStatisticsTransfer", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "BookingCancelationMessages",
                 columns: table => new
                 {
@@ -62,7 +92,9 @@ namespace InitialProject.Migrations
                     id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     bookingId = table.Column<int>(type: "INTEGER", nullable: false),
-                    seen = table.Column<bool>(type: "INTEGER", nullable: false)
+                    accommodationId = table.Column<int>(type: "INTEGER", nullable: false),
+                    seen = table.Column<bool>(type: "INTEGER", nullable: false),
+                    plannedArrival = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -81,6 +113,21 @@ namespace InitialProject.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Coupons", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DelayedBookings",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    bookingId = table.Column<int>(type: "INTEGER", nullable: false),
+                    accommodationId = table.Column<int>(type: "INTEGER", nullable: false),
+                    previousArrival = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DelayedBookings", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -273,6 +320,27 @@ namespace InitialProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TourRequests",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    city = table.Column<string>(type: "TEXT", nullable: false),
+                    country = table.Column<string>(type: "TEXT", nullable: false),
+                    numberOfTourists = table.Column<int>(type: "INTEGER", nullable: false),
+                    language = table.Column<int>(type: "INTEGER", nullable: false),
+                    startDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    endDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    description = table.Column<string>(type: "TEXT", nullable: false),
+                    status = table.Column<int>(type: "INTEGER", nullable: false),
+                    guestId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TourRequests", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TourReservations",
                 columns: table => new
                 {
@@ -282,7 +350,8 @@ namespace InitialProject.Migrations
                     tourId = table.Column<int>(type: "INTEGER", nullable: false),
                     guestNumber = table.Column<int>(type: "INTEGER", nullable: false),
                     guestJoined = table.Column<bool>(type: "INTEGER", nullable: false),
-                    guideConfirmed = table.Column<bool>(type: "INTEGER", nullable: false)
+                    guideConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    withVoucher = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -316,7 +385,8 @@ namespace InitialProject.Migrations
                     firstName = table.Column<string>(type: "TEXT", nullable: false),
                     lastName = table.Column<string>(type: "TEXT", nullable: false),
                     email = table.Column<string>(type: "TEXT", nullable: false),
-                    role = table.Column<string>(type: "TEXT", nullable: false)
+                    role = table.Column<string>(type: "TEXT", nullable: false),
+                    age = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -334,7 +404,8 @@ namespace InitialProject.Migrations
                     guestLimit = table.Column<int>(type: "INTEGER", nullable: false),
                     minDaysBooked = table.Column<int>(type: "INTEGER", nullable: false),
                     bookingCancelPeriodDays = table.Column<int>(type: "INTEGER", nullable: false),
-                    type = table.Column<int>(type: "INTEGER", nullable: false)
+                    type = table.Column<int>(type: "INTEGER", nullable: false),
+                    ownerId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -485,6 +556,12 @@ namespace InitialProject.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AccommodationAnnualStatisticsTransfer");
+
+            migrationBuilder.DropTable(
+                name: "AccommodationsMonthlyStatisticsTransfer");
+
+            migrationBuilder.DropTable(
                 name: "BookingCancelationMessages");
 
             migrationBuilder.DropTable(
@@ -495,6 +572,9 @@ namespace InitialProject.Migrations
 
             migrationBuilder.DropTable(
                 name: "Coupons");
+
+            migrationBuilder.DropTable(
+                name: "DelayedBookings");
 
             migrationBuilder.DropTable(
                 name: "detailedTourViewTransfers");
@@ -531,6 +611,9 @@ namespace InitialProject.Migrations
 
             migrationBuilder.DropTable(
                 name: "TourMessages");
+
+            migrationBuilder.DropTable(
+                name: "TourRequests");
 
             migrationBuilder.DropTable(
                 name: "TourReservations");
