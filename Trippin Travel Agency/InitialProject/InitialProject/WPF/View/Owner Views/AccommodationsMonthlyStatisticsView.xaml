@@ -72,6 +72,7 @@
                     </lc:Axis>
                 </lc:CartesianChart.AxisY>
             </lc:CartesianChart>
+            <lc:PieChart x:Name="pieChart" Width="350"/>
         </StackPanel>
     </Grid>
 </UserControl>

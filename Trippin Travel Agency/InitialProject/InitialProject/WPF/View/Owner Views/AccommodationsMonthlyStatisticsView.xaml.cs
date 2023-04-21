@@ -36,6 +36,7 @@ namespace InitialProject.WPF.View.Owner_Views
     public partial class AccommodationsMonthlyStatisticsView : UserControl
     {
         private AccommodationService accommodationService = new(new AccommodationRepository());
+        private BookingService bookingService = new(new BookingRepository());
         private string[] months = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
         public SeriesCollection SeriesCollection { get; set; }
         public string[] BarLabels { get; set; }
@@ -49,10 +50,44 @@ namespace InitialProject.WPF.View.Owner_Views
             MonthlyAccommodationTransfer transferedStatitic = annualStatisticsContext.AccommodationsMonthlyStatisticsTransfer.First();
             Accommodation accommodation = this.accommodationService.GetById(transferedStatitic.accommodationId);
             accommodationNameTextBlock.Text = accommodation.name;
-            //this.SeriesCollection = new SeriesCollection();
+
             foreach(string month in months)
             {
                 monthComboBox.Items.Add(month);
+            }
+
+            var occupancyByMonth = new Dictionary<string, int>();
+            List<Booking> bookings = this.bookingService.GetAllBookings();
+
+            foreach (Booking booking in bookings)
+            {
+                DateTime currentDate = DateTime.ParseExact(booking.arrival, "M/d/yyyy", CultureInfo.InvariantCulture);
+                DateTime departureDate = DateTime.ParseExact(booking.departure, "M/d/yyyy", CultureInfo.InvariantCulture);
+                while (currentDate < departureDate)
+                {
+                    string key = currentDate.ToString("yyyy-MM");
+                    if (occupancyByMonth.ContainsKey(key))
+                    {
+                        occupancyByMonth[key]++;
+                    }
+                    else
+                    {
+                        occupancyByMonth[key] = 1;
+                    }
+                    currentDate = currentDate.AddDays(1);
+                }
+            }
+
+            pieChart.Series.Clear();
+            foreach (string month in occupancyByMonth.Keys)
+            {
+                pieChart.Series.Add(new PieSeries
+                {
+                    Title = month,
+                    Values = new ChartValues<int> { occupancyByMonth[month] },
+                    DataLabels = true,
+                    LabelPoint = chartPoint => string.Format("{0} ({1:P})", chartPoint.SeriesView.Title, chartPoint.Participation),
+                });
             }
         }
 
