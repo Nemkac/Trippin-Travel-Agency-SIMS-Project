@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows;
 using InitialProject.Interfaces;
 using InitialProject.Repository;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace InitialProject.Service.TourServices
 {
@@ -202,6 +203,21 @@ namespace InitialProject.Service.TourServices
         {
             return keyPointsList.FirstOrDefault(kp => kp.visited == false);
         }
+
+        public List<TourAttendance> GetTourAttendances (int tourId)
+        {
+            List<TourAttendance> attendances = new List<TourAttendance>();
+            DataBaseContext dataBaseContext = new DataBaseContext();
+            foreach (TourAttendance ta in dataBaseContext.TourAttendances.ToList())
+            {
+                if (ta.tourId == tourId)
+                {
+                    attendances.Add(ta);
+                }
+            }
+            return attendances;
+        }
+
 
     }
 }

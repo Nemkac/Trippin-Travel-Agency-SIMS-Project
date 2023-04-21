@@ -132,7 +132,7 @@
 
                 <!-- Finished tours -->
                 <StackPanel Orientation="Vertical"
-                            Margin="0,20,0,0">
+                            Margin="0,20,0,40">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Check" HorizontalAlignment="Left" Style="{StaticResource menuBackButtonIcon}" Width="15" Height="15"/>
                         <Label Content="Finished tours" Style="{StaticResource labelAboveTextBox}"/>

@@ -30,8 +30,8 @@ namespace InitialProject.WPF.View.TourGuideViews
     {
         private readonly TourService tourService;
         private readonly MessageService messageService = new MessageService();
-
         private readonly TourReviewService tourReviewService = new TourReviewService();
+        private readonly UserService userService = new UserService();
 
         public TourGuide_FinishedTourData()
         {
@@ -48,7 +48,6 @@ namespace InitialProject.WPF.View.TourGuideViews
             TourMessage message = messageService.GetByTourId(tour.id);
             this.headerTextBlock.Text = tour.name;
             List<TourAndGuideRateDTO> finishedTourReviewDtos = new List<TourAndGuideRateDTO>();
-            //MessageBox.Show(message.keyPointId.ToString()); 
 
             List<TourAndGuideRate> reviews = tourService.GetTourRatingsById(tour.id);
             foreach (TourAndGuideRate tr in reviews)
@@ -56,6 +55,35 @@ namespace InitialProject.WPF.View.TourGuideViews
                 finishedTourReviewDtos.Add(tourReviewService.transformTourReviewToDTO(tr, message.keyPointId));
             }
             this.reviewsDataGrid.ItemsSource = finishedTourReviewDtos;
+
+            // years part 
+
+            List<TourAttendance> attendances = tourService.GetTourAttendances(tour.id);
+
+            int under18Count = 0;
+            int between18and50Count = 0;
+            int above50Count = 0;
+
+            foreach (TourAttendance attendance in attendances)
+            {
+                int age = userService.GetById(attendance.guestID).age;
+                if (age < 18)
+                {
+                    under18Count++;
+                }
+                else if (age >= 18 && age <= 50)
+                {
+                    between18and50Count++;
+                }
+                else
+                {
+                    above50Count++;
+                }
+            }
+
+            under18.Text = under18Count.ToString();
+            between18and50.Text = between18and50Count.ToString();
+            above50.Text = above50Count.ToString();
         }
 
 

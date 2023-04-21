@@ -68,7 +68,52 @@
                         Margin="0,0,0,20"
                         Width="Auto"
                         >
+                <!-- Age groups -->
+                <TextBlock Text="Age groups"
+                           MaxWidth="270"
+                           Style="{StaticResource headerTextBlock}"
+                           FontSize="28"
+                           HorizontalAlignment="Left"
+                           Margin="0, 0, 0, 20"
+                           />
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="18-"/>
+                    <TextBox x:Name="under18" Width="100"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="18 to 50"/>
+                    <TextBox x:Name="between18and50" Width="100"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="50+"/>
+                    <TextBox x:Name="above50" Width="100"/>
+                </StackPanel>
 
+                <!-- Voucher tourists -->
+                <TextBlock Text="Voucher tourists"
+                           MaxWidth="270"
+                           Style="{StaticResource headerTextBlock}"
+                           FontSize="28"
+                           HorizontalAlignment="Left"
+                           Margin="0, 0, 0, 20"
+                           />
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="With"/>
+                    <TextBox x:Name="withVoucher" Width="100"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Without"/>
+                    <TextBox x:Name="withoutVoucher" Width="100"/>
+                </StackPanel>
+
+                <!-- Tourist reviews --> 
+                <TextBlock Text="Tourst reviews"
+                           MaxWidth="270"
+                           Style="{StaticResource headerTextBlock}"
+                           FontSize="28"
+                           Margin="0, 20, 0, 0"
+                           HorizontalAlignment="Left"
+                           />
                 <!-- Little text helper -->
                 <StackPanel Orientation="Vertical"
                             Margin="0,20,0,20">

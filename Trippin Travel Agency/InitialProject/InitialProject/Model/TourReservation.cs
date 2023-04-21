@@ -20,6 +20,8 @@ namespace InitialProject.Model
         
         public bool guideConfirmed { get; set; }
 
+        public bool withVoucher { get; set; }
+
         public TourReservation(int guestId, int tourId, int guestNumber)
         {
             this.guestId = guestId;
@@ -27,6 +29,7 @@ namespace InitialProject.Model
             this.guestNumber = guestNumber;
             this.guestJoined = false;  
             this.guideConfirmed = false;
+            this.withVoucher = false;
         }
         public TourReservation() { }    
     }

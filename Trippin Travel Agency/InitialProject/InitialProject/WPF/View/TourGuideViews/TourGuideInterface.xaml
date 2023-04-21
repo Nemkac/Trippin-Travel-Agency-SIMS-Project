@@ -57,6 +57,26 @@
             <local:TourGuide_TourStatistics/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModel:TourGuide_RequestsViewModel}">
+            <local:TourGuide_Requests/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:TourGuide_FullTourRequestsViewModel}">
+            <local:TourGuide_FullTourRequests/>
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type viewModel:TourGuide_TourPartRequestsViewModel}">
+            <local:TourGuide_TourPartRequests/>
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type viewModel:TourGuide_RequestStatisticsViewModel}">
+            <local:TourGuide_RequestStatistics/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:TourGuide_ProfileViewModel}">
+            <local:TourGuide_Profile/>
+        </DataTemplate>
+
     </Window.Resources>
     
     <Grid>
@@ -96,7 +116,12 @@
                 </RadioButton>
 
                 <!-- Requests radio button -->
-                <RadioButton Grid.Column="3" Style="{StaticResource mobileMenuButton}" Tag="{StaticResource HoverColor}" DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <RadioButton Grid.Column="3" Style="{StaticResource mobileMenuButton}"
+                             Tag="{StaticResource HoverColor}"
+                             DockPanel.Dock="Left"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Center"
+                             Command="{Binding ShowTourGuideRequestsViewCommand}">
                     <StackPanel Orientation="Vertical" Margin="0,0,0,0">
                         <fa:IconImage Icon="ArrowDown" Style="{StaticResource menuButtonIcon}"/>
                         <Label Content="Requests" Style="{StaticResource labelBeneathIcon}"/>
@@ -104,7 +129,13 @@
                 </RadioButton>
                 
                 <!-- Profile radio button -->
-                <RadioButton Grid.Column="5" Style="{StaticResource mobileMenuButton}" Tag="{StaticResource HoverColor}" DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <RadioButton Grid.Column="5" Style="{StaticResource mobileMenuButton}"
+                             Tag="{StaticResource HoverColor}"
+                             DockPanel.Dock="Left"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Center"
+                             Command="{Binding ShowTourGuideProfileViewCommand}"
+                             >
                     <StackPanel Orientation="Vertical" Margin="11,0,0,0">
                         <fa:IconImage Icon="UserAlt" Style="{StaticResource menuButtonIcon}"/>
                         <Label Content="Profile" Style="{StaticResource labelBeneathIcon}"/>

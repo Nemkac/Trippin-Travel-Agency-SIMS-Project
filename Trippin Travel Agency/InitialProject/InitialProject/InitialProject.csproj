@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Assets\fruska-gora.jpg" />
     <None Remove="Assets\tours-white.svg" />
   </ItemGroup>
 
@@ -37,6 +38,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="WPF\View\TourGuideViews\TourGuide_Requests.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="WPF\View\TourGuideViews\TourGuide_Profile.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="WPF\View\TourGuideViews\TourGuide_Tours.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -44,6 +51,10 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\fruska-gora.jpg" />
   </ItemGroup>
 
 </Project>

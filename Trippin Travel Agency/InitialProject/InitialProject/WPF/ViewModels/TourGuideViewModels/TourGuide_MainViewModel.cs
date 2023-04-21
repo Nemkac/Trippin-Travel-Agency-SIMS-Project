@@ -34,6 +34,11 @@ namespace InitialProject.WPF.ViewModels
         public ICommand ShowTourGuideFinishedToursViewCommand { get; }
         public ICommand ShowTourGuideTourDataViewCommand { get; }
         public ICommand ShowTourGuideTourStatisticsViewCommand { get; }
+        public ICommand ShowTourGuideRequestsViewCommand { get; }
+        public ICommand ShowTourGuideFullTourRequestsViewCommand { get; }
+        public ICommand ShowTourGuideTourPartRequestsViewCommand { get; }
+        public ICommand ShowTourGuideRequestStatisticsViewCommand { get; }
+        public ICommand ShowTourGuideProfileViewCommand { get; }
 
         public TourGuide_MainViewModel()
         {
@@ -46,6 +51,12 @@ namespace InitialProject.WPF.ViewModels
             ShowTourGuideFinishedToursViewCommand = new ViewModelCommand(ExecuteShowTourGuideFinishedToursViewCommand);
             ShowTourGuideTourDataViewCommand = new ViewModelCommand(ExecuteShowTourGuideTourDataViewCommand);
             ShowTourGuideTourStatisticsViewCommand = new ViewModelCommand(ExecuteShowTourGuideTourStatisticsViewCommand);
+            ShowTourGuideRequestsViewCommand = new ViewModelCommand(ExecuteShowTourGuideRequestsViewCommand);
+            ShowTourGuideFullTourRequestsViewCommand = new ViewModelCommand(ExecuteShowTourGuideFullTourRequestsViewCommand);
+            ShowTourGuideTourPartRequestsViewCommand = new ViewModelCommand(ExecuteShowTourGuideTourPartRequestsViewCommand);
+            ShowTourGuideRequestStatisticsViewCommand = new ViewModelCommand(ExecuteShowTourGuideRequestStatisticsViewCommand);
+            ShowTourGuideProfileViewCommand = new ViewModelCommand(ExecuteShowTourGuideProfileViewCommand);
+
             ExecuteShowTourGuideDashboardViewCommand(null);
         }
 
@@ -85,6 +96,26 @@ namespace InitialProject.WPF.ViewModels
         public void ExecuteShowTourGuideTourStatisticsViewCommand(object obj)
         {
             CurrentChildView = new TourGuide_TourStatisticsViewModel(this);
+        }
+        public void ExecuteShowTourGuideRequestsViewCommand(object obj)
+        {
+            CurrentChildView = new TourGuide_RequestsViewModel(this);
+        }
+        public void ExecuteShowTourGuideFullTourRequestsViewCommand(object obj)
+        {
+            CurrentChildView = new TourGuide_FullTourRequestsViewModel(this);
+        }
+        public void ExecuteShowTourGuideTourPartRequestsViewCommand(object obj)
+        {
+            CurrentChildView = new TourGuide_TourPartRequestsViewModel(this);
+        }
+        public void ExecuteShowTourGuideRequestStatisticsViewCommand(object obj)
+        {
+            CurrentChildView = new TourGuide_RequestStatisticsViewModel(this);
+        }
+        public void ExecuteShowTourGuideProfileViewCommand(object obj)
+        {
+            CurrentChildView = new TourGuide_ProfileViewModel(this);
         }
 
 

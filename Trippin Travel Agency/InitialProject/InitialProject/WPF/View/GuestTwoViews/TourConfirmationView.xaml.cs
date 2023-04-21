@@ -60,6 +60,10 @@ namespace InitialProject.WPF.View.GuestTwoViews
             Tour tour = context.Tours.SingleOrDefault(t => t.id == tourBookingTransfer.id);
             tour.touristLimit -= tourBookingTransfer.numberOfGuests;
             TourReservation tourReservation = new TourReservation(LoggedUser.id, tour.id, tourBookingTransfer.numberOfGuests);
+            if (selectedCoupon != null)
+            {
+                tourReservation.withVoucher = true;  
+            }
 
 
             context.TourReservations.Add(tourReservation);
