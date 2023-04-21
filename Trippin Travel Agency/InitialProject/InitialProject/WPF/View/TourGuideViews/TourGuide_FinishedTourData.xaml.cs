@@ -56,8 +56,53 @@ namespace InitialProject.WPF.View.TourGuideViews
             }
             this.reviewsDataGrid.ItemsSource = finishedTourReviewDtos;
 
-            // years part 
+            YearsAttendance(tour);
+            UpdateAttendanceSummary(tour, context);
+        }
 
+        private void UpdateAttendanceSummary(Tour tour, DataBaseContext context)
+        {
+            List<TourAttendance> attendances = tourService.GetTourAttendances(tour.id);
+
+            int withVoucherCount = 0;
+            int withoutVoucherCount = 0;
+            VoucherPossession(tour, context, attendances, ref withVoucherCount, ref withoutVoucherCount);
+            double withVoucherPercentage, withoutVoucherPercentage;
+            ConvertToPercentages(withVoucherCount, withoutVoucherCount, out withVoucherPercentage, out withoutVoucherPercentage);
+
+            withVoucher.Text = withVoucherPercentage.ToString("0.##") + "%";
+            withoutVoucher.Text = withoutVoucherPercentage.ToString("0.##") + "%";
+        }
+
+        private static void ConvertToPercentages(int withVoucherCount, int withoutVoucherCount, out double withVoucherPercentage, out double withoutVoucherPercentage)
+        {
+            int totalCount = withVoucherCount + withoutVoucherCount;
+            withVoucherPercentage = totalCount > 0 ? (double)withVoucherCount / totalCount * 100 : 0;
+            withoutVoucherPercentage = totalCount > 0 ? (double)withoutVoucherCount / totalCount * 100 : 0;
+        }
+
+        private static void VoucherPossession(Tour tour, DataBaseContext context, List<TourAttendance> attendances, ref int withVoucherCount, ref int withoutVoucherCount)
+        {
+            foreach (TourAttendance attendance in attendances)
+            {
+                int guestId = attendance.guestID;
+                bool hasVoucher = context.TourReservations
+                    .Where(tr => tr.guestId == guestId && tr.tourId == tour.id)
+                    .Select(tr => tr.withVoucher)
+                    .FirstOrDefault();
+                if (hasVoucher)
+                {
+                    withVoucherCount++;
+                }
+                else
+                {
+                    withoutVoucherCount++;
+                }
+            }
+        }
+
+        private void YearsAttendance(Tour tour)
+        {
             List<TourAttendance> attendances = tourService.GetTourAttendances(tour.id);
 
             int under18Count = 0;
@@ -85,7 +130,6 @@ namespace InitialProject.WPF.View.TourGuideViews
             between18and50.Text = between18and50Count.ToString();
             above50.Text = above50Count.ToString();
         }
-
 
         public void report_ButtonClick(object sender, RoutedEventArgs e)
         {
