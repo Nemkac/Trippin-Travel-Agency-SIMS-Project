@@ -17,5 +17,7 @@ namespace InitialProject.Interfaces
         public List<int> GetAllByType(string type);
         public List<Booking> GetAccommodationsBookings(List<Booking> bookings, Accommodation accommodation);
         public void Save(Accommodation accommodation);
+        public List<Accommodation> GetOwnersAccommodations(int id);
+        public AccommodationLocation GetNewLocation(string country, string city);
     }
 }

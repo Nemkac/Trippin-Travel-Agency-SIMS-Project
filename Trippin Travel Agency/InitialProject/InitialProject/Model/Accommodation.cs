@@ -24,9 +24,10 @@ namespace InitialProject.Model
         public int bookingCancelPeriodDays { get; set; }
         public Type type { get; set; }
         public List<Image> imageLinks { get; set; }
+        public int ownerId { get; set; }
         public Accommodation() { }
 
-        public Accommodation(string name, AccommodationLocation location, int guestLimit, int minDaysBooked, int bookingCancelPeriodDays, Type type, List<Image> imageLinks)
+        public Accommodation(string name, AccommodationLocation location, int guestLimit, int minDaysBooked, int bookingCancelPeriodDays, Type type, List<Image> imageLinks, int ownerId)
         {
             this.name = name;
             this.location = location;
@@ -35,6 +36,7 @@ namespace InitialProject.Model
             this.bookingCancelPeriodDays = bookingCancelPeriodDays;
             this.type = type;
             this.imageLinks = imageLinks;
+            this.ownerId = ownerId;
         }
 
 

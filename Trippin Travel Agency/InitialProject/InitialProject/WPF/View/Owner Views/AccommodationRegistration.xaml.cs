@@ -22,17 +22,15 @@ namespace InitialProject.WPF.View.Owner_Views
 {
     public partial class AccommodationRegistration : UserControl
     {
-        private AccommodationService accommodationService;
+        private AccommodationService accommodationService = new(new AccommodationRepository());
         public AccommodationRegistration()
         {
             InitializeComponent();
             FillCountryComboBox();
-            this.accommodationService = new(new AccommodationRepository());
         }
 
         private void FillCountryComboBox()
         {
-            //List<AccommodationLocation> countryList = _accommodationService.GetAllLocations();
             DataBaseContext countryContext = new DataBaseContext();
             List<AccommodationLocation> countryList = countryContext.AccommodationLocation.ToList();
             foreach (AccommodationLocation location in countryList.ToList())
@@ -47,7 +45,7 @@ namespace InitialProject.WPF.View.Owner_Views
         private void SaveAccommodation(object sender, RoutedEventArgs e)
         {
             string name;
-            AccommodationLocation location;
+            AccommodationLocation location = new AccommodationLocation();
             int guestLimit, minDaysBooked, bookingCancelPeriod;
             GetAccommodationBasicProperties(out name, out location, out guestLimit, out minDaysBooked, out bookingCancelPeriod);
             Model.Type type = GetAccommodationType();
@@ -55,7 +53,7 @@ namespace InitialProject.WPF.View.Owner_Views
             // Add image links
             List<Model.Image> imageLinks = CreateImageLinks();
 
-            Accommodation accommodation = new Accommodation(name, location, guestLimit, minDaysBooked, bookingCancelPeriod, type, imageLinks);
+            Accommodation accommodation = new Accommodation(name, location, guestLimit, minDaysBooked, bookingCancelPeriod, type, imageLinks, LoggedUser.id);
             accommodationService.Save(accommodation);
             ClearInputs();
         }
@@ -65,7 +63,7 @@ namespace InitialProject.WPF.View.Owner_Views
             name = accommodationNameTB.Text;
             string country = countryComboBox.SelectedValue.ToString();
             string city = cityComboBox.SelectedValue.ToString();
-            location = AccommodationService.GetLocation(country, city);
+            location = this.accommodationService.GetLocation(country, city);
             string guestLimitInput = guestLimitTB.Text;
             guestLimit = int.Parse(guestLimitInput);
             string minDaysBookedInput = minDaysBookedTB.Text;
@@ -83,13 +81,10 @@ namespace InitialProject.WPF.View.Owner_Views
             TextBox newTextBox = CreateNewTextBoxForImageLink();
             StackPanel newStackPanel = FillStackPanelWithElements(newLabel, newTextBox);
 
-            // Add the textbox to the list of dynamic textboxes
             dynamicImageLinksTextBoxes.Add(newTextBox);
 
-            // Add the new StackPanel below the button
             containerImageStackPanel.Children.Insert(containerImageStackPanel.Children.IndexOf(addImageButton) + 1, newStackPanel);
 
-            // Update the Margin of the new StackPanel to align it with the button
             Thickness buttonMargin = addImageButton.Margin;
             newStackPanel.Margin = new Thickness(buttonMargin.Left, 10, 0, 0);
 

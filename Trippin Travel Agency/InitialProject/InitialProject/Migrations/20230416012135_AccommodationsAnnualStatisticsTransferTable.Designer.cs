@@ -3,6 +3,7 @@ using System;
 using InitialProject.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230416012135_AccommodationsAnnualStatisticsTransferTable")]
+    partial class AccommodationsAnnualStatisticsTransferTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
@@ -239,14 +242,8 @@ namespace InitialProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("accommodationId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("bookingId")
                         .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("plannedArrival")
-                        .HasColumnType("TEXT");
 
                     b.Property<bool>("seen")
                         .HasColumnType("INTEGER");
@@ -279,14 +276,8 @@ namespace InitialProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("accommodationId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("bookingId")
                         .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("previousArrival")
-                        .HasColumnType("TEXT");
 
                     b.HasKey("id");
 
@@ -559,9 +550,11 @@ namespace InitialProject.Migrations
                     b.Property<int>("accommodationId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("accommodationName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("accommodationName")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("accommodationType")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("location")
                         .IsRequired()
@@ -604,23 +597,6 @@ namespace InitialProject.Migrations
                     b.HasKey("id");
 
                     b.ToTable("detailedTourViewTransfers");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.TransferModels.MonthlyAccommodationTransfer", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("accommodationId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("selectedYear")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("id");
-
-                    b.ToTable("AccommodationsMonthlyStatisticsTransfer");
                 });
 
             modelBuilder.Entity("InitialProject.Model.TransferModels.TourBookingTransfer", b =>

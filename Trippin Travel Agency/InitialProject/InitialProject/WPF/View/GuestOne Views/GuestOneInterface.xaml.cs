@@ -210,7 +210,7 @@ namespace InitialProject.WPF.View.GuestOne_Views
         private void GetBasicDatesProperties(object sender, RoutedEventArgs e, out int daysToBook, out List<string> displayableDates)
         {
             AccommodationDTO accommodationDTO = (AccommodationDTO)dataGrid.SelectedItem;
-            Accommodation accommodation = accommodationService.GetById(accommodationDTO.id);
+            Accommodation accommodation = accommodationService.GetById(accommodationDTO.accommodationId);
             selectedAccommodation = accommodation;
             List<DateTime> dateLimits = GetDateLimits(sender, e);
             daysToBook = (int.Parse(numberOfDays.Text));
