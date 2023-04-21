@@ -14,10 +14,11 @@ namespace InitialProject.Model
         public string lastName { get; set; }
         public string email { get; set; }
         public string role { get; set; }
+        public int age { get; set; }    
 
         public User() { }
 
-        public User(string username, string password, string role, string firstName, string lastName, string email)
+        public User(string username, string password, string role, string firstName, string lastName, string email, int age)
         {
             this.username = username;
             this.password = password;
@@ -25,6 +26,7 @@ namespace InitialProject.Model
             this.firstName = firstName;
             this.lastName = lastName;
             this.email = email;
+            this.age = age; 
         }
     }
 }
