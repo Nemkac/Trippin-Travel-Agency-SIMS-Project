@@ -26,7 +26,7 @@
             <ColumnDefinition Width="520"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\login-background WEB.jpg">
+            <ImageBrush ImageSource="pack://application:,,,/Assets/login-background.jpg">
                 <ImageBrush.RelativeTransform>
                     <ScaleTransform ScaleX="1" ScaleY="1" />
                 </ImageBrush.RelativeTransform>
@@ -133,7 +133,7 @@
                     Grid.Column="2"
                     VerticalAlignment="Center"
                     >
-            <Image Source="C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\logoWEB.png"
+            <Image Source="pack://application:,,,/Assets/logo.png"
                            Width="130"
                            Height="70"
                            Margin="0, 0, 0, 30"
