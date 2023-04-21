@@ -19,13 +19,22 @@
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
-            <TextBlock
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <TextBlock
                    HorizontalAlignment="Center"
                    FontFamily="Ubuntu Bold"
-                   FontSize="48">
-                    <Run Text="Hello, " />
-                    <Run Text="{Binding username}" />
-            </TextBlock>
+                   FontSize="48"
+                   Text="Hello, "/>
+
+                <TextBlock
+                   HorizontalAlignment="Center"
+                   FontFamily="Ubuntu Bold"
+                   FontSize="48"
+                   x:Name="usernameTextBlock"
+                   Width="Auto"/>
+
+            </StackPanel>
             <Label Content="Let's guide today!"
                        HorizontalAlignment="Center"
                        FontFamily="Ubuntu"

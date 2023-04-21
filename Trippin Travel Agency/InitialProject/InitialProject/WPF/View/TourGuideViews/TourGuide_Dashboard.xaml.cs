@@ -15,6 +15,7 @@ namespace InitialProject.WPF.View.TourGuideViews
         {
             InitializeComponent();
             DataContext = new TourGuide_DashboardViewModel();
+            this.usernameTextBlock.Text = LoggedUser.username; 
         }
     }
 }

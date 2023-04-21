@@ -66,19 +66,19 @@
                               Margin="0, 70, 0, 20"
                               Foreground="#273c75"
                               />
-                <TextBlock Text="Aleksa"
+                <TextBlock x:Name="nameTextBlock"
                            FontSize="48"
                            FontFamily="Ubuntu"
                            FontWeight="Bold"
-                           Foreground="#273c75"
+                           Foreground="#171717"
                            HorizontalAlignment="Center"
                            />
 
-                <TextBlock Text="Simeunovic"
+                <TextBlock x:Name="lastNameTextBlock"
                            FontSize="48"
                            FontFamily="Ubuntu"
                            FontWeight="Bold"
-                           Foreground="#273c75"
+                           Foreground="#171717"
                            HorizontalAlignment="Center"
                            />
 
@@ -86,7 +86,7 @@
                            FontSize="18"
                            FontFamily="Ubuntu"
                            FontWeight="Regular"
-                           Foreground="#273c75"
+                           Foreground="#171717"
                            HorizontalAlignment="Center"
                            Margin="0, 10, 0, 0"
                            />

@@ -26,6 +26,8 @@ namespace InitialProject.WPF.View.TourGuideViews
         public TourGuide_Profile()
         {
             InitializeComponent();
+            this.nameTextBlock.Text = LoggedUser.firstName; 
+            this.lastNameTextBlock.Text = LoggedUser.lastName;
         }
 
         private void Logout_ButtonClick(object sender, RoutedEventArgs e)

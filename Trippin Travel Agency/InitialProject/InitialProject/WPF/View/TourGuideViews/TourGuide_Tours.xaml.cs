@@ -69,10 +69,6 @@ namespace InitialProject.WPF.View.TourGuideViews
                     }
                 }
 
-                /*Treba resiti slucaj kada se selektuje godina za koju ne postoji tura. Kada se selektuje odredjena godina
-                 prosledjuje se i tourId u transfer tabelu. */
-
-
                 int maxAttendance = mostVisitedTours.Max();
                 int maxTourId;
 
