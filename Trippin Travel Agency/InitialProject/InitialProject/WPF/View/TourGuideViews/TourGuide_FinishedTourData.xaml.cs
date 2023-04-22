@@ -6,6 +6,9 @@ using InitialProject.Repository;
 using InitialProject.Service.GuestServices;
 using InitialProject.Service.TourServices;
 using InitialProject.WPF.ViewModels;
+using LiveCharts;
+using LiveCharts.Defaults;
+using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,8 +41,37 @@ namespace InitialProject.WPF.View.TourGuideViews
             InitializeComponent();
             this.Loaded += tourDataLoaded;
             this.tourService = new(new TourRepository());
-        }
+            DataBaseContext context = new DataBaseContext();
+            List<TourLiveViewTransfer> requests = context.TourLiveViewTransfers.ToList();
+            Tour tour = this.tourService.GetById(requests.Last().tourId);
+            List<TourAttendance> attendances = tourService.GetTourAttendances(tour.id);
 
+            int withVoucherCount = 0;
+            int withoutVoucherCount = 0;
+            VoucherPossession(tour, context, attendances, ref withVoucherCount, ref withoutVoucherCount);
+            SeriesCollection = new SeriesCollection
+            {
+                new PieSeries
+                {
+                    Title = "With voucher",
+                    Values = new ChartValues<ObservableValue>{new ObservableValue(withVoucherCount) },
+                    DataLabels = true
+                },
+                new PieSeries
+                {
+                    Title = "Without voucher",
+                    Values = new ChartValues<ObservableValue>{new ObservableValue(withoutVoucherCount) },
+                    DataLabels = true
+                }
+            };
+
+            DataContext = this; 
+        }
+        public SeriesCollection SeriesCollection { get; set; }
+        public void PieChart_DataClick(object sender, ChartPoint chartPoint)
+        {
+            MessageBox.Show("Current value: " + chartPoint.Y + "(" + (chartPoint.Participation * 100).ToString() + "%" + ")");
+        }
         public void tourDataLoaded(object sender, RoutedEventArgs e)
         {
             DataBaseContext context = new DataBaseContext();
@@ -69,9 +101,6 @@ namespace InitialProject.WPF.View.TourGuideViews
             VoucherPossession(tour, context, attendances, ref withVoucherCount, ref withoutVoucherCount);
             double withVoucherPercentage, withoutVoucherPercentage;
             ConvertToPercentages(withVoucherCount, withoutVoucherCount, out withVoucherPercentage, out withoutVoucherPercentage);
-
-            withVoucher.Text = withVoucherPercentage.ToString("0.##") + "%";
-            withoutVoucher.Text = withoutVoucherPercentage.ToString("0.##") + "%";
         }
 
         private static void ConvertToPercentages(int withVoucherCount, int withoutVoucherCount, out double withVoucherPercentage, out double withoutVoucherPercentage)

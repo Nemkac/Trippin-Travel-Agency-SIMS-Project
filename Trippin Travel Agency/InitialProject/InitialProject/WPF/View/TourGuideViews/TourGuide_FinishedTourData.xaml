@@ -7,6 +7,7 @@
              xmlns:viewModel="clr-namespace:InitialProject.WPF.ViewModels"
              xmlns:local="clr-namespace:InitialProject.Model"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="750"
              d:DesignWidth="430"
@@ -95,16 +96,22 @@
                            Style="{StaticResource headerTextBlock}"
                            FontSize="28"
                            HorizontalAlignment="Left"
-                           Margin="0, 20, 0, 20"
+                           Margin="0, 20, 0, 0"
                            />
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="With"/>
-                    <TextBox x:Name="withVoucher" Width="100"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Without"/>
-                    <TextBox x:Name="withoutVoucher" Width="100"/>
-                </StackPanel>
+
+                <lvc:PieChart LegendLocation="Right"
+                              Series="{Binding SeriesCollection}"
+                              DataClick="PieChart_DataClick"
+                              Hoverable="True"
+                              Height="300"
+                              >
+                    <lvc:PieChart.ChartLegend>
+                        <lvc:DefaultLegend BulletSize="25" TextBlock.FontSize="12"></lvc:DefaultLegend>
+                    </lvc:PieChart.ChartLegend>
+                    <lvc:PieChart.DataTooltip>
+                        <lvc:DefaultTooltip BulletSize="25"></lvc:DefaultTooltip>
+                    </lvc:PieChart.DataTooltip>
+                </lvc:PieChart>
 
                 <!-- Tourist reviews --> 
                 <TextBlock Text="Tourst reviews"

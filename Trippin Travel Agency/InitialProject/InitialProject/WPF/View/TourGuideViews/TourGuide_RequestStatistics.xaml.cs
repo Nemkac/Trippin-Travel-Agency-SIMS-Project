@@ -29,6 +29,65 @@ namespace InitialProject.WPF.View.TourGuideViews
         {
             InitializeComponent();
             this.tourService = new(new TourRepository());
+            FillCountryComboBox();
+            FillYearComboBox();
+        }
+        private void FillCountryComboBox()
+        {
+            DataBaseContext countryToursContext = new DataBaseContext();
+
+            List<TourLocation> countryList = countryToursContext.TourLocation.ToList();
+            foreach (TourLocation location in countryList.ToList())
+            {
+                if (!requestCountryComboBox.Items.Contains(location.country))
+                {
+                    requestCountryComboBox.Items.Add(location.country);
+                }
+            }
+        }
+        private void requestCountryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (requestCountryComboBox.SelectedItem != null)
+            {
+                languageComboBox.SelectedItem = null;
+                requestCityComboBox.SelectedItem = null;
+                requestCityComboBox.Items.Clear();
+                string selectedCountry = requestCountryComboBox.SelectedValue.ToString();
+                GetCitiesByCountry(selectedCountry);
+            }
+        }
+        private void GetCitiesByCountry(string selectedCountry)
+        {
+            DataBaseContext cityContext = new DataBaseContext();
+            List<TourLocation> cityList = cityContext.TourLocation.ToList();
+
+            foreach (TourLocation location in cityList.ToList())
+            {
+                if (location.country.ToString() == selectedCountry)
+                {
+                    if (!requestCityComboBox.Items.Contains(location.city))
+                    {
+                        requestCityComboBox.Items.Add(location.city);
+                    }
+                }
+            }
+        }
+        private void languageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (languageComboBox.SelectedItem != null)
+            {
+                requestCountryComboBox.SelectedItem = null;
+                requestCityComboBox.SelectedItem = null;
+                requestCityComboBox.Items.Clear();
+            }
+        }
+        private void FillYearComboBox()
+        {
+            for (int year = 2015; year <= 2023; year++)
+            {
+                yearComboBox.Items.Add(year.ToString());
+            }
+            yearComboBox.Items.Add("All time");
         }
 
     }

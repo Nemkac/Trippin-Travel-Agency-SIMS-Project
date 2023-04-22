@@ -73,6 +73,28 @@
                         Margin="0,0,0,20">
 
 
+                <!-- Little text helper -->
+                <StackPanel Orientation="Vertical"
+                            Margin="0,10,0,0">
+                    <!-- Choose a tour and click a button beneath -->
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+                        <fa:IconImage Icon="MousePointer"
+                                      HorizontalAlignment="Left"
+                                      Style="{StaticResource menuBackButtonIcon}"
+                                      Width="15" Height="15" Foreground="#353b48"/>
+                        <Label Style="{StaticResource labelAboveTextBox}"
+                               Foreground="#353b48"
+                               Margin="0,0,0,0">
+                                                    <TextBlock>
+                                <Run Text="View statistics by language "/>
+                                <Run FontWeight="Bold" Text="or"/>
+                                <Run Text=" location"/>     
+                            </TextBlock>
+                        </Label>
+
+                    </StackPanel>
+                </StackPanel>
                 <!-- Filters GroupBox -->
                 <GroupBox Header="  Data for  "
                           Style="{StaticResource labelGroupBox}"
@@ -88,6 +110,7 @@
                                 x:Name="languageComboBox"
                                 HorizontalAlignment="Left"
                                 ItemsSource="{Binding Source={StaticResource dataFromEnum}}"
+                                SelectionChanged="languageComboBox_SelectionChanged"
                                 />
                         </StackPanel>
 
@@ -99,7 +122,8 @@
                                 <Label Content="Country" Style="{StaticResource labelAboveTextBox}"/>
                                 <ComboBox Width="100"
                                    Height="30"
-                                   x:Name="countryComboBox"
+                                   x:Name="requestCountryComboBox"
+                                   SelectionChanged="requestCountryComboBox_SelectionChanged"
                                    />
                             </StackPanel>
 
@@ -108,13 +132,27 @@
                                 <Label Content="City" Style="{StaticResource labelAboveTextBox}"/>
                                 <ComboBox Width="100"
                                   Height="30"
-                                  x:Name="cityComboBox"
+                                  x:Name="requestCityComboBox"
                                   />
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
+                
+                <!-- Year to choose -->
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0, 20, 0, 0"
+                            >
+                    <Label Content="Year"
+                               Style="{StaticResource labelAboveTextBox}"/>
+                    <ComboBox     Width="100"
+                                  Margin="20,0,0,0"
+                                  x:Name="yearComboBox"
+                                  >
 
+                    </ComboBox>
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
         <ContentControl Content="{Binding CurrentChildView}" Grid.RowSpan="3" Grid.ColumnSpan="3"/>
