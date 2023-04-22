@@ -12,7 +12,14 @@
              d:DesignWidth="430"
              x:Name="requestStatisticsControl"
              >
-
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:language"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </UserControl.Resources>
+    
     <Grid Background="White">
         <Grid.RowDefinitions>
             <!-- Margin -->
@@ -66,6 +73,47 @@
                         Margin="0,0,0,20">
 
 
+                <!-- Filters GroupBox -->
+                <GroupBox Header="  Data for  "
+                          Style="{StaticResource labelGroupBox}"
+                          Margin="0,20,0,0"
+                          Height="Auto"
+                          >
+                    <StackPanel>
+                        <!-- Language ComboBox -->
+                        <StackPanel Margin="20, 20, 20, 20">
+                            <Label Content="Language" Style="{StaticResource labelAboveTextBox}"/>
+                            <ComboBox Width="278"
+                                Height="30"
+                                x:Name="languageComboBox"
+                                HorizontalAlignment="Left"
+                                ItemsSource="{Binding Source={StaticResource dataFromEnum}}"
+                                />
+                        </StackPanel>
+
+
+                        <!-- Number of people and language -->
+                        <StackPanel Orientation="Horizontal">
+                            <!-- Country ComboBox -->
+                            <StackPanel Margin="20,0,20,20">
+                                <Label Content="Country" Style="{StaticResource labelAboveTextBox}"/>
+                                <ComboBox Width="100"
+                                   Height="30"
+                                   x:Name="countryComboBox"
+                                   />
+                            </StackPanel>
+
+                            <!-- City ComboBox -->
+                            <StackPanel Margin="55,0,20,20">
+                                <Label Content="City" Style="{StaticResource labelAboveTextBox}"/>
+                                <ComboBox Width="100"
+                                  Height="30"
+                                  x:Name="cityComboBox"
+                                  />
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
 
             </StackPanel>
         </ScrollViewer>

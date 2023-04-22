@@ -114,21 +114,9 @@
                     </DataGrid.ColumnHeaderStyle>
                 </DataGrid>
 
-                <!-- Labels --> 
-                <Label Content="Selected tour"
-                       Style="{StaticResource labelBackHeader}"
-                       Margin="0,20, 0, 0"
-                       FontSize="32"
-                       HorizontalAlignment="Center"
-                       />
-                <Label Content="{Binding SelectedTourName}"
-                       Style="{StaticResource labelAboveTextBox}"
-                       HorizontalAlignment="Center"
-                       x:Name="tourNameContainer"
-                       />
 
                 <!-- Buttons -->
-                <DockPanel>
+                <DockPanel Margin="0, 20, 0, 0">
                     <Button Content="Start tour"
                         Style="{StaticResource acceptButton}"
                         Width="150"

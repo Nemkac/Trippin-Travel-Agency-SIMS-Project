@@ -39,6 +39,7 @@ namespace InitialProject.WPF.ViewModels
         public ICommand ShowTourGuideTourPartRequestsViewCommand { get; }
         public ICommand ShowTourGuideRequestStatisticsViewCommand { get; }
         public ICommand ShowTourGuideProfileViewCommand { get; }
+        public ICommand ShowTourGuideAcceptedTourRequestViewCommand { get; }
 
         public TourGuide_MainViewModel()
         {
@@ -56,6 +57,7 @@ namespace InitialProject.WPF.ViewModels
             ShowTourGuideTourPartRequestsViewCommand = new ViewModelCommand(ExecuteShowTourGuideTourPartRequestsViewCommand);
             ShowTourGuideRequestStatisticsViewCommand = new ViewModelCommand(ExecuteShowTourGuideRequestStatisticsViewCommand);
             ShowTourGuideProfileViewCommand = new ViewModelCommand(ExecuteShowTourGuideProfileViewCommand);
+            ShowTourGuideAcceptedTourRequestViewCommand = new ViewModelCommand(ExecuteShowTourGuideAcceptedTourRequestViewCommand);
 
             ExecuteShowTourGuideDashboardViewCommand(null);
         }
@@ -116,6 +118,10 @@ namespace InitialProject.WPF.ViewModels
         public void ExecuteShowTourGuideProfileViewCommand(object obj)
         {
             CurrentChildView = new TourGuide_ProfileViewModel(this);
+        }
+        public void ExecuteShowTourGuideAcceptedTourRequestViewCommand(object obj)
+        {
+            CurrentChildView = new TourGuide_AcceptedTourRequestViewModel(this);
         }
 
 

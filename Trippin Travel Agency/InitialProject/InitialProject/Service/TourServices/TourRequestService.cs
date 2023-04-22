@@ -29,6 +29,5 @@ namespace InitialProject.Service.TourServices
             }
             return requests;
         }
-
     }
 }

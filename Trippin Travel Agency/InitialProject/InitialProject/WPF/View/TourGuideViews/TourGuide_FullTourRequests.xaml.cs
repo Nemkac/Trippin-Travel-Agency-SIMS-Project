@@ -1,5 +1,6 @@
 ﻿using InitialProject.Context;
 using InitialProject.Model;
+using InitialProject.Model.TransferModels;
 using InitialProject.Repository;
 using InitialProject.Service.TourServices;
 using System;
@@ -64,22 +65,45 @@ namespace InitialProject.WPF.View.TourGuideViews
                 filteredRequests = filteredRequests.Where(r => r.language.ToString().StartsWith(language, StringComparison.InvariantCultureIgnoreCase));
             }
 
-            if (startDate.HasValue)
-                filteredRequests = filteredRequests.Where(r => r.startDate >= startDate.Value);
+            if (startDate.HasValue && endDate.HasValue)
+            {
+                filteredRequests = filteredRequests.Where(r =>
+                    (startDate.Value >= r.startDate && startDate.Value <= r.endDate) ||
+                    (endDate.Value >= r.startDate && endDate.Value <= r.endDate) ||
+                    (r.startDate >= startDate.Value && r.startDate <= endDate.Value) ||
+                    (r.endDate >= startDate.Value && r.endDate <= endDate.Value));
 
-            if (endDate.HasValue)
-                filteredRequests = filteredRequests.Where(r => r.endDate <= endDate.Value);
+                var maxEndDate = filteredRequests.Select(r => r.endDate).Max();
+                if (maxEndDate < endingDateDatePicker.SelectedDate)
+                {
+                    MessageBox.Show("Selected end date is after tour request's end date.");
+                    endingDateDatePicker.SelectedDate = null;
+                    return;
+                }
+
+                var minStartDate = filteredRequests.Select(r => r.startDate).Min();
+                if (minStartDate > startingDateDatePicker.SelectedDate)
+                {
+                    MessageBox.Show("Selected start date is before tour request's start date.");
+                    startingDateDatePicker.SelectedDate = null;
+                    return;
+                }
+            }
 
             tourRequestsDataGrid.ItemsSource = filteredRequests.ToList();
+
         }
-
-
-
-
-
         private void FilterParametersChanged(object sender, EventArgs e)
         {
             FilterData();
+        }
+        public void acceptTourRequest_ButtonClick(object sender, RoutedEventArgs e)
+        {
+            TourRequest request = tourRequestsDataGrid.SelectedItem as TourRequest;
+            DataBaseContext context = new DataBaseContext();
+            AcceptedTourRequestViewTransfer accepted = new AcceptedTourRequestViewTransfer(request.id);
+            context.AcceptedTourRequestViewTransfers.Add(accepted);
+            context.SaveChanges();
         }
     }
     

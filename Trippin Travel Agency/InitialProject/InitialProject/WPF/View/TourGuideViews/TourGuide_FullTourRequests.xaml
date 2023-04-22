@@ -47,7 +47,7 @@
                 </StackPanel>
 
             </RadioButton>
-            <TextBlock     Text="Tour parts "
+            <TextBlock     Text="Requests"
                            TextTrimming="CharacterEllipsis"
                            MaxWidth="270"
                            Style="{StaticResource headerTextBlock}"
@@ -83,40 +83,42 @@
 
 
                 <!-- All full tour requests -->
-                <DataGrid x:Name="tourRequestsDataGrid"
-                        AutoGenerateColumns="False"
-                        Width="330"
-                        BorderThickness="0"
-                        >
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Id" Binding="{Binding id}" Width="*"/>
-                        <DataGridTextColumn Header="Start" Binding="{Binding startDate}" Width="*"/>
-                        <DataGridTextColumn Header="End" Binding="{Binding endDate}" Width="*"/>
-                        <DataGridTextColumn Header="Language" Binding="{Binding language}" Width="*"/>
-                    </DataGrid.Columns>
-                    <DataGrid.CellStyle>
-                        <Style TargetType="{x:Type DataGridCell}">
-                            <Setter Property="FontFamily" Value="Ubuntu"/>
-                            <Setter Property="FontSize" Value="16"/>
-                        </Style>
-                    </DataGrid.CellStyle>
-                    <DataGrid.RowStyle>
-                        <Style TargetType="{x:Type DataGridRow}">
-                            <Setter Property="BorderThickness" Value="0"/>
-                        </Style>
-                    </DataGrid.RowStyle>
-                    <DataGrid.ColumnHeaderStyle>
-                        <Style TargetType="{x:Type DataGridColumnHeader}">
-                            <Setter Property="BorderThickness" Value="0"/>
-                            <Setter Property="FontFamily" Value="Ubuntu"/>
-                            <Setter Property="FontSize" Value="12"/>
-                            <Setter Property="Padding" Value="6"/>
-                            <Setter Property="Background" Value="#273c75"/>
-                            <Setter Property="Foreground" Value="#f5f6fa"/>
+                <ScrollViewer Height="150">
+                    <DataGrid x:Name="tourRequestsDataGrid"
+                              AutoGenerateColumns="False"
+                              Width="330"
+                              BorderThickness="0">        
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding id}" Width="30"/>
+                            <DataGridTextColumn Header="Start" Binding="{Binding startDate}" Width="85"/>
+                            <DataGridTextColumn Header="End" Binding="{Binding endDate}" Width="85"/>
+                            <DataGridTextColumn Header="Num" Binding="{Binding numberOfTourists}" Width="45"/>
+                            <DataGridTextColumn Header="Lng" Binding="{Binding language}" Width="*"/>
+                        </DataGrid.Columns>
+                        <DataGrid.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}">
+                                <Setter Property="FontFamily" Value="Ubuntu"/>
+                                <Setter Property="FontSize" Value="16"/>
+                            </Style>
+                        </DataGrid.CellStyle>
+                        <DataGrid.RowStyle>
+                            <Style TargetType="{x:Type DataGridRow}">
+                                <Setter Property="BorderThickness" Value="0"/>
+                            </Style>
+                        </DataGrid.RowStyle>
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="FontFamily" Value="Ubuntu"/>
+                                <Setter Property="FontSize" Value="12"/>
+                                <Setter Property="Padding" Value="6"/>
+                                <Setter Property="Background" Value="#273c75"/>
+                                <Setter Property="Foreground" Value="#f5f6fa"/>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+                    </DataGrid>
+                </ScrollViewer>
 
-                        </Style>
-                    </DataGrid.ColumnHeaderStyle>
-                </DataGrid>
 
                 <!-- Filters GroupBox -->
                 <GroupBox Header="  Search by these parameters  "
@@ -128,7 +130,7 @@
                         <!-- Country and city -->
                         <StackPanel Orientation="Horizontal">
                             <!-- Country ComboBox -->
-                            <StackPanel Margin="20">
+                            <StackPanel Margin="20, 0, 20, 20">
                                 <Label Content="Country" Style="{StaticResource labelAboveTextBox}"/>
                                 <TextBox Width="100"
                                    Height="30"
@@ -138,7 +140,7 @@
                             </StackPanel>
 
                             <!-- City ComboBox -->
-                            <StackPanel Margin="55,20,20,20">
+                            <StackPanel Margin="55,0,20,20">
                                 <Label Content="City" Style="{StaticResource labelAboveTextBox}"/>
                                 <TextBox Width="100"
                                   Height="30"
@@ -150,8 +152,8 @@
                         
                         <!-- Number of people and language -->
                         <StackPanel Orientation="Horizontal">
-                            <!-- Country ComboBox -->
-                            <StackPanel Margin="20">
+                            <!-- Number of tourists textbox -->
+                            <StackPanel Margin="20,0,20,20">
                                 <Label Content="Num. of people" Style="{StaticResource labelAboveTextBox}"/>
                                 <TextBox Width="100"
                                    Height="30"
@@ -160,8 +162,8 @@
                                    />
                             </StackPanel>
 
-                            <!-- City ComboBox -->
-                            <StackPanel Margin="55,20,20,20">
+                            <!-- Language textbox -->
+                            <StackPanel Margin="55,0,20,20">
                                 <Label Content="Language" Style="{StaticResource labelAboveTextBox}"/>
                                 <TextBox Width="100"
                                   Height="30"
@@ -173,8 +175,8 @@
 
                         <!-- Starting and ending date -->
                         <StackPanel Orientation="Horizontal">
-                            <!-- Country ComboBox -->
-                            <StackPanel Margin="20">
+                            <!-- Starting date -->
+                            <StackPanel Margin="20,0,20,20">
                                 <Label Content="Starting" Style="{StaticResource labelAboveTextBox}"/>
                                 <DatePicker Width="100"
                                    Height="30"
@@ -183,8 +185,8 @@
                                    />
                             </StackPanel>
 
-                            <!-- City ComboBox -->
-                            <StackPanel Margin="55,20,20,20">
+                            <!-- Ending date -->
+                            <StackPanel Margin="55,0,20,20">
                                 <Label Content="Ending" Style="{StaticResource labelAboveTextBox}"/>
                                 <DatePicker Width="100"
                                   Height="30"
@@ -195,6 +197,12 @@
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
+                <Button Content="Proceed"
+                        Style="{StaticResource showImagesButton}"
+                        Margin="0,20,0,0"
+                        Click="acceptTourRequest_ButtonClick"
+                        Command="{Binding ShowAcceptedTourRequestCommand}"
+                        />
 
             </StackPanel>
         </ScrollViewer>

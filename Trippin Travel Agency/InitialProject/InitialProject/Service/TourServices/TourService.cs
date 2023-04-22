@@ -216,6 +216,10 @@ namespace InitialProject.Service.TourServices
             }
             return attendances;
         }
+        public TourRequest GetRequestById(int id)
+        {
+            return iTourRepository.GetRequestById(id);
+        }
 
 
     }

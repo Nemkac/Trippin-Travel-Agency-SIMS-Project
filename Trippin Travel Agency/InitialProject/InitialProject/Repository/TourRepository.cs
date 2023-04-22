@@ -35,6 +35,23 @@ namespace InitialProject.Repository
             }
         }
 
+        public TourRequest GetRequestById(int id)
+        {
+            using (var db = new DataBaseContext())
+            {
+                foreach (TourRequest tr in db.TourRequests)
+                {
+                    if (tr.id == id)
+                    {
+
+                        return tr;
+
+                    }
+                }
+                return null;
+            }
+        }
+
         public void Save(Tour tour)
         {
             DataBaseContext saveContext = new DataBaseContext();

@@ -6,19 +6,18 @@ using System.Threading.Tasks;
 
 namespace InitialProject.WPF.ViewModels
 {
-    public class TourGuide_FullTourRequestsViewModel : ViewModelBase
+    public class TourGuide_AcceptedTourRequestViewModel : ViewModelBase
     {
         public ViewModelCommand ShowRequestsCommand { get; private set; }
-        
-        public ViewModelCommand ShowAcceptedTourRequestCommand { get; private set; }
+        public ViewModelCommand ShowFullTourRequestsCommand { get; private set; }
 
         private readonly TourGuide_MainViewModel _mainViewModel;
 
-        public TourGuide_FullTourRequestsViewModel(TourGuide_MainViewModel mainViewModel)
+        public TourGuide_AcceptedTourRequestViewModel(TourGuide_MainViewModel mainViewModel)
         {
             _mainViewModel = mainViewModel;
             ShowRequestsCommand = new ViewModelCommand(ShowRequests);
-            ShowAcceptedTourRequestCommand = new ViewModelCommand(ShowAcceptedRequest);
+            ShowFullTourRequestsCommand = new ViewModelCommand(ShowFullTourRequests);
         }
 
         public void ShowRequests(object obj)
@@ -26,11 +25,9 @@ namespace InitialProject.WPF.ViewModels
             _mainViewModel.ExecuteShowTourGuideRequestsViewCommand(null);
         }
 
-
-        public void ShowAcceptedRequest(object obj)
+        public void ShowFullTourRequests(object obj)
         {
-            _mainViewModel.ExecuteShowTourGuideAcceptedTourRequestViewCommand(null);
+            _mainViewModel.ExecuteShowTourGuideFullTourRequestsViewCommand(null);
         }
-
     }
 }
