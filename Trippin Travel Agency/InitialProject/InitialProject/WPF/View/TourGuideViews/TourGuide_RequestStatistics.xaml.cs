@@ -50,6 +50,13 @@ namespace InitialProject.WPF.View.TourGuideViews
         }
         private void requestCountryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (yearComboBox.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a year before choosing a country.");
+                requestCountryComboBox.SelectedItem = null;
+                return;
+            }
+
             if (requestCountryComboBox.SelectedItem != null)
             {
                 languageComboBox.SelectedItem = null;
@@ -63,6 +70,13 @@ namespace InitialProject.WPF.View.TourGuideViews
         }
         private void requestCityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (yearComboBox.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a year before choosing a city.");
+                requestCityComboBox.SelectedItem = null;
+                return;
+            }
+
             UpdateTourRequestsChart();
         }
         private void GetCitiesByCountry(string selectedCountry)
@@ -84,6 +98,12 @@ namespace InitialProject.WPF.View.TourGuideViews
         }
         private void languageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (yearComboBox.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a year before choosing a language.");
+                languageComboBox.SelectedItem = null;
+                return;
+            }
             if (languageComboBox.SelectedItem != null)
             {
                 requestCountryComboBox.SelectedItem = null;
@@ -97,7 +117,6 @@ namespace InitialProject.WPF.View.TourGuideViews
         {
             UpdateTourRequestsChart();
         }
-
         private void FillYearComboBox()
         {
             for (int year = 2015; year <= 2023; year++)
@@ -110,7 +129,37 @@ namespace InitialProject.WPF.View.TourGuideViews
         {
             using var dbContext = new DataBaseContext();
             IQueryable<TourRequest> tourRequests = dbContext.TourRequests;
+            tourRequests = FilterTourRequests(language, country, city, tourRequests);
 
+            Dictionary<string, int> tourRequestsData;
+            tourRequestsData = ApplyTimePeriod(year, ref tourRequests);
+
+            return tourRequestsData;
+        }
+        private static Dictionary<string, int> ApplyTimePeriod(string year, ref IQueryable<TourRequest> tourRequests)
+        {
+            Dictionary<string, int> tourRequestsData;
+            if (year == "All time")
+            {
+                tourRequestsData = tourRequests
+                    .GroupBy(tr => tr.startDate.Year)
+                    .ToDictionary(g => g.Key.ToString(), g => g.Count());
+            }
+            else
+            {
+                // Group tour requests by month for the selected year
+                int selectedYear = int.Parse(year);
+                tourRequests = tourRequests.Where(tr => tr.startDate.Year == selectedYear);
+
+                tourRequestsData = tourRequests
+                    .GroupBy(tr => tr.startDate.Month)
+                    .ToDictionary(g => CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(g.Key), g => g.Count());
+            }
+
+            return tourRequestsData;
+        }
+        private static IQueryable<TourRequest> FilterTourRequests(string language, string country, string city, IQueryable<TourRequest> tourRequests)
+        {
             // Filter by language if provided
             if (!string.IsNullOrEmpty(language))
             {
@@ -130,60 +179,36 @@ namespace InitialProject.WPF.View.TourGuideViews
                 tourRequests = tourRequests.Where(tr => tr.city == city);
             }
 
-            Dictionary<string, int> tourRequestsData;
-
-            if (year == "All time")
-            {
-                // Group tour requests by year
-                tourRequestsData = tourRequests
-                    .GroupBy(tr => tr.startDate.Year)
-                    .ToDictionary(g => g.Key.ToString(), g => g.Count());
-            }
-            else
-            {
-                // Group tour requests by month for the selected year
-                int selectedYear = int.Parse(year);
-                tourRequests = tourRequests.Where(tr => tr.startDate.Year == selectedYear);
-
-                tourRequestsData = tourRequests
-                    .GroupBy(tr => tr.startDate.Month)
-                    .ToDictionary(g => CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(g.Key), g => g.Count());
-            }
-
-            return tourRequestsData;
+            return tourRequests;
         }
-
-
-
         private void UpdateTourRequestsChart()
         {
             if (languageComboBox.SelectedItem == null && requestCountryComboBox.SelectedItem == null && requestCityComboBox.SelectedItem == null)
                 return;
-
-            string language = languageComboBox.SelectedItem?.ToString();
-            string country = requestCountryComboBox.SelectedItem?.ToString();
-            string city = requestCityComboBox.SelectedItem?.ToString();
-            string year = yearComboBox.SelectedItem?.ToString();
+            string language, country, city, year;
+            LoadFilterData(out language, out country, out city, out year);
 
             Dictionary<string, int> tourRequestsData = GetTourRequestsData(language, country, city, year);
 
-            // Clear the existing series from the chart
             cartesianChart.Series.Clear();
-
-            // Create a new ColumnSeries to display the tour requests data
+            CreateChartData(tourRequestsData);
+        }
+        private void CreateChartData(Dictionary<string, int> tourRequestsData)
+        {
             ColumnSeries columnSeries = new ColumnSeries
             {
                 Title = "Tour Requests",
                 Values = new ChartValues<int>(tourRequestsData.Values)
             };
-
-            // Set the labels for the X-Axis
             cartesianChart.AxisX[0].Labels = tourRequestsData.Keys.ToList();
-
-            // Add the ColumnSeries to the chart
             cartesianChart.Series.Add(columnSeries);
         }
-
-
+        private void LoadFilterData(out string language, out string country, out string city, out string year)
+        {
+            language = languageComboBox.SelectedItem?.ToString();
+            country = requestCountryComboBox.SelectedItem?.ToString();
+            city = requestCityComboBox.SelectedItem?.ToString();
+            year = yearComboBox.SelectedItem?.ToString();
+        }
     }
 }
