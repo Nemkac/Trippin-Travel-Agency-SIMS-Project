@@ -64,6 +64,10 @@
             <owner:AccommodationsMonthlyStatisticsView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModel:RenovationsViewModel}">
+            <owner:RenovationsView/>
+        </DataTemplate>
+
         <Style x:Key="ButtonFocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -185,7 +189,8 @@
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}" 
                              Tag="{StaticResource HoverColor}" 
-                             GroupName="MainWindowButtons">
+                             GroupName="MainWindowButtons"
+                             Command="{Binding ShowRenovationsCommand}">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Gear" Style="{StaticResource menuButtonIconTablet}"/>
                         <TextBlock Style="{StaticResource menuButtonText}" Text="Renovations"/>

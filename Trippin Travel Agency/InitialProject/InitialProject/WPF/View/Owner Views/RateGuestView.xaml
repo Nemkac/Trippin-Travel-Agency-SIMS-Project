@@ -90,7 +90,7 @@
             <Button Content="Save Rating" 
                 Grid.Row="3" Grid.ColumnSpan="3"
                 VerticalAlignment="Center"
-                Style="{StaticResource saveButton}"
+                Style="{StaticResource saveButtonTablet}"
                 Click="SaveRate"/>
         </StackPanel>
     </Grid>

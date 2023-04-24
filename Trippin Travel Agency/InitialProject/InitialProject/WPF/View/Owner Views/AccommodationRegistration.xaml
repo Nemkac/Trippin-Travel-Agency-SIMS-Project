@@ -54,7 +54,7 @@
 
         <Border Grid.Row="1" Grid.ColumnSpan="3" CornerRadius="0, 0, 30, 30">
             <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Right">
-                <Button x:Name="saveAccommodation" Style="{StaticResource saveButton}" Grid.Row="1" Margin="0, 0, 19, 0" Click="SaveAccommodation" 
+                <Button x:Name="saveAccommodation" Style="{StaticResource saveButtonTablet}" Grid.Row="1" Margin="0, 0, 19, 0" Click="SaveAccommodation" 
                         Content="Save Accommodation"/>
             </StackPanel>
         </Border>

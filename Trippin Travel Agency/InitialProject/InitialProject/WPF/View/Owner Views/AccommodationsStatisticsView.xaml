@@ -16,6 +16,18 @@
 
         <ScrollViewer HorizontalScrollBarVisibility="Hidden">
             <StackPanel Grid.Row="0" Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" Grid.Row="0"
+                                HorizontalAlignment="Left" Margin="15 0 0 0">
+                    <fa:IconImage Icon="Fingerprint"
+                                      HorizontalAlignment="Left"
+                                      Style="{StaticResource menuBackButtonIcon}"
+                                      Width="15" Height="15" Foreground="#353b48"/>
+                    <Label Content="Choose an accommodation and click a button beneath to see accommodation details"
+                               Style="{StaticResource labelAboveTextBox}"
+                               Foreground="#353b48"
+                               Margin="10,0,0,0"
+                               />
+                </StackPanel>
                 <DataGrid x:Name="MyAccommodationsDataGrid"
                       Style="{DynamicResource DataGridStyle1}" 
                       CellStyle="{DynamicResource DataGridCellStyle1}" 
