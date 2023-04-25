@@ -38,6 +38,9 @@ namespace InitialProject.Context
         public DbSet<TourRequest> TourRequests { get; set; }
         public DbSet<AcceptedTourRequestViewTransfer> AcceptedTourRequestViewTransfers { get; set; }
         public DbSet<RequestMessage> RequestMessages { get; set; }
+        public DbSet<TourLocationTransfer> TourLocationTransfers { get; set; }
+        public DbSet<TourLanguageTransfer> TourLanguageTransfers { get; set; }
+        public DbSet<TourFlagTransfer> TourFlagTransfers { get; set; }
 
 
 

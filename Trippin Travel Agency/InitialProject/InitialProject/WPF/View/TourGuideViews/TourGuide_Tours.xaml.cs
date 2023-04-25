@@ -1,6 +1,7 @@
 ﻿using InitialProject.Context;
 using InitialProject.DTO;
 using InitialProject.Model;
+using InitialProject.Model.TransferModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -165,6 +166,14 @@ namespace InitialProject.WPF.View.TourGuideViews
         private void ShowTourStatisticsButton_Click(object sender, RoutedEventArgs e)
         {
             ShowTourStatistics();
+        }
+
+        private void createPlainTour_Click(object sender, RoutedEventArgs e)
+        {
+            DataBaseContext context = new DataBaseContext();
+            TourFlagTransfer tourFlagTransfer = new TourFlagTransfer(2);
+            context.TourFlagTransfers.Add(tourFlagTransfer);
+            context.SaveChanges();
         }
     }
 }

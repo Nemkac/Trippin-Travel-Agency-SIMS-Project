@@ -101,7 +101,8 @@
                         Margin="226, 120, 0, 0"
                         Height="40"
                         x:Name="createTourByLocationButton"
-                        
+                        Command="{Binding CreateTourCommand}"
+                        Click="createTourByLocationButton_Click"
                         >
 
                     </Button>
@@ -164,7 +165,8 @@
                         Margin="226, 120, 0, 0"
                         Height="40"
                         x:Name="createTourByLanguageButton"
-                        
+                        Command="{Binding CreateTourCommand}"
+                        Click="createTourByLanguageButton_Click"
                         >
 
                     </Button>

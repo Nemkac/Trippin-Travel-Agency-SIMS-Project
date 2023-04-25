@@ -59,6 +59,7 @@
                     <RadioButton x:Name="createTourButton"
                                  Style="{StaticResource mobileCreateTourButton}"
                                  Command="{Binding CreateTourCommand}"
+                                 Click="createPlainTour_Click"
                                  >
                         <StackPanel Orientation="Horizontal"
                                 Margin="0, 5, 0 ,0">

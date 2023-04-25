@@ -1,9 +1,12 @@
 ﻿using InitialProject.Context;
 using InitialProject.Model;
+using InitialProject.Model.TransferModels;
 using InitialProject.Repository;
 using InitialProject.Service.TourServices;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
+using System.Diagnostics.PerformanceData;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,8 +33,29 @@ namespace InitialProject.WPF.View.TourGuideViews
             InitializeComponent();
             FillCountryComboBox();
             this.tourService = new(new TourRepository());
+            this.Loaded += DataLoaded;
+            //this.Loaded += languageDataLoaded; 
         }
-
+        public void DataLoaded(object sender, RoutedEventArgs e)
+        {
+            DataBaseContext context = new DataBaseContext();
+            string country, city, language;
+            List<TourLocationTransfer> tourLocationTransfers = context.TourLocationTransfers.ToList();
+            List<TourLanguageTransfer> tourLanguageTransfers = context.TourLanguageTransfers.ToList();
+            List<TourFlagTransfer> tourFlagTransfers = context.TourFlagTransfers.ToList();
+            if (tourFlagTransfers.Last().flag == 0)
+            {
+                country = tourLocationTransfers.Last().country;
+                city = tourLocationTransfers.Last().city;
+                tourCountryComboBox.Text = country;
+                tourCityComboBox.Text = city;
+            }
+            if(tourFlagTransfers.Last().flag == 1)
+            {
+                language = tourLanguageTransfers.Last().language;
+                tourLanguageComboBox.Text = language;
+            }
+        }
         List<TextBox> dynamicTextBoxes = new List<TextBox>();
         List<TextBox> dynamicImageLinksTextBoxes = new List<TextBox>();
 

@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using InitialProject.Context;
 using System;
+using InitialProject.DTO;
+using InitialProject.Model.TransferModels;
+using System.Windows;
 
 namespace InitialProject.WPF.View.TourGuideViews
 {
@@ -18,10 +21,8 @@ namespace InitialProject.WPF.View.TourGuideViews
         public TourGuide_Dashboard()
         {
             InitializeComponent();
-            DataContext = new TourGuide_DashboardViewModel();
+            //DataContext = new TourGuide_DashboardViewModel();
             this.usernameTextBlock.Text = LoggedUser.username;
-
-            // Load the most requested location and language
             LoadMostRequestedData();
         }
 
@@ -66,15 +67,12 @@ namespace InitialProject.WPF.View.TourGuideViews
             return mostRequestedLanguage != null ? (mostRequestedLanguage.Language, mostRequestedLanguage.Count) : ("", 0);
         }
 
-
         private List<TourRequest> FetchTourRequestsFromDatabase()
         {
-            // Get the current date and subtract a year to get the date one year ago
             DateTime oneYearAgo = DateTime.Now.AddYears(-1);
 
             using (DataBaseContext context = new DataBaseContext())
             {
-                // Fetch tour requests from the database that are no longer than a year old
                 var tourRequests = context.TourRequests
                                           .Where(tr => tr.startDate >= oneYearAgo)
                                           .ToList();
@@ -82,6 +80,38 @@ namespace InitialProject.WPF.View.TourGuideViews
                 return tourRequests;
             }
         }
+        private string[] CreateNamesByLocation(string location)
+        {
+            string[] locationParts = location.Split(", ");
 
+            return locationParts; 
+        }
+        public void createTourByLocationButton_Click(object sender, RoutedEventArgs e)
+        {
+            // location 0 
+            // language 1 
+            // plain 2
+            string location = locationTextBlock.Text;
+            string[] locationParts = CreateNamesByLocation(location);
+            string country = locationParts[0];
+            string city = locationParts[1];
+            DataBaseContext dataBaseContext = new DataBaseContext();
+            TourLocationTransfer tourLocationTransfer = new TourLocationTransfer(country, city);
+            TourFlagTransfer tourFlagTransfer = new TourFlagTransfer(0);
+            dataBaseContext.TourLocationTransfers.Add(tourLocationTransfer);
+            dataBaseContext.TourFlagTransfers.Add(tourFlagTransfer);
+            dataBaseContext.SaveChanges();
+        }
+
+        public void createTourByLanguageButton_Click(object sender, RoutedEventArgs e)
+        {
+            string language = languageTextBlock.Text;
+            DataBaseContext dataBaseContext = new DataBaseContext();
+            TourLanguageTransfer tourLanguageTransfer = new TourLanguageTransfer(language);
+            TourFlagTransfer tourFlagTransfer = new TourFlagTransfer(1);
+            dataBaseContext.TourLanguageTransfers.Add(tourLanguageTransfer);
+            dataBaseContext.TourFlagTransfers.Add(tourFlagTransfer);
+            dataBaseContext.SaveChanges();
+        }
     }
 }

@@ -64,7 +64,7 @@ namespace InitialProject.WPF.ViewModels
 
         public void ExecuteShowTourGuideDashboardViewCommand(object obj)
         {
-            CurrentChildView = new TourGuide_DashboardViewModel();
+            CurrentChildView = new TourGuide_DashboardViewModel(this);
         }
         public void ExecuteShowTourGuideToursViewCommand(object obj)
         {
@@ -90,7 +90,6 @@ namespace InitialProject.WPF.ViewModels
         {
             CurrentChildView = new TourGuide_FinishedToursViewModel(this);
         }
-
         public void ExecuteShowTourGuideTourDataViewCommand(object obj)
         {
             CurrentChildView = new TourGuide_FinishedTourDataViewModel(this);

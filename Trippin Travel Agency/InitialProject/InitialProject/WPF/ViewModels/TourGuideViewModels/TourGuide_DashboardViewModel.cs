@@ -27,5 +27,19 @@ namespace InitialProject.WPF.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }*/
+        public ViewModelCommand CreateTourCommand { get; private set; }
+
+        private readonly TourGuide_MainViewModel _mainViewModel;
+
+        public TourGuide_DashboardViewModel(TourGuide_MainViewModel mainViewModel)
+        {
+            _mainViewModel = mainViewModel;
+            CreateTourCommand = new ViewModelCommand(CreateTour);
+        }
+
+        public void CreateTour(object obj)
+        {
+            _mainViewModel.ExecuteShowTourGuideCreateTourViewCommand(null);
+        }
     }
 }
