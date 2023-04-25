@@ -197,19 +197,14 @@ namespace InitialProject.WPF.View.TourGuideViews
             TextBox newTextBox = CreateNewTextBoxForKeyPoint();
             StackPanel newStackPanel = CreateNewStackPanelWithElementsForKeyPoint(newLabel, newTextBox);
 
-            // Add the textbox to the list of dynamic textboxes
             dynamicTextBoxes.Add(newTextBox);
 
-            // Remove the previous StackPanel
             RemovePreviousStackPanelKeyPoints();
 
-            // Add the new StackPanel in the same place
             containerKeyPoints.Children.Insert(containerKeyPoints.Children.IndexOf(addCheckpointButton) + 1, newStackPanel);
 
-            // Store the last created StackPanel
             lastCreatedStackPanelKeyPoints = newStackPanel;
 
-            // Update the Margin of the new StackPanel to align it with the button
             newStackPanel.Margin = new Thickness(15, 10, 0, 0);
 
             checkpointCounter++;

@@ -88,9 +88,6 @@ namespace InitialProject.WPF.View.TourGuideViews
         }
         public void createTourByLocationButton_Click(object sender, RoutedEventArgs e)
         {
-            // location 0 
-            // language 1 
-            // plain 2
             string location = locationTextBlock.Text;
             string[] locationParts = CreateNamesByLocation(location);
             string country = locationParts[0];

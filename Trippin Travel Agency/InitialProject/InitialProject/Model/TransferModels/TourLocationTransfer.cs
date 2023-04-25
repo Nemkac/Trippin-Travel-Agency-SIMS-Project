@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Model.TransferModels
 {
-    public class TourFlagTransfer
+    public class TourLocationTransfer
     {
         public int id { get; set; }
-        public int flag { get; set; }
+        public string country { get; set; }
+        public string city { get; set; }
 
-        public TourFlagTransfer(int flag)
+        public TourLocationTransfer(string country, string city)
         {
-            this.flag = flag; 
+            this.country = country;
+            this.city = city;
         }
 
     }

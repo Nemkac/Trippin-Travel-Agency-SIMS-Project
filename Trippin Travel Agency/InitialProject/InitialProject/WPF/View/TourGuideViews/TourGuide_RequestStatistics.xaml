@@ -74,6 +74,38 @@
                         Margin="0,0,0,20">
 
 
+                <!-- Please select a year first -->
+                <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+                    <fa:IconImage Icon="ArrowDown"
+                                      HorizontalAlignment="Left"
+                                      Style="{StaticResource menuBackButtonIcon}"
+                                      Width="15" Height="15" Foreground="#353b48"/>
+                    <Label Style="{StaticResource labelAboveTextBox}"
+                               Foreground="#353b48"
+                               Margin="0,0,0,0">
+                        <TextBlock>
+                                <Run Text="Please first select "/>
+                                <Run FontWeight="Bold" Text="year"/>
+                        </TextBlock>
+                    </Label>
+
+                </StackPanel>
+                <!-- Year to choose -->
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0, 20, 0, 0"
+                            >
+                    <Label Content="Year"
+                               Style="{StaticResource labelAboveTextBox}"/>
+                    <ComboBox     Width="100"
+                                  Margin="20,0,0,0"
+                                  x:Name="yearComboBox"
+                                  SelectionChanged="yearComboBox_SelectionChanged"
+                                  >
+
+                    </ComboBox>
+                </StackPanel>
                 <!-- Little text helper -->
                 <StackPanel Orientation="Vertical"
                             Margin="0,10,0,0">
@@ -140,22 +172,7 @@
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
-                
-                <!-- Year to choose -->
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center"
-                            Margin="0, 20, 0, 0"
-                            >
-                    <Label Content="Year"
-                               Style="{StaticResource labelAboveTextBox}"/>
-                    <ComboBox     Width="100"
-                                  Margin="20,0,0,0"
-                                  x:Name="yearComboBox"
-                                  SelectionChanged="yearComboBox_SelectionChanged"
-                                  >
 
-                    </ComboBox>
-                </StackPanel>
                 
                 <!-- Cartessian chart -->
                 <lvc:CartesianChart x:Name="cartesianChart"
@@ -173,6 +190,7 @@
                     </lvc:CartesianChart.AxisY>
                 </lvc:CartesianChart>
 
+                <!-- Our recommendation based on requests --> 
                 <fa:IconImage Icon="StarOfLife"
                               HorizontalAlignment="Center"
                               Style="{StaticResource menuBackButtonIcon}" Width="15" Height="15"
