@@ -20,6 +20,18 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
+                            <StackPanel Orientation="Horizontal" Grid.Row="0"
+                                HorizontalAlignment="Left" Margin="15 0 0 0">
+                    <fa:IconImage Icon="Fingerprint"
+                                      HorizontalAlignment="Left"
+                                      Style="{StaticResource menuBackButtonIcon}"
+                                      Width="15" Height="15" Foreground="#353b48"/>
+                    <Label Content="Choose a request and click a button beneath to see details"
+                               Style="{StaticResource labelAboveTextBox}"
+                               Foreground="#353b48"
+                               Margin="10,0,0,0"
+                               />
+                </StackPanel>
             <DataGrid Style="{DynamicResource DataGridStyle1}" 
                       CellStyle="{DynamicResource DataGridCellStyle1}" 
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"  

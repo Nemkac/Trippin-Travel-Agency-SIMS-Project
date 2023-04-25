@@ -68,6 +68,10 @@
             <owner:RenovationsView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModel:NewRenovationViewModel}">
+            <owner:NewRenovationView/>
+        </DataTemplate>
+
         <Style x:Key="ButtonFocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>

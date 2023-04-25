@@ -9,8 +9,8 @@
              d:DesignHeight="650" d:DesignWidth="710">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="250"/>
-            <RowDefinition Height="70"/>
+            <RowDefinition Height="260"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="330"/>
         </Grid.RowDefinitions>
 
@@ -22,7 +22,7 @@
                                       HorizontalAlignment="Left"
                                       Style="{StaticResource menuBackButtonIcon}"
                                       Width="15" Height="15" Foreground="#353b48"/>
-                    <Label Content="Choose an accommodation and click a button beneath to see accommodation details"
+                    <Label Content="Choose an accommodation and click a button beneath to see accommodation images or annual statistics"
                                Style="{StaticResource labelAboveTextBox}"
                                Foreground="#353b48"
                                Margin="10,0,0,0"
@@ -46,7 +46,7 @@
                 </DataGrid>
             </StackPanel>
         </ScrollViewer>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Bottom">
+        <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center">
             <Button Style="{StaticResource showImagesButtonTablet}"
                 Grid.Row="1" HorizontalAlignment="Right"
                 BorderBrush="Transparent" Width="220" Height="50" Margin="0 0 0 0">

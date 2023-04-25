@@ -91,6 +91,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public ICommand ShowAnnualStatisticsCommand { get; }
         public ICommand ShowAccommodationMonthlyStatistics { get; }
         public ICommand ShowRenovationsCommand { get; }
+        public ICommand ShowNewRenovationCommand { get; }
         public OwnerInterfaceViewModel()
         {
             //Initialize commands
@@ -105,6 +106,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ShowOurRecommendationsCommand = new ViewModelCommand(ExecuteShowOurRecommendationsViewCommand);
             ShowAccommodationMonthlyStatistics = new ViewModelCommand(ExecuteShowMonthlyStatistics);
             ShowRenovationsCommand = new ViewModelCommand(ExecuteShowRenovationsCommand);
+            ShowNewRenovationCommand = new ViewModelCommand(ExecuteShowNewRenovationViewCommand);
             //Default view
             ExecuteShowMyBookingsCommand(null);
         }
@@ -181,7 +183,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public void ExecuteShowRenovationsCommand(object obj)
         {
-            CurrentChildView = new RenovationsViewModel();
+            CurrentChildView = new RenovationsViewModel(this);
+            Caption = "Renovations";
+        }
+
+        public void ExecuteShowNewRenovationViewCommand(object obj)
+        {
+            CurrentChildView = new NewRenovationViewModel();
             Caption = "Renovations";
         }
     }

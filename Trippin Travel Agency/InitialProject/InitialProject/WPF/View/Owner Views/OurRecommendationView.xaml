@@ -31,7 +31,7 @@
                 CornerRadius="0, 25, 25, 25">
                 <Grid>
                     <Grid.Background>
-                        <ImageBrush ImageSource="C:\Users\Nemanja\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\mitrovica.jpg">
+                        <ImageBrush ImageSource="C:\Users\Nemanja\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\most_popular_location_generic.jpg">
                             <ImageBrush.RelativeTransform>
                                 <ScaleTransform ScaleX="1" ScaleY="1" />
                             </ImageBrush.RelativeTransform>
@@ -47,7 +47,7 @@
                             </VisualBrush.Visual>
                         </VisualBrush>
                     </Grid.OpacityMask>
-                    <Rectangle Fill="#80000000" />
+                    <!--<Rectangle Fill="#80000000" />-->
                     <Label Content="Sremska Mitrovica"
                        FontSize="34"
                        FontFamily="Ubuntu"
@@ -55,15 +55,7 @@
                        Foreground="White"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Margin="20, -20, 0, 0"/>
-                    <Label Content="Most popular location"
-                       FontSize="21"
-                       FontFamily="Ubuntu"
-                       FontWeight="Light"
-                       Foreground="White"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       Margin="20, 40, 0, 0"/>
+                       Margin="20, 20, 0, 0"/>
                     <Button Style="{StaticResource acceptButton}"
                         Content="Open new accommodation"
                         Width="183"
@@ -82,7 +74,7 @@
                 CornerRadius="0, 25, 25, 25">
                 <Grid>
                     <Grid.Background>
-                        <ImageBrush ImageSource="C:\Users\Nemanja\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\madrid.jpg">
+                        <ImageBrush ImageSource="C:\Users\Nemanja\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\least_popular_location_generic.jpg">
                             <ImageBrush.RelativeTransform>
                                 <ScaleTransform ScaleX="1" ScaleY="1" />
                             </ImageBrush.RelativeTransform>
@@ -98,7 +90,7 @@
                             </VisualBrush.Visual>
                         </VisualBrush>
                     </Grid.OpacityMask>
-                    <Rectangle Fill="#80000000" />
+                    <!--<Rectangle Fill="#80000000" />-->
                     <Label Content="Madrid"
                        FontSize="34"
                        FontFamily="Ubuntu"
@@ -106,15 +98,7 @@
                        Foreground="White"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Margin="20, -20, 0, 0"/>
-                    <Label Content="Least popular location"
-                       FontSize="21"
-                       FontFamily="Ubuntu"
-                       FontWeight="Light"
-                       Foreground="White"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       Margin="20, 40, 0, 0"/>
+                       Margin="20, 20, 0, 0"/>
                     <Button Style="{StaticResource denyButtonMobile}"
                         Content="Close existing accommodation"
                         Width="183"
