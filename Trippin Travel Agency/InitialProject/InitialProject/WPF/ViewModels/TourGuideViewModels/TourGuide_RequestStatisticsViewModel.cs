@@ -9,6 +9,7 @@ namespace InitialProject.WPF.ViewModels
     public class TourGuide_RequestStatisticsViewModel : ViewModelBase
     {
         public ViewModelCommand ShowRequestsCommand { get; private set; }
+        public ViewModelCommand ShowDashboardCommand { get; private set; }
 
         private readonly TourGuide_MainViewModel _mainViewModel;
 
@@ -16,6 +17,12 @@ namespace InitialProject.WPF.ViewModels
         {
             _mainViewModel = mainViewModel;
             ShowRequestsCommand = new ViewModelCommand(ShowRequests);
+            ShowDashboardCommand = new ViewModelCommand(ShowDashboard);
+        }
+
+        public void ShowDashboard(object obj)
+        {
+            _mainViewModel.ExecuteShowTourGuideDashboardViewCommand(null);
         }
 
         public void ShowRequests(object obj)

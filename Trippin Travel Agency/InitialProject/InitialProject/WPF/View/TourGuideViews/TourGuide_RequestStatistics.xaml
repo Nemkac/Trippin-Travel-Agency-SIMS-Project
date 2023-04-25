@@ -172,6 +172,31 @@
                         </lvc:Axis>
                     </lvc:CartesianChart.AxisY>
                 </lvc:CartesianChart>
+
+                <fa:IconImage Icon="StarOfLife"
+                              HorizontalAlignment="Center"
+                              Style="{StaticResource menuBackButtonIcon}" Width="15" Height="15"
+                              Margin="0, 20, 0, 0"
+                              />
+                <TextBlock Text="See our recommendation based on tourist's requests"
+                           HorizontalAlignment="Center"
+                           Width="200"
+                           TextWrapping="Wrap"
+                           TextAlignment="Center"
+                           FontFamily="Ubuntu"
+                           FontSize="16"
+                           Foreground="#273c75"
+                           Margin="0, 20, 0 ,0"
+                           >
+                </TextBlock>
+
+                <Button Content="Show dashboard" Style="{StaticResource leadButton}"
+                            Command="{Binding ShowDashboardCommand}"
+                            HorizontalAlignment="Center"
+                            Width="200"
+                            Margin="0, 20, 0, 20"
+                        />
+
             </StackPanel>
         </ScrollViewer>
         <ContentControl Content="{Binding CurrentChildView}" Grid.RowSpan="3" Grid.ColumnSpan="3"/>

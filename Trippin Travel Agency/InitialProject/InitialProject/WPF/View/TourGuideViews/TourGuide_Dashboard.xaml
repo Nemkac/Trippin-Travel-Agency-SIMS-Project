@@ -9,8 +9,8 @@
              d:DesignHeight="660" d:DesignWidth="430">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="200"/>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="130"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -18,109 +18,158 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="1" Grid.Column="1"
+                    VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center">
+                        HorizontalAlignment="Left"
+                        >
                 <TextBlock
-                   HorizontalAlignment="Center"
+                   HorizontalAlignment="Left"
                    FontFamily="Ubuntu Bold"
-                   FontSize="48"
+                   FontSize="30"
                    Text="Hello, "/>
 
                 <TextBlock
                    HorizontalAlignment="Center"
                    FontFamily="Ubuntu Bold"
-                   FontSize="48"
+                   FontSize="30"
                    x:Name="usernameTextBlock"
                    Width="Auto"/>
 
             </StackPanel>
             <Label Content="Let's guide today!"
-                       HorizontalAlignment="Center"
+                       HorizontalAlignment="Left"
                        FontFamily="Ubuntu"
                        FontSize="18"
-                       Margin="0,5,0,0"
+                       Margin="0,0,0,0"
                        />
         </StackPanel>
-        <StackPanel Grid.Row="2"
-                    Grid.Column="1"
-                    Margin="0, -25, 0, 0"
-                    >
-            <StackPanel Orientation="Horizontal"
-                   Margin="6, 0, 0, 0">
-                <fa:IconImage Icon="Star" HorizontalAlignment="Left" Style="{StaticResource menuBackButtonIcon}" Width="15" Height="15"/>
-                <Label Content="Our recommendation"
-                   Foreground="#273c75"
-                   FontSize="21"
-                   FontFamily="Ubuntu"
-                   FontWeight="SemiBold"
-                   />
-            </StackPanel>
-            <Label Content="Based on tourist reviews"
-                   Foreground="#273c75"
-                   FontSize="14"
-                   FontFamily="Ubuntu"
-                   FontWeight="Light"
-                   Margin="0,-10, 0, 0"
-                   />
-        </StackPanel>
-        <Border Grid.Column="1"
-        Grid.Row="2"
+        <StackPanel Grid.Row="2" Grid.Column="1">
+
+            <!-- Most wanted location card-->
+            <Border
         Width="Auto"
         Height="200"
-        CornerRadius="0, 25, 25, 25">
-            <Grid>
-                <Grid.Background>
-                    <ImageBrush ImageSource="pack://application:,,,/Assets/fruska-gora.jpg">
-                        <ImageBrush.RelativeTransform>
-                            <ScaleTransform ScaleX="1" ScaleY="1" />
-                        </ImageBrush.RelativeTransform>
-                    </ImageBrush>
-                </Grid.Background>
-                <Grid.OpacityMask>
-                    <VisualBrush>
-                        <VisualBrush.Visual>
-                            <Border Width="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}"
+        CornerRadius="0, 25, 25, 25"
+                >
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="C:\Users\aleks\OneDrive\Dokumenti\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\location_generic.jpg">
+                            <ImageBrush.RelativeTransform>
+                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                            </ImageBrush.RelativeTransform>
+                        </ImageBrush>
+                    </Grid.Background>
+                    <Grid.OpacityMask>
+                        <VisualBrush>
+                            <VisualBrush.Visual>
+                                <Border Width="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}"
                             Height="{Binding ActualHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}"
                             Background="Black"
                             CornerRadius="0, 25, 25, 25" />
-                        </VisualBrush.Visual>
-                    </VisualBrush>
-                </Grid.OpacityMask>
-                <Rectangle Fill="#80000000" />
-                <Label Content="Fruška gora"
-                       FontSize="36"
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Grid.OpacityMask>
+                    <!--Dim the recntagle <Rectangle Fill="#80000000" />-->
+                    <TextBlock Text=""
+                       FontSize="28"
                        FontFamily="Ubuntu"
                        FontWeight="Bold"
                        Foreground="White"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Margin="20, -20, 0, 0"
+                       Margin="20, 40, 0, 40"
+                       x:Name="locationTextBlock"
+                       Width="250"
+                       TextWrapping="Wrap"
                 />
-                <Label Content="800 requests"
-                       FontSize="21"
+                    <TextBlock Text=""
+                       FontSize="16"
                        FontFamily="Ubuntu"
                        FontWeight="Light"
                        Foreground="White"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Margin="20, 40, 0, 0"
+                       Margin="20, 100, 0, 0"
+                       x:Name="locationRequestNumberTextBlock"
                 />
-                <Button Style="{StaticResource denyButtonMobile}"
+                    <Button Style="{StaticResource showImagesButton}"
                         Content="Create"
                         Width="83"
                         HorizontalAlignment="Left"
-                        Margin="20, 120, 0, 0"
+                        Margin="226, 120, 0, 0"
                         Height="40"
+                        x:Name="createTourByLocationButton"
                         
                         >
-                    
-                </Button>
-            </Grid>
-        </Border>
+
+                    </Button>
+                </Grid>
+            </Border>
 
 
+            <!-- Most wanted language card-->
+            <Border
+        Width="Auto"
+        Height="200"
+        CornerRadius="0, 25, 25, 25"
+        Margin="0, 35, 0, 0"
+                >
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="C:\Users\aleks\OneDrive\Dokumenti\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\language_generic.jpg">
+                            <ImageBrush.RelativeTransform>
+                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                            </ImageBrush.RelativeTransform>
+                        </ImageBrush>
+                    </Grid.Background>
+                    <Grid.OpacityMask>
+                        <VisualBrush>
+                            <VisualBrush.Visual>
+                                <Border Width="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}"
+                            Height="{Binding ActualHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}"
+                            Background="Black"
+                            CornerRadius="0, 25, 25, 25" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Grid.OpacityMask>
+                    <!--Dim the recntagle <Rectangle Fill="#80000000" />-->
+                    <TextBlock Text=""
+                       FontSize="28"
+                       FontFamily="Ubuntu"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Margin="20, 40, 0, 40"
+                       x:Name="languageTextBlock"
+                       Width="250"
+                       TextWrapping="Wrap"
+                />
+                    <TextBlock Text=""
+                       FontSize="16"
+                       FontFamily="Ubuntu"
+                       FontWeight="Light"
+                       Foreground="White"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Margin="20, 75, 0, 0"
+                       x:Name="languageRequestNumberTextBlock"
+                />
+                    <Button Style="{StaticResource showImagesButton}"
+                        Content="Create"
+                        Width="83"
+                        HorizontalAlignment="Left"
+                        Margin="226, 120, 0, 0"
+                        Height="40"
+                        x:Name="createTourByLanguageButton"
+                        
+                        >
 
-
+                    </Button>
+                </Grid>
+            </Border>
+        </StackPanel>
     </Grid>
 </UserControl>
