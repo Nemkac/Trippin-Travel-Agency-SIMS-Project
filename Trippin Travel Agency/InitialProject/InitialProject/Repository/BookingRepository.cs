@@ -85,5 +85,19 @@ namespace InitialProject.Repository
             List<DelayedBookings> delayedBookings = delayedContext.DelayedBookings.ToList();
             return delayedBookings;
         }
+
+        public bool HasGuestRated(int bookingId)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<AccommodationRate> accommodationRates = context.AccommodationRates.ToList();
+            foreach(AccommodationRate rate in accommodationRates)
+            {
+                if(bookingId == rate.bookingId)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

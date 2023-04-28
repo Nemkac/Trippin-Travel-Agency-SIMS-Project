@@ -53,9 +53,18 @@ namespace InitialProject.WPF.View.GuestOne_Views
                                     {
                                         bookingId = guestRate.bookingId,
                                         accommodationName = accommodationService.GetById((bookingService.GetById(guestRate.bookingId)).accommodationId).name,
-                                        test = new String("testtest")
-                                      };
+                                        test = GenerateFeedback(sender,e,bookingService.HasGuestRated(guestRate.bookingId))
+                                    };
             this.GuestsReviewsGrid.ItemsSource = guestsRatesToGrid;
+        }
+
+        public string GenerateFeedback(object sender, RoutedEventArgs e, bool ifRated)
+        {
+            if (ifRated)
+            {
+                return new string("Select then press ENTER to see review you got");
+            }
+            return new string("In order to see review, you must leave a review of your staying there");
         }
     }
 }

@@ -7,8 +7,26 @@
         mc:Ignorable="d"
         Title="GuestsReviewsInterface" Height="800" Width="1500">
     <Grid>
-        <DataGrid HorizontalAlignment="Center" Height="386" VerticalAlignment="Center" Width="776"  Name = "GuestsReviewsGrid"/>
-        <TextBlock HorizontalAlignment="Center" Height="46" Margin="0,70,0,0" TextWrapping="Wrap" Text="moje recenzije" VerticalAlignment="Top" Width="248" FontSize="36"/>
+        <Grid Margin="4,4,-4,-4">
+            <Label Content="" FontSize ="72" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,14,0,0" FontFamily="ubuntu" FontWeight="Bold" Foreground="#192a56"/>
+            <GroupBox Header="Navigator" Margin="985,1,26,662" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
+                <StackPanel>
+                    <TextBlock Width="478" FontWeight="medium"><Run Text="Press CTRL+N for program map" FontFamily="ubuntu"/></TextBlock>
+                </StackPanel>
+            </GroupBox>
+            <Rectangle HorizontalAlignment="Left" Height="65" Margin="-30,708,0,0" Fill ="#273c75" Stroke="Black" VerticalAlignment="Top" Width="1674"/>
+            <TextBlock HorizontalAlignment="Left" Height="72" Margin="609,700,0,0" TextWrapping="Wrap" Text="Trippin' Travel" VerticalAlignment="Top" Width="325" Foreground="white" FontSize="48" FontWeight="Bold" />
+            <GroupBox Header="Help" Margin="35,0,1114,662" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
+                <StackPanel>
+                    <TextBlock Height="39" FontWeight="medium"><Run Text="Press CTRL+H for help"/></TextBlock>
+                </StackPanel>
+            </GroupBox>
+            <Label Content="My reviews" FontSize ="64" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,24,0,0" FontFamily="ubuntu" FontWeight="Bold" Foreground="#192a56"/>
+            <Rectangle HorizontalAlignment="Left" Height="5" Margin="35,120,0,0" Stroke="#FF192A56" VerticalAlignment="Top" Width="1435" Fill="#192a56"/>
+            <TextBlock HorizontalAlignment="Left" Height="57" Margin="412,601,0,0" TextWrapping="Wrap" x:Name="warningBlock"  VerticalAlignment="Top" Width="146"/>
+        </Grid>
+
+        <DataGrid HorizontalAlignment="Center" Height="386" VerticalAlignment="Center" Width="871"  x:Name = "GuestsReviewsGrid" FontFamily="ubuntu" FontSize="18" Foreground="#FF192A56" BorderBrush="#FF192A56" Background="White" FontWeight="Medium" TextBlock.TextAlignment="Center" MinRowHeight="50"/>
 
     </Grid>
 </Window>
