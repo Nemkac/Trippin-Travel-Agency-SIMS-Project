@@ -4,6 +4,7 @@ using InitialProject.Model;
 using InitialProject.Model.TransferModels;
 using InitialProject.Repository;
 using InitialProject.Service.TourServices;
+using InitialProject.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,8 @@ namespace InitialProject.WPF.View.TourGuideViews
         public TourGuide_FinishedTours()
         {
             InitializeComponent();
-            this.tourService = new(new TourRepository());
+            this.DataContext = new TourGuide_FinishedToursViewModel();
+            /*this.tourService = new(new TourRepository());
             List<Tour> finishedTours = this.tourService.GetAllFinishedTours();
             List<FinishedTourDTO> finishedToursDtos = new List<FinishedTourDTO>();
             
@@ -38,18 +40,18 @@ namespace InitialProject.WPF.View.TourGuideViews
             {
                 finishedToursDtos.Add(tourService.createFinishedToursDTO(t)); 
             }
-            finishedToursDataGrid.ItemsSource = finishedToursDtos; 
+            finishedToursDataGrid.ItemsSource = finishedToursDtos; */
         }
 
 
-        public void showData_ButtonClick(object sender, RoutedEventArgs e)
+        /*public void showData_ButtonClick(object sender, RoutedEventArgs e)
         {
             FinishedTourDTO tourData = finishedToursDataGrid.SelectedItem as FinishedTourDTO;
             DataBaseContext dataBaseContext = new DataBaseContext();
             TourLiveViewTransfer tourLiveViewTransfer = new TourLiveViewTransfer(tourData.id);
             dataBaseContext.TourLiveViewTransfers.Add(tourLiveViewTransfer);
             dataBaseContext.SaveChanges();
-        }
+        }*/
 
     }
 }

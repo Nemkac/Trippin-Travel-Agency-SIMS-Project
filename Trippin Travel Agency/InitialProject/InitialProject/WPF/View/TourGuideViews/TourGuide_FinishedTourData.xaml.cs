@@ -41,6 +41,7 @@ namespace InitialProject.WPF.View.TourGuideViews
             InitializeComponent();
             this.Loaded += tourDataLoaded;
             this.tourService = new(new TourRepository());
+            this.DataContext = new TourGuide_FinishedTourDataViewModel();
             DataBaseContext context = new DataBaseContext();
             List<TourLiveViewTransfer> requests = context.TourLiveViewTransfers.ToList();
             Tour tour = this.tourService.GetById(requests.Last().tourId);
@@ -119,7 +120,6 @@ namespace InitialProject.WPF.View.TourGuideViews
             }
             this.reviewsDataGrid.ItemsSource = finishedTourReviewDtos;
 
-            //YearsAttendance(tour);
             UpdateAttendanceSummary(tour, context);
         }
 
@@ -160,36 +160,6 @@ namespace InitialProject.WPF.View.TourGuideViews
                 }
             }
         }
-
-        /*private void YearsAttendance(Tour tour, out int under18count, out int between18and50count, out int above50count)
-        {
-            List<TourAttendance> attendances = tourService.GetTourAttendances(tour.id);
-
-            int under18Count = 0;
-            int between18and50Count = 0;
-            int above50Count = 0;
-
-            foreach (TourAttendance attendance in attendances)
-            {
-                int age = userService.GetById(attendance.guestID).age;
-                if (age < 18)
-                {
-                    under18Count++;
-                }
-                else if (age >= 18 && age <= 50)
-                {
-                    between18and50Count++;
-                }
-                else
-                {
-                    above50Count++;
-                }
-            }
-
-            under18.Text = under18Count.ToString();
-            between18and50.Text = between18and50Count.ToString();
-            above50.Text = above50Count.ToString();
-        }*/
 
         public void report_ButtonClick(object sender, RoutedEventArgs e)
         {

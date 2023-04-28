@@ -65,7 +65,7 @@
                         Grid.Column="1"
                         Margin="0,0,0,20">
 
-                <!-- Choose a tour and apply filters -->
+                <!-- Apply filters and choose a request -->
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Center"
                             Margin="0, 0, 0, 10"
@@ -74,7 +74,7 @@
                                     HorizontalAlignment="Left"
                                     Style="{StaticResource menuBackButtonIcon}"
                                     Width="15" Height="15" Foreground="#353b48"/>
-                    <Label Content="Choose a request and apply filters"
+                    <Label Content="Apply filters and choose a request"
                             Style="{StaticResource labelAboveTextBox}"
                             Foreground="#353b48"
                             Margin="10,0,0,0"

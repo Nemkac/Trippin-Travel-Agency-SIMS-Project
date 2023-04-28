@@ -21,6 +21,7 @@ namespace InitialProject.Model
         public language language { get; set; }
         public DateTime startDate { get; set; }
         public DateTime endDate { get; set; }
+        public DateTime? acceptedDate { get; set; }
         public string description { get; set; }
         public TourRequestStatus status { get; set; }
         public int guestId { get; set; }
@@ -36,6 +37,7 @@ namespace InitialProject.Model
             this.description = description;
             this.status = TourRequestStatus.OnHold;
             this.guestId = guestId;
+            this.acceptedDate = null; 
         }
     }
 }

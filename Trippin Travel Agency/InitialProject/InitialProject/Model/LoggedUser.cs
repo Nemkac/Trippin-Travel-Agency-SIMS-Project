@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InitialProject.WPF.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,7 @@ namespace InitialProject.Model
         public static string email { get; set; }
 
         public static string role { get; set; }
+        public static TourGuide_MainViewModel TourGuide_MainViewModel { get; set; }
 
     }
 }

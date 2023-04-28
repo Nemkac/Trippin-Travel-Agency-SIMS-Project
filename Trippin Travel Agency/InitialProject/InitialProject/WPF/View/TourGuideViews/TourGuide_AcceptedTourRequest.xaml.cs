@@ -66,6 +66,7 @@ namespace InitialProject.WPF.View.TourGuideViews
             }
 
             tr.status = TourRequestStatus.Accepted;
+            tr.acceptedDate = selectedDate;
             context.TourRequests.Update(tr);
             RequestMessage rm = new RequestMessage(tr.id, tr.guestId);
             context.RequestMessages.Add(rm);

@@ -22,16 +22,16 @@ namespace InitialProject.WPF.ViewModels
             get { return _mainViewModel; }
             set { _mainViewModel = value; }
         }
-        public ViewModelCommand ShowToursTodayCommand { get; private set; }
+        public ViewModelCommand ToursTodayCommand { get; private set; }
 
         public TourGuide_TourLiveViewModel(TourGuide_MainViewModel mainViewModel)
         {
             MainViewModel = mainViewModel;
-            ShowToursTodayCommand = new ViewModelCommand(ShowToursToday);
+            ToursTodayCommand = new ViewModelCommand(ToursToday);
         }
         public TourGuide_TourLiveViewModel() { }
 
-        public void ShowToursToday(object obj)
+        public void ToursToday(object obj)
         {
             _mainViewModel.ExecuteShowTourGuideToursTodayViewCommand(null);
         }

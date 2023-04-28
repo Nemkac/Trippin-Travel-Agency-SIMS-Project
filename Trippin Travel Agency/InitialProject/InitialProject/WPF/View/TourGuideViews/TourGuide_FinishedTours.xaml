@@ -85,6 +85,8 @@
                           AutoGenerateColumns="False"
                           Width="330"
                           BorderThickness="0"
+                          ItemsSource="{Binding observableFinishedTourDTOs}"
+                          SelectedItem ="{Binding SelectedFinishedTourDTO}"
                           >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Id" Binding="{Binding id}" Width="*"/>
@@ -119,7 +121,6 @@
                 <Button Content="Show Data "
                         Style="{StaticResource showImagesButton}"
                         Margin="0,20,0,0"
-                        Click="showData_ButtonClick"
                         Command="{Binding ShowTourDataCommand}"
                         />
 

@@ -23,27 +23,11 @@ namespace InitialProject.WPF.View.TourGuideViews
 {
     public partial class TourGuide_ToursToday : UserControl
     {
-        private TourService tourService;
+        //private TourService tourService;
         public TourGuide_ToursToday()
         {
             InitializeComponent();
-            this.tourService = new(new TourRepository());
-            List<Tour> toursToday = tourService.GetAllToursToday();
-            List<ToursTodayDTO> tourDtosToday = new List<ToursTodayDTO>();
-
-            foreach (Tour t in toursToday)
-            {
-                tourDtosToday.Add(this.tourService.createToursTodayDTO(t));
-            }
-            tourDataGrid.ItemsSource = tourDtosToday;
-        }
-        public void startTourClick(object sender, RoutedEventArgs e)
-        {
-            ToursTodayDTO tourData = tourDataGrid.SelectedItem as ToursTodayDTO;
-            DataBaseContext dataBaseContext = new DataBaseContext();
-            TourLiveViewTransfer tourLiveViewTransfer = new TourLiveViewTransfer(tourData.id); 
-            dataBaseContext.TourLiveViewTransfers.Add(tourLiveViewTransfer);
-            dataBaseContext.SaveChanges(); 
+            this.DataContext = new TourGuide_ToursTodayViewModel();
         }
     }
 }

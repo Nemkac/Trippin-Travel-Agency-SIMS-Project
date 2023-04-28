@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Model.TransferModels
 {
-    public class TourTodayImagesTransfer
+    public class TourLiveViewTransfer
     {
         public int id { get; set; }
         public int tourId { get; set; } 
 
-        public TourTodayImagesTransfer(int tourId)
+        public TourLiveViewTransfer(int tourId)
         {
             this.tourId = tourId; 
         }

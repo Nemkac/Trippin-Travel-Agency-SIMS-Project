@@ -7,7 +7,7 @@
              xmlns:viewModel="clr-namespace:InitialProject.WPF.ViewModels"
              xmlns:local="clr-namespace:InitialProject.Model"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             xmlns:vm="clr-namespace:InitialProject.WPF.ViewModels"
+             xmlns:vm="clr-namespace:InitialProject.WPF.ViewModels" d:DataContext="{d:DesignInstance Type=viewModel:TourGuide_ToursTodayViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="750"
              d:DesignWidth="430"
@@ -84,6 +84,8 @@
                           AutoGenerateColumns="False"
                           Width="330"
                           BorderThickness="0"
+                          ItemsSource="{Binding observableToursTodayDTOs}"
+                          SelectedItem ="{Binding SelectedToursTodayDTO}"
                           >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Id" Binding="{Binding id}" Width="*"/>
@@ -121,8 +123,6 @@
                         Style="{StaticResource acceptButton}"
                         Width="150"
                         DockPanel.Dock="Left"
-                        x:Name="startTourLiveButton"
-                        Click="startTourClick"
                         Command="{Binding ShowTourLiveCommand}"
                       />  
 
@@ -132,7 +132,9 @@
                     Style="{StaticResource showImagesButton}"
                     HorizontalAlignment="Right"
                     Width="150"
-                    DockPanel.Dock="Right"/>
+                    DockPanel.Dock="Right"
+                    Command="{Binding ShowTourImagesCommand}"
+                            />
 
                 </DockPanel>
 

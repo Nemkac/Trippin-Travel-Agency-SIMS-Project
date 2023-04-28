@@ -7,7 +7,7 @@
              xmlns:viewModel="clr-namespace:InitialProject.WPF.ViewModels"
              xmlns:local="clr-namespace:InitialProject.Model"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf" d:DataContext="{d:DesignInstance Type=viewModel:TourGuide_FinishedTourDataViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="750"
              d:DesignWidth="430"
@@ -57,7 +57,6 @@
                            x:Name="headerTextBlock"
                            />
         </StackPanel>
-
         <ScrollViewer VerticalScrollBarVisibility="Hidden"
                       Grid.Row="2"
                       Grid.Column="1">

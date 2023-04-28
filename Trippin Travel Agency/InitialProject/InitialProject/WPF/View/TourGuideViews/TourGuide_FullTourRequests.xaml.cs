@@ -99,16 +99,25 @@ namespace InitialProject.WPF.View.TourGuideViews
         }
         public void acceptTourRequest_ButtonClick(object sender, RoutedEventArgs e)
         {
-            TourRequest request = tourRequestsDataGrid.SelectedItem as TourRequest;
-            DataBaseContext context = new DataBaseContext();
-            AcceptedTourRequestViewTransfer accepted = new AcceptedTourRequestViewTransfer(request.id);
-            context.AcceptedTourRequestViewTransfers.Add(accepted);
-            context.SaveChanges();
+            if (tourRequestsDataGrid.SelectedItem == null)
+            {
+                MessageBox.Show("Select a request to proceed");
+                return;
+            }
+            else
+            {
+                TourRequest request = tourRequestsDataGrid.SelectedItem as TourRequest;
+                DataBaseContext context = new DataBaseContext();
+                AcceptedTourRequestViewTransfer accepted = new AcceptedTourRequestViewTransfer(request.id);
+                context.AcceptedTourRequestViewTransfers.Add(accepted);
+                context.SaveChanges();
+            }
         }
-    }
-    
 
-    
+    }
+
+
+
 
 
 }
