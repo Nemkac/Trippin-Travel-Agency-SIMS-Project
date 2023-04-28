@@ -91,7 +91,7 @@ namespace InitialProject.WPF.ViewModels
         }
         public void ExecuteShowTourGuideFutureToursViewCommand(object obj)
         {
-            CurrentChildView = new TourGuide_FutureToursViewModel(this);
+            CurrentChildView = new TourGuide_FutureToursViewModel();
         }
         public void ExecuteShowTourGuideFinishedToursViewCommand(object obj)
         {
