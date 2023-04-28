@@ -44,6 +44,11 @@ namespace InitialProject.Service.GuestServices
             }
         }
 
+        public List<GuestRate> GetGuestRates()
+        {
+            return iGuestRateRepository.GetGuestsRates();
+        }
+
         public decimal CalculateTotalRating(List<AccommodationRate> availableRates)
         {
             int ratesSum = 0;

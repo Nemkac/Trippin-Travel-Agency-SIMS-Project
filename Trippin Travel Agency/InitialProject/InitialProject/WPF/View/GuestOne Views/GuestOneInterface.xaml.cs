@@ -207,6 +207,16 @@ namespace InitialProject.WPF.View.GuestOne_Views
             this.Close();
         }
 
+        private void GoToGuestsReviews(object sender, RoutedEventArgs e)
+        {
+            GuestsReviewsInterface GuestsReviewsInterface = new GuestsReviewsInterface();
+            GuestsReviewsInterface.WindowStartupLocation = WindowStartupLocation.Manual;
+            GuestsReviewsInterface.Left = this.Left;
+            GuestsReviewsInterface.Top = this.Top;
+            GuestsReviewsInterface.Show();
+            this.Close();
+        }
+
         private void GetBasicDatesProperties(object sender, RoutedEventArgs e, out int daysToBook, out List<string> displayableDates)
         {
             AccommodationDTO accommodationDTO = (AccommodationDTO)dataGrid.SelectedItem;
