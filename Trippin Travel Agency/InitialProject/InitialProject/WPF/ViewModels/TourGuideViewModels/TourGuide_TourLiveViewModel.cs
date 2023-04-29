@@ -9,6 +9,7 @@ using InitialProject.Model.TransferModels;
 using System.Windows;
 using InitialProject.Repository;
 using InitialProject.Service.TourServices;
+using System.Security.Cryptography.X509Certificates;
 
 namespace InitialProject.WPF.ViewModels
 {
@@ -22,12 +23,13 @@ namespace InitialProject.WPF.ViewModels
             get { return _mainViewModel; }
             set { _mainViewModel = value; }
         }
-        public ViewModelCommand ToursTodayCommand { get; private set; }
+        public ViewModelCommand ToursTodayCommand { get; set; }
 
         public TourGuide_TourLiveViewModel(TourGuide_MainViewModel mainViewModel)
         {
             MainViewModel = mainViewModel;
             ToursTodayCommand = new ViewModelCommand(ToursToday);
+            
         }
         public TourGuide_TourLiveViewModel() { }
 

@@ -35,7 +35,9 @@
                    FontFamily="Ubuntu Bold"
                    FontSize="30"
                    x:Name="usernameTextBlock"
-                   Width="Auto"/>
+                   Width="Auto"
+                   Text="{Binding Username}"
+                    />
 
             </StackPanel>
             <Label Content="Let's guide today!"
@@ -72,7 +74,8 @@
                         </VisualBrush>
                     </Grid.OpacityMask>
                     <!--Dim the recntagle <Rectangle Fill="#80000000" />-->
-                    <TextBlock Text=""
+                    <TextBlock 
+                       Text="{Binding Location}"
                        FontSize="28"
                        FontFamily="Ubuntu"
                        FontWeight="Bold"
@@ -84,7 +87,8 @@
                        Width="250"
                        TextWrapping="Wrap"
                 />
-                    <TextBlock Text=""
+                    <TextBlock 
+                       Text="{Binding LocationRequestNumber}"
                        FontSize="16"
                        FontFamily="Ubuntu"
                        FontWeight="Light"
@@ -101,8 +105,7 @@
                         Margin="226, 120, 0, 0"
                         Height="40"
                         x:Name="createTourByLocationButton"
-                        Command="{Binding CreateTourCommand}"
-                        Click="createTourByLocationButton_Click"
+                        Command="{Binding CreateTourByLocationCommand}"
                         >
 
                     </Button>
@@ -136,7 +139,7 @@
                         </VisualBrush>
                     </Grid.OpacityMask>
                     <!--Dim the recntagle <Rectangle Fill="#80000000" />-->
-                    <TextBlock Text=""
+                    <TextBlock Text="{Binding Language}"
                        FontSize="28"
                        FontFamily="Ubuntu"
                        FontWeight="Bold"
@@ -148,7 +151,7 @@
                        Width="250"
                        TextWrapping="Wrap"
                 />
-                    <TextBlock Text=""
+                    <TextBlock Text="{Binding LanguageRequestNumber}"
                        FontSize="16"
                        FontFamily="Ubuntu"
                        FontWeight="Light"
@@ -165,8 +168,7 @@
                         Margin="226, 120, 0, 0"
                         Height="40"
                         x:Name="createTourByLanguageButton"
-                        Command="{Binding CreateTourCommand}"
-                        Click="createTourByLanguageButton_Click"
+                        Command="{Binding CreateTourByLanguageCommand}"
                         >
 
                     </Button>

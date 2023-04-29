@@ -20,5 +20,6 @@ namespace InitialProject.Model
         public static string role { get; set; }
         public static TourGuide_MainViewModel TourGuide_MainViewModel { get; set; }
 
+
     }
 }
