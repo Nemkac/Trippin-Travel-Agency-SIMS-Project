@@ -85,7 +85,6 @@ namespace InitialProject.WPF.ViewModels
                 dataBaseContext.SaveChanges();
                 _mainViewModel.ExecuteShowTourGuideTourLiveViewCommand(null);
             }
-            _mainViewModel.ExecuteShowTourGuideToursTodayImagesViewCommand(null);
         }
         public void ShowImages(object obj)
         {

@@ -12,6 +12,10 @@
              d:DesignHeight="750"
              d:DesignWidth="430"
              x:Name="tourLiveControl">
+    
+    <UserControl.DataContext>
+        <vm:TourGuide_TourLiveViewModel />
+    </UserControl.DataContext>
 
     <Grid Background="#f5f6fa">
         <Grid.RowDefinitions>
@@ -36,7 +40,7 @@
                      VerticalAlignment="Center"
                      HorizontalAlignment="Left"
                      IsChecked="False"
-                     Command="{Binding ShowToursTodayCommand}"
+                     Command="{Binding ToursTodayCommand}"
                      Width="Auto"
                      Height="Auto"
                      >
