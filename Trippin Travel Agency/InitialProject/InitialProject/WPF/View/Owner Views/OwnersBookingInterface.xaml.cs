@@ -4,6 +4,7 @@ using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service.BookingServices;
 using InitialProject.Service.GuestServices;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -26,33 +27,10 @@ namespace InitialProject.WPF.View.Owner_Views
 
     public partial class OwnersBookingInterface : UserControl
     {
-        private readonly BookingService bookingService;
-        private GuestRateService guestRateService;
         public OwnersBookingInterface()
         {
             InitializeComponent();
-            List<BookingDTO> dataGridData = ShowBookings();
-            bookingDataGrid.ItemsSource = dataGridData;
-            BookingRepository bookingRepository = new BookingRepository();
-            this.bookingService = new BookingService(bookingRepository);
-            this.guestRateService = new(new GuestRateRepository());
-        }
-
-        private List<BookingDTO> ShowBookings()
-        {
-            //GuestRateService guestRateService = new GuestRateService();
-            DataBaseContext bookingContext = new DataBaseContext();
-            List<BookingDTO> dataList = new List<BookingDTO>();
-            BookingService bookingService = new BookingService(new BookingRepository());
-            BookingDTO dto = new BookingDTO();
-
-            foreach (Booking booking in bookingContext.Bookings.ToList())
-            {
-                dto = bookingService.CreateBookingDTO(booking);
-                dataList.Add(dto);
-            }
-
-            return dataList;
+            this.DataContext = new OwnersBookingDisplayViewModel();
         }
     }
 }

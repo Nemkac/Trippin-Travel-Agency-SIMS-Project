@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InitialProject.WPF.View.Owner_Views;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,5 +20,8 @@ namespace InitialProject.Model
 
         public static string role { get; set; }
 
+        public static OwnerInterfaceViewModel _mainViewModel { get; set; } 
+
+        public static AccommodationsAnnualStatisticsView accommodationsAnnualStatisticsView { get; set; } 
     }
 }

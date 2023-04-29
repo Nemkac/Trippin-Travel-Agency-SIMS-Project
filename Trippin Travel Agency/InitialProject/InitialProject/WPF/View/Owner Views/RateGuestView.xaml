@@ -26,23 +26,28 @@
         
         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <Viewbox Width="30" Height="30" Margin="0 0 5 0">
-                <RadioButton x:Name="cleannesRateRadioButton1" GroupName="Cleanness"/>
+                <RadioButton x:Name="cleannesRateRadioButton1" GroupName="Cleanness"
+                             IsChecked="{Binding SelectedCleannessRadioButton1}"/>
             </Viewbox>
             <Label Content="1" Style="{StaticResource defaultLabel}" FontSize="20" VerticalAlignment="Center"/>
             <Viewbox Width="30" Height="30" Margin="5 0 5 0">
-                <RadioButton x:Name="cleannesRateRadioButton2" GroupName="Cleanness"/>
+                <RadioButton x:Name="cleannesRateRadioButton2" GroupName="Cleanness"
+                             IsChecked="{Binding SelectedCleannessRadioButton2}"/>
             </Viewbox>
             <Label Content="2" Style="{StaticResource defaultLabel}" FontSize="20" VerticalAlignment="Center"/>
             <Viewbox Width="30" Height="30" Margin="5 0 5 0">
-                <RadioButton x:Name="cleannesRateRadioButton3" GroupName="Cleanness"/>
+                <RadioButton x:Name="cleannesRateRadioButton3" GroupName="Cleanness"
+                             IsChecked="{Binding SelectedCleannessRadioButton3}"/>
             </Viewbox>
             <Label Content="3" Style="{StaticResource defaultLabel}" FontSize="20" VerticalAlignment="Center"/>
             <Viewbox Width="30" Height="30" Margin="5 0 5 0">
-                <RadioButton x:Name="cleannesRateRadioButton4" GroupName="Cleanness"/>
+                <RadioButton x:Name="cleannesRateRadioButton4" GroupName="Cleanness"
+                             IsChecked="{Binding SelectedCleannessRadioButton4}"/>
             </Viewbox>
             <Label Content="4" Style="{StaticResource defaultLabel}" FontSize="20" VerticalAlignment="Center"/>
             <Viewbox Width="30" Height="30" Margin="5 0 0 0">
-                <RadioButton x:Name="cleannesRateRadioButton5" GroupName="Cleanness"/>
+                <RadioButton x:Name="cleannesRateRadioButton5" GroupName="Cleanness"
+                             IsChecked="{Binding SelectedCleannessRadioButton5}"/>
             </Viewbox>
             <Label Content="5" Style="{StaticResource defaultLabel}" FontSize="20" VerticalAlignment="Center"/>
         </StackPanel>
@@ -54,23 +59,28 @@
 
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <Viewbox Width="30" Height="30" Margin="0 0 5 0">
-                <RadioButton x:Name="rulesRateRadioButton1" GroupName="RulesRespecting"/>
+                <RadioButton x:Name="rulesRateRadioButton1" GroupName="RulesRespecting"
+                             IsChecked="{Binding SelectedRulesRespectingRadioButton1}"/>
             </Viewbox>
             <Label Content="1" Style="{StaticResource defaultLabel}" FontSize="20" VerticalAlignment="Center"/>
             <Viewbox Width="30" Height="30" Margin="5 0 5 0">
-                <RadioButton x:Name="rulesRateRadioButton2" GroupName="RulesRespecting"/>
+                <RadioButton x:Name="rulesRateRadioButton2" GroupName="RulesRespecting"
+                             IsChecked="{Binding SelectedRulesRespectingRadioButton2}"/>
             </Viewbox>
             <Label Content="2" Style="{StaticResource defaultLabel}" FontSize="20" VerticalAlignment="Center"/>
             <Viewbox Width="30" Height="30" Margin="5 0 5 0">
-                <RadioButton x:Name="rulesRateRadioButton3" GroupName="RulesRespecting"/>
+                <RadioButton x:Name="rulesRateRadioButton3" GroupName="RulesRespecting"
+                             IsChecked="{Binding SelectedRulesRespectingRadioButton3}"/>
             </Viewbox>
             <Label Content="3" Style="{StaticResource defaultLabel}" FontSize="20" VerticalAlignment="Center"/>
             <Viewbox Width="30" Height="30" Margin="5 0 5 0">
-                <RadioButton x:Name="rulesRateRadioButton4" GroupName="RulesRespecting"/>
+                <RadioButton x:Name="rulesRateRadioButton4" GroupName="RulesRespecting"
+                             IsChecked="{Binding SelectedRulesRespectingRadioButton4}"/>
             </Viewbox>
             <Label Content="4" Style="{StaticResource defaultLabel}" FontSize="20" VerticalAlignment="Center"/>
             <Viewbox Width="30" Height="30" Margin="5 0 0 0">
-                <RadioButton x:Name="rulesRateRadioButton5" GroupName="RulesRespecting"/>
+                <RadioButton x:Name="rulesRateRadioButton5" GroupName="RulesRespecting"
+                             IsChecked="{Binding SelectedRulesRespectingRadioButton5}"/>
             </Viewbox>
             <Label Content="5" Style="{StaticResource defaultLabel}" FontSize="20" VerticalAlignment="Center"/>
         </StackPanel>
@@ -81,17 +91,19 @@
         </StackPanel>
 
         <TextBox Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" Height="230"
-                 VerticalAlignment="Top" Margin="0 40 0 0" x:Name="commentTB"/>
+                 VerticalAlignment="Top" Margin="0 40 0 0" x:Name="commentTB"
+                 Text="{Binding Comment}"/>
         
         <StackPanel Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal">
             <TextBlock x:Name="saveFeedback" 
                    VerticalAlignment="Center"
-                   Height="30" Width="200" Margin="260 10 10 0" FontSize="17" Foreground="#4CD137" FontFamily="Ubuntu"/>
+                   Height="30" Width="200" Margin="260 10 10 0" FontSize="17" Foreground="#4CD137" 
+                   FontFamily="Ubuntu" Text="{Binding FeedBack}"/>
             <Button Content="Save Rating" 
                 Grid.Row="3" Grid.ColumnSpan="3"
                 VerticalAlignment="Center"
                 Style="{StaticResource saveButtonTablet}"
-                Click="SaveRate"/>
+                Command="{Binding SaveRatingCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>

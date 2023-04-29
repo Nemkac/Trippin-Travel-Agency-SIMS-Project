@@ -1,5 +1,6 @@
 ﻿using FontAwesome.Sharp;
 using InitialProject.DTO;
+using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.WPF.View;
 using InitialProject.WPF.View.Owner_Views;
@@ -92,6 +93,9 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public ICommand ShowAccommodationMonthlyStatistics { get; }
         public ICommand ShowRenovationsCommand { get; }
         public ICommand ShowNewRenovationCommand { get; }
+        public ICommand ShowScheduleNewRenovationCommand { get; }
+
+        public ICommand LogOut { get; }
         public OwnerInterfaceViewModel()
         {
             //Initialize commands
@@ -107,7 +111,9 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ShowAccommodationMonthlyStatistics = new ViewModelCommand(ExecuteShowMonthlyStatistics);
             ShowRenovationsCommand = new ViewModelCommand(ExecuteShowRenovationsCommand);
             ShowNewRenovationCommand = new ViewModelCommand(ExecuteShowNewRenovationViewCommand);
+            ShowScheduleNewRenovationCommand = new ViewModelCommand(ExecuteShowScheduleNewRenovationCommand);
             //Default view
+            LoggedUser._mainViewModel = this;
             ExecuteShowMyBookingsCommand(null);
         }
 
@@ -119,13 +125,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public void ExecuteShowAcceptDenyViewCommand(object obj)
         {
-            CurrentChildView = new AcceptDenyViewModel(this, _requestDataGridSelectedItem);
+            CurrentChildView = new AcceptDenyViewModel();
             Caption = "Requests";
         }
 
         public void ExecuteShowRequestViewCommand(object obj)
         {
-            CurrentChildView = new RequestViewModel(this);
+            CurrentChildView = new RequestViewModel();
             Caption = "Requests";
         }
 
@@ -137,7 +143,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public void ExecuteShowProfileViewCommand(object obj)
         {
-            CurrentChildView = new ProfileViewModel(this);
+            CurrentChildView = new ProfileViewModel();
             Caption = "Profile";
         }
 
@@ -149,7 +155,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public void ExecuteShowNotificationsViewCommand(object obj)
         {
-            CurrentChildView = new NotificationsViewModel(this);
+            CurrentChildView = new NotificationsViewModel();
             Caption = "Notifications";
         }
 
@@ -161,7 +167,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public void ExecuteShowMyBookingsCommand(object obj)
         {
-            CurrentChildView = new AccommodationStatisticsViewModel(this);
+            CurrentChildView = new AccommodationStatisticsViewModel();
             Caption = "My Accommodations";
         }
         public void ExecuteShowOurRecommendationsViewCommand(object obj)
@@ -171,7 +177,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         }
         public void ExecuteShowAnnualStatisticsCommand(object obj)
         {
-            CurrentChildView = new AccommodationAnnualStatisticsViewModel(this);
+            CurrentChildView = new AccommodationAnnualStatisticsViewModel();
             Caption = "My Accommodations";
         }
 
@@ -183,13 +189,19 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public void ExecuteShowRenovationsCommand(object obj)
         {
-            CurrentChildView = new RenovationsViewModel(this);
+            CurrentChildView = new RenovationsViewModel();
             Caption = "Renovations";
         }
 
         public void ExecuteShowNewRenovationViewCommand(object obj)
         {
             CurrentChildView = new NewRenovationViewModel();
+            Caption = "Renovations";
+        }
+
+        public void ExecuteShowScheduleNewRenovationCommand(object obj)
+        {
+            CurrentChildView = new ScheduleNewRenovationViewModel();
             Caption = "Renovations";
         }
     }

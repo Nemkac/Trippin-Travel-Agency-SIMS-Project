@@ -33,6 +33,8 @@
                       CellStyle="{DynamicResource DataGridCellStyle1}" 
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"  
                       RowStyle="{DynamicResource DataGridRowStyle1}"
+                      ItemsSource="{Binding accommodations}"
+                      SelectedItem="{Binding SelectedAccommodation}"
                       AutoGenerateColumns="False" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Id" Binding="{Binding accommodationId}" Width="45"/>
@@ -59,8 +61,7 @@
             <Button Style="{StaticResource detailsButton}"
                 Grid.Row="1" HorizontalAlignment="Right"
                 BorderBrush="Transparent" 
-                Margin="269 0 0 0"
-                Click="ShowDetails" Height="50"
+                Margin="269 0 0 0" Height="50"
                 Command="{Binding ShowAnnualStatisticsViewCommand}">
                 <StackPanel Orientation="Horizontal"
                                 Margin="0, 0, 0 ,0">

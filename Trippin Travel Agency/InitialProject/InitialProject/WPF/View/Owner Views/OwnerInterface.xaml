@@ -72,6 +72,10 @@
             <owner:NewRenovationView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModel:ScheduleNewRenovationViewModel}">
+            <owner:ScheduleNewRenovation/>
+        </DataTemplate>
+
         <Style x:Key="ButtonFocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>

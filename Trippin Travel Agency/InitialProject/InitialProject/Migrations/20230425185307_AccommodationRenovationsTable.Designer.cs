@@ -3,6 +3,7 @@ using System;
 using InitialProject.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230425185307_AccommodationRenovationsTable")]
+    partial class AccommodationRenovationsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
@@ -165,13 +168,11 @@ namespace InitialProject.Migrations
                     b.Property<int>("accommodationId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("accommodationName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("accommodationName")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("accommodationType")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("accommodationType")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("description")
                         .IsRequired()
@@ -180,12 +181,10 @@ namespace InitialProject.Migrations
                     b.Property<int>("duration")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("endDate")
-                        .IsRequired()
+                    b.Property<DateTime>("endDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("startDate")
-                        .IsRequired()
+                    b.Property<DateTime>("startDate")
                         .HasColumnType("TEXT");
 
                     b.HasKey("id");

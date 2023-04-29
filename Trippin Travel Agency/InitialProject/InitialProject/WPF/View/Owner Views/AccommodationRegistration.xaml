@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.WPF.View.Owner_Views"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              d:DesignHeight="650" Width="710">
     <Grid>
@@ -17,44 +18,123 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Row="0" Grid.Column="0"  CornerRadius="30, 0, 0, 0">
+        <Border Grid.Row="0" Grid.Column="0" CornerRadius="30, 0, 0, 0">
             <StackPanel Orientation="Vertical">
                 <Label x:Name="label" Style="{StaticResource defaultLabel}" Content="Accommodation name" HorizontalAlignment="Left" Height="27" Margin="49,26,0,0" VerticalAlignment="Top" Width="165"/>
-                <TextBox x:Name="accommodationNameTB" HorizontalAlignment="Left" Margin="49,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="25"/>
+                <TextBox x:Name="accommodationNameTB" HorizontalAlignment="Left" Margin="49,10,0,0" 
+                         TextWrapping="Wrap" VerticalAlignment="Top" Width="190" 
+                         Height="25" Text="{Binding AccommodationName}"/>
                 <Label x:Name="label1" Style="{StaticResource defaultLabel}" Content="Country"  HorizontalAlignment="Left" Margin="49,45,0,0" VerticalAlignment="Top" Height="30" Width="150"/>
-                <ComboBox x:Name="countryComboBox" HorizontalAlignment="Left" Margin="49,10,0,0" VerticalAlignment="Top" Width="190" Height="22" SelectionChanged="countryComboBox_SelectionChanged"/>
+                <ComboBox x:Name="countryComboBox" HorizontalAlignment="Left" Margin="49,10,0,0" 
+                          VerticalAlignment="Top" Width="190" Height="22" 
+                          SelectedItem="{Binding SelectedCountry}"
+                          ItemsSource="{Binding countries}"/>
                 <Label x:Name="label2" Style="{StaticResource defaultLabel}" Content="City"  HorizontalAlignment="Left" Margin="49,45,0,0" VerticalAlignment="Top" Width="125" Height="26"/>
-                <ComboBox x:Name="cityComboBox" HorizontalAlignment="Left" Margin="49,10,0,0" VerticalAlignment="Top" Width="190" Height="22"/>
+                <ComboBox x:Name="cityComboBox" HorizontalAlignment="Left" Margin="49,10,0,0" 
+                          VerticalAlignment="Top" Width="190" Height="22"
+                          ItemsSource="{Binding cities}" SelectedItem="{Binding SelectedCity}"/>
             </StackPanel>
         </Border>
 
         <Border Grid.Row="0" Grid.Column="1" >
             <StackPanel Orientation="Vertical">
                 <Label x:Name="label4" Style="{StaticResource defaultLabel}" Content="Maximum number of guests"  HorizontalAlignment="Left" Margin="49,26,0,0" VerticalAlignment="Top" Width="200" Height="26"/>
-                <TextBox x:Name="guestLimitTB" HorizontalAlignment="Left" Margin="49,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="25"/>
-                <Label x:Name="label5" Style="{StaticResource defaultLabel}" Content="Minimum days to book" HorizontalAlignment="Left" Margin="49,36,0,0" VerticalAlignment="Top" Width="190" Height="26"/>
-                <TextBox x:Name="minDaysBookedTB"  HorizontalAlignment="Left" Margin="49,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="25"/>
-                <Label x:Name="label6" Style="{StaticResource defaultLabel}" Content="Booking cancelation period" HorizontalAlignment="Left" Margin="49,36,0,0" VerticalAlignment="Top" Width="193" Height="26"/>
-                <TextBox x:Name="bookingCancelPeriodTB"  HorizontalAlignment="Left" Margin="49,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="25"/>
+                <TextBox x:Name="guestLimitTB" HorizontalAlignment="Left" Margin="49,10,0,0" 
+                         TextWrapping="Wrap" Text="{Binding GuestLimit}" VerticalAlignment="Top" 
+                         Width="190" Height="25"/>
+                <Label x:Name="label5" Style="{StaticResource defaultLabel}" Content="Minimum days to book" HorizontalAlignment="Left" Margin="49,49,0,0" VerticalAlignment="Top" Width="190" Height="26"/>
+                <TextBox x:Name="minDaysBookedTB"  HorizontalAlignment="Left" Margin="49,10,0,0" 
+                         TextWrapping="Wrap" Text="{Binding MinDaysBooked}" 
+                         VerticalAlignment="Top" Width="190" Height="25"/>
+                <Label x:Name="label6" Style="{StaticResource defaultLabel}" Content="Booking cancelation period" HorizontalAlignment="Left" Margin="49,43,0,0" VerticalAlignment="Top" Width="193" Height="26"/>
+                <TextBox x:Name="bookingCancelPeriodTB"  HorizontalAlignment="Left" 
+                         Margin="49,10,0,0" TextWrapping="Wrap" Text="{Binding BookingCancelationPeriod}" 
+                         VerticalAlignment="Top" Width="190" Height="25"/>
                 <Label x:Name="label7" Style="{StaticResource defaultLabel}" Content="Accommodation type" HorizontalAlignment="Left" Margin="49,36,0,0" VerticalAlignment="Top" Width="190" Height="26"/>
-                <RadioButton x:Name="houseRadioButton" Foreground="#192a56" Content="House" FontFamily="Ubuntu" FontSize="13" FontWeight="Medium" HorizontalAlignment="Left" Margin="49,10,0,0" VerticalAlignment="Top" Height="14" Width="137"/>
-                <RadioButton x:Name="apartmentRadioButton" Foreground="#192a56" Content="Apartment" FontFamily="Ubuntu" FontSize="13" FontWeight="Medium" HorizontalAlignment="Left" Margin="49,10,0,0" VerticalAlignment="Top"/>
-                <RadioButton x:Name="hutRadioButton" Foreground="#192a56" Content="Hut" FontFamily="Ubuntu" FontSize="13" FontWeight="Medium" HorizontalAlignment="Left" Margin="49,10,0,0" VerticalAlignment="Top"/>
-            </StackPanel>
-        </Border>
 
-        <Border Grid.Row="0" Grid.Column="2" CornerRadius="0, 30, 0, 0">
-            <StackPanel Orientation="Vertical" Margin="0,15,0,0" Grid.Row="0" Grid.Column="2">
-                <Label Content="Insert image" Style="{StaticResource defaultLabel}" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top"/>
-                <StackPanel x:Name="containerImageStackPanel">
-                    <Button x:Name="addImageButton" Style="{StaticResource addButton}" Content="Add" HorizontalAlignment="Left" Margin="15,0,0,0" Height="30" Width="100" Click="addImageButton_Click" RenderTransformOrigin="0.489,0.521"/>
+                <StackPanel Orientation="Vertical" Margin="49 0 0 0">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <Viewbox Height="25" Width="25">
+                            <RadioButton x:Name="houseRadioButton"
+                                     IsChecked="{Binding House}"/>
+                        </Viewbox>
+                        <Label Content="House" Foreground="#192a56" 
+                                     FontFamily="Ubuntu" FontSize="16" 
+                                     FontWeight="Medium" HorizontalAlignment="Left"
+                                     VerticalAlignment="Top"/>
+                    </StackPanel>
+                
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0 10 0 0">
+                        <Viewbox Height="25" Width="25">
+                            <RadioButton x:Name="apartmentRadioButton"
+                                     IsChecked="{Binding Apartment}"/>
+                        </Viewbox>
+                        <Label Content="Apartment" Foreground="#192a56" 
+                                     FontFamily="Ubuntu" FontSize="16" 
+                                     FontWeight="Medium" HorizontalAlignment="Left" 
+                                     VerticalAlignment="Top"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  Margin="0 10 0 0">
+                        <Viewbox Height="25" Width="25">
+                            <RadioButton x:Name="hutRadioButton"
+                                     IsChecked="{Binding Hut}"/>
+                        </Viewbox>
+                        <Label Content="Hut" Foreground="#192a56" 
+                                     FontFamily="Ubuntu" FontSize="16" 
+                                     FontWeight="Medium" HorizontalAlignment="Left" 
+                                     VerticalAlignment="Top"/>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
         </Border>
 
+        <Border Grid.Row="0" Grid.Column="2" CornerRadius="0, 30, 0, 0">
+            <GroupBox Header="Images" VerticalAlignment="Top"
+                          Style="{StaticResource labelGroupBox}"
+                          Margin="0,30,0,0"
+                          Height="150"
+                          Padding="10">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center"
+                                x:Name="containerImages">
+                    <!-- Add image -->
+                    <StackPanel Orientation="Vertical"
+                                    Margin="0, 5, 0 ,0">
+                        <TextBlock Text="{Binding ImageNumber}"
+                                       FontSize="16" Foreground="#192a56"
+                                       Margin="0, 0, 0, 0"/>
+                        <TextBox Text="{Binding Url}"
+                                     FontSize="16" Width="140"
+                                     Margin="0, 5, 0, 0"/>
+                    </StackPanel>
+                    <RadioButton x:Name="addimageButton"
+                                 Style="{StaticResource mobileCreateTourButton}"
+                                 HorizontalAlignment="Center"
+                                 Command="{Binding AddImageCommand}">
+                        <StackPanel Orientation="Horizontal" Margin="0 15 0 0">
+                            <fa:IconImage Icon="PlusCircle"
+                                          HorizontalAlignment="Left"
+                                          Style="{StaticResource menuBackButtonIcon}"
+                                          Width="25" Height="25"/>
+                            <Label Content="Add image"
+                                       FontSize="18"
+                                       FontFamily="Ubuntu"
+                                       FontWeight="SemiBold"
+                                       Margin="10, 0, 0, 0"
+                                       Style="{StaticResource labelBackHeader}"/>
+                        </StackPanel>
+                    </RadioButton>
+                </StackPanel>
+            </GroupBox>
+        </Border>
+
         <Border Grid.Row="1" Grid.ColumnSpan="3" CornerRadius="0, 0, 30, 30">
-            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Right">
-                <Button x:Name="saveAccommodation" Style="{StaticResource saveButtonTablet}" Grid.Row="1" Margin="0, 0, 19, 0" Click="SaveAccommodation" 
+            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <TextBlock x:Name="FeedBack" Margin="15 10 0 0" Width="320" Height="30" 
+                               FontSize="17" Foreground="#4CD137" FontFamily="Ubuntu"
+                               Text="{Binding FeedBack}"/>
+                <Button x:Name="saveAccommodation" Style="{StaticResource saveButtonTablet}" 
+                        Grid.Row="1" Margin="0, 0, 19, 0" Command="{Binding SaveAccommodationCommand}"
                         Content="Save Accommodation"/>
             </StackPanel>
         </Border>

@@ -1,5 +1,11 @@
-﻿using System;
+﻿using InitialProject.Context;
+using InitialProject.Model;
+using InitialProject.Repository;
+using InitialProject.Service.AccommodationServices;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,10 +25,11 @@ namespace InitialProject.WPF.View.Owner_Views
     /// Interaction logic for RenovationsView.xaml
     /// </summary>
     public partial class RenovationsView : UserControl
-    {
+    { 
         public RenovationsView()
         {
             InitializeComponent();
+            this.DataContext = new RenovationsViewModel();
         }
     }
 }

@@ -45,19 +45,24 @@
                         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal">
                             <Label Content="Hello, " FontFamily="Ubuntu"
                            FontSize="48" FontWeight="Bold" VerticalAlignment="Bottom" Foreground="#192a56"/>
-                            <TextBlock x:Name="UsernameTextBlock" FontFamily="Ubuntu" Width="310" Margin="0 0 0 5"
-                           FontSize="48" FontWeight="Bold" VerticalAlignment="Bottom" Foreground="#192a56"/>
+                            <TextBlock x:Name="UsernameTextBlock" FontFamily="Ubuntu" Width="310" 
+                                       Margin="0 0 0 5" FontSize="48" FontWeight="Bold" 
+                                       VerticalAlignment="Bottom" Foreground="#192a56"
+                                       Text="{Binding Username}"/>
                         </StackPanel>
                         <StackPanel Grid.Row="1" Grid.Column="0">
-                            <TextBlock x:Name="OwnerTypeTextBlock" FontFamily="Ubuntu" Margin="5 5 0 0"
-                           FontSize="20" FontWeight="Regular" VerticalAlignment="Center" Foreground="#192a56"/>
+                            <TextBlock x:Name="OwnerTypeTextBlock" FontFamily="Ubuntu" 
+                                       Margin="5 5 0 0" Text="{Binding OwnerType}"
+                                       FontSize="20" FontWeight="Regular" 
+                                       VerticalAlignment="Center" Foreground="#192a56"/>
                         </StackPanel>
                         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
                             <fa:IconImage Icon="Gratipay" Width="30" Height="30" VerticalAlignment="Top"
                                           HorizontalAlignment="Left" Margin="0 5 0 0" Foreground="#fbc531"/>
                             <TextBlock x:Name="TotalRateTextBlock" FontFamily="Ubuntu" 
                                        FontSize="20" FontWeight="Bold" VerticalAlignment="Top"
-                                       Margin="10 7 0 0" Foreground="#fbc531" Width="80"/>
+                                       Margin="10 7 0 0" Foreground="#fbc531" Width="80"
+                                       Text="{Binding TotalRating}"/>
                         </StackPanel>
                     </Grid>
                 </StackPanel>
@@ -76,13 +81,16 @@
                 <StackPanel Grid.Row="1" Grid.Column="1">
                     <TextBlock x:Name="FirstNameTextBlock" FontFamily="Ubuntu" Width="430"
                            FontSize="20" FontWeight="Medium" VerticalAlignment="Center" 
-                           Foreground="#192a56" Margin="5 60 0 0" HorizontalAlignment="Left"/>
+                           Foreground="#192a56" Margin="5 55 0 0" HorizontalAlignment="Left"
+                           Text="{Binding Firstname}"/>
                     <TextBlock x:Name="LastNameTextBlock" FontFamily="Ubuntu" Width="430"
                            FontSize="20" FontWeight="Medium" VerticalAlignment="Center" 
-                           Foreground="#192a56" Margin="5 30 0 0" HorizontalAlignment="Left"/>
+                           Foreground="#192a56" Margin="5 30 0 0" HorizontalAlignment="Left"
+                           Text="{Binding Lastname}"/>
                     <TextBlock x:Name="EmailTextBlock" FontFamily="Ubuntu" Width="430"
                            FontSize="20" FontWeight="Medium" VerticalAlignment="Center" 
-                           Foreground="#192a56" Margin="5 35 0 0" HorizontalAlignment="Left"/>
+                           Foreground="#192a56" Margin="5 30 0 0" HorizontalAlignment="Left"
+                           Text="{Binding Email}"/>
                 </StackPanel>
             </Grid>
         </StackPanel>

@@ -12,6 +12,7 @@
                   CellStyle="{DynamicResource DataGridCellStyle1}" 
                   ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                   RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="bookingDataGrid" 
+                  ItemsSource="{Binding bookings}"
                   AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Guest" Binding="{Binding guestName}" Width="95"/>

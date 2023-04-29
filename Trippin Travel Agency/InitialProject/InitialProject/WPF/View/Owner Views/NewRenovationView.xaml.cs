@@ -2,6 +2,7 @@
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service.AccommodationServices;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,27 +25,10 @@ namespace InitialProject.WPF.View.Owner_Views
     /// </summary>
     public partial class NewRenovationView : UserControl
     {
-        public AccommodationService accommodationService = new(new AccommodationRepository());
         public NewRenovationView()
         {
             InitializeComponent();
-            List<AccommodationStatisticsDTO> dataGridData = ShowOwnersAccommodations();
-            this.newRenovationDataGrid.ItemsSource = dataGridData;
+            this.DataContext = new NewRenovationViewModel();
         }
-
-        private List<AccommodationStatisticsDTO> ShowOwnersAccommodations()
-        {
-            AccommodationStatisticsDTO dto;
-            List<AccommodationStatisticsDTO> accommodationsToShow = new List<AccommodationStatisticsDTO>();
-            List<Accommodation> ownersAccommodations = this.accommodationService.GetAccommodationsByOwnerId(LoggedUser.id);
-            foreach (Accommodation accommodation in ownersAccommodations)
-            {
-                dto = this.accommodationService.CreateAccommodationStatisticsDTO(accommodation);
-                accommodationsToShow.Add(dto);
-            }
-
-            return accommodationsToShow;
-        }
-
     }
 }

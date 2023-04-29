@@ -1,22 +1,52 @@
-﻿using System;
+﻿using InitialProject.Context;
+using InitialProject.Model;
+using InitialProject.Repository;
+using InitialProject.Service.AccommodationServices;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class RenovationsViewModel : ViewModelBase
     {
+        private AccommodationService accommodationService = new(new AccommodationRepository());
+        public ObservableCollection<AccommodationRenovation> Renovations { get; set; } = new ObservableCollection<AccommodationRenovation>();
+        
+        private AccommodationRenovation selectedRenovation;
+        public AccommodationRenovation SelectedRenovation
+        {
+            get { return selectedRenovation; }
+            set
+            {
+                if (selectedRenovation != value)
+                {
+                    selectedRenovation = value;
+                    OnPropertyChanged(nameof(SelectedRenovation));
+                }
+            }
+        }
+
+        public ViewModelCommand CancelRenovationCommand { get; }
 
         private readonly OwnerInterfaceViewModel _mainViewModel;
 
         public ViewModelCommand ShowNewRenovationView { get; }
 
-        public RenovationsViewModel(OwnerInterfaceViewModel mainViewModel)
+        public RenovationsViewModel()
         {
-            _mainViewModel = mainViewModel;
+            _mainViewModel = LoggedUser._mainViewModel;
             ShowNewRenovationView = new ViewModelCommand(ExecuteShowNewRenovationView);
+            CancelRenovationCommand = new ViewModelCommand(CancelRenovation);
+            ShowRenovation();
         }
 
         public void ExecuteShowNewRenovationView(object obj)
@@ -24,5 +54,64 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             _mainViewModel.ExecuteShowNewRenovationViewCommand(null);
         }
 
+        public void ShowRenovation()
+        {
+            List<AccommodationRenovation> renovations = this.accommodationService.GetAllRenovations();
+            List<AccommodationRenovation> renovationsToShow = new List<AccommodationRenovation>();
+
+            foreach (AccommodationRenovation renovation in renovations)
+            {
+                Accommodation accommodation = this.accommodationService.GetById(renovation.accommodationId);
+
+                if (accommodation.ownerId == LoggedUser.id)
+                {
+                    renovationsToShow.Add(renovation);
+                }
+
+            }
+
+            foreach(AccommodationRenovation renovation in renovationsToShow)
+            {
+                Renovations.Add(renovation);
+            }
+        }
+
+        public void CancelRenovation(object obj)
+        {
+            AccommodationRenovation selectedRenovation = SelectedRenovation;
+            DateTime endDate = DateTime.ParseExact(selectedRenovation.endDate, "M/d/yyyy", CultureInfo.InvariantCulture);
+            DateTime startDate = DateTime.ParseExact(selectedRenovation.startDate, "M/d/yyyy", CultureInfo.InvariantCulture);
+            DateTime currentDate = DateTime.Now;
+            DataBaseContext renovationsContext = new DataBaseContext();
+
+            if (selectedRenovation != null)
+            {
+                if (currentDate >= endDate)
+                {
+                    MessageBox.Show("This renovation is finished!");
+                    SelectedRenovation = null;
+                    return;
+                }
+                else if (currentDate >= startDate && currentDate <= endDate)
+                {
+                    MessageBox.Show("Renovation is in progress");
+                    SelectedRenovation = null;
+                    return;
+                }
+                else if (startDate <= currentDate.AddDays(5))
+                {
+                    MessageBox.Show("Renovation can be canceled at least 5 days before start date!");
+                    SelectedRenovation = null;
+                    return;
+                }
+                else
+                {
+                    Renovations.Remove(selectedRenovation);
+                    SelectedRenovation = null;
+                    renovationsContext.AccommodationRenovations.Remove(selectedRenovation);
+                    renovationsContext.SaveChanges();
+                }
+            }
+        }
     }
 }

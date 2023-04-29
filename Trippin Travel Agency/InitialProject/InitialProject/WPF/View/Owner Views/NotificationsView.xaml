@@ -7,7 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="710">
     <Grid>
-        <ListBox x:Name="notificationsListBox" FontFamily="Ubuntu" FontSize="24" SelectionChanged="HandleSelections" />
+        <ListBox x:Name="notificationsListBox" FontFamily="Ubuntu" 
+                 FontSize="24"
+                 SelectedItem="{Binding SelectedNotification}"
+                 ItemsSource="{Binding Notifications}"/>
         <ContentControl Content="{Binding CurrentChildView}"/>
     </Grid>
 </UserControl>

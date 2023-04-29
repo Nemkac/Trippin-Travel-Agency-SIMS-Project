@@ -26,7 +26,8 @@
         <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Top">
             <TextBlock x:Name="accommodationNameTextBlock"  FontFamily="Ubuntu" 
                        Width="Auto" FontSize="20" FontWeight="Light" Margin="5 0 0 0" 
-                       VerticalAlignment="Center" Foreground="#192a56"/>
+                       VerticalAlignment="Center" Foreground="#192a56"
+                       Text="{Binding AccommodationNameTextBlock}"/>
             <Label Content="annual statistics"  FontFamily="Ubuntu"
                            FontSize="20" FontWeight="Light" VerticalAlignment="Center" 
                            Foreground="#192a56"/>
@@ -36,7 +37,9 @@
             <Label Content="Choose year"  FontFamily="Ubuntu"
                            FontSize="20" FontWeight="Regular" VerticalAlignment="Center" 
                            Foreground="#192a56"/>
-            <ComboBox x:Name="yearComboBox" Width="120" Height="30" Margin="15 0 0 0" SelectionChanged="yearComboBox_SelectionChanged"/>
+            <ComboBox x:Name="yearComboBox" Width="120" Height="30" Margin="15 0 0 0" 
+                      ItemsSource="{Binding years}"
+                      SelectedItem="{Binding SelectedYear}"/>
             <Button Style="{StaticResource showImagesButton}"
                 Grid.Row="1" HorizontalAlignment="Right"
                 BorderBrush="Transparent" Width="220" Height="35" Margin="225 0 0 0">
@@ -65,8 +68,9 @@
                 <DataGrid Style="{DynamicResource DataGridStyle1}" 
                   CellStyle="{DynamicResource DataGridCellStyle1}" 
                   ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-                  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="annualStatisticsDataGrid" 
-                  AutoGenerateColumns="False">
+                  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="annualStatisticsDataGrid"
+                  SelectedItem="{Binding SelectedAnnualStatistics}"
+                  AutoGenerateColumns="False" ItemsSource="{Binding accommodationsAnnualStatisticsDTOs}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Year" Binding="{Binding year}" Width="70"/>
                         <DataGridTextColumn Header="No. of bookings" Binding="{Binding numberOfBookings}" Width="Auto"/>
@@ -82,7 +86,7 @@
             <Button Style="{StaticResource detailsButton}"
                 Grid.Row="1" HorizontalAlignment="Right"
                 BorderBrush="Transparent" 
-                Margin="490 0 0 0" Click="ShowDetails"
+                Margin="490 0 0 0"
                 Command="{Binding ShowMonthlyStatistics}">
                 <StackPanel Orientation="Horizontal"
                                 Margin="0, 0, 0 ,0">
@@ -93,7 +97,8 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="4" Margin="0 10 0 0">
-            <lc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Bottom" Width="300">
+            <lc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Bottom" 
+                               Width="300" DataContext="{Binding}">
                 <lc:CartesianChart.AxisX>
                     <lc:Axis Labels="{Binding BarLabels}"/>
                 </lc:CartesianChart.AxisX>
@@ -120,13 +125,17 @@
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="10 0 0 0">
                         <TextBlock x:Name="accommodationDetailsNameTextBlock" Width="Auto" 
-                                   FontSize="16" FontWeight="Light" Margin="0 25 0 0"/>
+                                   FontSize="16" FontWeight="Light" Margin="0 25 0 0"
+                                   Text="{Binding AccommodationName}"/>
                         <TextBlock x:Name="accommodationDetailsLocationTextBlock" Width="Auto" 
-                                   FontSize="16" FontWeight="Light" Margin="0 30 0 0"/>
+                                   FontSize="16" FontWeight="Light" Margin="0 30 0 0"
+                                   Text="{Binding AccommodationLocation}"/>
                         <TextBlock x:Name="accommodationDetailsGuestLimitTextBlock" Width="Auto" 
-                                   FontSize="16" FontWeight="Light" Margin="0 30 0 0"/>
+                                   FontSize="16" FontWeight="Light" Margin="0 30 0 0"
+                                   Text="{Binding MaxNumOfGuests}"/>
                         <TextBlock x:Name="accommodationDetailsTypeTextBlock" Width="Auto" 
-                                   FontSize="16" FontWeight="Light" Margin="0 30 0 0"/>
+                                   FontSize="16" FontWeight="Light" Margin="0 30 0 0"
+                                   Text="{Binding AccommodationType}"/>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>

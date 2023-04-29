@@ -38,7 +38,8 @@
                   CellStyle="{DynamicResource DataGridCellStyle1}" 
                   ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                   RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="newRenovationDataGrid" 
-                  AutoGenerateColumns="False">
+                  AutoGenerateColumns="False" ItemsSource="{Binding ownerBookings}"
+                  SelectedItem="{Binding SelectedAccommodation}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Accommodation name" Binding="{Binding accommodationName}"  Width="250"/>
                     <DataGridTextColumn Header="Accommodation location" Binding="{Binding location}" Width="250"/>
@@ -48,6 +49,7 @@
         </StackPanel>
 
         <Button Style="{StaticResource showImagesButton}"
+                Command="{Binding ScheduleNewRenovationView}"
                 Grid.Row="3" HorizontalAlignment="Right"
                 BorderBrush="Transparent" Width="280" Height="35" Margin="0 0 10 0">
             <StackPanel Orientation="Horizontal"
@@ -56,5 +58,7 @@
                 <Label VerticalAlignment="Center" Foreground="#192a56" Content="Renovate" FontSize="20" FontFamily="Ubuntu" FontWeight="Regular"  Margin="10 0 0 0"/>
             </StackPanel>
         </Button>
+
+        <ContentControl Content="{Binding CurrentChildView}"/>
     </Grid>
 </UserControl>

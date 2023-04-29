@@ -5,8 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.WPF.View.Owner_Views"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:viewModel="clr-namespace:InitialProject.WPF.ViewModels.OwnerViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="710">
+
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type viewModel:RenovationsViewModel}"/>
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
@@ -37,14 +43,16 @@
             <DataGrid Style="{DynamicResource DataGridStyle1}" 
                   CellStyle="{DynamicResource DataGridCellStyle1}" 
                   ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-                  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="monthlyStatisticsDataGrid" 
+                  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="renovationsDataGrid"
+                  SelectedItem="{Binding SelectedRenovation}"
+                  ItemsSource="{Binding Renovations}"
                   AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Accommodation name"  Width="Auto"/>
-                    <DataGridTextColumn Header="Accommodation type" Width="Auto"/>
-                    <DataGridTextColumn Header="Start date" Width="Auto"/>
-                    <DataGridTextColumn Header="End date" Width="Auto"/>
-                    <DataGridTextColumn Header="Duration" Width="Auto"/>
+                    <DataGridTextColumn Header="Accommodation name" Binding="{Binding accommodationName}" Width="Auto"/>
+                    <DataGridTextColumn Header="Accommodation type" Binding="{Binding accommodationType}" Width="Auto"/>
+                    <DataGridTextColumn Header="Start date" Binding="{Binding startDate}" Width="Auto"/>
+                    <DataGridTextColumn Header="End date" Binding="{Binding endDate}" Width="Auto"/>
+                    <DataGridTextColumn Header="Duration" Binding="{Binding duration}" Width="Auto"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
@@ -60,7 +68,7 @@
             </StackPanel>
         </Button>
         <Button Style="{StaticResource denyButtonTablet}"
-                Grid.Row="3" HorizontalAlignment="Left"
+                Grid.Row="3" HorizontalAlignment="Left" Command="{Binding CancelRenovationCommand}"
                 BorderBrush="Transparent" Width="280" Height="35" Margin="10 0 0 0">
             <StackPanel Orientation="Horizontal"
                                 Margin="0, 0, 0 ,0">
