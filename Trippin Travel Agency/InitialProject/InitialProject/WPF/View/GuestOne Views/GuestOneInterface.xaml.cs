@@ -191,15 +191,15 @@ namespace InitialProject.WPF.View.GuestOne_Views
             }
             else
             {
+                SelectedAccommodationToBook.result = result;
                 ShowBookInterface(result);
             }
         }
 
         private void ShowBookInterface(dynamic result)
         {
+            SelectedAccommodationToBook.id = selectedAccommodation.id;
             BookAccommodationInterface BookAccommodationInterface = new BookAccommodationInterface();
-            BookAccommodationInterface.SetAttributes(selectedAccommodation.id, LoggedUser.id);
-            BookAccommodationInterface.ShowBookings(result);
             BookAccommodationInterface.WindowStartupLocation = WindowStartupLocation.Manual;
             BookAccommodationInterface.Left = this.Left;
             BookAccommodationInterface.Top = this.Top;
