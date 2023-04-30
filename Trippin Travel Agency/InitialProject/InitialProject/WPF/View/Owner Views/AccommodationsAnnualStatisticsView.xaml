@@ -42,7 +42,8 @@
                       SelectedItem="{Binding SelectedYear}"/>
             <Button Style="{StaticResource showImagesButton}"
                 Grid.Row="1" HorizontalAlignment="Right"
-                BorderBrush="Transparent" Width="220" Height="35" Margin="225 0 0 0">
+                BorderBrush="Transparent" Width="220" Height="35" Margin="225 0 0 0"
+                Command="{Binding GenerateAnnualReport}">
                 <StackPanel Orientation="Horizontal"
                                 Margin="0, 0, 0 ,0">
                     <fa:IconImage Icon="FilePdf" HorizontalAlignment="Left" Width="20" Height="20" Foreground="#192a56" VerticalAlignment="Center" Margin="0 2 0 0"/>

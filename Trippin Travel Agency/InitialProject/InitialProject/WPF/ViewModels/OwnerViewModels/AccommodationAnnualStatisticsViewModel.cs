@@ -118,14 +118,22 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         }
 
         public ViewModelCommand ShowMonthlyStatistics { get; private set; }
+        public ViewModelCommand GenerateAnnualReport { get; private set; }
 
         public AccommodationAnnualStatisticsViewModel()
         {
             this._mainViewModel = LoggedUser._mainViewModel;
             ShowMonthlyStatistics = new ViewModelCommand(ExecuteShowMonthlyStatistics);
+            GenerateAnnualReport = new ViewModelCommand(ExecuteGenerateAnnualReport);
             ShowTransferedAccommodationsStatistics();
             GetYearList();
             ShowAccommodationsDetails();
+        }
+
+        private void ExecuteGenerateAnnualReport(object obj)
+        {
+            _mainViewModel.selectedYearForAnnualReport = SelectedYear;
+            _mainViewModel.GenerateAnnualReport(null);
         }
 
         private void ExecuteShowMonthlyStatistics(object obj)
@@ -234,7 +242,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             AccommodationsAnnualStatisticsDTO dto = new AccommodationsAnnualStatisticsDTO(selectedYear, numberOfBookings, numberOfCancelations, numberOfDelayments);
             dataToShow.Add(dto);
 
-            foreach(AccommodationsAnnualStatisticsDTO asdto in dataToShow)
+            foreach (AccommodationsAnnualStatisticsDTO asdto in dataToShow)
             {
                 accommodationsAnnualStatisticsDTOs.Clear();
                 accommodationsAnnualStatisticsDTOs.Add(dto);
@@ -263,8 +271,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                     },
                 };
 
-                //DataContext = this;
-                LoggedUser.accommodationsAnnualStatisticsView.DataContext = this;
+                BarLabels = new[] { "Number of: " };
+                Formatter = value => value.ToString("N");
             }
             else
             {
@@ -273,11 +281,10 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 ((ColumnSeries)SeriesCollection[2]).Values[0] = numberOfDelayments;
             }
 
-            BarLabels = new[] { "Number of: " };
-            Formatter = value => value.ToString("N");
-
-            //DataContext = this;
-            LoggedUser.accommodationsAnnualStatisticsView.DataContext = this;
+            OnPropertyChanged(nameof(SeriesCollection));
+            OnPropertyChanged(nameof(BarLabels));
+            OnPropertyChanged(nameof(YAxisLabelFormatter));
+            OnPropertyChanged(nameof(Formatter));
         }
     }
 }

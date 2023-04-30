@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace InitialProject.WPF.ViewModels.OwnerViewModels
@@ -25,6 +26,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private string _caption;
 
         private RequestDTO _requestDataGridSelectedItem;
+
+        public int selectedYearForAnnualReport { get; set; }
 
         //Properties
         public ViewModelBase CurrentChildView
@@ -94,6 +97,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public ICommand ShowRenovationsCommand { get; }
         public ICommand ShowNewRenovationCommand { get; }
         public ICommand ShowScheduleNewRenovationCommand { get; }
+        public ICommand GenerateReportCommand { get; }
 
         public ICommand LogOut { get; }
         public OwnerInterfaceViewModel()
@@ -112,6 +116,9 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ShowRenovationsCommand = new ViewModelCommand(ExecuteShowRenovationsCommand);
             ShowNewRenovationCommand = new ViewModelCommand(ExecuteShowNewRenovationViewCommand);
             ShowScheduleNewRenovationCommand = new ViewModelCommand(ExecuteShowScheduleNewRenovationCommand);
+
+            GenerateReportCommand = new ViewModelCommand(GenerateAnnualReport);
+
             //Default view
             LoggedUser._mainViewModel = this;
             ExecuteShowMyBookingsCommand(null);
@@ -203,6 +210,25 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             CurrentChildView = new ScheduleNewRenovationViewModel();
             Caption = "Renovations";
+        }
+
+        public void GenerateAnnualReport(object obj)
+        {
+            if(selectedYearForAnnualReport == 0)
+            {
+                MessageBox.Show("You must select a year before generating a report!");
+                return;
+            }
+            else
+            {
+                AnnualStatisticsReport report = new AnnualStatisticsReport(selectedYearForAnnualReport);
+
+                PrintDialog printDialog = new PrintDialog();
+                if (printDialog.ShowDialog() == true)
+                {
+                    printDialog.PrintVisual(report, "Report");
+                }
+            }
         }
     }
 }
