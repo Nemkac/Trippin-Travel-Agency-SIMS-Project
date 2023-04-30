@@ -31,7 +31,6 @@ namespace InitialProject.WPF.View.GuestOne_Views
         {
             InitializeComponent();
             this.DataContext = new BookAccommodationViewModel();
-
         }
     }
 }
