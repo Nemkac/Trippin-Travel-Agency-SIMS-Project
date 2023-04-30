@@ -1,6 +1,7 @@
 ﻿using InitialProject.Context;
 using InitialProject.Model;
 using InitialProject.Model.TransferModels;
+using InitialProject.WPF.ViewModels.GuestTwoViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,10 +38,10 @@ namespace InitialProject.WPF.View.GuestTwoViews
            // DataBaseContext context = new DataBaseContext();
            // List<DetailedTourViewTransfer> requests = context.detailedTourViewTransfers.ToList();
            // this.TextBlock.Text = requests.Last().tourId.ToString();
-           if(TourView.DetailedId != -1)
+           if(TourDisplayViewModel.DetailedId != -1)
             {
-                this.TextBlock.Text = TourView.DetailedId.ToString();
-                TourView.DetailedId = -1;
+                this.TextBlock.Text = TourDisplayViewModel.DetailedId.ToString();
+                TourDisplayViewModel.DetailedId = -1;
 
             }
             if (GuestTwoMessages.tourIdTransfer != -1) 

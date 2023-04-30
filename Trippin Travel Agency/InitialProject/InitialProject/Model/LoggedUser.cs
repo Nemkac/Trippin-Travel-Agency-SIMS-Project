@@ -1,4 +1,5 @@
 ﻿using InitialProject.WPF.ViewModels;
+using InitialProject.WPF.ViewModels.GuestTwoViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace InitialProject.Model
 
         public static string role { get; set; }
         public static TourGuide_MainViewModel TourGuide_MainViewModel { get; set; }
+        public static GuestTwoInterfaceViewModel GuestTwoInterfaceViewModel { get; set; }
 
 
     }

@@ -8,6 +8,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using System.Windows.Input;
 using InitialProject.WPF.ViewModels;
 using InitialProject.WPF.ViewModels.GuestTwoViewModels;
+using InitialProject.Model;
 
 namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 {
@@ -56,11 +57,13 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 
             ShowGuestTwoStatistics = new ViewModelCommand(ExecuteShowGuestTwoStatistics);
 
+            LoggedUser.GuestTwoInterfaceViewModel = this;
+
         }
 
         private void ExecuteTourViewCommand(object obj)
         {
-            CurrentChildView = new TourDisplayViewModel(this);
+            CurrentChildView = new TourDisplayViewModel();
 
         }
         public void ExecuteShowDetailedTourView(object obj)

@@ -24,24 +24,24 @@
             <GroupBox Header="Search by these parameters" FontSize="40" FontFamily="Ubuntu" FontWeight="Medium" Foreground="#192a56"/>
             <StackPanel Grid.Column="0">
                 <Label Content="Filter by country" HorizontalAlignment="Left" Margin="50,60,0,0" VerticalAlignment="Top" Width="244" Height="40" FontSize="20"/>
-                <TextBox HorizontalAlignment="Left" Margin="50,5,0,0" Text = "" TextWrapping="Wrap" Width="244" Name = "countryName"/>
+                <TextBox HorizontalAlignment="Left" Margin="50,5,0,0"  TextWrapping="Wrap" Width="244" Name = "countryName" Text="{Binding CountryName}"/>
                 <Label Content="Filter by city" HorizontalAlignment="Left" Margin="50,120,0,0" VerticalAlignment="Top" Width="244" Height="40" FontSize="20"/>
-                <TextBox HorizontalAlignment="Left" Margin="50,5,0,0" Text = "" TextWrapping="Wrap" Width="244" Name ="cityName"/>
-                <TextBox HorizontalAlignment="Left" Margin="400,-201,0,0" Text = "" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Name ="duration"/>
+                <TextBox HorizontalAlignment="Left" Margin="50,5,0,0" TextWrapping="Wrap" Width="244" Name ="cityName" Text="{Binding CityName}"/>
+                <TextBox HorizontalAlignment="Left" Margin="400,-201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Name ="duration" Text="{Binding Duration}"/>
                 <Label Content="Filter by duration" HorizontalAlignment="Left" Margin="400,-245,0,0" VerticalAlignment="Top" Width="244" Height="40" FontSize="20"/>
-                <TextBox HorizontalAlignment="Left" Margin="400,-19,0,0" Text = "" VerticalAlignment="Top" Width="100" Name="touristLimit"/>
+                <TextBox HorizontalAlignment="Left" Margin="400,-19,0,0" VerticalAlignment="Top" Width="100" Name="touristLimit" Text="{Binding TouristLimit}"/>
                 <Label Content="Number of Tourists" Margin="400,-65,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="244" Height="40" FontSize="20"/>
-                <Button Content="Apply filters" HorizontalAlignment="Left" Margin="640,-50,0,0" VerticalAlignment="Top" Height="82" Width="239" Click="ApplyFilters" FontSize="20" Style="{StaticResource addButtonWEB}"/>
-                <ComboBox HorizontalAlignment="Left" Margin="640,-235,0,0" Text = "Language" VerticalAlignment="Top" Width="120" Name ="languageBox"/>
+                <Button Content="Apply filters" HorizontalAlignment="Left" Margin="640,-50,0,0" VerticalAlignment="Top" Height="82" Width="239" Command="{Binding ApplyFiltersCommand}" FontSize="20" Style="{StaticResource addButtonWEB}"/>
+                <ComboBox HorizontalAlignment="Left" Margin="640,-235,0,0" Text = "Language" VerticalAlignment="Top" Width="120" Name ="languageBox" ItemsSource="{Binding languages}" SelectedItem="{Binding SelectedLanguage}"/>
       
             </StackPanel>
 
             <GroupBox Header="Booking section" FontSize="40" FontFamily="Ubuntu" FontWeight="Medium" Grid.Column="1" Foreground="#192a56"/>
             <StackPanel Grid.Column="1">
-                <Button Content="Book" HorizontalAlignment="Left" Margin ="22 255 0 0" VerticalAlignment="Center" Style="{StaticResource saveButtonWEB}"  Click="ReserveTour"  Command="{Binding BookingConfirmationViewCommand}"  Height="82" Width="239"/>
-                <TextBox TextWrapping="Wrap" Margin ="22 -250 0 0" Text="" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" Name ="NumberOfTourists"/>
+                <Button Content="Book" HorizontalAlignment="Left" Margin ="22 255 0 0" VerticalAlignment="Center" Style="{StaticResource saveButtonWEB}" Command="{Binding BookingConfirmationViewCommand}"  Height="82" Width="239"/>
+                <TextBox TextWrapping="Wrap" Margin ="22 -250 0 0" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" Name ="NumberOfTourists" Text="{Binding NumberOfTourists}"/>
                 <Label Content="No. of tourists" Margin="22 -350 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="244" Height="40" FontSize="20"/>
-                <TextBlock Height="136" TextWrapping="Wrap" Margin="300 -135 0 0" Text="" Width="275" HorizontalAlignment="Left"  VerticalAlignment="Center" Background="#d1e0e0" Name ="TextBlock" FontSize="20" FontFamily="Ubuntu"/>
+                <TextBlock Height="136" TextWrapping="Wrap" Margin="300 -135 0 0" Width="275" HorizontalAlignment="Left"  VerticalAlignment="Center" Background="#d1e0e0" Name ="TextBlock" FontSize="20" FontFamily="Ubuntu" Text="{Binding TextBlockText}"/>
             </StackPanel>
         </Grid>
 
@@ -57,7 +57,9 @@
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                       RowStyle="{DynamicResource DataGridRowStyle1}"
                       AutoGenerateColumns="False"
-                      FontSize="20">
+                      FontSize="20"
+                      ItemsSource="{Binding tourDTOs}"
+                      SelectedItem="{Binding SelectedTour}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding name}" Width="auto"/>
                     <DataGridTextColumn Header="City" Binding="{Binding cityLocation}" Width="auto"/>
@@ -70,16 +72,15 @@
 
 
                 </DataGrid.Columns>
-
             </DataGrid>
+
 
             <Button Content="Show images" 
                     HorizontalAlignment="Left" 
                     Margin="-250,635,0,0" 
                     VerticalAlignment="Top"  
                     Height="82" Width="239" 
-                    FontSize="20" Style="{StaticResource imagesButtonWeb}" 
-                    Click="ShowTourDetailedView" 
+                    FontSize="20" Style="{StaticResource imagesButtonWeb}"                     
                     Grid.Row="2"
                     Command="{Binding DetailedTourViewCommand}"/>
         </StackPanel>
