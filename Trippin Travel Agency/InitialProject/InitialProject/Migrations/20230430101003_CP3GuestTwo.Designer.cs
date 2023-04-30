@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20230425162654_addedTourLocationTransfers")]
-    partial class addedTourLocationTransfers
+    [Migration("20230430101003_CP3GuestTwo")]
+    partial class CP3GuestTwo
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -554,6 +554,9 @@ namespace InitialProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime?>("acceptedDate")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("city")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -751,6 +754,35 @@ namespace InitialProject.Migrations
                     b.ToTable("tourBookingTransfers");
                 });
 
+            modelBuilder.Entity("InitialProject.Model.TransferModels.TourFlagTransfer", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("flag")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("TourFlagTransfers");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.TransferModels.TourLanguageTransfer", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("language")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("id");
+
+                    b.ToTable("TourLanguageTransfers");
+                });
+
             modelBuilder.Entity("InitialProject.Model.TransferModels.TourLiveViewTransfer", b =>
                 {
                     b.Property<int>("id")
@@ -782,6 +814,20 @@ namespace InitialProject.Migrations
                     b.HasKey("id");
 
                     b.ToTable("TourLocationTransfers");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.TransferModels.TourTodayImagesTransfer", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("tourId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("TourTodayImagesTransfers");
                 });
 
             modelBuilder.Entity("InitialProject.Model.User", b =>

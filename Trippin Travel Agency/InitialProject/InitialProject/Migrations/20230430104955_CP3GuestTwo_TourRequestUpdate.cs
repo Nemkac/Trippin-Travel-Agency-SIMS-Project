@@ -1,28 +1,28 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace InitialProject.Migrations
 {
     /// <inheritdoc />
-    public partial class addedSelectedDate : Migration
+    public partial class CP3GuestTwo_TourRequestUpdate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<DateTime>(
-                name: "acceptedDate",
+            migrationBuilder.AddColumn<bool>(
+                name: "sent",
                 table: "TourRequests",
-                type: "TEXT",
-                nullable: true);
+                type: "INTEGER",
+                nullable: false,
+                defaultValue: false);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "acceptedDate",
+                name: "sent",
                 table: "TourRequests");
         }
     }

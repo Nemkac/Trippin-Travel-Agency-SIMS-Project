@@ -87,7 +87,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 
         public void ExecuteShowGuestTwoMessages(object obj)
         {
-            CurrentChildView = new GuestTwoMesagesViewModel();
+            CurrentChildView = new GuestTwoMesagesViewModel(this);
         }
 
         public void ExecuteShowCreateTourOwnTourCommand(object obj)

@@ -5,14 +5,14 @@
 namespace InitialProject.Migrations
 {
     /// <inheritdoc />
-    public partial class removedFlag : Migration
+    public partial class Adjustments : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<bool>(
-                name: "flag",
-                table: "TourLocationTransfers",
+                name: "fulfilled",
+                table: "UnfulfilledTourRequests",
                 type: "INTEGER",
                 nullable: false,
                 defaultValue: false);
@@ -22,8 +22,8 @@ namespace InitialProject.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "flag",
-                table: "TourLocationTransfers");
+                name: "fulfilled",
+                table: "UnfulfilledTourRequests");
         }
     }
 }

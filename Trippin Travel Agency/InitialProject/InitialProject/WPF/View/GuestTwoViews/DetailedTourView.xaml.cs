@@ -34,33 +34,21 @@ namespace InitialProject.WPF.View.GuestTwoViews
 
         public void WindowLoaded(object sender, RoutedEventArgs e) {
 
-            DataBaseContext context = new DataBaseContext();
-            List<DetailedTourViewTransfer> requests = context.detailedTourViewTransfers.ToList();
-            this.TextBlock.Text = requests.Last().tourId.ToString();
-            int id1 = 0;
-            int id2 = 0;
-            int id3 = 0;
-            int sum = 0;
-            foreach (KeyPoint keyPoint in context.KeyPoints.ToList()) {
-                if (keyPoint.tourId == 2) {
-                    id1++;
-                    sum++;
-                }
-                else if(keyPoint.tourId == 3) {
-                    id2++;
-                    sum++;
-                }
-                else
-                {
-                    id3++;
-                    sum++;
-                }
+           // DataBaseContext context = new DataBaseContext();
+           // List<DetailedTourViewTransfer> requests = context.detailedTourViewTransfers.ToList();
+           // this.TextBlock.Text = requests.Last().tourId.ToString();
+           if(TourView.DetailedId != -1)
+            {
+                this.TextBlock.Text = TourView.DetailedId.ToString();
+                TourView.DetailedId = -1;
+
             }
-            this.PieChart.Slice = 0.5;
-            this.PieChart.Slice = 0.5;
-            //this.PieChart.Slice = sum / 100 * id3 / 100;
-
-
+            if (GuestTwoMessages.tourIdTransfer != -1) 
+            {
+                this.TextBlock.Text = GuestTwoMessages.tourIdTransfer.ToString();
+                GuestTwoMessages.tourIdTransfer = -1;
+            }
+          
         }
     }
 }

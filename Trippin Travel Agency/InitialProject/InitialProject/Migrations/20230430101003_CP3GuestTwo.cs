@@ -6,11 +6,24 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace InitialProject.Migrations
 {
     /// <inheritdoc />
-    public partial class CP3Migration : Migration
+    public partial class CP3GuestTwo : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "AcceptedTourRequestViewTransfers",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    requestId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AcceptedTourRequestViewTransfers", x => x.id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AccommodationAnnualStatisticsTransfer",
                 columns: table => new
@@ -162,6 +175,21 @@ namespace InitialProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RequestMessages",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    message = table.Column<string>(type: "TEXT", nullable: false),
+                    requestId = table.Column<int>(type: "INTEGER", nullable: false),
+                    guestId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RequestMessages", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SelectedRatingNotificationTransfer",
                 columns: table => new
                 {
@@ -276,6 +304,32 @@ namespace InitialProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TourFlagTransfers",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    flag = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TourFlagTransfers", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TourLanguageTransfers",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    language = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TourLanguageTransfers", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TourLiveViewTransfers",
                 columns: table => new
                 {
@@ -300,6 +354,20 @@ namespace InitialProject.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TourLocation", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TourLocationTransfers",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    country = table.Column<string>(type: "TEXT", nullable: false),
+                    city = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TourLocationTransfers", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -331,6 +399,7 @@ namespace InitialProject.Migrations
                     language = table.Column<int>(type: "INTEGER", nullable: false),
                     startDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     endDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    acceptedDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     description = table.Column<string>(type: "TEXT", nullable: false),
                     status = table.Column<int>(type: "INTEGER", nullable: false),
                     guestId = table.Column<int>(type: "INTEGER", nullable: false)
@@ -372,6 +441,19 @@ namespace InitialProject.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TourStatisticsTransfer", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TourTodayImagesTransfers",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    tourId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TourTodayImagesTransfers", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -556,6 +638,9 @@ namespace InitialProject.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AcceptedTourRequestViewTransfers");
+
+            migrationBuilder.DropTable(
                 name: "AccommodationAnnualStatisticsTransfer");
 
             migrationBuilder.DropTable(
@@ -589,6 +674,9 @@ namespace InitialProject.Migrations
                 name: "KeyPoints");
 
             migrationBuilder.DropTable(
+                name: "RequestMessages");
+
+            migrationBuilder.DropTable(
                 name: "SelectedRatingNotificationTransfer");
 
             migrationBuilder.DropTable(
@@ -604,10 +692,19 @@ namespace InitialProject.Migrations
                 name: "tourBookingTransfers");
 
             migrationBuilder.DropTable(
+                name: "TourFlagTransfers");
+
+            migrationBuilder.DropTable(
+                name: "TourLanguageTransfers");
+
+            migrationBuilder.DropTable(
                 name: "TourLiveViewTransfers");
 
             migrationBuilder.DropTable(
                 name: "TourLocation");
+
+            migrationBuilder.DropTable(
+                name: "TourLocationTransfers");
 
             migrationBuilder.DropTable(
                 name: "TourMessages");
@@ -620,6 +717,9 @@ namespace InitialProject.Migrations
 
             migrationBuilder.DropTable(
                 name: "TourStatisticsTransfer");
+
+            migrationBuilder.DropTable(
+                name: "TourTodayImagesTransfers");
 
             migrationBuilder.DropTable(
                 name: "Users");

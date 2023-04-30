@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20230425171528_addedFlagTransfer")]
-    partial class addedFlagTransfer
+    [Migration("20230430104955_CP3GuestTwo_TourRequestUpdate")]
+    partial class CP3GuestTwo_TourRequestUpdate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -554,6 +554,9 @@ namespace InitialProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime?>("acceptedDate")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("city")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -576,6 +579,9 @@ namespace InitialProject.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("numberOfTourists")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("sent")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("startDate")
@@ -808,12 +814,23 @@ namespace InitialProject.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("flag")
+                    b.HasKey("id");
+
+                    b.ToTable("TourLocationTransfers");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.TransferModels.TourTodayImagesTransfer", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("tourId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("id");
 
-                    b.ToTable("TourLocationTransfers");
+                    b.ToTable("TourTodayImagesTransfers");
                 });
 
             modelBuilder.Entity("InitialProject.Model.User", b =>

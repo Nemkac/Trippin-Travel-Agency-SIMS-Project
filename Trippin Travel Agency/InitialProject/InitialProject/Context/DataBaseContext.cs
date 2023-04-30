@@ -42,7 +42,10 @@ namespace InitialProject.Context
         public DbSet<TourLanguageTransfer> TourLanguageTransfers { get; set; }
         public DbSet<TourFlagTransfer> TourFlagTransfers { get; set; }
         public DbSet<TourTodayImagesTransfer> TourTodayImagesTransfers { get; set; }
-
+        public DbSet<UnfulfilledTourRequests> UnfulfilledTourRequests { get; set; }
+        public DbSet<UnfulfilledTourCities> UnfulfilledTourCities { get; set; }
+        public DbSet<UnfulfilledTourCountries> unfulfilledTourCountries { get; set; }   
+        public DbSet<UnfulfilledTourLanguages> UnfulfilledTourLanguages { get; set; }
 
 
 
@@ -52,18 +55,18 @@ namespace InitialProject.Context
         // public string path = @"C:\Users\ifeel\Documents\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
 
         // Aleksa Simeunovic -> Laptop
-        public string path = @"C:\\Users\\aleks\\OneDrive\\Dokumenti\\GitHub\\Trippin-Travel-Agency-SIMS-Project\\Trippin Travel Agency\\InitialProject\\InitialProject\\MyDatabase.sqlite"; 
+        // public string path = @"C:\\Users\\aleks\\OneDrive\\Dokumenti\\GitHub\\Trippin-Travel-Agency-SIMS-Project\\Trippin Travel Agency\\InitialProject\\InitialProject\\MyDatabase.sqlite"; 
 
-        // Nemanja Ranitovic
-         public string path = @"C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
+        // Nemanja Ranitovic -> Desktop PC
+        public string path = @"C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
 
-        // Nemanja Todorovic
+        // Nemanja Todorovic -> Laptop
         // public string path = @"C:\Users\Nemanja\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
 
-        // Vladimir Blanusa lap
+        // Vladimir Blanusa -> Laptop
         // public string path = @"C:\Users\abc\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
 
-        // Vladimir BLanusa pc
+        // Vladimir BLanusa -> Desktop PC
         // public string path = @"C:\Users\vlada\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
 
         // Vladimir Blanusinog brata komp 

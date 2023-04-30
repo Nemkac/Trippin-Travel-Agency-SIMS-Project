@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20230425175857_refreshed")]
-    partial class refreshed
+    [Migration("20230430135938_Adjustments")]
+    partial class Adjustments
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -554,6 +554,9 @@ namespace InitialProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime?>("acceptedDate")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("city")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -576,6 +579,9 @@ namespace InitialProject.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("numberOfTourists")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("sent")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("startDate")
@@ -811,6 +817,48 @@ namespace InitialProject.Migrations
                     b.HasKey("id");
 
                     b.ToTable("TourLocationTransfers");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.TransferModels.TourTodayImagesTransfer", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("tourId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("TourTodayImagesTransfers");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.UnfulfilledTourRequests", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("city")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("country")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("fulfilled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("guestId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("language")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("UnfulfilledTourRequests");
                 });
 
             modelBuilder.Entity("InitialProject.Model.User", b =>

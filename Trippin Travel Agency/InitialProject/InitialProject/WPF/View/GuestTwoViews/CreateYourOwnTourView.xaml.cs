@@ -90,6 +90,40 @@ namespace InitialProject.WPF.View.GuestTwoViews
                                                               (string)DescriptionTextBox.Text,
                                                               LoggedUser.id);
                     DataBaseContext context = new DataBaseContext();
+
+                    bool cityFlag = false;
+                    bool countryFlag = false;
+                    bool languageFlag = false;
+
+                    foreach (Tour tour in context.Tours.ToList()) 
+                    {
+                       TourLocation location =  this.tourLocationService.GetById(tour.location);
+                        if ((string)CityComboBox.SelectedItem == location.city) 
+                        {
+                            cityFlag = true;
+                        }
+
+                        if ((string)CountryComboBox.SelectedItem == location.country)
+                        {
+                            countryFlag = true;
+                        }
+                        if ((language)LanguageComboBox.SelectedItem == tour.language) 
+                        {
+                            languageFlag = true;
+                        }                        
+                    }
+                    if (!cityFlag) 
+                    {
+                        context.UnfulfilledTourCities.Add(new(LoggedUser.id,(string)CityComboBox.SelectedItem));
+                    }
+                    if (!countryFlag)
+                    {
+                        context.unfulfilledTourCountries.Add(new(LoggedUser.id, (string)CountryComboBox.SelectedItem));
+                    }
+                    if (!languageFlag)
+                    {
+                        context.UnfulfilledTourLanguages.Add(new(LoggedUser.id, (language)LanguageComboBox.SelectedItem));
+                    }
                     context.TourRequests.Add(tourRequest);
                     context.SaveChanges();
                 }

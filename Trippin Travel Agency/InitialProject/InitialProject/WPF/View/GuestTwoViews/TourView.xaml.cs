@@ -28,13 +28,14 @@ namespace InitialProject.WPF.View.GuestTwoViews
     /// </summary>
     public partial class TourView : UserControl
     {
-        public static int DetailedId { get; set; }
+        public static int DetailedId = -1;
         private TourService tourService;
         public TourView()
         {
             InitializeComponent();
             this.Loaded += Window_Loaded;
             this.tourService = new(new TourRepository());
+            DetailedId = -1;
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -152,14 +153,13 @@ namespace InitialProject.WPF.View.GuestTwoViews
 
         private void ShowTourDetailedView(object sender, RoutedEventArgs e)
         {
-            
             TourDTO? tour = this.dataGrid.SelectedItem as TourDTO;      
             DataBaseContext context = new DataBaseContext();
-            DetailedTourViewTransfer detailedTourViewTransfer = new DetailedTourViewTransfer(tour.id);
-            context.detailedTourViewTransfers.Add(detailedTourViewTransfer);
-            context.SaveChanges();
+            //DetailedTourViewTransfer detailedTourViewTransfer = new DetailedTourViewTransfer(tour.id);
+            DetailedId = tour.id;
+            //context.detailedTourViewTransfers.Add(detailedTourViewTransfer);
+            //context.SaveChanges();
             //DetailedTourView detailedTourView = new DetailedTourView(); OVO NISAM PROVERIO MOZDA NE RADI ZBOG OVOGA AKO NESTO NE RADI.
-
         }
     }
 }
