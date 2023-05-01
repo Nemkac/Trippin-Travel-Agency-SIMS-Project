@@ -4,9 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.WPF.View.Owner_Views"
+             xmlns:viewModel="clr-namespace:InitialProject.WPF.ViewModels.OwnerViewModels"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              d:DesignHeight="650" Width="710">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="550"/>
@@ -20,7 +22,9 @@
 
         <Border Grid.Row="0" Grid.Column="0" CornerRadius="30, 0, 0, 0">
             <StackPanel Orientation="Vertical">
-                <Label x:Name="label" Style="{StaticResource defaultLabel}" Content="Accommodation name" HorizontalAlignment="Left" Height="27" Margin="49,26,0,0" VerticalAlignment="Top" Width="165"/>
+                <Label x:Name="label" Style="{StaticResource defaultLabel}" 
+                       Content="Accommodation name" HorizontalAlignment="Left" Height="27" 
+                       Margin="49,26,0,0" VerticalAlignment="Top" Width="165"/>
                 <TextBox x:Name="accommodationNameTB" HorizontalAlignment="Left" Margin="49,10,0,0" 
                          TextWrapping="Wrap" VerticalAlignment="Top" Width="190" 
                          Height="25" Text="{Binding AccommodationName}"/>
@@ -42,7 +46,10 @@
                 <TextBox x:Name="guestLimitTB" HorizontalAlignment="Left" Margin="49,10,0,0" 
                          TextWrapping="Wrap" Text="{Binding GuestLimit}" VerticalAlignment="Top" 
                          Width="190" Height="25"/>
-                <Label x:Name="label5" Style="{StaticResource defaultLabel}" Content="Minimum days to book" HorizontalAlignment="Left" Margin="49,49,0,0" VerticalAlignment="Top" Width="190" Height="26"/>
+                <Label x:Name="label5" Style="{StaticResource defaultLabel}" 
+                       Content="Minimum days to book" HorizontalAlignment="Left" 
+                       Margin="49,49,0,0" VerticalAlignment="Top" Width="190" 
+                       Height="26"/>
                 <TextBox x:Name="minDaysBookedTB"  HorizontalAlignment="Left" Margin="49,10,0,0" 
                          TextWrapping="Wrap" Text="{Binding MinDaysBooked}" 
                          VerticalAlignment="Top" Width="190" Height="25"/>

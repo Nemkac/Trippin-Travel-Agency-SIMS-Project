@@ -23,5 +23,7 @@ namespace InitialProject.Model
         public static OwnerInterfaceViewModel _mainViewModel { get; set; } 
 
         public static AccommodationsAnnualStatisticsView accommodationsAnnualStatisticsView { get; set; } 
+
+        public static bool IsChecked { get; set; }
     }
 }

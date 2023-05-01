@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
@@ -190,9 +191,22 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
-        public ViewModelCommand AddImageCommand { get; set; }
-       
+        private Style _labelStyle;
+        public Style LabelStyle
+        {
+            get { return _labelStyle; }
+            set
+            {
+                if(_labelStyle != value)
+                {
+                    _labelStyle = value;
+                    OnPropertyChanged(nameof(LabelStyle));
+                }
+            }
+        }
 
+        public ViewModelCommand AddImageCommand { get; set; }
+      
         public ViewModelCommand SaveAccommodationCommand { get; set; }
 
         public AccommodationRegistrationViewModel() 
@@ -201,6 +215,14 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             SaveAccommodationCommand = new ViewModelCommand(SaveAccommodation);
             AddImageCommand = new ViewModelCommand(AddImage);
             ImageNumber = "Image " + imageCounter;
+            if(LoggedUser.IsChecked == true)
+            {
+                LabelStyle = (Style)Application.Current.Resources["defaultLabelDark"];
+            }
+            else
+            {
+                LabelStyle = (Style)Application.Current.Resources["defaultLabel"];
+            }
         }
 
         private void FillCountryComboBox()

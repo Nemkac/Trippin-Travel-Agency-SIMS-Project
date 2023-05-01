@@ -1,7 +1,33 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!--Button Colors-->
+    <!--TABLET COLORS-->
     <SolidColorBrush x:Key="HoverColor" Color="#051923"/>
+    
+    
+    
+    <!--============LIGHT THEME============-->
+    <!--Menu colors-->
+    <SolidColorBrush x:Key="NavigationMenuColor" Color="#273c75"/>
+    <SolidColorBrush x:Key="ActiveButtonColor" Color="#192a56"/>
+    <SolidColorBrush x:Key="MenuButtonsTextColor" Color="#F5F6FA"/>
+    <SolidColorBrush x:Key="ContentSectionBackgroundColor" Color="#F5F6FA"/>
+    <SolidColorBrush x:Key="CaptionHeaderText" Color="#003554"/>
+    <SolidColorBrush x:Key="HeaderButtonIconColor" Color="#003554"/>
+    <SolidColorBrush x:Key="ContentTextColor" Color="#192a56"/>
 
+    <!--============DARK THEME============-->
+    <!--Menu colors-->
+    <SolidColorBrush x:Key="DarkNavigationMenuColor" Color="#353b48"/>
+    <SolidColorBrush x:Key="DarkActiveButtonColor" Color="#718093"/>
+    <SolidColorBrush x:Key="DarkMenuButtonsTextColor" Color="#F5F6FA"/>
+    <SolidColorBrush x:Key="DarkContentSectionBackgroundColor" Color="#353b48"/>
+    <SolidColorBrush x:Key="DarkCaptionHeaderText" Color="#F5F6FA"/>
+    <SolidColorBrush x:Key="DarkHeaderButtonIconColor" Color="#F5F6FA"/>
+    <SolidColorBrush x:Key="DarkContentTextColor" Color="#F5F6FA"/>
+
+
+    <SolidColorBrush x:Key="ModeUnchecked" Color="#F5F6FA"/>
+    <SolidColorBrush x:Key="ModeChecked" Color="#fbc531"/>
+    
 </ResourceDictionary>

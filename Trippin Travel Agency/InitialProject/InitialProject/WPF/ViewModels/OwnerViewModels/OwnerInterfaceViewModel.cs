@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
@@ -28,6 +29,96 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private RequestDTO _requestDataGridSelectedItem;
 
         public int selectedYearForAnnualReport { get; set; }
+
+        private SolidColorBrush _menuColor;
+        public SolidColorBrush MenuColor 
+        {
+            get { return _menuColor; }
+            set
+            {
+                _menuColor = value;
+                OnPropertyChanged(nameof(MenuColor));
+            }
+        }
+
+
+        private SolidColorBrush _menuActiveButtonColor;
+        public SolidColorBrush MenuActiveButtonColor
+        {
+            get { return _menuActiveButtonColor; }
+            set
+            {
+                _menuActiveButtonColor = value;
+                OnPropertyChanged(nameof(MenuActiveButtonColor));
+            }
+        }
+
+        private SolidColorBrush _contentSectionBackgroundColor;
+        public SolidColorBrush ContentSectionBackgroundColor
+        {
+            get { return _contentSectionBackgroundColor; }
+            set
+            {
+                _contentSectionBackgroundColor = value;
+                OnPropertyChanged(nameof(ContentSectionBackgroundColor));
+            }
+        }
+
+        private SolidColorBrush _captionHeaderText;
+        public SolidColorBrush CaptionHeaderText
+        {
+            get { return _captionHeaderText; }
+            set
+            {
+                _captionHeaderText = value;
+                OnPropertyChanged(nameof(CaptionHeaderText));
+            }
+        }
+
+        private SolidColorBrush _headerButtonIconColor;
+        public SolidColorBrush HeaderButtonIconColor
+        {
+            get { return _headerButtonIconColor; }
+            set
+            {
+                _headerButtonIconColor = value;
+                OnPropertyChanged(nameof(HeaderButtonIconColor));
+            }
+        }
+
+        private SolidColorBrush _contentTextColor;
+        public SolidColorBrush ContentTextColor
+        {
+            get { return _contentTextColor; }
+            set
+            {
+                _contentTextColor = value;
+                OnPropertyChanged(nameof(ContentTextColor));
+            }
+        }
+
+        private SolidColorBrush _darkThemeChecked;
+        public SolidColorBrush DarkThemeChecked
+        {
+            get { return _darkThemeChecked; }
+            set
+            {
+                _darkThemeChecked = value;
+                OnPropertyChanged(nameof(DarkThemeChecked));
+            }
+        }
+
+        private SolidColorBrush _lightThemeChecked;
+        public SolidColorBrush LightThemeChecked
+        {
+            get { return _lightThemeChecked; }
+            set
+            {
+                _lightThemeChecked = value;
+                OnPropertyChanged(nameof(LightThemeChecked));
+            }
+        }
+
 
         //Properties
         public ViewModelBase CurrentChildView
@@ -82,6 +173,20 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private bool _isChecked;
+
+        public bool IsChecked
+        {
+            get { return _isChecked; }
+            set
+            {
+                _isChecked = value;
+                LightOrDarkTheme();
+                LoggedUser.IsChecked = _isChecked;
+                OnPropertyChanged(nameof(IsChecked));  
+            }
+        }
+
         //--> Commands
         public ICommand ShowAcceptDenyViewCommand { get; }
         public ICommand ShowReviewsViewCommand { get; }
@@ -116,7 +221,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ShowRenovationsCommand = new ViewModelCommand(ExecuteShowRenovationsCommand);
             ShowNewRenovationCommand = new ViewModelCommand(ExecuteShowNewRenovationViewCommand);
             ShowScheduleNewRenovationCommand = new ViewModelCommand(ExecuteShowScheduleNewRenovationCommand);
-
+            IsChecked = false;
             GenerateReportCommand = new ViewModelCommand(GenerateAnnualReport);
 
             //Default view
@@ -228,6 +333,33 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 {
                     printDialog.PrintVisual(report, "Report");
                 }
+            }
+        }
+
+        public void LightOrDarkTheme()
+        {
+            if(IsChecked == true)
+            {
+                MenuColor = (SolidColorBrush)Application.Current.Resources["DarkNavigationMenuColor"];
+                MenuActiveButtonColor = (SolidColorBrush)Application.Current.Resources["DarkActiveButtonColor"];
+                ContentSectionBackgroundColor = (SolidColorBrush)Application.Current.Resources["DarkContentSectionBackgroundColor"];
+                CaptionHeaderText = (SolidColorBrush)Application.Current.Resources["DarkCaptionHeaderText"];
+                HeaderButtonIconColor = (SolidColorBrush)Application.Current.Resources["DarkHeaderButtonIconColor"];
+                ContentTextColor = (SolidColorBrush)Application.Current.Resources["DarkContentTextColor"];
+                LightThemeChecked = (SolidColorBrush)Application.Current.Resources["ModeUnchecked"];
+                DarkThemeChecked = (SolidColorBrush)Application.Current.Resources["ModeChecked"];
+            }
+            else
+            {
+                MenuColor = (SolidColorBrush)Application.Current.Resources["NavigationMenuColor"];
+                MenuActiveButtonColor = (SolidColorBrush)Application.Current.Resources["ActiveButtonColor"];
+                ContentSectionBackgroundColor = (SolidColorBrush)Application.Current.Resources["ContentSectionBackgroundColor"];
+                CaptionHeaderText = (SolidColorBrush)Application.Current.Resources["CaptionHeaderText"];
+                HeaderButtonIconColor = (SolidColorBrush)Application.Current.Resources["HeaderButtonIconColor"];
+                ContentTextColor = (SolidColorBrush)Application.Current.Resources["ContentTextColor"];
+                DarkThemeChecked = (SolidColorBrush)Application.Current.Resources["ModeUnchecked"];
+                LightThemeChecked = (SolidColorBrush)Application.Current.Resources["ModeChecked"];
+
             }
         }
     }
