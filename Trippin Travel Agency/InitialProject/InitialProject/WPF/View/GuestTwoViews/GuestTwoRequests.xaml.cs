@@ -1,5 +1,6 @@
 ﻿using InitialProject.Context;
 using InitialProject.Model;
+using InitialProject.WPF.ViewModels.GuestTwoViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,29 +26,7 @@ namespace InitialProject.WPF.View.GuestTwoViews
         public GuestTwoRequests()
         {
             InitializeComponent();
-            this.Loaded += WindowLoaded;
-        }
-        public void WindowLoaded(object sender, RoutedEventArgs e)
-        {
-            this.UsernameLabel.Content = "Hello, " + LoggedUser.username + "!";
-            this.UsernameLabel2.Content = "@" + LoggedUser.username;
-            this.AccountTypeLabel.Content = "Account type:  " + LoggedUser.role;
-
-            DataBaseContext context = new DataBaseContext();
-            LoadRequests(context);
-        }
-
-        public void LoadRequests(DataBaseContext context)
-        {
-            List<TourRequest> requests = new List<TourRequest>();
-            foreach (TourRequest request in context.TourRequests.ToList())
-            {
-                if (LoggedUser.id == request.guestId)
-                {
-                    requests.Add(request);
-                }
-            }
-            this.dataGrid.ItemsSource = requests;
+            this.DataContext = new GuestTwoRequestsViewModel();
         }
     }
 }

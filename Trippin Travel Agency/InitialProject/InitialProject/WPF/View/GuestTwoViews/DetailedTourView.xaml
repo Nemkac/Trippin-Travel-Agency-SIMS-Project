@@ -8,8 +8,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Height="168" Margin="197,111,0,0" TextWrapping="Wrap" Text="IDEGAS"  VerticalAlignment="Top" Width="309" Name ="TextBlock"/>
-        <xctk:Pie Width="300" Height="300" Name="PieChart"></xctk:Pie>
-
+        <TextBlock HorizontalAlignment="Left" 
+                   Height="168" 
+                   Margin="197,111,0,0" 
+                   TextWrapping="Wrap" 
+                   Text="{Binding Id}"  
+                   VerticalAlignment="Top" 
+                   Width="309" 
+                   Name ="TextBlock"/>
     </Grid>
 </UserControl>

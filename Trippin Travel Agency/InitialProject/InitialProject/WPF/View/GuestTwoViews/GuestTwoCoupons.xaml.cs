@@ -1,6 +1,7 @@
 ﻿using InitialProject.Context;
 using InitialProject.DTO;
 using InitialProject.Model;
+using InitialProject.WPF.ViewModels.GuestTwoViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,34 +28,7 @@ namespace InitialProject.WPF.View.GuestTwoViews
         public GuestTwoCoupons()
         {
             InitializeComponent();
-            this.Loaded += Window_Loaded;
+            this.DataContext = new GuestTwoCouponsViewModel();
         }
-
-        public void Window_Loaded(object sender, RoutedEventArgs e) {
-            this.UsernameLabel.Content = "Hello, " + LoggedUser.username + "!";
-            this.UsernameLabel2.Content = "@" + LoggedUser.username;
-            this.AccountTypeLabel.Content = "Account type:  " + LoggedUser.role;
-            
-            DataBaseContext context = new DataBaseContext();
-            LoadCoupons(context);
-        }
-
-
-
-        public void LoadCoupons(DataBaseContext context) {
-            List<Coupon> coupons = context.Coupons.ToList();
-
-            List<CouponDTO> dataList = new List<CouponDTO>();
-            int counter = 0;
-            foreach (Coupon coup in coupons)
-            {
-                if (coup.userId == LoggedUser.id)
-                {
-                    counter += 1;
-                    dataList.Add(new CouponDTO(coup.id, "Coupon" + counter, coup.exiresOn));
-                }
-            }
-            this.dataGrid.ItemsSource = dataList;
-        }
-    }
+    }     
 }

@@ -35,7 +35,9 @@
                        Width="220"
                        Height="50"
                        Margin="-230 -40 0 0"
-                       Name="TourNameLabel"/>
+                       Name="TourNameLabel"
+                       Content="{Binding TourName}"
+                       />
                 <Label FontFamily="Ubuntu" 
                        FontSize="20" 
                        FontWeight="Medium"
@@ -43,7 +45,16 @@
                        Height="36"
                        Margin="-660 5 0 0"
                        Content="Key points"/>
-                <DataGrid x:Name="keyPointsGrid" d:DataContext ="" Width="300" Height="250" Margin="-450 20 0 0" FontSize="20" FontFamily="Ubuntu" FontWeight="Medium"/>
+                <DataGrid x:Name="keyPointsGrid" 
+                          d:DataContext ="" 
+                          Width="300" 
+                          Height="250" 
+                          Margin="-450 20 0 0" 
+                          FontSize="20" 
+                          FontFamily="Ubuntu" 
+                          FontWeight="Medium"
+                          ItemsSource="{Binding keyPoitsGrid}"
+                          />
                 <Label FontFamily="Ubuntu" 
                        FontSize="28" 
                        FontWeight="Medium"
@@ -58,7 +69,9 @@
                        Height="45"
                        Margin="380 -550 0 0"
                        HorizontalAlignment="Center"
-                       Name ="KeyPointLabel"/>
+                       Name ="KeyPointLabel"
+                       Content="{Binding KeyPointLabel}"
+                       />
                 <Button Width="200" 
                         Height="100" 
                         Margin="350 -350 0 0"
@@ -66,7 +79,7 @@
                         FontSize="32" 
                         FontWeight="Medium" 
                         FontFamily="Ubuntu"
-                        Click="JoinTour">
+                        Command="{Binding JoinTourCommand}">
 
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Check" Width="35" Margin="15 0 0 0"/>
@@ -93,7 +106,9 @@
                         Style="{StaticResource addButtonWEB}" 
                         Margin="-500 0 0 0" 
                         Click="UploadPhoto"
-                        Name="UploadPhotoButton"/>
+                        Name="UploadPhotoButton"
+                        IsEnabled="{Binding UploadButtonEnabled}"
+                        />
             </StackPanel>
         </GroupBox>
 
@@ -113,20 +128,20 @@
                        Width="170"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Viewbox Height="40">
-                        <RadioButton GroupName="Guide Knowledge" Margin="0 0 15 0 " Name="Knowledge1"/>
+                        <RadioButton GroupName="Guide Knowledge" Margin="0 0 15 0 " Name="Knowledge1" IsChecked="{Binding Knowledge1}"/>
                     </Viewbox>
                     
                     <Viewbox Height="40">
-                        <RadioButton GroupName="Guide Knowledge" Margin="0 0 15 0 " Name="Knowledge2"/>
+                        <RadioButton GroupName="Guide Knowledge" Margin="0 0 15 0 " Name="Knowledge2" IsChecked="{Binding Knowledge2}"/>
                     </Viewbox>
                     <Viewbox Height="40">
-                        <RadioButton GroupName="Guide Knowledge" Margin="0 0 15 0 " Name="Knowledge3"/>
+                        <RadioButton GroupName="Guide Knowledge" Margin="0 0 15 0 " Name="Knowledge3" IsChecked="{Binding Knowledge3}"/>
                     </Viewbox>
                     <Viewbox Height="40">
-                        <RadioButton GroupName="Guide Knowledge" Margin="0 0 15 0 " Name="Knowledge4"/>
+                        <RadioButton GroupName="Guide Knowledge" Margin="0 0 15 0 " Name="Knowledge4" IsChecked="{Binding Knowledge4}"/>
                     </Viewbox>
                     <Viewbox Height="40">
-                        <RadioButton GroupName="Guide Knowledge" Name="Knowledge5"/>
+                        <RadioButton GroupName="Guide Knowledge" Name="Knowledge5" IsChecked="{Binding Knowledge5}"/>
                     </Viewbox>
                     
                 </StackPanel>
@@ -147,20 +162,20 @@
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Viewbox Height="40">
-                        <RadioButton GroupName="Quality of translation" Margin="0 0 15 0 " Name="Translation1"/>
+                        <RadioButton GroupName="Quality of translation" Margin="0 0 15 0 " Name="Translation1" IsChecked="{Binding Translation1}"/>
                     </Viewbox>
 
                     <Viewbox Height="40">
-                        <RadioButton GroupName="Quality of translation" Margin="0 0 15 0 " Name="Translation2"/>
+                        <RadioButton GroupName="Quality of translation" Margin="0 0 15 0 " Name="Translation2" IsChecked="{Binding Translation2}"/>
                     </Viewbox>
                     <Viewbox Height="40">
-                        <RadioButton GroupName="Quality of translation" Margin="0 0 15 0 " Name="Translation3"/>
+                        <RadioButton GroupName="Quality of translation" Margin="0 0 15 0 " Name="Translation3" IsChecked="{Binding Translation3}"/>
                     </Viewbox>
                     <Viewbox Height="40">
-                        <RadioButton GroupName="Quality of translation" Margin="0 0 15 0 " Name="Translation4"/>
+                        <RadioButton GroupName="Quality of translation" Margin="0 0 15 0 " Name="Translation4" IsChecked="{Binding Translation4}"/>
                     </Viewbox>
                     <Viewbox Height="40">
-                        <RadioButton GroupName="Quality of translation" Name="Translation5"/>
+                        <RadioButton GroupName="Quality of translation" Name="Translation5" IsChecked="{Binding Translation5}"/>
                     </Viewbox>
 
                 </StackPanel>
@@ -182,20 +197,20 @@
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Viewbox Height="40">
-                        <RadioButton GroupName="Tour content" Margin="0 0 15 0 " Name ="Content1"/>
+                        <RadioButton GroupName="Tour content" Margin="0 0 15 0 " Name ="Content1" IsChecked="{Binding Content1}"/>
                     </Viewbox>
 
                     <Viewbox Height="40">
-                        <RadioButton GroupName="Tour content" Margin="0 0 15 0 " Name ="Content2"/>
+                        <RadioButton GroupName="Tour content" Margin="0 0 15 0 " Name ="Content2" IsChecked="{Binding Content2}"/>
                     </Viewbox>
                     <Viewbox Height="40">
-                        <RadioButton GroupName="Tour content" Margin="0 0 15 0 " Name ="Content3"/>
+                        <RadioButton GroupName="Tour content" Margin="0 0 15 0 " Name ="Content3" IsChecked="{Binding Content3}"/>
                     </Viewbox>
                     <Viewbox Height="40">
-                        <RadioButton GroupName="Tour content" Margin="0 0 15 0 " Name ="Content4"/>
+                        <RadioButton GroupName="Tour content" Margin="0 0 15 0 " Name ="Content4" IsChecked="{Binding Content4}"/>
                     </Viewbox>
                     <Viewbox Height="40">
-                        <RadioButton GroupName="Tour content"  Name ="Content5"/>
+                        <RadioButton GroupName="Tour content"  Name ="Content5" IsChecked="{Binding Content5}"/>
                     </Viewbox>
 
                 </StackPanel>
@@ -223,7 +238,10 @@
                          Name="CommentBox"
                          FontFamily="Ubuntu"
                          FontSize="20"
-                         FontWeight="Medium"/>
+                         FontWeight="Medium"
+                         IsEnabled="{Binding CommentBoxEnabled}"
+                         Text="{Binding CommentBox}"
+                         />
 
                 <Button Style="{StaticResource addButtonWEB}" 
                         Width="150" 
@@ -233,7 +251,9 @@
                         FontFamily="Ubuntu" 
                         FontSize="28" 
                         FontWeight="Medium" 
-                        Name="SubmitButton" Click="SubmitRating"/>
+                        Name="SubmitButton"
+                        Command="{Binding SubmitRatingCommand}"
+                        IsEnabled="{Binding SubmitButtonEnabled}"/>
 
             </StackPanel>
         </GroupBox>

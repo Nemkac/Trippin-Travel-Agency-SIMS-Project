@@ -25,11 +25,39 @@
             </StackPanel>
 
             <StackPanel Grid.Column="1">
-                <Label Content="" FontSize="60" Margin="25 0 0 0" Name="UsernameLabel" FontFamily="Ubuntu" FontWeight="Medium" Foreground="#273c75"/>
-                <Label Content="Number of coupons" Margin ="-945 30 0 0" FontSize="24" FontFamily="Ubuntu" FontWeight="Light" Width="225"/>
-                <Label Content="Tours visited" Margin ="-450 -38 0 0 " FontSize="24" FontFamily="Ubuntu" FontWeight="Light" Width="225"/>
-                <Label Content="" FontSize="24" Margin ="-1119 0 0 0" FontFamily="Ubuntu" FontWeight="Light" Width="50" Name="CouponNumberLabel"/>
-                <Label Content="" FontSize="24" Margin ="-620 -38 0 0" FontFamily="Ubuntu" FontWeight="Light" Width="50" Name="ToursVisitedLabel"/>
+                <Label Content="{Binding UsernameLabel}" 
+                       FontSize="60" 
+                       Margin="25 0 0 0" 
+                       Name="UsernameLabel" 
+                       FontFamily="Ubuntu"
+                       FontWeight="Medium" 
+                       Foreground="#273c75"/>
+                <Label Content="Number of coupons"
+                       Margin ="-945 30 0 0" 
+                       FontSize="24" 
+                       FontFamily="Ubuntu" 
+                       FontWeight="Light"
+                       Width="225"/>
+                <Label Content="Tours visited"
+                       Margin ="-450 -38 0 0 " 
+                       FontSize="24" 
+                       FontFamily="Ubuntu"
+                       FontWeight="Light"
+                       Width="225"/>
+                <Label Content=""
+                       FontSize="24" 
+                       Margin ="-1119 0 0 0" 
+                       FontFamily="Ubuntu" 
+                       FontWeight="Light" 
+                       Width="50" 
+                       Name="CouponNumberLabel"/>
+                <Label Content="" 
+                       FontSize="24" 
+                       Margin ="-620 -38 0 0"
+                       FontFamily="Ubuntu"
+                       FontWeight="Light"
+                       Width="50" 
+                       Name="ToursVisitedLabel"/>
             </StackPanel>
 
         </Grid>
@@ -41,9 +69,26 @@
 
             <GroupBox Header="Info" FontSize="28" FontFamily="Ubuntu" FontWeight="Heavy" Height="287" VerticalAlignment="Top" Foreground="#192a56">
                 <StackPanel Grid.Column="0">
-                    <Label Name="NameLastName" Margin ="15 15 0 0" FontSize="20" FontFamily="Ubuntu" FontWeight="Medium"/>
-                    <Label Name="UsernameLabel2" Margin ="15 15 0 0" FontSize="20" FontFamily="Ubuntu" FontWeight="Medium"/>
-                    <Label Name="AccountTypeLabel" Margin ="15 15 0 0" FontSize="20" FontFamily="Ubuntu" FontWeight="Medium"/>
+                    <Label Name="NameLastName" 
+                           Margin ="15 15 0 0"
+                           FontSize="20" 
+                           FontFamily="Ubuntu"
+                           FontWeight="Medium"
+                           Content="{Binding NameAndLastName}"
+                           />
+                    <Label Name="UsernameLabel2"
+                           Margin ="15 15 0 0" 
+                           FontSize="20" 
+                           FontFamily="Ubuntu"
+                           FontWeight="Medium"
+                           Content="{Binding UsernameLabel2}"/>
+                    <Label Name="AccountTypeLabel" 
+                           Margin ="15 15 0 0" 
+                           FontSize="20" 
+                           FontFamily="Ubuntu" 
+                           FontWeight="Medium"
+                           Content="{Binding AccountType}"
+                           />
                 </StackPanel>
             </GroupBox>
 
@@ -55,21 +100,25 @@
                            FontSize="20"
                            FontFamily="Ubuntu"
                            FontWeight="Medium"
-                           Name="AcceptedToursLabel"/>
+                           Name="AcceptedToursLabel"
+                           Content="{Binding AcceptedTours}"/>
                     <Label Width="700" 
                            Height="40"
                            Margin="-350 25 0 0"
                            FontSize="20"
                            FontFamily="Ubuntu"
                            FontWeight="Medium"
-                           Name="AverageNumberOfPeopleLabel"/>
+                           Name="AverageNumberOfPeopleLabel"
+                           Content="{Binding AverageNumberOfPeople}"/>
                     <Label Width="700" 
                            Height="40"
                            Margin="-350 50 0 0"
                            FontSize="20"
                            FontFamily="Ubuntu"
                            FontWeight="Medium"
-                           Name="DeclinedToursLabel"/>
+                           Name="DeclinedToursLabel"
+                           Content="{Binding DeclinedTours}"
+                           />
                     <xctk:WatermarkComboBox Width="300"
                                             Height="50"
                                             FontWeight="Light"
@@ -79,8 +128,9 @@
                                             VerticalAlignment="Center"
                                             Margin="800 -350 0 0"
                                             Watermark="Select the year"
-                                            Name="YearsComboBox"
-                                            SelectionChanged="ComboBoxSelectedYear"
+                                            Name="YearsComboBox" 
+                                            SelectedItem="{Binding SelectedYear}"
+                                            ItemsSource="{Binding YearComboBox}"
                                             />
                 </StackPanel>
             </GroupBox>
