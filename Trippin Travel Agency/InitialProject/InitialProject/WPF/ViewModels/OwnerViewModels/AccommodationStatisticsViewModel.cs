@@ -71,6 +71,66 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+
+
+
+
+
+        private string _dataGridColumnHeaderColor;
+        public string DataGridColumnHeaderColor
+        {
+            get { return _dataGridColumnHeaderColor; }
+            set
+            {
+                _dataGridColumnHeaderColor = value;
+                OnPropertyChanged(nameof(DataGridColumnHeaderColor));
+            }
+        }
+
+        private string _dataGridSelectionColor;
+        public string DataGridSelectionColor
+        {
+            get { return _dataGridSelectionColor; }
+            set
+            {
+                _dataGridSelectionColor = value;
+                OnPropertyChanged(nameof(DataGridSelectionColor));
+            }
+        }
+
+        private string _dataGridTextSelectionColor;
+        public string DataGridTextSelectionColor
+        {
+            get { return _dataGridTextSelectionColor; }
+            set
+            {
+                _dataGridTextSelectionColor = value;
+                OnPropertyChanged(nameof(DataGridTextSelectionColor));
+            }
+        }
+
+        private string _dataGridRowColor;
+        public string DataGridRowColor
+        {
+            get { return _dataGridRowColor; }
+            set
+            {
+                _dataGridRowColor = value;
+                OnPropertyChanged(nameof(DataGridRowColor));
+            }
+        }
+
+        private string _dataGridTextColor;
+        public string DataGridTextColor
+        {
+            get { return _dataGridTextColor; }
+            set
+            {
+                _dataGridTextColor = value;
+                OnPropertyChanged(nameof(DataGridTextColor));
+            }
+        }
+
         public ICommand ShowOurRecommendationsViewCommand { get; private set; }
         public ViewModelCommand ShowAnnualStatisticsViewCommand { get; private set; }
 
@@ -86,12 +146,24 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
             ContentHintColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#353b48";
             DetailsButtonColor = Mediator.GetCurrentIsChecked() ? "#718093" : "#2f3640";
+
+            DataGridColumnHeaderColor = Mediator.GetCurrentIsChecked() ? "#1e2226" : "#192a56";
+            DataGridSelectionColor = Mediator.GetCurrentIsChecked() ? "#1e2226" : "#192a56";
+            DataGridTextSelectionColor = Mediator.GetCurrentIsChecked() ? "#f4fff8" : "#f4fff8";
+            DataGridTextColor = Mediator.GetCurrentIsChecked() ? "#f4fff8" : "#222528";
+            DataGridRowColor = Mediator.GetCurrentIsChecked() ? "#2f3640" : "#FCFFFC";
         }
 
         private void OnIsCheckedChanged(object sender, bool isChecked)
         {
             ContentHintColor = isChecked ? "#F4F6F8" : "#353b48";
             DetailsButtonColor = isChecked ? "#718093" : "#2f3640";
+
+            DataGridColumnHeaderColor = isChecked ? "#1e2226" : "#192a56";
+            DataGridSelectionColor = isChecked ? "#1e2226" : "#192a56";
+            DataGridTextSelectionColor = isChecked ? "#f4fff8" : "#f4fff8";
+            DataGridTextColor = isChecked ? "#f4fff8" : "#222528";
+            DataGridRowColor = isChecked ? "#2f3640" : "#FCFFFC";
         }
 
         public void ExecuteShowOurRecommendationsViewCommand(object obj)

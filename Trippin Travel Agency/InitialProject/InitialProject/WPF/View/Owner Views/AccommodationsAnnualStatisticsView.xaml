@@ -68,7 +68,7 @@
                 </StackPanel>
                 <DataGrid Style="{DynamicResource DataGridStyle1}" 
                   CellStyle="{DynamicResource DataGridCellStyle1}" 
-                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle1}" 
                   RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="annualStatisticsDataGrid"
                   SelectedItem="{Binding SelectedAnnualStatistics}"
                   AutoGenerateColumns="False" ItemsSource="{Binding accommodationsAnnualStatisticsDTOs}">
