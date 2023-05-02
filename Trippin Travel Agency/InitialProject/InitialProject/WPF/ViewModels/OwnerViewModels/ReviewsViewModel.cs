@@ -29,12 +29,33 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 }
             }
         }
+
+        private string _contentTextColor;
+        public string ContentTextColor
+        {
+            get { return _contentTextColor; }
+            set
+            {
+                _contentTextColor = value;
+                OnPropertyChanged(nameof(ContentTextColor));
+            }
+        }
+
         public ReviewsViewModel() 
         {
             ShowReviews();
             List<AccommodationRate> availableRates = GetAllReviews();
             decimal totalRating = guestRateService.CalculateTotalRating(availableRates);
             TotalRating = totalRating;
+
+            Mediator.IsCheckedChanged += OnIsCheckedChanged;
+
+            ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";
+        }
+
+        private void OnIsCheckedChanged(object sender, bool isChecked)
+        {
+            ContentTextColor = isChecked ? "#F4F6F8" : "#192a56";
         }
 
         public void ShowReviews()

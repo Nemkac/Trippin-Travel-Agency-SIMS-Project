@@ -100,6 +100,28 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private string _contentTextColor;
+        public string ContentTextColor
+        {
+            get { return _contentTextColor; }
+            set
+            {
+                _contentTextColor = value;
+                OnPropertyChanged(nameof(ContentTextColor));
+            }
+        }
+
+        private string _detailsButtonColor;
+        public string DetailsButtonColor
+        {
+            get { return _detailsButtonColor; }
+            set
+            {
+                _detailsButtonColor = value;
+                OnPropertyChanged(nameof(DetailsButtonColor));
+            }
+        }
+
         public ProfileViewModel()
         {
             _mainViewModel = LoggedUser._mainViewModel;
@@ -110,6 +132,17 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             TotalRating = totalRating;
 
             DisplayOwnerType(totalRating);
+
+            Mediator.IsCheckedChanged += OnIsCheckedChanged;
+
+            ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";
+            DetailsButtonColor = Mediator.GetCurrentIsChecked() ? "#718093" : "#2f3640";
+        }
+
+        private void OnIsCheckedChanged(object sender, bool isChecked)
+        {
+            ContentTextColor = isChecked ? "#F4F6F8" : "#192a56";
+            DetailsButtonColor = isChecked ? "#718093" : "#2f3640";
         }
 
         public void ShowReviewsView(object obj)

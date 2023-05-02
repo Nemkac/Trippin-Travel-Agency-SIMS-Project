@@ -21,6 +21,7 @@
 
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
             <Label Content="Cleanness" Style="{StaticResource RatingLabel}"
+                   Foreground="{Binding ContentTextColor}"
                    VerticalAlignment="Center" Margin="0 0 0 0"/>
         </StackPanel>
         
@@ -54,6 +55,7 @@
 
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
             <Label Content="Respecting the rules" Style="{StaticResource RatingLabel}"
+                   Foreground="{Binding ContentTextColor}"
                    VerticalAlignment="Center" Margin="0 0 0 0"/>
         </StackPanel>
 
@@ -87,6 +89,7 @@
 
         <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
             <Label Content="Comment" Style="{StaticResource RatingLabel}"
+                   Foreground="{Binding ContentTextColor}"
                    VerticalAlignment="Top" Margin="0 40 0 0"/>
         </StackPanel>
 

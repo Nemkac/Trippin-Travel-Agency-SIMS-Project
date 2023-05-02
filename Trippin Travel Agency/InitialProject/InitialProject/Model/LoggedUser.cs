@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace InitialProject.Model
 {
@@ -25,5 +26,6 @@ namespace InitialProject.Model
         public static AccommodationsAnnualStatisticsView accommodationsAnnualStatisticsView { get; set; } 
 
         public static bool IsChecked { get; set; }
+        public static SolidColorBrush ContentTextColor { get; set; }
     }
 }

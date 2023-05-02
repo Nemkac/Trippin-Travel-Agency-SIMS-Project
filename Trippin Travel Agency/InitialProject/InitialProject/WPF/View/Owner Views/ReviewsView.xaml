@@ -28,11 +28,11 @@
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <Label Content="Total Rating: " FontFamily="Ubuntu" FontSize="40"
-                   FontWeight="Bold" Foreground="#192a56" VerticalAlignment="Bottom"
+                   FontWeight="Bold" Foreground="{Binding ContentTextColor}" VerticalAlignment="Bottom"
                    Margin="350 0 0 0"/>
             <TextBlock Width="90" Height="50" VerticalAlignment="Bottom"
                        FontFamily="Ubuntu" FontSize="40" FontWeight="Bold"
-                       Foreground="#192a56" x:Name="TotalRateTextBlock"
+                       Foreground="{Binding ContentTextColor}" x:Name="TotalRateTextBlock"
                        Text="{Binding TotalRating}"/>
         </StackPanel>
     </Grid>

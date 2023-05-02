@@ -86,8 +86,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
-        private SolidColorBrush _contentTextColor;
-        public SolidColorBrush ContentTextColor
+        private string _contentTextColor;
+        public string ContentTextColor
         {
             get { return _contentTextColor; }
             set
@@ -181,9 +181,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             set
             {
                 _isChecked = value;
-                LightOrDarkTheme();
                 LoggedUser.IsChecked = _isChecked;
-                OnPropertyChanged(nameof(IsChecked));  
+                LightOrDarkTheme();
+                OnPropertyChanged(nameof(IsChecked));
+
+                Mediator.OnIsCheckedChanged(_isChecked);
             }
         }
 
@@ -222,6 +224,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ShowNewRenovationCommand = new ViewModelCommand(ExecuteShowNewRenovationViewCommand);
             ShowScheduleNewRenovationCommand = new ViewModelCommand(ExecuteShowScheduleNewRenovationCommand);
             IsChecked = false;
+            Mediator.OnIsCheckedChanged(IsChecked);
             GenerateReportCommand = new ViewModelCommand(GenerateAnnualReport);
 
             //Default view
@@ -345,7 +348,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 ContentSectionBackgroundColor = (SolidColorBrush)Application.Current.Resources["DarkContentSectionBackgroundColor"];
                 CaptionHeaderText = (SolidColorBrush)Application.Current.Resources["DarkCaptionHeaderText"];
                 HeaderButtonIconColor = (SolidColorBrush)Application.Current.Resources["DarkHeaderButtonIconColor"];
-                ContentTextColor = (SolidColorBrush)Application.Current.Resources["DarkContentTextColor"];
+                //ContentTextColor = (SolidColorBrush)Application.Current.Resources["DarkContentTextColor"];
+                ContentTextColor = "F4F6F8";
                 LightThemeChecked = (SolidColorBrush)Application.Current.Resources["ModeUnchecked"];
                 DarkThemeChecked = (SolidColorBrush)Application.Current.Resources["ModeChecked"];
             }
@@ -356,7 +360,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 ContentSectionBackgroundColor = (SolidColorBrush)Application.Current.Resources["ContentSectionBackgroundColor"];
                 CaptionHeaderText = (SolidColorBrush)Application.Current.Resources["CaptionHeaderText"];
                 HeaderButtonIconColor = (SolidColorBrush)Application.Current.Resources["HeaderButtonIconColor"];
-                ContentTextColor = (SolidColorBrush)Application.Current.Resources["ContentTextColor"];
+                //ContentTextColor = (SolidColorBrush)Application.Current.Resources["HeaderButtonIconColor"];
+                ContentTextColor = "#192a56";
                 DarkThemeChecked = (SolidColorBrush)Application.Current.Resources["ModeUnchecked"];
                 LightThemeChecked = (SolidColorBrush)Application.Current.Resources["ModeChecked"];
 

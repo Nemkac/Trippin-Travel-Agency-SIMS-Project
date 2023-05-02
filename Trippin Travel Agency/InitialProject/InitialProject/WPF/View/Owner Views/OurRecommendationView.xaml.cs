@@ -1,4 +1,5 @@
 ﻿using InitialProject.Model;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace InitialProject.WPF.View.Owner_Views
 {
@@ -25,6 +25,7 @@ namespace InitialProject.WPF.View.Owner_Views
         public OurRecommendationView()
         {
             InitializeComponent();
+            this.DataContext = new OurRecommendationsViewModel();
         }
     }
 }

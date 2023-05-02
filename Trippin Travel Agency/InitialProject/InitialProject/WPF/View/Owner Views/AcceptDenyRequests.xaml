@@ -32,19 +32,19 @@
                 <StackPanel Grid.Column="1" Orientation="Vertical">
                     <TextBlock x:Name="AccommodationNameTextBlock" Margin="0,28,0,0" Height="27" 
                                VerticalAlignment="Top" Width="265" FontFamily="Ubuntu" FontSize="16" 
-                               FontWeight="Light" Foreground="#192a56" Text="{Binding AccommodationName}"/>
+                               FontWeight="Light" Foreground="{Binding ContentTextColor}" Text="{Binding AccommodationName}"/>
                     <TextBlock x:Name="LocationTextBlock"  Margin="0,26,0,0" Height="27" 
                                VerticalAlignment="Top" Width="265" FontFamily="Ubuntu" 
-                               FontSize="16" FontWeight="Light" Foreground="#192a56"
+                               FontSize="16" FontWeight="Light" Foreground="{Binding ContentTextColor}"
                                Text="{Binding Location}"/>
                     <TextBlock x:Name="AccommodationTypeTextBlock" Margin="0,26,0,0" Height="27" 
                                VerticalAlignment="Top" Width="265" FontFamily="Ubuntu" FontSize="16" 
-                               FontWeight="Light" Foreground="#192a56" Text="{Binding AccommodationType}"/>
+                               FontWeight="Light" Foreground="{Binding ContentTextColor}" Text="{Binding AccommodationType}"/>
                     <TextBlock x:Name="BookingIdTextBlock" Margin="0,26,0,0" Height="27" 
                                VerticalAlignment="Top" Width="265" FontFamily="Ubuntu" FontSize="16" 
-                               FontWeight="Light" Foreground="#192a56" Text="{Binding BookingId}"/>
+                               FontWeight="Light" Foreground="{Binding ContentTextColor}" Text="{Binding BookingId}"/>
                 </StackPanel>
-                <Separator Grid.ColumnSpan="2" Background="#192a56" Width="612" Margin="49, 170, 0, 0"/>
+                <Separator Grid.ColumnSpan="2" Background="{Binding ContentTextColor}" Width="612" Margin="49, 170, 0, 0"/>
             </Grid>
         </Border>
         <Border Grid.Row="1">
@@ -62,10 +62,10 @@
                         <StackPanel Orientation="Horizontal" Grid.Column="0">
                             <Label Content="Guest:" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="49,0,0,0" VerticalAlignment="Center" Width="165"/>
                         </StackPanel>
-                        <Separator Grid.ColumnSpan="2" Background="#192a56" Width="612" Margin="49, 70, 0, 0"/>
+                        <Separator Grid.ColumnSpan="2" Background="{Binding ContentTextColor}" Width="612" Margin="49, 70, 0, 0"/>
                         <StackPanel Orientation="Horizontal" Grid.Column="1">
                             <TextBlock x:Name="GuestTextBlock" Height="27" VerticalAlignment="Center" 
-                                       Margin="30 0 0 0" Width="265" FontFamily="Ubuntu" 
+                                       Margin="30 0 0 0" Width="265" FontFamily="Ubuntu"  Foreground="{Binding ContentTextColor}"
                                        FontSize="16" FontWeight="Light" Text="{Binding GuestName}"/>
                         </StackPanel>
                     </Grid>
@@ -81,12 +81,12 @@
                             <TextBlock x:Name="OldArrivalTextBlock" 
                                        Margin="0,-24,20,0" Height="27" HorizontalAlignment="Right" 
                                        Width="165" FontFamily="Ubuntu" FontSize="16" 
-                                       FontWeight="Light" Foreground="#192a56"
+                                       FontWeight="Light" Foreground="{Binding ContentTextColor}"
                                        Text="{Binding OldArrival}"/>
                             <Label Content="Old Departure:" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="49,26,0,0" VerticalAlignment="Top" Width="110" />
                             <TextBlock x:Name="OldDepartureTextBlock" Margin="0,-24,20,0" Height="27" 
                                        HorizontalAlignment="Right" Width="165" FontFamily="Ubuntu" 
-                                       FontSize="16" FontWeight="Light" Foreground="#192a56"
+                                       FontSize="16" FontWeight="Light" Foreground="{Binding ContentTextColor}"
                                        Text="{Binding OldDeparture}"/>
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Grid.Column="1">
@@ -94,12 +94,12 @@
                             <TextBlock x:Name="NewArrivalTextBlock" Margin="0,-24,70,0" 
                                        Height="27" HorizontalAlignment="Right" Width="165" 
                                        FontFamily="Ubuntu" FontSize="16" FontWeight="Light" 
-                                       Foreground="#192a56" Text="{Binding NewArrival}"/>
+                                       Foreground="{Binding ContentTextColor}" Text="{Binding NewArrival}"/>
                             <Label Content="New Departure:" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="0,26,0,0" VerticalAlignment="Top" Width="120"/>
                             <TextBlock x:Name="NewDepartureTextBlock" Margin="0,-24,70,0" 
                                        Height="27" HorizontalAlignment="Right" Width="165" 
                                        FontFamily="Ubuntu" FontSize="16" FontWeight="Light" 
-                                       Foreground="#192a56" Text="{Binding NewDeparture}"/>
+                                       Foreground="{Binding ContentTextColor}" Text="{Binding NewDeparture}"/>
                         </StackPanel>
                     </Grid>
                 </Border>

@@ -26,17 +26,17 @@
         <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Top">
             <TextBlock x:Name="accommodationNameTextBlock"  FontFamily="Ubuntu" 
                        Width="Auto" FontSize="20" FontWeight="Light" Margin="5 0 0 0" 
-                       VerticalAlignment="Center" Foreground="#192a56"
+                       VerticalAlignment="Center" Foreground="{Binding ContentTextColor}"
                        Text="{Binding AccommodationNameTextBlock}"/>
             <Label Content="annual statistics"  FontFamily="Ubuntu"
                            FontSize="20" FontWeight="Light" VerticalAlignment="Center" 
-                           Foreground="#192a56"/>
+                           Foreground="{Binding ContentTextColor}"/>
         </StackPanel>
         
         <StackPanel Orientation="Horizontal" Grid.Row="1">
             <Label Content="Choose year"  FontFamily="Ubuntu"
                            FontSize="20" FontWeight="Regular" VerticalAlignment="Center" 
-                           Foreground="#192a56"/>
+                           Foreground="{Binding ContentTextColor}"/>
             <ComboBox x:Name="yearComboBox" Width="120" Height="30" Margin="15 0 0 0" 
                       ItemsSource="{Binding years}"
                       SelectedItem="{Binding SelectedYear}"/>
@@ -59,10 +59,10 @@
                     <fa:IconImage Icon="Fingerprint"
                                       HorizontalAlignment="Left"
                                       Style="{StaticResource menuBackButtonIcon}"
-                                      Width="15" Height="15" Foreground="#353b48"/>
+                                      Width="15" Height="15" Foreground="{Binding ContentHintColor}"/>
                     <Label Content="Choose an accommodation and click a button beneath to see accommodations annual statistics"
                                Style="{StaticResource labelAboveTextBox}"
-                               Foreground="#353b48"
+                               Foreground="{Binding ContentHintColor}"
                                Margin="10,0,0,0"
                                />
                 </StackPanel>
@@ -86,13 +86,15 @@
         <StackPanel Orientation="Horizontal" Grid.Row="3">
             <Button Style="{StaticResource detailsButton}"
                 Grid.Row="1" HorizontalAlignment="Right"
-                BorderBrush="Transparent" 
-                Margin="490 0 0 0"
+                BorderBrush="Transparent"
+                VerticalAlignment="Bottom"
+                Margin="490 0 0 5"
+                Width="220" Height="35"
                 Command="{Binding ShowMonthlyStatistics}">
                 <StackPanel Orientation="Horizontal"
                                 Margin="0, 0, 0 ,0">
-                    <fa:IconImage Icon="PlusCircle" HorizontalAlignment="Left" Width="23" Height="23" Foreground="#F4FFF8" VerticalAlignment="Center" Margin="0 2 0 0"/>
-                    <Label VerticalAlignment="Center" Content="Show Details" FontSize="25" FontFamily="Ubuntu" FontWeight="Regular" Foreground="#F4FFF8" Margin="10 0 0 0"/>
+                    <fa:IconImage Icon="PlusCircle" HorizontalAlignment="Left" Width="20" Height="20" Foreground="#F4FFF8" VerticalAlignment="Center" Margin="0 2 0 0"/>
+                    <Label VerticalAlignment="Center" Content="Show Details" FontSize="20" FontFamily="Ubuntu" FontWeight="Regular" Foreground="#F4FFF8" Margin="10 0 0 0"/>
                 </StackPanel>
             </Button>
         </StackPanel>
@@ -112,7 +114,7 @@
                 </lc:CartesianChart.AxisY>
             </lc:CartesianChart>
             <GroupBox Header="Accommodation Details" FontFamily="Ubuntu" FontSize="20"
-                      FontWeight="Bold" Foreground="#192a56" Width="410">
+                      FontWeight="Bold" Foreground="{Binding ContentTextColor}" Width="410">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
                         <Label Content="Accommodation name:" Style="{StaticResource defaultLabel}" 
@@ -127,15 +129,19 @@
                     <StackPanel Orientation="Vertical" Margin="10 0 0 0">
                         <TextBlock x:Name="accommodationDetailsNameTextBlock" Width="Auto" 
                                    FontSize="16" FontWeight="Light" Margin="0 25 0 0"
+                                   Foreground="{Binding ContentTextColor}"
                                    Text="{Binding AccommodationName}"/>
                         <TextBlock x:Name="accommodationDetailsLocationTextBlock" Width="Auto" 
                                    FontSize="16" FontWeight="Light" Margin="0 30 0 0"
+                                   Foreground="{Binding ContentTextColor}"
                                    Text="{Binding AccommodationLocation}"/>
                         <TextBlock x:Name="accommodationDetailsGuestLimitTextBlock" Width="Auto" 
                                    FontSize="16" FontWeight="Light" Margin="0 30 0 0"
+                                   Foreground="{Binding ContentTextColor}"
                                    Text="{Binding MaxNumOfGuests}"/>
                         <TextBlock x:Name="accommodationDetailsTypeTextBlock" Width="Auto" 
                                    FontSize="16" FontWeight="Light" Margin="0 30 0 0"
+                                   Foreground="{Binding ContentTextColor}"
                                    Text="{Binding AccommodationType}"/>
                     </StackPanel>
                 </StackPanel>

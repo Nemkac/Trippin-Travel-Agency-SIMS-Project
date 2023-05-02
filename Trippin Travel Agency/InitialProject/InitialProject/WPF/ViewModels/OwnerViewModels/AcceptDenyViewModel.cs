@@ -176,6 +176,17 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private string _contentTextColor;
+        public string ContentTextColor
+        {
+            get { return _contentTextColor; }
+            set
+            {
+                _contentTextColor = value;
+                OnPropertyChanged(nameof(ContentTextColor));
+            }
+        }
+
         public ViewModelCommand AcceptRequestCommand { get; set; }
         public ViewModelCommand DenyRequestCommand { get; set; }
 
@@ -186,6 +197,15 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             DenyRequestCommand = new ViewModelCommand(DenyRequest);
 
             DisplayData();
+
+            Mediator.IsCheckedChanged += OnIsCheckedChanged;
+
+            ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";
+        }
+
+        private void OnIsCheckedChanged(object sender, bool isChecked)
+        {
+            ContentTextColor = isChecked ? "#F4F6F8" : "#192a56";
         }
 
 

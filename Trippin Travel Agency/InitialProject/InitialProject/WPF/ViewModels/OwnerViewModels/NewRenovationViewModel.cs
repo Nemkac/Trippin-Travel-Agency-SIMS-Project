@@ -32,6 +32,28 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private string _contentTextColor;
+        public string ContentTextColor
+        {
+            get { return _contentTextColor; }
+            set
+            {
+                _contentTextColor = value;
+                OnPropertyChanged(nameof(ContentTextColor));
+            }
+        }
+
+        private string _contentHintColor;
+        public string ContentHintColor
+        {
+            get { return _contentHintColor; }
+            set
+            {
+                _contentHintColor = value;
+                OnPropertyChanged(nameof(ContentHintColor));
+            }
+        }
+
         public ViewModelCommand ScheduleNewRenovationView { get; private set; }
 
         public NewRenovationViewModel()
@@ -39,6 +61,17 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             this._mainViewModel = LoggedUser._mainViewModel;
             ScheduleNewRenovationView = new ViewModelCommand(ShowScheduleNewRenovationView);
             ShowOwnersAccommodations();
+
+            Mediator.IsCheckedChanged += OnIsCheckedChanged;
+
+            ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";
+            ContentHintColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#353b48";
+        }
+
+        private void OnIsCheckedChanged(object sender, bool isChecked)
+        {
+            ContentTextColor = isChecked ? "#F4F6F8" : "#192a56";
+            ContentHintColor = isChecked ? "#F4F6F8" : "#353b48";
         }
 
         public void ShowScheduleNewRenovationView(object obj)

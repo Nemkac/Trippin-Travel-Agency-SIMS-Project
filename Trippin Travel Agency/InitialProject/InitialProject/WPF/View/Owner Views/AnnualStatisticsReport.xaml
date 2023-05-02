@@ -173,7 +173,7 @@
                                Foreground="#192a56" FontWeight="Bold" HorizontalAlignment="Center"
                                VerticalAlignment="Center" Margin="0 1 0 0"/>
                         <TextBlock x:Name="AvgRate"  FontSize="18" FontFamily="Ubuntu" Width="60"
-                                   Foreground="#192a56" FontWeight="Medium" Margin="5 7 0 0"
+                                   Foreground="#192a56" FontWeight="Medium" Margin="5 6 0 0"
                                    TextAlignment="Center"/>
                     </StackPanel>
 

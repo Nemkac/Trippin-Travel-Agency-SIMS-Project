@@ -25,10 +25,10 @@
                     <fa:IconImage Icon="Fingerprint"
                                       HorizontalAlignment="Left"
                                       Style="{StaticResource menuBackButtonIcon}"
-                                      Width="15" Height="15" Foreground="#353b48"/>
+                                      Width="15" Height="15" Foreground="{Binding ContentHintColor}"/>
                     <Label Content="Choose a request and click a button beneath to see details"
                                Style="{StaticResource labelAboveTextBox}"
-                               Foreground="#353b48"
+                               Foreground="{Binding ContentHintColor}"
                                Margin="10,0,0,0"
                                />
                 </StackPanel>
@@ -54,12 +54,12 @@
                 Grid.Row="1" HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Command="{Binding ShowAcceptDenyViewCommand}"
-                Margin="0 0 10 10"
+                Margin="0 0 10 10" Width="220" Height="35"
                 BorderBrush="Transparent">
             <StackPanel Orientation="Horizontal"
                                 Margin="0, 0, 0 ,0">
-                <fa:IconImage Icon="PlusCircle" HorizontalAlignment="Left" Width="23" Height="23" Foreground="#F4FFF8" VerticalAlignment="Center" Margin="0 3 0 0"/>
-                <Label VerticalAlignment="Center" Content="Show Details" FontSize="25" FontFamily="Ubuntu" FontWeight="Regular" Foreground="#F4FFF8" Margin="10 0 0 0"/>
+                <fa:IconImage Icon="PlusCircle" HorizontalAlignment="Left" Width="20" Height="20" Foreground="#F4FFF8" VerticalAlignment="Center" Margin="0 3 0 0"/>
+                <Label VerticalAlignment="Center" Content="Show Details" FontSize="20" FontFamily="Ubuntu" FontWeight="Regular" Foreground="#F4FFF8" Margin="10 0 0 0"/>
             </StackPanel>
         </Button>
         <ContentControl Content="{Binding CurrentChildView}"/>

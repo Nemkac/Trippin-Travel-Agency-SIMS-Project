@@ -196,6 +196,32 @@
                 </Style.Triggers>
             </Style>
 
+            <Style x:Key="defaultLabel" TargetType="Label">
+                <Setter Property="FontFamily" Value="Ubuntu"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontWeight" Value="Medium"/>
+                <Setter Property="Foreground" Value="{Binding ContentTextColor}"/>
+            </Style>
+
+            <Style x:Key="detailsButton" TargetType="Button">
+                <Setter Property="Background" Value="{Binding DetailsButtonColor}"/>
+                <Setter Property="FontFamily" Value="Ubuntu"/>
+                <Setter Property="FontSize" Value="17"/>
+                <Setter Property="FontWeight" Value="Light"/>
+                <Setter Property="Width" Value="220"/>
+                <Setter Property="Height" Value="50"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{Binding DetailsButtonColor}" CornerRadius="5" BorderThickness="0.4" BorderBrush="{Binding DetailsButtonColor}">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+
             <!-- Line delimiter style -->
             <Style x:Key="mobileDelimiterLine" TargetType="Line">
                 <Setter Property="X1" Value="0"/>

@@ -24,7 +24,8 @@
                 <GroupBox BorderBrush="#192a56">
                     <GroupBox.Header>
                         <TextBlock x:Name="accommodationNameTextBlock" Width="auto"
-                                   FontFamily="Ubuntu" FontSize="22" FontWeight="Regular" Foreground="#192a56"
+                                   FontFamily="Ubuntu" FontSize="22" FontWeight="Regular" 
+                                   Foreground="{Binding ContentTextColor}"
                                    Text="{Binding AccommodationName}"/>
                     </GroupBox.Header>
 
@@ -34,13 +35,13 @@
                             <Label Content="Location" Style="{StaticResource defaultLabel}" FontSize="18"/>
                             <TextBlock x:Name="locationTextBlock" Width="auto"
                                    Margin="10 7 0 0" FontFamily="Ubuntu" FontSize="16" FontWeight="Light" 
-                                   Foreground="#192a56" Text="{Binding Location}"/>
+                                   Foreground="{Binding ContentTextColor}" Text="{Binding Location}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Type" Style="{StaticResource defaultLabel}" FontSize="18"/>
                             <TextBlock x:Name="typeTextBlock" Width="auto"
                                    Margin="10 7 0 0" FontFamily="Ubuntu" FontSize="16" FontWeight="Light" 
-                                   Foreground="#192a56" Text="{Binding Type}"/>
+                                   Foreground="{Binding ContentTextColor}" Text="{Binding Type}"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
@@ -92,10 +93,10 @@
                         <fa:IconImage Icon="Fingerprint"
                                       HorizontalAlignment="Left"
                                       Style="{StaticResource menuBackButtonIcon}"
-                                      Width="15" Height="15" Foreground="#353b48"/>
+                                      Width="15" Height="15" Foreground="{Binding ContentHintColor}"/>
                         <Label Content="Choose one of the available periods"
                                Style="{StaticResource labelAboveTextBox}"
-                               Foreground="#353b48"
+                               Foreground="{Binding ContentHintColor}"
                                Margin="10,0,0,0"
                                />
                     </StackPanel>

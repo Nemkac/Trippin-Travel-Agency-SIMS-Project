@@ -191,17 +191,14 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
-        private Style _labelStyle;
-        public Style LabelStyle
+        private string _contentTextColor;
+        public string ContentTextColor
         {
-            get { return _labelStyle; }
+            get { return _contentTextColor; }
             set
             {
-                if(_labelStyle != value)
-                {
-                    _labelStyle = value;
-                    OnPropertyChanged(nameof(LabelStyle));
-                }
+                _contentTextColor = value;
+                OnPropertyChanged(nameof(ContentTextColor));
             }
         }
 
@@ -215,14 +212,15 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             SaveAccommodationCommand = new ViewModelCommand(SaveAccommodation);
             AddImageCommand = new ViewModelCommand(AddImage);
             ImageNumber = "Image " + imageCounter;
-            if(LoggedUser.IsChecked == true)
-            {
-                LabelStyle = (Style)Application.Current.Resources["defaultLabelDark"];
-            }
-            else
-            {
-                LabelStyle = (Style)Application.Current.Resources["defaultLabel"];
-            }
+
+            Mediator.IsCheckedChanged += OnIsCheckedChanged;
+
+            ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";
+        }
+
+        private void OnIsCheckedChanged(object sender, bool isChecked)
+        {
+            ContentTextColor = isChecked ? "#F4F6F8" : "#192a56";
         }
 
         private void FillCountryComboBox()

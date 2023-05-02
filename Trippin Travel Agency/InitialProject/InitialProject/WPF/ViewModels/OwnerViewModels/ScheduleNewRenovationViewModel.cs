@@ -132,6 +132,28 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private string _contentTextColor;
+        public string ContentTextColor
+        {
+            get { return _contentTextColor; }
+            set
+            {
+                _contentTextColor = value;
+                OnPropertyChanged(nameof(ContentTextColor));
+            }
+        }
+
+        private string _contentHintColor;
+        public string ContentHintColor
+        {
+            get { return _contentHintColor; }
+            set
+            {
+                _contentHintColor = value;
+                OnPropertyChanged(nameof(ContentHintColor));
+            }
+        }
+
         public ViewModelCommand ShowAvailableDateRanges { get; set; }
         public ViewModelCommand ScheduleRenovationCommand { get; set; }
 
@@ -142,6 +164,17 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             Type = SelectedAccommodations.selectedAccommodationForRenovation.type.ToString();
             ShowAvailableDateRanges = new ViewModelCommand(ProceedWithRenovation);
             ScheduleRenovationCommand = new ViewModelCommand(ScheduleRenovation);
+
+            Mediator.IsCheckedChanged += OnIsCheckedChanged;
+
+            ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";
+            ContentHintColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#353b48";
+        }
+
+        private void OnIsCheckedChanged(object sender, bool isChecked)
+        {
+            ContentTextColor = isChecked ? "#F4F6F8" : "#192a56";
+            ContentHintColor = isChecked ? "#F4F6F8" : "#353b48";
         }
 
         private void ProceedWithRenovation(object obj)

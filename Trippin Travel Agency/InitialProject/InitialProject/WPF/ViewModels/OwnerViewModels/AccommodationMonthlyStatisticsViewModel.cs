@@ -59,6 +59,17 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private string _contentTextColor;
+        public string ContentTextColor
+        {
+            get { return _contentTextColor; }
+            set
+            {
+                _contentTextColor = value;
+                OnPropertyChanged(nameof(ContentTextColor));
+            }
+        }
+
         public SeriesCollection PieSeriesCollection { get; set; }
 
         public ObservableCollection<AccommodationMonthlyStatisticsDTO> monthlyStatistics { get; set; } = new ObservableCollection<AccommodationMonthlyStatisticsDTO>();
@@ -76,6 +87,15 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             AccommodationName = accommodation.name;
             PieSeriesCollection = new SeriesCollection();
             DisplayPieChart(PieSeriesCollection);
+
+            Mediator.IsCheckedChanged += OnIsCheckedChanged;
+
+            ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";
+        }
+
+        private void OnIsCheckedChanged(object sender, bool isChecked)
+        {
+            ContentTextColor = isChecked ? "#F4F6F8" : "#192a56";
         }
 
         public void GetMonthList()

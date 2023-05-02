@@ -30,10 +30,10 @@
                 <fa:IconImage Icon="Fingerprint"
                                       HorizontalAlignment="Left"
                                       Style="{StaticResource menuBackButtonIcon}"
-                                      Width="15" Height="15" Foreground="#353b48"/>
+                                      Width="15" Height="15" Foreground="{Binding ContentHintColor}"/>
                 <Label Content="Choose an accommodation and click a button beneath to cancel the renovation"
                                Style="{StaticResource labelAboveTextBox}"
-                               Foreground="#353b48"
+                               Foreground="{Binding ContentHintColor}"
                                Margin="10,0,0,0"
                                />
             </StackPanel>

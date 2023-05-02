@@ -78,7 +78,14 @@ namespace InitialProject.WPF.View.Owner_Views
                 }
             }
 
-            avgRate = ratesSum / countRates;
+            if(ratesSum != 0 && countRates != 0) 
+            {
+                avgRate = ratesSum / countRates;
+            }
+            else
+            {
+                avgRate = 0;
+            }
 
             AvgRate.Text = avgRate.ToString();
         }

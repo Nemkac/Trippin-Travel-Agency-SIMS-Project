@@ -49,6 +49,27 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private string _contentHintColor;
+        public string ContentHintColor
+        {
+            get { return _contentHintColor; }
+            set
+            {
+                _contentHintColor = value;
+                OnPropertyChanged(nameof(ContentHintColor));
+            }
+        }
+
+        private string _detailsButtonColor;
+        public string DetailsButtonColor
+        {
+            get { return _detailsButtonColor; }
+            set
+            {
+                _detailsButtonColor = value;
+                OnPropertyChanged(nameof(DetailsButtonColor));
+            }
+        }
 
         public ICommand ShowOurRecommendationsViewCommand { get; private set; }
         public ViewModelCommand ShowAnnualStatisticsViewCommand { get; private set; }
@@ -60,6 +81,17 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ShowAnnualStatisticsViewCommand = new ViewModelCommand(ShowAnnualStatistics);
             ShowOwnersAccommodations();
             ExecuteShowOurRecommendationsViewCommand(null);
+
+            Mediator.IsCheckedChanged += OnIsCheckedChanged;
+
+            ContentHintColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#353b48";
+            DetailsButtonColor = Mediator.GetCurrentIsChecked() ? "#718093" : "#2f3640";
+        }
+
+        private void OnIsCheckedChanged(object sender, bool isChecked)
+        {
+            ContentHintColor = isChecked ? "#F4F6F8" : "#353b48";
+            DetailsButtonColor = isChecked ? "#718093" : "#2f3640";
         }
 
         public void ExecuteShowOurRecommendationsViewCommand(object obj)

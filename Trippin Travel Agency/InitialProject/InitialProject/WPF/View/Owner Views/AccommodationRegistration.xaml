@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.WPF.View.Owner_Views"
              xmlns:viewModel="clr-namespace:InitialProject.WPF.ViewModels.OwnerViewModels"
-             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp" d:DataContext="{d:DesignInstance Type=viewModel:AccommodationRegistrationViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="650" Width="710">
 
@@ -22,7 +22,7 @@
 
         <Border Grid.Row="0" Grid.Column="0" CornerRadius="30, 0, 0, 0">
             <StackPanel Orientation="Vertical">
-                <Label x:Name="label" Style="{StaticResource defaultLabel}" 
+                <Label x:Name="label" Style="{StaticResource defaultLabel}"
                        Content="Accommodation name" HorizontalAlignment="Left" Height="27" 
                        Margin="49,26,0,0" VerticalAlignment="Top" Width="165"/>
                 <TextBox x:Name="accommodationNameTB" HorizontalAlignment="Left" Margin="49,10,0,0" 
@@ -65,7 +65,7 @@
                             <RadioButton x:Name="houseRadioButton"
                                      IsChecked="{Binding House}"/>
                         </Viewbox>
-                        <Label Content="House" Foreground="#192a56" 
+                        <Label Content="House" Foreground="{Binding ContentTextColor}" 
                                      FontFamily="Ubuntu" FontSize="16" 
                                      FontWeight="Medium" HorizontalAlignment="Left"
                                      VerticalAlignment="Top"/>
@@ -76,7 +76,7 @@
                             <RadioButton x:Name="apartmentRadioButton"
                                      IsChecked="{Binding Apartment}"/>
                         </Viewbox>
-                        <Label Content="Apartment" Foreground="#192a56" 
+                        <Label Content="Apartment" Foreground="{Binding ContentTextColor}" 
                                      FontFamily="Ubuntu" FontSize="16" 
                                      FontWeight="Medium" HorizontalAlignment="Left" 
                                      VerticalAlignment="Top"/>
@@ -87,7 +87,7 @@
                             <RadioButton x:Name="hutRadioButton"
                                      IsChecked="{Binding Hut}"/>
                         </Viewbox>
-                        <Label Content="Hut" Foreground="#192a56" 
+                        <Label Content="Hut" Foreground="{Binding ContentTextColor}"
                                      FontFamily="Ubuntu" FontSize="16" 
                                      FontWeight="Medium" HorizontalAlignment="Left" 
                                      VerticalAlignment="Top"/>
@@ -99,6 +99,7 @@
         <Border Grid.Row="0" Grid.Column="2" CornerRadius="0, 30, 0, 0">
             <GroupBox Header="Images" VerticalAlignment="Top"
                           Style="{StaticResource labelGroupBox}"
+                          Foreground="{Binding ContentTextColor}"
                           Margin="0,30,0,0"
                           Height="150"
                           Padding="10">
@@ -108,7 +109,7 @@
                     <StackPanel Orientation="Vertical"
                                     Margin="0, 5, 0 ,0">
                         <TextBlock Text="{Binding ImageNumber}"
-                                       FontSize="16" Foreground="#192a56"
+                                       FontSize="16" Foreground="{Binding ContentTextColor}"
                                        Margin="0, 0, 0, 0"/>
                         <TextBox Text="{Binding Url}"
                                      FontSize="16" Width="140"
@@ -122,13 +123,15 @@
                             <fa:IconImage Icon="PlusCircle"
                                           HorizontalAlignment="Left"
                                           Style="{StaticResource menuBackButtonIcon}"
+                                          Foreground="{Binding ContentTextColor}"
                                           Width="25" Height="25"/>
                             <Label Content="Add image"
                                        FontSize="18"
                                        FontFamily="Ubuntu"
                                        FontWeight="SemiBold"
                                        Margin="10, 0, 0, 0"
-                                       Style="{StaticResource labelBackHeader}"/>
+                                       Style="{StaticResource labelBackHeader}"
+                                       Foreground="{Binding ContentTextColor}"/>
                         </StackPanel>
                     </RadioButton>
                 </StackPanel>

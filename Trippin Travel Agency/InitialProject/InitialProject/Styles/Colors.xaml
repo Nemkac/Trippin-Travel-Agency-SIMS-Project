@@ -18,8 +18,8 @@
 
     <!--============DARK THEME============-->
     <!--Menu colors-->
-    <SolidColorBrush x:Key="DarkNavigationMenuColor" Color="#353b48"/>
-    <SolidColorBrush x:Key="DarkActiveButtonColor" Color="#718093"/>
+    <SolidColorBrush x:Key="DarkNavigationMenuColor" Color="#2f3640"/>
+    <SolidColorBrush x:Key="DarkActiveButtonColor" Color="#1e2226"/>
     <SolidColorBrush x:Key="DarkMenuButtonsTextColor" Color="#F5F6FA"/>
     <SolidColorBrush x:Key="DarkContentSectionBackgroundColor" Color="#353b48"/>
     <SolidColorBrush x:Key="DarkCaptionHeaderText" Color="#F5F6FA"/>
