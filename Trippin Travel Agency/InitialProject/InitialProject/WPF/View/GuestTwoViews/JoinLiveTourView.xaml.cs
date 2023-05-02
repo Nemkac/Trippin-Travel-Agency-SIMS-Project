@@ -28,7 +28,7 @@ namespace InitialProject.WPF.View.GuestTwoViews
         public JoinLiveTourView()
         {
             InitializeComponent();
-            this.DataContext = new JoinLiveTourViewModel()          
+            this.DataContext = new JoinLiveTourViewModel();          
         }      
     }
 }
