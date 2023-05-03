@@ -81,8 +81,8 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         {
             if ((DateTime.Parse(SelectedBooking.arrival).Subtract(DateTime.Today)).Days >= (accommodationService.GetById(SelectedBooking.accommodationId)).bookingCancelPeriodDays)
             {
+                GuestOneStaticHelper.selectedBookingToDelay = SelectedBooking;
                 SendBookingDelaymentInterface sendBookingDelaymentInterface = new SendBookingDelaymentInterface();
-                GuestOneStaticHelper.selectedBookingToDelay = selectedBooking; 
                 sendBookingDelaymentInterface.WindowStartupLocation = WindowStartupLocation.Manual;
                 sendBookingDelaymentInterface.Left = GuestOneStaticHelper.futureBookingsInterface.Left;
                 sendBookingDelaymentInterface.Top = GuestOneStaticHelper.futureBookingsInterface.Top;
@@ -103,8 +103,6 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             pastBookingsInterface.Show();
             GuestOneStaticHelper.futureBookingsInterface.Close();
         }
-
-
 
     }
 }
