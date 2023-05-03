@@ -1,11 +1,13 @@
 ﻿using InitialProject.Context;
 using InitialProject.DTO;
 using InitialProject.Model;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -57,6 +59,35 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             }
         }
 
+        private int numberOfCoupons;
+        public int NumberOfCoupons
+        {
+            get { return numberOfCoupons; }
+            set
+            {
+                if (numberOfCoupons != value)
+                {
+                    numberOfCoupons = value;
+                    OnPropertyChanged(nameof(NumberOfCoupons));
+                }
+            }
+        }
+
+        private int numberOfVisitedTours;
+        public int NumberOfVisitedTours
+        {
+            get { return numberOfVisitedTours; }
+            set
+            {
+                if (numberOfVisitedTours != value)
+                {
+                    numberOfVisitedTours = value;
+                    OnPropertyChanged(nameof(NumberOfVisitedTours));
+                }
+            }
+        }
+
+
         public GuestTwoRequestsViewModel()
         { 
             WindowLoaded();
@@ -68,6 +99,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             AccountType = "Account type:  " + LoggedUser.role;
 
             DataBaseContext context = new DataBaseContext();
+            LoadData(context);
             LoadRequests(context);
         }
         public void LoadRequests(DataBaseContext context)
@@ -78,6 +110,25 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 if (LoggedUser.id == request.guestId)
                 {
                     requests.Add(request);
+                }
+            }
+
+        }
+
+        public void LoadData(DataBaseContext context) 
+        {
+            foreach (Coupon coupon in context.Coupons.ToList()) 
+            {
+                if (coupon.userId == LoggedUser.id) 
+                {
+                    NumberOfCoupons++;
+                }
+            }
+            foreach (TourAttendance attendance in context.TourAttendances.ToList())
+            {
+                if (attendance.guestID == LoggedUser.id)
+                {
+                    NumberOfVisitedTours++;
                 }
             }
 

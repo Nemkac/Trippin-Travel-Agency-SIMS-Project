@@ -157,9 +157,12 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 
         public void ShowDetailedTourView(object obj)
         {
-            _mainViewModel.ExecuteShowDetailedTourView(null);
             TourDTO? tour = SelectedTour;
-            DetailedId = tour.id;
+            if(tour != null) 
+            {                
+                _mainViewModel.ExecuteShowDetailedTourView(null);
+                DetailedId = tour.id;
+            }
         }
 
         public void ShowBookingConfirmation(object obj)

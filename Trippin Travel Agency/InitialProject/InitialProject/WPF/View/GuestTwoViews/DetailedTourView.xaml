@@ -3,12 +3,158 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:local="clr-namespace:InitialProject.WPF.View.GuestTwoViews"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="1500" d:DesignWidth="1520">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="600"/>
+            <ColumnDefinition Width="920"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <GroupBox Header="Tour Preview" 
+                      FontFamily="Ubuntu"
+                      FontSize="40"
+                      FontWeight="Heavy"
+                      Height="1200"
+                      Margin="0 -200 0 0"
+                      >
+                <StackPanel Orientation="Vertical" 
+                        Height="1300"
+                        Margin="0 -50 0 0">
+                    <Label Content="Tour name: "
+                       Margin="-395 50 0 0"
+                       FontSize="28"
+                       FontFamily="Ubuntu"
+                       FontWeight="Medium"
+                       Width="200"
+                       />
+                    <Label Content="City: "
+                       Margin="-395 50 0 0"
+                       FontSize="28"
+                       FontFamily="Ubuntu"
+                       FontWeight="Medium"
+                       Width="200"
+                       />
+                    <Label Content="Country: "
+                       Margin="-395 50 0 0"
+                       FontSize="28"
+                       FontFamily="Ubuntu"
+                       FontWeight="Medium"
+                       Width="200"
+                       />
+                    <Label Content="Key points: "
+                       Margin="-395 50 0 0"
+                       FontSize="28"
+                       FontFamily="Ubuntu"
+                       FontWeight="Medium"
+                       Width="200"
+                       />
+                    <Label Content="Spots remaining: "
+                       Margin="-345 350 0 0"
+                       FontSize="28"
+                       FontFamily="Ubuntu"
+                       FontWeight="Medium"
+                       Width="250"
+                       />
+                    <Label Content="Duration: "
+                       Margin="-395 50 0 0"
+                       FontSize="28"
+                       FontFamily="Ubuntu"
+                       FontWeight="Medium"
+                       Width="200"
+                       />
+                    <Label Content="Description: "
+                       Margin="-395 50 0 0"
+                       FontSize="28"
+                       FontFamily="Ubuntu"
+                       FontWeight="Medium"
+                       Width="200"
+                       />
+                    <Label Margin="0 -1750 0 0"
+                       FontSize="20"
+                       FontFamily="Ubuntu"
+                       FontWeight="Medium"
+                       Width="200"
+                       Height="40"
+                       Content="{Binding TourName}"
+                       Name = "TourNameLabel"
+                       />
+                    <Label Margin="0 -1565 0 0"
+                       FontSize="20"
+                       FontFamily="Ubuntu"
+                       FontWeight="Medium"
+                       Width="200"
+                       Height="40"
+                       Content="{Binding CityName}"
+                       />
+                    <Label Margin="0 -1370 0 0"
+                       FontSize="20"
+                       FontFamily="Ubuntu"
+                       FontWeight="Medium"
+                       Width="200"
+                       Height="40"
+                       Content="{Binding CountryName}"
+                       />
+                    <Label Margin="100 -900 0 0"
+                       FontSize="20"
+                       FontFamily="Ubuntu"
+                       FontWeight="Medium"
+                       Width="300"
+                       Height="300"
+                       Content="{Binding KeyPointNames}"
+                       />
+                    <Label Margin="70 -400 0 0"
+                       FontSize="20"
+                       FontFamily="Ubuntu"
+                       FontWeight="Medium"
+                       Width="200"
+                       Height="40"
+                       Content="{Binding NumberOfSpots}"
+                       />
+                    <Label Margin="70 -220 0 0"
+                       FontSize="20"
+                       FontFamily="Ubuntu"
+                       FontWeight="Medium"
+                       Width="200"
+                       Height="40"
+                       Content="{Binding Duration}"
+                       />
+                    <TextBlock Margin="70 -45 0 0"
+                       FontSize="20"
+                       FontFamily="Ubuntu"
+                       FontWeight="Medium"
+                       Width="250"
+                       Height="300"
+                       Text="{Binding Description}"
+                       TextWrapping="Wrap"/>
+                </StackPanel>
+            </GroupBox>
+
+            <Button Height="NaN"
+                    Width="NaN"
+                    Style="{StaticResource addButtonWEB}"
+                    Margin="150,1255,150,145"
+                    Command="{Binding BookingViewCommand}">
+
+                <StackPanel Orientation="Horizontal">
+                    <fa:IconImage Icon="PlaneDeparture" Width="70" Margin="15 0 0 0"/>
+                    <Label Content="Book" FontFamily="Ubuntu" FontSize="55" FontWeight="Heavy" Margin="0 0 0 0"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="450"/>
+                <RowDefinition Height="250"/>
+                <RowDefinition Height="350"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock HorizontalAlignment="Left" 
                    Height="168" 
                    Margin="197,111,0,0" 
                    TextWrapping="Wrap" 
@@ -16,5 +162,7 @@
                    VerticalAlignment="Top" 
                    Width="309" 
                    Name ="TextBlock"/>
+        </Grid>
+
     </Grid>
 </UserControl>

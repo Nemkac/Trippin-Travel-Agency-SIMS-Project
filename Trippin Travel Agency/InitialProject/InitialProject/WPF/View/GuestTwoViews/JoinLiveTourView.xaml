@@ -252,7 +252,7 @@
                         FontWeight="Medium" 
                         Name="SubmitButton"
                         Command="{Binding SubmitRatingCommand}"
-                        IsEnabled="{}"/>
+                        IsEnabled="{Binding SubmitButtonEnabled}"/>
 
             </StackPanel>
         </GroupBox>

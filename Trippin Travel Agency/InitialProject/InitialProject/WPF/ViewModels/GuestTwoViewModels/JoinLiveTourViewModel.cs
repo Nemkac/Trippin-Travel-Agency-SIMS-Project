@@ -451,7 +451,10 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 guideLanguageUsage = 5;
             }
 
-            comment = CommentBox;
+            if (CommentBox != null)
+            {
+                comment = CommentBox;
+            }
 
             DataBaseContext context = new DataBaseContext();
             Tour activeTour = this.tourService.GetActiveTour(context);

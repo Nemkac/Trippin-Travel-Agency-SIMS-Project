@@ -42,20 +42,21 @@
                        FontFamily="Ubuntu" 
                        FontWeight="Light" 
                        Width="225"/>
-                <Label Content="" 
+                <Label Content="{Binding NumberOfCoupons}" 
                        FontSize="24" 
                        Margin ="-1119 0 0 0" 
                        FontFamily="Ubuntu"
                        FontWeight="Light" 
                        Width="50" 
                        Name="CouponNumberLabel"/>
-                <Label Content="" 
+                <Label Content="{Binding NumberOfVisitedTours}" 
                        FontSize="24"
                        Margin ="-620 -38 0 0" 
                        FontFamily="Ubuntu" 
                        FontWeight="Light" 
                        Width="50" 
-                       Name="ToursVisitedLabel"/>
+                       Name="ToursVisitedLabel"
+                       />
             </StackPanel>
 
         </Grid>

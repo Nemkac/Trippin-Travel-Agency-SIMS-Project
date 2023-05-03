@@ -95,6 +95,33 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             }
         }
 
+        private int numberOfCoupons;
+        public int NumberOfCoupons
+        {
+            get { return numberOfCoupons; }
+            set
+            {
+                if (numberOfCoupons != value)
+                {
+                    numberOfCoupons = value;
+                    OnPropertyChanged(nameof(NumberOfCoupons));
+                }
+            }
+        }
+
+        private int numberOfVisitedTours;
+        public int NumberOfVisitedTours
+        {
+            get { return numberOfVisitedTours; }
+            set
+            {
+                if (numberOfVisitedTours != value)
+                {
+                    numberOfVisitedTours = value;
+                    OnPropertyChanged(nameof(NumberOfVisitedTours));
+                }
+            }
+        }
 
         public GuestTwoMesagesViewModel()
         {
@@ -113,6 +140,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             UsernameLabel2 = "@" + LoggedUser.username;
             AccountType = "Account type:  " + LoggedUser.role;
             DataBaseContext context = new DataBaseContext();
+            LoadData(context);
             LoadMessages(context);
         }
         public void LoadMessages(DataBaseContext context)
@@ -229,10 +257,29 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
         {
             string message = SelectedRequest;
             if (message.Substring(0, 9) == "[NewTour]")
-            {
+            {             
                 _mainViewModel.ExecuteShowDetailedTourView(null);
                 tourIdTransfer = Int32.Parse(message.Substring(message.Length - 2));
             }            
+        }
+
+        public void LoadData(DataBaseContext context)
+        {
+            foreach (Coupon coupon in context.Coupons.ToList())
+            {
+                if (coupon.userId == LoggedUser.id)
+                {
+                    NumberOfCoupons++;
+                }
+            }
+            foreach (TourAttendance attendance in context.TourAttendances.ToList())
+            {
+                if (attendance.guestID == LoggedUser.id)
+                {
+                    NumberOfVisitedTours++;
+                }
+            }
+
         }
     }
 }
