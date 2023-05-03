@@ -18,21 +18,22 @@ namespace InitialProject.WPF.View.TourGuideViews
 {
     public partial class TourGuide_TourLive : UserControl
     {
+        /*
         private readonly List<KeyPoint> keyPointsList = new List<KeyPoint>();
         List<TourReservationsTodayDTO> tourReservationDtosToday = new List<TourReservationsTodayDTO>();
         private readonly TourService tourService;
         private readonly TourReservationService tourReservationService;
         private readonly TourGuide_TourLiveViewModel tourLiveViewModel = new TourGuide_TourLiveViewModel();
-        
+        */
         public TourGuide_TourLive()
         {
             InitializeComponent();
             this.DataContext = new TourGuide_TourLiveViewModel();
-            this.Loaded += tourDataLoaded;
+            /*this.Loaded += tourDataLoaded;
             this.tourReservationService = new(new TourReservationRepository());
-            this.tourService = new(new TourRepository());
+            this.tourService = new(new TourRepository());*/
         }
-        
+        /*
         public void tourDataLoaded(object sender, RoutedEventArgs e)
         {
             DataBaseContext context;
@@ -179,7 +180,7 @@ namespace InitialProject.WPF.View.TourGuideViews
             }
 
             guestReservationsDataGrid.ItemsSource = dtos;
-        }
+        }*/
 
     }
 }
