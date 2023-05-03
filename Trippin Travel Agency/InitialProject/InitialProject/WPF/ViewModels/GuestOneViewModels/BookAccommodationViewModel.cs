@@ -18,7 +18,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         private AccommodationService accommodationService = new(new AccommodationRepository());
         private BookingService bookingService = new(new BookingRepository());
         private AccommodationRateService accommodationRateService = new(new AccommodationRateRepository());
-
+        public ViewModelCommand DataGridKeyDown { get; set; }
 
         private string accommodationInfo;
         public string AccommodationInfo
@@ -118,7 +118,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             AvaialableDatesGrid = GuestOneStaticHelper.result;
             BookAccommodation = new ViewModelCommand(Book);
         }
-         
+
         private void Book(object sender)
         {
             string arrival, departure, guestsNumber;

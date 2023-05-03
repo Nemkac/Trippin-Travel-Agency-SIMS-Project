@@ -17,8 +17,8 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         private BookingDelaymentRequestService bookingDelaymentRequestService = new(new BookingDelaymentRequestRepository());
         public SendBookingDelaymentViewModel()
         {
-            SelectedArrival = DateTime.Today;
-            selectedDeparture = DateTime.Today;
+            SelectedArrival = DateTime.Parse(GuestOneStaticHelper.selectedBookingToDelay.arrival);
+            selectedDeparture = DateTime.Parse(GuestOneStaticHelper.selectedBookingToDelay.departure);
             accommodationInfoLabels = "Booking ID:" + "\n\nInitial arrival date" + "\n\nInitiral departure date:";
             accommodationInfo = GuestOneStaticHelper.selectedBookingToDelay.Id + "\n\n" + GuestOneStaticHelper.selectedBookingToDelay.arrival + "\n\n" + GuestOneStaticHelper.selectedBookingToDelay.departure;
             SendRequest = new ViewModelCommand(SaveRequest);
