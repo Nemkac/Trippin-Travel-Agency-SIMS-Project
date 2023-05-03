@@ -66,10 +66,11 @@
                                Margin="10,0,0,0"
                                />
                 </StackPanel>
-                <DataGrid Style="{DynamicResource DataGridStyle1}" 
-                  CellStyle="{DynamicResource DataGridCellStyle1}" 
-                  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle1}" 
-                  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="annualStatisticsDataGrid"
+                <DataGrid x:Name="annualStatisticsDataGrid"
+                  Style="{Binding DataGridStyle}"
+                  CellStyle="{Binding DataGridCellStyle}"
+                  ColumnHeaderStyle="{Binding DataGridColumnHeaderStyle}"
+                  RowStyle="{Binding DataGridRowStyle}"
                   SelectedItem="{Binding SelectedAnnualStatistics}"
                   AutoGenerateColumns="False" ItemsSource="{Binding accommodationsAnnualStatisticsDTOs}">
                     <DataGrid.Columns>

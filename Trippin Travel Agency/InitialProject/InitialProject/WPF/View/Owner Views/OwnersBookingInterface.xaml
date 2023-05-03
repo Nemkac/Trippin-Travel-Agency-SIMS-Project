@@ -8,10 +8,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="580">
     <Grid>
-        <DataGrid Style="{DynamicResource DataGridStyle1}" 
-                  CellStyle="{DynamicResource DataGridCellStyle1}" 
-                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-                  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="bookingDataGrid" 
+        <DataGrid x:Name="bookingDataGrid" 
+                  Style="{Binding DataGridStyle}"
+                  CellStyle="{Binding DataGridCellStyle}"
+                  ColumnHeaderStyle="{Binding DataGridColumnHeaderStyle}"
+                  RowStyle="{Binding DataGridRowStyle}"
                   ItemsSource="{Binding bookings}"
                   AutoGenerateColumns="False">
             <DataGrid.Columns>

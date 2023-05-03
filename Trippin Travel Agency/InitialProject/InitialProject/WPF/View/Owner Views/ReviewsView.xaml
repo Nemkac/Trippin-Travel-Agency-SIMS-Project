@@ -13,10 +13,10 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <DataGrid x:Name="ReviewsDataGrid" Width="710" 
-                      Style="{DynamicResource DataGridStyle1}" 
-                      CellStyle="{DynamicResource DataGridCellStyle1}" 
-                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-                      RowStyle="{DynamicResource DataGridRowStyle1}"
+                      Style="{Binding DataGridStyle}"
+                      CellStyle="{Binding DataGridCellStyle}"
+                      ColumnHeaderStyle="{Binding DataGridColumnHeaderStyle}"
+                      RowStyle="{Binding DataGridRowStyle}"
                       ItemsSource="{Binding rates}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Booking Id" Binding="{Binding bookingId}" Width="145"/>

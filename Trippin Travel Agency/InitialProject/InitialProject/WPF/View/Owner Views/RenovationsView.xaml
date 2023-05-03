@@ -40,10 +40,11 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1">
-            <DataGrid Style="{DynamicResource DataGridStyle1}" 
-                  CellStyle="{DynamicResource DataGridCellStyle1}" 
-                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-                  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="renovationsDataGrid"
+            <DataGrid x:Name="renovationsDataGrid"
+                  Style="{Binding DataGridStyle}"
+                  CellStyle="{Binding DataGridCellStyle}"
+                  ColumnHeaderStyle="{Binding DataGridColumnHeaderStyle}"
+                  RowStyle="{Binding DataGridRowStyle}"
                   SelectedItem="{Binding SelectedRenovation}"
                   ItemsSource="{Binding Renovations}"
                   AutoGenerateColumns="False">

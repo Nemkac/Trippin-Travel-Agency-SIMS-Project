@@ -32,10 +32,10 @@
                                Margin="10,0,0,0"
                                />
                 </StackPanel>
-            <DataGrid Style="{DynamicResource DataGridStyle1}" 
-                      CellStyle="{DynamicResource DataGridCellStyle1}" 
-                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"  
-                      RowStyle="{DynamicResource DataGridRowStyle1}" 
+            <DataGrid Style="{Binding DataGridStyle}"
+                      CellStyle="{Binding DataGridCellStyle}"
+                      ColumnHeaderStyle="{Binding DataGridColumnHeaderStyle}"
+                      RowStyle="{Binding DataGridRowStyle}"
                       Grid.Row="0" ItemsSource="{Binding requests}"
                       SelectedItem="{Binding SelectedRequest}"
                       x:Name="requestsDataGrid" AutoGenerateColumns="False">

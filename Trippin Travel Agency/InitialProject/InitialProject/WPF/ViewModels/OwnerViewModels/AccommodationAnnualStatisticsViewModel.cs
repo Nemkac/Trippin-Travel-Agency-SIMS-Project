@@ -151,60 +151,46 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         }
 
 
-
-
-        private string _dataGridColumnHeaderColor;
-        public string DataGridColumnHeaderColor
+        private Style _dataGridStyle;
+        public Style DataGridStyle
         {
-            get { return _dataGridColumnHeaderColor; }
+            get { return _dataGridStyle; }
             set
             {
-                _dataGridColumnHeaderColor = value;
-                OnPropertyChanged(nameof(DataGridColumnHeaderColor));
+                _dataGridStyle = value;
+                OnPropertyChanged(nameof(DataGridStyle));
             }
         }
 
-        private string _dataGridSelectionColor;
-        public string DataGridSelectionColor
+        private Style _dataGridCellStyle;
+        public Style DataGridCellStyle
         {
-            get { return _dataGridSelectionColor; }
+            get { return _dataGridCellStyle; }
             set
             {
-                _dataGridSelectionColor = value;
-                OnPropertyChanged(nameof(DataGridSelectionColor));
+                _dataGridCellStyle = value;
+                OnPropertyChanged(nameof(DataGridCellStyle));
+            }
+        }
+        private Style _dataGridColumnHeaderStyle;
+        public Style DataGridColumnHeaderStyle
+        {
+            get { return _dataGridColumnHeaderStyle; }
+            set
+            {
+                _dataGridColumnHeaderStyle = value;
+                OnPropertyChanged(nameof(DataGridColumnHeaderStyle));
             }
         }
 
-        private string _dataGridTextSelectionColor;
-        public string DataGridTextSelectionColor
+        private Style _dataGridRowStyle;
+        public Style DataGridRowStyle
         {
-            get { return _dataGridTextSelectionColor; }
+            get { return _dataGridRowStyle; }
             set
             {
-                _dataGridTextSelectionColor = value;
-                OnPropertyChanged(nameof(DataGridTextSelectionColor));
-            }
-        }
-
-        private string _dataGridRowColor;
-        public string DataGridRowColor
-        {
-            get { return _dataGridRowColor; }
-            set
-            {
-                _dataGridRowColor = value;
-                OnPropertyChanged(nameof(DataGridRowColor));
-            }
-        }
-
-        private string _dataGridTextColor;
-        public string DataGridTextColor
-        {
-            get { return _dataGridTextColor; }
-            set
-            {
-                _dataGridTextColor = value;
-                OnPropertyChanged(nameof(DataGridTextColor));
+                _dataGridRowStyle = value;
+                OnPropertyChanged(nameof(DataGridRowStyle));
             }
         }
 
@@ -226,11 +212,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ContentHintColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#353b48";
             DetailsButtonColor = Mediator.GetCurrentIsChecked() ? "#718093" : "#2f3640";
 
-            DataGridColumnHeaderColor = Mediator.GetCurrentIsChecked() ? "#1e2226" : "#192a56";
-            DataGridSelectionColor = Mediator.GetCurrentIsChecked() ? "#1e2226" : "#192a56";
-            DataGridTextSelectionColor = Mediator.GetCurrentIsChecked() ? "#f4fff8" : "#f4fff8";
-            DataGridTextColor = Mediator.GetCurrentIsChecked() ? "#f4fff8" : "#222528";
-            DataGridRowColor = Mediator.GetCurrentIsChecked() ? "#2f3640" : "#FCFFFC";
+            DataGridStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridStyle2"] : (Style)Application.Current.Resources["DataGridStyle1"];
+
+            DataGridCellStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridCellStyle2"] : (Style)Application.Current.Resources["DataGridCellStyle1"];
+
+            DataGridColumnHeaderStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridColumnHeaderStyle2"] : (Style)Application.Current.Resources["DataGridColumnHeaderStyle1"];
+
+            DataGridRowStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridRowStyle2"] : (Style)Application.Current.Resources["DataGridRowStyle1"];
         }
 
         private void OnIsCheckedChanged(object sender, bool isChecked)
@@ -239,11 +227,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ContentHintColor = isChecked ? "#F4F6F8" : "#353b48";
             DetailsButtonColor = isChecked ? "#718093" : "#2f3640";
 
-            DataGridColumnHeaderColor = isChecked ? "#1e2226" : "#192a56";
-            DataGridSelectionColor = isChecked ? "#1e2226" : "#192a56";
-            DataGridTextSelectionColor = isChecked ? "#f4fff8" : "#f4fff8";
-            DataGridTextColor = isChecked ? "#f4fff8" : "#222528";
-            DataGridRowColor = isChecked ? "#2f3640" : "#FCFFFC";
+            DataGridStyle = isChecked ? (Style)Application.Current.Resources["DataGridStyle2"] : (Style)Application.Current.Resources["DataGridStyle1"];
+
+            DataGridCellStyle = isChecked ? (Style)Application.Current.Resources["DataGridCellStyle2"] : (Style)Application.Current.Resources["DataGridCellStyle1"];
+
+            DataGridColumnHeaderStyle = isChecked ? (Style)Application.Current.Resources["DataGridColumnHeaderStyle2"] : (Style)Application.Current.Resources["DataGridColumnHeaderStyle1"];
+
+            DataGridRowStyle = isChecked ? (Style)Application.Current.Resources["DataGridRowStyle2"] : (Style)Application.Current.Resources["DataGridRowStyle1"];
         }
 
 

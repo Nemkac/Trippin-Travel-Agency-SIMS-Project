@@ -73,64 +73,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
 
 
-
-
-
-        private string _dataGridColumnHeaderColor;
-        public string DataGridColumnHeaderColor
-        {
-            get { return _dataGridColumnHeaderColor; }
-            set
-            {
-                _dataGridColumnHeaderColor = value;
-                OnPropertyChanged(nameof(DataGridColumnHeaderColor));
-            }
-        }
-
-        private string _dataGridSelectionColor;
-        public string DataGridSelectionColor
-        {
-            get { return _dataGridSelectionColor; }
-            set
-            {
-                _dataGridSelectionColor = value;
-                OnPropertyChanged(nameof(DataGridSelectionColor));
-            }
-        }
-
-        private string _dataGridTextSelectionColor;
-        public string DataGridTextSelectionColor
-        {
-            get { return _dataGridTextSelectionColor; }
-            set
-            {
-                _dataGridTextSelectionColor = value;
-                OnPropertyChanged(nameof(DataGridTextSelectionColor));
-            }
-        }
-
-        private string _dataGridRowColor;
-        public string DataGridRowColor
-        {
-            get { return _dataGridRowColor; }
-            set
-            {
-                _dataGridRowColor = value;
-                OnPropertyChanged(nameof(DataGridRowColor));
-            }
-        }
-
-        private string _dataGridTextColor;
-        public string DataGridTextColor
-        {
-            get { return _dataGridTextColor; }
-            set
-            {
-                _dataGridTextColor = value;
-                OnPropertyChanged(nameof(DataGridTextColor));
-            }
-        }
-
         private Style _dataGridStyle;
         public Style DataGridStyle
         {
@@ -211,7 +153,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             DataGridColumnHeaderStyle = isChecked ? (Style)Application.Current.Resources["DataGridColumnHeaderStyle2"] : (Style)Application.Current.Resources["DataGridColumnHeaderStyle1"];
 
             DataGridRowStyle = isChecked ? (Style)Application.Current.Resources["DataGridRowStyle2"] : (Style)Application.Current.Resources["DataGridRowStyle1"];
-    }
+        }
 
         public void ExecuteShowOurRecommendationsViewCommand(object obj)
         {

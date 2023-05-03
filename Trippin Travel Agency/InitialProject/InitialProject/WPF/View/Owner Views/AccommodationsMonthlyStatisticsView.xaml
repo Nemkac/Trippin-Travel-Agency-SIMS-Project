@@ -45,10 +45,11 @@
 
         <ScrollViewer HorizontalScrollBarVisibility="Hidden" Grid.Row="2">
             <StackPanel Grid.Row="2">
-                <DataGrid Style="{DynamicResource DataGridStyle1}" 
-                  CellStyle="{DynamicResource DataGridCellStyle1}" 
-                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-                  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="monthlyStatisticsDataGrid" 
+                <DataGrid x:Name="monthlyStatisticsDataGrid" 
+                  Style="{Binding DataGridStyle}"
+                  CellStyle="{Binding DataGridCellStyle}"
+                  ColumnHeaderStyle="{Binding DataGridColumnHeaderStyle}"
+                  RowStyle="{Binding DataGridRowStyle}"
                   AutoGenerateColumns="False" ItemsSource="{Binding monthlyStatistics}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Month" Binding="{Binding month}" Width="95"/>
