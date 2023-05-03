@@ -16,6 +16,7 @@ using System.Diagnostics;
 using InitialProject.Context;
 using InitialProject.Repository;
 using InitialProject.Service.AccommodationServices;
+using InitialProject.WPF.ViewModels.GuestOneViewModels;
 
 namespace InitialProject.WPF.View.GuestOne_Views
 {
@@ -24,44 +25,10 @@ namespace InitialProject.WPF.View.GuestOne_Views
     /// </summary>
     public partial class RateAccommodationInterface : Window
     {
-
-        public List<Model.Image> imageUrls = new List<Model.Image>();
-        public int imageCounter = 0;
-
-        public int bookingId;
-        private AccommodationRateService accommodationRateService;
-
         public RateAccommodationInterface()
         {
             InitializeComponent();
-            this.accommodationRateService = new AccommodationRateService(new AccommodationRateRepository());
-        }
-
-        public void SetAttributes(int bookingId)
-        {
-            this.bookingId = bookingId;
-        }
-
-        private void GetImageUrlInput(object sender, RoutedEventArgs e)
-        {
-            Model.Image image = new Model.Image(imageBlock.Text, null);
-            imageUrls.Add(image);
-            imageBlock.Clear();
-            imageCounter++;
-            if (imageCounter == 1)
-            {
-                imageCounterBlock.Text = "You have added 1 image";
-            }
-            if (imageCounter > 1)
-            {
-                imageCounterBlock.Text = "You have added " + imageCounter + " images";
-            }
-        }
-
-        private void LeaveReview(object sender, RoutedEventArgs e)
-        {
-            AccommodationRate accommodationRate = new AccommodationRate(bookingId, Convert.ToInt32(cleannesInput.Value), Convert.ToInt32(ownerRateInput.Value), commentInput.Text, imageUrls);
-            this.accommodationRateService.Save(accommodationRate);
+            this.DataContext = new RateAccommodationViewModel();
         }
     }
 }

@@ -107,26 +107,25 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand BookAccommodation { get; set; }
         public BookAccommodationViewModel()
         {
-            Accommodation accommodation = accommodationService.GetById(SelectedAccommodationToBook.id);
+            Accommodation accommodation = accommodationService.GetById(GuestOneStaticHelper.id);
             AccommodationInfoLabels = "Accommodation name:" + "\n\nCountry:" + "\n\nCity:" + "\n\nMaximum number of guests:" + "\n\nRating out of 10:";
 
-            AccommodationInfo = SelectedAccommodationToBook.id.ToString();
-            AccommodationInfo = accommodation.name + "\n\n" + this.accommodationService.GetAccommodationLocation(SelectedAccommodationToBook.id)[0] + "\n\n" +
-                accommodationService.GetAccommodationLocation(SelectedAccommodationToBook.id)[1] + "\n\n" + accommodation.guestLimit + "\n\n" +
-                accommodationRateService.GetAccommodationAverageRate(SelectedAccommodationToBook.id);
+            AccommodationInfo = GuestOneStaticHelper.id.ToString();
+            AccommodationInfo = accommodation.name + "\n\n" + this.accommodationService.GetAccommodationLocation(GuestOneStaticHelper.id)[0] + "\n\n" +
+                accommodationService.GetAccommodationLocation(GuestOneStaticHelper.id)[1] + "\n\n" + accommodation.guestLimit + "\n\n" +
+                accommodationRateService.GetAccommodationAverageRate(GuestOneStaticHelper.id);
 
-            AvaialableDatesGrid = SelectedAccommodationToBook.result;
+            AvaialableDatesGrid = GuestOneStaticHelper.result;
             BookAccommodation = new ViewModelCommand(Book);
-
         }
-
+         
         private void Book(object sender)
         {
             string arrival, departure, guestsNumber;
             GetBasicAccommodationBookingProperties(out arrival, out departure, out guestsNumber);
-            if (int.Parse(guestsNumber) > this.accommodationService.GetById(SelectedAccommodationToBook.id).guestLimit)
+            if (int.Parse(guestsNumber) > this.accommodationService.GetById(GuestOneStaticHelper.id).guestLimit)
             {
-                warningText = accommodationService.GetById(SelectedAccommodationToBook.id).name + " cannot take more then " + this.accommodationService.GetById(SelectedAccommodationToBook.id).guestLimit.ToString() + " guests.";
+                warningText = accommodationService.GetById(GuestOneStaticHelper.id).name + " cannot take more then " + this.accommodationService.GetById(GuestOneStaticHelper.id).guestLimit.ToString() + " guests.";
             }
             else
             {
@@ -146,10 +145,8 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 
         private void SaveBooking(AccommodationService accommodationService, string arrival, string departure, string guestsNumber)
         {
-            Booking booking = new Booking(SelectedAccommodationToBook.id, arrival, departure, (DateTime.Parse(departure).Subtract(DateTime.Parse(arrival))).Days, LoggedUser.id);
+            Booking booking = new Booking(GuestOneStaticHelper.id, arrival, departure, (DateTime.Parse(departure).Subtract(DateTime.Parse(arrival))).Days, LoggedUser.id);
             bookingService.Save(booking);
         }
-
-
     }
 }
