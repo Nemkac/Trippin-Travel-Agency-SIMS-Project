@@ -23,9 +23,11 @@ namespace InitialProject.WPF.View.TourGuideViews
         private readonly TourService tourService;
         private readonly TourReservationService tourReservationService;
         private readonly TourGuide_TourLiveViewModel tourLiveViewModel = new TourGuide_TourLiveViewModel();
+        
         public TourGuide_TourLive()
         {
             InitializeComponent();
+            this.DataContext = new TourGuide_TourLiveViewModel();
             this.Loaded += tourDataLoaded;
             this.tourReservationService = new(new TourReservationRepository());
             this.tourService = new(new TourRepository());

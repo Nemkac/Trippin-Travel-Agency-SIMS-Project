@@ -16,23 +16,16 @@ namespace InitialProject.WPF.ViewModels
     public class TourGuide_TourLiveViewModel : ViewModelBase
     {
         private readonly TourService tourService = new(new TourRepository());
-        private TourGuide_MainViewModel _mainViewModel;
+        private readonly TourReservationService tourReservationService = new(new TourReservationRepository());
 
-        public TourGuide_MainViewModel MainViewModel
-        {
-            get { return _mainViewModel; }
-            set { _mainViewModel = value; }
-        }
+        public TourGuide_MainViewModel _mainViewModel;
         public ViewModelCommand ToursTodayCommand { get; set; }
 
-        public TourGuide_TourLiveViewModel(TourGuide_MainViewModel mainViewModel)
+        public TourGuide_TourLiveViewModel()
         {
-            MainViewModel = mainViewModel;
+            _mainViewModel = LoggedUser.TourGuide_MainViewModel;
             ToursTodayCommand = new ViewModelCommand(ToursToday);
-            
         }
-        public TourGuide_TourLiveViewModel() { }
-
         public void ToursToday(object obj)
         {
             _mainViewModel.ExecuteShowTourGuideToursTodayViewCommand(null);
