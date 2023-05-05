@@ -136,8 +136,12 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public void ShowScheduleNewRenovationView(object obj)
         {
-            SelectedAccommodations.selectedAccommodationForRenovation = SelectedAccommodation;
-            _mainViewModel.ExecuteShowScheduleNewRenovationCommand(null);
+            if (SelectedAccommodation != null)
+            {
+                SelectedAccommodations.selectedAccommodationForRenovation = SelectedAccommodation;
+                _mainViewModel.ExecuteShowScheduleNewRenovationCommand(null);
+            }
+            else MessageBox.Show("You must select an accommodation before proceeding with renovation!");
         }
 
         private void ShowOwnersAccommodations()

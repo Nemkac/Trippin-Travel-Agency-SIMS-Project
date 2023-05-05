@@ -224,18 +224,23 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private void SaveRate(object obj)
         {
-            //BookingService bookingService = new BookingService();
-            int cleannessRate = GetCleanness();
-            int rulesRate = GetRulesRespecting();
-            string comment = Comment;
-            int guestId = bookingService.GetGuestId(this.bookingId);
-            GuestRate newGuestRate = new GuestRate(cleannessRate, rulesRate, comment, guestId, this.bookingId);
-            guestRateService.Save(newGuestRate);
-            DataBaseContext transferedBooking = new DataBaseContext();
-            transferedBooking.SelectedRatingNotificationTransfer.Remove(transferedBooking.SelectedRatingNotificationTransfer.First());
-            transferedBooking.SaveChanges();
-            FeedBack = "Rating successfully saved!";
-            ClearInput();
+            bool checkValuesExistance = IsPropertyNull();
+
+            if (checkValuesExistance)
+            {
+                int cleannessRate = GetCleanness();
+                int rulesRate = GetRulesRespecting();
+                string comment = Comment;
+                int guestId = bookingService.GetGuestId(this.bookingId);
+                GuestRate newGuestRate = new GuestRate(cleannessRate, rulesRate, comment, guestId, this.bookingId);
+                guestRateService.Save(newGuestRate);
+                DataBaseContext transferedBooking = new DataBaseContext();
+                transferedBooking.SelectedRatingNotificationTransfer.Remove(transferedBooking.SelectedRatingNotificationTransfer.First());
+                transferedBooking.SaveChanges();
+                FeedBack = "Rating successfully saved!";
+                ClearInput();
+            }
+            else MessageBox.Show("Required data is not available");
         }
 
         private int GetCleanness()
@@ -307,6 +312,16 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             SelectedRulesRespectingRadioButton5 = false;
 
             Comment = null;
+        }
+
+        public bool IsPropertyNull()
+        {
+            if (SelectedCleannessRadioButton1 == false || SelectedCleannessRadioButton2 == false ||
+                SelectedCleannessRadioButton3 == false || SelectedCleannessRadioButton4 == false ||
+                SelectedCleannessRadioButton5 == false || SelectedRulesRespectingRadioButton1 == false ||
+                SelectedRulesRespectingRadioButton2 == false || SelectedRulesRespectingRadioButton3 == false ||
+                SelectedRulesRespectingRadioButton4 == false || SelectedRulesRespectingRadioButton5 == false) return false;
+            return true;
         }
     }
 }

@@ -233,23 +233,32 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private void AcceptRequest(object obj)
         {
-            DataBaseContext bookingContext = new DataBaseContext();
-            DataBaseContext acceptContext = new DataBaseContext();
+            bool checkValuesExistance = IsPropertyNull();
+            if (checkValuesExistance)
+            {
+                DataBaseContext bookingContext = new DataBaseContext();
+                DataBaseContext acceptContext = new DataBaseContext();
 
-            List<Booking> bookings = bookingContext.Bookings.ToList();
-            List<RequestDTO> selectedRequest = acceptContext.SelectedRequestTransfers.ToList();
+                List<Booking> bookings = bookingContext.Bookings.ToList();
+                List<RequestDTO> selectedRequest = acceptContext.SelectedRequestTransfers.ToList();
 
-            UpdateChanges(bookingContext, bookings, selectedRequest);
+                UpdateChanges(bookingContext, bookings, selectedRequest);
 
-            DataBaseContext requestContext = new DataBaseContext();
-            List<BookingDelaymentRequest> bookingDelaymentRequests = requestContext.BookingDelaymentRequests.ToList();
+                DataBaseContext requestContext = new DataBaseContext();
+                List<BookingDelaymentRequest> bookingDelaymentRequests = requestContext.BookingDelaymentRequests.ToList();
 
-            UpdateAcceptedRequestStatus(selectedRequest, requestContext, bookingDelaymentRequests);
+                UpdateAcceptedRequestStatus(selectedRequest, requestContext, bookingDelaymentRequests);
 
-            AcceptFeedBack = "Request accepted!";
-            acceptContext.SelectedRequestTransfers.Remove(acceptContext.SelectedRequestTransfers.First());
-            acceptContext.SaveChanges();
-            ClearInput();
+                AcceptFeedBack = "Request accepted!";
+                acceptContext.SelectedRequestTransfers.Remove(acceptContext.SelectedRequestTransfers.First());
+                acceptContext.SaveChanges();
+                ClearInput();
+            }
+            else
+            {
+                MessageBox.Show("Required data is not available!");
+            }
+
         }
 
         private static void UpdateAcceptedRequestStatus(List<RequestDTO> selectedRequest, DataBaseContext requestContext, List<BookingDelaymentRequest> bookingDelaymentRequests)
@@ -261,7 +270,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 if (request.bookingId == selectedRequest.First().bookingId)
                 {
                     request.status = Status.Accepted;
-                    //requestContext.BookingDelaymentRequests.Remove(request);
                     requestContext.BookingDelaymentRequests.Update(request);
                     requestContext.SaveChanges();
                     Booking booking = bookingService.GetById(request.bookingId);
@@ -288,17 +296,25 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private void DenyRequest(object obj)
         {
-            DataBaseContext acceptContext = new DataBaseContext();
-            List<RequestDTO> selectedRequest = acceptContext.SelectedRequestTransfers.ToList();
-            DataBaseContext requestContext = new DataBaseContext();
-            List<BookingDelaymentRequest> bookingDelaymentRequests = requestContext.BookingDelaymentRequests.ToList();
+            bool checkValuesExistance = IsPropertyNull();
+            if (checkValuesExistance)
+            {
+                DataBaseContext acceptContext = new DataBaseContext();
+                List<RequestDTO> selectedRequest = acceptContext.SelectedRequestTransfers.ToList();
+                DataBaseContext requestContext = new DataBaseContext();
+                List<BookingDelaymentRequest> bookingDelaymentRequests = requestContext.BookingDelaymentRequests.ToList();
 
-            UpdateDeniedRequestStatus(selectedRequest, requestContext, bookingDelaymentRequests);
+                UpdateDeniedRequestStatus(selectedRequest, requestContext, bookingDelaymentRequests);
 
-            DenyFeedBack = "Request denied!";
-            acceptContext.SelectedRequestTransfers.Remove(acceptContext.SelectedRequestTransfers.First());
-            acceptContext.SaveChanges();
-            ClearInput();
+                DenyFeedBack = "Request denied!";
+                acceptContext.SelectedRequestTransfers.Remove(acceptContext.SelectedRequestTransfers.First());
+                acceptContext.SaveChanges();
+                ClearInput();
+            }
+            else
+            {
+                MessageBox.Show("Required data is not available");
+            }
         }
 
         private static void UpdateDeniedRequestStatus(List<RequestDTO> selectedRequest, DataBaseContext requestContext, List<BookingDelaymentRequest> bookingDelaymentRequests)
@@ -308,7 +324,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 if (request.bookingId == selectedRequest.First().bookingId)
                 {
                     request.status = Status.Denied;
-                    //requestContext.BookingDelaymentRequests.Remove(request);
                     requestContext.BookingDelaymentRequests.Update(request);
                     requestContext.SaveChanges();
                 }
@@ -326,6 +341,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             AccommodationType = null;
             GuestName = null;
             BookingId = -1;
+        }
+
+        private bool IsPropertyNull()
+        {
+            if (NewArrival == null || NewDeparture == null || OldArrival == null || OldDeparture == null || 
+                AccommodationName == null || Location == null || AccommodationType == null || GuestName == null || BookingId == -1) return false;
+            return true;
         }
     }
 }

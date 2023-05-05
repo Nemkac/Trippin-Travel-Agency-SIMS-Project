@@ -179,20 +179,24 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private void ShowAnnualStatistics(object obj)
         {
-            AccommodationStatisticsDTO? selectedAccommodation = SelectedAccommodation;
-            DataBaseContext annualTransferContext = new DataBaseContext();
-            DataBaseContext transferContext = new DataBaseContext();
+            if (SelectedAccommodation != null)
+            {
+                AccommodationStatisticsDTO? selectedAccommodation = SelectedAccommodation;
+                DataBaseContext annualTransferContext = new DataBaseContext();
+                DataBaseContext transferContext = new DataBaseContext();
 
-            var transfers = transferContext.AccommodationAnnualStatisticsTransfer.ToList();
-            transferContext.AccommodationAnnualStatisticsTransfer.RemoveRange(transfers);
-            transferContext.SaveChanges();
+                var transfers = transferContext.AccommodationAnnualStatisticsTransfer.ToList();
+                transferContext.AccommodationAnnualStatisticsTransfer.RemoveRange(transfers);
+                transferContext.SaveChanges();
 
-            AnnualAccommodationTransfer accommodationToTransfer = new AnnualAccommodationTransfer(
-                selectedAccommodation.accommodationId, selectedAccommodation.accommodationName, selectedAccommodation.location, selectedAccommodation.guestLimit);
+                AnnualAccommodationTransfer accommodationToTransfer = new AnnualAccommodationTransfer(
+                    selectedAccommodation.accommodationId, selectedAccommodation.accommodationName, selectedAccommodation.location, selectedAccommodation.guestLimit);
 
-            annualTransferContext.AccommodationAnnualStatisticsTransfer.Add(accommodationToTransfer);
-            annualTransferContext.SaveChanges();
-            _mainViewModel.ExecuteShowAnnualStatisticsCommand(null);
+                annualTransferContext.AccommodationAnnualStatisticsTransfer.Add(accommodationToTransfer);
+                annualTransferContext.SaveChanges();
+                _mainViewModel.ExecuteShowAnnualStatisticsCommand(null);
+            }
+            else MessageBox.Show("You must select an accommodation before proceeding to annual statistics!");
         }
     }
 }

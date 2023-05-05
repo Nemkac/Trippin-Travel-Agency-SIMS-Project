@@ -141,17 +141,21 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public void ShowAcceptDenyView(object obj)
         {
-            RequestDTO? selectedRequest = SelectedRequest;
-            DataBaseContext requestContext = new DataBaseContext();
-            DataBaseContext transferContext = new DataBaseContext();
+            if (SelectedRequest != null)
+            {
+                RequestDTO? selectedRequest = SelectedRequest;
+                DataBaseContext requestContext = new DataBaseContext();
+                DataBaseContext transferContext = new DataBaseContext();
 
-            var transfers = transferContext.SelectedRequestTransfers.ToList();
-            transferContext.SelectedRequestTransfers.RemoveRange(transfers);
-            transferContext.SaveChanges();
+                var transfers = transferContext.SelectedRequestTransfers.ToList();
+                transferContext.SelectedRequestTransfers.RemoveRange(transfers);
+                transferContext.SaveChanges();
 
-            requestContext.SelectedRequestTransfers.Add(selectedRequest);
-            requestContext.SaveChanges();
-            _mainViewModel.ExecuteShowAcceptDenyViewCommand(null);
+                requestContext.SelectedRequestTransfers.Add(selectedRequest);
+                requestContext.SaveChanges();
+                _mainViewModel.ExecuteShowAcceptDenyViewCommand(null);
+            }
+            else MessageBox.Show("You must select an request before proceeding to request regulation!");
         }
 
         private void ShowRequests()

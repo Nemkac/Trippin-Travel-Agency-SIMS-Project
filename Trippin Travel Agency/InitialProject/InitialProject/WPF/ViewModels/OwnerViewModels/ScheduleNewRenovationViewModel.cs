@@ -179,7 +179,15 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private void ProceedWithRenovation(object obj)
         {
-            FindAvailableRenovationDates();
+            if(SelectedStartingDate == null || SelectedEndingDate == null || Duration == null)
+            {
+                MessageBox.Show("Required data is not available!");
+            }
+            else if(SelectedStartingDate > SelectedEndingDate)
+            {
+                MessageBox.Show("Starting date cannot be after the ending date of the renovation!");
+            }
+            else FindAvailableRenovationDates();
         }
 
         private void FindAvailableRenovationDates()
@@ -235,29 +243,33 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private void ScheduleRenovation(object obj)
         {
-            string selectedItem = SelectedDateRange;
-            string[] parts = selectedItem.Split('-');
-            string startDateString = parts[0].Trim();
-            string endDateString = parts[1].Trim();
-
-            string description = Description;
-            int duration;
-            if (!int.TryParse(Duration, out duration))
+            if (SelectedDateRange != null)
             {
-                MessageBox.Show("Please enter a valid duration.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                string selectedItem = SelectedDateRange;
+                string[] parts = selectedItem.Split('-');
+                string startDateString = parts[0].Trim();
+                string endDateString = parts[1].Trim();
+
+                string description = Description;
+                int duration;
+                if (!int.TryParse(Duration, out duration))
+                {
+                    MessageBox.Show("Please enter a valid duration.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                AccommodationRenovation accommodationRenovation = new AccommodationRenovation(SelectedAccommodations.selectedAccommodationForRenovation.accommodationId,
+                                                                      SelectedAccommodations.selectedAccommodationForRenovation.accommodationName, SelectedAccommodations.selectedAccommodationForRenovation.type.ToString(),
+                                                                      startDateString, endDateString, duration, description);
+
+                DataBaseContext renovationContext = new DataBaseContext();
+                renovationContext.AccommodationRenovations.Add(accommodationRenovation);
+                renovationContext.SaveChanges();
+
+                AvailableDates.Clear();
+                Description = null;
+                FeedBack = "Renovation successfully scheduled!";
             }
-            AccommodationRenovation accommodationRenovation = new AccommodationRenovation(SelectedAccommodations.selectedAccommodationForRenovation.accommodationId,
-                                                                  SelectedAccommodations.selectedAccommodationForRenovation.accommodationName, SelectedAccommodations.selectedAccommodationForRenovation.type.ToString(),
-                                                                  startDateString, endDateString, duration, description);
-
-            DataBaseContext renovationContext = new DataBaseContext();
-            renovationContext.AccommodationRenovations.Add(accommodationRenovation);
-            renovationContext.SaveChanges();
-
-            AvailableDates.Clear();
-            Description = null;
-            FeedBack = "Renovation successfully scheduled!";
+            else MessageBox.Show("You must select one of given date ranges scheduling the renovation!");
         }
     }
 }

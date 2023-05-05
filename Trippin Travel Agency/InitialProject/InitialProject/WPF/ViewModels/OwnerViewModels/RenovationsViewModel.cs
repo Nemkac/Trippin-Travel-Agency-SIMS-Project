@@ -172,40 +172,44 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public void CancelRenovation(object obj)
         {
-            AccommodationRenovation selectedRenovation = SelectedRenovation;
-            DateTime endDate = DateTime.ParseExact(selectedRenovation.endDate, "M/d/yyyy", CultureInfo.InvariantCulture);
-            DateTime startDate = DateTime.ParseExact(selectedRenovation.startDate, "M/d/yyyy", CultureInfo.InvariantCulture);
-            DateTime currentDate = DateTime.Now;
-            DataBaseContext renovationsContext = new DataBaseContext();
-
-            if (selectedRenovation != null)
+            if (SelectedRenovation != null)
             {
-                if (currentDate >= endDate)
+                AccommodationRenovation selectedRenovation = SelectedRenovation;
+                DateTime endDate = DateTime.ParseExact(selectedRenovation.endDate, "M/d/yyyy", CultureInfo.InvariantCulture);
+                DateTime startDate = DateTime.ParseExact(selectedRenovation.startDate, "M/d/yyyy", CultureInfo.InvariantCulture);
+                DateTime currentDate = DateTime.Now;
+                DataBaseContext renovationsContext = new DataBaseContext();
+
+                if (selectedRenovation != null)
                 {
-                    MessageBox.Show("This renovation is finished!");
-                    SelectedRenovation = null;
-                    return;
-                }
-                else if (currentDate >= startDate && currentDate <= endDate)
-                {
-                    MessageBox.Show("Renovation is in progress");
-                    SelectedRenovation = null;
-                    return;
-                }
-                else if (startDate <= currentDate.AddDays(5))
-                {
-                    MessageBox.Show("Renovation can be canceled at least 5 days before start date!");
-                    SelectedRenovation = null;
-                    return;
-                }
-                else
-                {
-                    Renovations.Remove(selectedRenovation);
-                    SelectedRenovation = null;
-                    renovationsContext.AccommodationRenovations.Remove(selectedRenovation);
-                    renovationsContext.SaveChanges();
+                    if (currentDate >= endDate)
+                    {
+                        MessageBox.Show("This renovation is finished!");
+                        SelectedRenovation = null;
+                        return;
+                    }
+                    else if (currentDate >= startDate && currentDate <= endDate)
+                    {
+                        MessageBox.Show("Renovation is in progress");
+                        SelectedRenovation = null;
+                        return;
+                    }
+                    else if (startDate <= currentDate.AddDays(5))
+                    {
+                        MessageBox.Show("Renovation can be canceled at least 5 days before start date!");
+                        SelectedRenovation = null;
+                        return;
+                    }
+                    else
+                    {
+                        Renovations.Remove(selectedRenovation);
+                        SelectedRenovation = null;
+                        renovationsContext.AccommodationRenovations.Remove(selectedRenovation);
+                        renovationsContext.SaveChanges();
+                    }
                 }
             }
+            else MessageBox.Show("You must select an renovation in order to cancel it!");
         }
     }
 }

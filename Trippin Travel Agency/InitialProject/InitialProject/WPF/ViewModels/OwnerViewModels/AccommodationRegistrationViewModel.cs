@@ -309,21 +309,36 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ImageNumber = "Image " + imageCounter;
         }
 
+        private bool IsPropertyNull()
+        {
+            if (AccommodationName == null || GuestLimit == null || MinDaysBooked == null || House == false || BookingCancelationPeriod == null || Hut == false || Apartment == false) return false;
+            return true;
+        }
+
         private void SaveAccommodation(object obj)
         {
-            string name;
-            AccommodationLocation location = new AccommodationLocation();
-            int guestLimit, minDaysBooked, bookingCancelPeriod;
-            GetAccommodationBasicProperties(out name, out location, out guestLimit, out minDaysBooked, out bookingCancelPeriod);
-            Model.Type type = GetAccommodationType();
+            bool checkValuesExistance = IsPropertyNull();
 
-            // Add image links
-            List<Model.Image> imageLinks = CreateImageLinks();
+            if (checkValuesExistance)
+            {
+                string name;
+                AccommodationLocation location = new AccommodationLocation();
+                int guestLimit, minDaysBooked, bookingCancelPeriod;
+                GetAccommodationBasicProperties(out name, out location, out guestLimit, out minDaysBooked, out bookingCancelPeriod);
+                Model.Type type = GetAccommodationType();
 
-            Accommodation accommodation = new Accommodation(name, location, guestLimit, minDaysBooked, bookingCancelPeriod, type, imageLinks, LoggedUser.id);
-            accommodationService.Save(accommodation);
-            ClearInputs();
-            FeedBack = "Accommodation registered successfully!";
+                // Add image links
+                List<Model.Image> imageLinks = CreateImageLinks();
+
+                Accommodation accommodation = new Accommodation(name, location, guestLimit, minDaysBooked, bookingCancelPeriod, type, imageLinks, LoggedUser.id);
+                accommodationService.Save(accommodation);
+                ClearInputs();
+                FeedBack = "Accommodation registered successfully!";
+            }
+            else
+            {
+                MessageBox.Show("You must enter a valid data before registering accommodation!");
+            }
         }
 
         List<string> dynamicImageLinksTextBoxes = new List<string>();

@@ -239,26 +239,34 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private void ExecuteGenerateAnnualReport(object obj)
         {
-            _mainViewModel.selectedYearForAnnualReport = SelectedYear;
-            _mainViewModel.GenerateAnnualReport(null);
+            if (SelectedYear != null)
+            {
+                _mainViewModel.selectedYearForAnnualReport = SelectedYear;
+                _mainViewModel.GenerateAnnualReport(null);
+            }
+            else MessageBox.Show("You must select a year before generating a report!");
         }
 
         private void ExecuteShowMonthlyStatistics(object obj)
         {
-            AccommodationsAnnualStatisticsDTO? selectedAccommodation = SelectedAnnualStatistics;
-            DataBaseContext monthlyTransferContext = new DataBaseContext();
-            DataBaseContext transferContext = new DataBaseContext();
-            DataBaseContext transferedAnnualAccommodation = new DataBaseContext();
-            AnnualAccommodationTransfer transferedAccommodation = transferedAnnualAccommodation.AccommodationAnnualStatisticsTransfer.First();
+            if (SelectedAnnualStatistics != null)
+            {
+                AccommodationsAnnualStatisticsDTO? selectedAccommodation = SelectedAnnualStatistics;
+                DataBaseContext monthlyTransferContext = new DataBaseContext();
+                DataBaseContext transferContext = new DataBaseContext();
+                DataBaseContext transferedAnnualAccommodation = new DataBaseContext();
+                AnnualAccommodationTransfer transferedAccommodation = transferedAnnualAccommodation.AccommodationAnnualStatisticsTransfer.First();
 
-            var transfers = transferContext.AccommodationsMonthlyStatisticsTransfer.ToList();
-            transferContext.AccommodationsMonthlyStatisticsTransfer.RemoveRange(transfers);
-            transferContext.SaveChanges();
+                var transfers = transferContext.AccommodationsMonthlyStatisticsTransfer.ToList();
+                transferContext.AccommodationsMonthlyStatisticsTransfer.RemoveRange(transfers);
+                transferContext.SaveChanges();
 
-            MonthlyAccommodationTransfer monthlyAccommodationTransfer = new MonthlyAccommodationTransfer(selectedAccommodation.year, transferedAccommodation.accommodationId);
-            monthlyTransferContext.AccommodationsMonthlyStatisticsTransfer.Add(monthlyAccommodationTransfer);
-            monthlyTransferContext.SaveChanges();
-            _mainViewModel.ExecuteShowMonthlyStatistics(null);
+                MonthlyAccommodationTransfer monthlyAccommodationTransfer = new MonthlyAccommodationTransfer(selectedAccommodation.year, transferedAccommodation.accommodationId);
+                monthlyTransferContext.AccommodationsMonthlyStatisticsTransfer.Add(monthlyAccommodationTransfer);
+                monthlyTransferContext.SaveChanges();
+                _mainViewModel.ExecuteShowMonthlyStatistics(null);
+            }
+            else MessageBox.Show("You must select accommodation annual statistics before proceeding to monthly report!");
         }
 
         public void GetYearList()
