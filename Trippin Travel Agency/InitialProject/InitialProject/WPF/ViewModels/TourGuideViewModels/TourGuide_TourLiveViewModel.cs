@@ -123,7 +123,11 @@ namespace InitialProject.WPF.ViewModels
         }
         public void VisitCheckpoint(object obj)
         {
-            // Add your logic for visiting a checkpoint here
+            if (SelectedKeyPoint == null)
+            {
+                MessageBox.Show("Please select a keypoint to visit it. ");
+                return;
+            }
             var selectedKeyPoint = SelectedKeyPoint;
             selectedKeyPoint.visited = true;
 
@@ -140,7 +144,6 @@ namespace InitialProject.WPF.ViewModels
             context.Update(tour);
             context.SaveChanges();
 
-            //RefreshKeyPoints(tour);
             if (this._tourService.IsTourFinished(_keyPointsList))
             {
                 this.EndTour(tour);
@@ -149,7 +152,11 @@ namespace InitialProject.WPF.ViewModels
 
         public void GuideConfirmed(object obj)
         {
-            // Add your logic for guide confirmation here
+            if(SelectedTourReservationDTO == null)
+            {
+                MessageBox.Show("Select a guest reservation to set it as arrieved.");
+                return;
+            }
             DataBaseContext context;
             Tour tour;
             GetExact(out context, out tour);
@@ -190,7 +197,6 @@ namespace InitialProject.WPF.ViewModels
         }
         public void EndTour(object obj)
         {
-            // Add your logic for ending the tour here
             DataBaseContext context;
             Tour tour;
             GetExact(out context, out tour);

@@ -214,7 +214,7 @@
                         <!-- Visited button -->
                         <Button Content="Guest Arrieved"
                             Style="{StaticResource acceptButton}"
-                            Command="{Binding VisitCheckpointCommand}"
+                            Command="{Binding GuideConfirmedCommand}"
                             Width="150"
                             Margin="30, 20, 0, 0"
                             />

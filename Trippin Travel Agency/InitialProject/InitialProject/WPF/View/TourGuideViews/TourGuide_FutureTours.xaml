@@ -140,7 +140,6 @@
                             DockPanel.Dock="Left"
                             x:Name="cancelTourButton"
                             Command="{Binding CancelTourCommand}"
-                            CommandParameter="{Binding SelectedFutureTourDto}"
                           />
 
                     <Button Content="Show images"

@@ -70,6 +70,12 @@ namespace InitialProject.WPF.ViewModels
         }
         public void ShowTourData(object obj)
         {
+            if (SelectedFinishedTourDTO == null)
+            {
+                MessageBox.Show("Please select a tour from the list to show its data.");
+                return;
+            }
+
             FinishedTourDTO tourData = SelectedFinishedTourDTO; 
             DataBaseContext dataBaseContext = new DataBaseContext();
             TourLiveViewTransfer tourLiveViewTransfer = new TourLiveViewTransfer(tourData.id);
