@@ -10,6 +10,7 @@ using InitialProject.WPF.ViewModels;
 using InitialProject.DTO;
 using InitialProject.Model;
 using System.Collections.ObjectModel;
+using InitialProject.WPF.View.GuestTwoViews;
 
 namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 {
@@ -140,9 +141,28 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             }
         }
 
+        private string imageSlider;
+        public string ImageSlider
+        {
+            get { return imageSlider; }
+            set
+            {
+                if (imageSlider != value)
+                {
+                    imageSlider = value;
+                    OnPropertyChanged(nameof(ImageSlider));
+                }
+            }
+        }
+
+        public int imagecounter = 1;
+
         private readonly GuestTwoInterfaceViewModel _mainViewModel;
         public ViewModelCommand CancelBookingCommand { get; private set; }
         public ViewModelCommand TourViewCommand { get; private set; }
+        public ViewModelCommand NextPhoto { get; private set; }
+        public ViewModelCommand PreviousPhoto { get; private set; }
+        public ViewModelCommand CreateTourReport { get; private set; }
 
         public TourConfirmationViewModel()
         {
@@ -152,6 +172,9 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             CancelDisabled = true;
             TourViewCommand = new ViewModelCommand(ShowDetailedTourView);
             CancelBookingCommand = new ViewModelCommand(CancelBooking);
+            NextPhoto = new ViewModelCommand(GetNextPhoto);
+            PreviousPhoto = new ViewModelCommand(GetPreviousPhoto);
+            CreateTourReport = new ViewModelCommand(ExecuteCreateTourReport);
         }
 
         public void ShowDetailedTourView(object obj)
@@ -167,8 +190,8 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 }
             }
 
-            TourBookingTransfer tourBookingTransfer = context.tourBookingTransfers.First();
-            Tour tour = context.Tours.SingleOrDefault(t => t.id == tourBookingTransfer.id);
+            TourBookingTransfer tourBookingTransfer = context.tourBookingTransfers.ToList().Last();
+            Tour tour = context.Tours.SingleOrDefault(t => t.id == tourBookingTransfer.tourId);
             tour.touristLimit -= tourBookingTransfer.numberOfGuests;
             TourReservation tourReservation = new TourReservation(LoggedUser.id, tour.id, tourBookingTransfer.numberOfGuests);
             if (selectedCoupon != null)
@@ -192,7 +215,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
         public void CancelBooking(object obj) 
         {
             DataBaseContext context = new DataBaseContext();
-            TourBookingTransfer tourBookingTransfer = context.tourBookingTransfers.First();
+            TourBookingTransfer tourBookingTransfer = context.tourBookingTransfers.ToList().Last();
             context.tourBookingTransfers.Remove(tourBookingTransfer);
             context.SaveChanges();
             // CancelDisabled = false;
@@ -205,13 +228,14 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 
             ShowCoupons();
             DataBaseContext context = new DataBaseContext();
-            TourBookingTransfer tourBookingTransfer = context.tourBookingTransfers.First();
+            TourBookingTransfer tourBookingTransfer = context.tourBookingTransfers.ToList().Last();
             TourName = tourBookingTransfer.name;
             CityName = tourBookingTransfer.cityLocation;
             CountryName = tourBookingTransfer.countryLocation;
             KeyPoints = tourBookingTransfer.keypoints;
             GuestNumber = tourBookingTransfer.numberOfGuests;
             Duration = tourBookingTransfer.hoursDuration;
+            ImageSlider = "C:\\Users\\Nemanja\\Desktop\\Faks\\Semestar 6\\Projekat c#\\Trippin-Travel-Agency-SIMS-Project\\Trippin Travel Agency\\InitialProject\\InitialProject\\Assets\\" + tourBookingTransfer.cityLocation + imagecounter.ToString()+".jpg";
 
         }
 
@@ -231,6 +255,34 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                     couponDTOs.Add(new CouponDTO(coup.id, "Coupon" + counter, coup.exiresOn));
                 }
             }            
-        }       
+        }
+
+        public void GetNextPhoto(object obj) 
+        {
+            if (imagecounter < 4)
+            {
+                imagecounter += 1;
+                ImageSlider = "C:\\Users\\Nemanja\\Desktop\\Faks\\Semestar 6\\Projekat c#\\Trippin-Travel-Agency-SIMS-Project\\Trippin Travel Agency\\InitialProject\\InitialProject\\Assets\\" + CityName + imagecounter.ToString() + ".jpg";
+            }
+        }
+
+        public void GetPreviousPhoto(object obj)
+        {
+            if (imagecounter > 1)
+            {
+                imagecounter -= 1;
+                ImageSlider = "C:\\Users\\Nemanja\\Desktop\\Faks\\Semestar 6\\Projekat c#\\Trippin-Travel-Agency-SIMS-Project\\Trippin Travel Agency\\InitialProject\\InitialProject\\Assets\\" + CityName + imagecounter.ToString() + ".jpg";
+            }
+        }
+        public void ExecuteCreateTourReport(object obj)
+        {
+            _mainViewModel.TourNameReport = TourName;
+            _mainViewModel.CityNameReport = CityName;
+            _mainViewModel.CityNameReport = CountryName;
+            _mainViewModel.KeyPointsReport = KeyPoints;
+            _mainViewModel.Duration = Duration;
+            _mainViewModel.GuestNumberReport = GuestNumber;
+            _mainViewModel.ExecuteGenerateReport(null);
+        }
     }
 }

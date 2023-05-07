@@ -104,6 +104,15 @@
                             FontFamily="Ubuntu" 
                             FontWeight="Heavy" 
                             Command="{Binding OpenMessage}"/>
+                    <TextBlock Width="350"
+                               Height="130"
+                               Margin="-770 -140 0 0"
+                               Foreground="{Binding ResponseColor}"
+                               Text="{Binding MyMessagesFeedback}"
+                               FontSize="20"
+                               FontWeight="Light"
+                               FontFamily="Ubuntu"
+                               />
                 </StackPanel>
             </GroupBox>
         </Grid>
@@ -133,6 +142,15 @@
                             FontFamily="Ubuntu" 
                             FontWeight="Heavy"
                             Command="{Binding DetailedTourViewCommand}"/>
+                    <TextBlock Width="350"
+                               Height="130"
+                               Margin="-770 -140 0 0"
+                               Foreground="{Binding ResponseColor}"
+                               Text="{Binding AcceptedRequestsFeedback}"
+                               FontSize="20"
+                               FontWeight="Light"
+                               FontFamily="Ubuntu"                               
+                               />
                 </StackPanel>
             </GroupBox>
         </Grid>

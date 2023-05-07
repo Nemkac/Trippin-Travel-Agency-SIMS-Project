@@ -529,7 +529,13 @@
             </Setter.Value>
         </Setter>
     </Style>
-
+    
+    <Style x:Key="nextPhotoButtonWEB" TargetType="fa:IconImage">
+        <Setter Property="Foreground" Value="#f5f6fa"/>
+        <Setter Property="Width" Value="35"/>
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
 
     <Style x:Key="defaultLabel" TargetType="Label">
         <Setter Property="FontFamily" Value="Ubuntu"/>

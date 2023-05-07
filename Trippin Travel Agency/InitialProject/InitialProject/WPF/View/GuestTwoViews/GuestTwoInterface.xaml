@@ -87,7 +87,11 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" Grid.Column="1">
-            <Image Source="C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\headerImage2.png" Width="1520" Height="220" Stretch="UniformToFill" RenderTransformOrigin="500,500" />
+            <Image Source="C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\headerImage2.png" 
+                   Width="1520" 
+                   Height="220" 
+                   Stretch="UniformToFill"
+                   RenderTransformOrigin="500,500" />
         </StackPanel>
        
         

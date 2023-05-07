@@ -118,6 +118,34 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 }
             }
         }
+       
+        private string feedbackMessage;
+        public string FeedbackMessage
+        {
+            get { return feedbackMessage; }
+            set
+            {
+                if (feedbackMessage != value)
+                {
+                    feedbackMessage = value;
+                    OnPropertyChanged(nameof(FeedbackMessage));
+                }
+            }
+        }
+        
+        private string responseColor;
+        public string ResponseColor
+        {
+            get { return responseColor; }
+            set
+            {
+                if (responseColor != value)
+                {
+                    responseColor = value;
+                    OnPropertyChanged(nameof(ResponseColor));
+                }
+            }
+        }
 
         public ViewModelCommand CreateRegularTourCommand { get; private set; }
 
@@ -225,12 +253,20 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                         context.UnfulfilledTourLanguages.Add(new(LoggedUser.id, LanguageComboBox));
                     }
                     context.TourRequests.Add(tourRequest);
+                    ResponseColor = "#4cd137";
+                    FeedbackMessage = "Request sent!";
                     context.SaveChanges();
                 }
                 else
                 {
-                    MessageBox.Show("Invalid dates!");
+                    ResponseColor = "#e84118";
+                    FeedbackMessage = "Invalid dates!";
                 }
+            }
+            else 
+            {
+                ResponseColor = "#e84118";
+                FeedbackMessage = "Please enter complete request information";
             }
         }
     }

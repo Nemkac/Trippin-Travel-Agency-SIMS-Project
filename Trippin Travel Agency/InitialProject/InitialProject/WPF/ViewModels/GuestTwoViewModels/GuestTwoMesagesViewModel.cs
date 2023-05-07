@@ -94,6 +94,19 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 }
             }
         }
+        private string responseColor;
+        public string ResponseColor
+        {
+            get { return responseColor; }
+            set
+            {
+                if (responseColor != value)
+                {
+                    responseColor = value;
+                    OnPropertyChanged(nameof(ResponseColor));
+                }
+            }
+        }
 
         private int numberOfCoupons;
         public int NumberOfCoupons
@@ -119,6 +132,34 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 {
                     numberOfVisitedTours = value;
                     OnPropertyChanged(nameof(NumberOfVisitedTours));
+                }
+            }
+        }
+
+        private string acceptedRequestsFeedback;
+        public string AcceptedRequestsFeedback
+        {
+            get { return acceptedRequestsFeedback; }
+            set
+            {
+                if (acceptedRequestsFeedback != value)
+                {
+                    acceptedRequestsFeedback = value;
+                    OnPropertyChanged(nameof(AcceptedRequestsFeedback));
+                }
+            }
+        }
+        
+        private string myMessagesFeedback;
+        public string MyMessagesFeedback
+        {
+            get { return myMessagesFeedback; }
+            set
+            {
+                if (myMessagesFeedback != value)
+                {
+                    myMessagesFeedback = value;
+                    OnPropertyChanged(nameof(MyMessagesFeedback));
                 }
             }
         }
@@ -250,17 +291,32 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 TourAttendance tourAttendance = new TourAttendance(tourMessage.tourId, tourMessage.keyPointId, tourMessage.guestId, tourMessage.numberOfGuests);
                 context.TourAttendances.Add(tourAttendance);
                 //context.TourMessages.Remove(tourMessage);
+                ResponseColor = "#4cd137";
+                MyMessagesFeedback = "Your attendence has been marked";
                 context.SaveChanges();
+            }
+            else
+            {
+                ResponseColor = "#e84118";
+                MyMessagesFeedback = "Please select a message."; 
             }
         }
         public void ShowDetailedTourView(object obj)
         {
             string message = SelectedRequest;
-            if (message.Substring(0, 9) == "[NewTour]")
-            {             
-                _mainViewModel.ExecuteShowDetailedTourView(null);
-                tourIdTransfer = Int32.Parse(message.Substring(message.Length - 2));
-            }            
+            if (message != null)
+            {
+                if (message.Substring(0, 9) == "[NewTour]")
+                {
+                    _mainViewModel.ExecuteShowDetailedTourView(null);
+                    tourIdTransfer = Int32.Parse(message.Substring(message.Length - 2));
+                }
+            }
+            else
+            {
+                ResponseColor = "#e84118";
+                AcceptedRequestsFeedback = "Please select a message.";
+            }
         }
 
         public void LoadData(DataBaseContext context)

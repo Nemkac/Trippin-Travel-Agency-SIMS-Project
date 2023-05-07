@@ -6,6 +6,7 @@ using InitialProject.Repository;
 using InitialProject.Service.TourServices;
 using InitialProject.WPF.View.GuestTwoViews;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -147,6 +148,58 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 }
             }
         }
+        private string image1;
+        public string Image1
+        {
+            get { return image1; }
+            set
+            {
+                if (image1 != value)
+                {
+                    image1 = value;
+                    OnPropertyChanged(nameof(Image1));
+                }
+            }
+        }
+        private string image2;
+        public string Image2
+        {
+            get { return image2; }
+            set
+            {
+                if (image2 != value)
+                {
+                    image2 = value;
+                    OnPropertyChanged(nameof(Image2));
+                }
+            }
+        }
+        private string image3;
+        public string Image3
+        {
+            get { return image3; }
+            set
+            {
+                if (image3 != value)
+                {
+                    image3 = value;
+                    OnPropertyChanged(nameof(Image3));
+                }
+            }
+        }
+        private string image4;
+        public string Image4
+        {
+            get { return image4; }
+            set
+            {
+                if (image4 != value)
+                {
+                    image4 = value;
+                    OnPropertyChanged(nameof(Image4));
+                }
+            }
+        }
 
         public ViewModelCommand BookingViewCommand { get; private set; }
         private readonly GuestTwoInterfaceViewModel _mainViewModel;
@@ -197,7 +250,10 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             Description = tour.description;
             NumberOfSpots = tour.touristLimit.ToString();
             Duration = tour.hoursDuration.ToString();
-
+            Image1 = "C:\\Users\\Nemanja\\Desktop\\Faks\\Semestar 6\\Projekat c#\\Trippin-Travel-Agency-SIMS-Project\\Trippin Travel Agency\\InitialProject\\InitialProject\\Assets\\" + location.city + "1.jpg";
+            Image2 = "C:\\Users\\Nemanja\\Desktop\\Faks\\Semestar 6\\Projekat c#\\Trippin-Travel-Agency-SIMS-Project\\Trippin Travel Agency\\InitialProject\\InitialProject\\Assets\\" + location.city + "2.jpg";
+            Image3 = "C:\\Users\\Nemanja\\Desktop\\Faks\\Semestar 6\\Projekat c#\\Trippin-Travel-Agency-SIMS-Project\\Trippin Travel Agency\\InitialProject\\InitialProject\\Assets\\" + location.city + "3.jpg";
+            Image4 = "C:\\Users\\Nemanja\\Desktop\\Faks\\Semestar 6\\Projekat c#\\Trippin-Travel-Agency-SIMS-Project\\Trippin Travel Agency\\InitialProject\\InitialProject\\Assets\\" + location.city + "4.jpg";
             DataBaseContext context = new DataBaseContext();    
             List<KeyPoint> keyPoints = this.tourService.GetKeyPoints(tour.id, context);
             foreach (KeyPoint keyPoint in keyPoints)

@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <None Remove="Assets\fruska-gora.jpg" />
+    <None Remove="Assets\Ohrid5.jpg" />
     <None Remove="Assets\tours-white.svg" />
   </ItemGroup>
 

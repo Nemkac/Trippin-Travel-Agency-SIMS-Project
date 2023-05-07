@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:InitialProject.WPF.View.GuestTwoViews"
+             xmlns:local="clr-namespace:InitialProject.WPF.View.GuestTwoViews" xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              d:DesignHeight="1100" d:DesignWidth="1520">
 
@@ -14,12 +14,15 @@
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="600"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1100"/>
+        </Grid.RowDefinitions>
 
         <GroupBox Header="Tour preview" FontSize="40" FontFamily="Ubuntu" FontWeight="Heavy" Foreground="#192a56">
-            <StackPanel Margin ="0 0 0 0" 
+            <StackPanel Margin ="0 -100 0 0" 
                         Orientation="Vertical"
                         Grid.Column="0" 
-                        Height="750">
+                        Height="950">
                 <Label Content="Tour Name:"
                        Margin="-365 15 0 0"
                        FontFamily="Ubuntu"
@@ -120,7 +123,33 @@
                        Height="48" 
                        Name="DurationLabel" 
                        Content="{Binding Duration}"/>
-
+                <Image Height="380" 
+                       Width="500"
+                       Margin="0 15 0 0"
+                       Source="{Binding ImageSlider}"
+                       />
+                <Button Height="30"
+                        Width="30"
+                        Margin="550 -310 0 0"
+                        Grid.RowSpan="4"
+                        BorderBrush="#F5F6FA"
+                        Command="{Binding NextPhoto}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="ArrowRight" Width="30" Margin="-3 0 0 0"/>
+                    </StackPanel>
+                </Button>
+                <Button Height="30"
+                        Width="30"
+                        Margin="-550 -310 0 0"
+                        Grid.RowSpan="4"
+                        BorderBrush="#F5F6FA"
+                        Command="{Binding PreviousPhoto}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="ArrowLeft"
+                                      Width="30" 
+                                      Margin="1 0 0 0"/>
+                    </StackPanel>
+                </Button>
             </StackPanel>
         </GroupBox>
       
@@ -148,7 +177,8 @@
                     FontFamily="Ubuntu" 
                     FontSize="28" 
                     Height="120" 
-                    Style="{StaticResource saveButtonWEB}">
+                    Style="{StaticResource saveButtonWEB}"
+                    Command="{Binding CreateTourReport}">
                 <TextBlock Text="Generate booking confirmation" 
                            TextWrapping="Wrap" 
                            TextAlignment="Center"/>
