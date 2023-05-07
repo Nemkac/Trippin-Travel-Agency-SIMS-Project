@@ -57,7 +57,7 @@
                 >
                 <Grid>
                     <Grid.Background>
-                        <ImageBrush ImageSource="C:\Users\ifeel\Documents\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\location_generic.jpg">
+                        <ImageBrush ImageSource="C:\Users\aleks\OneDrive\Dokumenti\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\location_generic.jpg">
                             <ImageBrush.RelativeTransform>
                                 <ScaleTransform ScaleX="1" ScaleY="1" />
                             </ImageBrush.RelativeTransform>
@@ -122,7 +122,7 @@
                 >
                 <Grid>
                     <Grid.Background>
-                        <ImageBrush ImageSource="C:\Users\ifeel\Documents\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\language_generic.jpg">
+                        <ImageBrush ImageSource="C:\Users\aleks\OneDrive\Dokumenti\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\language_generic.jpg">
                             <ImageBrush.RelativeTransform>
                                 <ScaleTransform ScaleX="1" ScaleY="1" />
                             </ImageBrush.RelativeTransform>
@@ -170,7 +170,6 @@
                         x:Name="createTourByLanguageButton"
                         Command="{Binding CreateTourByLanguageCommand}"
                         >
-
                     </Button>
                 </Grid>
             </Border>
