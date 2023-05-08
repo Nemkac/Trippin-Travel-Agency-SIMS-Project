@@ -96,11 +96,11 @@
                      VerticalContentAlignment="Center" 
                      IsTabStop="False"
                      Text="{Binding NumberOfGuests,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                <TextBox.InputBindings>
-                    <KeyBinding Key="Enter" Command="{Binding BookAccommodation}" />
-                    <KeyBinding Key="Left" Command="{Binding PreviousImage}" />
-                    <KeyBinding Key="Right" Command="{Binding NextImage}" />
-                </TextBox.InputBindings>
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding BookAccommodation}" />
+                        <KeyBinding Key="Left" Command="{Binding PreviousImage}" />
+                        <KeyBinding Key="Right" Command="{Binding NextImage}" />
+                    </TextBox.InputBindings>
             </TextBox>
 
             <Button Content="Book" 

@@ -28,6 +28,7 @@ namespace InitialProject.WPF.View.GuestOne_Views
         public RateAccommodationInterface()
         {
             InitializeComponent();
+            GuestOneStaticHelper.rateAccommodationInterface = this;
             this.DataContext = new RateAccommodationViewModel();
         }
     }

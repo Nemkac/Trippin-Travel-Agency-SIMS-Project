@@ -15,6 +15,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand RateAccommodation { get; set; }
         public ViewModelCommand AddImageUrl { get; set; }
         private AccommodationRateService accommodationRateService = new(new AccommodationRateRepository());
+        public ViewModelCommand GoToPreviousWindow { get; set; }
 
         public List<Model.Image> imageUrls = new List<Model.Image>();
         public int imageCounter = 0;
@@ -22,6 +23,8 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         {
             RateAccommodation = new ViewModelCommand(Rate);
             AddImageUrl = new ViewModelCommand(GetImage);
+            GoToPreviousWindow = new ViewModelCommand(GoBack);
+
         }
 
         private int cleannesSliderInput;
@@ -94,6 +97,26 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             }
         }
 
+        private string warningText;
+        public string WarningText
+        {
+            get { return warningText; }
+            set
+            {
+                if (warningText != value)
+                {
+                    warningText = value;
+                    OnPropertyChanged(nameof(WarningText));
+                }
+            }
+        }
+
+        private void GoBack(object sender)
+        {
+            GuestOneStaticHelper.pastBookingsInterface.Show();
+            GuestOneStaticHelper.rateAccommodationInterface.Close();
+        }
+
 
         private void GetImage(object sender)
         {
@@ -112,8 +135,15 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         }
         private void Rate(object sender)
         {
-            AccommodationRate accommodationRate = new AccommodationRate(GuestOneStaticHelper.selectedBookingIdToRate, cleannesSliderInput, OwnerSliderInput, Comment , imageUrls);
-            this.accommodationRateService.Save(accommodationRate);
+            if (Comment != null && Comment != string.Empty)
+            {
+                AccommodationRate accommodationRate = new AccommodationRate(GuestOneStaticHelper.selectedBookingIdToRate, cleannesSliderInput, OwnerSliderInput, Comment, imageUrls);
+                this.accommodationRateService.Save(accommodationRate);
+                WarningText = string.Empty;
+            } else
+            {
+                WarningText = "Please fill the comment box";
+            }
         }
     }
 }
