@@ -17,5 +17,6 @@ namespace InitialProject.Model
         public static int selectedBookingIdToRate { get; set; }
         public static PastBookingsInterface pastBookingsInterface { get; set; }
 
+        public static string previousWindow { get; set; }
     }
 }

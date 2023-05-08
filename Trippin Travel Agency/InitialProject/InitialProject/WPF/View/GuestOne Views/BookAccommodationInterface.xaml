@@ -7,6 +7,9 @@
         xmlns:viewModel = "clr-namespace:InitialProject.WPF.ViewModels.GuestOneViewModels"
         mc:Ignorable="d"
         Title="GuestOneInterface" Height="800" Width="1500" >
+    <Window.InputBindings>
+        <KeyBinding Key="Escape" Command="{Binding GoToPreviousWindow}" />
+    </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="106*"/>
@@ -27,7 +30,7 @@
                 BorderBrush="#192a56" 
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Top"/>
-            
+
             <TextBlock 
                 HorizontalAlignment="Left" 
                 Height="36" 
@@ -67,7 +70,7 @@
                 HorizontalAlignment="Left" 
                 ItemsSource="{Binding AvaialableDatesGrid}" 
                 SelectedItem="{Binding SelectedDateRange}"/>
-            
+
             <TextBox HorizontalAlignment="Center" 
                      TextWrapping="Wrap"
                      x:Name ="numberOfGuests" 
@@ -83,7 +86,7 @@
                      TextAlignment="Center" 
                      VerticalContentAlignment="Center" 
                      Text="{Binding NumberOfGuests}" />
-            
+
             <Button Content="Book" 
                     HorizontalAlignment="Left" 
                     Height="48"
@@ -100,7 +103,7 @@
                     Foreground="White" 
                     FontWeight="Medium" 
                     Command="{Binding BookAccommodation}"/>
-            
+
             <TextBlock 
                 HorizontalAlignment="Left" 
                 Height="73"
@@ -113,7 +116,7 @@
                 Canvas.Bottom="60"
                 Canvas.Left="5" 
                 Text="{Binding WarningText}"/>
-            
+
             <GroupBox Height="459" 
                       Header="Accommodation info" 
                       Canvas.Left="194"
@@ -127,8 +130,8 @@
                       BorderBrush="#192a56" 
                       HorizontalAlignment="Left" 
                       VerticalAlignment="Center"/>
-            
-            <TextBlock Height="242"
+
+            <TextBlock Height="212"
                        Canvas.Left="227
                        " TextWrapping="Wrap"
                        Name="accommodationInfoBlock" 
@@ -141,8 +144,8 @@
                        FontFamily="Ubuntu" 
                        FontSize="20" 
                        Text="{Binding AccommodationInfo}"/>
-            
-            <TextBlock Height="242" 
+
+            <TextBlock Height="212" 
                        Canvas.Left="227"
                        TextWrapping="Wrap" 
                        Name="accommodationInfoLabelsBlock" 
@@ -166,7 +169,7 @@
                FontFamily="ubuntu" 
                FontWeight="Bold" 
                Foreground="#192a56"/>
-        
+
         <GroupBox Header="Navigator" 
                   Margin="985,1,26,273" 
                   Padding="10"
@@ -181,7 +184,7 @@
                     FontWeight="medium"><Run Text="Press CTRL+N for program map" FontFamily="ubuntu"/></TextBlock>
             </StackPanel>
         </GroupBox>
-        
+
         <Rectangle HorizontalAlignment="Left"
                    Height="65"
                    Margin="-30,325,0,0" 
@@ -190,7 +193,7 @@
                    VerticalAlignment="Top"
                    Width="1544"
                    Grid.Row="1"/>
-        
+
         <TextBlock HorizontalAlignment="Left" 
                    Height="72" 
                    Margin="609,319,0,0" 
@@ -202,7 +205,7 @@
                    FontSize="48"
                    FontWeight="Bold"
                    Grid.Row="1" />
-        
+
         <GroupBox Header="Help"
                   Margin="35,0,1114,281" 
                   Padding="10"
@@ -211,7 +214,7 @@
                   BorderThickness="3"
                   BorderBrush="#192a56" 
                   FontWeight="medium" >
-          
+
             <StackPanel>
                 <TextBlock Height="39" FontWeight="medium"><Run Text="Press CTRL+H for help"/></TextBlock>
             </StackPanel>
@@ -224,5 +227,46 @@
                    VerticalAlignment="Top" 
                    Width="1434" 
                    Fill="#192a56"/>
+
+        <Image HorizontalAlignment="Left" 
+               Height="169" 
+               Margin="232,72,0,0" 
+               Grid.Row="1"
+               VerticalAlignment="Top"
+               Width="303" 
+               Source="{Binding AccommodationImage}" 
+               Stretch="Fill"/>
+
+        <Button Content="⩽" 
+                HorizontalAlignment="Left"
+                Height="40"
+                Margin="140,0,0,0" 
+                Grid.Row="1" 
+                VerticalAlignment="Center" 
+                Width="40"
+                Command="{Binding PreviousImage}"/>
+
+        <Button Content=">" 
+                HorizontalAlignment="Left"
+                Height="40"
+                Margin="586,0,0,0" 
+                Grid.Row="1" 
+                VerticalAlignment="Center" 
+                Width="40"
+                Command="{Binding NextImage}"/>
+
+        <TextBlock HorizontalAlignment="Left" 
+                   Height="35" 
+                   Margin="655,287,0,0"
+                   Grid.Row="1" 
+                   TextWrapping="Wrap" 
+                   Text="{Binding WarningMessage}" 
+                   VerticalAlignment="Top" 
+                   Width="633"
+                   FontFamily="Ubuntu" 
+                   FontSize="22" 
+                   FontWeight="Bold" 
+                   Foreground="#e84118"
+                   TextAlignment="Center"/>
     </Grid>
 </Window>

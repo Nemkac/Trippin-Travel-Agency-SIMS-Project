@@ -1,4 +1,5 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Context;
+using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service.AccommodationServices;
 using InitialProject.Service.BookingServices;
@@ -18,7 +19,10 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         private AccommodationService accommodationService = new(new AccommodationRepository());
         private BookingService bookingService = new(new BookingRepository());
         private AccommodationRateService accommodationRateService = new(new AccommodationRateRepository());
+        int imageCounter = 0;
         public ViewModelCommand DataGridKeyDown { get; set; }
+        public ViewModelCommand GoToPreviousWindow { get; set; }
+
 
         private string accommodationInfo;
         public string AccommodationInfo
@@ -44,6 +48,20 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 {
                     accommodationInfoLabels = value;
                     OnPropertyChanged(nameof(AccommodationInfoLabels));
+                }
+            }
+        }
+
+        private string warningMessage;
+        public string WarningMessage
+        {
+            get { return warningMessage; }
+            set
+            {
+                if (warningMessage != value)
+                {
+                    warningMessage = value;
+                    OnPropertyChanged(nameof(WarningMessage));
                 }
             }
         }
@@ -104,19 +122,46 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             }
         }
 
+
+        private string accommodationImage;
+        public string AccommodationImage
+        {
+            get { return accommodationImage; }
+            set
+            {
+                if (accommodationImage != value)
+                {
+                    accommodationImage = value;
+                    OnPropertyChanged(nameof(AccommodationImage));
+                }
+            }
+        }
+
         public ViewModelCommand BookAccommodation { get; set; }
+        public ViewModelCommand NextImage { get; set; }
+        public ViewModelCommand PreviousImage { get; set; }
         public BookAccommodationViewModel()
         {
+            DataBaseContext context = new DataBaseContext();
+            List<Model.Image> images = context.Images.ToList();
             Accommodation accommodation = accommodationService.GetById(GuestOneStaticHelper.id);
-            AccommodationInfoLabels = "Accommodation name:" + "\n\nCountry:" + "\n\nCity:" + "\n\nMaximum number of guests:" + "\n\nRating out of 10:";
-
+            AccommodationInfoLabels = "Accommodation name:" + "\n\nLocation:" + "\n\nMaximum number of guests:" + "\n\nRating out of 10:";
+            AccommodationImage = images[0].imageLink;
             AccommodationInfo = GuestOneStaticHelper.id.ToString();
-            AccommodationInfo = accommodation.name + "\n\n" + this.accommodationService.GetAccommodationLocation(GuestOneStaticHelper.id)[0] + "\n\n" +
+            AccommodationInfo = accommodation.name + "\n\n" + this.accommodationService.GetAccommodationLocation(GuestOneStaticHelper.id)[0]+ " , " +
                 accommodationService.GetAccommodationLocation(GuestOneStaticHelper.id)[1] + "\n\n" + accommodation.guestLimit + "\n\n" +
                 accommodationRateService.GetAccommodationAverageRate(GuestOneStaticHelper.id);
 
             AvaialableDatesGrid = GuestOneStaticHelper.result;
             BookAccommodation = new ViewModelCommand(Book);
+            NextImage = new ViewModelCommand(ShowNextImage);
+            PreviousImage = new ViewModelCommand(ShowPreviousImage);
+            GoToPreviousWindow = new ViewModelCommand(GoBack);
+        }
+
+        private void GoBack(object sender)
+        {
+            
         }
 
         private void Book(object sender)
@@ -125,13 +170,45 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             GetBasicAccommodationBookingProperties(out arrival, out departure, out guestsNumber);
             if (int.Parse(guestsNumber) > this.accommodationService.GetById(GuestOneStaticHelper.id).guestLimit)
             {
-                warningText = accommodationService.GetById(GuestOneStaticHelper.id).name + " cannot take more then " + this.accommodationService.GetById(GuestOneStaticHelper.id).guestLimit.ToString() + " guests.";
+                WarningMessage = accommodationService.GetById(GuestOneStaticHelper.id).name + " cannot take more then " + this.accommodationService.GetById(GuestOneStaticHelper.id).guestLimit.ToString() + " guests";
             }
             else
             {
                 SaveBooking(accommodationService, arrival, departure, guestsNumber);
+                WarningMessage = string.Empty;
             }
         }
+
+        public void ShowNextImage(object sender)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<Model.Image> images = context.Images.ToList();
+            if (imageCounter < images.Count-1)
+            {
+                imageCounter++;
+            } else
+            {
+                imageCounter = 0;
+            }
+            AccommodationImage = images[imageCounter].imageLink;
+        }
+
+        public void ShowPreviousImage(object sender)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<Model.Image> images = context.Images.ToList();
+            if (imageCounter > 0)
+            {
+                imageCounter--;
+            }
+            else
+            {
+                imageCounter = images.Count-1;
+            }
+            AccommodationImage = images[imageCounter].imageLink;
+        }
+
+
 
         private void GetBasicAccommodationBookingProperties(out string arrival, out string departure, out string guestsNumber)
         {
