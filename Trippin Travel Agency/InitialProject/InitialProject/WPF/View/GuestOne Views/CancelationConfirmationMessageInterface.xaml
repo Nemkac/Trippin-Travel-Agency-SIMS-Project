@@ -5,19 +5,62 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
         mc:Ignorable="d"
-        Title="CancelationConfirmationMessageInterface" Height="450" Width="550" WindowStyle="None">
+        Title="CancelationConfirmationMessageInterface" Height="350" Width="480" WindowStyle="None">
+    <Window.InputBindings>
+        <KeyBinding Key="Enter" Command="{Binding Ok}" />
+    </Window.InputBindings>
     <Grid>
-        <GroupBox HorizontalAlignment="Center"
-            Height="413" 
-            Header="Delayment request update" 
+        <GroupBox HorizontalAlignment="Left"
+            Height="340" 
+            Header="Sorry to hear that" 
             VerticalAlignment="Top"
-            Width="481" 
+            Width="480" 
             FontFamily="ubuntu" 
             FontSize="36" 
             FontWeight="Bold" 
             Foreground="#FF192A56" 
             BorderThickness="3" 
             BorderBrush="#192a56" 
-            Margin="0,11,0,0"/>
+            Margin="0,8,0,0"/>
+
+        <TextBlock HorizontalAlignment="Left" 
+            Height="80" 
+            Margin="84,117,0,0"
+            FontSize="30"
+            TextWrapping="Wrap" 
+            Text="Booking successfully canceled !"
+            VerticalAlignment="Top" 
+            Width="312"
+            FontFamily="ubuntu" 
+            FontWeight="Bold"
+            TextAlignment="center"
+            Foreground="#192a56"/>
+
+        <Button Content="OK"
+            HorizontalAlignment="Center" 
+            Height="38"
+            Margin="0,234,0,0" 
+            VerticalAlignment="Top"
+            Width="150"
+            FontFamily="ubuntu" 
+            FontSize="14" 
+            Background="#FF273C75" 
+            Foreground="White"
+            Style="{StaticResource leadButton}"
+            FontWeight="Medium"
+            Command="{Binding Ok}"/>
+        
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="190,283,0,0"
+            TextWrapping="Wrap" 
+            Text="Press ENTER" 
+            VerticalAlignment="Top" 
+            Width="100"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"/>
     </Grid>
 </Window>

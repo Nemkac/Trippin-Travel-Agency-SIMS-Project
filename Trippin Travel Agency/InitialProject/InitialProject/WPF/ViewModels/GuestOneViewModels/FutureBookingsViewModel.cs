@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 {
@@ -95,6 +96,12 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                     canceledContext.CanceledBookings.Add(canceledBooking);
                     canceledContext.SaveChanges();
                     WarningText = string.Empty;
+
+                    CancelationConfirmationMessageInterface cancelationConfirmationMessageInterface = new CancelationConfirmationMessageInterface();
+                    cancelationConfirmationMessageInterface.Left = GuestOneStaticHelper.futureBookingsInterface.Left + (GuestOneStaticHelper.futureBookingsInterface.Width - cancelationConfirmationMessageInterface.Width) / 2;
+                    cancelationConfirmationMessageInterface.Top = GuestOneStaticHelper.futureBookingsInterface.Top + (GuestOneStaticHelper.futureBookingsInterface.Height - cancelationConfirmationMessageInterface.Height) / 2; ;
+                    GuestOneStaticHelper.futureBookingsInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
+                    cancelationConfirmationMessageInterface.Show();
                 }
                 else
                 {

@@ -1,4 +1,6 @@
-﻿using InitialProject.WPF.ViewModels.GuestOneViewModels;
+﻿using InitialProject.Model;
+using InitialProject.WPF.ViewModels;
+using InitialProject.WPF.ViewModels.GuestOneViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,8 +25,8 @@ namespace InitialProject.WPF.View.GuestOne_Views
         public CancelationConfirmationMessageInterface()
         {
             InitializeComponent();
+            GuestOneStaticHelper.cancelationConfirmationMessageInterface = this;
             this.DataContext = new CancelationConfirmationMessageViewModel();
-
         }
     }
 }

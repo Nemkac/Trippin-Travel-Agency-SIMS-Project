@@ -1,12 +1,14 @@
 ﻿using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service.AccommodationServices;
+using InitialProject.WPF.View.GuestOne_Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 {
@@ -140,6 +142,12 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 AccommodationRate accommodationRate = new AccommodationRate(GuestOneStaticHelper.selectedBookingIdToRate, cleannesSliderInput, OwnerSliderInput, Comment, imageUrls);
                 this.accommodationRateService.Save(accommodationRate);
                 WarningText = string.Empty;
+
+                RateAccommodationConfirmationInterface rateAccommodationConfirmationInterface = new RateAccommodationConfirmationInterface();
+                rateAccommodationConfirmationInterface.Left = GuestOneStaticHelper.rateAccommodationInterface.Left + (GuestOneStaticHelper.rateAccommodationInterface.Width - rateAccommodationConfirmationInterface.Width) / 2;
+                rateAccommodationConfirmationInterface.Top = GuestOneStaticHelper.rateAccommodationInterface.Top + (GuestOneStaticHelper.rateAccommodationInterface.Height - rateAccommodationConfirmationInterface.Height) / 2; ;
+                GuestOneStaticHelper.rateAccommodationInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
+                rateAccommodationConfirmationInterface.Show();
             } else
             {
                 WarningText = "Please fill the comment box";
