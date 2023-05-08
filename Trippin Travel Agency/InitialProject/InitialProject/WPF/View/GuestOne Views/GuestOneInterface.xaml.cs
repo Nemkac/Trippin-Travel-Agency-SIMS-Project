@@ -204,7 +204,8 @@ namespace InitialProject.WPF.View.GuestOne_Views
             BookAccommodationInterface.Left = this.Left;
             BookAccommodationInterface.Top = this.Top;
             BookAccommodationInterface.Show();
-            this.Close();
+            GuestOneStaticHelper.guestOneInterface = this;
+            this.Hide();
         }
 
         private void GoToGuestsReviews(object sender, RoutedEventArgs e)

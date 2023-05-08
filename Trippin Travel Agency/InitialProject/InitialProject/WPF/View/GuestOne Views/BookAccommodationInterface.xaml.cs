@@ -30,6 +30,7 @@ namespace InitialProject.WPF.View.GuestOne_Views
         public BookAccommodationInterface()
         {
             InitializeComponent();
+            GuestOneStaticHelper.bookAccommodationInterface = this;
             this.DataContext = new BookAccommodationViewModel();
         }
     }

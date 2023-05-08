@@ -25,6 +25,7 @@ namespace InitialProject.WPF.View.GuestOne_Views
         public SendBookingDelaymentInterface()
         {
             InitializeComponent();
+            GuestOneStaticHelper.sendBookingDelaymentInterface = this;
             this.DataContext = new SendBookingDelaymentViewModel();
         }
     }

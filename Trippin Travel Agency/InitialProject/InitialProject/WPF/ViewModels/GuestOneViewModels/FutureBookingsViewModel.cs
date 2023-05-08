@@ -25,6 +25,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand GoToDelayment { get; set; }
         public ViewModelCommand GoToPastBookings { get; set; }
 
+
         public FutureBookingsViewModel()
         {
             UpcomingBookingsGrid = new ObservableCollection<Booking>(userService.GetGuestsFutureBookings(LoggedUser.id));
@@ -48,6 +49,20 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             }
         }
 
+        private string warningText;
+        public string WarningText
+        {
+            get { return warningText; }
+            set
+            {
+                if (warningText != value)
+                {
+                    warningText = value;
+                    OnPropertyChanged(nameof(WarningText));
+                }
+            }
+        }
+
         private ObservableCollection<Booking> upcomingBookingsGrid;
         public ObservableCollection<Booking> UpcomingBookingsGrid
         {
@@ -64,34 +79,49 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 
         private void CancelBooking(object sender)
         {
-            BookingCancelationMessageService BookingCancelationMessageService = new BookingCancelationMessageService();
-            bookingService.Delete(SelectedBooking);
-            string message = "Booking with ID: " + SelectedBooking.Id + " has been canceled.";
-            BookingCancelationMessage bookingCancelationMessage = new BookingCancelationMessage(message, SelectedBooking.Id);
-            BookingCancelationMessageService.Save(bookingCancelationMessage);
-            DataBaseContext canceledContext = new DataBaseContext();
-            DateTime plannedArrival = DateTime.ParseExact(selectedBooking.arrival, "M/d/yyyy", CultureInfo.InvariantCulture);
-            CanceledBooking canceledBooking = new CanceledBooking(SelectedBooking.Id, SelectedBooking.accommodationId, plannedArrival);
-            UpcomingBookingsGrid.Remove(SelectedBooking);
-            canceledContext.CanceledBookings.Add(canceledBooking);
-            canceledContext.SaveChanges();
+            if (SelectedBooking != null)
+            {
+                if ((DateTime.Parse(SelectedBooking.arrival).Subtract(DateTime.Today)).Days >= (accommodationService.GetById(SelectedBooking.accommodationId)).bookingCancelPeriodDays)
+                {
+                    BookingCancelationMessageService BookingCancelationMessageService = new BookingCancelationMessageService();
+                    bookingService.Delete(SelectedBooking);
+                    string message = "Booking with ID: " + SelectedBooking.Id + " has been canceled.";
+                    BookingCancelationMessage bookingCancelationMessage = new BookingCancelationMessage(message, SelectedBooking.Id);
+                    BookingCancelationMessageService.Save(bookingCancelationMessage);
+                    DataBaseContext canceledContext = new DataBaseContext();
+                    DateTime plannedArrival = DateTime.ParseExact(selectedBooking.arrival, "M/d/yyyy", CultureInfo.InvariantCulture);
+                    CanceledBooking canceledBooking = new CanceledBooking(SelectedBooking.Id, SelectedBooking.accommodationId, plannedArrival);
+                    UpcomingBookingsGrid.Remove(SelectedBooking);
+                    canceledContext.CanceledBookings.Add(canceledBooking);
+                    canceledContext.SaveChanges();
+                    WarningText = string.Empty;
+                }
+                else
+                {
+                    WarningText = "Chosen booking cannot be canceled due to expired cancelation period";
+                }
+            } else
+            {
+                WarningText = "You must select one of your bookings";
+            }
         }
 
         private void GoToBookingDelayment(object sender)
         {
-            if ((DateTime.Parse(SelectedBooking.arrival).Subtract(DateTime.Today)).Days >= (accommodationService.GetById(SelectedBooking.accommodationId)).bookingCancelPeriodDays)
+            if (SelectedBooking != null)
             {
                 GuestOneStaticHelper.selectedBookingToDelay = SelectedBooking;
                 SendBookingDelaymentInterface sendBookingDelaymentInterface = new SendBookingDelaymentInterface();
                 sendBookingDelaymentInterface.WindowStartupLocation = WindowStartupLocation.Manual;
                 sendBookingDelaymentInterface.Left = GuestOneStaticHelper.futureBookingsInterface.Left;
                 sendBookingDelaymentInterface.Top = GuestOneStaticHelper.futureBookingsInterface.Top;
-                GuestOneStaticHelper.futureBookingsInterface.Close();
                 sendBookingDelaymentInterface.Show();
+                WarningText = string.Empty;
+                GuestOneStaticHelper.futureBookingsInterface.Hide();
             }
             else
             {
-                // buking da ne moze da se otkaze
+                WarningText = "You must select one of your bookings";
             }
         }
         private void ShowPastBookings(object sender)
@@ -101,7 +131,8 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             pastBookingsInterface.Left = GuestOneStaticHelper.futureBookingsInterface.Left;
             pastBookingsInterface.Top = GuestOneStaticHelper.futureBookingsInterface.Top;
             pastBookingsInterface.Show();
-            GuestOneStaticHelper.futureBookingsInterface.Close();
+            WarningText = string.Empty;
+            GuestOneStaticHelper.futureBookingsInterface.Hide();
         }
 
     }

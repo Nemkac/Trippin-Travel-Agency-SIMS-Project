@@ -9,6 +9,10 @@
         Title="GuestOneInterface" Height="800" Width="1500" >
     <Window.InputBindings>
         <KeyBinding Key="Escape" Command="{Binding GoToPreviousWindow}" />
+        <KeyBinding Key="Left" Command="{Binding PreviousImage}" />
+        <KeyBinding Key="Right" Command="{Binding NextImage}" />
+        <KeyBinding Key="Enter" Command="{Binding BookAccommodation}" />
+        <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding NextImage}" />
     </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -67,9 +71,14 @@
                 FrozenColumnCount="300" 
                 ColumnWidth="500" 
                 TextBlock.TextAlignment="Center" 
-                HorizontalAlignment="Left" 
+                HorizontalAlignment="Left"
                 ItemsSource="{Binding AvaialableDatesGrid}" 
-                SelectedItem="{Binding SelectedDateRange}"/>
+                SelectedItem="{Binding SelectedDateRange}">
+                <DataGrid.InputBindings>
+                    <KeyBinding Key="Left" Command="{Binding PreviousImage}" />
+                    <KeyBinding Key="Right" Command="{Binding NextImage}" />
+                </DataGrid.InputBindings>
+            </DataGrid>
 
             <TextBox HorizontalAlignment="Center" 
                      TextWrapping="Wrap"
@@ -85,7 +94,14 @@
                      FontSize="22" 
                      TextAlignment="Center" 
                      VerticalContentAlignment="Center" 
-                     Text="{Binding NumberOfGuests}" />
+                     IsTabStop="False"
+                     Text="{Binding NumberOfGuests,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding BookAccommodation}" />
+                    <KeyBinding Key="Left" Command="{Binding PreviousImage}" />
+                    <KeyBinding Key="Right" Command="{Binding NextImage}" />
+                </TextBox.InputBindings>
+            </TextBox>
 
             <Button Content="Book" 
                     HorizontalAlignment="Left" 
@@ -102,6 +118,7 @@
                     Background="#FF273C75" 
                     Foreground="White" 
                     FontWeight="Medium" 
+                    IsTabStop="False"
                     Command="{Binding BookAccommodation}"/>
 
             <TextBlock 
@@ -187,11 +204,11 @@
 
         <Rectangle HorizontalAlignment="Left"
                    Height="65"
-                   Margin="-30,325,0,0" 
+                   Margin="0,325,0,0" 
                    Fill ="#273c75" 
                    Stroke="Black" 
                    VerticalAlignment="Top"
-                   Width="1544"
+                   Width="1514"
                    Grid.Row="1"/>
 
         <TextBlock HorizontalAlignment="Left" 
@@ -207,7 +224,7 @@
                    Grid.Row="1" />
 
         <GroupBox Header="Help"
-                  Margin="35,0,1114,281" 
+                  Margin="35,0,1105,276" 
                   Padding="10"
                   FontFamily="ubuntu"
                   FontSize="30"
@@ -237,30 +254,12 @@
                Source="{Binding AccommodationImage}" 
                Stretch="Fill"/>
 
-        <Button Content="⩽" 
-                HorizontalAlignment="Left"
-                Height="40"
-                Margin="140,0,0,0" 
-                Grid.Row="1" 
-                VerticalAlignment="Center" 
-                Width="40"
-                Command="{Binding PreviousImage}"/>
-
-        <Button Content=">" 
-                HorizontalAlignment="Left"
-                Height="40"
-                Margin="586,0,0,0" 
-                Grid.Row="1" 
-                VerticalAlignment="Center" 
-                Width="40"
-                Command="{Binding NextImage}"/>
-
         <TextBlock HorizontalAlignment="Left" 
                    Height="35" 
                    Margin="655,287,0,0"
                    Grid.Row="1" 
                    TextWrapping="Wrap" 
-                   Text="{Binding WarningMessage}" 
+                   Text="{Binding WarningText}" 
                    VerticalAlignment="Top" 
                    Width="633"
                    FontFamily="Ubuntu" 
@@ -268,5 +267,33 @@
                    FontWeight="Bold" 
                    Foreground="#e84118"
                    TextAlignment="Center"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Height="27" Margin="35,344,0,0"
+            Grid.Row="1" 
+            TextWrapping="Wrap"
+            Text="Press ESC to go back" 
+            VerticalAlignment="Top" 
+            Width="225"
+            Foreground="#e1b12c"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Bold"/>
+        
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Height="33" 
+            Margin="222,264,0,0"
+            Grid.Row="1" 
+            TextWrapping="Wrap" 
+            Text="Go through photos with arrows" 
+            VerticalAlignment="Top" 
+            Width="324"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"/>
+
     </Grid>
 </Window>

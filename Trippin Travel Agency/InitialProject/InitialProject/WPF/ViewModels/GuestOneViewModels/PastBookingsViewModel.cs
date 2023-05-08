@@ -20,11 +20,15 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         private BookingService bookingService = new(new BookingRepository());
         private AccommodationRateService accommodationRateService = new(new AccommodationRateRepository());
         public ViewModelCommand GoToRate { get; set; }
-    
+        public ViewModelCommand GoToPreviousWindow { get; set; }
+
+
         public PastBookingsViewModel()
         {
             PastBookingsGrid = new ObservableCollection<Booking>(userService.GetGuestsPastBookings(LoggedUser.id));
             GoToRate = new ViewModelCommand(ShowRateInterface);
+            GoToPreviousWindow = new ViewModelCommand(GoBack);
+
         }
 
         private Booking selectedBooking;
@@ -37,6 +41,20 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 {
                     selectedBooking = value;
                     OnPropertyChanged(nameof(SelectedBooking));
+                }
+            }
+        }
+
+        private string warningText;
+        public string WarningText
+        {
+            get { return warningText; }
+            set
+            {
+                if (warningText != value)
+                {
+                    warningText = value;
+                    OnPropertyChanged(nameof(WarningText));
                 }
             }
         }
@@ -55,6 +73,12 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             }
         }
 
+        private void GoBack(object sender)
+        {
+            GuestOneStaticHelper.futureBookingsInterface.Show();
+            GuestOneStaticHelper.pastBookingsInterface.Close();
+        }
+
         private void ShowRateInterface(object sender)
         {
             if (bookingService.CheckIfValidForRating(SelectedBooking) && !accommodationRateService.isPreviouslyRated((SelectedBooking).Id))
@@ -65,11 +89,12 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 rateAccommodationInterface.Left = GuestOneStaticHelper.pastBookingsInterface.Left;
                 rateAccommodationInterface.Top = GuestOneStaticHelper.pastBookingsInterface.Top;
                 rateAccommodationInterface.Show();
-                GuestOneStaticHelper.pastBookingsInterface.Close();
+                GuestOneStaticHelper.pastBookingsInterface.Hide();
+                WarningText = string.Empty;
             }
             else
             {
-                
+                WarningText = "You cannot leave a review of a booking older then 5 days";
             }
         }
     }

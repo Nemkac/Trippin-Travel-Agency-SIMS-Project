@@ -6,7 +6,15 @@
         xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
         mc:Ignorable="d"
         Title="SendBookingDelaymentInterface" Height="800" Width="1500">
+    <Window.InputBindings>
+        <KeyBinding Key="Escape" Command="{Binding GoToPreviousWindow}" />
+        <KeyBinding Key="Enter" Command="{Binding SendRequest}" />
+    </Window.InputBindings>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="741*"/>
+            <RowDefinition Height="43*"/>
+        </Grid.RowDefinitions>
         <GroupBox HorizontalAlignment="Center" 
                   Height="329"
                   Header="Please enter desired dates"
@@ -32,7 +40,7 @@
                    FontWeight="Bold"
                    Foreground="#FF192A56" 
                    RenderTransformOrigin="0.414,0.263"/>
-        
+
         <TextBlock HorizontalAlignment="Left"
                    Height="42"
                    Margin="565,489,0,0"
@@ -44,7 +52,7 @@
                    FontSize="20" 
                    FontWeight="Bold"
                    Foreground="#FF192A56"/>
-        
+
         <DatePicker HorizontalAlignment="Left" 
                     Height="27" 
                     Margin="759,412,0,0" 
@@ -54,8 +62,13 @@
                     FontFamily="ubuntu"
                     FontSize="18"
                     Background="#FF192A56" 
-                    SelectedDate="{Binding SelectedArrival}"/>
-        
+                    SelectedDate="{Binding SelectedArrival, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <DatePicker.InputBindings>
+                        <KeyBinding Key="Escape" Command="{Binding GoToPreviousWindow}" />
+                        <KeyBinding Key="Enter" Command="{Binding SendRequest}" />
+                    </DatePicker.InputBindings>
+        </DatePicker>
+
         <DatePicker HorizontalAlignment="Left" 
                     Height="28"
                     Margin="759,488,0,0" 
@@ -65,12 +78,17 @@
                     FontFamily="ubuntu" 
                     FontSize="18"
                     Background="#FF192A56"
-                    SelectedDate="{Binding SelectedDeparture}"/>
-        
+                    SelectedDate="{Binding SelectedDeparture, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <DatePicker.InputBindings>
+                        <KeyBinding Key="Escape" Command="{Binding GoToPreviousWindow}" />
+                        <KeyBinding Key="Enter" Command="{Binding SendRequest}" />
+                    </DatePicker.InputBindings>
+        </DatePicker>
+
         <Button Content="Send a request"
                 HorizontalAlignment="Center"
                 Height="40"
-                Margin="0,576,0,0" 
+                Margin="0,567,0,0" 
                 VerticalAlignment="Top"
                 Width="164" 
                 FontFamily="ubuntu"
@@ -79,7 +97,7 @@
                 Foreground="White"
                 FontWeight="Medium" 
                 Command="{Binding SendRequest}"/>
-        
+
         <Label Content="Date changing"
                FontSize ="64"
                HorizontalAlignment="Center" 
@@ -88,9 +106,9 @@
                FontFamily="ubuntu" 
                FontWeight="Bold"
                Foreground="#192a56"/>
-        
+
         <GroupBox Header="Navigator"
-                  Margin="985,1,26,662"
+                  Margin="985,1,26,619"
                   Padding="10"
                   FontFamily="ubuntu"
                   FontSize="30" 
@@ -101,15 +119,15 @@
                 <TextBlock Width="478" FontWeight="medium"><Run Text="Press CTRL+N for program map" FontFamily="ubuntu"/></TextBlock>
             </StackPanel>
         </GroupBox>
-        
+
         <Rectangle HorizontalAlignment="Left" 
                    Height="65"
-                   Margin="-30,702,0,0"
+                   Margin="0,702,0,0"
                    Fill ="#273c75"
                    Stroke="Black"
                    VerticalAlignment="Top" 
-                   Width="1674"/>
-        
+                   Width="1644" Grid.RowSpan="2"/>
+
         <TextBlock HorizontalAlignment="Left" 
                    Height="72" 
                    Margin="609,698,0,0"
@@ -119,10 +137,10 @@
                    Width="325"
                    Foreground="white" 
                    FontSize="48"
-                   FontWeight="Bold" />
-        
+                   FontWeight="Bold" Grid.RowSpan="2" />
+
         <GroupBox Header="Help"
-                  Margin="35,0,1114,662" 
+                  Margin="35,0,1114,619" 
                   Padding="10" 
                   FontFamily="ubuntu" 
                   FontSize="30" 
@@ -133,29 +151,29 @@
                 <TextBlock Height="39" FontWeight="medium"><Run Text="Press CTRL+H for help"/></TextBlock>
             </StackPanel>
         </GroupBox>
-        
+
         <TextBlock HorizontalAlignment="Center" 
-                   Height="131" 
+                   Height="150" 
                    Margin="0,138,0,0"
                    TextWrapping="Wrap" 
                    Name="bookingInfoLabelsBlock" 
                    VerticalAlignment="Top" 
                    Width="314" 
                    LineHeight="24"
-                   FontSize="20" 
+                   FontSize="22" 
                    FontWeight="Bold" 
                    TextAlignment="Center" 
                    Text="{Binding AccommodationInfoLabels}"/>
-        
+
         <TextBlock HorizontalAlignment="Center"
-                   Height="139" 
-                   Margin="0,158,0,0" 
+                   Height="150" 
+                   Margin="0,163,0,0" 
                    TextWrapping="Wrap" 
                    Name="bookingInfoBlock"
                    VerticalAlignment="Top"
                    Width="314" 
                    LineHeight="24" 
-                   FontSize="20" 
+                   FontSize="22" 
                    TextAlignment="Center" 
                    Text="{Binding AccommodationInfo}"/>
 
@@ -166,5 +184,42 @@
                    VerticalAlignment="Top"
                    Width="1434" 
                    Fill="#192a56"/>
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Height="27" Margin="35,727,0,0" 
+            TextWrapping="Wrap"
+            Text="Press ESC to go back" 
+            VerticalAlignment="Top" 
+            Width="225"
+            Foreground="#e1b12c"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Bold" Grid.RowSpan="2"/>
+
+        <TextBlock 
+            HorizontalAlignment="Center" 
+            Height="32" 
+            Margin="0,531,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="448"
+            FontFamily="Ubuntu" 
+            FontSize="20" 
+            FontWeight="Bold" 
+            Foreground="#e84118"
+            TextAlignment="Center"
+            Text="{Binding WarningText}"/>
+        <TextBlock 
+            HorizontalAlignment="Center"
+            Height="20" 
+            Margin="0,612,0,0"
+            TextWrapping="Wrap" 
+            Text="Press ENTER" 
+            VerticalAlignment="Top" 
+            Width="102"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"/>
     </Grid>
 </Window>

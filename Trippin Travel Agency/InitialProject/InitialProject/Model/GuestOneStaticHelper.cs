@@ -16,7 +16,10 @@ namespace InitialProject.Model
         public static FutureBookingsInterface futureBookingsInterface { get; set; }
         public static int selectedBookingIdToRate { get; set; }
         public static PastBookingsInterface pastBookingsInterface { get; set; }
-
         public static string previousWindow { get; set; }
+        public static GuestOneInterface guestOneInterface { get; set; }
+        public static BookAccommodationInterface bookAccommodationInterface { get; set; }
+        public static RateAccommodationInterface rateAccommodationInterface { get; set; }
+        public static SendBookingDelaymentInterface sendBookingDelaymentInterface { get; set;}
     }
 }

@@ -3,10 +3,12 @@ using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service.AccommodationServices;
 using InitialProject.Service.BookingServices;
+using InitialProject.WPF.View.GuestOne_Views;
 using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -140,6 +142,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand BookAccommodation { get; set; }
         public ViewModelCommand NextImage { get; set; }
         public ViewModelCommand PreviousImage { get; set; }
+
         public BookAccommodationViewModel()
         {
             DataBaseContext context = new DataBaseContext();
@@ -157,23 +160,33 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             NextImage = new ViewModelCommand(ShowNextImage);
             PreviousImage = new ViewModelCommand(ShowPreviousImage);
             GoToPreviousWindow = new ViewModelCommand(GoBack);
+
         }
 
         private void GoBack(object sender)
         {
-            
+            GuestOneStaticHelper.guestOneInterface.Show();
+            GuestOneStaticHelper.bookAccommodationInterface.Close();
         }
 
         private void Book(object sender)
         {
-            string arrival, departure, guestsNumber;
-            GetBasicAccommodationBookingProperties(out arrival, out departure, out guestsNumber);
-            if (int.Parse(guestsNumber) > this.accommodationService.GetById(GuestOneStaticHelper.id).guestLimit)
+            if ((NumberOfGuests == null && SelectedDateRange == null) || (SelectedDateRange == null))
+            {
+                WarningMessage = "You must select arrival and departure dates";
+            }
+            else if (NumberOfGuests == null)
+            {
+                WarningMessage = "You must enter the number of guests";
+            }
+            else if (int.Parse(NumberOfGuests) > this.accommodationService.GetById(GuestOneStaticHelper.id).guestLimit)
             {
                 WarningMessage = accommodationService.GetById(GuestOneStaticHelper.id).name + " cannot take more then " + this.accommodationService.GetById(GuestOneStaticHelper.id).guestLimit.ToString() + " guests";
             }
             else
             {
+                string arrival, departure, guestsNumber;
+                GetBasicAccommodationBookingProperties(out arrival, out departure, out guestsNumber);
                 SaveBooking(accommodationService, arrival, departure, guestsNumber);
                 WarningMessage = string.Empty;
             }
@@ -217,7 +230,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             List<string> dates = selectedDate.Split("-").ToList();
             arrival = dates[0].Substring(0, dates[0].Length - 2);
             departure = dates[1].Substring(2, dates[1].Length - 2);
-            guestsNumber = numberOfGuests;
+            guestsNumber = NumberOfGuests;
         }
 
         private void SaveBooking(AccommodationService accommodationService, string arrival, string departure, string guestsNumber)
@@ -225,5 +238,6 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             Booking booking = new Booking(GuestOneStaticHelper.id, arrival, departure, (DateTime.Parse(departure).Subtract(DateTime.Parse(arrival))).Days, LoggedUser.id);
             bookingService.Save(booking);
         }
+
     }
 }
