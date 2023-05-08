@@ -54,6 +54,7 @@
                 Foreground="White" 
                 FontWeight="Medium" 
                 IsTabStop="False"
+                Style="{StaticResource leadButton}"
                 Command="{Binding GoToDelayment}"/>
 
         <Button Content="Cancel booking"
@@ -68,6 +69,7 @@
                 Foreground="White" 
                 FontWeight="Medium" 
                 IsTabStop="False"
+                Style="{StaticResource leadButton}"
                 Command="{Binding DeleteBooking}" />
 
         <Button Content="My previous bookings" 
@@ -82,6 +84,7 @@
                 Foreground="White" 
                 FontWeight="Medium" 
                 IsTabStop="False"
+                Style="{StaticResource leadButton}"
                 Command="{Binding GoToPastBookings}"/>
 
         <Button Content="Show detailed" 
@@ -95,6 +98,7 @@
                 Background="#FF273C75" 
                 Foreground="White" 
                 FontWeight="Medium"
+                Style="{StaticResource leadButton}"
                 IsTabStop="False"/>
 
         <GroupBox Header="Navigator"

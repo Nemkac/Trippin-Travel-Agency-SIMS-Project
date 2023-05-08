@@ -34,7 +34,8 @@
                 FontSize="20"
                 Background="#FF273C75"
                 Foreground="White"
-                FontWeight="Medium" 
+                FontWeight="Medium"
+                Style="{StaticResource leadButton}"
                 Command="{Binding GoToRate}"/>
 
         <Label Content="Booking archive"
@@ -124,6 +125,7 @@
                 FontSize="20"
                 Background="#FF273C75"
                 Foreground="White"
+                Style="{StaticResource leadButton}"
                 FontWeight="Medium"/>
 
         <TextBlock HorizontalAlignment="Left"

@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 {
@@ -152,15 +153,14 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             AccommodationImage = images[0].imageLink;
             AccommodationInfo = GuestOneStaticHelper.id.ToString();
             AccommodationInfo = accommodation.name + "\n\n" + this.accommodationService.GetAccommodationLocation(GuestOneStaticHelper.id)[0]+ " , " +
-                accommodationService.GetAccommodationLocation(GuestOneStaticHelper.id)[1] + "\n\n" + accommodation.guestLimit + "\n\n" +
-                accommodationRateService.GetAccommodationAverageRate(GuestOneStaticHelper.id);
+                                accommodationService.GetAccommodationLocation(GuestOneStaticHelper.id)[1] + "\n\n" + accommodation.guestLimit + "\n\n" +
+                                accommodationRateService.GetAccommodationAverageRate(GuestOneStaticHelper.id);
 
             AvaialableDatesGrid = GuestOneStaticHelper.result;
             BookAccommodation = new ViewModelCommand(Book);
             NextImage = new ViewModelCommand(ShowNextImage);
             PreviousImage = new ViewModelCommand(ShowPreviousImage);
             GoToPreviousWindow = new ViewModelCommand(GoBack);
-
         }
 
         private void GoBack(object sender)
@@ -189,6 +189,11 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 GetBasicAccommodationBookingProperties(out arrival, out departure, out guestsNumber);
                 SaveBooking(accommodationService, arrival, departure, guestsNumber);
                 WarningMessage = string.Empty;
+                BookingConfirmationInterface bookingConfirmationInterface = new BookingConfirmationInterface();
+                bookingConfirmationInterface.Left = GuestOneStaticHelper.bookAccommodationInterface.Left + (GuestOneStaticHelper.bookAccommodationInterface.Width - bookingConfirmationInterface.Width)/2;
+                bookingConfirmationInterface.Top = GuestOneStaticHelper.bookAccommodationInterface.Top + (GuestOneStaticHelper.bookAccommodationInterface.Height - bookingConfirmationInterface.Height) / 2; ;
+                GuestOneStaticHelper.bookAccommodationInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
+                bookingConfirmationInterface.Show();
             }
         }
 

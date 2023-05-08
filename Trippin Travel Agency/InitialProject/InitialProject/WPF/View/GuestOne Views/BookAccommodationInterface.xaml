@@ -96,11 +96,11 @@
                      VerticalContentAlignment="Center" 
                      IsTabStop="False"
                      Text="{Binding NumberOfGuests,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                    <TextBox.InputBindings>
-                        <KeyBinding Key="Enter" Command="{Binding BookAccommodation}" />
-                        <KeyBinding Key="Left" Command="{Binding PreviousImage}" />
-                        <KeyBinding Key="Right" Command="{Binding NextImage}" />
-                    </TextBox.InputBindings>
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding BookAccommodation}" />
+                    <KeyBinding Key="Left" Command="{Binding PreviousImage}" />
+                    <KeyBinding Key="Right" Command="{Binding NextImage}" />
+                </TextBox.InputBindings>
             </TextBox>
 
             <Button Content="Book" 
@@ -119,6 +119,7 @@
                     Foreground="White" 
                     FontWeight="Medium" 
                     IsTabStop="False"
+                    Style="{StaticResource leadButton}"
                     Command="{Binding BookAccommodation}"/>
 
             <TextBlock 
@@ -254,20 +255,6 @@
                Source="{Binding AccommodationImage}" 
                Stretch="Fill"/>
 
-        <TextBlock HorizontalAlignment="Left" 
-                   Height="35" 
-                   Margin="655,287,0,0"
-                   Grid.Row="1" 
-                   TextWrapping="Wrap" 
-                   Text="{Binding WarningText}" 
-                   VerticalAlignment="Top" 
-                   Width="633"
-                   FontFamily="Ubuntu" 
-                   FontSize="22" 
-                   FontWeight="Bold" 
-                   Foreground="#e84118"
-                   TextAlignment="Center"/>
-
         <TextBlock 
             HorizontalAlignment="Left" 
             Height="27" Margin="35,344,0,0"
@@ -280,7 +267,7 @@
             FontFamily="Ubuntu" 
             FontSize="22" 
             FontWeight="Bold"/>
-        
+
         <TextBlock 
             HorizontalAlignment="Left" 
             Height="33" 
@@ -294,6 +281,20 @@
             FontFamily="Ubuntu" 
             FontSize="22" 
             FontWeight="Medium"/>
+        
+        <TextBlock HorizontalAlignment="Left" 
+                   Height="35" 
+                   Margin="655,287,0,0"
+                   Grid.Row="1" 
+                   TextWrapping="Wrap" 
+                   Text="{Binding WarningMessage}" 
+                   VerticalAlignment="Top" 
+                   Width="633"
+                   FontFamily="Ubuntu" 
+                   FontSize="22" 
+                   FontWeight="Bold" 
+                   Foreground="#e84118"
+                   TextAlignment="Center"/>
 
     </Grid>
 </Window>

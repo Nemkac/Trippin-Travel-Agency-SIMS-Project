@@ -2,6 +2,7 @@
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service.BookingServices;
+using InitialProject.WPF.View.GuestOne_Views;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 {
@@ -137,6 +139,13 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 BookingDelaymentRequest bookingDelaymentRequest = new BookingDelaymentRequest(GuestOneStaticHelper.selectedBookingToDelay.Id, selectedArrival, selectedDeparture, Status.Pending, new string(""));
                 bookingDelaymentRequestService.Save(bookingDelaymentRequest);
                 WarningText = string.Empty;
+
+                BookingDelaymentConfirmationInterface bookingDelaymentConfirmationInterface = new BookingDelaymentConfirmationInterface();
+                bookingDelaymentConfirmationInterface.Left = GuestOneStaticHelper.sendBookingDelaymentInterface.Left + (GuestOneStaticHelper.sendBookingDelaymentInterface.Width - bookingDelaymentConfirmationInterface.Width) / 2;
+                bookingDelaymentConfirmationInterface.Top = GuestOneStaticHelper.sendBookingDelaymentInterface.Top + (GuestOneStaticHelper.sendBookingDelaymentInterface.Height - bookingDelaymentConfirmationInterface.Height) / 2;
+                GuestOneStaticHelper.sendBookingDelaymentInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
+                bookingDelaymentConfirmationInterface.Show();
+
             }
         }
 

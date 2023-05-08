@@ -1,0 +1,66 @@
+﻿<Window x:Class="InitialProject.WPF.View.GuestOne_Views.BookingDelaymentConfirmationInterface"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
+        mc:Ignorable="d"
+        Title="BookingDelaymentConfirmationInterface" Height="350" Width="480" WindowStyle="None">
+    <Window.InputBindings>
+        <KeyBinding Key="Enter" Command="{Binding ShowRequests}" />
+        </Window.InputBindings>
+    <Grid>
+        <GroupBox HorizontalAlignment="Left"
+            Height="340" 
+            Header="Congratulations !" 
+            VerticalAlignment="Top"
+            Width="480" 
+            FontFamily="ubuntu" 
+            FontSize="36" 
+            FontWeight="Bold" 
+            Foreground="#FF192A56" 
+            BorderThickness="3" 
+            BorderBrush="#192a56" 
+            Margin="0,8,0,0"/>
+
+        <TextBlock HorizontalAlignment="Center" 
+            Height="80" 
+            Margin="0,117,0,0"
+            FontSize="30"
+            TextWrapping="Wrap" 
+            Text="Successfully sent delayment request !"
+            VerticalAlignment="Top" 
+            Width="312"
+            FontFamily="ubuntu" 
+            FontWeight="Bold"
+            TextAlignment="center"
+            Foreground="#192a56"/>
+
+        <Button Content="Go to my delayment requests"
+            HorizontalAlignment="Center" 
+            Height="38"
+            Margin="0,235,0,0" 
+            VerticalAlignment="Top"
+            Width="199"
+            FontFamily="ubuntu" 
+            FontSize="14" 
+            Background="#FF273C75" 
+            Foreground="White"
+            Style="{StaticResource leadButton}"
+            FontWeight="Medium"
+            Command="{Binding ShowRequests}"/>
+
+        <TextBlock 
+            HorizontalAlignment="Center"
+            Height="20" 
+            Margin="0,283,0,0"
+            TextWrapping="Wrap" 
+            Text="Press ENTER" 
+            VerticalAlignment="Top" 
+            Width="100"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"/>
+    </Grid>
+</Window>

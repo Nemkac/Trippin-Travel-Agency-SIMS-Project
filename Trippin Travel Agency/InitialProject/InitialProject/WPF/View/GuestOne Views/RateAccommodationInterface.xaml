@@ -37,6 +37,7 @@
                 Foreground="White"
                 FontWeight="Medium"
                 IsTabStop="False"
+                Style="{StaticResource leadButton}"
                 Command="{Binding RateAccommodation}"/>
 
         <TextBlock HorizontalAlignment="Left" 
@@ -246,6 +247,7 @@
                 Foreground="White" 
                 FontWeight="Medium"
                 IsTabStop="False"
+                Style="{StaticResource leadButton}"
                 Command="{Binding AddImageUrl}"/>
 
         <TextBlock HorizontalAlignment="Left" 
