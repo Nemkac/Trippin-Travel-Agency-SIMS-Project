@@ -4,6 +4,7 @@ using InitialProject.Repository;
 using InitialProject.Service.BookingServices;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand SendRequest { get; set; }
         private BookingDelaymentRequestService bookingDelaymentRequestService = new(new BookingDelaymentRequestRepository());
         public ViewModelCommand GoToPreviousWindow { get; set; }
+        int counter = 0;
 
         public SendBookingDelaymentViewModel()
         {
@@ -120,7 +122,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             {
                 WarningText = "You must pick departure date";
             }
-            else if (SelectedArrival <= DateTime.Today)
+            else if (SelectedArrival.Date <= DateTime.Today.Date)
             {
                 WarningText = "Arrival date set to a past";
             }
