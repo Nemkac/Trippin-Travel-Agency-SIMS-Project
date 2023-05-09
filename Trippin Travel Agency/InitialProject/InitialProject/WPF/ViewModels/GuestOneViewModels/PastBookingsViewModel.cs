@@ -20,9 +20,11 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         private UserService userService = new UserService();
         private BookingService bookingService = new(new BookingRepository());
         private AccommodationRateService accommodationRateService = new(new AccommodationRateRepository());
+        bool isHelpOn = false;
         public ViewModelCommand GoToRate { get; set; }
         public ViewModelCommand GoToPreviousWindow { get; set; }
         public ViewModelCommand OpenNavigator { get; set; }
+        public ViewModelCommand Help { get; set; }
 
         public PastBookingsViewModel()
         {
@@ -30,6 +32,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             GoToRate = new ViewModelCommand(ShowRateInterface);
             GoToPreviousWindow = new ViewModelCommand(GoBack);
             OpenNavigator = new ViewModelCommand(ShowNavigator);
+            Help = new ViewModelCommand(ShowHelp);
         }
 
         private Booking selectedBooking;
@@ -60,6 +63,48 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             }
         }
 
+        private string helpGrid;
+        public string HelpGrid
+        {
+            get { return helpGrid; }
+            set
+            {
+                if (helpGrid != value)
+                {
+                    helpGrid = value;
+                    OnPropertyChanged(nameof(HelpGrid));
+                }
+            }
+        }
+
+        private string helpChoose;
+        public string HelpChoose
+        {
+            get { return helpChoose; }
+            set
+            {
+                if (helpChoose != value)
+                {
+                    helpChoose = value;
+                    OnPropertyChanged(nameof(HelpChoose));
+                }
+            }
+        }
+
+        private string helpExit;
+        public string HelpExit
+        {
+            get { return helpExit; }
+            set
+            {
+                if (helpExit != value)
+                {
+                    helpExit = value;
+                    OnPropertyChanged(nameof(helpExit));
+                }
+            }
+        }
+
         private ObservableCollection<Booking> pastBookingsGrid;
         public ObservableCollection<Booking> PastBookingsGrid
         {
@@ -71,6 +116,24 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                     pastBookingsGrid = value;
                     OnPropertyChanged(nameof(PastBookingsGrid));
                 }
+            }
+        }
+
+        public void ShowHelp(object sender)
+        {
+            if(isHelpOn)
+            {
+                HelpGrid = string.Empty;
+                HelpExit = string.Empty;
+                HelpChoose = string.Empty;
+                isHelpOn = false;
+            }
+            else
+            {
+                HelpGrid = "Access the list of bookings by pressing TAB, then go through them with Up and Down arrows";
+                HelpChoose = "When booking is selected you can press R to leave a review of it or press S to send a renovation idea to owner";
+                HelpExit = "To exit Help, press CTRL + H again";
+                isHelpOn = true;
             }
         }
 

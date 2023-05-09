@@ -14,6 +14,7 @@
         <KeyBinding Key="Right" Command="{Binding NextImage}" />
         <KeyBinding Key="Enter" Command="{Binding BookAccommodation}" />
         <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
+        <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
     </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -105,15 +106,15 @@
             </TextBox>
 
             <Button Content="Book" 
-                    HorizontalAlignment="Left" 
+                    HorizontalAlignment="Center" 
                     Height="48"
-                    VerticalAlignment="Center" 
+                    VerticalAlignment="Top" 
                     Width="114" 
                     x:Name ="BookAccommodation" 
                     Grid.RowSpan="2" 
                     Canvas.Bottom="-60" 
                     Canvas.Left="902"
-                    Canvas.Top="594" 
+                    Canvas.Top="606" 
                     FontFamily="ubuntu" 
                     FontSize="24" 
                     Background="#FF273C75" 
@@ -138,7 +139,7 @@
 
             <GroupBox Height="459" 
                       Header="Accommodation info" 
-                      Canvas.Left="194"
+                      Canvas.Left="216"
                       Canvas.Top="183"
                       Width="378"
                       FontFamily="ubuntu" 
@@ -151,13 +152,12 @@
                       VerticalAlignment="Center"/>
 
             <TextBlock Height="212"
-                       Canvas.Left="227
-                       " TextWrapping="Wrap"
+                       Canvas.Left="249" TextWrapping="Wrap"
                        Name="accommodationInfoBlock" 
                        Canvas.Top="251" 
                        Width="305" 
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Top" 
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center" 
                        TextAlignment="Center" 
                        LineHeight="24" 
                        FontFamily="Ubuntu" 
@@ -165,13 +165,13 @@
                        Text="{Binding AccommodationInfo}"/>
 
             <TextBlock Height="212" 
-                       Canvas.Left="227"
+                       Canvas.Left="249"
                        TextWrapping="Wrap" 
                        Name="accommodationInfoLabelsBlock" 
                        Canvas.Top="231"
                        Width="305" 
-                       HorizontalAlignment="Center" 
-                       VerticalAlignment="Top"
+                       HorizontalAlignment="Left" 
+                       VerticalAlignment="Center"
                        TextAlignment="Center"
                        LineHeight="24"
                        Foreground="#FF192A56" 
@@ -249,7 +249,7 @@
 
         <Image HorizontalAlignment="Left" 
                Height="169" 
-               Margin="232,72,0,0" 
+               Margin="254,72,0,0" 
                Grid.Row="1"
                VerticalAlignment="Top"
                Width="303" 
@@ -272,17 +272,16 @@
         <TextBlock 
             HorizontalAlignment="Left" 
             Height="33" 
-            Margin="222,264,0,0"
+            Margin="244,264,0,0"
             Grid.Row="1" 
             TextWrapping="Wrap" 
-            Text="Go through photos with arrows" 
             VerticalAlignment="Top" 
             Width="324"
             Foreground="#7f8fa6"
             FontFamily="Ubuntu" 
             FontSize="22" 
             FontWeight="Medium"/>
-        
+
         <TextBlock HorizontalAlignment="Left" 
                    Height="35" 
                    Margin="655,287,0,0"
@@ -296,6 +295,85 @@
                    FontWeight="Bold" 
                    Foreground="#e84118"
                    TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+                   Height="197" 
+                   Margin="9,220,0,0" 
+                   TextWrapping="Wrap" 
+                   Text="{Binding HelpInfo}"
+                   VerticalAlignment="Top" 
+                   Width="202"
+                   Foreground="#7f8fa6"
+                   FontFamily="Ubuntu" 
+                   FontSize="22" 
+                   FontWeight="Medium" 
+                   Grid.RowSpan="2"
+                   TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="165" 
+            Margin="28,95,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpImage}"
+            VerticalAlignment="Top" 
+            Width="157" Grid.Row="1"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="233" 
+            Margin="1317,232,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpDates}"
+            VerticalAlignment="Top" 
+            Width="157" Grid.RowSpan="2"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="80" 
+            Margin="1129,142,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpGuests}"
+            VerticalAlignment="Top" 
+            Width="341" Grid.Row="1"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="86" 
+            Margin="1046,228,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpBook}"
+            VerticalAlignment="Top" 
+            Width="428" Grid.Row="1"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+        
+        <TextBlock HorizontalAlignment="Left"
+            Height="111" 
+            Margin="609,160,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpExit}"
+            VerticalAlignment="Top" 
+            Width="188" Grid.Row="1"
+            Foreground="#c23616"
+            FontFamily="Ubuntu" 
+            FontSize="26" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
 
     </Grid>
 </Window>

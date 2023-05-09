@@ -19,15 +19,19 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         private AccommodationRateService accommodationRateService = new(new AccommodationRateRepository());
         public ViewModelCommand GoToPreviousWindow { get; set; }
         public ViewModelCommand OpenNavigator { get; set; }
+        public ViewModelCommand Help { get; set; }
 
         public List<Model.Image> imageUrls = new List<Model.Image>();
         public int imageCounter = 0;
+        bool isHelpOn = false;
+
         public RateAccommodationViewModel()
         {
             RateAccommodation = new ViewModelCommand(Rate);
             AddImageUrl = new ViewModelCommand(GetImage);
             GoToPreviousWindow = new ViewModelCommand(GoBack);
             OpenNavigator = new ViewModelCommand(ShowNavigator);
+            Help = new ViewModelCommand(ShowHelp);
 
         }
 
@@ -112,6 +116,34 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                     warningText = value;
                     OnPropertyChanged(nameof(WarningText));
                 }
+            }
+        }
+
+        private string helpExit;
+        public string HelpExit
+        {
+            get { return helpExit; }
+            set
+            {
+                if (helpExit != value)
+                {
+                    helpExit = value;
+                    OnPropertyChanged(nameof(helpExit));
+                }
+            }
+        }
+
+        public void ShowHelp(object sender)
+        {
+            if(isHelpOn)
+            {
+                HelpExit = string.Empty;
+                isHelpOn = false;
+            }
+            else
+            {
+                HelpExit = "To exit Help, press CTRL + H again";
+                isHelpOn = true;
             }
         }
 

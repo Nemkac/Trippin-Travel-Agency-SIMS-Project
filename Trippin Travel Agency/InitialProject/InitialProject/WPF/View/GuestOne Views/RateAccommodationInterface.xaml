@@ -10,6 +10,7 @@
         <KeyBinding Key="Escape" Command="{Binding GoToPreviousWindow}" />
         <KeyBinding Key="Enter" Command="{Binding RateAccommodation}" />
         <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
+        <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
     </Window.InputBindings>
     <Grid>
         <GroupBox HorizontalAlignment="Left" 
@@ -287,6 +288,18 @@
             FontSize="22" 
             FontWeight="Bold" 
             Foreground="#e84118"
+            TextAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Left"
+            Height="148" 
+            Margin="1323,535,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpExit}"
+            VerticalAlignment="Top" 
+            Width="127"
+            Foreground="#c23616"
+            FontFamily="Ubuntu" 
+            FontSize="26" 
+            FontWeight="Medium"
             TextAlignment="Center"/>
 
     </Grid>

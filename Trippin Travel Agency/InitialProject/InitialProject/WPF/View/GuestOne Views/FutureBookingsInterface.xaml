@@ -6,11 +6,12 @@
         xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
         mc:Ignorable="d"
         Title="FutureBookingsInterface" Height="800" Width="1500" >
-        <Window.InputBindings>
-            <KeyBinding Key="R" Command="{Binding GoToDelayment}" />
-            <KeyBinding Key="C" Command="{Binding DeleteBooking}" />
-            <KeyBinding Key="B" Command="{Binding GoToPastBookings}" />
-            <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
+    <Window.InputBindings>
+        <KeyBinding Key="R" Command="{Binding GoToDelayment}" />
+        <KeyBinding Key="C" Command="{Binding DeleteBooking}" />
+        <KeyBinding Key="B" Command="{Binding GoToPastBookings}" />
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
+        <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
     </Window.InputBindings>
     <Grid>
         <GroupBox HorizontalAlignment="Center"
@@ -162,14 +163,6 @@
                    Width="1435" 
                    Fill="#192a56"/>
 
-        <TextBlock HorizontalAlignment="Left" 
-                   Height="57" 
-                   Margin="412,601,0,0" 
-                   TextWrapping="Wrap" 
-                   Name="warningBlock"  
-                   VerticalAlignment="Top" 
-                   Width="146"/>
-
         <TextBlock 
             HorizontalAlignment="Left"
             Height="20" 
@@ -235,6 +228,58 @@
             Foreground="#e84118"
             TextAlignment="Center"
             Text="{Binding WarningText}"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="198" 
+            Margin="18,257,0,0" 
+            TextWrapping="Wrap" 
+            Text= "{Binding HelpGrid}"
+            VerticalAlignment="Top" 
+            Width="202"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="197" 
+            Margin="1262,255,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpChoose}"
+            VerticalAlignment="Top" 
+            Width="218"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="80" 
+            Margin="938,604,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpPast}"
+            VerticalAlignment="Top" 
+            Width="324"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+        
+        <TextBlock HorizontalAlignment="Left"
+            Height="111" 
+            Margin="347,592,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpExit}"
+            VerticalAlignment="Top" 
+            Width="188"
+            Foreground="#c23616"
+            FontFamily="Ubuntu" 
+            FontSize="26" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
 
     </Grid>
 </Window>

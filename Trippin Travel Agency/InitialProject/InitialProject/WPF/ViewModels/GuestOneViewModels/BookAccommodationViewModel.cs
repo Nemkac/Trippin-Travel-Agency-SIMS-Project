@@ -23,9 +23,11 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         private BookingService bookingService = new(new BookingRepository());
         private AccommodationRateService accommodationRateService = new(new AccommodationRateRepository());
         int imageCounter = 0;
+        bool isHelpOn = false;
         public ViewModelCommand DataGridKeyDown { get; set; }
         public ViewModelCommand GoToPreviousWindow { get; set; }
         public ViewModelCommand OpenNavigator { get; set; }
+        public ViewModelCommand Help {  get; set; }
 
 
         private string accommodationInfo;
@@ -141,6 +143,90 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             }
         }
 
+        private string helpInfo;
+        public string HelpInfo
+        {
+            get { return helpInfo; }
+            set
+            {
+                if (helpInfo != value)
+                {
+                    helpInfo = value;
+                    OnPropertyChanged(nameof(HelpInfo));
+                }
+            }
+        }
+
+        private string helpImage;
+        public string HelpImage
+        {
+            get { return helpImage; }
+            set
+            {
+                if (helpImage != value)
+                {
+                    helpImage = value;
+                    OnPropertyChanged(nameof(HelpImage));
+                }
+            }
+        }
+
+        private string helpDates;
+        public string HelpDates
+        {
+            get { return helpDates; }
+            set
+            {
+                if (helpDates != value)
+                {
+                    helpDates = value;
+                    OnPropertyChanged(nameof(HelpDates));
+                }
+            }
+        }
+
+        private string helpGuests;
+        public string HelpGuests
+        {
+            get { return helpGuests; }
+            set
+            {
+                if (helpGuests != value)
+                {
+                    helpGuests = value;
+                    OnPropertyChanged(nameof(HelpGuests));
+                }
+            }
+        }
+
+        private string helpBook;
+        public string HelpBook
+        {
+            get { return helpBook; }
+            set
+            {
+                if (helpBook != value)
+                {
+                    helpBook = value;
+                    OnPropertyChanged(nameof(HelpBook));
+                }
+            }
+        }
+
+        private string helpExit;
+        public string HelpExit
+        {
+            get { return helpExit; }
+            set
+            {
+                if (helpExit != value)
+                {
+                    helpExit = value;
+                    OnPropertyChanged(nameof(helpExit));
+                }
+            }
+        }
+
         public ViewModelCommand BookAccommodation { get; set; }
         public ViewModelCommand NextImage { get; set; }
         public ViewModelCommand PreviousImage { get; set; }
@@ -163,6 +249,32 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             PreviousImage = new ViewModelCommand(ShowPreviousImage);
             GoToPreviousWindow = new ViewModelCommand(GoBack);
             OpenNavigator = new ViewModelCommand(ShowNavigator);
+            Help = new ViewModelCommand(ShowHelp);
+        }
+
+
+        public void ShowHelp(object sender)
+        {
+            if (isHelpOn)
+            {
+                HelpInfo = string.Empty;
+                HelpImage = string.Empty; ;
+                HelpDates = string.Empty; ;
+                HelpGuests = string.Empty; ;
+                HelpBook = string.Empty; ;
+                HelpExit = string.Empty; ;
+                isHelpOn = false;
+            }
+            else
+            {
+                HelpInfo = "Here you can see informations about the acccommodation you have selected";
+                HelpImage = "You can go through photos with Left and Right arrows on keyboards";
+                HelpDates = "By pressing TAB you will access list of available dates. You can go through them with Up and Down arrows";
+                HelpGuests = "When you have selected the dates you like, press Left Shift and then enter number of guests";
+                HelpBook = "When dates are selected and number of guests entered, all there left is to press Enter and you have made your booking";
+                HelpExit = "To exit Help, press CTRL + H again";
+                isHelpOn = true;
+            }
         }
 
         private void ShowNavigator(object sender)

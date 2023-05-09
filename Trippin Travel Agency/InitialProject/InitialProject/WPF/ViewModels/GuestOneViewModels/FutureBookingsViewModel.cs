@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,6 +27,8 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand GoToDelayment { get; set; }
         public ViewModelCommand OpenNavigator { get; set; }
         public ViewModelCommand GoToPastBookings { get; set; }
+        public ViewModelCommand Help { get;set; }
+        bool isHelpOn = false;
 
         public FutureBookingsViewModel()
         {
@@ -34,6 +37,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             GoToDelayment = new ViewModelCommand(GoToBookingDelayment);
             OpenNavigator = new ViewModelCommand(ShowNavigator);
             GoToPastBookings = new ViewModelCommand(ShowPastBookings);
+            Help = new ViewModelCommand(ShowHelp);
         }
 
 
@@ -65,6 +69,62 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             }
         }
 
+        private string helpGrid;
+        public string HelpGrid
+        {
+            get { return helpGrid; }
+            set
+            {
+                if (helpGrid != value)
+                {
+                    helpGrid = value;
+                    OnPropertyChanged(nameof(HelpGrid));
+                }
+            }
+        }
+
+        private string helpChoose;
+        public string HelpChoose
+        {
+            get { return helpChoose; }
+            set
+            {
+                if (helpChoose != value)
+                {
+                    helpChoose = value;
+                    OnPropertyChanged(nameof(HelpChoose));
+                }
+            }
+        }
+
+        private string helpPast;
+        public string HelpPast
+        {
+            get { return helpPast; }
+            set
+            {
+                if (helpPast != value)
+                {
+                    helpPast = value;
+                    OnPropertyChanged(nameof(HelpPast));
+                }
+            }
+        }
+
+        private string helpExit;
+        public string HelpExit
+        {
+            get { return helpExit; }
+            set
+            {
+                if (helpExit != value)
+                {
+                    helpExit = value;
+                    OnPropertyChanged(nameof(helpExit));
+                }
+            }
+        }
+
         private ObservableCollection<Booking> upcomingBookingsGrid;
         public ObservableCollection<Booking> UpcomingBookingsGrid
         {
@@ -76,6 +136,26 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                     upcomingBookingsGrid = value;
                     OnPropertyChanged(nameof(UpcomingBookingsGrid));
                 }
+            }
+        }
+
+        public void ShowHelp(object sedner)
+        {
+            if(isHelpOn)
+            {
+                HelpGrid = string.Empty;
+                HelpChoose = string.Empty;
+                HelpPast = string.Empty;
+                HelpExit = string.Empty;
+                isHelpOn = false;
+            } 
+            else
+            {
+                HelpGrid = "Access the list of bookings by pressing TAB, then go through them with Up and Down arrows";
+                HelpChoose = "When booking is selected you can press D to show it detailed, R to send a delayment request or C to cancel it if possible";
+                HelpPast = "You can as well press B if you want to take a look of your previous bookings";
+                HelpExit = "To exit Help, press CTRL + H again";
+                isHelpOn = true;
             }
         }
 
