@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
         mc:Ignorable="d"
         Title="CancelationConfirmationMessageInterface" Height="350" Width="480" WindowStyle="None">
-    <Window.InputBindings>
-        <KeyBinding Key="Enter" Command="{Binding Ok}" />
-    </Window.InputBindings>
+        <Window.InputBindings>
+            <KeyBinding Key="Enter" Command="{Binding Ok}" />
+        </Window.InputBindings>
     <Grid>
         <GroupBox HorizontalAlignment="Left"
             Height="340" 

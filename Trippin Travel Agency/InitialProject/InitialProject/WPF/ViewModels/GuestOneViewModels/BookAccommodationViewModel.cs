@@ -205,6 +205,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 bookingConfirmationInterface.Top = GuestOneStaticHelper.bookAccommodationInterface.Top + (GuestOneStaticHelper.bookAccommodationInterface.Height - bookingConfirmationInterface.Height) / 2;
                 GuestOneStaticHelper.bookAccommodationInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
                 bookingConfirmationInterface.Show();
+                bookingConfirmationInterface.Focus();
             }
         }
 

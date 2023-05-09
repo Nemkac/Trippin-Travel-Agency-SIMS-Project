@@ -98,11 +98,12 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                     canceledContext.SaveChanges();
                     WarningText = string.Empty;
 
+                    GuestOneStaticHelper.futureBookingsInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
                     CancelationConfirmationMessageInterface cancelationConfirmationMessageInterface = new CancelationConfirmationMessageInterface();
                     cancelationConfirmationMessageInterface.Left = GuestOneStaticHelper.futureBookingsInterface.Left + (GuestOneStaticHelper.futureBookingsInterface.Width - cancelationConfirmationMessageInterface.Width) / 2;
                     cancelationConfirmationMessageInterface.Top = GuestOneStaticHelper.futureBookingsInterface.Top + (GuestOneStaticHelper.futureBookingsInterface.Height - cancelationConfirmationMessageInterface.Height) / 2; ;
-                    GuestOneStaticHelper.futureBookingsInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
                     cancelationConfirmationMessageInterface.Show();
+                    cancelationConfirmationMessageInterface.Focus();
                 }
                 else
                 {
