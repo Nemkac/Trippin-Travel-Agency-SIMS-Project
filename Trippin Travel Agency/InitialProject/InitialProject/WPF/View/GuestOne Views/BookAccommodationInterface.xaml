@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
         xmlns:viewModel = "clr-namespace:InitialProject.WPF.ViewModels.GuestOneViewModels"
         mc:Ignorable="d"
-        Title="GuestOneInterface" Height="800" Width="1500" >
+        Title="GuestOneInterface" Height="800" Width="1500" 
+        KeyDown= "F" >
     <Window.InputBindings>
         <KeyBinding Key="Escape" Command="{Binding GoToPreviousWindow}" />
         <KeyBinding Key="Left" Command="{Binding PreviousImage}" />
@@ -82,7 +83,7 @@
 
             <TextBox HorizontalAlignment="Center" 
                      TextWrapping="Wrap"
-                     x:Name ="numberOfGuests" 
+                     x:Name ="n" 
                      VerticalAlignment="Top" 
                      Width="73" 
                      Height="38" 

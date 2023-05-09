@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="BookingConfirmationInterface" Height="350" Width="480" WindowStyle="None">
         <Window.InputBindings>
-            <KeyBinding Key="B" Command="{Binding GoToPreviousWindow}" />
-            <KeyBinding Key="Enter" Command="{Binding PreviousImage}" />
+        <KeyBinding Key="B" Command="{Binding ShowBookings}" />
+            <KeyBinding Key="Enter" Command="{Binding Ok}" />
          </Window.InputBindings>
     <Grid>
         <GroupBox HorizontalAlignment="Center"

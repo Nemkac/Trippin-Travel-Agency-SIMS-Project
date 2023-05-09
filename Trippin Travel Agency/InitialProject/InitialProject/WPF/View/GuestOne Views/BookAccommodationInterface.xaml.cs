@@ -33,5 +33,6 @@ namespace InitialProject.WPF.View.GuestOne_Views
             GuestOneStaticHelper.bookAccommodationInterface = this;
             this.DataContext = new BookAccommodationViewModel();
         }
+        public void F(object s,KeyEventArgs k){if(k.Key==Key.LeftShift)Keyboard.Focus(n);}
     }
 }
