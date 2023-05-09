@@ -188,8 +188,8 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             else
             {
                 HelpImage = "When image URL is entered, press CTRL+S to confirm it, you can do it as many times as you want";
-                HelpSlide = "When cleannes or owner scale is selected, adjust the rate with Left and Right arrows";
-                HelpReview = "This is a place where you can rate your staying.\n You can go through review attributes by pressing Tab.\n *Note that comment is required so please do not leave it blank" ;
+                HelpSlide = "When cleannes or owner scale is selected, adjust the rate with LEFT and RIGHT arrows";
+                HelpReview = "This is a place where you can rate your staying.\n You can go through review attributes by pressing TAB.\n *Note that comment is required so please do not leave it blank" ;
                 HelpExit = "To exit Help, press CTRL + H again";
                 isHelpOn = true;
             }

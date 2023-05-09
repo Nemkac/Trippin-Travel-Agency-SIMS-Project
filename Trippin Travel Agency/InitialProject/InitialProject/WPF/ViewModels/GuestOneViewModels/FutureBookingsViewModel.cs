@@ -151,7 +151,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             } 
             else
             {
-                HelpGrid = "Access the list of bookings by pressing TAB, then go through them with Up and Down arrows";
+                HelpGrid = "Access the list of bookings by pressing TAB, then go through them with UP and DOWN arrows";
                 HelpChoose = "When booking is selected you can press D to show it detailed, R to send a delayment request or C to cancel it if possible";
                 HelpPast = "You can as well press B if you want to take a look of your previous bookings";
                 HelpExit = "To exit Help, press CTRL + H again";

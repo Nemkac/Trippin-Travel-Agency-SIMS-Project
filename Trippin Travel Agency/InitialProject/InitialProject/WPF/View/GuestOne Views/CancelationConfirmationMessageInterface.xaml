@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
         mc:Ignorable="d"
-        Title="CancelationConfirmationMessageInterface" Height="350" Width="480" WindowStyle="None">
+        Title="CancelationConfirmationMessageInterface" Height="365" Width="500" WindowStyle="None">
         <Window.InputBindings>
             <KeyBinding Key="Enter" Command="{Binding Ok}" />
         </Window.InputBindings>

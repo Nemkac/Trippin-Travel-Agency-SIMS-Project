@@ -62,16 +62,16 @@
             </StackPanel>
         </GroupBox>
 
-        <Rectangle HorizontalAlignment="Left" 
-                   Height="65"
+        <Rectangle HorizontalAlignment="Center" 
+                   Height="76"
                    Margin="0,708,0,0" 
                    Fill ="#273c75"
                    Stroke="Black" 
                    VerticalAlignment="Top"
-                   Width="1644"/>
+                   Width="1500"/>
 
         <TextBlock HorizontalAlignment="Left" Height="72" 
-                   Margin="609,702,0,0" 
+                   Margin="609,696,0,0" 
                    TextWrapping="Wrap" 
                    Text="Trippin' Travel" 
                    VerticalAlignment="Top" 
@@ -145,7 +145,7 @@
 
         <TextBlock 
             HorizontalAlignment="Left" 
-            Height="27" Margin="35,727,0,0" 
+            Height="27" Margin="35,721,0,0" 
             TextWrapping="Wrap"
             Text="Press ESC to go back" 
             VerticalAlignment="Top" 
@@ -219,5 +219,62 @@
             FontSize="26" 
             FontWeight="Medium"
             TextAlignment="Center"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="142" 
+            Margin="1178,298,0,0"
+            TextWrapping="Wrap" 
+            Text="Press TAB to access then UP and DOWN arrows" 
+            VerticalAlignment="Top" 
+            Width="61"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="25" 
+            Margin="274,360,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt;" 
+            VerticalAlignment="Top" 
+            Width="16"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="25"
+            FontWeight="Medium" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="25" 
+            Margin="278,336,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt;" 
+            VerticalAlignment="Top" 
+            Width="16"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="25"
+            FontWeight="Medium" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
     </Grid>
 </Window>

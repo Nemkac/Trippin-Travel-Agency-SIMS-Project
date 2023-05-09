@@ -130,7 +130,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             }
             else
             {
-                HelpGrid = "Access the list of bookings by pressing TAB, then go through them with Up and Down arrows";
+                HelpGrid = "Access the list of bookings by pressing TAB, then go through them with UP and DOWN arrows";
                 HelpChoose = "When booking is selected you can press R to leave a review of it or press S to send a renovation idea to owner";
                 HelpExit = "To exit Help, press CTRL + H again";
                 isHelpOn = true;
@@ -154,7 +154,11 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 
         private void ShowRateInterface(object sender)
         {
-            if (!bookingService.CheckIfValidForRating(SelectedBooking))
+            if (SelectedBooking == null)
+            {
+                WarningText = "You must first select booking";
+            }
+            else if (!bookingService.CheckIfValidForRating(SelectedBooking))
             {
                 WarningText = "You cannot leave a review of a booking older then 5 days";
             }

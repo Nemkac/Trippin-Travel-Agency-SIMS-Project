@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -241,7 +242,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             AccommodationInfo = GuestOneStaticHelper.id.ToString();
             AccommodationInfo = accommodation.name + "\n\n" + this.accommodationService.GetAccommodationLocation(GuestOneStaticHelper.id)[0]+ " , " +
                                 accommodationService.GetAccommodationLocation(GuestOneStaticHelper.id)[1] + "\n\n" + accommodation.guestLimit + "\n\n" +
-                                accommodationRateService.GetAccommodationAverageRate(GuestOneStaticHelper.id);
+                                Math.Round(accommodationRateService.GetAccommodationAverageRate(GuestOneStaticHelper.id),1);
 
             AvaialableDatesGrid = GuestOneStaticHelper.result;
             BookAccommodation = new ViewModelCommand(Book);
@@ -268,10 +269,10 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             else
             {
                 HelpInfo = "Here you can see informations about the acccommodation you have selected";
-                HelpImage = "You can go through photos with Left and Right arrows on keyboards";
-                HelpDates = "By pressing TAB you will access list of available dates. You can go through them with Up and Down arrows";
-                HelpGuests = "When you have selected the dates you like, press Left Shift and then enter number of guests";
-                HelpBook = "When dates are selected and number of guests entered, all there left is to press Enter and you have made your booking";
+                HelpImage = "You can go through photos with LEFT and RIGHT arrows on keyboards";
+                HelpDates = "By pressing TAB you will access the list of available dates. You can go through them with UP and DOWN arrows";
+                HelpGuests = "When dates are selected, press LEFT SHIFT and then enter number of guests";
+                HelpBook = "When dates are selected and number of guests entered, all there left is to press ENTER and you have made your booking";
                 HelpExit = "To exit Help, press CTRL + H again";
                 isHelpOn = true;
             }
@@ -301,6 +302,10 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             else if (NumberOfGuests == null)
             {
                 WarningMessage = "You must enter the number of guests";
+            }
+            else if (!Regex.IsMatch(NumberOfGuests, @"^\d+$"))
+            {
+                WarningMessage = "Invalid input for number of guests";
             }
             else if (int.Parse(NumberOfGuests) > this.accommodationService.GetById(GuestOneStaticHelper.id).guestLimit)
             {

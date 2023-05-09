@@ -76,7 +76,7 @@
         <Button Content="My previous bookings" 
                 HorizontalAlignment="Left" 
                 Height="57"
-                Margin="638,615,0,0" 
+                Margin="638,608,0,0" 
                 VerticalAlignment="Top"
                 Width="262" 
                 FontFamily="ubuntu" 
@@ -115,17 +115,17 @@
             </StackPanel>
         </GroupBox>
 
-        <Rectangle HorizontalAlignment="Left" 
-                   Height="65" 
-                   Margin="0,708,0,0"
+        <Rectangle HorizontalAlignment="Center" 
+                   Height="80" 
+                   Margin="0,704,0,0"
                    Fill ="#273c75" 
                    Stroke="Black"
                    VerticalAlignment="Top"
-                   Width="1644"/>
+                   Width="1500"/>
 
         <TextBlock HorizontalAlignment="Left" 
                    Height="72"
-                   Margin="609,702,0,0"
+                   Margin="609,693,0,0"
                    TextWrapping="Wrap" Text="Trippin' Travel" 
                    VerticalAlignment="Top"
                    Width="325" 
@@ -205,7 +205,7 @@
         <TextBlock 
             HorizontalAlignment="Left"
             Height="20" 
-            Margin="738,677,0,0"
+            Margin="738,674,0,0"
             TextWrapping="Wrap" 
             Text="Press B" 
             VerticalAlignment="Top" 
@@ -216,9 +216,9 @@
             FontWeight="Medium"/>
 
         <TextBlock 
-            HorizontalAlignment="Center" 
+            HorizontalAlignment="Left" 
             Height="32" 
-            Margin="0,578,0,0" 
+            Margin="382,579,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="780"
@@ -267,7 +267,7 @@
             FontSize="22" 
             FontWeight="Medium"
             TextAlignment="Center"/>
-        
+
         <TextBlock HorizontalAlignment="Left"
             Height="111" 
             Margin="347,592,0,0" 
@@ -280,6 +280,63 @@
             FontSize="26" 
             FontWeight="Medium"
             TextAlignment="Center"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="141" 
+            Margin="1182,259,0,0"
+            TextWrapping="Wrap" 
+            Text="Press TAB to access then UP and DOWN arrows" 
+            VerticalAlignment="Top" 
+            Width="61"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="25" 
+            Margin="271,330,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt;" 
+            VerticalAlignment="Top" 
+            Width="16"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="25"
+            FontWeight="Medium" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="25" 
+            Margin="275,306,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt;" 
+            VerticalAlignment="Top" 
+            Width="16"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="25"
+            FontWeight="Medium" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
 
     </Grid>
 </Window>

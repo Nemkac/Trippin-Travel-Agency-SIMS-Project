@@ -27,18 +27,18 @@
                 Header="Pick arrival and departure dates" 
                 Canvas.Left="659" 
                 Canvas.Top="184" 
-                Width="647" 
+                Width="598" 
                 FontFamily="ubuntu" 
                 FontSize="36" 
                 FontWeight="Bold" 
                 Foreground="#FF192A56" 
                 BorderThickness="3" 
                 BorderBrush="#192a56" 
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Top"/>
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center"/>
 
             <TextBlock 
-                HorizontalAlignment="Left" 
+                HorizontalAlignment="Center" 
                 Height="36" 
                 TextWrapping="Wrap" 
                 Text="Number of guests :" 
@@ -47,7 +47,7 @@
                 Grid.Row="1" 
                 Canvas.Bottom="-185" 
                 Canvas.Left="836" 
-                Canvas.Top="541" 
+                Canvas.Top="533" 
                 FontFamily="Ubuntu" 
                 FontSize="22" 
                 FontWeight="Bold" 
@@ -91,7 +91,7 @@
                      Grid.Row="1" 
                      Canvas.Bottom="-185" 
                      Canvas.Left="1046" 
-                     Canvas.Top="535" 
+                     Canvas.Top="527" 
                      FontFamily="ubuntu" 
                      FontSize="22" 
                      TextAlignment="Center" 
@@ -113,8 +113,8 @@
                     x:Name ="BookAccommodation" 
                     Grid.RowSpan="2" 
                     Canvas.Bottom="-60" 
-                    Canvas.Left="902"
-                    Canvas.Top="606" 
+                    Canvas.Left="906"
+                    Canvas.Top="585" 
                     FontFamily="ubuntu" 
                     FontSize="24" 
                     Background="#FF273C75" 
@@ -137,7 +137,7 @@
                 Canvas.Left="5" 
                 Text="{Binding WarningText}"/>
 
-            <GroupBox Height="459" 
+            <GroupBox Height="469" 
                       Header="Accommodation info" 
                       Canvas.Left="216"
                       Canvas.Top="183"
@@ -148,8 +148,8 @@
                       Foreground="#FF192A56" 
                       BorderThickness="3" 
                       BorderBrush="#192a56" 
-                      HorizontalAlignment="Left" 
-                      VerticalAlignment="Center"/>
+                      HorizontalAlignment="Center" 
+                      VerticalAlignment="Top"/>
 
             <TextBlock Height="212"
                        Canvas.Left="249" TextWrapping="Wrap"
@@ -204,13 +204,13 @@
             </StackPanel>
         </GroupBox>
 
-        <Rectangle HorizontalAlignment="Left"
-                   Height="65"
+        <Rectangle HorizontalAlignment="Center"
+                   Height="76"
                    Margin="0,325,0,0" 
                    Fill ="#273c75" 
                    Stroke="Black" 
                    VerticalAlignment="Top"
-                   Width="1514"
+                   Width="1500"
                    Grid.Row="1"/>
 
         <TextBlock HorizontalAlignment="Left" 
@@ -248,8 +248,8 @@
                    Fill="#192a56"/>
 
         <Image HorizontalAlignment="Left" 
-               Height="169" 
-               Margin="254,72,0,0" 
+               Height="185" 
+               Margin="254,57,0,0" 
                Grid.Row="1"
                VerticalAlignment="Top"
                Width="303" 
@@ -269,22 +269,9 @@
             FontSize="22" 
             FontWeight="Bold"/>
 
-        <TextBlock 
-            HorizontalAlignment="Left" 
-            Height="33" 
-            Margin="244,264,0,0"
-            Grid.Row="1" 
-            TextWrapping="Wrap" 
-            VerticalAlignment="Top" 
-            Width="324"
-            Foreground="#7f8fa6"
-            FontFamily="Ubuntu" 
-            FontSize="22" 
-            FontWeight="Medium"/>
-
         <TextBlock HorizontalAlignment="Left" 
                    Height="35" 
-                   Margin="655,287,0,0"
+                   Margin="655,291,0,0"
                    Grid.Row="1" 
                    TextWrapping="Wrap" 
                    Text="{Binding WarningMessage}" 
@@ -325,7 +312,7 @@
 
         <TextBlock HorizontalAlignment="Left"
             Height="233" 
-            Margin="1317,232,0,0" 
+            Margin="1302,232,0,0" 
             TextWrapping="Wrap" 
             Text="{Binding HelpDates}"
             VerticalAlignment="Top" 
@@ -351,7 +338,7 @@
 
         <TextBlock HorizontalAlignment="Left"
             Height="86" 
-            Margin="1046,228,0,0" 
+            Margin="1046,223,0,0" 
             TextWrapping="Wrap" 
             Text="{Binding HelpBook}"
             VerticalAlignment="Top" 
@@ -361,7 +348,7 @@
             FontSize="22" 
             FontWeight="Medium"
             TextAlignment="Center"/>
-        
+
         <TextBlock HorizontalAlignment="Left"
             Height="111" 
             Margin="609,160,0,0" 
@@ -374,6 +361,132 @@
             FontSize="26" 
             FontWeight="Medium"
             TextAlignment="Center"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="915,273,0,0"
+            TextWrapping="Wrap" 
+            Text="Press ENTER" 
+            VerticalAlignment="Top" 
+            Width="102"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium" Grid.Row="1"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="837,0,0,0"
+            TextWrapping="Wrap" 
+            Text="Press LEFT SHIFT" 
+            VerticalAlignment="Center" 
+            Width="135"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium" Grid.Row="1"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="764,108,0,0"
+            TextWrapping="Wrap" 
+            Text="Press TAB to access, then UP and DOWN arrows" 
+            VerticalAlignment="Top" 
+            Width="404"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium" Grid.Row="1"
+            TextAlignment="Center"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="31" 
+            Margin="1222,352,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt;" 
+            VerticalAlignment="Top" 
+            Width="16"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="25"
+            FontWeight="Medium" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="29" 
+            Margin="1225,329,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt;" 
+            VerticalAlignment="Top" 
+            Width="16"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="25"
+            FontWeight="Medium" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="25" 
+            Margin="389,252,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt;" 
+            VerticalAlignment="Top" 
+            Width="16"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="25"
+            FontWeight="Medium" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="180"/>
+                    <TranslateTransform X="15.838" Y="-8.059"/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock 
+            
+            HorizontalAlignment="Left"
+            Height="25" 
+            Margin="393,232,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt;" 
+            VerticalAlignment="Top" 
+            Width="16"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="25"
+            FontWeight="Medium" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform X="-15.838" Y="8.059"/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
 
     </Grid>
 </Window>

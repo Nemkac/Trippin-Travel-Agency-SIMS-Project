@@ -145,7 +145,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             }
             else
             {
-                HelpDelay = "Here you can send a delayment request for one of your bookings.\n\nBy pressing Tab, you access arrival/departure date input.\nWhen date is enter, press Enter to confirm it.\n\nOnce you entered dates you want, press S to send a request to owner.";
+                HelpDelay = "Here you can send a delayment request for one of your bookings.\n\nBy pressing TAB, you access arrival/departure date input.\nWhen date is entered, press ENTER to confirm it.\n\nOnce you entered dates you want, press S to send a request to owner.";
                 HelpExit = "To exit Help, press CTRL + H again";
                 isHelpOn = true;
             }
