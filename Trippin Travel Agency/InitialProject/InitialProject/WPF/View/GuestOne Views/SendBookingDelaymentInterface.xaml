@@ -6,10 +6,11 @@
         xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
         mc:Ignorable="d"
         Title="SendBookingDelaymentInterface" Height="800" Width="1500">
-        <Window.InputBindings>
-            <KeyBinding Key="Escape" Command="{Binding GoToPreviousWindow}" />
-            <KeyBinding Key="S" Command="{Binding SendRequest}" />
+    <Window.InputBindings>
+        <KeyBinding Key="Escape" Command="{Binding GoToPreviousWindow}" />
+        <KeyBinding Key="S" Command="{Binding SendRequest}" />
         <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
+        <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
     </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -235,6 +236,32 @@
             FontFamily="Ubuntu" 
             FontSize="17"
             FontWeight="Medium"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="111" 
+            Margin="1115,447,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpExit}"
+            VerticalAlignment="Top" 
+            Width="188"
+            Foreground="#c23616"
+            FontFamily="Ubuntu" 
+            FontSize="26" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="291" 
+            Margin="28,382,0,0" 
+            TextWrapping="Wrap" 
+            Text= "{Binding HelpDelay}"
+            VerticalAlignment="Top" 
+            Width="470"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
 
 
     </Grid>

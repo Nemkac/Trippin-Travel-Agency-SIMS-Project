@@ -289,18 +289,71 @@
             FontWeight="Bold" 
             Foreground="#e84118"
             TextAlignment="Center"/>
+
         <TextBlock HorizontalAlignment="Left"
-            Height="148" 
-            Margin="1323,535,0,0" 
+            Height="170" 
+            Margin="10,324,0,0" 
             TextWrapping="Wrap" 
             Text="{Binding HelpExit}"
             VerticalAlignment="Top" 
-            Width="127"
+            Width="153"
             Foreground="#c23616"
             FontFamily="Ubuntu" 
             FontSize="26" 
             FontWeight="Medium"
             TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="134" 
+            Margin="283,539,0,0" 
+            TextWrapping="Wrap" 
+            Text= "{Binding HelpReview}"
+            VerticalAlignment="Top" 
+            Width="587"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="207" 
+            Margin="1323,202,0,0" 
+            TextWrapping="Wrap" 
+            Text= "{Binding HelpSlide}"
+            VerticalAlignment="Top" 
+            Width="145"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="217" 
+            Margin="1323,456,0,0" 
+            TextWrapping="Wrap" 
+            Text= "{Binding HelpImage}"
+            VerticalAlignment="Top" 
+            Width="145"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="999,627,0,0"
+            TextWrapping="Wrap" 
+            Text="Press Enter" 
+            VerticalAlignment="Top" 
+            Width="94"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"/>
 
     </Grid>
 </Window>

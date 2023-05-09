@@ -133,15 +133,63 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             }
         }
 
+        private string helpReview;
+        public string HelpReview
+        {
+            get { return helpReview; }
+            set
+            {
+                if (helpReview != value)
+                {
+                    helpReview = value;
+                    OnPropertyChanged(nameof(HelpReview));
+                }
+            }
+        }
+
+        private string helpSlide;
+        public string HelpSlide
+        {
+            get { return helpSlide; }
+            set
+            {
+                if (helpSlide != value)
+                {
+                    helpSlide = value;
+                    OnPropertyChanged(nameof(HelpSlide));
+                }
+            }
+        }
+
+        private string helpImage;
+        public string HelpImage
+        {
+            get { return helpImage; }
+            set
+            {
+                if (helpImage != value)
+                {
+                    helpImage = value;
+                    OnPropertyChanged(nameof(HelpImage));
+                }
+            }
+        }
+
         public void ShowHelp(object sender)
         {
             if(isHelpOn)
             {
+                HelpImage = string.Empty;
+                HelpSlide = string.Empty; 
+                HelpReview = string.Empty;
                 HelpExit = string.Empty;
                 isHelpOn = false;
             }
             else
             {
+                HelpImage = "When image URL is entered, press CTRL+S to confirm it, you can do it as many times as you want";
+                HelpSlide = "When cleannes or owner scale is selected, adjust the rate with Left and Right arrows";
+                HelpReview = "This is a place where you can rate your staying.\n You can go through review attributes by pressing Tab.\n *Note that comment is required so please do not leave it blank" ;
                 HelpExit = "To exit Help, press CTRL + H again";
                 isHelpOn = true;
             }

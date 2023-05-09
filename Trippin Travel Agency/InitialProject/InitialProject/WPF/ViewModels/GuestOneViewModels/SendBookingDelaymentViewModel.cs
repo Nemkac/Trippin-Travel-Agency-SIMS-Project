@@ -20,8 +20,8 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         private BookingDelaymentRequestService bookingDelaymentRequestService = new(new BookingDelaymentRequestRepository());
         public ViewModelCommand GoToPreviousWindow { get; set; }
         public ViewModelCommand OpenNavigator { get; set; }
-        int counter = 0;
-
+        public ViewModelCommand Help { get; set; }
+        bool isHelpOn = false;
         public SendBookingDelaymentViewModel()
         {
             SelectedArrival = DateTime.Parse(GuestOneStaticHelper.selectedBookingToDelay.arrival);
@@ -31,6 +31,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             SendRequest = new ViewModelCommand(SaveRequest);
             GoToPreviousWindow = new ViewModelCommand(GoBack);
             OpenNavigator = new ViewModelCommand(ShowNavigator);
+            Help = new ViewModelCommand(ShowHelp);
 
         }
 
@@ -103,6 +104,50 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                     accommodationInfo = value;
                     OnPropertyChanged(nameof(AccommodationInfo));
                 }
+            }
+        }
+
+        private string helpDelay;
+        public string HelpDelay
+        {
+            get { return helpDelay; }
+            set
+            {
+                if (helpDelay != value)
+                {
+                    helpDelay = value;
+                    OnPropertyChanged(nameof(HelpDelay));
+                }
+            }
+        }
+
+        private string helpExit;
+        public string HelpExit
+        {
+            get { return helpExit; }
+            set
+            {
+                if (helpExit != value)
+                {
+                    helpExit = value;
+                    OnPropertyChanged(nameof(helpExit));
+                }
+            }
+        }
+
+        private void ShowHelp(object sender)
+        {
+            if(isHelpOn)
+            {
+                HelpDelay = string.Empty;
+                HelpExit = string.Empty;
+                isHelpOn = false;
+            }
+            else
+            {
+                HelpDelay = "Here you can send a delayment request for one of your bookings.\n\nBy pressing Tab, you access arrival/departure date input.\nWhen date is enter, press Enter to confirm it.\n\nOnce you entered dates you want, press S to send a request to owner.";
+                HelpExit = "To exit Help, press CTRL + H again";
+                isHelpOn = true;
             }
         }
 
