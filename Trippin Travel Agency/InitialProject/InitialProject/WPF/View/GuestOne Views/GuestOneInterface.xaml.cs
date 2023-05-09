@@ -216,7 +216,7 @@ namespace InitialProject.WPF.View.GuestOne_Views
             GuestsReviewsInterface.Left = this.Left;
             GuestsReviewsInterface.Top = this.Top;
             GuestsReviewsInterface.Show();
-            this.Close();
+            this.Hide();
         }
 
         private void GetBasicDatesProperties(object sender, RoutedEventArgs e, out int daysToBook, out List<string> displayableDates)
@@ -246,7 +246,7 @@ namespace InitialProject.WPF.View.GuestOne_Views
             futureBookingsInterface.WindowStartupLocation = WindowStartupLocation.Manual;
             futureBookingsInterface.Left = this.Left;
             futureBookingsInterface.Top = this.Top;
-            this.Close();
+            this.Hide();
             futureBookingsInterface.Show();
         }
 
@@ -256,7 +256,7 @@ namespace InitialProject.WPF.View.GuestOne_Views
             guestsBookingDelaymentRequestsInterface.WindowStartupLocation = WindowStartupLocation.Manual;
             guestsBookingDelaymentRequestsInterface.Left = this.Left;
             guestsBookingDelaymentRequestsInterface.Top = this.Top;
-            this.Close();
+            this.Hide();
             guestsBookingDelaymentRequestsInterface.Show();
         }
 
