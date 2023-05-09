@@ -55,6 +55,7 @@ namespace InitialProject.WPF.View.GuestOne_Views
             accommodationRepository = new AccommodationRepository();
             this.accommodationService = new AccommodationService(accommodationRepository);
             this.bookingDelaymentRequestService = new(new BookingDelaymentRequestRepository());
+            GuestOneStaticHelper.guestOneInterface = this;
         }
 
         private void ShowAccommodations(object sender, RoutedEventArgs e)

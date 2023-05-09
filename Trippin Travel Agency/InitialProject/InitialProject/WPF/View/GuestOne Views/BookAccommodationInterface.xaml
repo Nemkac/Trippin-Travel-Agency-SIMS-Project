@@ -12,7 +12,7 @@
         <KeyBinding Key="Left" Command="{Binding PreviousImage}" />
         <KeyBinding Key="Right" Command="{Binding NextImage}" />
         <KeyBinding Key="Enter" Command="{Binding BookAccommodation}" />
-        <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding NextImage}" />
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
     </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>

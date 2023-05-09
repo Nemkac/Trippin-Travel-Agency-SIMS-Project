@@ -24,14 +24,15 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         private AccommodationService accommodationService = new(new AccommodationRepository());
         public ViewModelCommand DeleteBooking { get; set; }
         public ViewModelCommand GoToDelayment { get; set; }
+        public ViewModelCommand OpenNavigator { get; set; }
         public ViewModelCommand GoToPastBookings { get; set; }
-
 
         public FutureBookingsViewModel()
         {
             UpcomingBookingsGrid = new ObservableCollection<Booking>(userService.GetGuestsFutureBookings(LoggedUser.id));
             DeleteBooking = new ViewModelCommand(CancelBooking);
             GoToDelayment = new ViewModelCommand(GoToBookingDelayment);
+            OpenNavigator = new ViewModelCommand(ShowNavigator);
             GoToPastBookings = new ViewModelCommand(ShowPastBookings);
         }
 
@@ -113,6 +114,26 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             }
         }
 
+        private void ShowPastBookings(object sender)
+        {
+            PastBookingsInterface pastBookingsInterface = new PastBookingsInterface();
+            pastBookingsInterface.WindowStartupLocation = WindowStartupLocation.Manual;
+            pastBookingsInterface.Left = GuestOneStaticHelper.futureBookingsInterface.Left;
+            pastBookingsInterface.Top = GuestOneStaticHelper.futureBookingsInterface.Top;
+            pastBookingsInterface.Show();
+            WarningText = string.Empty;
+            GuestOneStaticHelper.futureBookingsInterface.Hide();
+        }
+
+        private void ShowNavigator(object sender)
+        {
+            Navigator navigator = new Navigator();
+            navigator.Left = GuestOneStaticHelper.futureBookingsInterface.Left + (GuestOneStaticHelper.futureBookingsInterface.Width - navigator.Width) / 2;
+            navigator.Top = GuestOneStaticHelper.futureBookingsInterface.Top + (GuestOneStaticHelper.futureBookingsInterface.Height - navigator.Height) / 2;
+            GuestOneStaticHelper.futureBookingsInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
+            navigator.Show();
+        }
+
         private void GoToBookingDelayment(object sender)
         {
             if (SelectedBooking != null)
@@ -131,16 +152,5 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 WarningText = "You must select one of your bookings";
             }
         }
-        private void ShowPastBookings(object sender)
-        {
-            PastBookingsInterface pastBookingsInterface = new PastBookingsInterface();
-            pastBookingsInterface.WindowStartupLocation = WindowStartupLocation.Manual;
-            pastBookingsInterface.Left = GuestOneStaticHelper.futureBookingsInterface.Left;
-            pastBookingsInterface.Top = GuestOneStaticHelper.futureBookingsInterface.Top;
-            pastBookingsInterface.Show();
-            WarningText = string.Empty;
-            GuestOneStaticHelper.futureBookingsInterface.Hide();
-        }
-
     }
 }

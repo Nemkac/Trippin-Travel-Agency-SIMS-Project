@@ -19,6 +19,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand SendRequest { get; set; }
         private BookingDelaymentRequestService bookingDelaymentRequestService = new(new BookingDelaymentRequestRepository());
         public ViewModelCommand GoToPreviousWindow { get; set; }
+        public ViewModelCommand OpenNavigator { get; set; }
         int counter = 0;
 
         public SendBookingDelaymentViewModel()
@@ -29,6 +30,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             accommodationInfo = GuestOneStaticHelper.selectedBookingToDelay.Id + "\n\n" + GuestOneStaticHelper.selectedBookingToDelay.arrival + "\n\n" + GuestOneStaticHelper.selectedBookingToDelay.departure;
             SendRequest = new ViewModelCommand(SaveRequest);
             GoToPreviousWindow = new ViewModelCommand(GoBack);
+            OpenNavigator = new ViewModelCommand(ShowNavigator);
 
         }
 
@@ -108,6 +110,15 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         {
             GuestOneStaticHelper.futureBookingsInterface.Show();
             GuestOneStaticHelper.sendBookingDelaymentInterface.Close();
+        }
+
+        private void ShowNavigator(object sender)
+        {
+            Navigator navigator = new Navigator();
+            navigator.Left = GuestOneStaticHelper.sendBookingDelaymentInterface.Left + (GuestOneStaticHelper.sendBookingDelaymentInterface.Width - navigator.Width) / 2;
+            navigator.Top = GuestOneStaticHelper.sendBookingDelaymentInterface.Top + (GuestOneStaticHelper.sendBookingDelaymentInterface.Height - navigator.Height) / 2;
+            GuestOneStaticHelper.sendBookingDelaymentInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
+            navigator.Show();
         }
 
         private void SaveRequest(object sender)

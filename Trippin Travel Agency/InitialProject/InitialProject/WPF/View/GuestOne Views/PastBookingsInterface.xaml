@@ -9,6 +9,7 @@
     <Window.InputBindings>
         <KeyBinding Key="Escape" Command="{Binding GoToPreviousWindow}" />
         <KeyBinding Key="R" Command="{Binding GoToRate}" />
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
     </Window.InputBindings>
     <Grid>
         <GroupBox HorizontalAlignment="Center"

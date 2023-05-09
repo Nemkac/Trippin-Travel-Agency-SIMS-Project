@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 {
@@ -21,14 +22,14 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         private AccommodationRateService accommodationRateService = new(new AccommodationRateRepository());
         public ViewModelCommand GoToRate { get; set; }
         public ViewModelCommand GoToPreviousWindow { get; set; }
-
+        public ViewModelCommand OpenNavigator { get; set; }
 
         public PastBookingsViewModel()
         {
             PastBookingsGrid = new ObservableCollection<Booking>(userService.GetGuestsPastBookings(LoggedUser.id));
             GoToRate = new ViewModelCommand(ShowRateInterface);
             GoToPreviousWindow = new ViewModelCommand(GoBack);
-
+            OpenNavigator = new ViewModelCommand(ShowNavigator);
         }
 
         private Booking selectedBooking;
@@ -73,6 +74,15 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             }
         }
 
+        private void ShowNavigator(object sender)
+        {
+            Navigator navigator = new Navigator();
+            navigator.Left = GuestOneStaticHelper.pastBookingsInterface.Left + (GuestOneStaticHelper.pastBookingsInterface.Width - navigator.Width) / 2;
+            navigator.Top = GuestOneStaticHelper.pastBookingsInterface.Top + (GuestOneStaticHelper.pastBookingsInterface.Height - navigator.Height) / 2;
+            GuestOneStaticHelper.pastBookingsInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
+            navigator.Show();
+        }
+
         private void GoBack(object sender)
         {
             GuestOneStaticHelper.futureBookingsInterface.Show();
@@ -81,7 +91,15 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 
         private void ShowRateInterface(object sender)
         {
-            if (bookingService.CheckIfValidForRating(SelectedBooking) && !accommodationRateService.isPreviouslyRated((SelectedBooking).Id))
+            if (!bookingService.CheckIfValidForRating(SelectedBooking))
+            {
+                WarningText = "You cannot leave a review of a booking older then 5 days";
+            }
+            else if (accommodationRateService.isPreviouslyRated((SelectedBooking).Id))
+            {
+                WarningText = "You have already left a review of a selected booking";
+            }
+            else
             {
                 RateAccommodationInterface rateAccommodationInterface = new RateAccommodationInterface();
                 GuestOneStaticHelper.selectedBookingIdToRate = SelectedBooking.Id;
@@ -91,10 +109,6 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 rateAccommodationInterface.Show();
                 GuestOneStaticHelper.pastBookingsInterface.Hide();
                 WarningText = string.Empty;
-            }
-            else
-            {
-                WarningText = "You cannot leave a review of a booking older then 5 days";
             }
         }
     }

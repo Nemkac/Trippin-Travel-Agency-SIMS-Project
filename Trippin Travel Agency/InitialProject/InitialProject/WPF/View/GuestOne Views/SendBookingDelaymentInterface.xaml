@@ -9,7 +9,8 @@
         <Window.InputBindings>
             <KeyBinding Key="Escape" Command="{Binding GoToPreviousWindow}" />
             <KeyBinding Key="S" Command="{Binding SendRequest}" />
-        </Window.InputBindings>
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
+    </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="741*"/>

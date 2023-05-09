@@ -18,6 +18,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand AddImageUrl { get; set; }
         private AccommodationRateService accommodationRateService = new(new AccommodationRateRepository());
         public ViewModelCommand GoToPreviousWindow { get; set; }
+        public ViewModelCommand OpenNavigator { get; set; }
 
         public List<Model.Image> imageUrls = new List<Model.Image>();
         public int imageCounter = 0;
@@ -26,6 +27,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             RateAccommodation = new ViewModelCommand(Rate);
             AddImageUrl = new ViewModelCommand(GetImage);
             GoToPreviousWindow = new ViewModelCommand(GoBack);
+            OpenNavigator = new ViewModelCommand(ShowNavigator);
 
         }
 
@@ -117,6 +119,15 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         {
             GuestOneStaticHelper.pastBookingsInterface.Show();
             GuestOneStaticHelper.rateAccommodationInterface.Close();
+        }
+
+        private void ShowNavigator(object sender)
+        {
+            Navigator navigator = new Navigator();
+            navigator.Left = GuestOneStaticHelper.rateAccommodationInterface.Left + (GuestOneStaticHelper.rateAccommodationInterface.Width - navigator.Width) / 2;
+            navigator.Top = GuestOneStaticHelper.rateAccommodationInterface.Top + (GuestOneStaticHelper.rateAccommodationInterface.Height - navigator.Height) / 2;
+            GuestOneStaticHelper.rateAccommodationInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
+            navigator.Show();
         }
 
 
