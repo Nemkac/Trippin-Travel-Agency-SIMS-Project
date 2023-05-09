@@ -274,6 +274,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 HelpGuests = "When dates are selected, press LEFT SHIFT and then enter number of guests";
                 HelpBook = "When dates are selected and number of guests entered, all there left is to press ENTER and you have made your booking";
                 HelpExit = "To exit Help, press CTRL + H again";
+                WarningMessage = string.Empty;
                 isHelpOn = true;
             }
         }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
         mc:Ignorable="d"
-        Title="Navigator" Height="600" Width="500" WindowStyle="None">
+        Title="Navigator" Height="610" Width="490" WindowStyle="None">
     <Window.InputBindings>
         <KeyBinding Key="F2" Command="{Binding GoToBookings}" />
     </Window.InputBindings>

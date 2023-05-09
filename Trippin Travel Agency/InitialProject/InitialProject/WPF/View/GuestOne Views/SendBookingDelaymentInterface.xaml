@@ -142,7 +142,7 @@
                    FontWeight="Bold" Grid.RowSpan="2" />
 
         <GroupBox Header="Help"
-                  Margin="35,0,1114,619" 
+                  Margin="35,0,1106,619" 
                   Padding="10" 
                   FontFamily="ubuntu" 
                   FontSize="30" 
@@ -252,11 +252,11 @@
 
         <TextBlock HorizontalAlignment="Left"
             Height="291" 
-            Margin="28,382,0,0" 
+            Margin="6,352,0,0" 
             TextWrapping="Wrap" 
             Text= "{Binding HelpDelay}"
             VerticalAlignment="Top" 
-            Width="470"
+            Width="496"
             Foreground="#7f8fa6"
             FontFamily="Ubuntu" 
             FontSize="22" 
