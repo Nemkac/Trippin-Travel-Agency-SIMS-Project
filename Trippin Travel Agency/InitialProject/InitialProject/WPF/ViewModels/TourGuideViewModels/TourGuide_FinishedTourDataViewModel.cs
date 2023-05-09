@@ -12,7 +12,7 @@ namespace InitialProject.WPF.ViewModels
     {
         public ViewModelCommand ShowFinishedToursCommand { get; private set; }
 
-        public TourGuide_MainViewModel _mainViewModel;
+        private readonly TourGuide_MainViewModel _mainViewModel;
 
         public TourGuide_FinishedTourDataViewModel()
         {
