@@ -25,7 +25,10 @@ namespace InitialProject.Model
         public static BookingDelaymentConfirmationInterface bookingDelaymentConfirmationInterface { get;set; }
         public static CancelationConfirmationMessageInterface cancelationConfirmationMessageInterface { get; set;}
         public static RateAccommodationConfirmationInterface rateAccommodationConfirmationInterface { get; set; }
+        public static GuestsReviewsInterface guestsReviewsInterface { get; set; }
+        public static SelectedGuestReviewInterface selectedGuestReviewInterface { get; set; }
         public static Navigator navigator { get; set; }
+        public static GuestRate guestRate { get; set; }
 
     }
 }

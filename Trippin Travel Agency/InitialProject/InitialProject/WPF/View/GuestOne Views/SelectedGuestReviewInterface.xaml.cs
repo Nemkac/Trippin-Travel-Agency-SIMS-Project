@@ -1,8 +1,4 @@
 ﻿using InitialProject.Model;
-using InitialProject.Repository;
-using InitialProject.Service.AccommodationServices;
-using InitialProject.Service.BookingServices;
-using InitialProject.Service.GuestServices;
 using InitialProject.WPF.ViewModels.GuestOneViewModels;
 using System;
 using System.Collections.Generic;
@@ -21,17 +17,15 @@ using System.Windows.Shapes;
 namespace InitialProject.WPF.View.GuestOne_Views
 {
     /// <summary>
-    /// Interaction logic for GuestsReviewsInterface.xaml
+    /// Interaction logic for SelectedGuestReviewInterface.xaml
     /// </summary>
-    public partial class GuestsReviewsInterface : Window
+    public partial class SelectedGuestReviewInterface : Window
     {
-        public GuestsReviewsInterface()
+        public SelectedGuestReviewInterface()
         {
             InitializeComponent();
-            GuestOneStaticHelper.guestsReviewsInterface = this;
-            this.DataContext = new GuestsReviewsViewModel();
+            GuestOneStaticHelper.selectedGuestReviewInterface = this;
+            this.DataContext = new SelectedGuestReviewViewModel();
         }
-
-
     }
 }

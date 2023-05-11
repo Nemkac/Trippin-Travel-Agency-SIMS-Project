@@ -7,8 +7,9 @@
         mc:Ignorable="d"
         Title="Navigator" Height="610" Width="490" WindowStyle="None">
     <Window.InputBindings>
-        <KeyBinding Key="F2" Command="{Binding GoToBookings}" />
         <KeyBinding Key="F1" Command="{Binding GoToHome}" />
+        <KeyBinding Key="F2" Command="{Binding GoToBookings}" />
+        <KeyBinding Key="F3" Command="{Binding GoReviews}" />
     </Window.InputBindings>
     <Grid>
         <GroupBox HorizontalAlignment="Left"

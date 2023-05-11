@@ -6,27 +6,201 @@
         xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
         mc:Ignorable="d"
         Title="GuestsReviewsInterface" Height="800" Width="1500">
+    <Window.InputBindings>
+        <KeyBinding Key="R" Command="{Binding OpenReview}" />
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
+        <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
+    </Window.InputBindings>
+
     <Grid>
+        <GroupBox HorizontalAlignment="Left"
+            Height="509"
+            Header="My upcoming bookings"
+            Margin="250,146,0,0" 
+            VerticalAlignment="Top" 
+            Width="1032"
+            FontFamily="ubuntu" 
+            FontSize="36"
+            FontWeight="Medium" 
+            Foreground="#FF192A56" 
+            BorderThickness="3" 
+            BorderBrush="#192a56"/>
         <Grid Margin="4,4,-4,-4">
-            <Label Content="" FontSize ="72" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,14,0,0" FontFamily="ubuntu" FontWeight="Bold" Foreground="#192a56"/>
-            <GroupBox Header="Navigator" Margin="985,1,26,662" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
+            <Label Content="" 
+                   FontSize ="72"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Top" 
+                   Margin="0,14,0,0" 
+                   FontFamily="ubuntu" 
+                   FontWeight="Bold" Foreground="#192a56"/>
+
+            <GroupBox Header="Navigator"
+                      Margin="985,1,26,662"
+                      Padding="10" 
+                      FontFamily="ubuntu" 
+                      FontSize="30" 
+                      BorderThickness="3" 
+                      BorderBrush="#192a56" FontWeight="medium" >
                 <StackPanel>
                     <TextBlock Width="478" FontWeight="medium"><Run Text="Press CTRL+N for program map" FontFamily="ubuntu"/></TextBlock>
                 </StackPanel>
             </GroupBox>
-            <Rectangle HorizontalAlignment="Left" Height="65" Margin="-30,708,0,0" Fill ="#273c75" Stroke="Black" VerticalAlignment="Top" Width="1674"/>
-            <TextBlock HorizontalAlignment="Left" Height="72" Margin="609,700,0,0" TextWrapping="Wrap" Text="Trippin' Travel" VerticalAlignment="Top" Width="325" Foreground="white" FontSize="48" FontWeight="Bold" />
-            <GroupBox Header="Help" Margin="35,0,1104,662" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
+
+            <Rectangle HorizontalAlignment="Left" 
+                       Height="65" 
+                       Margin="-4,708,0,0" 
+                       Fill ="#273c75" 
+                       Stroke="Black" 
+                       VerticalAlignment="Top" 
+                       Width="1501"/>
+
+            <TextBlock HorizontalAlignment="Left" 
+                       Height="72" 
+                       Margin="609,700,0,0"
+                       TextWrapping="Wrap" 
+                       Text="Trippin' Travel" 
+                       VerticalAlignment="Top"
+                       Width="325" 
+                       Foreground="white" 
+                       FontSize="48"
+                       FontWeight="Bold" />
+
+            <GroupBox Header="Help" 
+                      Margin="35,0,1104,662" 
+                      Padding="10"
+                      FontFamily="ubuntu"
+                      FontSize="30" 
+                      BorderThickness="3" 
+                      BorderBrush="#192a56" FontWeight="medium" >
                 <StackPanel>
                     <TextBlock Height="39" FontWeight="medium"><Run Text="Press CTRL+H for help"/></TextBlock>
                 </StackPanel>
             </GroupBox>
-            <Label Content="My reviews" FontSize ="64" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,24,0,0" FontFamily="ubuntu" FontWeight="Bold" Foreground="#192a56"/>
-            <Rectangle HorizontalAlignment="Left" Height="5" Margin="35,120,0,0" Stroke="#FF192A56" VerticalAlignment="Top" Width="1435" Fill="#192a56"/>
-            <TextBlock HorizontalAlignment="Left" Height="57" Margin="412,601,0,0" TextWrapping="Wrap" x:Name="warningBlock"  VerticalAlignment="Top" Width="146"/>
+
+            <Label Content="My reviews" 
+                   FontSize ="64" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Top" 
+                   Margin="0,24,0,0" 
+                   FontFamily="ubuntu" 
+                   FontWeight="Bold" 
+                   Foreground="#192a56"/>
+
+            <Rectangle 
+                HorizontalAlignment="Left"
+                Height="5"
+                Margin="35,120,0,0" 
+                Stroke="#FF192A56" 
+                VerticalAlignment="Top" 
+                Width="1435" 
+                Fill="#192a56"/>
+
+            <TextBlock
+                HorizontalAlignment="Left"
+                Height="57" 
+                Margin="412,601,0,0" 
+                TextWrapping="Wrap" 
+                x:Name="warningBlock" 
+                VerticalAlignment="Top"
+                Width="146"/>
+            <TextBlock 
+                HorizontalAlignment="Left"
+                Height="141" 
+                Margin="1188,307,0,0"
+                TextWrapping="Wrap" 
+                Text="Press TAB to access then UP and DOWN arrows" 
+                VerticalAlignment="Top" 
+                Width="61"
+                Foreground="#718093"
+                FontFamily="Ubuntu" 
+                FontSize="17" 
+                FontWeight="Medium"
+                TextAlignment="Center"/>
+            <TextBlock 
+                HorizontalAlignment="Left"
+                Height="25" 
+                Margin="269,374,0,0"
+                TextWrapping="Wrap" 
+                Text="&lt;" 
+                VerticalAlignment="Top" 
+                Width="16"
+                Foreground="#718093"
+                FontFamily="Ubuntu" 
+                FontSize="25"
+                FontWeight="Medium" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-90"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock 
+                HorizontalAlignment="Left"
+                Height="25" 
+                Margin="273,350,0,0"
+                TextWrapping="Wrap" 
+                Text="&lt;" 
+                VerticalAlignment="Top" 
+                Width="16"
+                Foreground="#718093"
+                FontFamily="Ubuntu" 
+                FontSize="25"
+                FontWeight="Medium" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="90"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+            <Button Content="Check a review" 
+                    HorizontalAlignment="Left" 
+                    Height="46" 
+                    Margin="662,571,0,0" 
+                    VerticalAlignment="Top" 
+                    Width="182"
+                    FontFamily="ubuntu" 
+                    FontSize="20" 
+                    Background="#FF273C75" 
+                    Foreground="White" 
+                    FontWeight="Medium"
+                    Style="{StaticResource leadButton}"
+                    IsTabStop="False"
+                    />
+            <TextBlock 
+                HorizontalAlignment="Left"
+                Height="20" 
+                Margin="722,620,0,0"
+                TextWrapping="Wrap" 
+                Text="Press R" 
+                VerticalAlignment="Top" 
+                Width="62"
+                Foreground="#718093"
+                FontFamily="Ubuntu" 
+                FontSize="17" 
+                FontWeight="Medium"/>
         </Grid>
 
-        <DataGrid HorizontalAlignment="Center" Height="386" VerticalAlignment="Center" Width="871"  x:Name = "GuestsReviewsGrid" FontFamily="ubuntu" FontSize="18" Foreground="#FF192A56" BorderBrush="#FF192A56" Background="White" FontWeight="Medium" TextBlock.TextAlignment="Center" MinRowHeight="50"/>
-
+        <DataGrid HorizontalAlignment="Center"
+                  Height="344" 
+                  VerticalAlignment="Top"
+                  Width="872" 
+                  FontFamily="ubuntu"
+                  FontSize="18"
+                  Foreground="#FF192A56"
+                  BorderBrush="#FF192A56"
+                  Background="White" 
+                  FontWeight="Medium" 
+                  TextBlock.TextAlignment="Center" 
+                  MinRowHeight="50"
+                  ItemsSource="{Binding ReviewsGrid}"
+                  SelectedIndex="{Binding SelectedIndex}" Margin="0,212,0,0"
+                  />
     </Grid>
 </Window>

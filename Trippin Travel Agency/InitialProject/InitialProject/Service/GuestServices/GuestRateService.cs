@@ -68,5 +68,10 @@ namespace InitialProject.Service.GuestServices
             totalRating = Math.Round((decimal)ratesSum / numOfRates, 2);
             return totalRating;
         }
+
+        public string GetDisplayableRate(GuestRate guestRate)
+        {
+            return guestRate.cleanness.ToString() + "\n\n" + guestRate.respectingRules + "\n\n" + guestRate.comment + "\n\n";
+        }
     }
 }

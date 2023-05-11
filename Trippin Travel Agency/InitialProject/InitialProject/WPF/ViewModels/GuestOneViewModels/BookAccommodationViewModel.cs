@@ -259,11 +259,11 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             if (isHelpOn)
             {
                 HelpInfo = string.Empty;
-                HelpImage = string.Empty; ;
-                HelpDates = string.Empty; ;
-                HelpGuests = string.Empty; ;
-                HelpBook = string.Empty; ;
-                HelpExit = string.Empty; ;
+                HelpImage = string.Empty; 
+                HelpDates = string.Empty; 
+                HelpGuests = string.Empty; 
+                HelpBook = string.Empty; 
+                HelpExit = string.Empty; 
                 isHelpOn = false;
             }
             else

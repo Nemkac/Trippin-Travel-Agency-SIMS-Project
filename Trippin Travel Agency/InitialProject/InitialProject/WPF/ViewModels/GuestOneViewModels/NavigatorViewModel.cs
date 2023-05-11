@@ -9,39 +9,50 @@ using System.Windows.Media;
 
 namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 {
-    public class NavigatorViewModel
+    public class NavigatorViewModel : ViewModelBase
     {
         public ViewModelCommand GoToBookings { get; set; }
         public ViewModelCommand GoToHome { get; set; }
+        public ViewModelCommand GoReviews { get; set; }
         public NavigatorViewModel()
         {
             GoToBookings = new ViewModelCommand(GoToFutureBookings);
             GoToHome = new ViewModelCommand(GoHome);
+            GoReviews = new ViewModelCommand(GoToReviews);
         }
         public void GoToFutureBookings(object sender)
         {
-            GuestOneStaticHelper.futureBookingsInterface?.Close();
+            CloseInterfaces();
             FutureBookingsInterface futureBookingsInterface = new FutureBookingsInterface();
             futureBookingsInterface.Top = GuestOneStaticHelper.guestOneInterface.Top;
             futureBookingsInterface.Left = GuestOneStaticHelper.guestOneInterface.Left;
             futureBookingsInterface.Show();
-            GuestOneStaticHelper.futureBookingsInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#f5f6fa");
-            GuestOneStaticHelper.navigator.Close();
-            GuestOneStaticHelper.bookAccommodationInterface?.Close();
-            GuestOneStaticHelper.pastBookingsInterface?.Close();
-            GuestOneStaticHelper.rateAccommodationInterface?.Close();
-            GuestOneStaticHelper.sendBookingDelaymentInterface?.Close();
         }
 
         public void GoHome(object sender)
         {
-            GuestOneStaticHelper.futureBookingsInterface?.Close();
             GuestOneStaticHelper.guestOneInterface.Show();
+            CloseInterfaces();
+        }
+
+        public void GoToReviews(object sender)
+        {
+            CloseInterfaces();
+            GuestsReviewsInterface guestsReviewsInterface = new GuestsReviewsInterface();
+            guestsReviewsInterface.Top = GuestOneStaticHelper.guestOneInterface.Top;
+            guestsReviewsInterface.Left = GuestOneStaticHelper.guestOneInterface.Left;
+            guestsReviewsInterface.Show();
+        }
+
+        public void CloseInterfaces()
+        {
             GuestOneStaticHelper.navigator.Close();
             GuestOneStaticHelper.bookAccommodationInterface?.Close();
             GuestOneStaticHelper.pastBookingsInterface?.Close();
             GuestOneStaticHelper.rateAccommodationInterface?.Close();
             GuestOneStaticHelper.sendBookingDelaymentInterface?.Close();
+            GuestOneStaticHelper.futureBookingsInterface?.Close();
+            GuestOneStaticHelper.guestsReviewsInterface?.Close();
         }
     }
 }
