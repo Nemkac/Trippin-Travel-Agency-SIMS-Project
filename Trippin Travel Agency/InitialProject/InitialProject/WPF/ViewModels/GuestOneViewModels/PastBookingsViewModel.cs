@@ -25,6 +25,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand GoToPreviousWindow { get; set; }
         public ViewModelCommand OpenNavigator { get; set; }
         public ViewModelCommand Help { get; set; }
+        public ViewModelCommand GoToRenovation { get; set; }
 
         public PastBookingsViewModel()
         {
@@ -33,6 +34,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             GoToPreviousWindow = new ViewModelCommand(GoBack);
             OpenNavigator = new ViewModelCommand(ShowNavigator);
             Help = new ViewModelCommand(ShowHelp);
+            GoToRenovation = new ViewModelCommand(ShowRenovation);
         }
 
         private Booking selectedBooking;
@@ -116,6 +118,21 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                     pastBookingsGrid = value;
                     OnPropertyChanged(nameof(PastBookingsGrid));
                 }
+            }
+        }
+
+        public void ShowRenovation(object sender)
+        {
+            if (SelectedBooking != null)
+            {
+                RenovationSuggestionInterface renovationSuggestionInterface = new RenovationSuggestionInterface();
+                renovationSuggestionInterface.Top = GuestOneStaticHelper.pastBookingsInterface.Top;
+                renovationSuggestionInterface.Left = GuestOneStaticHelper.pastBookingsInterface.Left;
+                renovationSuggestionInterface.Show();
+                GuestOneStaticHelper.pastBookingsInterface.Hide();
+            } else
+            {
+                WarningText = "You must first select booking";
             }
         }
 

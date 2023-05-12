@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InitialProject.Model;
+using InitialProject.WPF.ViewModels.GuestOneViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,23 +13,19 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using InitialProject.Model;
-using InitialProject.Context;
-using System.Globalization;
-using InitialProject.WPF.ViewModels.GuestOneViewModels;
 
 namespace InitialProject.WPF.View.GuestOne_Views
 {
     /// <summary>
-    /// Interaction logic for FutureBookingsInterface.xaml
+    /// Interaction logic for RenovationSuggestionInterface.xaml
     /// </summary>
-    public partial class FutureBookingsInterface : Window
+    public partial class RenovationSuggestionInterface : Window
     {
-        public FutureBookingsInterface()
+        public RenovationSuggestionInterface()
         {
             InitializeComponent();
-            GuestOneStaticHelper.futureBookingsInterface = this;
-            this.DataContext = new FutureBookingsViewModel();
+            GuestOneStaticHelper.renovationSuggestionInterface = this;
+            this.DataContext = new RenovationSuggestionViewModel();
         }
     }
 }

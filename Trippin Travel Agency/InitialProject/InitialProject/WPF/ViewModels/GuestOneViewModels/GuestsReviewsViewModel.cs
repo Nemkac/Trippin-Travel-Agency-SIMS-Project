@@ -21,8 +21,10 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         private BookingService bookingService;
         private AccommodationService accommodationService;
         private GuestRateService guestRateService;
+        bool isHelpOn = false;
         public ViewModelCommand OpenReview { get; set; }
         public ViewModelCommand OpenNavigator { get; set; }
+        public ViewModelCommand Help { get; set; }
         public GuestsReviewsViewModel()
         {
             this.bookingService = new BookingService(new BookingRepository());
@@ -31,6 +33,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             List<GuestRate> guestsRates = guestRateService.GetGuestRates();
             OpenReview = new ViewModelCommand(ShowReview);
             OpenNavigator = new ViewModelCommand(ShowNavigator);
+            Help = new ViewModelCommand(ShowHelp);
 
             var guestsRatesToGrid = from guestRate in guestsRates
                                     select new
@@ -64,6 +67,66 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             navigator.Top = GuestOneStaticHelper.guestsReviewsInterface.Top + (GuestOneStaticHelper.guestsReviewsInterface.Height - navigator.Height) / 2;
             GuestOneStaticHelper.guestsReviewsInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
             navigator.Show();
+        }
+
+        public void ShowHelp(object sender)
+        {
+            if (isHelpOn)
+            {
+                HelpGrid = string.Empty;
+                HelpExit = string.Empty;
+                HelpChoose = string.Empty;
+                isHelpOn = false;
+            }
+            else
+            {
+                HelpGrid = "Access the list of reviews by pressing TAB, then go through them with UP and DOWN arrows";
+                HelpChoose = "When review is selected, you can press R to take a look of it";
+                HelpExit = "To exit Help, press CTRL + H again";
+                isHelpOn = true;
+            }
+        }
+
+        private string helpGrid;
+        public string HelpGrid
+        {
+            get { return helpGrid; }
+            set
+            {
+                if (helpGrid != value)
+                {
+                    helpGrid = value;
+                    OnPropertyChanged(nameof(HelpGrid));
+                }
+            }
+        }
+
+        private string helpChoose;
+        public string HelpChoose
+        {
+            get { return helpChoose; }
+            set
+            {
+                if (helpChoose != value)
+                {
+                    helpChoose = value;
+                    OnPropertyChanged(nameof(HelpChoose));
+                }
+            }
+        }
+
+        private string helpExit;
+        public string HelpExit
+        {
+            get { return helpExit; }
+            set
+            {
+                if (helpExit != value)
+                {
+                    helpExit = value;
+                    OnPropertyChanged(nameof(helpExit));
+                }
+            }
         }
 
         private dynamic reviewsGrid;

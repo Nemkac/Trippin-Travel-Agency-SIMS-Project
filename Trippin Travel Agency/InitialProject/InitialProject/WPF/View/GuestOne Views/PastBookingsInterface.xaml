@@ -9,6 +9,7 @@
     <Window.InputBindings>
         <KeyBinding Key="Escape" Command="{Binding GoToPreviousWindow}" />
         <KeyBinding Key="R" Command="{Binding GoToRate}" />
+        <KeyBinding Key="S" Command="{Binding GoToRenovation}" />
         <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
         <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
     </Window.InputBindings>
@@ -127,6 +128,7 @@
                 FontSize="20"
                 Background="#FF273C75"
                 Foreground="White"
+                Command= "{Binding GoToRenovation}"
                 Style="{StaticResource leadButton}"
                 FontWeight="Medium"/>
 

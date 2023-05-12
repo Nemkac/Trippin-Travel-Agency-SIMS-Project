@@ -13,18 +13,6 @@
     </Window.InputBindings>
 
     <Grid>
-        <GroupBox HorizontalAlignment="Left"
-            Height="509"
-            Header="My upcoming bookings"
-            Margin="250,146,0,0" 
-            VerticalAlignment="Top" 
-            Width="1032"
-            FontFamily="ubuntu" 
-            FontSize="36"
-            FontWeight="Medium" 
-            Foreground="#FF192A56" 
-            BorderThickness="3" 
-            BorderBrush="#192a56"/>
         <Grid Margin="4,4,-4,-4">
             <Label Content="" 
                    FontSize ="72"
@@ -187,6 +175,19 @@
                 FontWeight="Medium"/>
         </Grid>
 
+        <GroupBox HorizontalAlignment="Left"
+            Height="509"
+            Header="My reviews"
+            Margin="250,146,0,0" 
+            VerticalAlignment="Top" 
+            Width="1032"
+            FontFamily="ubuntu" 
+            FontSize="36"
+            FontWeight="Medium" 
+            Foreground="#FF192A56" 
+            BorderThickness="3" 
+            BorderBrush="#192a56"/>
+
         <DataGrid HorizontalAlignment="Center"
                   Height="344" 
                   VerticalAlignment="Top"
@@ -202,5 +203,41 @@
                   ItemsSource="{Binding ReviewsGrid}"
                   SelectedIndex="{Binding SelectedIndex}" Margin="0,212,0,0"
                   />
+        <TextBlock HorizontalAlignment="Left"
+            Height="198" 
+            Margin="18,257,0,0" 
+            TextWrapping="Wrap" 
+            Text= "{Binding HelpGrid}"
+            VerticalAlignment="Top" 
+            Width="202"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Left"
+            Height="254" 
+            Margin="1288,212,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpChoose}"
+            VerticalAlignment="Top" 
+            Width="176"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Left"
+            Height="111" 
+            Margin="1288,531,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpExit}"
+            VerticalAlignment="Top" 
+            Width="188"
+            Foreground="#c23616"
+            FontFamily="Ubuntu" 
+            FontSize="26" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
     </Grid>
 </Window>

@@ -47,12 +47,13 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public void CloseInterfaces()
         {
             GuestOneStaticHelper.navigator.Close();
-            GuestOneStaticHelper.bookAccommodationInterface?.Close();
-            GuestOneStaticHelper.pastBookingsInterface?.Close();
-            GuestOneStaticHelper.rateAccommodationInterface?.Close();
-            GuestOneStaticHelper.sendBookingDelaymentInterface?.Close();
-            GuestOneStaticHelper.futureBookingsInterface?.Close();
-            GuestOneStaticHelper.guestsReviewsInterface?.Close();
+            GuestOneStaticHelper.bookAccommodationInterface?.Hide();
+            GuestOneStaticHelper.pastBookingsInterface?.Hide();
+            GuestOneStaticHelper.rateAccommodationInterface?.Hide();
+            GuestOneStaticHelper.sendBookingDelaymentInterface?.Hide();
+            GuestOneStaticHelper.futureBookingsInterface?.Hide();
+            GuestOneStaticHelper.guestsReviewsInterface?.Hide();
+            GuestOneStaticHelper.renovationSuggestionInterface?.Hide();
         }
     }
 }
