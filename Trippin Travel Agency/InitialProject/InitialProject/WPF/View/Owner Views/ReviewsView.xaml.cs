@@ -2,6 +2,7 @@
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service.GuestServices;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,43 +26,10 @@ namespace InitialProject.WPF.View.Owner_Views
     /// </summary>
     public partial class ReviewsView : UserControl
     {
-        private GuestRateService guestRateService;
         public ReviewsView()
         {
             InitializeComponent();
-            this.guestRateService = new GuestRateService(new GuestRateRepository());
-            List<AccommodationRate> dataGridData = ShowReviews();
-
-            var reviewsData = from review in dataGridData
-                              select new
-                              {
-                                  review.bookingId,
-                                  review.cleanness,
-                                  review.ownerRate,
-                                  review.comment
-                              };
-
-            ReviewsDataGrid.ItemsSource = reviewsData;
-
-            List<AccommodationRate> availableRates = ShowReviews();
-            decimal totalRating = guestRateService.CalculateTotalRating(availableRates);
-            TotalRateTextBlock.Text = totalRating.ToString();
-        }
-
-        public List<AccommodationRate> ShowReviews()
-        {
-            DataBaseContext accommodationRateContext = new DataBaseContext();
-            DataBaseContext guestRateContext = new DataBaseContext();
-            //GuestRateService guestRateService = new GuestRateService();
-
-            List<AccommodationRate> accommodationRates = accommodationRateContext.AccommodationRates.ToList();
-            List<GuestRate> guestRates = guestRateContext.GuestRate.ToList();
-
-            List<AccommodationRate> ratesForDisplay = new List<AccommodationRate>();
-
-            guestRateService.FormDisplayableRates(accommodationRates, guestRates, ratesForDisplay);
-
-            return ratesForDisplay;
+            this.DataContext = new ReviewsViewModel();
         }
     }
 }

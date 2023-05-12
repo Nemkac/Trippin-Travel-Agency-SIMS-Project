@@ -7,13 +7,20 @@
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              d:DesignHeight="350" d:DesignWidth="710">
+
+    <UserControl.Resources>
+        <Style TargetType="Label" BasedOn="{StaticResource defaultLabel}">
+            <Setter Property="Foreground" Value="{Binding ContentTextColor}"/>
+        </Style>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-            <fa:IconImage Icon="StarHalfAlt" Width="35" Height="35" Foreground="#192a56"/>
+            <fa:IconImage Icon="StarHalfAlt" Width="35" Height="35" Foreground="{Binding ContentTextColor}"/>
             <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="15 0 0 0">
                 <Label Content="Our Recommendations" 
                        Style="{StaticResource defaultLabel}"
@@ -48,22 +55,22 @@
                         </VisualBrush>
                     </Grid.OpacityMask>
                     <Rectangle Fill="#80000000" />
-                    <Label Content="Sremska Mitrovica"
-                       FontSize="34"
+                    <Label Content="Serbia,"
+                       FontSize="28"
                        FontFamily="Ubuntu"
                        FontWeight="Bold"
                        Foreground="White"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Margin="20, -20, 0, 0"/>
-                    <Label Content="Most popular location"
-                       FontSize="21"
+                       Margin="20, -25, 0, 0"/>
+                    <Label Content="Sremska Mitrovica"
+                       FontSize="28"
                        FontFamily="Ubuntu"
-                       FontWeight="Light"
+                       FontWeight="Bold"
                        Foreground="White"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Margin="20, 40, 0, 0"/>
+                       Margin="20, 35, 0, 0"/>
                     <Button Style="{StaticResource acceptButton}"
                         Content="Open new accommodation"
                         Width="183"
@@ -99,22 +106,22 @@
                         </VisualBrush>
                     </Grid.OpacityMask>
                     <Rectangle Fill="#80000000" />
-                    <Label Content="Madrid"
-                       FontSize="34"
+                    <Label Content="Spain,"
+                       FontSize="28"
                        FontFamily="Ubuntu"
                        FontWeight="Bold"
                        Foreground="White"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Margin="20, -20, 0, 0"/>
-                    <Label Content="Least popular location"
-                       FontSize="21"
+                       Margin="20, -25, 0, 0"/>
+                    <Label Content="Madrid"
+                       FontSize="28"
                        FontFamily="Ubuntu"
-                       FontWeight="Light"
+                       FontWeight="Bold"
                        Foreground="White"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Margin="20, 40, 0, 0"/>
+                       Margin="20, 35, 0, 0"/>
                     <Button Style="{StaticResource denyButtonMobile}"
                         Content="Close existing accommodation"
                         Width="183"

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InitialProject.Model;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,7 @@ namespace InitialProject.WPF.View.Owner_Views
         public OurRecommendationView()
         {
             InitializeComponent();
+            this.DataContext = new OurRecommendationsViewModel();
         }
     }
 }

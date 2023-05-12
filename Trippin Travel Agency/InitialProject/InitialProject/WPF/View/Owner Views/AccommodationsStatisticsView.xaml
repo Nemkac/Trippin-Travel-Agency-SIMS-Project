@@ -9,18 +9,32 @@
              d:DesignHeight="650" d:DesignWidth="710">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="250"/>
-            <RowDefinition Height="70"/>
+            <RowDefinition Height="260"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="330"/>
         </Grid.RowDefinitions>
 
         <ScrollViewer HorizontalScrollBarVisibility="Hidden">
             <StackPanel Grid.Row="0" Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" Grid.Row="0"
+                                HorizontalAlignment="Left" Margin="15 0 0 0">
+                    <fa:IconImage Icon="Fingerprint"
+                                      HorizontalAlignment="Left"
+                                      Style="{StaticResource menuBackButtonIcon}"
+                                      Width="15" Height="15" Foreground="{Binding ContentHintColor}"/>
+                    <Label Content="Choose an accommodation and click a button beneath to see accommodation images or annual statistics"
+                               Style="{StaticResource labelAboveTextBox}"
+                               Foreground="{Binding ContentHintColor}"
+                               Margin="10,0,0,0"
+                               />
+                </StackPanel>
                 <DataGrid x:Name="MyAccommodationsDataGrid"
-                      Style="{DynamicResource DataGridStyle1}" 
-                      CellStyle="{DynamicResource DataGridCellStyle1}" 
-                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"  
-                      RowStyle="{DynamicResource DataGridRowStyle1}"
+                      Style="{Binding DataGridStyle}"
+                      CellStyle="{Binding DataGridCellStyle}"
+                      ColumnHeaderStyle="{Binding DataGridColumnHeaderStyle}"
+                      RowStyle="{Binding DataGridRowStyle}"
+                      ItemsSource="{Binding accommodations}"
+                      SelectedItem="{Binding SelectedAccommodation}"
                       AutoGenerateColumns="False" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Id" Binding="{Binding accommodationId}" Width="45"/>
@@ -37,23 +51,28 @@
         <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Bottom">
             <Button Style="{StaticResource showImagesButtonTablet}"
                 Grid.Row="1" HorizontalAlignment="Right"
-                BorderBrush="Transparent" Width="220" Height="50" Margin="0 0 0 0">
+                BorderBrush="Transparent" Width="220" Height="35"
+                Margin="0 0 0 0">
                 <StackPanel Orientation="Horizontal"
                                 Margin="0, 0, 0 ,0">
-                    <fa:IconImage Icon="Image" HorizontalAlignment="Left" Width="23" Height="23" Foreground="#192a56" VerticalAlignment="Center" Margin="0 2 0 0"/>
-                    <Label VerticalAlignment="Center" Foreground="#192a56" Content="Show Images" FontSize="25" FontFamily="Ubuntu" FontWeight="Regular"  Margin="10 0 0 0"/>
+                    <fa:IconImage Icon="Image" HorizontalAlignment="Left" Width="20" Height="20" Foreground="#192a56" VerticalAlignment="Center" Margin="0 2 0 0"/>
+                    <Label VerticalAlignment="Center" Foreground="#192a56" Content="Show Images" FontSize="20" FontFamily="Ubuntu" FontWeight="Regular"  Margin="10 0 0 0"/>
                 </StackPanel>
             </Button>
-            <Button Style="{StaticResource detailsButton}"
+            <Label Content="{Binding LabelContent}"
+                   Margin="47 5 0 0" FontFamily="Ubuntu" FontSize="14" FontWeight="Medium"
+                   Width="220" x:Name="warningLabel"
+                   Foreground="#c23616"/>
+
+                <Button Style="{StaticResource detailsButton}"
                 Grid.Row="1" HorizontalAlignment="Right"
                 BorderBrush="Transparent" 
-                Margin="269 0 0 0"
-                Click="ShowDetails" Height="50"
+                Width="220" Height="35"
                 Command="{Binding ShowAnnualStatisticsViewCommand}">
                 <StackPanel Orientation="Horizontal"
                                 Margin="0, 0, 0 ,0">
-                    <fa:IconImage Icon="PlusCircle" HorizontalAlignment="Left" Width="23" Height="23" Foreground="#F4FFF8" VerticalAlignment="Center" Margin="0 2 0 0"/>
-                    <Label VerticalAlignment="Center" Content="Show Details" FontSize="25" FontFamily="Ubuntu" FontWeight="Regular" Foreground="#F4FFF8" Margin="10 0 0 0"/>
+                    <fa:IconImage Icon="PlusCircle" HorizontalAlignment="Left" Width="20" Height="20" Foreground="#F4FFF8" VerticalAlignment="Center" Margin="0 2 0 0"/>
+                    <Label VerticalAlignment="Center" Content="Show Details" FontSize="20" FontFamily="Ubuntu" FontWeight="Regular" Foreground="#F4FFF8" Margin="10 0 0 0"/>
                 </StackPanel>
             </Button>
         </StackPanel>

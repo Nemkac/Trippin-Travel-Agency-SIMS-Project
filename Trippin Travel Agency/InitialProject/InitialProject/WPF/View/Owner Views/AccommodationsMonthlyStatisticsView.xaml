@@ -19,17 +19,19 @@
         <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Top">
             <TextBlock x:Name="accommodationNameTextBlock"  FontFamily="Ubuntu" 
                        Width="Auto" FontSize="20" FontWeight="Light" Margin="5 0 0 0" 
-                       VerticalAlignment="Center" Foreground="#192a56"/>
+                       VerticalAlignment="Center" Foreground="{Binding ContentTextColor}"
+                       Text="{Binding AccommodationName}"/>
             <Label Content="monthly statistics"  FontFamily="Ubuntu"
                            FontSize="20" FontWeight="Light" VerticalAlignment="Center" 
-                           Foreground="#192a56"/>
+                           Foreground="{Binding ContentTextColor}"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1">
             <Label Content="Show statistics for month"  FontFamily="Ubuntu"
                            FontSize="20" FontWeight="Regular" VerticalAlignment="Center" 
-                           Foreground="#192a56"/>
-            <ComboBox x:Name="monthComboBox" Width="120" Height="30" Margin="15 0 0 0" SelectionChanged="monthComboBox_SelectionChanged"/>
+                           Foreground="{Binding ContentTextColor}"/>
+            <ComboBox x:Name="monthComboBox" Width="120" Height="30" Margin="15 0 0 0" 
+                      SelectedItem="{Binding SelectedMonth}" ItemsSource="{Binding monthsList}"/>
             <Button Style="{StaticResource showImagesButton}"
                 Grid.Row="1" HorizontalAlignment="Right"
                 BorderBrush="Transparent" Width="220" Height="35" Margin="105 0 0 0">
@@ -43,11 +45,12 @@
 
         <ScrollViewer HorizontalScrollBarVisibility="Hidden" Grid.Row="2">
             <StackPanel Grid.Row="2">
-                <DataGrid Style="{DynamicResource DataGridStyle1}" 
-                  CellStyle="{DynamicResource DataGridCellStyle1}" 
-                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-                  RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="monthlyStatisticsDataGrid" 
-                  AutoGenerateColumns="False">
+                <DataGrid x:Name="monthlyStatisticsDataGrid" 
+                  Style="{Binding DataGridStyle}"
+                  CellStyle="{Binding DataGridCellStyle}"
+                  ColumnHeaderStyle="{Binding DataGridColumnHeaderStyle}"
+                  RowStyle="{Binding DataGridRowStyle}"
+                  AutoGenerateColumns="False" ItemsSource="{Binding monthlyStatistics}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Month" Binding="{Binding month}" Width="95"/>
                         <DataGridTextColumn Header="No. of bookings" Binding="{Binding numberOfBookings}" Width="Auto"/>
@@ -72,7 +75,9 @@
                     </lc:Axis>
                 </lc:CartesianChart.AxisY>
             </lc:CartesianChart>
-            <lc:PieChart x:Name="pieChart" Width="350"/>
+            
+            <lc:PieChart LegendLocation="Bottom" Series="{Binding PieSeriesCollection}"
+                         Hoverable="True" InnerRadius="10" Width="350"/>
         </StackPanel>
     </Grid>
 </UserControl>

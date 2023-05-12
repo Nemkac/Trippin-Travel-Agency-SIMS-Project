@@ -115,7 +115,6 @@ namespace InitialProject.Repository
             DataBaseContext saveContext = new DataBaseContext();
             saveContext.Attach(accommodation);
             saveContext.SaveChanges();
-            MessageBox.Show("Accommodation registered succesfuly!");
         }
 
         public List<Accommodation> GetOwnersAccommodations(int id)
@@ -148,6 +147,13 @@ namespace InitialProject.Repository
 
             AccommodationLocation newLocation = new AccommodationLocation(country, city);
             return newLocation;
+        }
+
+        public List<AccommodationRenovation> GetAllRenovations()
+        {
+            DataBaseContext renovationsContext = new DataBaseContext();
+            List<AccommodationRenovation> renovations = renovationsContext.AccommodationRenovations.ToList();
+            return renovations;
         }
     }
 }

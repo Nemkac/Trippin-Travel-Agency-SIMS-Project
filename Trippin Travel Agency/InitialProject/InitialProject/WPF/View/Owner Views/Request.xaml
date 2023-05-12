@@ -20,11 +20,24 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
-            <DataGrid Style="{DynamicResource DataGridStyle1}" 
-                      CellStyle="{DynamicResource DataGridCellStyle1}" 
-                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"  
-                      RowStyle="{DynamicResource DataGridRowStyle1}" 
-                      Grid.Row="0"
+                            <StackPanel Orientation="Horizontal" Grid.Row="0"
+                                HorizontalAlignment="Left" Margin="15 0 0 0">
+                    <fa:IconImage Icon="Fingerprint"
+                                      HorizontalAlignment="Left"
+                                      Style="{StaticResource menuBackButtonIcon}"
+                                      Width="15" Height="15" Foreground="{Binding ContentHintColor}"/>
+                    <Label Content="Choose a request and click a button beneath to see details"
+                               Style="{StaticResource labelAboveTextBox}"
+                               Foreground="{Binding ContentHintColor}"
+                               Margin="10,0,0,0"
+                               />
+                </StackPanel>
+            <DataGrid Style="{Binding DataGridStyle}"
+                      CellStyle="{Binding DataGridCellStyle}"
+                      ColumnHeaderStyle="{Binding DataGridColumnHeaderStyle}"
+                      RowStyle="{Binding DataGridRowStyle}"
+                      Grid.Row="0" ItemsSource="{Binding requests}"
+                      SelectedItem="{Binding SelectedRequest}"
                       x:Name="requestsDataGrid" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Guest" Binding="{Binding guestName}" Width="80"/>
@@ -41,12 +54,12 @@
                 Grid.Row="1" HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Command="{Binding ShowAcceptDenyViewCommand}"
-                Margin="0 0 10 10"
-                BorderBrush="Transparent" Click="ShowDetails">
+                Margin="0 0 10 10" Width="220" Height="35"
+                BorderBrush="Transparent">
             <StackPanel Orientation="Horizontal"
                                 Margin="0, 0, 0 ,0">
-                <fa:IconImage Icon="PlusCircle" HorizontalAlignment="Left" Width="23" Height="23" Foreground="#F4FFF8" VerticalAlignment="Center" Margin="0 3 0 0"/>
-                <Label VerticalAlignment="Center" Content="Show Details" FontSize="25" FontFamily="Ubuntu" FontWeight="Regular" Foreground="#F4FFF8" Margin="10 0 0 0"/>
+                <fa:IconImage Icon="PlusCircle" HorizontalAlignment="Left" Width="20" Height="20" Foreground="#F4FFF8" VerticalAlignment="Center" Margin="0 3 0 0"/>
+                <Label VerticalAlignment="Center" Content="Show Details" FontSize="20" FontFamily="Ubuntu" FontWeight="Regular" Foreground="#F4FFF8" Margin="10 0 0 0"/>
             </StackPanel>
         </Button>
         <ContentControl Content="{Binding CurrentChildView}"/>

@@ -2,13 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp">
 
+
     <!-- Menu button -->
     <Style x:Key="menuButton" TargetType="RadioButton">
         <!--Normal button style-->
         <Setter Property="Height" Value="50"/>
         <Setter Property="Margin" Value="-5, 0, 0, 5"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="#f4fff8"/>
+        <Setter Property="Foreground" Value="{DynamicResource MenuButtonsTextColor}"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -25,9 +26,9 @@
             <!--Active button style-->
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Margin" Value="0, 0, 0, 5"/>
-                <Setter Property="Background" Value="#192a56"/>
-                <Setter Property="Foreground" Value="#FEFEFF"/>
-                <Setter Property="BorderBrush" Value="#192a56"/>
+                <Setter Property="Background" Value="{Binding MenuActiveButtonColor}"/>
+                <Setter Property="Foreground" Value="{Binding MenuActiveButtonColor}"/>
+                <Setter Property="BorderBrush" Value="{Binding MenuActiveButtonColor}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -196,7 +197,7 @@
 
     <!--Header button icon-->
     <Style x:Key="HeaderButtonIcon" TargetType="fa:IconImage">
-        <Setter Property="Foreground" Value="#192a56"/>
+        <Setter Property="Foreground" Value="{Binding HeaderButtonIconColor}"/>
         <Setter Property="Width" Value="25"/>
         <Setter Property="Height" Value="25"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -215,58 +216,6 @@
         <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="FontSize" Value="14.5"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-    </Style>
-
-    <Style x:Key="saveButton" TargetType="Button">
-        <Setter Property="Background" Value="#4CD137"/>
-        <Setter Property="Foreground" Value="#F4FFF8"/>
-        <Setter Property="FontFamily" Value="Ubuntu"/>
-        <Setter Property="FontSize" Value="17"/>
-        <Setter Property="FontWeight" Value="Light"/>
-        <Setter Property="Width" Value="200"/>
-        <Setter Property="Height" Value="40"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border Background="#4CD137" CornerRadius="20">
-                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="False">
-                <Setter Property="Background" Value="#44BD32"/>
-            </Trigger>
-        </Style.Triggers>
-
-    </Style>
-
-    <Style x:Key="denyButton" TargetType="Button">
-        <Setter Property="Background" Value="#C23616"/>
-        <Setter Property="Foreground" Value="#F4FFF8"/>
-        <Setter Property="FontFamily" Value="Ubuntu"/>
-        <Setter Property="FontSize" Value="17"/>
-        <Setter Property="FontWeight" Value="Light"/>
-        <Setter Property="Width" Value="200"/>
-        <Setter Property="Height" Value="40"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border Background="#E84118" CornerRadius="20">
-                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="False">
-                <Setter Property="Background" Value="#44BD32"/>
-            </Trigger>
-        </Style.Triggers>
-
     </Style>
 
     <Style x:Key="addButton" TargetType="Button">
@@ -530,37 +479,11 @@
         </Setter>
     </Style>
 
-
-    <Style x:Key="defaultLabel" TargetType="Label">
-        <Setter Property="FontFamily" Value="Ubuntu"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontWeight" Value="Medium"/>
-        <Setter Property="Foreground" Value="#192a56"/>
-    </Style>
-
     <Style x:Key="RatingLabel" TargetType="Label">
         <Setter Property="FontFamily" Value="Ubuntu"/>
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="Foreground" Value="#192a56"/>
-    </Style>
-
-    <Style x:Key="detailsButton" TargetType="Button">
-        <Setter Property="Background" Value="#2f3640"/>
-        <Setter Property="FontFamily" Value="Ubuntu"/>
-        <Setter Property="FontSize" Value="17"/>
-        <Setter Property="FontWeight" Value="Light"/>
-        <Setter Property="Width" Value="220"/>
-        <Setter Property="Height" Value="50"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border Background="#2f3640" CornerRadius="10" BorderThickness="0.4" BorderBrush="#192a56">
-                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
     </Style>
 
     <Style x:Key="showImagesButtonTablet" TargetType="Button">
@@ -573,7 +496,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="#fbc531" CornerRadius="10" BorderThickness="0.4" BorderBrush="#fbc531">
+                    <Border Background="#fbc531" CornerRadius="5" BorderThickness="0.4" BorderBrush="#fbc531">
                         <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
@@ -581,4 +504,86 @@
         </Setter>
     </Style>
 
+    <Style x:Key="denyButtonTablet" TargetType="Button">
+        <Setter Property="Background" Value="#C23616"/>
+        <Setter Property="Foreground" Value="#F4FFF8"/>
+        <Setter Property="FontFamily" Value="Ubuntu"/>
+        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="Width" Value="220"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="#C23616" CornerRadius="5" BorderThickness="0.4" BorderBrush="#C23616">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="saveButtonTablet" TargetType="Button">
+        <Setter Property="Background" Value="#4CD137"/>
+        <Setter Property="Foreground" Value="#F4FFF8"/>
+        <Setter Property="FontFamily" Value="Ubuntu"/>
+        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="Width" Value="220"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="#4CD137" CornerRadius="5" BorderThickness="0.4" BorderBrush="#4CD137">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ToggleButtonStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="#F5F6FA"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Width" Value="65"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Grid>
+                        <Border x:Name="ToggleButtonBackRibbon"
+                                Background="#F5F6FA" CornerRadius="10" Width="65" Height="20"
+                                VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Ellipse x:Name="Elipse" Fill="#F5F6FA" Stroke="Gray" StrokeThickness="5" Height="30" Width="30"
+                                 HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="Checked">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ThicknessAnimation Storyboard.TargetName="Elipse"
+                                                        Storyboard.TargetProperty="Margin"
+                                                        To="35 0 0 0" Duration="0:0:0.2"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+                        <EventTrigger RoutedEvent="Unchecked">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ThicknessAnimation Storyboard.TargetName="Elipse"
+                                                        Storyboard.TargetProperty="Margin"
+                                                        To="0 0 0 0" Duration="0:0:0.2"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+
+    </Style>
+    
 </ResourceDictionary>

@@ -5,6 +5,7 @@ using InitialProject.Repository;
 using InitialProject.Service.BookingServices;
 using InitialProject.Service.GuestServices;
 using InitialProject.WPF.ViewModels;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
 using SharpVectors.Dom;
 using System;
 using System.Collections.Generic;
@@ -28,89 +29,10 @@ namespace InitialProject.WPF.View.Owner_Views
     /// </summary>
     public partial class RateGuestView : UserControl
     {
-        GuestRateRepository rateRepository = new GuestRateRepository();
-        private BookingService bookingService;
-        private GuestRateService guestRateService;
-
-        public int bookingId { get; set; }
         public RateGuestView()
         {
             InitializeComponent();
-            DataBaseContext ratingContext = new DataBaseContext();
-            BookingTransfer transferedBooking = ratingContext.SelectedRatingNotificationTransfer.First();
-            this.bookingId = transferedBooking.bookingId;
-            BookingRepository bookingRepository = new BookingRepository();
-            this.bookingService = new BookingService(bookingRepository);
-            this.guestRateService = new(rateRepository);
-        }
-
-        private void SaveRate(object sender, RoutedEventArgs e)
-        {
-            //BookingService bookingService = new BookingService();
-            int cleannessRate = GetCleanness();
-            int rulesRate = GetRulesRespecting();
-            string comment = commentTB.Text;
-            int guestId = bookingService.GetGuestId(this.bookingId);
-            GuestRate newGuestRate = new GuestRate(cleannessRate, rulesRate, comment, guestId, this.bookingId);
-            guestRateService.Save(newGuestRate);
-            DataBaseContext transferedBooking = new DataBaseContext();
-            transferedBooking.SelectedRatingNotificationTransfer.Remove(transferedBooking.SelectedRatingNotificationTransfer.First());
-            transferedBooking.SaveChanges();
-            saveFeedback.Text = "Rating successfully saved!";
-        }
-
-        private int GetCleanness()
-        {
-            int cleannessRate;
-            if (cleannesRateRadioButton1.IsChecked == true)
-            {
-                cleannessRate = 1;
-            }
-            else if (cleannesRateRadioButton2.IsChecked == true)
-            {
-                cleannessRate = 2;
-            }
-            else if (cleannesRateRadioButton3.IsChecked == true)
-            {
-                cleannessRate = 3;
-            }
-            else if (cleannesRateRadioButton4.IsChecked == true)
-            {
-                cleannessRate = 4;
-            }
-            else
-            {
-                cleannessRate = 5;
-            }
-
-            return cleannessRate;
-        }
-
-        private int GetRulesRespecting()
-        {
-            int rulesRate;
-            if (rulesRateRadioButton1.IsChecked == true)
-            {
-                rulesRate = 1;
-            }
-            else if (rulesRateRadioButton2.IsChecked == true)
-            {
-                rulesRate = 2;
-            }
-            else if (rulesRateRadioButton3.IsChecked == true)
-            {
-                rulesRate = 3;
-            }
-            else if (rulesRateRadioButton4.IsChecked == true)
-            {
-                rulesRate = 4;
-            }
-            else
-            {
-                rulesRate = 5;
-            }
-
-            return rulesRate;
+            this.DataContext = new RateGuestViewModel();
         }
     }
 }

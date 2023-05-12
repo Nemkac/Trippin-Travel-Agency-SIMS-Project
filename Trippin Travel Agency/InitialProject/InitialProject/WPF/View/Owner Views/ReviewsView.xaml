@@ -13,15 +13,27 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <DataGrid x:Name="ReviewsDataGrid" Width="710" 
-                      Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}"/>
+                      Style="{Binding DataGridStyle}"
+                      CellStyle="{Binding DataGridCellStyle}"
+                      ColumnHeaderStyle="{Binding DataGridColumnHeaderStyle}"
+                      RowStyle="{Binding DataGridRowStyle}"
+                      ItemsSource="{Binding rates}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Booking Id" Binding="{Binding bookingId}" Width="145"/>
+                    <DataGridTextColumn Header="Cleanness" Binding="{Binding cleanness}" Width="145"/>
+                    <DataGridTextColumn Header="Owner Rate" Binding="{Binding ownerRate}" Width="145"/>
+                    <DataGridTextColumn Header="Comment" Binding="{Binding comment}" Width="96"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <Label Content="Total Rating: " FontFamily="Ubuntu" FontSize="40"
-                   FontWeight="Bold" Foreground="#192a56" VerticalAlignment="Bottom"
+                   FontWeight="Bold" Foreground="{Binding ContentTextColor}" VerticalAlignment="Bottom"
                    Margin="350 0 0 0"/>
             <TextBlock Width="90" Height="50" VerticalAlignment="Bottom"
                        FontFamily="Ubuntu" FontSize="40" FontWeight="Bold"
-                       Foreground="#192a56" x:Name="TotalRateTextBlock"/>
+                       Foreground="{Binding ContentTextColor}" x:Name="TotalRateTextBlock"
+                       Text="{Binding TotalRating}"/>
         </StackPanel>
     </Grid>
 </UserControl>

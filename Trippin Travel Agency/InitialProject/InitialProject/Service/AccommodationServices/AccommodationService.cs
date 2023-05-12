@@ -210,6 +210,11 @@ namespace InitialProject.Service.AccommodationServices
             AccommodationStatisticsDTO dto = new AccommodationStatisticsDTO(accommodation, location);
             return dto;
         }
+
+        public List<AccommodationRenovation> GetAllRenovations()
+        {
+            return this.iAccommodationRepository.GetAllRenovations();
+        }
     }
 }
 

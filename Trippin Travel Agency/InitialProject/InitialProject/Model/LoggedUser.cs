@@ -1,9 +1,12 @@
 ﻿using InitialProject.WPF.ViewModels;
+﻿using InitialProject.WPF.View.Owner_Views;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace InitialProject.Model
 {
@@ -21,5 +24,12 @@ namespace InitialProject.Model
         public static TourGuide_MainViewModel TourGuide_MainViewModel { get; set; }
 
 
+        public static OwnerInterfaceViewModel _mainViewModel { get; set; } 
+
+        public static AccommodationsAnnualStatisticsView accommodationsAnnualStatisticsView { get; set; } 
+
+        public static bool IsChecked { get; set; }
+        public static bool IsLanguageChecked { get; set; }
+        public static SolidColorBrush ContentTextColor { get; set; }
     }
 }
