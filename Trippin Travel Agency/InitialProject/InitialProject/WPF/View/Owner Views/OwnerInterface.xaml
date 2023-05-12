@@ -147,13 +147,24 @@
 
                 <!--Dark theme-->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
-                            Margin="0 250 0 0" Grid.Column="0">
+                            Margin="0 210 0 0" Grid.Column="0">
                     <icons:PackIcon Kind="WbSunny" Width="25" Height="25" 
                                     Foreground="{Binding LightThemeChecked}" Margin="0 7 20 0"/>
                     <CheckBox Style="{StaticResource ToggleButtonStyle}" 
                               IsChecked="{Binding IsChecked}"/>
                     <icons:PackIcon Kind="MoonWaningCrescent" Width="25" Height="25" 
                                     Foreground="{Binding DarkThemeChecked}" Margin="20 7 0 0"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                            Margin="0 0 0 0" Grid.Column="0">
+                    <TextBlock Style="{StaticResource menuButtonText}" Text="ENG"
+                                Foreground="{Binding EngChecked}" Margin="0 0 20 0"/>
+                    <CheckBox Style="{StaticResource ToggleButtonStyle}" 
+                              IsChecked="{Binding IsLanguageChecked}"/>
+                    <TextBlock Style="{StaticResource menuButtonText}" Text="SRB"
+                                Foreground="{Binding SrbChecked}" Margin="20 0 0 0"/>
+
                 </StackPanel>
             </StackPanel>
         </Border>

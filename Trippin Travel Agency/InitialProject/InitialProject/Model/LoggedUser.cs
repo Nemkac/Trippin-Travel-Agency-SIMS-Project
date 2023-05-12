@@ -26,6 +26,7 @@ namespace InitialProject.Model
         public static AccommodationsAnnualStatisticsView accommodationsAnnualStatisticsView { get; set; } 
 
         public static bool IsChecked { get; set; }
+        public static bool IsLanguageChecked { get; set; }
         public static SolidColorBrush ContentTextColor { get; set; }
     }
 }

@@ -119,6 +119,28 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private SolidColorBrush _engChecked;
+        public SolidColorBrush EngChecked
+        {
+            get { return _engChecked; }
+            set
+            {
+                _engChecked = value;
+                OnPropertyChanged(nameof(EngChecked));
+            }
+        }
+
+        private SolidColorBrush _srbChecked;
+        public SolidColorBrush SrbChecked
+        {
+            get { return _srbChecked; }
+            set
+            {
+                _srbChecked = value;
+                OnPropertyChanged(nameof(SrbChecked));
+            }
+        }
+
 
         //Properties
         public ViewModelBase CurrentChildView
@@ -189,6 +211,22 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private bool _isLanguageChecked;
+
+        public bool IsLanguageChecked
+        {
+            get { return _isLanguageChecked; }
+            set
+            {
+                _isLanguageChecked = value;
+                LoggedUser.IsLanguageChecked = _isLanguageChecked;
+                EngOrSrbLanguage();
+                OnPropertyChanged(nameof(IsLanguageChecked));
+
+                Mediator.OnIsLanguageCheckedChanged(IsLanguageChecked);
+            }
+        }
+
         //--> Commands
         public ICommand ShowAcceptDenyViewCommand { get; }
         public ICommand ShowReviewsViewCommand { get; }
@@ -226,7 +264,9 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ShowScheduleNewRenovationCommand = new ViewModelCommand(ExecuteShowScheduleNewRenovationCommand);
             //SignOutCommand = new ViewModelCommand(ExecuteSignOutCommand);
             IsChecked = false;
+            IsLanguageChecked = false;
             Mediator.OnIsCheckedChanged(IsChecked);
+            Mediator.OnIsLanguageCheckedChanged(IsLanguageChecked);
             GenerateReportCommand = new ViewModelCommand(GenerateAnnualReport);
 
             //Default view
@@ -370,6 +410,20 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 DarkThemeChecked = (SolidColorBrush)Application.Current.Resources["ModeUnchecked"];
                 LightThemeChecked = (SolidColorBrush)Application.Current.Resources["ModeChecked"];
 
+            }
+        }
+
+        public void EngOrSrbLanguage()
+        {
+            if(IsLanguageChecked == true)
+            {
+                SrbChecked = (SolidColorBrush)Application.Current.Resources["ModeChecked"];
+                EngChecked = (SolidColorBrush)Application.Current.Resources["ModeUnchecked"];
+            }
+            else
+            {
+                EngChecked = (SolidColorBrush)Application.Current.Resources["ModeChecked"];
+                SrbChecked = (SolidColorBrush)Application.Current.Resources["ModeUnchecked"];
             }
         }
     }

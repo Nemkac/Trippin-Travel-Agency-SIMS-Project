@@ -7,11 +7,15 @@ using InitialProject.Service.AccommodationServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
+using System.Windows.Threading;
 
 namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
@@ -71,7 +75,16 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
-
+        private string _labelContent;
+        public string LabelContent
+        {
+            get { return _labelContent; }
+            set
+            {
+                _labelContent = value;
+                OnPropertyChanged(nameof(LabelContent));
+            }
+        }
 
         private Style _dataGridStyle;
         public Style DataGridStyle
@@ -118,6 +131,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public ICommand ShowOurRecommendationsViewCommand { get; private set; }
         public ViewModelCommand ShowAnnualStatisticsViewCommand { get; private set; }
+
 
         public AccommodationStatisticsViewModel()
         {
@@ -196,7 +210,23 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 annualTransferContext.SaveChanges();
                 _mainViewModel.ExecuteShowAnnualStatisticsCommand(null);
             }
-            else MessageBox.Show("You must select an accommodation before proceeding to annual statistics!");
+            else
+            {
+                LabelContent = "Please select an accommodation";
+                RemoveWarning();
+            }
+        }
+
+        private void RemoveWarning()
+        {
+            var timer = new DispatcherTimer();
+            timer.Tick += (sender, args) =>
+            {
+                LabelContent = string.Empty;
+                timer.Stop();
+            };
+            timer.Interval = TimeSpan.FromSeconds(2);
+            timer.Start();
         }
     }
 }
