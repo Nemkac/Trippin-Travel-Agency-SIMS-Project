@@ -43,7 +43,8 @@ namespace InitialProject.Context
         public DbSet<TourFlagTransfer> TourFlagTransfers { get; set; }
         public DbSet<TourTodayImagesTransfer> TourTodayImagesTransfers { get; set; }
         public DbSet<AccommodationRenovation> AccommodationRenovations { get; set; }
-
+        public DbSet<RenovationSuggestion> RenovationSuggestions { get; set; }
+        public DbSet<RenovationSuggestionMessage> RenovationSuggestionMessages { get; set; }
 
 
 
