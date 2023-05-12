@@ -311,7 +311,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private bool IsPropertyNull()
         {
-            if (AccommodationName == null || GuestLimit == null || MinDaysBooked == null || House == false || BookingCancelationPeriod == null || Hut == false || Apartment == false) return false;
+            if ((AccommodationName == null || GuestLimit == null || MinDaysBooked == null  || BookingCancelationPeriod == null) && (Hut == false || Apartment == false || House == false)) return false;
             return true;
         }
 

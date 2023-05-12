@@ -38,7 +38,7 @@
                 CornerRadius="0, 25, 25, 25">
                 <Grid>
                     <Grid.Background>
-                        <ImageBrush ImageSource="C:\Users\aleks\OneDrive\Dokumenti\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\mitrovica.jpg">
+                        <ImageBrush ImageSource="C:\Users\Nemanja\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\mitrovica.jpg">
                             <ImageBrush.RelativeTransform>
                                 <ScaleTransform ScaleX="1" ScaleY="1" />
                             </ImageBrush.RelativeTransform>
@@ -89,7 +89,7 @@
                 CornerRadius="0, 25, 25, 25">
                 <Grid>
                     <Grid.Background>
-                        <ImageBrush ImageSource="C:\Users\aleks\OneDrive\Dokumenti\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\madrid.jpg">
+                        <ImageBrush ImageSource="C:\Users\Nemanja\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\madrid.jpg">
                             <ImageBrush.RelativeTransform>
                                 <ScaleTransform ScaleX="1" ScaleY="1" />
                             </ImageBrush.RelativeTransform>

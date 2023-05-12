@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20230425171528_addedFlagTransfer")]
-    partial class addedFlagTransfer
+    [Migration("20230512172014_DatabaseSetup")]
+    partial class DatabaseSetup
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,6 +157,43 @@ namespace InitialProject.Migrations
                     b.HasKey("id");
 
                     b.ToTable("AccommodationRates");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.AccommodationRenovation", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("accommodationId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("accommodationName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("accommodationType")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("duration")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("endDate")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("startDate")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("id");
+
+                    b.ToTable("AccommodationRenovations");
                 });
 
             modelBuilder.Entity("InitialProject.Model.Booking", b =>
@@ -554,6 +591,9 @@ namespace InitialProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime?>("acceptedDate")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("city")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -808,12 +848,23 @@ namespace InitialProject.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("flag")
+                    b.HasKey("id");
+
+                    b.ToTable("TourLocationTransfers");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.TransferModels.TourTodayImagesTransfer", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("tourId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("id");
 
-                    b.ToTable("TourLocationTransfers");
+                    b.ToTable("TourTodayImagesTransfers");
                 });
 
             modelBuilder.Entity("InitialProject.Model.User", b =>
