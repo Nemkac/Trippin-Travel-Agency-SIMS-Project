@@ -1,6 +1,7 @@
 ﻿using InitialProject.Context;
 using InitialProject.Interfaces;
 using InitialProject.Model;
+using InitialProject.Service.BookingServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,8 +32,24 @@ namespace InitialProject.Repository
                     return true;
                 }
             }
-
             return false;
+        }
+
+        public List<GuestRate> GetGuestsRates()
+        {   
+            DataBaseContext context = new DataBaseContext();
+            List<GuestRate> rates = context.GuestRate.ToList(); 
+            BookingRepository bookingRepository = new BookingRepository();
+            BookingService bookingService = new BookingService(bookingRepository);
+            List<GuestRate> foundRates = new List<GuestRate> ();
+            foreach(GuestRate guestRate in rates)
+            {
+                if (bookingService.GetById(guestRate.bookingId).guestId == LoggedUser.id)
+                {
+                    foundRates.Add(guestRate);
+                }
+            }
+            return foundRates;
         }
     }
 }

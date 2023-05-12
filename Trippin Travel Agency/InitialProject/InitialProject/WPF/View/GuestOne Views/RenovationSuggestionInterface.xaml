@@ -1,0 +1,101 @@
+﻿<Window x:Class="InitialProject.WPF.View.GuestOne_Views.RenovationSuggestionInterface"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
+        mc:Ignorable="d"
+        Title="RenovationSuggestionInterface" Height="800" Width="1500">
+    <Window.InputBindings>
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
+        <KeyBinding Key="Escape" Command="{Binding GoToPreviousWindow}" />
+    </Window.InputBindings>
+    <Grid>
+        
+        <GroupBox HorizontalAlignment="Center"
+            Height="432"
+            Header="My upcoming bookings"
+            Margin="0,141,0,0" 
+            VerticalAlignment="Top" 
+            Width="1032"
+            FontFamily="ubuntu" 
+            FontSize="36"
+            FontWeight="Medium" 
+            Foreground="#FF192A56" 
+            BorderThickness="3" 
+            BorderBrush="#192a56"/>
+        
+        <GroupBox Header="Navigator"
+            Margin="985,1,26,662"
+            Padding="10" 
+            FontFamily="ubuntu" 
+            FontSize="30"
+            BorderThickness="3" 
+            BorderBrush="#192a56" 
+            FontWeight="medium" >
+            <StackPanel>
+                <TextBlock Width="478" FontWeight="medium"><Run Text="Press CTRL+N for program map" FontFamily="ubuntu"/></TextBlock>
+            </StackPanel>
+        </GroupBox>
+        
+        <Rectangle HorizontalAlignment="Center" 
+            Height="80" 
+            Margin="0,704,0,0"
+            Fill ="#273c75" 
+            Stroke="Black"
+            VerticalAlignment="Top"
+            Width="1500"/>
+        
+        <TextBlock HorizontalAlignment="Left" 
+            Height="72"
+            Margin="609,693,0,0"
+            TextWrapping="Wrap" Text="Trippin' Travel" 
+            VerticalAlignment="Top"
+            Width="325" 
+            Foreground="white" 
+            FontSize="48" 
+            FontWeight="Bold" />
+        
+        <GroupBox Header="Help"
+            Margin="35,0,1107,662"
+            Padding="10"
+            FontFamily="ubuntu" 
+            FontSize="30"
+            BorderThickness="3" 
+            BorderBrush="#192a56"
+            FontWeight="medium" >
+            <StackPanel>
+                <TextBlock Height="39" FontWeight="medium"><Run Text="Press CTRL+H for help"/></TextBlock>
+            </StackPanel>
+        </GroupBox>
+        
+        <Label Content="Here Soon"
+            FontSize ="64" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Top" 
+            Margin="0,24,0,0"
+            FontFamily="ubuntu"
+            FontWeight="Bold" 
+            Foreground="#192a56"/>
+        
+        <Rectangle HorizontalAlignment="Left" 
+            Height="5"
+            Margin="35,120,0,0" 
+            Stroke="#FF192A56" 
+            VerticalAlignment="Top" 
+            Width="1435" 
+            Fill="#192a56"/>
+        
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Height="27" Margin="35,717,0,0" 
+            TextWrapping="Wrap"
+            Text="Press ESC to go back" 
+            VerticalAlignment="Top" 
+            Width="225"
+            Foreground="#e1b12c"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Bold"/>
+    </Grid>
+</Window>

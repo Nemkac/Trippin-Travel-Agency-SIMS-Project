@@ -11,5 +11,7 @@ namespace InitialProject.Interfaces
     {
         public void Save(GuestRate guestRate);
         public bool IsGuestRated(int bookingId);
+
+        public List<GuestRate> GetGuestsRates();
     }
 }

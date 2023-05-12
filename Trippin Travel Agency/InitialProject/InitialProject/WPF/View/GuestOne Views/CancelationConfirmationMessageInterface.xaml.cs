@@ -1,7 +1,5 @@
-﻿using InitialProject.Context;
-using InitialProject.Model;
-using InitialProject.Repository;
-using InitialProject.Service.BookingServices;
+﻿using InitialProject.Model;
+using InitialProject.WPF.ViewModels;
 using InitialProject.WPF.ViewModels.GuestOneViewModels;
 using System;
 using System.Collections.Generic;
@@ -19,14 +17,16 @@ using System.Windows.Shapes;
 
 namespace InitialProject.WPF.View.GuestOne_Views
 {
-
-    public partial class SendBookingDelaymentInterface : Window
+    /// <summary>
+    /// Interaction logic for CancelationConfirmationMessageInterface.xaml
+    /// </summary>
+    public partial class CancelationConfirmationMessageInterface : Window
     {
-        public SendBookingDelaymentInterface()
+        public CancelationConfirmationMessageInterface()
         {
             InitializeComponent();
-            GuestOneStaticHelper.sendBookingDelaymentInterface = this;
-            this.DataContext = new SendBookingDelaymentViewModel();
+            GuestOneStaticHelper.cancelationConfirmationMessageInterface = this;
+            this.DataContext = new CancelationConfirmationMessageViewModel();
         }
     }
 }

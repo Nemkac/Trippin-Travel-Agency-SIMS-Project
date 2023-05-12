@@ -17,9 +17,9 @@
                 <TextBlock Width="478" FontWeight="medium"><Run Text="Press CTRL+N for program map" FontFamily="ubuntu"/></TextBlock>
             </StackPanel>
         </GroupBox>
-        <Rectangle HorizontalAlignment="Left" Height="65" Margin="-30,708,0,0" Fill ="#273c75" Stroke="Black" VerticalAlignment="Top" Width="1674"/>
+        <Rectangle HorizontalAlignment="Center" Height="65" Margin="0,708,0,0" Fill ="#273c75" Stroke="Black" VerticalAlignment="Top" Width="1500"/>
         <TextBlock HorizontalAlignment="Left" Height="72" Margin="609,702,0,0" TextWrapping="Wrap" Text="Trippin' Travel" VerticalAlignment="Top" Width="325" Foreground="white" FontSize="48" FontWeight="Bold" />
-        <GroupBox Header="Help" Margin="35,0,1114,665" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
+        <GroupBox Header="Help" Margin="35,0,1109,665" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
             <StackPanel>
                 <TextBlock Height="39" FontWeight="medium"><Run Text="Press CTRL+H for help"/></TextBlock>
             </StackPanel>

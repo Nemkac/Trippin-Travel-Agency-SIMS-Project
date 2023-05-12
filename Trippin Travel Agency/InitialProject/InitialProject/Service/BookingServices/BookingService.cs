@@ -61,6 +61,11 @@ namespace InitialProject.Service.BookingServices
             this.iBookingRepository.Delete(booking);
         }
 
+        public bool HasGuestRated(int bookingId)
+        {
+            return this.iBookingRepository.HasGuestRated(bookingId);
+        }
+
         public RequestDTO CreateRequestDTO(BookingDelaymentRequest bookingDelaymentRequest)
         {
             UserService userService = new UserService();

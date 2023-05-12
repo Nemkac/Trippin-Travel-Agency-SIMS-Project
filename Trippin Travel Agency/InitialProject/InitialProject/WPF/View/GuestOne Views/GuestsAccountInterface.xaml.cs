@@ -1,7 +1,4 @@
-﻿using InitialProject.Context;
-using InitialProject.Model;
-using InitialProject.Repository;
-using InitialProject.Service.BookingServices;
+﻿using InitialProject.Model;
 using InitialProject.WPF.ViewModels.GuestOneViewModels;
 using System;
 using System.Collections.Generic;
@@ -19,14 +16,16 @@ using System.Windows.Shapes;
 
 namespace InitialProject.WPF.View.GuestOne_Views
 {
-
-    public partial class SendBookingDelaymentInterface : Window
+    /// <summary>
+    /// Interaction logic for GuestsAccountInterface.xaml
+    /// </summary>
+    public partial class GuestsAccountInterface : Window
     {
-        public SendBookingDelaymentInterface()
+        public GuestsAccountInterface()
         {
             InitializeComponent();
-            GuestOneStaticHelper.sendBookingDelaymentInterface = this;
-            this.DataContext = new SendBookingDelaymentViewModel();
+            GuestOneStaticHelper.guestsAccountInterface = this;
+            this.DataContext = new GuestsAccountViewModel();
         }
     }
 }

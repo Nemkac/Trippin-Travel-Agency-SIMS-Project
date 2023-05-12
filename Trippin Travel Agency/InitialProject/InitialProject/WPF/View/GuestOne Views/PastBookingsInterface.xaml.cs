@@ -19,6 +19,7 @@ using InitialProject.Repository;
 using InitialProject.Service.AccommodationServices;
 using InitialProject.Service.BookingServices;
 using InitialProject.Service.GuestServices;
+using InitialProject.WPF.ViewModels.GuestOneViewModels;
 
 namespace InitialProject.WPF.View.GuestOne_Views
 {
@@ -27,43 +28,11 @@ namespace InitialProject.WPF.View.GuestOne_Views
     /// </summary>
     public partial class PastBookingsInterface : Window
     {
-        private BookingService bookingService;
-        private AccommodationService accommodationService;
-        private AccommodationRateService accommodationRateService;
         public PastBookingsInterface()
         {
             InitializeComponent();
-            this.Loaded += ShowPastBookings;
-            BookingRepository bookingRepository = new BookingRepository();
-            this.bookingService = new BookingService(bookingRepository);
-            AccommodationRepository accommodationRepository = new AccommodationRepository();
-            this.accommodationService = new AccommodationService(accommodationRepository);
-            this.accommodationRateService = new AccommodationRateService(new AccommodationRateRepository());
-        }
-
-        private void ShowPastBookings(object sender, RoutedEventArgs e)
-        {
-            DataBaseContext context = new DataBaseContext();
-            UserService userService = new UserService();
-            List<Booking> bookings = userService.GetGuestsPastBookings(LoggedUser.id);
-            this.pastBookingsGrid.ItemsSource = bookings;
-        }
-
-        private void ShowRateInterface(object sender, RoutedEventArgs e)
-        {   
-            if (bookingService.CheckIfValidForRating((Booking)pastBookingsGrid.SelectedItem) && !accommodationRateService.isPreviouslyRated(((Booking)pastBookingsGrid.SelectedItem).Id))
-            {
-                RateAccommodationInterface RateAccommodationInterface = new RateAccommodationInterface();
-                RateAccommodationInterface.SetAttributes(((Booking)pastBookingsGrid.SelectedItem).Id);
-                RateAccommodationInterface.WindowStartupLocation = WindowStartupLocation.Manual;
-                RateAccommodationInterface.Left = this.Left;
-                RateAccommodationInterface.Top = this.Top;
-                RateAccommodationInterface.Show();
-                this.Close();
-            } else
-            {
-                warningBlock.Text = "ne moze";
-            }
+            GuestOneStaticHelper.pastBookingsInterface = this;
+            this.DataContext = new PastBookingsViewModel();
         }
     }
 }

@@ -4,39 +4,491 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
+        xmlns:viewModel = "clr-namespace:InitialProject.WPF.ViewModels.GuestOneViewModels"
         mc:Ignorable="d"
-        Title="GuestOneInterface" Height="800" Width="1500" >
+        Title="GuestOneInterface" Height="800" Width="1500" 
+        KeyDown= "F" >
+    <Window.InputBindings>
+        <KeyBinding Key="Escape" Command="{Binding GoToPreviousWindow}" />
+        <KeyBinding Key="Left" Command="{Binding PreviousImage}" />
+        <KeyBinding Key="Right" Command="{Binding NextImage}" />
+        <KeyBinding Key="Enter" Command="{Binding BookAccommodation}" />
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
+        <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
+    </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="106*"/>
             <RowDefinition Height="111*"/>
         </Grid.RowDefinitions>
         <Canvas>
-            <GroupBox Height="332" Header="Pick arrival and departure dates" Canvas.Left="659" Canvas.Top="184" Width="647" FontFamily="ubuntu" FontSize="36" FontWeight="Bold" Foreground="#FF192A56" BorderThickness="3" BorderBrush="#192a56" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <TextBlock HorizontalAlignment="Left" Height="36" TextWrapping="Wrap" Text="Number of guests :" VerticalAlignment="Top" Width="202" Grid.Row="1" Canvas.Bottom="-185" Canvas.Left="836" Canvas.Top="541" FontFamily="Ubuntu" FontSize="22" FontWeight="Bold" Foreground="#FF192A56"/>
+            <GroupBox 
+                Height="332" 
+                Header="Pick arrival and departure dates" 
+                Canvas.Left="659" 
+                Canvas.Top="184" 
+                Width="598" 
+                FontFamily="ubuntu" 
+                FontSize="36" 
+                FontWeight="Bold" 
+                Foreground="#FF192A56" 
+                BorderThickness="3" 
+                BorderBrush="#192a56" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center"/>
+
+            <TextBlock 
+                HorizontalAlignment="Center" 
+                Height="36" 
+                TextWrapping="Wrap" 
+                Text="Number of guests :" 
+                VerticalAlignment="Top" 
+                Width="202" 
+                Grid.Row="1" 
+                Canvas.Bottom="-185" 
+                Canvas.Left="836" 
+                Canvas.Top="533" 
+                FontFamily="Ubuntu" 
+                FontSize="22" 
+                FontWeight="Bold" 
+                Foreground="#FF192A56"/>
 
 
-            <DataGrid Height="225" VerticalAlignment="Center" Width="507" x:Name ="dataGrid" Grid.RowSpan="2" Canvas.Bottom="-130" Canvas.Left="709" Canvas.Top="250" FontFamily="ubuntu" FontSize="32" Foreground="#FF192A56" BorderBrush="#FF192A56" Background="White" FontWeight="Medium" HeadersVisibility="None" FrozenColumnCount="300" ColumnWidth="500" TextBlock.TextAlignment="Center" HorizontalAlignment="Left"/>
-            <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" x:Name ="numberOfGuests"  VerticalAlignment="Top" Width="73" Height="38" Grid.Row="1" Canvas.Bottom="-185" Canvas.Left="1046" Canvas.Top="535" FontFamily="ubuntu" FontSize="22" TextAlignment="Center" VerticalContentAlignment="Center"/>
-            <Button Content="Book" HorizontalAlignment="Left" Height="48" VerticalAlignment="Center" Width="114" x:Name ="BookAccommodation" Click="BookAccommodation_Click" Grid.RowSpan="2" Canvas.Bottom="-60" Canvas.Left="902" Canvas.Top="594" FontFamily="ubuntu" FontSize="24" Background="#FF273C75" Foreground="White" FontWeight="Medium"/>
-            <TextBlock HorizontalAlignment="Left" Height="73" Margin="364,82,0,0" Grid.Row="1" TextWrapping="Wrap" x:Name="warningText" VerticalAlignment="Top" Width="91" Canvas.Bottom="60" Canvas.Left="5"/>
-            <GroupBox Height="459" Header="Accommodation info" Canvas.Left="194" Canvas.Top="183" Width="378" FontFamily="ubuntu" FontSize="36" FontWeight="Bold" Foreground="#FF192A56" BorderThickness="3" BorderBrush="#192a56" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBlock Height="242" Canvas.Left="227" TextWrapping="Wrap" Name="accommodationInfoBlock"  Canvas.Top="251" Width="305" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" LineHeight="24" FontFamily="Ubuntu" FontSize="20"/>
-            <TextBlock Height="242" Canvas.Left="227" TextWrapping="Wrap" Name="accommodationInfoLabelsBlock"  Canvas.Top="231" Width="305" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" LineHeight="24" Foreground="#FF192A56" FontFamily="Ubuntu" FontSize="20" FontWeight="Bold" />
+            <DataGrid 
+                Height="225" 
+                VerticalAlignment="Center" 
+                Width="507" 
+                x:Name ="dataGrid" 
+                Grid.RowSpan="2" 
+                Canvas.Bottom="-130" 
+                Canvas.Left="709" 
+                Canvas.Top="250" 
+                FontFamily="ubuntu" 
+                FontSize="32" 
+                Foreground="#FF192A56"
+                BorderBrush="#FF192A56" 
+                Background="White" 
+                FontWeight="Medium" 
+                HeadersVisibility="None"
+                FrozenColumnCount="300" 
+                ColumnWidth="500" 
+                TextBlock.TextAlignment="Center" 
+                HorizontalAlignment="Left"
+                ItemsSource="{Binding AvaialableDatesGrid}" 
+                SelectedItem="{Binding SelectedDateRange}">
+                <DataGrid.InputBindings>
+                    <KeyBinding Key="Left" Command="{Binding PreviousImage}" />
+                    <KeyBinding Key="Right" Command="{Binding NextImage}" />
+                </DataGrid.InputBindings>
+            </DataGrid>
+
+            <TextBox HorizontalAlignment="Center" 
+                     TextWrapping="Wrap"
+                     x:Name ="n" 
+                     VerticalAlignment="Top" 
+                     Width="73" 
+                     Height="38" 
+                     Grid.Row="1" 
+                     Canvas.Bottom="-185" 
+                     Canvas.Left="1046" 
+                     Canvas.Top="527" 
+                     FontFamily="ubuntu" 
+                     FontSize="22" 
+                     TextAlignment="Center" 
+                     VerticalContentAlignment="Center" 
+                     IsTabStop="False"
+      
+                     Text="{Binding NumberOfGuests,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding BookAccommodation}" />
+                    <KeyBinding Key="Left" Command="{Binding PreviousImage}" />
+                    <KeyBinding Key="Right" Command="{Binding NextImage}" />
+                </TextBox.InputBindings>
+            </TextBox>
+
+            <Button Content="Book" 
+                    HorizontalAlignment="Center" 
+                    Height="48"
+                    VerticalAlignment="Top" 
+                    Width="114" 
+                    x:Name ="BookAccommodation" 
+                    Grid.RowSpan="2" 
+                    Canvas.Bottom="-60" 
+                    Canvas.Left="906"
+                    Canvas.Top="585" 
+                    FontFamily="ubuntu" 
+                    FontSize="24" 
+                    Background="#FF273C75" 
+                    Foreground="White" 
+                    FontWeight="Medium" 
+                    IsTabStop="False"
+                    Style="{StaticResource leadButton}"
+                    Command="{Binding BookAccommodation}"/>
+
+            <TextBlock 
+                HorizontalAlignment="Left" 
+                Height="73"
+                Margin="364,82,0,0" 
+                Grid.Row="1" 
+                TextWrapping="Wrap"
+                x:Name="warningText"
+                VerticalAlignment="Top" 
+                Width="91" 
+                Canvas.Bottom="60"
+                Canvas.Left="5" 
+                Text="{Binding WarningText}"/>
+
+            <GroupBox Height="469" 
+                      Header="Accommodation info" 
+                      Canvas.Left="216"
+                      Canvas.Top="183"
+                      Width="378"
+                      FontFamily="ubuntu" 
+                      FontSize="36" 
+                      FontWeight="Bold" 
+                      Foreground="#FF192A56" 
+                      BorderThickness="3" 
+                      BorderBrush="#192a56" 
+                      HorizontalAlignment="Center" 
+                      VerticalAlignment="Top"/>
+
+            <TextBlock Height="212"
+                       Canvas.Left="249" TextWrapping="Wrap"
+                       Name="accommodationInfoBlock" 
+                       Canvas.Top="251" 
+                       Width="305" 
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center" 
+                       TextAlignment="Center" 
+                       LineHeight="24" 
+                       FontFamily="Ubuntu" 
+                       FontSize="20" 
+                       Text="{Binding AccommodationInfo}"/>
+
+            <TextBlock Height="212" 
+                       Canvas.Left="249"
+                       TextWrapping="Wrap" 
+                       Name="accommodationInfoLabelsBlock" 
+                       Canvas.Top="231"
+                       Width="305" 
+                       HorizontalAlignment="Left" 
+                       VerticalAlignment="Center"
+                       TextAlignment="Center"
+                       LineHeight="24"
+                       Foreground="#FF192A56" 
+                       FontFamily="Ubuntu" 
+                       FontSize="20" 
+                       FontWeight="Bold" 
+                       Text="{Binding AccommodationInfoLabels}"/>
         </Canvas>
-        <Label Content="Almost there!" FontSize ="64" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="532,23,0,0" FontFamily="ubuntu" FontWeight="Bold" Foreground="#192a56"/>
-        <GroupBox Header="Navigator" Margin="985,1,26,273" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
+        <Label Content="Almost there!" 
+               FontSize ="64"
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Top" 
+               Margin="532,23,0,0"
+               FontFamily="ubuntu" 
+               FontWeight="Bold" 
+               Foreground="#192a56"/>
+
+        <GroupBox Header="Navigator" 
+                  Margin="985,1,26,273" 
+                  Padding="10"
+                  FontFamily="ubuntu"
+                  FontSize="30" 
+                  BorderThickness="3"
+                  BorderBrush="#192a56" 
+                  FontWeight="medium" >
             <StackPanel>
-                <TextBlock Width="478" FontWeight="medium"><Run Text="Press CTRL+N for program map" FontFamily="ubuntu"/></TextBlock>
+                <TextBlock 
+                    Width="478" 
+                    FontWeight="medium"><Run Text="Press CTRL+N for program map" FontFamily="ubuntu"/></TextBlock>
             </StackPanel>
         </GroupBox>
-        <Rectangle HorizontalAlignment="Left" Height="65" Margin="-30,325,0,0" Fill ="#273c75" Stroke="Black" VerticalAlignment="Top" Width="1544" Grid.Row="1"/>
-        <TextBlock HorizontalAlignment="Left" Height="72" Margin="609,319,0,0" TextWrapping="Wrap" Text="Trippin' Travel" VerticalAlignment="Top" Width="325" Foreground="white" FontSize="48" FontWeight="Bold" Grid.Row="1" />
-        <GroupBox Header="Help" Margin="35,0,1114,281" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
+
+        <Rectangle HorizontalAlignment="Center"
+                   Height="76"
+                   Margin="0,325,0,0" 
+                   Fill ="#273c75" 
+                   Stroke="Black" 
+                   VerticalAlignment="Top"
+                   Width="1500"
+                   Grid.Row="1"/>
+
+        <TextBlock HorizontalAlignment="Left" 
+                   Height="72" 
+                   Margin="609,319,0,0" 
+                   TextWrapping="Wrap"
+                   Text="Trippin' Travel" 
+                   VerticalAlignment="Top" 
+                   Width="325" 
+                   Foreground="white"
+                   FontSize="48"
+                   FontWeight="Bold"
+                   Grid.Row="1" />
+
+        <GroupBox Header="Help"
+                  Margin="35,0,1105,276" 
+                  Padding="10"
+                  FontFamily="ubuntu"
+                  FontSize="30"
+                  BorderThickness="3"
+                  BorderBrush="#192a56" 
+                  FontWeight="medium" >
+
             <StackPanel>
                 <TextBlock Height="39" FontWeight="medium"><Run Text="Press CTRL+H for help"/></TextBlock>
             </StackPanel>
         </GroupBox>
-        <Rectangle HorizontalAlignment="Left" Height="5" Margin="28,119,0,0" Stroke="#FF192A56" VerticalAlignment="Top" Width="1434" Fill="#192a56"/>
+
+        <Rectangle HorizontalAlignment="Left" 
+                   Height="5" 
+                   Margin="28,119,0,0" 
+                   Stroke="#FF192A56"
+                   VerticalAlignment="Top" 
+                   Width="1434" 
+                   Fill="#192a56"/>
+
+        <Image HorizontalAlignment="Left" 
+               Height="185" 
+               Margin="254,57,0,0" 
+               Grid.Row="1"
+               VerticalAlignment="Top"
+               Width="303" 
+               Source="{Binding AccommodationImage}" 
+               Stretch="Fill"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Height="27" Margin="35,344,0,0"
+            Grid.Row="1" 
+            TextWrapping="Wrap"
+            Text="Press ESC to go back" 
+            VerticalAlignment="Top" 
+            Width="225"
+            Foreground="#e1b12c"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Bold"/>
+
+        <TextBlock HorizontalAlignment="Left" 
+                   Height="35" 
+                   Margin="655,291,0,0"
+                   Grid.Row="1" 
+                   TextWrapping="Wrap" 
+                   Text="{Binding WarningMessage}" 
+                   VerticalAlignment="Top" 
+                   Width="633"
+                   FontFamily="Ubuntu" 
+                   FontSize="22" 
+                   FontWeight="Bold" 
+                   Foreground="#e84118"
+                   TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+                   Height="197" 
+                   Margin="9,220,0,0" 
+                   TextWrapping="Wrap" 
+                   Text="{Binding HelpInfo}"
+                   VerticalAlignment="Top" 
+                   Width="202"
+                   Foreground="#7f8fa6"
+                   FontFamily="Ubuntu" 
+                   FontSize="22" 
+                   FontWeight="Medium" 
+                   Grid.RowSpan="2"
+                   TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="165" 
+            Margin="28,95,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpImage}"
+            VerticalAlignment="Top" 
+            Width="157" Grid.Row="1"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="233" 
+            Margin="1302,232,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpDates}"
+            VerticalAlignment="Top" 
+            Width="157" Grid.RowSpan="2"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="80" 
+            Margin="1129,142,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpGuests}"
+            VerticalAlignment="Top" 
+            Width="341" Grid.Row="1"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="86" 
+            Margin="1046,223,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpBook}"
+            VerticalAlignment="Top" 
+            Width="428" Grid.Row="1"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="111" 
+            Margin="609,160,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpExit}"
+            VerticalAlignment="Top" 
+            Width="188" Grid.Row="1"
+            Foreground="#c23616"
+            FontFamily="Ubuntu" 
+            FontSize="26" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="915,273,0,0"
+            TextWrapping="Wrap" 
+            Text="Press ENTER" 
+            VerticalAlignment="Top" 
+            Width="102"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium" Grid.Row="1"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="837,0,0,0"
+            TextWrapping="Wrap" 
+            Text="Press LEFT SHIFT" 
+            VerticalAlignment="Center" 
+            Width="135"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium" 
+            Grid.Row="1"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="764,108,0,0"
+            TextWrapping="Wrap" 
+            Text="Press TAB to access, then UP and DOWN arrows" 
+            VerticalAlignment="Top" 
+            Width="404"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium" Grid.Row="1"
+            TextAlignment="Center"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="31" 
+            Margin="1222,352,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt;" 
+            VerticalAlignment="Top" 
+            Width="16"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="25"
+            FontWeight="Medium" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="29" 
+            Margin="1225,329,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt;" 
+            VerticalAlignment="Top" 
+            Width="16"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="25"
+            FontWeight="Medium" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="25" 
+            Margin="389,252,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt;" 
+            VerticalAlignment="Top" 
+            Width="16"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="25"
+            FontWeight="Medium" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="180"/>
+                    <TranslateTransform X="15.838" Y="-8.059"/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock 
+            
+            HorizontalAlignment="Left"
+            Height="25" 
+            Margin="393,232,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt;" 
+            VerticalAlignment="Top" 
+            Width="16"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="25"
+            FontWeight="Medium" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform X="-15.838" Y="8.059"/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+
     </Grid>
 </Window>

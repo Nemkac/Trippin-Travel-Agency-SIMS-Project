@@ -6,29 +6,348 @@
         xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
         mc:Ignorable="d"
         Title="FutureBookingsInterface" Height="800" Width="1500" >
+    <Window.InputBindings>
+        <KeyBinding Key="R" Command="{Binding GoToDelayment}" />
+        <KeyBinding Key="C" Command="{Binding DeleteBooking}" />
+        <KeyBinding Key="B" Command="{Binding GoToPastBookings}" />
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
+        <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
+    </Window.InputBindings>
     <Grid>
-        <GroupBox HorizontalAlignment="Center" Height="432" Header="My upcoming bookings" Margin="0,141,0,0" VerticalAlignment="Top" Width="1032" FontFamily="ubuntu" FontSize="36" FontWeight="Medium" Foreground="#FF192A56" BorderThickness="3" BorderBrush="#192a56"/>
+        <GroupBox HorizontalAlignment="Center"
+                  Height="432"
+                  Header="My upcoming bookings"
+                  Margin="0,141,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="1032"
+                  FontFamily="ubuntu" 
+                  FontSize="36"
+                  FontWeight="Medium" 
+                  Foreground="#FF192A56" 
+                  BorderThickness="3" 
+                  BorderBrush="#192a56"/>
 
-        <DataGrid HorizontalAlignment="Center" Height="246" Margin="0,201,0,0" VerticalAlignment="Top" Width="868" x:Name ="futureBookingsGrid" FontFamily="ubuntu" FontSize="22" Foreground="#FF192A56" BorderBrush="#FF192A56" Background="White" FontWeight="Medium"/>
-        <Button Content="Send a delayment request" HorizontalAlignment="Left" Height="57" Margin="638,481,0,0" VerticalAlignment="Top" Width="262" Click="GoToBookingDelayment" FontFamily="ubuntu" FontSize="20" Background="#FF273C75" Foreground="White" FontWeight="Medium"/>
-        <Button Content="Cancel booking" HorizontalAlignment="Left" Height="57" Margin="1032,481,0,0" VerticalAlignment="Top" Width="152" Click="DeleteBooking" FontFamily="ubuntu" FontSize="20" Background="#FF273C75" Foreground="White" FontWeight="Medium"/>
-        <Button Content="My previous bookings" HorizontalAlignment="Left" Height="57" Margin="638,601,0,0" VerticalAlignment="Top" Width="262" Click="ShowPastBookings" FontFamily="ubuntu" FontSize="20" Background="#FF273C75" Foreground="White" FontWeight="Medium"/>
-        <Button Content="Show detailed" HorizontalAlignment="Left" Height="57" Margin="316,481,0,0" VerticalAlignment="Top" Width="154" Click="ShowDetailed" FontFamily="ubuntu" FontSize="20" Background="#FF273C75" Foreground="White" FontWeight="Medium"/>
-        <Label Content="" FontSize ="72" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,14,0,0" FontFamily="ubuntu" FontWeight="Bold" Foreground="#192a56"/>
-        <GroupBox Header="Navigator" Margin="985,1,26,662" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
+        <DataGrid HorizontalAlignment="Center" 
+                  Height="246"
+                  Margin="0,201,0,0" 
+                  VerticalAlignment="Top"
+                  Width="855"
+                  x:Name ="futureBookingsGrid"
+                  FontFamily="ubuntu" 
+                  FontSize="28"
+                  Foreground="#FF192A56" 
+                  BorderBrush="#FF192A56"
+                  Background="White" 
+                  FontWeight="Medium"
+                  TextBlock.TextAlignment="Center" 
+                  ItemsSource="{Binding UpcomingBookingsGrid}"
+                  SelectedItem="{Binding SelectedBooking}"/>
+
+        <Button Content="Send a delayment request"
+                HorizontalAlignment="Left" 
+                Height="57"
+                Margin="638,481,0,0"
+                VerticalAlignment="Top"
+                Width="262"
+                FontFamily="ubuntu" 
+                FontSize="20" 
+                Background="#FF273C75"
+                Foreground="White" 
+                FontWeight="Medium" 
+                IsTabStop="False"
+                Style="{StaticResource leadButton}"
+                Command="{Binding GoToDelayment}"/>
+
+        <Button Content="Cancel booking"
+                HorizontalAlignment="Left" 
+                Height="57" 
+                Margin="1032,481,0,0"
+                VerticalAlignment="Top" 
+                Width="152" 
+                FontFamily="ubuntu" 
+                FontSize="20" 
+                Background="#FF273C75" 
+                Foreground="White" 
+                FontWeight="Medium" 
+                IsTabStop="False"
+                Style="{StaticResource leadButton}"
+                Command="{Binding DeleteBooking}" />
+
+        <Button Content="My previous bookings" 
+                HorizontalAlignment="Left" 
+                Height="57"
+                Margin="638,608,0,0" 
+                VerticalAlignment="Top"
+                Width="262" 
+                FontFamily="ubuntu" 
+                FontSize="20" 
+                Background="#FF273C75"
+                Foreground="White" 
+                FontWeight="Medium" 
+                IsTabStop="False"
+                Style="{StaticResource leadButton}"
+                Command="{Binding GoToPastBookings}"/>
+
+        <Button Content="Show detailed" 
+                HorizontalAlignment="Left"
+                Height="57"
+                Margin="316,481,0,0" 
+                VerticalAlignment="Top" 
+                Width="154"
+                FontFamily="ubuntu" 
+                FontSize="20" 
+                Background="#FF273C75" 
+                Foreground="White" 
+                FontWeight="Medium"
+                Style="{StaticResource leadButton}"
+                IsTabStop="False"/>
+
+        <GroupBox Header="Navigator"
+                  Margin="985,1,26,662"
+                  Padding="10" 
+                  FontFamily="ubuntu" 
+                  FontSize="30"
+                  BorderThickness="3" 
+                  BorderBrush="#192a56" 
+                  FontWeight="medium" >
             <StackPanel>
                 <TextBlock Width="478" FontWeight="medium"><Run Text="Press CTRL+N for program map" FontFamily="ubuntu"/></TextBlock>
             </StackPanel>
         </GroupBox>
-        <Rectangle HorizontalAlignment="Left" Height="65" Margin="-30,708,0,0" Fill ="#273c75" Stroke="Black" VerticalAlignment="Top" Width="1674"/>
-        <TextBlock HorizontalAlignment="Left" Height="72" Margin="609,702,0,0" TextWrapping="Wrap" Text="Trippin' Travel" VerticalAlignment="Top" Width="325" Foreground="white" FontSize="48" FontWeight="Bold" />
-        <GroupBox Header="Help" Margin="35,0,1114,662" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
+
+        <Rectangle HorizontalAlignment="Center" 
+                   Height="80" 
+                   Margin="0,704,0,0"
+                   Fill ="#273c75" 
+                   Stroke="Black"
+                   VerticalAlignment="Top"
+                   Width="1500"/>
+
+        <TextBlock HorizontalAlignment="Left" 
+                   Height="72"
+                   Margin="609,693,0,0"
+                   TextWrapping="Wrap" Text="Trippin' Travel" 
+                   VerticalAlignment="Top"
+                   Width="325" 
+                   Foreground="white" 
+                   FontSize="48" 
+                   FontWeight="Bold" />
+
+        <GroupBox Header="Help"
+                  Margin="35,0,1107,662"
+                  Padding="10"
+                  FontFamily="ubuntu" 
+                  FontSize="30"
+                  BorderThickness="3" 
+                  BorderBrush="#192a56"
+                  FontWeight="medium" >
             <StackPanel>
                 <TextBlock Height="39" FontWeight="medium"><Run Text="Press CTRL+H for help"/></TextBlock>
             </StackPanel>
         </GroupBox>
-        <Label Content="Here Soon" FontSize ="64" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,24,0,0" FontFamily="ubuntu" FontWeight="Bold" Foreground="#192a56"/>
-        <Rectangle HorizontalAlignment="Left" Height="5" Margin="35,120,0,0" Stroke="#FF192A56" VerticalAlignment="Top" Width="1435" Fill="#192a56"/>
-        <TextBlock HorizontalAlignment="Left" Height="57" Margin="412,601,0,0" TextWrapping="Wrap" Name="warningBlock"  VerticalAlignment="Top" Width="146"/>
+
+        <Label Content="Here Soon"
+               FontSize ="64" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Top" 
+               Margin="0,24,0,0"
+               FontFamily="ubuntu"
+               FontWeight="Bold" 
+               Foreground="#192a56"/>
+
+        <Rectangle HorizontalAlignment="Left" 
+                   Height="5"
+                   Margin="35,120,0,0" 
+                   Stroke="#FF192A56" 
+                   VerticalAlignment="Top" 
+                   Width="1435" 
+                   Fill="#192a56"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="362,543,0,0"
+            TextWrapping="Wrap" 
+            Text="Press D" 
+            VerticalAlignment="Top" 
+            Width="62"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="738,543,0,0"
+            TextWrapping="Wrap" 
+            Text="Press R" 
+            VerticalAlignment="Top" 
+            Width="62"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="1083,543,0,0"
+            TextWrapping="Wrap" 
+            Text="Press C" 
+            VerticalAlignment="Top" 
+            Width="62"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="738,674,0,0"
+            TextWrapping="Wrap" 
+            Text="Press B" 
+            VerticalAlignment="Top" 
+            Width="62"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Height="32" 
+            Margin="382,579,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="780"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Bold" 
+            Foreground="#e84118"
+            TextAlignment="Center"
+            Text="{Binding WarningText}"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="198" 
+            Margin="18,257,0,0" 
+            TextWrapping="Wrap" 
+            Text= "{Binding HelpGrid}"
+            VerticalAlignment="Top" 
+            Width="202"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="197" 
+            Margin="1262,255,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpChoose}"
+            VerticalAlignment="Top" 
+            Width="218"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="80" 
+            Margin="938,604,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpPast}"
+            VerticalAlignment="Top" 
+            Width="324"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="111" 
+            Margin="347,592,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpExit}"
+            VerticalAlignment="Top" 
+            Width="188"
+            Foreground="#c23616"
+            FontFamily="Ubuntu" 
+            FontSize="26" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="141" 
+            Margin="1182,259,0,0"
+            TextWrapping="Wrap" 
+            Text="Press TAB to access then UP and DOWN arrows" 
+            VerticalAlignment="Top" 
+            Width="61"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="25" 
+            Margin="271,330,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt;" 
+            VerticalAlignment="Top" 
+            Width="16"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="25"
+            FontWeight="Medium" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="25" 
+            Margin="275,306,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt;" 
+            VerticalAlignment="Top" 
+            Width="16"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="25"
+            FontWeight="Medium" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Height="27" Margin="35,719,0,0" 
+            TextWrapping="Wrap"
+            Text="Press ESC to go back" 
+            VerticalAlignment="Top" 
+            Width="225"
+            Foreground="#e1b12c"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Bold"/>
+
     </Grid>
 </Window>

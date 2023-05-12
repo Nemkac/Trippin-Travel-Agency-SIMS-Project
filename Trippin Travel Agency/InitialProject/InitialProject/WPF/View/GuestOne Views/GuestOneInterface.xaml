@@ -61,15 +61,16 @@
                 <TextBlock Width="478" FontWeight="medium"><Run Text="Press CTRL+N for program map" FontFamily="ubuntu"/></TextBlock>
             </StackPanel>
         </GroupBox>
-        <GroupBox Header="Help" Margin="29,0,1120,138" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
+        <GroupBox Header="Help" Margin="29,0,1106,138" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
             <StackPanel>
                 <TextBlock Height="39" FontWeight="medium"><Run Text="Press CTRL+H for help"/></TextBlock>
             </StackPanel>
         </GroupBox>
-        <Rectangle HorizontalAlignment="Left" Height="65" Margin="-30,468,0,0" Fill ="#273c75" Stroke="Black" VerticalAlignment="Top" Width="1674" Grid.Row="1"/>
+        <Rectangle HorizontalAlignment="Left" Height="76" Margin="-12,468,0,0" Fill ="#273c75" Stroke="Black" VerticalAlignment="Top" Width="1512" Grid.Row="1"/>
         <TextBlock HorizontalAlignment="Left" Height="72" Margin="609,462,0,0" TextWrapping="Wrap" Text="Trippin' Travel" VerticalAlignment="Top" Width="325" Foreground="white" FontSize="48" FontWeight="Bold" Grid.Row="1" />
         <TextBlock HorizontalAlignment="Left" Height="25" Margin="435,127,0,0" Grid.Row="1" TextWrapping="Wrap" Name="debug"  VerticalAlignment="Top" Width="279"/>
         <Button Content="zahtevi zodlaganje" HorizontalAlignment="Left" Height="25" Margin="179,127,0,0" Grid.Row="1" VerticalAlignment="Top" Width="117" Click="GoToBookingDelaymentRequests"/>
         <Rectangle HorizontalAlignment="Left" Height="5" Margin="28,0,0,0" Stroke="#FF192A56" VerticalAlignment="Center" Width="1434" Fill="#192a56"/>
+        <Button Content="ocene" HorizontalAlignment="Left" Height="26" Margin="323,125,0,0" Grid.Row="1" VerticalAlignment="Top" Width="99" Click="GoToGuestsReviews"/>
     </Grid>
 </Window>
