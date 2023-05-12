@@ -234,10 +234,10 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public BookAccommodationViewModel()
         {
             DataBaseContext context = new DataBaseContext();
-            List<Model.Image> images = context.Images.ToList();
+            //List<Model.Image> images = context.Images.ToList();
             Accommodation accommodation = accommodationService.GetById(GuestOneStaticHelper.id);
             AccommodationInfoLabels = "Accommodation name:" + "\n\nLocation:" + "\n\nMaximum number of guests:" + "\n\nRating out of 10:";
-            AccommodationImage = images[0].imageLink;
+            //AccommodationImage = images[0].imageLink;
             AccommodationInfo = GuestOneStaticHelper.id.ToString();
             AccommodationInfo = accommodation.name + "\n\n" + this.accommodationService.GetAccommodationLocation(GuestOneStaticHelper.id)[0]+ " , " +
                                 accommodationService.GetAccommodationLocation(GuestOneStaticHelper.id)[1] + "\n\n" + accommodation.guestLimit + "\n\n" +
@@ -329,30 +329,37 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public void ShowNextImage(object sender)
         {
             DataBaseContext context = new DataBaseContext();
-            List<Model.Image> images = context.Images.ToList();
-            if (imageCounter < images.Count-1)
+            if (context.Images.ToList().Count != 0)
             {
-                imageCounter++;
-            } else
-            {
-                imageCounter = 0;
+                List<Model.Image> images = context.Images.ToList();
+                if (imageCounter < images.Count - 1)
+                {
+                    imageCounter++;
+                }
+                else
+                {
+                    imageCounter = 0;
+                }
+                AccommodationImage = images[imageCounter].imageLink;
             }
-            AccommodationImage = images[imageCounter].imageLink;
         }
 
         public void ShowPreviousImage(object sender)
         {
             DataBaseContext context = new DataBaseContext();
-            List<Model.Image> images = context.Images.ToList();
-            if (imageCounter > 0)
+            if (context.Images.ToList().Count != 0)
             {
-                imageCounter--;
+                List<Model.Image> images = context.Images.ToList();
+                if (imageCounter > 0)
+                {
+                    imageCounter--;
+                }
+                else
+                {
+                    imageCounter = images.Count - 1;
+                }
+                AccommodationImage = images[imageCounter].imageLink;
             }
-            else
-            {
-                imageCounter = images.Count-1;
-            }
-            AccommodationImage = images[imageCounter].imageLink;
         }
 
 
