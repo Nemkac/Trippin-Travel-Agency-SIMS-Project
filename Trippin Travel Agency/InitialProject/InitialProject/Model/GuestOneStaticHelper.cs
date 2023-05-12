@@ -16,7 +16,6 @@ namespace InitialProject.Model
         public static FutureBookingsInterface futureBookingsInterface { get; set; }
         public static int selectedBookingIdToRate { get; set; }
         public static PastBookingsInterface pastBookingsInterface { get; set; }
-        public static string previousWindow { get; set; }
         public static GuestOneInterface guestOneInterface { get; set; }
         public static BookAccommodationInterface bookAccommodationInterface { get; set; }
         public static RateAccommodationInterface rateAccommodationInterface { get; set; }
@@ -28,6 +27,7 @@ namespace InitialProject.Model
         public static GuestsReviewsInterface guestsReviewsInterface { get; set; }
         public static SelectedGuestReviewInterface selectedGuestReviewInterface { get; set; }
         public static RenovationSuggestionInterface renovationSuggestionInterface { get; set; }
+        public static GuestsAccountInterface guestsAccountInterface { get; set; }
         public static Navigator navigator { get; set; }
         public static GuestRate guestRate { get; set; }
 

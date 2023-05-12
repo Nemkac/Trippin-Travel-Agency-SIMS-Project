@@ -10,6 +10,7 @@
         <KeyBinding Key="F1" Command="{Binding GoToHome}" />
         <KeyBinding Key="F2" Command="{Binding GoToBookings}" />
         <KeyBinding Key="F3" Command="{Binding GoReviews}" />
+        <KeyBinding Key="F7" Command="{Binding GoAccount}" />
     </Window.InputBindings>
     <Grid>
         <GroupBox HorizontalAlignment="Left"

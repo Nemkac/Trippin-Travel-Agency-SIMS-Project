@@ -387,7 +387,8 @@
             Foreground="#718093"
             FontFamily="Ubuntu" 
             FontSize="17" 
-            FontWeight="Medium" Grid.Row="1"/>
+            FontWeight="Medium" 
+            Grid.Row="1"/>
 
         <TextBlock 
             HorizontalAlignment="Left"

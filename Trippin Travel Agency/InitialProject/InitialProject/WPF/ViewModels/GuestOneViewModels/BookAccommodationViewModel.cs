@@ -29,6 +29,9 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand GoToPreviousWindow { get; set; }
         public ViewModelCommand OpenNavigator { get; set; }
         public ViewModelCommand Help {  get; set; }
+        public ViewModelCommand BookAccommodation { get; set; }
+        public ViewModelCommand NextImage { get; set; }
+        public ViewModelCommand PreviousImage { get; set; }
 
 
         private string accommodationInfo;
@@ -227,10 +230,6 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 }
             }
         }
-
-        public ViewModelCommand BookAccommodation { get; set; }
-        public ViewModelCommand NextImage { get; set; }
-        public ViewModelCommand PreviousImage { get; set; }
 
         public BookAccommodationViewModel()
         {

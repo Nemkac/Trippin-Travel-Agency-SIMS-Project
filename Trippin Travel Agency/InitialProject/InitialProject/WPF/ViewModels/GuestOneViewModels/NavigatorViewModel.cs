@@ -14,11 +14,13 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand GoToBookings { get; set; }
         public ViewModelCommand GoToHome { get; set; }
         public ViewModelCommand GoReviews { get; set; }
+        public ViewModelCommand GoAccount { get; set; }
         public NavigatorViewModel()
         {
             GoToBookings = new ViewModelCommand(GoToFutureBookings);
             GoToHome = new ViewModelCommand(GoHome);
             GoReviews = new ViewModelCommand(GoToReviews);
+            GoAccount = new ViewModelCommand(GoToAccount);
         }
         public void GoToFutureBookings(object sender)
         {
@@ -44,6 +46,15 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             guestsReviewsInterface.Show();
         }
 
+        public void GoToAccount(object sender)
+        {
+            CloseInterfaces();
+            GuestsAccountInterface accountInterface = new GuestsAccountInterface();
+            accountInterface.Top = GuestOneStaticHelper.guestOneInterface.Top;
+            accountInterface.Left = GuestOneStaticHelper.guestOneInterface.Left;
+            accountInterface.Show();
+        }
+
         public void CloseInterfaces()
         {
             GuestOneStaticHelper.navigator.Close();
@@ -54,6 +65,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             GuestOneStaticHelper.futureBookingsInterface?.Hide();
             GuestOneStaticHelper.guestsReviewsInterface?.Hide();
             GuestOneStaticHelper.renovationSuggestionInterface?.Hide();
+            GuestOneStaticHelper.guestsAccountInterface?.Hide();
         }
     }
 }
