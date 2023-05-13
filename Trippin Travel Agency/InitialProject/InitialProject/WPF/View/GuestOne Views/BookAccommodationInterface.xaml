@@ -515,6 +515,6 @@
             FontSize="22" 
             FontWeight="Medium"
             TextAlignment="Center"/>
-
+        
     </Grid>
 </Window>
