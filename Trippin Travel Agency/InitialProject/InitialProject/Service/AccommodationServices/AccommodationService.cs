@@ -89,9 +89,10 @@ namespace InitialProject.Service.AccommodationServices
             int startEndSpan;
             List<List<DateTime>> availablePeriods;
             List<Booking> sameAccommodationBookings;
+            List<List<DateTime>> takenDates = new List<List<DateTime>>();
             GetDateBasicProperties(accommodation, dateLimits, out startingDate, out startEndSpan, out availablePeriods, out sameAccommodationBookings);
 
-            if (sameAccommodationBookings.Count == 0)
+            if (sameAccommodationBookings.Count == 0 && GetRenovations(GuestOneStaticHelper.id) == null)
             {
                 for (int i = 0; i <= startEndSpan - daysToBook; i++)
                 {
@@ -99,8 +100,24 @@ namespace InitialProject.Service.AccommodationServices
                 }
                 return availablePeriods;
             }
+            if(sameAccommodationBookings.Count == 0)
+            {
+                foreach (AccommodationRenovation accommodationRenovation in GetRenovations(GuestOneStaticHelper.id))
+                {
+                    takenDates.Add(new List<DateTime>() { DateTime.Parse(accommodationRenovation.startDate), DateTime.Parse(accommodationRenovation.endDate) });
+                    if (GetAvailableDateSlots(startEndSpan, daysToBook, startingDate, takenDates).Count > 0)
+                    {
+                        return GetAvailableDateSlots(startEndSpan, daysToBook, startingDate, takenDates);
+                    }
 
-            List<List<DateTime>> takenDates = new List<List<DateTime>>();
+                    if (SuggestAdditionalDates(startEndSpan, daysToBook, startingDate, takenDates).Count > 0)
+                    {
+                        return SuggestAdditionalDates(startEndSpan, daysToBook, startingDate, takenDates);
+                    }
+                    return null;
+                }
+            }
+
             foreach (Booking booking in sameAccommodationBookings)
             {
                 takenDates.Add(new List<DateTime>() { DateTime.Parse(booking.arrival), DateTime.Parse(booking.departure) });
