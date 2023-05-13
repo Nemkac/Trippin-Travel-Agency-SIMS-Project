@@ -181,11 +181,12 @@ namespace InitialProject.Service.AccommodationServices
         {
             foreach (List<DateTime> bookingsDates in takenDates)
             {
-                if (exactDay >= bookingsDates[0] && exactDay < bookingsDates[1])
+                if ((exactDay >= bookingsDates[0] && exactDay < bookingsDates[1]) || IsDayDuringRenovation(exactDay))
                 {
                     return false;
                 }
             }
+
             return true;
         }
 
@@ -214,6 +215,38 @@ namespace InitialProject.Service.AccommodationServices
         public List<AccommodationRenovation> GetAllRenovations()
         {
             return this.iAccommodationRepository.GetAllRenovations();
+        }
+
+        public bool IsDayDuringRenovation(DateTime exactDay)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<AccommodationRenovation> accommodationRenovations = GetRenovations(GuestOneStaticHelper.id);
+            if (accommodationRenovations != null)
+            {
+                foreach (AccommodationRenovation accommodationRenovation in accommodationRenovations)
+                {
+                    if (exactDay >= DateTime.Parse(accommodationRenovation.startDate) && exactDay <= DateTime.Parse(accommodationRenovation.endDate))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public List<AccommodationRenovation> GetRenovations(int accommodationId)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<AccommodationRenovation> accommodationRenovations = context.AccommodationRenovations.ToList();
+            List<AccommodationRenovation> foundRenovations = new List<AccommodationRenovation>();
+            foreach (AccommodationRenovation accommodationRenovation in accommodationRenovations)
+            {
+                if(accommodationRenovation.accommodationId == accommodationId)
+                {
+                    foundRenovations.Add(accommodationRenovation);
+                }
+            }
+            return foundRenovations;
         }
     }
 }

@@ -268,6 +268,7 @@ namespace InitialProject.WPF.View.GuestOne_Views
             AccommodationDTO accommodationDTO = (AccommodationDTO)dataGrid.SelectedItem;
             Accommodation accommodation = accommodationService.GetById(accommodationDTO.accommodationId);
             selectedAccommodation = accommodation;
+            GuestOneStaticHelper.id = selectedAccommodation.id;
             List<DateTime> dateLimits = GetDateLimits(sender, e);
             daysToBook = (int.Parse(numberOfDays.Text));
             List<List<DateTime>> availableDates = accommodationService.GetAvailableDatePeriods(accommodation, daysToBook, dateLimits);

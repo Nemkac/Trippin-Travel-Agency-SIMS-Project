@@ -26,6 +26,7 @@ namespace InitialProject.WPF.View.GuestOne_Views
         public FutureBookingsInterface()
         {
             InitializeComponent();
+            debuger.Text = GuestOneStaticHelper.temp;
             GuestOneStaticHelper.futureBookingsInterface = this;
             this.DataContext = new FutureBookingsViewModel();
         }

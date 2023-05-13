@@ -340,7 +340,7 @@
         <TextBlock HorizontalAlignment="Left"
             Height="86" 
             Margin="1046,223,0,0" 
-            TextWrapping="Wrap" 
+            TextWrapping="Wrap"
             Text="{Binding HelpBook}"
             VerticalAlignment="Top" 
             Width="428" Grid.Row="1"
@@ -489,7 +489,7 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-        
+
         <TextBlock HorizontalAlignment="Left"
             Height="48" 
             Margin="745,138,0,0" 
@@ -498,6 +498,19 @@
             VerticalAlignment="Top" 
             Width="428"
             Foreground="#FF192A56"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+        
+        <TextBlock HorizontalAlignment="Left"
+            Height="40" 
+            Margin="171,142,0,0" 
+            TextWrapping="Wrap"
+            Name="debuger"
+            VerticalAlignment="Top" 
+            Width="428"
+            Foreground="#7f8fa6"
             FontFamily="Ubuntu" 
             FontSize="22" 
             FontWeight="Medium"
