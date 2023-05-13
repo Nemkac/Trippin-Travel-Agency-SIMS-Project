@@ -104,7 +104,7 @@ namespace InitialProject.WPF.View.GuestOne_Views
                     }
                 } 
             }
-        }
+        } 
 
         public void CheckIfValidForSuperGuest()
         {
