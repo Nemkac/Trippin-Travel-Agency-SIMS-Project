@@ -56,7 +56,8 @@ namespace InitialProject.WPF.View.GuestOne_Views
             this.accommodationService = new AccommodationService(accommodationRepository);
             this.bookingDelaymentRequestService = new(new BookingDelaymentRequestRepository());
             GuestOneStaticHelper.guestOneInterface = this;
-            //CheckIfStillSuperGuest();
+            CheckIfStillSuperGuest();
+            CheckIfValidForSuperGuest();
         }
 
  
@@ -85,7 +86,7 @@ namespace InitialProject.WPF.View.GuestOne_Views
             UserService userService = new UserService();
             if(userService.IsSuperGuest() != null)
             {
-                if(DateTime.Today.Subtract(userService.IsSuperGuest().titleAcquisition).Days >= 365)
+                if (DateTime.Today.Subtract(userService.IsSuperGuest().titleAcquisition).Days >= 365)
                 {
                     foreach (SuperGuest superGuest in context.SuperGuests.ToList())
                     {
@@ -101,7 +102,21 @@ namespace InitialProject.WPF.View.GuestOne_Views
                             context.SaveChanges();
                         }
                     }
-                }
+                } 
+            }
+        }
+
+        public void CheckIfValidForSuperGuest()
+        {
+            DataBaseContext context = new DataBaseContext();
+            UserService userService = new UserService();
+            string temp = LoggedUser.id.ToString();
+            int loggedId = int.Parse(temp);
+            if (userService.IsSuperGuest() == null && userService.BookingsInLastYear() >= 10)
+            {
+                SuperGuest superGuest = new SuperGuest(loggedId, 5, DateTime.Today, 1);
+                context.Attach(superGuest);
+                context.SaveChanges();     
             }
         }
 
@@ -120,6 +135,7 @@ namespace InitialProject.WPF.View.GuestOne_Views
                 accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetAccommodationLocation(accommodation.id)));
             }
             this.dataGrid.ItemsSource = accommodationsDTO;
+            debuger1.Text = LoggedUser.id.ToString();
         }
 
         private void GetByCountry(object sender, KeyEventArgs k)

@@ -149,18 +149,6 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 DiscountPointsText = "Number of discount points\n(lasting until " + userService.IsSuperGuest().titleAcquisition.AddYears(1).ToString().ToString().Substring(0, Math.Max(0, userService.IsSuperGuest().titleAcquisition.AddYears(1).ToString().Length - 11)) + " )";
                 NumberOfReservations = userService.BookingsSinceSuperGuestAcquisition();
                 BookingsInLastYearText = "Bookings since acquiring Super Guest title";
-
-            }
-            else if (userService.BookingsInLastYear() >= 10)
-            {
-                SuperGuest superGuest = new SuperGuest(LoggedUser.id, 5, DateTime.Today,1);
-                DataBaseContext saveContext = new DataBaseContext();
-                saveContext.Attach(superGuest);
-                saveContext.SaveChanges();
-                DiscountPoints = userService.IsSuperGuest().points.ToString();
-                DiscountPointsText = "Number of discount points\n(lasting until " + userService.IsSuperGuest().titleAcquisition.AddYears(1).ToString().Substring(0, Math.Max(0, userService.IsSuperGuest().titleAcquisition.AddYears(1).ToString().Length - 11)) + ")";
-                NumberOfReservations = userService.BookingsSinceSuperGuestAcquisition();
-                BookingsInLastYearText = "Bookings since acquiring Super Guest title";
             }
             else if (userService.BookingsInLastYear() > 0 && userService.BookingsInLastYear() < 10)
             {

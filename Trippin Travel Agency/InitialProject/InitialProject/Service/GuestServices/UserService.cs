@@ -154,7 +154,7 @@ namespace InitialProject.Service.GuestServices
             DataBaseContext context = new DataBaseContext();
             List<SuperGuest> superGuests = context.SuperGuests.ToList();
             DateTime oldSuperGuestAcquisition = new DateTime();
-            oldSuperGuestAcquisition = DateTime.Today;
+            oldSuperGuestAcquisition = DateTime.Today.AddDays(1);
             foreach (SuperGuest superGuest in superGuests)
             {
                 if(superGuest.guestId == LoggedUser.id && superGuest.ifActive == 0)
@@ -165,7 +165,7 @@ namespace InitialProject.Service.GuestServices
             int bookingsInLastYearCounter = 0;
             DateTime dayYearBefore = DateTime.Today.AddYears(-1);
             List<Booking> pastBookings = GetGuestsPastBookings(LoggedUser.id);
-            if (oldSuperGuestAcquisition != DateTime.Today)
+            if (oldSuperGuestAcquisition != DateTime.Today.AddDays(1))
             {
                 foreach (Booking booking in pastBookings)
                 {
@@ -210,7 +210,7 @@ namespace InitialProject.Service.GuestServices
             List<SuperGuest> superGuests = context.SuperGuests.ToList();
             foreach (SuperGuest superGuest in superGuests)
             {
-                if (superGuest.guestId == LoggedUser.id)
+                if (superGuest.guestId == LoggedUser.id && superGuest.ifActive == 1)
                 {
                     foreach(Booking booking in GetGuestsPastBookings(LoggedUser.id))
                     {
