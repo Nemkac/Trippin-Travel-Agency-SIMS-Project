@@ -10,6 +10,7 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 
 namespace InitialProject.Service.AccommodationServices
 
@@ -51,23 +52,39 @@ namespace InitialProject.Service.AccommodationServices
 
         public List<int> GetAllByCountry(string country)
         {
-            DataBaseContext context = new DataBaseContext();
-            List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
-            List<int> filtered = new List<int>();
-            List<Accommodation> accommodations = context.Accommodations.ToList();
-            foreach (Accommodation accommodation in accommodations)
+            if (country != null)
             {
-                if (GetAccommodationLocation(accommodation.id)[0].ToUpper().Contains(country.ToUpper()))
+                DataBaseContext context = new DataBaseContext();
+                List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
+                List<int> filtered = new List<int>();
+                List<Accommodation> accommodations = context.Accommodations.ToList();
+                foreach (Accommodation accommodation in accommodations)
                 {
-                    filtered.Add(accommodation.id);
+                    if (GetAccommodationLocation(accommodation.id)[0].ToUpper().Contains(country.ToUpper()))
+                    {
+                        filtered.Add(accommodation.id);
+                    }
                 }
+                return filtered;
             }
-            GuestOneInterface guestOneInterface = new GuestOneInterface();
-            return filtered;
+            return null;
         }
 
         public List<Accommodation> GetMatching(List<int> allAccommodations, List<Accommodation> accommodationsToCheck)
         {
+            if(allAccommodations == null)
+            {
+                return accommodationsToCheck;
+            }
+            if(accommodationsToCheck == null)
+            {
+                List<Accommodation> output = new List<Accommodation>();
+                foreach (int accommodation in allAccommodations)
+                {
+                    output.Add(GetById(accommodation));
+                }
+                return output;
+            }
             List<Accommodation> matchingAccommodations = new List<Accommodation>();
             DataBaseContext context = new DataBaseContext();
             foreach (Accommodation accommodationToCheck in accommodationsToCheck)

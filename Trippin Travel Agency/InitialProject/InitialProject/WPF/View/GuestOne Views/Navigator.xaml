@@ -10,6 +10,9 @@
         <KeyBinding Key="F1" Command="{Binding GoToHome}" />
         <KeyBinding Key="F2" Command="{Binding GoToBookings}" />
         <KeyBinding Key="F3" Command="{Binding GoReviews}" />
+        <KeyBinding Key="F4" Command="{Binding GoAnyWhereAnyWhen}" />
+        <KeyBinding Key="F5" Command="{Binding GoForums}" />
+        <KeyBinding Key="F6" Command="{Binding GoDelaymentRequests}" />
         <KeyBinding Key="F7" Command="{Binding GoAccount}" />
     </Window.InputBindings>
     <Grid>

@@ -15,14 +15,23 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand GoToHome { get; set; }
         public ViewModelCommand GoReviews { get; set; }
         public ViewModelCommand GoAccount { get; set; }
+        public ViewModelCommand GoDelaymentRequests { get; set; }
         public NavigatorViewModel()
         {
             GoToBookings = new ViewModelCommand(GoToFutureBookings);
             GoToHome = new ViewModelCommand(GoHome);
             GoReviews = new ViewModelCommand(GoToReviews);
             GoAccount = new ViewModelCommand(GoToAccount);
+            GoDelaymentRequests = new ViewModelCommand(GoToDelaymentRequests);
+
         }
+
         public void GoToFutureBookings(object sender)
+        {
+            
+        }
+
+        public void GoToDelaymentRequests(object sender)
         {
             CloseInterfaces();
             FutureBookingsInterface futureBookingsInterface = new FutureBookingsInterface();

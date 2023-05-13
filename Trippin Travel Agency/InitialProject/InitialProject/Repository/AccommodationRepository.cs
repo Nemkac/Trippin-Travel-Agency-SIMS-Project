@@ -22,80 +22,100 @@ namespace InitialProject.Repository
         }
         public List<int> GetAllByName(string name)
         {
-            DataBaseContext context = new DataBaseContext();
-            GuestOneInterface guestOneInterface = new GuestOneInterface();
-            List<int> filtered = new List<int>();
-            List<Accommodation> accommodations = context.Accommodations.ToList();
-            foreach (Accommodation accommodation in accommodations)
+            if (name != null)
             {
-                string nameToUpper = accommodation.name.ToUpper();
-                if (nameToUpper.Contains(name.ToUpper()))
+                DataBaseContext context = new DataBaseContext();
+                GuestOneInterface guestOneInterface = new GuestOneInterface();
+                List<int> filtered = new List<int>();
+                List<Accommodation> accommodations = context.Accommodations.ToList();
+                foreach (Accommodation accommodation in accommodations)
                 {
-                    filtered.Add(accommodation.id);
+                    string nameToUpper = accommodation.name.ToUpper();
+                    if (nameToUpper.Contains(name.ToUpper()))
+                    {
+                        filtered.Add(accommodation.id);
+                    }
                 }
+                return filtered;
             }
-            return filtered;
+            return null;
         }
 
         public List<int> GetAllByCity(string city)
         {
-            DataBaseContext context = new DataBaseContext();
-            List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
-            List<Accommodation> accommodations = context.Accommodations.ToList();
-            List<int> filtered = new List<int>();
-            foreach (Accommodation accommodation in accommodations.ToList())
+            if (city != null)
             {
-                if ((accommodation.location.city.ToUpper()).Contains(city.ToUpper()))
+                DataBaseContext context = new DataBaseContext();
+                List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
+                List<Accommodation> accommodations = context.Accommodations.ToList();
+                List<int> filtered = new List<int>();
+                foreach (Accommodation accommodation in accommodations.ToList())
                 {
-                    filtered.Add(accommodation.id);
+                    if ((accommodation.location.city.ToUpper()).Contains(city.ToUpper()))
+                    {
+                        filtered.Add(accommodation.id);
+                    }
                 }
+                return filtered;
             }
-            return filtered;
+            return null;
         }
 
         public List<int> GetAllByGuestsNumber(int guestsNumber)
         {
-            DataBaseContext context = new DataBaseContext();
-            List<Accommodation> accommodations = context.Accommodations.ToList();
-            List<int> filtered = new List<int>();
-            foreach (Accommodation accommodation in accommodations.ToList())
+            if (guestsNumber != null)
             {
-                if (accommodation.guestLimit >= guestsNumber)
+                DataBaseContext context = new DataBaseContext();
+                List<Accommodation> accommodations = context.Accommodations.ToList();
+                List<int> filtered = new List<int>();
+                foreach (Accommodation accommodation in accommodations.ToList())
                 {
-                    filtered.Add(accommodation.id);
+                    if (accommodation.guestLimit >= guestsNumber)
+                    {
+                        filtered.Add(accommodation.id);
+                    }
                 }
+                return filtered;
             }
-            return filtered;
+            return null;
         }
 
         public List<int> GetAllByMininumDays(int days)
         {
-            DataBaseContext context = new DataBaseContext();
-            List<Accommodation> accommodations = context.Accommodations.ToList();
-            List<int> filtered = new List<int>();
-            foreach (Accommodation accommodation in accommodations.ToList())
+            if (days != null)
             {
-                if (accommodation.minDaysBooked <= days)
+                DataBaseContext context = new DataBaseContext();
+                List<Accommodation> accommodations = context.Accommodations.ToList();
+                List<int> filtered = new List<int>();
+                foreach (Accommodation accommodation in accommodations.ToList())
                 {
-                    filtered.Add(accommodation.id);
+                    if (accommodation.minDaysBooked <= days)
+                    {
+                        filtered.Add(accommodation.id);
+                    }
                 }
+                return filtered;
             }
-            return filtered;
+            return null;
         }
 
         public List<int> GetAllByType(string type)
         {
-            DataBaseContext context = new DataBaseContext();
-            List<Accommodation> accommodations = context.Accommodations.ToList();
-            List<int> filtered = new List<int>();
-            foreach (Accommodation accommodation in accommodations.ToList())
+            if (type != null)
             {
-                if ((accommodation.type.ToString().ToUpper()).Contains(type.ToUpper()))
+                DataBaseContext context = new DataBaseContext();
+                List<Accommodation> accommodations = context.Accommodations.ToList();
+                List<int> filtered = new List<int>();
+                foreach (Accommodation accommodation in accommodations.ToList())
                 {
-                    filtered.Add(accommodation.id);
+                    if ((accommodation.type.ToString().ToUpper()).Contains(type.ToUpper()))
+                    {
+                        filtered.Add(accommodation.id);
+                    }
                 }
+                return filtered;
             }
-            return filtered;
+            return null;
         }
         public List<Booking> GetAccommodationsBookings(List<Booking> bookings, Accommodation accommodation)
         {

@@ -21,7 +21,7 @@ using System.Configuration;
 using InitialProject.DTO;
 using System.Diagnostics;
 using System.Xml.Linq;
-using InitialProject.WPF.View.GuestOne_Views;
+using InitialProject.WPF.ViewModels.GuestOneViewModels;
 using InitialProject.Repository;
 using InitialProject.Service.AccommodationServices;
 using InitialProject.Service.BookingServices;
@@ -48,8 +48,8 @@ namespace InitialProject.WPF.View.GuestOne_Views
 
         public GuestOneInterface()
         {
+            this.DataContext = new GuestOneViewModel();
             InitializeComponent();
-            this.Loaded += ShowAccommodations;
             BookingRepository bookingRepository = new BookingRepository();
             this.bookingService = new BookingService(bookingRepository);
             accommodationRepository = new AccommodationRepository();
@@ -58,26 +58,6 @@ namespace InitialProject.WPF.View.GuestOne_Views
             GuestOneStaticHelper.guestOneInterface = this;
             CheckIfStillSuperGuest();
             CheckIfValidForSuperGuest();
-        }
-
- 
-        private void ShowAccommodations(object sender, RoutedEventArgs e)
-        {
-            DataBaseContext context = new DataBaseContext();
-            List<Accommodation> accommodations = context.Accommodations.ToList();
-            List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
-            foreach (Accommodation accommodation in accommodations)
-            {
-                accommodationsDTO.Add(new AccommodationDTO(accommodation,accommodationService.GetAccommodationLocation(accommodation.id)));
-            }
-            input_name.Clear();
-            input_country.Clear();
-            input_city.Clear();
-            input_type.Clear();
-            input_guests.Clear();
-            input_days.Clear();
-            this.dataGrid.ItemsSource = accommodationsDTO;
-            SendBookingDelaymentUpdate(sender, e);
         }
 
         public void CheckIfStillSuperGuest()
@@ -104,7 +84,7 @@ namespace InitialProject.WPF.View.GuestOne_Views
                     }
                 } 
             }
-        } 
+        }
 
         public void CheckIfValidForSuperGuest()
         {
@@ -118,109 +98,6 @@ namespace InitialProject.WPF.View.GuestOne_Views
                 context.Attach(superGuest);
                 context.SaveChanges();     
             }
-        }
-
-        private void GetByName(object sender, KeyEventArgs k)
-        {
-            string input = input_name.Text + k.Key.ToString();
-            List<AccommodationDTO> dtos = new List<AccommodationDTO>();
-            dtos = dataGrid.ItemsSource as List<AccommodationDTO>;
-            List<Accommodation> accommodations = accommodationService.ConvertDtoToInitial(dtos);
-
-            List<int> byName = this.accommodationRepository.GetAllByName(input);
-            List<Accommodation> foundResults = accommodationService.GetMatching(byName, accommodations);
-            List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
-            foreach (Accommodation accommodation in foundResults)
-            {
-                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetAccommodationLocation(accommodation.id)));
-            }
-            this.dataGrid.ItemsSource = accommodationsDTO;
-            debuger1.Text = LoggedUser.id.ToString();
-        }
-
-        private void GetByCountry(object sender, KeyEventArgs k)
-        {
-            string input = input_country.Text + k.Key.ToString();
-            List<AccommodationDTO> dtos = new List<AccommodationDTO>();
-            dtos = dataGrid.ItemsSource as List<AccommodationDTO>;
-            List<Accommodation> accommodations = accommodationService.ConvertDtoToInitial(dtos);
-
-            List<int> byCountry = accommodationService.GetAllByCountry(input);
-            List<Accommodation> foundResults = accommodationService.GetMatching(byCountry, accommodations);
-            List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
-            foreach (Accommodation accommodation in foundResults)
-            {
-                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetAccommodationLocation(accommodation.id)));
-            }
-            this.dataGrid.ItemsSource = accommodationsDTO;
-        }
-
-        private void GetByCity(object sender, KeyEventArgs k)
-        {
-            string input = input_city.Text + k.Key.ToString();
-            List<AccommodationDTO> dtos = new List<AccommodationDTO>();
-            dtos = dataGrid.ItemsSource as List<AccommodationDTO>;
-            List<Accommodation> accommodations = this.accommodationService.ConvertDtoToInitial(dtos);
-
-            List<int> byCity = accommodationRepository.GetAllByCity(input);
-            List<Accommodation> foundResults = accommodationService.GetMatching(byCity, accommodations);
-            List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
-            foreach (Accommodation accommodation in foundResults)
-            {
-                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetAccommodationLocation(accommodation.id)));
-            }
-            this.dataGrid.ItemsSource = accommodationsDTO;
-        }
-
-        private void GetByType(object sender, KeyEventArgs k)
-        {
-            string input = input_type.Text + k.Key.ToString();
-            List<AccommodationDTO> dtos = new List<AccommodationDTO>();
-            dtos = dataGrid.ItemsSource as List<AccommodationDTO>;
-            List<Accommodation> accommodations = accommodationService.ConvertDtoToInitial(dtos);
-
-            List<int> byType = accommodationRepository.GetAllByType(input);
-            List<Accommodation> foundResults = accommodationService.GetMatching(byType, accommodations);
-            List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
-            foreach (Accommodation accommodation in foundResults)
-            {
-                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetAccommodationLocation(accommodation.id)));
-            }
-            this.dataGrid.ItemsSource = accommodationsDTO;
-        }
-
-        private void GetByGuests(object sender, KeyEventArgs k)
-        {
-            string input = input_guests.Text + k.Key.ToString()[1];
-            List<AccommodationDTO> dtos = new List<AccommodationDTO>();
-            dtos = dataGrid.ItemsSource as List<AccommodationDTO>;
-            List<Accommodation> accommodations = accommodationService.ConvertDtoToInitial(dtos);
-
-            List<int> byGuests = accommodationRepository.GetAllByGuestsNumber(int.Parse(input));
-            List<Accommodation> foundResults = accommodationService.GetMatching(byGuests, accommodations);
-            List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
-            foreach (Accommodation accommodation in foundResults)
-            {
-                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetAccommodationLocation(accommodation.id)));
-            }
-            this.dataGrid.ItemsSource = accommodationsDTO;
-        }
-
-        private void GetByDays(object sender, KeyEventArgs k)
-        {
-            string input = input_days.Text + k.Key.ToString()[1];
-            List<AccommodationDTO> dtos = new List<AccommodationDTO>();
-            dtos = dataGrid.ItemsSource as List<AccommodationDTO>;
-            List<Accommodation> accommodations = accommodationService.ConvertDtoToInitial(dtos);
-
-            List<int> byDays = accommodationRepository.GetAllByMininumDays(int.Parse(input));
-            List<Accommodation> foundResults = accommodationService.GetMatching(byDays, accommodations);
-            List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
-            foreach (Accommodation accommodation in foundResults)
-            {
-                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetAccommodationLocation(accommodation.id)));
-            }
-            this.dataGrid.ItemsSource = accommodationsDTO;
         }
 
         private void CheckForDates(object sender, RoutedEventArgs e)

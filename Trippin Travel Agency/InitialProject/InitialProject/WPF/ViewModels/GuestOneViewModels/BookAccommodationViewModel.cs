@@ -149,7 +149,6 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             }
         }
 
-
         private string accommodationImage;
         public string AccommodationImage
         {
