@@ -502,15 +502,15 @@
             FontSize="22" 
             FontWeight="Medium"
             TextAlignment="Center"/>
-        
+
         <TextBlock HorizontalAlignment="Left"
             Height="40" 
-            Margin="171,142,0,0" 
+            Margin="142,138,0,0" 
             TextWrapping="Wrap"
-            Name="debuger"
+            Text ="{Binding IfRecentlyRenovated}"
             VerticalAlignment="Top" 
-            Width="428"
-            Foreground="#7f8fa6"
+            Width="561"
+            Foreground="#273c75"
             FontFamily="Ubuntu" 
             FontSize="22" 
             FontWeight="Medium"

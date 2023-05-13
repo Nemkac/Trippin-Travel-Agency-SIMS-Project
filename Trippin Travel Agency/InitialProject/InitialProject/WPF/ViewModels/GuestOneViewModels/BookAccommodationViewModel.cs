@@ -248,6 +248,20 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             }
         }
 
+        private string ifRecentlyRenovated;
+        public string IfRecentlyRenovated
+        {
+            get { return ifRecentlyRenovated; }
+            set
+            {
+                if (ifRecentlyRenovated != value)
+                {
+                    ifRecentlyRenovated = value;
+                    OnPropertyChanged(nameof(IfRecentlyRenovated));
+                }
+            }
+        }
+
         public BookAccommodationViewModel()
         {
             DataBaseContext context = new DataBaseContext();
@@ -267,7 +281,16 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             GoToPreviousWindow = new ViewModelCommand(GoBack);
             OpenNavigator = new ViewModelCommand(ShowNavigator);
             Help = new ViewModelCommand(ShowHelp);
+            CheckIfRecentlyRenovated();
             BonusPointsText();
+        }
+
+        public void CheckIfRecentlyRenovated()
+        {
+            if (accommodationService.IfAccommodationRecentlyRenovated(GuestOneStaticHelper.id))
+            {
+                IfRecentlyRenovated = "* This accommodation is renovated in past one year ! *";
+            }
         }
         
         public void BonusPointsText()

@@ -265,6 +265,21 @@ namespace InitialProject.Service.AccommodationServices
             }
             return foundRenovations;
         }
+
+        public bool IfAccommodationRecentlyRenovated(int accommodationId)
+        {
+            if (GetRenovations(accommodationId) != null)
+            {
+                foreach (AccommodationRenovation accommodationRenovation in GetRenovations(accommodationId))
+                {
+                    if (DateTime.Today.Subtract(DateTime.Parse(accommodationRenovation.endDate)).Days < 364)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }
 
