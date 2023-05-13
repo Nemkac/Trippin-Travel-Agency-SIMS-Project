@@ -45,6 +45,7 @@ namespace InitialProject.Context
         public DbSet<AccommodationRenovation> AccommodationRenovations { get; set; }
         public DbSet<RenovationSuggestion> RenovationSuggestions { get; set; }
         public DbSet<RenovationSuggestionMessage> RenovationSuggestionMessages { get; set; }
+        public DbSet<SuperGuest> SuperGuests { get; set; }
 
 
 

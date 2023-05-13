@@ -3,6 +3,7 @@ using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service.AccommodationServices;
 using InitialProject.Service.BookingServices;
+using InitialProject.Service.GuestServices;
 using InitialProject.WPF.View.GuestOne_Views;
 using Microsoft.VisualBasic.ApplicationServices;
 using System;
@@ -23,6 +24,8 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         private AccommodationService accommodationService = new(new AccommodationRepository());
         private BookingService bookingService = new(new BookingRepository());
         private AccommodationRateService accommodationRateService = new(new AccommodationRateRepository());
+        private UserService userService = new UserService();
+
         int imageCounter = 0;
         bool isHelpOn = false;
         public ViewModelCommand DataGridKeyDown { get; set; }
@@ -128,6 +131,20 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 {
                     warningText = value;
                     OnPropertyChanged(nameof(WarningText));
+                }
+            }
+        }
+
+        private string bonusPoints;
+        public string BonusPoints
+        {
+            get { return bonusPoints; }
+            set
+            {
+                if (bonusPoints != value)
+                {
+                    bonusPoints = value;
+                    OnPropertyChanged(nameof(BonusPoints));
                 }
             }
         }
@@ -250,8 +267,16 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             GoToPreviousWindow = new ViewModelCommand(GoBack);
             OpenNavigator = new ViewModelCommand(ShowNavigator);
             Help = new ViewModelCommand(ShowHelp);
+            BonusPointsText();
         }
-
+        
+        public void BonusPointsText()
+        {
+            if (userService.IsSuperGuest() != null)
+            {
+                BonusPoints = "You have " + userService.IsSuperGuest().points.ToString() + " bonus points available !";
+            }
+        }
 
         public void ShowHelp(object sender)
         {
@@ -313,6 +338,37 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             }
             else
             {
+                if(userService.IsSuperGuest() != null)
+                {
+                    SuperGuest superGuest = userService.IsSuperGuest();
+                    if (superGuest.points > 1)
+                    {
+                        superGuest.points--;
+                        DataBaseContext saveContext = new DataBaseContext();
+                        saveContext.Update(superGuest);
+                        saveContext.SaveChanges();
+                        BonusPoints = "You have " + userService.IsSuperGuest().points.ToString() + " bonus points available !";
+                    }
+                    else
+                    {
+                        BonusPoints = string.Empty;
+                        DataBaseContext context = new DataBaseContext();
+                        foreach (SuperGuest superGuest1 in context.SuperGuests.ToList())
+                        {
+                            if (superGuest1.guestId == LoggedUser.id && superGuest1.ifActive == 1)
+                            {
+                                superGuest1.ifActive = 0;
+                                context.Update(superGuest1);
+                                context.SaveChanges();
+                            }
+                            else if (superGuest1.guestId == LoggedUser.id && superGuest1.ifActive == 0)
+                            {
+                                context.Remove(superGuest1);
+                                context.SaveChanges();
+                            }
+                        }
+                    }
+                }
                 string arrival, departure, guestsNumber;
                 GetBasicAccommodationBookingProperties(out arrival, out departure, out guestsNumber);
                 SaveBooking(accommodationService, arrival, departure, guestsNumber);
@@ -361,8 +417,6 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 AccommodationImage = images[imageCounter].imageLink;
             }
         }
-
-
 
         private void GetBasicAccommodationBookingProperties(out string arrival, out string departure, out string guestsNumber)
         {

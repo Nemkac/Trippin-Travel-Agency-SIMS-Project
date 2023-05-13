@@ -108,12 +108,12 @@
 
         <TextBlock 
             HorizontalAlignment="Left"
-            Height="94" 
+            Height="68" 
             Margin="425,468,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="400"
-            TextAlignment="Center"
+            TextAlignment="Right"
             FontFamily="Ubuntu" 
             FontSize="26" 
             FontWeight="Bold" 
@@ -137,28 +137,29 @@
         <TextBlock 
             HorizontalAlignment="Left"
             Height="44" 
-            Margin="308,615,0,0" 
+            Margin="110,615,0,0" 
             TextWrapping="Wrap"
             VerticalAlignment="Top" 
-            Width="506"
-            TextAlignment="Center"
+            Width="704"
+            TextAlignment="Right"
             FontFamily="Ubuntu" 
             FontSize="26" 
             FontWeight="Bold" 
             Foreground="#FF192A56"
-            Text="Number of bookings in last one year :"/>
-        
+            Text="{Binding BookingsInLastYearText}"/>
+
         <ProgressBar 
             HorizontalAlignment="Left"
             Height="43" 
-            Margin="843,611,0,0"
+            Margin="819,611,0,0"
             VerticalAlignment="Top" 
-            Width="307"
+            Width="355"
             Minimum="0" 
-            Maximum="9" 
-            Value="7" 
+            Maximum="10" 
+            Value="{Binding NumberOfReservations}" 
             Foreground="#FFE1B12C"
             />
+
         <TextBlock 
             HorizontalAlignment="Left"
             Height="94" 
@@ -171,21 +172,7 @@
             FontSize="26" 
             FontWeight="Bold" 
             Foreground="#FF192A56"
-            Text="0   1   2   3   4   5   6   7   8   9"/>
-        
-        <TextBlock 
-            HorizontalAlignment="Left"
-            Height="44" 
-            Margin="308,645,0,0" 
-            TextWrapping="Wrap"
-            VerticalAlignment="Top" 
-            Width="506"
-            TextAlignment="Center"
-            FontFamily="Ubuntu" 
-            FontSize="26" 
-            FontWeight="Bold" 
-            Foreground="#FF192A56"
-            Text="( or since Super Guest title acquired )"/>
+            Text="0   1   2   3   4   5   6   7   8   9  10"/>
 
     </Grid>
 </Window>

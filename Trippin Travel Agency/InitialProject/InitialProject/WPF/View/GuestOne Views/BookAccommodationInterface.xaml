@@ -489,6 +489,19 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
+        
+        <TextBlock HorizontalAlignment="Left"
+            Height="48" 
+            Margin="745,138,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding BonusPoints}"
+            VerticalAlignment="Top" 
+            Width="428"
+            Foreground="#FF192A56"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
 
     </Grid>
 </Window>

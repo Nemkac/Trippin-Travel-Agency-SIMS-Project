@@ -56,8 +56,10 @@ namespace InitialProject.WPF.View.GuestOne_Views
             this.accommodationService = new AccommodationService(accommodationRepository);
             this.bookingDelaymentRequestService = new(new BookingDelaymentRequestRepository());
             GuestOneStaticHelper.guestOneInterface = this;
+            //CheckIfStillSuperGuest();
         }
 
+ 
         private void ShowAccommodations(object sender, RoutedEventArgs e)
         {
             DataBaseContext context = new DataBaseContext();
@@ -75,6 +77,32 @@ namespace InitialProject.WPF.View.GuestOne_Views
             input_days.Clear();
             this.dataGrid.ItemsSource = accommodationsDTO;
             SendBookingDelaymentUpdate(sender, e);
+        }
+
+        public void CheckIfStillSuperGuest()
+        {
+            DataBaseContext context = new DataBaseContext();
+            UserService userService = new UserService();
+            if(userService.IsSuperGuest() != null)
+            {
+                if(DateTime.Today.Subtract(userService.IsSuperGuest().titleAcquisition).Days >= 365)
+                {
+                    foreach (SuperGuest superGuest in context.SuperGuests.ToList())
+                    {
+                        if (superGuest.guestId == LoggedUser.id && superGuest.ifActive == 1)
+                        {
+                            superGuest.ifActive = 0;
+                            context.Update(superGuest);
+                            context.SaveChanges();
+                        } 
+                        else if(superGuest.guestId == LoggedUser.id && superGuest.ifActive == 0)
+                        {
+                            context.Remove(superGuest);
+                            context.SaveChanges();
+                        }
+                    }
+                }
+            }
         }
 
         private void GetByName(object sender, KeyEventArgs k)
