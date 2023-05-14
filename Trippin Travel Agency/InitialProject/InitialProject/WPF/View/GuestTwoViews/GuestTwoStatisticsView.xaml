@@ -132,6 +132,33 @@
                                             SelectedItem="{Binding SelectedYear}"
                                             ItemsSource="{Binding YearComboBox}"
                                             />
+                    <lc:CartesianChart Width="300"
+                                       Height="250"
+                                       Margin="-750 100 0 0"
+                                       Series="{Binding SeriesCollection}"
+                                       FontFamily="Ubuntu"
+                                       FontSize="20">
+                        <lc:CartesianChart.AxisX>
+                            <lc:Axis  Title="Language" Labels="{Binding Labels}"></lc:Axis>
+                        </lc:CartesianChart.AxisX>
+                        
+                        <lc:CartesianChart.AxisY>
+                            <lc:Axis  Title="Number of requests" Labels="{Binding Values}"></lc:Axis>
+                        </lc:CartesianChart.AxisY>
+                    </lc:CartesianChart>
+                    
+                    <lc:CartesianChart Width="300"
+                                       Height="250"
+                                       Margin="25 -250 0 0">
+                    </lc:CartesianChart>
+
+                    <lc:CartesianChart Width="300"
+                                       Height="250"
+                                       Margin="800 -250 0 0">
+                        
+                    </lc:CartesianChart>
+
+
                 </StackPanel>
             </GroupBox>
         </Grid>

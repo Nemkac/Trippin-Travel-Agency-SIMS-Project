@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using LiveCharts;
+using LiveCharts.Wpf;
 
 namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 {
@@ -132,7 +134,22 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
         {           
             LoadWindow();
             GetAllTourRequestYears();
+            SeriesCollection = new SeriesCollection()
+            {
+                new ColumnSeries{
+                 Values = new ChartValues<double> {GetAllTourRequests()}
+                }
+            };
+            SeriesCollection.Add(new ColumnSeries
+            {
+                Values = new ChartValues<double> { }
+            });
         }
+
+        public SeriesCollection SeriesCollection { get; set; }
+        public string[] Labels { get; set; } 
+        public Func<string,string> Values { get; set; }
+
         public void LoadWindow()
         {
             UsernameLabel = "Hello, " + LoggedUser.username + "!";
@@ -140,6 +157,20 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             UsernameLabel2 = "@" + LoggedUser.username;
             AccountType = "Account type:  " + LoggedUser.role;
 
+        }
+
+        public int GetAllTourRequests() 
+        {
+            int counter = 0;
+            DataBaseContext context = new DataBaseContext();
+            foreach (TourRequest tourRequest in context.TourRequests.ToList())
+            {
+                if (LoggedUser.id == tourRequest.guestId) 
+                {
+                    counter++;
+                }
+            }
+            return counter;
         }
 
         public void LoadStatistics(string selectedYear)

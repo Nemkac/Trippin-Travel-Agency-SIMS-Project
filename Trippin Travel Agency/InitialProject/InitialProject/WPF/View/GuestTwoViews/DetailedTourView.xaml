@@ -91,7 +91,7 @@
                        Height="40"
                        Content="{Binding CityName}"
                        />
-                    <Label Margin="0 -1370 0 0"
+                    <Label Margin="0 -1380 0 0"
                        FontSize="20"
                        FontFamily="Ubuntu"
                        FontWeight="Medium"
@@ -99,7 +99,7 @@
                        Height="40"
                        Content="{Binding CountryName}"
                        />
-                    <Label Margin="100 -900 0 0"
+                    <Label Margin="100 -935 0 0"
                        FontSize="20"
                        FontFamily="Ubuntu"
                        FontWeight="Medium"
@@ -107,7 +107,7 @@
                        Height="300"
                        Content="{Binding KeyPointNames}"
                        />
-                    <Label Margin="70 -400 0 0"
+                    <Label Margin="70 -410 0 0"
                        FontSize="20"
                        FontFamily="Ubuntu"
                        FontWeight="Medium"
@@ -115,7 +115,7 @@
                        Height="40"
                        Content="{Binding NumberOfSpots}"
                        />
-                    <Label Margin="70 -220 0 0"
+                    <Label Margin="70 -230 0 0"
                        FontSize="20"
                        FontFamily="Ubuntu"
                        FontWeight="Medium"
