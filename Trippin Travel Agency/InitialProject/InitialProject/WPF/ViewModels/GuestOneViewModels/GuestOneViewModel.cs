@@ -4,6 +4,7 @@ using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service.AccommodationServices;
 using InitialProject.Service.BookingServices;
+using InitialProject.WPF.View.GuestOne_Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,6 +15,7 @@ using System.Windows.Input;
 using System.Windows;
 using InitialProject.Interfaces;
 using System.Windows.Controls;
+using InitialProject.Service.GuestServices;
 
 namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 {
@@ -24,6 +26,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         private AccommodationRepository accommodationRepository;
         public ViewModelCommand RefreshGrid { get;set; }
         public ViewModelCommand SearchBy { get; set; }
+        public ViewModelCommand CheckDates { get; set; }
 
         public GuestOneViewModel()
         {
@@ -33,10 +36,13 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             RefreshGrid = new ViewModelCommand(Refresh);
             AccommodationsGrid = ShowAccommodations();
             SearchBy = new ViewModelCommand(Search);
+            CheckDates = new ViewModelCommand(CheckForDates);
+            CheckIfStillSuperGuest();
+            CheckIfValidForSuperGuest();
         }
 
-        private Accommodation selectedAccommodation;
-        public Accommodation SelectedAccommodation
+        private AccommodationDTO selectedAccommodation;
+        public AccommodationDTO SelectedAccommodation
         {
             get { return selectedAccommodation; }
             set
@@ -261,6 +267,96 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             AccommodationsGrid = new ObservableCollection<AccommodationDTO>(accommodationsDTO);
         }
 
-       
+        public void CheckIfStillSuperGuest()
+        {
+            DataBaseContext context = new DataBaseContext();
+            UserService userService = new UserService();
+            if (userService.IsSuperGuest() != null)
+            {
+                if (DateTime.Today.Subtract(userService.IsSuperGuest().titleAcquisition).Days >= 365)
+                {
+                    foreach (SuperGuest superGuest in context.SuperGuests.ToList())
+                    {
+                        if (superGuest.guestId == LoggedUser.id && superGuest.ifActive == 1)
+                        {
+                            superGuest.ifActive = 0;
+                            context.Update(superGuest);
+                            context.SaveChanges();
+                        }
+                        else if (superGuest.guestId == LoggedUser.id && superGuest.ifActive == 0)
+                        {
+                            context.Remove(superGuest);
+                            context.SaveChanges();
+                        }
+                    }
+                }
+            }
+        }
+
+        public void CheckIfValidForSuperGuest()
+        {
+            DataBaseContext context = new DataBaseContext();
+            UserService userService = new UserService();
+            string temp = LoggedUser.id.ToString();
+            int loggedId = int.Parse(temp);
+            if (userService.IsSuperGuest() == null && userService.BookingsInLastYear() >= 10)
+            {
+                SuperGuest superGuest = new SuperGuest(loggedId, 5, DateTime.Today, 1);
+                context.Attach(superGuest);
+                context.SaveChanges();
+            }
+        }
+
+        private void CheckForDates(object sender)
+        {
+            int daysToBook;
+            List<string> displayableDates;
+            GetBasicDatesProperties(sender, out daysToBook, out displayableDates);
+
+            dynamic result = displayableDates.Select(s => new { value = s }).ToList();
+            if (daysToBook < selectedAccommodation.minDaysBooked)
+            {
+                // ne moze da se bukira
+            }
+            else
+            {
+                GuestOneStaticHelper.result = result;
+                ShowBookInterface();
+            }
+        }
+
+        private void ShowBookInterface()
+        {
+            GuestOneStaticHelper.id = SelectedAccommodation.accommodationId;
+            BookAccommodationInterface bookAccommodationInterface = new BookAccommodationInterface();
+            bookAccommodationInterface.WindowStartupLocation = WindowStartupLocation.Manual;
+            bookAccommodationInterface.Left = GuestOneStaticHelper.guestOneInterface.Left;
+            bookAccommodationInterface.Top = GuestOneStaticHelper.guestOneInterface.Top;
+            bookAccommodationInterface.Show();
+            GuestOneStaticHelper.guestOneInterface.Hide();
+        }
+
+        private void GetBasicDatesProperties(object sender,out int daysToBook, out List<string> displayableDates)
+        {
+            AccommodationDTO accommodationDTO = SelectedAccommodation;
+            Accommodation accommodation = accommodationService.GetById(accommodationDTO.accommodationId);
+            GuestOneStaticHelper.id = accommodation.id;
+            List<DateTime> dateLimits = GetDateLimits(sender);
+            daysToBook = (int.Parse(DaysToStay));
+            List<List<DateTime>> availableDates = accommodationService.GetAvailableDatePeriods(accommodation, daysToBook, dateLimits);
+            displayableDates = BookingService.FormDisplayableDates(availableDates);
+        }
+
+        private List<DateTime> GetDateLimits(object sender)
+        {
+            DateTime startingDate = StartingDate;
+            DateTime endingDate = EndingDate;
+            List<DateTime> dateLimits = new List<DateTime>();
+            dateLimits.Add(startingDate);
+            dateLimits.Add(endingDate);
+            return dateLimits;
+        }
+
+
     }
 }

@@ -32,12 +32,6 @@ namespace InitialProject.WPF.View.GuestOne_Views
 
     public partial class GuestOneInterface : Window
     {
-        public AccommodationLocation location { get; set; }
-        public string name { get; set; }
-        public int type { get; set; }
-        public int guestsNumber { get; set; }
-        public int daysNumber { get; set; }
-
         public Accommodation selectedAccommodation = new Accommodation();
         public DateTime selectedDate = new DateTime();
 
@@ -56,79 +50,8 @@ namespace InitialProject.WPF.View.GuestOne_Views
             this.accommodationService = new AccommodationService(accommodationRepository);
             this.bookingDelaymentRequestService = new(new BookingDelaymentRequestRepository());
             GuestOneStaticHelper.guestOneInterface = this;
-            CheckIfStillSuperGuest();
-            CheckIfValidForSuperGuest();
         }
 
-        public void CheckIfStillSuperGuest()
-        {
-            DataBaseContext context = new DataBaseContext();
-            UserService userService = new UserService();
-            if(userService.IsSuperGuest() != null)
-            {
-                if (DateTime.Today.Subtract(userService.IsSuperGuest().titleAcquisition).Days >= 365)
-                {
-                    foreach (SuperGuest superGuest in context.SuperGuests.ToList())
-                    {
-                        if (superGuest.guestId == LoggedUser.id && superGuest.ifActive == 1)
-                        {
-                            superGuest.ifActive = 0;
-                            context.Update(superGuest);
-                            context.SaveChanges();
-                        } 
-                        else if(superGuest.guestId == LoggedUser.id && superGuest.ifActive == 0)
-                        {
-                            context.Remove(superGuest);
-                            context.SaveChanges();
-                        }
-                    }
-                } 
-            }
-        }
-
-        public void CheckIfValidForSuperGuest()
-        {
-            DataBaseContext context = new DataBaseContext();
-            UserService userService = new UserService();
-            string temp = LoggedUser.id.ToString();
-            int loggedId = int.Parse(temp);
-            if (userService.IsSuperGuest() == null && userService.BookingsInLastYear() >= 10)
-            {
-                SuperGuest superGuest = new SuperGuest(loggedId, 5, DateTime.Today, 1);
-                context.Attach(superGuest);
-                context.SaveChanges();     
-            }
-        }
-
-        private void CheckForDates(object sender, RoutedEventArgs e)
-        {
-            int daysToBook;
-            List<string> displayableDates;
-            GetBasicDatesProperties(sender, e, out daysToBook, out displayableDates);
-
-            dynamic result = displayableDates.Select(s => new { value = s }).ToList();
-            if (daysToBook < selectedAccommodation.minDaysBooked)
-            {
-                warningText.Text = selectedAccommodation.name + " cannot be booked for under " + selectedAccommodation.minDaysBooked.ToString() + " days.";
-            }
-            else
-            {
-                GuestOneStaticHelper.result = result;
-                ShowBookInterface(result);
-            }
-        }
-
-        private void ShowBookInterface(dynamic result)
-        {
-            GuestOneStaticHelper.id = selectedAccommodation.id;
-            BookAccommodationInterface BookAccommodationInterface = new BookAccommodationInterface();
-            BookAccommodationInterface.WindowStartupLocation = WindowStartupLocation.Manual;
-            BookAccommodationInterface.Left = this.Left;
-            BookAccommodationInterface.Top = this.Top;
-            BookAccommodationInterface.Show();
-            GuestOneStaticHelper.guestOneInterface = this;
-            this.Hide();
-        }
 
         private void GoToGuestsReviews(object sender, RoutedEventArgs e)
         {
@@ -138,28 +61,6 @@ namespace InitialProject.WPF.View.GuestOne_Views
             GuestsReviewsInterface.Top = this.Top;
             GuestsReviewsInterface.Show();
             this.Hide();
-        }
-
-        private void GetBasicDatesProperties(object sender, RoutedEventArgs e, out int daysToBook, out List<string> displayableDates)
-        {
-            AccommodationDTO accommodationDTO = (AccommodationDTO)dataGrid.SelectedItem;
-            Accommodation accommodation = accommodationService.GetById(accommodationDTO.accommodationId);
-            selectedAccommodation = accommodation;
-            GuestOneStaticHelper.id = selectedAccommodation.id;
-            List<DateTime> dateLimits = GetDateLimits(sender, e);
-            daysToBook = (int.Parse(numberOfDays.Text));
-            List<List<DateTime>> availableDates = accommodationService.GetAvailableDatePeriods(accommodation, daysToBook, dateLimits);
-            displayableDates = BookingService.FormDisplayableDates(availableDates);
-        }
-
-        private List<DateTime> GetDateLimits(object sender, RoutedEventArgs e)
-        {
-            DateTime startingDate = input_starting_date.SelectedDate.Value;
-            DateTime endingDate = input_ending_date.SelectedDate.Value;
-            List<DateTime> dateLimits = new List<DateTime>();
-            dateLimits.Add(startingDate);
-            dateLimits.Add(endingDate);
-            return dateLimits;
         }
 
         private void GoToBookings(object sender, RoutedEventArgs e)

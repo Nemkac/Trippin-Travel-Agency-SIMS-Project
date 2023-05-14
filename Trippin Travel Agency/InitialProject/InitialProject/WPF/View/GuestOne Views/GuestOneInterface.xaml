@@ -90,14 +90,14 @@
                 Height="41" 
                 VerticalAlignment="Top" 
                 Width="174"
-                Click="CheckForDates" 
                 Margin="1183,389,0,0"
                 FontFamily="ubuntu" 
                 FontSize="20" 
                 Background="#FF273C75" 
                 Foreground="White"
                 Grid.Row="1"
-                FontWeight="Medium"/>
+                FontWeight="Medium"
+                Command="{Binding CheckDates}"/>
 
         <TextBox HorizontalAlignment="Left"
                  Height="45" 
