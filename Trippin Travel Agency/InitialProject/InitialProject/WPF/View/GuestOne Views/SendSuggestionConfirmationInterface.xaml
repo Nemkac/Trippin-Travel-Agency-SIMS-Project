@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
         mc:Ignorable="d"
         Title="SendSuggestionConfirmationInterface" Height="365" Width="500" WindowStyle="None">
+        <Window.InputBindings>
+        <KeyBinding Key="Enter" Command="{Binding GoToPastBookings}" />
+    </Window.InputBindings>
     <Grid>
         <GroupBox HorizontalAlignment="Left"
             Height="340" 

@@ -16,6 +16,7 @@ using System.Windows;
 using InitialProject.Interfaces;
 using System.Windows.Controls;
 using InitialProject.Service.GuestServices;
+using System.Windows.Media;
 
 namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 {
@@ -24,21 +25,27 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         private BookingService bookingService;
         private AccommodationService accommodationService;
         private AccommodationRepository accommodationRepository;
+        private BookingDelaymentRequestService bookingDelaymentRequestService;
+
         public ViewModelCommand RefreshGrid { get;set; }
         public ViewModelCommand SearchBy { get; set; }
         public ViewModelCommand CheckDates { get; set; }
-
+        public ViewModelCommand OpenNavigator { get; set; }
         public GuestOneViewModel()
         {
             this.bookingService = new BookingService(new BookingRepository());
             this.accommodationService = new AccommodationService(new AccommodationRepository());
             this.accommodationRepository = new AccommodationRepository();
-            RefreshGrid = new ViewModelCommand(Refresh);
+            this.bookingDelaymentRequestService = new(new BookingDelaymentRequestRepository());
+            StartingDate = DateTime.Today;
+            EndingDate = DateTime.Today;
             AccommodationsGrid = ShowAccommodations();
             SearchBy = new ViewModelCommand(Search);
             CheckDates = new ViewModelCommand(CheckForDates);
+            OpenNavigator = new ViewModelCommand(ShowNavigator);
             CheckIfStillSuperGuest();
             CheckIfValidForSuperGuest();
+            SendBookingDelaymentUpdate();
         }
 
         private AccommodationDTO selectedAccommodation;
@@ -208,10 +215,13 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 }
             }
         }
-
-        public void Refresh(object sender)
+        private void ShowNavigator(object sender)
         {
-
+            Navigator navigator = new Navigator();
+            navigator.Left = GuestOneStaticHelper.guestOneInterface.Left + (GuestOneStaticHelper.guestOneInterface.Width - navigator.Width) / 2;
+            navigator.Top = GuestOneStaticHelper.guestOneInterface.Top + (GuestOneStaticHelper.guestOneInterface.Height - navigator.Height) / 2;
+            GuestOneStaticHelper.guestOneInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
+            navigator.Show();
         }
 
         private ObservableCollection<AccommodationDTO> ShowAccommodations()
@@ -356,6 +366,39 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             dateLimits.Add(endingDate);
             return dateLimits;
         }
+
+        public void SendBookingDelaymentUpdate()
+        {
+            UserService userService = new UserService();
+            if (userService.GetResolvedBookingDelaymentRequests() != null)
+            {
+                List<DelaymentRequestUpdate> delaymentRequestUpdates = new List<DelaymentRequestUpdate>();
+                foreach (BookingDelaymentRequest bookingDelaymentRequest in userService.GetResolvedBookingDelaymentRequests())
+                {
+                    FIllRequestUpdateComment(bookingDelaymentRequestService, delaymentRequestUpdates, bookingDelaymentRequest);
+                }
+                foreach (DelaymentRequestUpdate delaymentRequestUpdate in delaymentRequestUpdates)
+                {
+                    delaymentRequestUpdate.Show();
+                }
+            }
+        }
+
+        private void FIllRequestUpdateComment(BookingDelaymentRequestService bookingDelaymentRequestService, List<DelaymentRequestUpdate> delaymentRequestUpdates, BookingDelaymentRequest bookingDelaymentRequest)
+        {
+            List<string> output = bookingDelaymentRequestService.GetTextOutput(bookingDelaymentRequest);
+            DelaymentRequestUpdate delaymentRequestUpdate = new DelaymentRequestUpdate();
+            delaymentRequestUpdate.messageBlock.Text = "Your booking delayment request has been " + output[0];
+            delaymentRequestUpdate.requestsUpdateBlockLabels.Text = "Booking ID: " + "\n\nAccommodation name:" + "\n\nDesired arrival" + "\n\nDesired departure";
+            delaymentRequestUpdate.requestsUpdateBlock.Text = output[1] + "\n\n" + output[2] + "\n\n" + output[3] + "\n\n" + output[4];
+            delaymentRequestUpdate.WindowStartupLocation = WindowStartupLocation.Manual;
+            delaymentRequestUpdate.Left = GuestOneStaticHelper.guestOneInterface.Left + (GuestOneStaticHelper.guestOneInterface.Width - delaymentRequestUpdate.Width) / 2;
+            delaymentRequestUpdate.Top = GuestOneStaticHelper.guestOneInterface.Top + (GuestOneStaticHelper.guestOneInterface.Height - delaymentRequestUpdate.Height) / 2;
+            delaymentRequestUpdate.SetAttributes(bookingDelaymentRequest);
+            delaymentRequestUpdate.Topmost = true;
+            delaymentRequestUpdates.Add(delaymentRequestUpdate);
+        }
+
 
 
     }

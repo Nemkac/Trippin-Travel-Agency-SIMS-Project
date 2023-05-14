@@ -8,6 +8,11 @@
         xmlns:i1="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
         mc:Ignorable="d"
         Title="GuestOneInterface" Height="800" Width="1500" Background="#f5f6fa">
+        <Window.InputBindings>
+            <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
+            <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
+        </Window.InputBindings>
+
     <Grid Margin="10,-1,-10,1">
         <Grid.RowDefinitions>
             <RowDefinition Height="15*"/>
@@ -135,24 +140,6 @@
                    Margin="1514,562,0,0" 
                    FontFamily="ubuntu" 
                    Grid.Row="1"/>
-
-        <Button Content="Refresh" 
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top" 
-                Command="{Binding RefreshGrid}" 
-                Margin="111,123,0,0"
-                FontFamily="ubuntu"
-                Grid.Row="1"/>
-
-        <Button Content="bukinzi" Height="15" 
-                Width="68"
-                Click="GoToBookings"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top" 
-                Margin="35,125,0,0"
-                RenderTransformOrigin="0.462,0.727" 
-                FontFamily="Ubuntu" 
-                Grid.Row="1"/>
 
         <GroupBox Height="200" Header="Search by"
                   Width="1419"
@@ -418,15 +405,6 @@
                    FontWeight="Bold"
                    Grid.Row="1" />
 
-        <Button Content="zahtevi zodlaganje"
-                HorizontalAlignment="Left" 
-                Height="25"
-                Margin="179,127,0,0"
-                Grid.Row="1" 
-                VerticalAlignment="Top" 
-                Width="117" 
-                Click="GoToBookingDelaymentRequests"/>
-
         <Rectangle HorizontalAlignment="Left"
                    Height="5" 
                    Margin="28,0,0,0" 
@@ -434,15 +412,6 @@
                    VerticalAlignment="Center"
                    Width="1434" 
                    Fill="#192a56"/>
-
-        <Button Content="ocene" 
-                HorizontalAlignment="Left"
-                Height="26" 
-                Margin="323,125,0,0"
-                Grid.Row="1"
-                VerticalAlignment="Top"
-                Width="99"
-                Click="GoToGuestsReviews"/>
 
         <TextBlock HorizontalAlignment="Left"
             TextWrapping="Wrap" 

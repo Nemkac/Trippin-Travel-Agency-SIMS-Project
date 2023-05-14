@@ -29,6 +29,7 @@ namespace InitialProject.Model
         public static RenovationSuggestionInterface renovationSuggestionInterface { get; set; }
         public static GuestsAccountInterface guestsAccountInterface { get; set; }
         public static SendSuggestionConfirmationInterface sendSuggestionConfirmationInterface { get; set; }
+        public static GuestsBookingDelaymentRequestsInterface guestsBookingDelaymentRequestsInterface { get; set; }
         public static Navigator navigator { get; set; }
         public static GuestRate guestRate { get; set; }
 
