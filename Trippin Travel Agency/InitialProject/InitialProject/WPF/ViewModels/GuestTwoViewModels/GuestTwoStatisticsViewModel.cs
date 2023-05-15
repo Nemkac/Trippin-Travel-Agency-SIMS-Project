@@ -10,13 +10,18 @@ using System.Windows;
 using System.Windows.Controls;
 using LiveCharts;
 using LiveCharts.Wpf;
+using System.Collections;
+using InitialProject.Repository;
+using InitialProject.Service.TourServices;
 
 namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 {
     public class GuestTwoStatisticsViewModel : ViewModelBase
     {
 
-        public ObservableCollection<string> YearComboBox { get; set; } = new ObservableCollection<string>(); 
+        public ObservableCollection<string> YearComboBox { get; set; } = new ObservableCollection<string>();
+
+        private readonly TourLocationService tourLocationService = new(new TourLocationRepository());
 
         private string usernameLabel;
         public string UsernameLabel
@@ -129,27 +134,146 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             }
         }
 
-
-        public GuestTwoStatisticsViewModel() 
-        {           
-            LoadWindow();
-            GetAllTourRequestYears();
-            SeriesCollection = new SeriesCollection()
+        private SeriesCollection seriesCollection;
+        public SeriesCollection SeriesCollection
+        {
+            get { return seriesCollection; }
+            set
             {
-                new ColumnSeries{
-                 Values = new ChartValues<double> {GetAllTourRequests()}
+                if (seriesCollection != value)
+                {
+                    seriesCollection = value;
+                    OnPropertyChanged(nameof(SeriesCollection));
                 }
-            };
-            SeriesCollection.Add(new ColumnSeries
-            {
-                Values = new ChartValues<double> { }
-            });
+            }
         }
 
-        public SeriesCollection SeriesCollection { get; set; }
-        public string[] Labels { get; set; } 
-        public Func<string,string> Values { get; set; }
+        private string labels;
+        public string Labels
+        {
+            get { return labels; }
+            set
+            {
+                if (labels != value)
+                {
+                    labels = value;
+                    OnPropertyChanged(nameof(Labels));
+                }
+            }
+        }
+        private Func<string, string> values;
+        public Func<string, string> Values
+        {
+            get { return values; }
+            set
+            {
+                if (values != value)
+                {
+                    values = value;
+                    OnPropertyChanged(nameof(Values));
+                }
+            }
+        }
 
+        private SeriesCollection seriesCollection3;
+        public SeriesCollection SeriesCollection3
+        {
+            get { return seriesCollection3; }
+            set
+            {
+                if (seriesCollection3 != value)
+                {
+                    seriesCollection3 = value;
+                    OnPropertyChanged(nameof(SeriesCollection3));
+                }
+            }
+        }
+
+        private string labels3;
+        public string Labels3
+        {
+            get { return labels3; }
+            set
+            {
+                if (labels3 != value)
+                {
+                    labels3= value;
+                    OnPropertyChanged(nameof(Labels3));
+                }
+            }
+        }
+        private Func<string, string> values3;
+        public Func<string, string> Values3
+        {
+            get { return values3; }
+            set
+            {
+                if (values3 != value)
+                {
+                    values3 = value;
+                    OnPropertyChanged(nameof(Values3));
+                }
+            }
+        }
+        private SeriesCollection seriesCollection2;
+        public SeriesCollection SeriesCollection2
+        {
+            get { return seriesCollection2; }
+            set
+            {
+                if (seriesCollection2 != value)
+                {
+                    seriesCollection2 = value;
+                    OnPropertyChanged(nameof(SeriesCollection2));
+                }
+            }
+        }
+
+        private string labels2;
+        public string Labels2
+        {
+            get { return labels2; }
+            set
+            {
+                if (labels2 != value)
+                {
+                    labels2 = value;
+                    OnPropertyChanged(nameof(Labels2));
+                }
+            }
+        }
+        private Func<string, string> values2;
+        public Func<string, string> Values2
+        {
+            get { return values2; }
+            set
+            {
+                if (values2 != value)
+                {
+                    values2 = value;
+                    OnPropertyChanged(nameof(Values2));
+                }
+            }
+        }
+        private Func<double, string> formatter;
+        public Func<double, string> Formatter
+        {
+            get { return formatter; }
+            set
+            {
+                if (formatter != value)
+                {
+                    formatter = value;
+                    OnPropertyChanged(nameof(Formatter));
+                }
+            }
+        }
+
+        public GuestTwoStatisticsViewModel()
+        {
+            LoadWindow();
+            GetAllTourRequestYears();            
+        }
         public void LoadWindow()
         {
             UsernameLabel = "Hello, " + LoggedUser.username + "!";
@@ -159,13 +283,55 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 
         }
 
-        public int GetAllTourRequests() 
+        public int GetAllTourRequestsByLanguage(language lan, string selectedYear) 
         {
             int counter = 0;
+            string yearToCompare = selectedYear;
+            if (selectedYear.Equals("All time"))
+            {
+                yearToCompare = "";
+            }
             DataBaseContext context = new DataBaseContext();
             foreach (TourRequest tourRequest in context.TourRequests.ToList())
             {
-                if (LoggedUser.id == tourRequest.guestId) 
+                if (LoggedUser.id == tourRequest.guestId && lan == tourRequest.language && tourRequest.startDate.Year.ToString().Contains(yearToCompare)) 
+                {
+                    counter++;
+                }
+            }
+            return counter;
+        }
+
+        public int GetAllTourRequestsByCity(string city, string selectedYear)
+        {
+            int counter = 0;
+            string yearToCompare = selectedYear;
+            if (selectedYear.Equals("All time"))
+            {
+                yearToCompare = "";
+            }
+            DataBaseContext context = new DataBaseContext();
+            foreach (TourRequest tourRequest in context.TourRequests.ToList())
+            {
+                if (LoggedUser.id == tourRequest.guestId && tourRequest.city.Equals(city) && tourRequest.startDate.Year.ToString().Contains(yearToCompare))
+                {
+                    counter++;
+                }
+            }
+            return counter;
+        }
+        public int GetAllTourRequestsByCountry(string country, string selectedYear)
+        {
+            int counter = 0;
+            string yearToCompare = selectedYear;
+            if (selectedYear.Equals("All time"))
+            {
+                yearToCompare = "";
+            }
+            DataBaseContext context = new DataBaseContext();
+            foreach (TourRequest tourRequest in context.TourRequests.ToList())
+            {
+                if (LoggedUser.id == tourRequest.guestId && tourRequest.country.Equals(country) && tourRequest.startDate.Year.ToString().Contains(yearToCompare))
                 {
                     counter++;
                 }
@@ -178,10 +344,114 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             AcceptedTours = "Percentage of tours i suggested that are accepted:          " + GetAcceptedTourPercentage(selectedYear);
             AverageNumberOfPeople = "Average number of people in accepted tours:                     " + GetAverageNumberOfPeople(selectedYear);
             DeclinedTours = "Percentage of tours i suggested that are not accepted:   " + GetDeclinedTourPercentage(selectedYear);
+            DrawGraphs(selectedYear);
         }
-       
+        public void DrawGraphs(string selectedYear) 
+        {
+            DrawLanguageGraph(selectedYear);
+            DrawCityGraph(selectedYear);
+            DrawCountryGraph(selectedYear);
+        }
+        public void DrawLanguageGraph(string selectedYear)
+        {
+            bool flag = false;
+            foreach (language lang in Enum.GetValues(typeof(language)))
+            {
+                if (flag == false)
+                {
+                    SeriesCollection = new SeriesCollection()
+                    {
+                        new ColumnSeries{
+                            Title = lang.ToString(),
+                            DataLabels = true,
+                            Values = new ChartValues<int> { GetAllTourRequestsByLanguage(lang,selectedYear)}
+                        }
+                    };
+                }
+                else
+                {
+                    SeriesCollection.Add(new ColumnSeries
+                    {
+                        Title = lang.ToString(),
+                        DataLabels = true,
+                        Values = new ChartValues<int> { GetAllTourRequestsByLanguage(lang, selectedYear) }
+                    });
+                }
+                Formatter = Values => Math.Round(Values,2) + "";
+                Labels = "";
+                flag = true;
+            }            
+        }
+        public void DrawCityGraph(string selectedYear)
+        {
+            bool flag = false;      
+            List<string> cities = tourLocationService.GetAllCities();
+            foreach (string city in cities)
+            {
+
+                if (flag == false)
+                {
+                    SeriesCollection2 = new SeriesCollection()
+                    {
+                        new ColumnSeries{
+                            Title = city.ToString(),
+                            DataLabels = true,
+                            Values = new ChartValues<int> { GetAllTourRequestsByCity(city, selectedYear)}
+                        }
+                    };
+
+                }
+                else
+                {
+                    SeriesCollection2.Add(new ColumnSeries
+                    {
+                        Title = city.ToString(),
+                        DataLabels = true,
+                        Values = new ChartValues<int> { GetAllTourRequestsByCity(city, selectedYear) }
+                    });
+                }
+                Formatter = Values => Math.Round(Values, 2) + "";
+                Labels2 = "";
+                flag = true;
+            }
+        }
+        public void DrawCountryGraph(string selectedYear)
+        {
+            bool flag = false;
+            List<string> countries = tourLocationService.GetAllCountries();
+            foreach (string country in countries)
+            {
+
+                if (flag == false)
+                {
+                    SeriesCollection3 = new SeriesCollection()
+                    {
+                        new ColumnSeries{
+                            Title = country.ToString(),
+                            DataLabels = true,
+                            Values = new ChartValues<int> { GetAllTourRequestsByCountry(country, selectedYear)}
+                        }
+                    };
+
+                }
+                else
+                {
+                    SeriesCollection3.Add(new ColumnSeries
+                    {
+                        Title = country.ToString(),
+                        DataLabels = true,
+                        Values = new ChartValues<int> { GetAllTourRequestsByCountry(country, selectedYear) }
+                    });
+                }
+                Formatter = Values => Math.Round(Values, 2) + "";
+                Labels3 = "";
+                flag = true;
+            }
+        }
+
         public void GetAllTourRequestYears()
         {
+
             DataBaseContext context = new DataBaseContext();
             foreach (TourRequest tourRequest in context.TourRequests.ToList())
             {

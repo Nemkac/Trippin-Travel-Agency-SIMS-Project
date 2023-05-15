@@ -19,7 +19,7 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0">
-                <Image Source="C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\logo2.png" Height="250"/>
+                <Image Source="pack://application:,,,/Assets/Existing Assets/logo2.png" Height="250"/>
             </StackPanel>
 
             <StackPanel Grid.Column="1">

@@ -21,7 +21,7 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0">
-                <Image Source="C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\logo.png" Height="250"/>
+                <Image Source="pack://application:,,,/Assets/Existing Assets/logo2.png" Height="250"/>
             </StackPanel>
 
             <StackPanel Grid.Column="1">
@@ -132,31 +132,74 @@
                                             SelectedItem="{Binding SelectedYear}"
                                             ItemsSource="{Binding YearComboBox}"
                                             />
-                    <lc:CartesianChart Width="300"
+                    <lc:CartesianChart Width="340"
                                        Height="250"
                                        Margin="-750 100 0 0"
                                        Series="{Binding SeriesCollection}"
                                        FontFamily="Ubuntu"
                                        FontSize="20">
                         <lc:CartesianChart.AxisX>
-                            <lc:Axis  Title="Language" Labels="{Binding Labels}"></lc:Axis>
+                            <lc:Axis  Title="Language" 
+                                      ShowLabels="False" 
+                                      FontFamily="Ubuntu"
+                                      FontSize="20"></lc:Axis>
                         </lc:CartesianChart.AxisX>
                         
                         <lc:CartesianChart.AxisY>
-                            <lc:Axis  Title="Number of requests" Labels="{Binding Values}"></lc:Axis>
+                            <lc:Axis  Title="Number of requests" 
+                                      Labels="{Binding Values}"
+                                      FontFamily="Ubuntu"
+                                      FontSize="20"
+                                      LabelFormatter="{Binding Formatter}"
+                                      ></lc:Axis>
                         </lc:CartesianChart.AxisY>
                     </lc:CartesianChart>
                     
-                    <lc:CartesianChart Width="300"
+                    <lc:CartesianChart Width="340"
                                        Height="250"
-                                       Margin="25 -250 0 0">
-                    </lc:CartesianChart>
+                                       Margin="25 -250 0 0"
+                                       Series="{Binding SeriesCollection2}"
+                                       FontFamily="Ubuntu"
+                                       FontSize="20">
+                        <lc:CartesianChart.AxisX>
+                            <lc:Axis  Title="City" 
+                                      ShowLabels="False"
+                                      FontFamily="Ubuntu"                                      
+                                      FontSize="20"></lc:Axis>
+                        </lc:CartesianChart.AxisX>
 
-                    <lc:CartesianChart Width="300"
-                                       Height="250"
-                                       Margin="800 -250 0 0">
-                        
+                        <lc:CartesianChart.AxisY>
+                            <lc:Axis  Title="Number of requests" 
+                                      Labels="{Binding Values2}" 
+                                      FontFamily="Ubuntu"
+                                      FontSize="20"
+                                      LabelFormatter="{Binding Formatter}"
+                                      ></lc:Axis>
+                        </lc:CartesianChart.AxisY>
                     </lc:CartesianChart>
+                    <lc:CartesianChart Width="340"
+                                       Height="250"
+                                       Margin="790 -250 0 0"
+                                       Series="{Binding SeriesCollection3}"
+                                       FontFamily="Ubuntu"
+                                       FontSize="20">
+                        <lc:CartesianChart.AxisX>
+                            <lc:Axis  Title="Country"
+                                      ShowLabels="False"
+                                      FontSize="20" 
+                                      FontFamily="Ubuntu"
+                                      ></lc:Axis>
+                        </lc:CartesianChart.AxisX>
+
+                        <lc:CartesianChart.AxisY>
+                            <lc:Axis  Title="Number of requests"
+                                      Labels="{Binding Values3}"
+                                      FontSize="20" 
+                                      FontFamily="Ubuntu"
+                                      LabelFormatter="{Binding Formatter}"></lc:Axis>
+                        </lc:CartesianChart.AxisY>
+                    </lc:CartesianChart>
+                   
 
 
                 </StackPanel>

@@ -15,6 +15,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Existing Assets\headerImage2.png" />
+    <None Remove="Assets\Existing Assets\login-background WEB.jpg" />
+    <None Remove="Assets\Existing Assets\logo.png" />
+    <None Remove="Assets\Existing Assets\logo2.png" />
+    <None Remove="Assets\Existing Assets\logoWEB.png" />
+    <None Remove="Assets\Existing Assets\Ohrid1.jpg" />
+    <None Remove="Assets\Existing Assets\Ohrid2.jpg" />
+    <None Remove="Assets\Existing Assets\Ohrid3.jpg" />
+    <None Remove="Assets\Existing Assets\Ohrid4.jpg" />
     <None Remove="Assets\fruska-gora.jpg" />
     <None Remove="Assets\Ohrid5.jpg" />
     <None Remove="Assets\tours-white.svg" />
@@ -56,6 +65,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Existing Assets\headerImage2.png" />
+    <Resource Include="Assets\Existing Assets\login-background WEB.jpg" />
+    <Resource Include="Assets\Existing Assets\logo.png">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Existing Assets\logo2.png" />
+    <Resource Include="Assets\Existing Assets\logoWEB.png" />
+    <Resource Include="Assets\Existing Assets\Ohrid1.jpg" />
+    <Resource Include="Assets\Existing Assets\Ohrid2.jpg" />
+    <Resource Include="Assets\Existing Assets\Ohrid3.jpg" />
+    <Resource Include="Assets\Existing Assets\Ohrid4.jpg" />
     <Resource Include="Assets\fruska-gora.jpg" />
   </ItemGroup>
 

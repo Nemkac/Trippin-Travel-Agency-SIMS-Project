@@ -250,10 +250,10 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             Description = tour.description;
             NumberOfSpots = tour.touristLimit.ToString();
             Duration = tour.hoursDuration.ToString();
-            Image1 = "C:\\Users\\Nemanja\\Desktop\\Faks\\Semestar 6\\Projekat c#\\Trippin-Travel-Agency-SIMS-Project\\Trippin Travel Agency\\InitialProject\\InitialProject\\Assets\\" + location.city + "1.jpg";
-            Image2 = "C:\\Users\\Nemanja\\Desktop\\Faks\\Semestar 6\\Projekat c#\\Trippin-Travel-Agency-SIMS-Project\\Trippin Travel Agency\\InitialProject\\InitialProject\\Assets\\" + location.city + "2.jpg";
-            Image3 = "C:\\Users\\Nemanja\\Desktop\\Faks\\Semestar 6\\Projekat c#\\Trippin-Travel-Agency-SIMS-Project\\Trippin Travel Agency\\InitialProject\\InitialProject\\Assets\\" + location.city + "3.jpg";
-            Image4 = "C:\\Users\\Nemanja\\Desktop\\Faks\\Semestar 6\\Projekat c#\\Trippin-Travel-Agency-SIMS-Project\\Trippin Travel Agency\\InitialProject\\InitialProject\\Assets\\" + location.city + "4.jpg";
+            Image1 = "pack://application:,,,/Assets/Existing Assets/" + location.city + "1.jpg";
+            Image2 = "pack://application:,,,/Assets/Existing Assets/" + location.city + "2.jpg";
+            Image3 = "pack://application:,,,/Assets/Existing Assets/" + location.city + "3.jpg";
+            Image4 = "pack://application:,,,/Assets/Existing Assets/" + location.city + "4.jpg";
             DataBaseContext context = new DataBaseContext();    
             List<KeyPoint> keyPoints = this.tourService.GetKeyPoints(tour.id, context);
             foreach (KeyPoint keyPoint in keyPoints)

@@ -235,7 +235,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             KeyPoints = tourBookingTransfer.keypoints;
             GuestNumber = tourBookingTransfer.numberOfGuests;
             Duration = tourBookingTransfer.hoursDuration;
-            ImageSlider = "C:\\Users\\Nemanja\\Desktop\\Faks\\Semestar 6\\Projekat c#\\Trippin-Travel-Agency-SIMS-Project\\Trippin Travel Agency\\InitialProject\\InitialProject\\Assets\\" + tourBookingTransfer.cityLocation + imagecounter.ToString()+".jpg";
+            ImageSlider = "pack://application:,,,/Assets/Existing Assets/" + tourBookingTransfer.cityLocation + imagecounter.ToString()+".jpg";
 
         }
 
