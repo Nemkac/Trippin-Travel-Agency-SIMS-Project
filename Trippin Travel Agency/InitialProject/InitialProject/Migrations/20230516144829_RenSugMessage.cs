@@ -1,12 +1,11 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace InitialProject.Migrations
 {
     /// <inheritdoc />
-    public partial class Renovation : Migration
+    public partial class RenSugMessage : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -24,20 +23,6 @@ namespace InitialProject.Migrations
                 {
                     table.PrimaryKey("PK_RenovationSuggestionMessages", x => x.id);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "RenovationSuggestions",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    urgency = table.Column<int>(type: "INTEGER", nullable: false),
-                    sendingDate = table.Column<DateTime>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RenovationSuggestions", x => x.id);
-                });
         }
 
         /// <inheritdoc />
@@ -45,9 +30,6 @@ namespace InitialProject.Migrations
         {
             migrationBuilder.DropTable(
                 name: "RenovationSuggestionMessages");
-
-            migrationBuilder.DropTable(
-                name: "RenovationSuggestions");
         }
     }
 }

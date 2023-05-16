@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20230512213004_SuperGuest")]
-    partial class SuperGuest
+    [Migration("20230516135327_CP3")]
+    partial class CP3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -416,45 +416,6 @@ namespace InitialProject.Migrations
                     b.ToTable("KeyPoints");
                 });
 
-            modelBuilder.Entity("InitialProject.Model.RenovationSuggestion", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("message")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("sendingDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("urgency")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("id");
-
-                    b.ToTable("RenovationSuggestions");
-                });
-
-            modelBuilder.Entity("InitialProject.Model.RenovationSuggestionMessage", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("accommodationId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("message")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("id");
-
-                    b.ToTable("RenovationSuggestionMessages");
-                });
-
             modelBuilder.Entity("InitialProject.Model.RequestMessage", b =>
                 {
                     b.Property<int>("id")
@@ -480,6 +441,12 @@ namespace InitialProject.Migrations
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("guestId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ifActive")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("points")
@@ -674,6 +641,9 @@ namespace InitialProject.Migrations
                     b.Property<int>("numberOfTourists")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("sent")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("startDate")
                         .HasColumnType("TEXT");
 
@@ -839,6 +809,9 @@ namespace InitialProject.Migrations
                     b.Property<DateTime>("startDates")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("tourId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("touristLimit")
                         .HasColumnType("INTEGER");
 
@@ -921,6 +894,87 @@ namespace InitialProject.Migrations
                     b.HasKey("id");
 
                     b.ToTable("TourTodayImagesTransfers");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.UnfulfilledTourCities", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("city")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("guestId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("UnfulfilledTourCities");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.UnfulfilledTourCountries", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("country")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("guestId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("unfulfilledTourCountries");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.UnfulfilledTourLanguages", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("guestId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("language")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("UnfulfilledTourLanguages");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.UnfulfilledTourRequests", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("city")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("country")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("fulfilled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("guestId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("language")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("UnfulfilledTourRequests");
                 });
 
             modelBuilder.Entity("InitialProject.Model.User", b =>

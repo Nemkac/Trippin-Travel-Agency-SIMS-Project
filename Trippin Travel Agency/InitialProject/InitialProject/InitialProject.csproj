@@ -15,17 +15,28 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Existing Assets\accImg1.png" />
+    <None Remove="Assets\Existing Assets\accImg2.jpg" />
+    <None Remove="Assets\Existing Assets\accImg3.jpg" />
+    <None Remove="Assets\Existing Assets\accImg4.jpg" />
+    <None Remove="Assets\Existing Assets\fruska-gora.jpg" />
     <None Remove="Assets\Existing Assets\headerImage2.png" />
+    <None Remove="Assets\Existing Assets\language_generic.jpg" />
+    <None Remove="Assets\Existing Assets\least_popular_location_generic.jpg" />
+    <None Remove="Assets\Existing Assets\location_generic.jpg" />
     <None Remove="Assets\Existing Assets\login-background WEB.jpg" />
+    <None Remove="Assets\Existing Assets\login-background.jpg" />
     <None Remove="Assets\Existing Assets\logo.png" />
     <None Remove="Assets\Existing Assets\logo2.png" />
     <None Remove="Assets\Existing Assets\logoWEB.png" />
     <None Remove="Assets\Existing Assets\madrid.jpg" />
     <None Remove="Assets\Existing Assets\mitrovica.jpg" />
+    <None Remove="Assets\Existing Assets\most_popular_location_generic.jpg" />
     <None Remove="Assets\Existing Assets\Ohrid1.jpg" />
     <None Remove="Assets\Existing Assets\Ohrid2.jpg" />
     <None Remove="Assets\Existing Assets\Ohrid3.jpg" />
     <None Remove="Assets\Existing Assets\Ohrid4.jpg" />
+    <None Remove="Assets\Existing Assets\tours-white.png" />
     <None Remove="Assets\fruska-gora.jpg" />
     <None Remove="Assets\madrid.jpg" />
     <None Remove="Assets\mitrovica.jpg" />
@@ -82,8 +93,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Existing Assets\accImg1.png" />
+    <Resource Include="Assets\Existing Assets\accImg2.jpg" />
+    <Resource Include="Assets\Existing Assets\accImg3.jpg" />
+    <Resource Include="Assets\Existing Assets\accImg4.jpg" />
+    <Resource Include="Assets\Existing Assets\fruska-gora.jpg" />
     <Resource Include="Assets\Existing Assets\headerImage2.png" />
+    <Resource Include="Assets\Existing Assets\language_generic.jpg" />
+    <Resource Include="Assets\Existing Assets\least_popular_location_generic.jpg" />
+    <Resource Include="Assets\Existing Assets\location_generic.jpg" />
     <Resource Include="Assets\Existing Assets\login-background WEB.jpg" />
+    <Resource Include="Assets\Existing Assets\login-background.jpg" />
     <Resource Include="Assets\Existing Assets\logo.png">
       <CopyToOutputDirectory></CopyToOutputDirectory>
     </Resource>
@@ -91,10 +111,12 @@
     <Resource Include="Assets\Existing Assets\logoWEB.png" />
     <Resource Include="Assets\Existing Assets\madrid.jpg" />
     <Resource Include="Assets\Existing Assets\mitrovica.jpg" />
+    <Resource Include="Assets\Existing Assets\most_popular_location_generic.jpg" />
     <Resource Include="Assets\Existing Assets\Ohrid1.jpg" />
     <Resource Include="Assets\Existing Assets\Ohrid2.jpg" />
     <Resource Include="Assets\Existing Assets\Ohrid3.jpg" />
     <Resource Include="Assets\Existing Assets\Ohrid4.jpg" />
+    <Resource Include="Assets\Existing Assets\tours-white.png" />
     <Resource Include="Assets\fruska-gora.jpg" />
     <Resource Include="Assets\madrid.jpg" />
     <Resource Include="Assets\mitrovica.jpg" />

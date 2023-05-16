@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace InitialProject.Migrations
 {
     /// <inheritdoc />
-    public partial class CP3DB : Migration
+    public partial class CP3 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -240,6 +240,22 @@ namespace InitialProject.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SelectedRequestTransfers", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SuperGuests",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    guestId = table.Column<int>(type: "INTEGER", nullable: false),
+                    points = table.Column<int>(type: "INTEGER", nullable: false),
+                    titleAcquisition = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ifActive = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SuperGuests", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -764,6 +780,9 @@ namespace InitialProject.Migrations
 
             migrationBuilder.DropTable(
                 name: "SelectedRequestTransfers");
+
+            migrationBuilder.DropTable(
+                name: "SuperGuests");
 
             migrationBuilder.DropTable(
                 name: "TourAndGuideRates");
