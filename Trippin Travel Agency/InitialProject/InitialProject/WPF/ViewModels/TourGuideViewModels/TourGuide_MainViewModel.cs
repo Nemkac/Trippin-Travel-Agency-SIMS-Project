@@ -75,7 +75,7 @@ namespace InitialProject.WPF.ViewModels
         }
         public void ExecuteShowTourGuideToursViewCommand(object obj)
         {
-            CurrentChildView = new TourGuide_ToursViewModel(this);
+            CurrentChildView = new TourGuide_ToursViewModel();
         }
         public void ExecuteShowTourGuideCreateTourViewCommand(object obj)
         {
@@ -87,7 +87,7 @@ namespace InitialProject.WPF.ViewModels
         }
         public void ExecuteShowTourGuideTourLiveViewCommand(object obj)
         {
-            CurrentChildView = new TourGuide_TourLiveViewModel(this);
+            CurrentChildView = new TourGuide_TourLiveViewModel();
         }
         public void ExecuteShowTourGuideFutureToursViewCommand(object obj)
         {
@@ -104,7 +104,7 @@ namespace InitialProject.WPF.ViewModels
         }
         public void ExecuteShowTourGuideTourStatisticsViewCommand(object obj)
         {
-            CurrentChildView = new TourGuide_TourStatisticsViewModel(this);
+            CurrentChildView = new TourGuide_TourStatisticsViewModel();
         }
         public void ExecuteShowTourGuideRequestsViewCommand(object obj)
         {
@@ -124,7 +124,7 @@ namespace InitialProject.WPF.ViewModels
         }
         public void ExecuteShowTourGuideProfileViewCommand(object obj)
         {
-            CurrentChildView = new TourGuide_ProfileViewModel(this);
+            CurrentChildView = new TourGuide_ProfileViewModel();
         }
         public void ExecuteShowTourGuideAcceptedTourRequestViewCommand(object obj)
         {

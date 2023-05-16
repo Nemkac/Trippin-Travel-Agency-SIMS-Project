@@ -23,7 +23,6 @@ namespace InitialProject.WPF.ViewModels
         public ViewModelCommand ShowTourLiveCommand { get; private set; }
         public ViewModelCommand ShowTourImagesCommand { get; private set; }
         public ObservableCollection<ToursTodayDTO> observableToursTodayDTOs { get; private set;  } = new ObservableCollection<ToursTodayDTO>();
-
         public ToursTodayDTO selectedTourTodayDTO;
         public ToursTodayDTO SelectedToursTodayDTO
         {
@@ -37,7 +36,6 @@ namespace InitialProject.WPF.ViewModels
                 }
             }
         }
-
         public TourGuide_MainViewModel _mainViewModel;
 
         public TourGuide_ToursTodayViewModel()
@@ -103,8 +101,6 @@ namespace InitialProject.WPF.ViewModels
                 _mainViewModel.ExecuteShowTourGuideToursTodayImagesViewCommand(null);
             }
         }
-
-
     }
 
 }

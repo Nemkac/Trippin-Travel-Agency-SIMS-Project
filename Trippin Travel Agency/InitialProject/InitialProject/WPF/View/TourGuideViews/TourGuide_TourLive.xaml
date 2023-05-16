@@ -53,7 +53,7 @@
                 </StackPanel>
 
             </RadioButton>
-            <TextBlock     Text=""
+            <TextBlock     Text="{Binding TourName}"
                            TextTrimming="CharacterEllipsis"
                            MaxWidth="270"
                            Style="{StaticResource headerTextBlock}"
@@ -98,6 +98,8 @@
                           AutoGenerateColumns="False"
                           Width="330"
                           BorderThickness="0"
+                          ItemsSource="{Binding _keyPointsList}"
+                          SelectedItem="{Binding SelectedKeyPoint}"
                           >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Binding="{Binding name}" Width="*"/>
@@ -146,7 +148,7 @@
                     <!-- View checkpoint button -->
                     <Button Content="Visit checkpoint"
                             Style="{StaticResource showImagesButton}"
-                            Click="VisitCheckpointButton_Click"
+                            Command="{Binding VisitCheckpointCommand}"
                             />
                     <!-- Guests on tour text helper -->
                     <StackPanel Orientation="Vertical"
@@ -170,6 +172,8 @@
                           Width="330"
                           BorderThickness="0"
                           AutoGenerateColumns="False"
+                          ItemsSource="{Binding _tourReservationDtosToday}"
+                          SelectedItem="{Binding SelectedTourReservationDTO}"
                           >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Id" Binding="{Binding id}" Width="*"/>
@@ -203,15 +207,14 @@
                         <!-- End tour button -->
                         <Button Content="End tour"
                             Style="{StaticResource denyButtonMobile}"
-                            Click="endTourButton_Click"
-                            Command="{Binding ShowToursTodayCommand}"
+                            Command="{Binding EndTourCommand}"
                             Width="150"
                             Margin="0, 20, 0, 0"
                             />
                         <!-- Visited button -->
                         <Button Content="Guest Arrieved"
                             Style="{StaticResource acceptButton}"
-                            Click="GuideConfirmed_ButtonClick"
+                            Command="{Binding GuideConfirmedCommand}"
                             Width="150"
                             Margin="30, 20, 0, 0"
                             />

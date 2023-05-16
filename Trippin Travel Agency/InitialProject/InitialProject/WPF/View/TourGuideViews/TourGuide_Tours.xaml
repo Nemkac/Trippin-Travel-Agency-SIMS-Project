@@ -59,7 +59,6 @@
                     <RadioButton x:Name="createTourButton"
                                  Style="{StaticResource mobileCreateTourButton}"
                                  Command="{Binding CreateTourCommand}"
-                                 Click="createPlainTour_Click"
                                  >
                         <StackPanel Orientation="Horizontal"
                                 Margin="0, 5, 0 ,0">
@@ -111,8 +110,7 @@
                                Style="{StaticResource labelForDisplay}"/>
                     </StackPanel>
                 </StackPanel>
-                <StackPanel Orientation="Vertical"
-                            Margin="0,20,0,0">
+                <StackPanel Orientation="Vertical">
                     <DockPanel>
                         <Label Content="What is a best one?"
                                Style="{StaticResource labelAboveTextBox}"
@@ -121,13 +119,13 @@
                                   Width="120"
                                   Margin="84,0,0,0"
                                   x:Name="yearComboBox"
+                                  ItemsSource="{Binding Years}"
+                                  SelectedItem="{Binding SelectedYear}"
                                   >
-                            
                         </ComboBox>
                     </DockPanel>
                     <Button Content="Show statistics" Style="{StaticResource leadButton}"
-                            Click="ShowTourStatisticsButton_Click"
-                            Command="{Binding ShowTourStatisticsCommand}"/>
+                            Command="{Binding TourStatisticsCommand}"/>
                     <Line Style="{StaticResource mobileDelimiterLine}"/>
                 </StackPanel>
 
