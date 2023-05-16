@@ -60,7 +60,6 @@ namespace InitialProject.WPF
                     OwnerInterface ownerInterface = new OwnerInterface();
                     TourGuideInterface tourGuideInterface = new TourGuideInterface();
                     GuestTwoInterface guestTwoInterface = new GuestTwoInterface();
-                    GuestOneInterface guestOneInterface = new GuestOneInterface();
                    
                     LoggedUser.id = user.id;
                     LoggedUser.username = user.username;
@@ -69,6 +68,7 @@ namespace InitialProject.WPF
                     LoggedUser.lastName = user.lastName;
                     LoggedUser.email = user.email;
 
+                    GuestOneInterface guestOneInterface = new GuestOneInterface();
 
                     DataBaseContext context = new DataBaseContext();
                     List<Coupon> coupons = context.Coupons.ToList();

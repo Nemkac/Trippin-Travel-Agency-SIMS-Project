@@ -12,23 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Model;
-using InitialProject.Context;
-using System.Globalization;
 using InitialProject.WPF.ViewModels.GuestOneViewModels;
+
 
 namespace InitialProject.WPF.View.GuestOne_Views
 {
     /// <summary>
-    /// Interaction logic for FutureBookingsInterface.xaml
+    /// Interaction logic for SendSuggestionConfirmationInterface.xaml
     /// </summary>
-    public partial class FutureBookingsInterface : Window
+    public partial class SendSuggestionConfirmationInterface : Window
     {
-        public FutureBookingsInterface()
+        public SendSuggestionConfirmationInterface()
         {
             InitializeComponent();
-            debuger.Text = GuestOneStaticHelper.temp;
-            GuestOneStaticHelper.futureBookingsInterface = this;
-            this.DataContext = new FutureBookingsViewModel();
+            GuestOneStaticHelper.sendSuggestionConfirmationInterface = this;
+            this.DataContext = new SendSuggestionConfirmationViewModel();
         }
     }
 }

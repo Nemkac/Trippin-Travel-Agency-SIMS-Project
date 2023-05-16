@@ -53,6 +53,7 @@
     <PackageReference Include="Notifications.Wpf" Version="0.1.1" />
     <PackageReference Include="SharpVectors" Version="1.8.1" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.117" />
+    <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
     <PackageReference Include="ToastNotifications" Version="2.5.1" />
     <PackageReference Include="ToastNotifications.Messages" Version="2.5.1" />
     <PackageReference Include="WPFNotification" Version="1.1.0" />

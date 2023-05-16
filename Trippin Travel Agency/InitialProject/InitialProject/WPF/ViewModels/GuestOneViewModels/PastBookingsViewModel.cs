@@ -125,6 +125,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         {
             if (SelectedBooking != null)
             {
+                GuestOneStaticHelper.selectedBookingIdToRate = SelectedBooking.Id;
                 RenovationSuggestionInterface renovationSuggestionInterface = new RenovationSuggestionInterface();
                 renovationSuggestionInterface.Top = GuestOneStaticHelper.pastBookingsInterface.Top;
                 renovationSuggestionInterface.Left = GuestOneStaticHelper.pastBookingsInterface.Left;

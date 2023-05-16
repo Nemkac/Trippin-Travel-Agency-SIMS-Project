@@ -149,5 +149,80 @@ namespace InitialProject.Service.GuestServices
             return delayableBookings;
         }
 
+        public int BookingsInLastYear()
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<SuperGuest> superGuests = context.SuperGuests.ToList();
+            DateTime oldSuperGuestAcquisition = new DateTime();
+            oldSuperGuestAcquisition = DateTime.Today.AddDays(1);
+            foreach (SuperGuest superGuest in superGuests)
+            {
+                if(superGuest.guestId == LoggedUser.id && superGuest.ifActive == 0)
+                {
+                    oldSuperGuestAcquisition = superGuest.titleAcquisition;
+                }
+            }
+            int bookingsInLastYearCounter = 0;
+            DateTime dayYearBefore = DateTime.Today.AddYears(-1);
+            List<Booking> pastBookings = GetGuestsPastBookings(LoggedUser.id);
+            if (oldSuperGuestAcquisition != DateTime.Today.AddDays(1))
+            {
+                foreach (Booking booking in pastBookings)
+                {
+                    if (DateTime.Parse(booking.departure) > dayYearBefore && oldSuperGuestAcquisition < DateTime.Parse(booking.departure))
+                    {
+                        bookingsInLastYearCounter++;
+                    }
+                }
+            }
+            else
+            {
+                foreach (Booking booking in pastBookings)
+                {
+                    if (DateTime.Parse(booking.departure) > dayYearBefore)
+                    {
+                        bookingsInLastYearCounter++;
+                    }
+                }
+            }
+            return bookingsInLastYearCounter;
+        }
+
+        public SuperGuest IsSuperGuest()
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<SuperGuest> superGuests = context.SuperGuests.ToList();
+            foreach(SuperGuest superGuest in superGuests)
+            {
+               if(superGuest.guestId == LoggedUser.id && superGuest.ifActive == 1)
+                {
+                    return superGuest;
+                }
+            }
+            return null;
+        }
+
+        public int BookingsSinceSuperGuestAcquisition()
+        {
+            int bookingsSinceTitleAcquisition = 0;
+            BookingService bookingService = new BookingService(new BookingRepository());
+            DataBaseContext context = new DataBaseContext();
+            List<SuperGuest> superGuests = context.SuperGuests.ToList();
+            foreach (SuperGuest superGuest in superGuests)
+            {
+                if (superGuest.guestId == LoggedUser.id && superGuest.ifActive == 1)
+                {
+                    foreach(Booking booking in GetGuestsPastBookings(LoggedUser.id))
+                    {
+                        if(DateTime.Parse(booking.departure) > superGuest.titleAcquisition)
+                        {
+                            bookingsSinceTitleAcquisition++;
+                        }
+                    }
+                }
+            }
+            return bookingsSinceTitleAcquisition;
+        }
+
     }
 }

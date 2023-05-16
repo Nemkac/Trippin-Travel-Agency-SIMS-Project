@@ -10,6 +10,7 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 
 namespace InitialProject.Service.AccommodationServices
 
@@ -51,23 +52,39 @@ namespace InitialProject.Service.AccommodationServices
 
         public List<int> GetAllByCountry(string country)
         {
-            DataBaseContext context = new DataBaseContext();
-            List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
-            List<int> filtered = new List<int>();
-            List<Accommodation> accommodations = context.Accommodations.ToList();
-            foreach (Accommodation accommodation in accommodations)
+            if (country != null)
             {
-                if (GetAccommodationLocation(accommodation.id)[0].ToUpper().Contains(country.ToUpper()))
+                DataBaseContext context = new DataBaseContext();
+                List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
+                List<int> filtered = new List<int>();
+                List<Accommodation> accommodations = context.Accommodations.ToList();
+                foreach (Accommodation accommodation in accommodations)
                 {
-                    filtered.Add(accommodation.id);
+                    if (GetAccommodationLocation(accommodation.id)[0].ToUpper().Contains(country.ToUpper()))
+                    {
+                        filtered.Add(accommodation.id);
+                    }
                 }
+                return filtered;
             }
-            GuestOneInterface guestOneInterface = new GuestOneInterface();
-            return filtered;
+            return null;
         }
 
         public List<Accommodation> GetMatching(List<int> allAccommodations, List<Accommodation> accommodationsToCheck)
         {
+            if(allAccommodations == null)
+            {
+                return accommodationsToCheck;
+            }
+            if(accommodationsToCheck == null)
+            {
+                List<Accommodation> output = new List<Accommodation>();
+                foreach (int accommodation in allAccommodations)
+                {
+                    output.Add(GetById(accommodation));
+                }
+                return output;
+            }
             List<Accommodation> matchingAccommodations = new List<Accommodation>();
             DataBaseContext context = new DataBaseContext();
             foreach (Accommodation accommodationToCheck in accommodationsToCheck)
@@ -89,9 +106,10 @@ namespace InitialProject.Service.AccommodationServices
             int startEndSpan;
             List<List<DateTime>> availablePeriods;
             List<Booking> sameAccommodationBookings;
+            List<List<DateTime>> takenDates = new List<List<DateTime>>();
             GetDateBasicProperties(accommodation, dateLimits, out startingDate, out startEndSpan, out availablePeriods, out sameAccommodationBookings);
 
-            if (sameAccommodationBookings.Count == 0)
+            if (sameAccommodationBookings.Count == 0 && GetRenovations(GuestOneStaticHelper.id) == null)
             {
                 for (int i = 0; i <= startEndSpan - daysToBook; i++)
                 {
@@ -99,8 +117,24 @@ namespace InitialProject.Service.AccommodationServices
                 }
                 return availablePeriods;
             }
+            if(sameAccommodationBookings.Count == 0)
+            {
+                foreach (AccommodationRenovation accommodationRenovation in GetRenovations(GuestOneStaticHelper.id))
+                {
+                    takenDates.Add(new List<DateTime>() { DateTime.Parse(accommodationRenovation.startDate), DateTime.Parse(accommodationRenovation.endDate) });
+                    if (GetAvailableDateSlots(startEndSpan, daysToBook, startingDate, takenDates).Count > 0)
+                    {
+                        return GetAvailableDateSlots(startEndSpan, daysToBook, startingDate, takenDates);
+                    }
 
-            List<List<DateTime>> takenDates = new List<List<DateTime>>();
+                    if (SuggestAdditionalDates(startEndSpan, daysToBook, startingDate, takenDates).Count > 0)
+                    {
+                        return SuggestAdditionalDates(startEndSpan, daysToBook, startingDate, takenDates);
+                    }
+                    return null;
+                }
+            }
+
             foreach (Booking booking in sameAccommodationBookings)
             {
                 takenDates.Add(new List<DateTime>() { DateTime.Parse(booking.arrival), DateTime.Parse(booking.departure) });
@@ -181,11 +215,12 @@ namespace InitialProject.Service.AccommodationServices
         {
             foreach (List<DateTime> bookingsDates in takenDates)
             {
-                if (exactDay >= bookingsDates[0] && exactDay < bookingsDates[1])
+                if ((exactDay >= bookingsDates[0] && exactDay < bookingsDates[1]) || IsDayDuringRenovation(exactDay))
                 {
                     return false;
                 }
             }
+
             return true;
         }
 
@@ -214,6 +249,53 @@ namespace InitialProject.Service.AccommodationServices
         public List<AccommodationRenovation> GetAllRenovations()
         {
             return this.iAccommodationRepository.GetAllRenovations();
+        }
+
+        public bool IsDayDuringRenovation(DateTime exactDay)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<AccommodationRenovation> accommodationRenovations = GetRenovations(GuestOneStaticHelper.id);
+            if (accommodationRenovations != null)
+            {
+                foreach (AccommodationRenovation accommodationRenovation in accommodationRenovations)
+                {
+                    if (exactDay >= DateTime.Parse(accommodationRenovation.startDate) && exactDay <= DateTime.Parse(accommodationRenovation.endDate))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public List<AccommodationRenovation> GetRenovations(int accommodationId)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<AccommodationRenovation> accommodationRenovations = context.AccommodationRenovations.ToList();
+            List<AccommodationRenovation> foundRenovations = new List<AccommodationRenovation>();
+            foreach (AccommodationRenovation accommodationRenovation in accommodationRenovations)
+            {
+                if(accommodationRenovation.accommodationId == accommodationId)
+                {
+                    foundRenovations.Add(accommodationRenovation);
+                }
+            }
+            return foundRenovations;
+        }
+
+        public bool IfAccommodationRecentlyRenovated(int accommodationId)
+        {
+            if (GetRenovations(accommodationId) != null)
+            {
+                foreach (AccommodationRenovation accommodationRenovation in GetRenovations(accommodationId))
+                {
+                    if (DateTime.Today.Subtract(DateTime.Parse(accommodationRenovation.endDate)).Days < 364)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }

@@ -1,4 +1,9 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Context;
+using InitialProject.Migrations;
+using InitialProject.Model;
+using InitialProject.Repository;
+using InitialProject.Service.AccommodationServices;
+using InitialProject.Service.BookingServices;
 using InitialProject.WPF.View.GuestOne_Views;
 using System;
 using System.Collections.Generic;
@@ -11,15 +16,45 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 {
     public class RenovationSuggestionViewModel : ViewModelBase
     {
+        private AccommodationService accommodationService = new(new AccommodationRepository());
+        private BookingService bookingService = new(new BookingRepository());
         public ViewModelCommand OpenNavigator { get; set; }
         public ViewModelCommand GoToPreviousWindow { get; set; }
+        public ViewModelCommand SendRenovationSuggestion { get; set; }
         public RenovationSuggestionViewModel()
         {
             OpenNavigator = new ViewModelCommand(ShowNavigator);
             GoToPreviousWindow = new ViewModelCommand(ShowPastBookings);
+            AccommodationName = (accommodationService.GetById((bookingService.GetById(GuestOneStaticHelper.selectedBookingIdToRate)).accommodationId)).name;
+            SendRenovationSuggestion = new ViewModelCommand(SendSuggestion);
         }
 
-        private void ShowNavigator(object sender)
+        public void SendSuggestion(object sender)
+        {
+            if (Message == string.Empty || Message == null)
+            {
+                WarningMessage = "Please insert commentary";
+            } 
+            else
+            {
+                string messageToSend = "Renovation suggestion for accommodation with id: " + (accommodationService.GetById((bookingService.GetById(GuestOneStaticHelper.selectedBookingIdToRate)).accommodationId)).id.ToString();
+                RenovationSuggestion renovationSuggestion = new RenovationSuggestion(Message, UrgencyRate,DateTime.Today);
+                RenovationSuggestionMessage renovationSuggestionMessage = new RenovationSuggestionMessage(messageToSend, (accommodationService.GetById((bookingService.GetById(GuestOneStaticHelper.selectedBookingIdToRate)).accommodationId)).id);
+                DataBaseContext saveContext = new DataBaseContext();
+                saveContext.Attach(renovationSuggestion);
+                saveContext.Attach(renovationSuggestionMessage);
+                saveContext.SaveChanges();
+                WarningMessage = string.Empty;
+                SendSuggestionConfirmationInterface sendSuggestionConfirmationInterface = new SendSuggestionConfirmationInterface();
+                sendSuggestionConfirmationInterface.Left = GuestOneStaticHelper.renovationSuggestionInterface.Left + (GuestOneStaticHelper.renovationSuggestionInterface.Width - sendSuggestionConfirmationInterface.Width) / 2;
+                sendSuggestionConfirmationInterface.Top = GuestOneStaticHelper.renovationSuggestionInterface.Top + (GuestOneStaticHelper.renovationSuggestionInterface.Height - sendSuggestionConfirmationInterface.Height) / 2;
+                GuestOneStaticHelper.renovationSuggestionInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
+                sendSuggestionConfirmationInterface.Show();
+
+            }
+        }
+
+        public void ShowNavigator(object sender)
         {
             Navigator navigator = new Navigator();
             navigator.Left = GuestOneStaticHelper.renovationSuggestionInterface.Left + (GuestOneStaticHelper.renovationSuggestionInterface.Width - navigator.Width) / 2;
@@ -35,5 +70,62 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             GuestOneStaticHelper.renovationSuggestionInterface.Hide();
             GuestOneStaticHelper.pastBookingsInterface.Show();
         }
+
+        private string accommodationName;
+        public string AccommodationName
+        {
+            get { return accommodationName; }
+            set
+            {
+                if (accommodationName != value)
+                {
+                    accommodationName = value;
+                    OnPropertyChanged(nameof(AccommodationName));
+                }
+            }
+        }
+
+        private string message;
+        public string Message
+        {
+            get { return message; }
+            set
+            {
+                if (message != value)
+                {
+                    message = value;
+                    OnPropertyChanged(nameof(Message));
+                }
+            }
+        }
+
+        private string warningMessage;
+        public string WarningMessage
+        {
+            get { return warningMessage; }
+            set
+            {
+                if (warningMessage != value)
+                {
+                    warningMessage = value;
+                    OnPropertyChanged(nameof(WarningMessage));
+                }
+            }
+        }
+
+        private int urgencyRate;
+        public int UrgencyRate
+        {
+            get { return urgencyRate; }
+            set
+            {
+                if (urgencyRate != value)
+                {
+                    urgencyRate = value;
+                    OnPropertyChanged(nameof(UrgencyRate));
+                }
+            }
+        }
+
     }
 }

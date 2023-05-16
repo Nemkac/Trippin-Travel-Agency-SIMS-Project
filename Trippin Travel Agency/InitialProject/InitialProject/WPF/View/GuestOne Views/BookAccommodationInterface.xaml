@@ -340,7 +340,7 @@
         <TextBlock HorizontalAlignment="Left"
             Height="86" 
             Margin="1046,223,0,0" 
-            TextWrapping="Wrap" 
+            TextWrapping="Wrap"
             Text="{Binding HelpBook}"
             VerticalAlignment="Top" 
             Width="428" Grid.Row="1"
@@ -490,5 +490,31 @@
             </TextBlock.RenderTransform>
         </TextBlock>
 
+        <TextBlock HorizontalAlignment="Left"
+            Height="48" 
+            Margin="745,138,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding BonusPoints}"
+            VerticalAlignment="Top" 
+            Width="428"
+            Foreground="#FF192A56"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="40" 
+            Margin="142,138,0,0" 
+            TextWrapping="Wrap"
+            Text ="{Binding IfRecentlyRenovated}"
+            VerticalAlignment="Top" 
+            Width="561"
+            Foreground="#273c75"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+        
     </Grid>
 </Window>
