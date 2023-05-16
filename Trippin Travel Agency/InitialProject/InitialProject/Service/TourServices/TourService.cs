@@ -8,6 +8,7 @@ using System.Windows;
 using InitialProject.Interfaces;
 using InitialProject.Repository;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Collections.ObjectModel;
 
 namespace InitialProject.Service.TourServices
 {
@@ -90,7 +91,7 @@ namespace InitialProject.Service.TourServices
         {
             return iTourRepository.GetAllFinishedTours();
         }
-        public bool IsTourFinished(List<KeyPoint> keyPoints)
+        public bool IsTourFinished(ObservableCollection<KeyPoint> keyPoints)
         {
             return keyPoints != null && keyPoints.All(kp => kp.visited);
         }
@@ -198,7 +199,7 @@ namespace InitialProject.Service.TourServices
             return tour;
         }
 
-        public KeyPoint GetNextUnvisitedKeyPoint(List<KeyPoint> keyPointsList)
+        public KeyPoint GetNextUnvisitedKeyPoint(ObservableCollection<KeyPoint> keyPointsList)
         {
             return keyPointsList.FirstOrDefault(kp => kp.visited == false);
         }

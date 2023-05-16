@@ -41,7 +41,7 @@ namespace InitialProject.WPF.View.TourGuideViews
             InitializeComponent();
             this.Loaded += tourDataLoaded;
             this.tourService = new(new TourRepository());
-            this.DataContext = new TourGuide_FinishedTourDataViewModel();
+            this.DataContext = new TourGuide_FinishedToursViewModel(); 
             DataBaseContext context = new DataBaseContext();
             List<TourLiveViewTransfer> requests = context.TourLiveViewTransfers.ToList();
             Tour tour = this.tourService.GetById(requests.Last().tourId);

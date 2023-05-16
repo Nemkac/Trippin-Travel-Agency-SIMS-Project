@@ -7,6 +7,7 @@
              xmlns:viewModel="clr-namespace:InitialProject.WPF.ViewModels"
              xmlns:local="clr-namespace:InitialProject.Model"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             d:DataContext="{d:DesignInstance Type=viewModel:TourGuide_TourStatisticsViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="750"
              d:DesignWidth="430"
@@ -64,24 +65,27 @@
                     <!-- Tour name -->
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Tour name: "
-                               Style="{StaticResource labelForDisplay}"/>
-                        <Label x:Name="statisticsTourName"
+                               Style="{StaticResource labelForDisplay}"
+                               FontWeight="Bold"/>
+                        <Label Content="{Binding TourName}"
                                Style="{StaticResource labelForDisplay}"/>
                     </StackPanel>
 
                     <!-- Tour name -->
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Visited by: "
-                               Style="{StaticResource labelForDisplay}"/>
-                        <Label x:Name="statisticsVisitedBy"
+                               Style="{StaticResource labelForDisplay}"
+                               FontWeight="Bold"/>
+                        <Label Content="{Binding TourVisitedBy}"
                                Style="{StaticResource labelForDisplay}"/>
                     </StackPanel>
 
                     <!-- Tour name -->
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Date: "
-                               Style="{StaticResource labelForDisplay}"/>
-                        <Label x:Name="statisticsDate"
+                               Style="{StaticResource labelForDisplay}"
+                               FontWeight="Bold"/>
+                        <Label Content="{Binding TourDate}"
                                Style="{StaticResource labelForDisplay}"/>
                     </StackPanel>
                 </StackPanel>
@@ -91,7 +95,7 @@
                               Style="{StaticResource menuBackButtonIcon}" Width="15" Height="15"
                               Margin="0, 20, 0, 0"
                               />
-                <TextBlock Text="See our recommendation based on tourist's requests"
+                <TextBlock Text="See our recommendations based on tourist's requests"
                            HorizontalAlignment="Center"
                            Width="200"
                            TextWrapping="Wrap"

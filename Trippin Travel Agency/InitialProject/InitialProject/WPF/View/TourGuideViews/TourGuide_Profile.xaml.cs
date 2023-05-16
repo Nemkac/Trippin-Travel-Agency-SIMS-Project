@@ -1,6 +1,7 @@
 ﻿using InitialProject.Context;
 using InitialProject.DTO;
 using InitialProject.Model;
+using InitialProject.WPF.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -26,15 +27,9 @@ namespace InitialProject.WPF.View.TourGuideViews
         public TourGuide_Profile()
         {
             InitializeComponent();
-            this.nameTextBlock.Text = LoggedUser.firstName; 
-            this.lastNameTextBlock.Text = LoggedUser.lastName;
-        }
-
-        private void Logout_ButtonClick(object sender, RoutedEventArgs e)
-        {
-            Window.GetWindow(this)?.Close();
-            SignInForm signInForm = new SignInForm();
-            signInForm.Show();
+            var viewModel = new TourGuide_ProfileViewModel();
+            viewModel.ParentWindow = Window.GetWindow(this);
+            DataContext = viewModel;
         }
     }
 }

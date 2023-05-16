@@ -170,7 +170,6 @@
                         x:Name="createTourByLanguageButton"
                         Command="{Binding CreateTourByLanguageCommand}"
                         >
-
                     </Button>
                 </Grid>
             </Border>

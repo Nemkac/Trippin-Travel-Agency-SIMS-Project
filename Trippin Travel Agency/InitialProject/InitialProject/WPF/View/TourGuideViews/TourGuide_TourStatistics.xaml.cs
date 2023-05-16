@@ -27,11 +27,6 @@ namespace InitialProject.WPF.View.TourGuideViews
         public TourGuide_TourStatistics()
         {
             InitializeComponent();
-            DataBaseContext tourStatisticsDto = new DataBaseContext();
-            TourStatisticsDTO transferedTour = tourStatisticsDto.TourStatisticsTransfer.First();
-            statisticsTourName.Content = transferedTour.tourName;
-            statisticsVisitedBy.Content = transferedTour.numberOfGuests;
-            statisticsDate.Content = transferedTour.startDate;
         }
     }
 }

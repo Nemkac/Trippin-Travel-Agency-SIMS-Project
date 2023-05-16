@@ -18,6 +18,7 @@ namespace InitialProject.WPF.ViewModels
     {
         public ViewModelCommand ShowToursCommand { get; private set; }
         public ICommand CancelTourCommand { get; private set; }
+        public ViewModelCommand ShowImagesCommand { get; private set; } 
 
         private readonly TourGuide_MainViewModel _mainViewModel;
 
@@ -41,7 +42,8 @@ namespace InitialProject.WPF.ViewModels
             _mainViewModel = LoggedUser.TourGuide_MainViewModel;
             tourService = new(new TourRepository());
             ShowToursCommand = new ViewModelCommand(ShowTours);
-            CancelTourCommand = new ViewModelCommand(CancelTour, CanCancelTour);
+            CancelTourCommand = new ViewModelCommand(CancelTour);
+            ShowImagesCommand = new ViewModelCommand(ShowImages);
             RefreshFutureToursDataGrid();
         }
 
@@ -65,56 +67,68 @@ namespace InitialProject.WPF.ViewModels
         {
             _mainViewModel.ExecuteShowTourGuideToursViewCommand(null);
         }
-        private void CancelTour(object parameter)
+        public void ShowImages(object parameter)
         {
-            using (DataBaseContext dataBaseContext = new DataBaseContext())
+            if(SelectedFutureTourDto == null)
             {
-                Tour tourToDelete = dataBaseContext.Tours.FirstOrDefault(t => t.id == SelectedFutureTourDto.id);
+                MessageBox.Show("Please select a tour from the list to show its images.");
+                return;
+            }
+        }
+        public void CancelTour(object parameter)
+        {
+            if (SelectedFutureTourDto != null)
+            {
 
-                if (tourToDelete != null)
+                using (DataBaseContext dataBaseContext = new DataBaseContext())
                 {
-                    TimeSpan timeUntilTourStart = tourToDelete.startDates - DateTime.Now;
+                    Tour tourToDelete = dataBaseContext.Tours.FirstOrDefault(t => t.id == SelectedFutureTourDto.id);
 
-                    if (timeUntilTourStart.TotalHours > 48)
+                    if (tourToDelete != null)
                     {
-                        dataBaseContext.Images.RemoveRange(dataBaseContext.Images.Where(i => i.tourId == tourToDelete.id));
-                        dataBaseContext.KeyPoints.RemoveRange(dataBaseContext.KeyPoints.Where(k => k.tourId == tourToDelete.id));
-                        dataBaseContext.TourAttendances.RemoveRange(dataBaseContext.TourAttendances.Where(ta => ta.tourId == tourToDelete.id));
-                        dataBaseContext.TourLiveViewTransfers.RemoveRange(dataBaseContext.TourLiveViewTransfers.Where(tlt => tlt.tourId == tourToDelete.id));
-                        dataBaseContext.TourMessages.RemoveRange(dataBaseContext.TourMessages.Where(tm => tm.tourId == tourToDelete.id));
-                        dataBaseContext.TourReservations.RemoveRange(dataBaseContext.TourReservations.Where(tr => tr.tourId == tourToDelete.id));
+                        TimeSpan timeUntilTourStart = tourToDelete.startDates - DateTime.Now;
 
-                        dataBaseContext.Tours.Remove(tourToDelete);
-                        foreach (TourReservation tr in dataBaseContext.TourReservations.ToList())
+                        if (timeUntilTourStart.TotalHours > 48)
                         {
-                            if (tr.id == tourToDelete.id)
+                            dataBaseContext.Images.RemoveRange(dataBaseContext.Images.Where(i => i.tourId == tourToDelete.id));
+                            dataBaseContext.KeyPoints.RemoveRange(dataBaseContext.KeyPoints.Where(k => k.tourId == tourToDelete.id));
+                            dataBaseContext.TourAttendances.RemoveRange(dataBaseContext.TourAttendances.Where(ta => ta.tourId == tourToDelete.id));
+                            dataBaseContext.TourLiveViewTransfers.RemoveRange(dataBaseContext.TourLiveViewTransfers.Where(tlt => tlt.tourId == tourToDelete.id));
+                            dataBaseContext.TourMessages.RemoveRange(dataBaseContext.TourMessages.Where(tm => tm.tourId == tourToDelete.id));
+                            dataBaseContext.TourReservations.RemoveRange(dataBaseContext.TourReservations.Where(tr => tr.tourId == tourToDelete.id));
+
+                            dataBaseContext.Tours.Remove(tourToDelete);
+                            foreach (TourReservation tr in dataBaseContext.TourReservations.ToList())
                             {
-                                Coupon coupon = new Coupon(tr.guestId, DateTime.Now.AddYears(1));
-                                dataBaseContext.Coupons.Add(coupon);
+                                if (tr.id == tourToDelete.id)
+                                {
+                                    Coupon coupon = new Coupon(tr.guestId, DateTime.Now.AddYears(1));
+                                    dataBaseContext.Coupons.Add(coupon);
+                                }
                             }
+                            dataBaseContext.SaveChanges();
+
+                            MessageBox.Show("Tour has been cancelled.");
+
+                            RefreshFutureToursDataGrid();
                         }
-                        dataBaseContext.SaveChanges();
-
-                        MessageBox.Show("Tour has been cancelled.");
-
-                        RefreshFutureToursDataGrid();
+                        else
+                        {
+                            MessageBox.Show("You cannot cancel tours that are less than 48 hours away.");
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("You cannot cancel tours that are less than 48 hours away.");
+                        MessageBox.Show("Error: The selected tour was not found in the database.");
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Error: The selected tour was not found in the database.");
-                }
+            } else
+            {
+                MessageBox.Show("Please select a tour from the list to cancel it.");
+                return; 
             }
-        }
-        private bool CanCancelTour(object parameter)
-        {
-            return SelectedFutureTourDto != null;
-        }
 
-        
+
+        }
     }
 }
