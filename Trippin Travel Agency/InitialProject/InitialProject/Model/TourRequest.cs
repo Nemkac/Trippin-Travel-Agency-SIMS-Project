@@ -25,6 +25,7 @@ namespace InitialProject.Model
         public string description { get; set; }
         public TourRequestStatus status { get; set; }
         public int guestId { get; set; }
+        public bool sent { get; set; } 
 
         public TourRequest(string city, string country, int numberOfTourists, language language, DateTime startDate, DateTime endDate, string description, int guestId)
         {
@@ -37,7 +38,9 @@ namespace InitialProject.Model
             this.description = description;
             this.status = TourRequestStatus.OnHold;
             this.guestId = guestId;
-            this.acceptedDate = null; 
+            this.acceptedDate = null;
+            this.sent = false;
+
         }
     }
 }

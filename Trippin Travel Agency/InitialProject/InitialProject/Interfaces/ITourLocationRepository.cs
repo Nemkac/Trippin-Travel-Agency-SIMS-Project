@@ -12,5 +12,7 @@ namespace InitialProject.Interfaces
         public TourLocation GetById(int id);
         public TourLocation GetTourLocationByCountryAndCity(string country, string city);
         public List<TourLocation> GetAllTourLocations();
+        public List<string> GetAllCities();
+        public List<string> GetAllCountries();
     }
 }

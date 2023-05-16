@@ -1,6 +1,10 @@
 ﻿using InitialProject.Context;
 using InitialProject.DTO;
 using InitialProject.Model;
+using InitialProject.Repository;
+using InitialProject.Service.TourServices;
+using InitialProject.WPF.View.Owner_Views;
+using InitialProject.WPF.ViewModels.GuestTwoViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,41 +30,8 @@ namespace InitialProject.WPF.View.GuestTwoViews
         public GuestTwoMessages()
         {
             InitializeComponent();
-            this.Loaded += WindowLoaded;
-        }
-
-        public void WindowLoaded(object sender, RoutedEventArgs e)
-        {
-            this.UsernameLabel.Content = "Hello, " + LoggedUser.username + "!";
-            this.UsernameLabel2.Content = "@" + LoggedUser.username;
-            this.AccountTypeLabel.Content = "Account type:  " + LoggedUser.role;
-
-            DataBaseContext context = new DataBaseContext();    
-            LoadMessages(context);
-        }
-
-        public void LoadMessages(DataBaseContext context) { 
-            
-            List<TourMessage> tourMessages = new List<TourMessage>();
-            foreach (TourMessage message in context.TourMessages.ToList()) {
-                if (LoggedUser.id == message.guestId) {
-                    tourMessages.Add(message);
-                }
-            }
-            this.dataGrid.ItemsSource = tourMessages;
-        }
-
-        private void OpenMessage(object sender, RoutedEventArgs e)
-        {
-            TourMessage tourMessage = this.dataGrid.SelectedItem as TourMessage;
-            DataBaseContext context = new DataBaseContext();
-            if (tourMessage != null)
-            {
-                TourAttendance tourAttendance = new TourAttendance(tourMessage.tourId,tourMessage.keyPointId,tourMessage.guestId,tourMessage.numberOfGuests);
-                context.TourAttendances.Add(tourAttendance);
-               // context.TourMessages.Remove(tourMessage);
-                context.SaveChanges();
-            }
+            this.DataContext = new GuestTwoMesagesViewModel();
+           
         }
     }
 }

@@ -41,5 +41,33 @@ namespace InitialProject.Repository
             List<TourLocation> locations = locationContext.TourLocation.ToList();
             return locations;
         }
+        public List<string> GetAllCities()
+        {
+            DataBaseContext locationContext = new DataBaseContext();
+            List<TourLocation> locations = locationContext.TourLocation.ToList();
+            List<string> cities = new List<string>();
+            foreach(TourLocation location in locations) 
+            {
+                if (!cities.Contains(location.city)) 
+                {
+                    cities.Add(location.city);
+                }
+            }
+            return cities;
+        }
+        public List<string> GetAllCountries()
+        {
+            DataBaseContext locationContext = new DataBaseContext();
+            List<TourLocation> locations = locationContext.TourLocation.ToList();
+            List<string> countries = new List<string>();
+            foreach (TourLocation location in locations)
+            {
+                if (!countries.Contains(location.country))
+                {
+                    countries.Add(location.country);
+                }
+            }
+            return countries;
+        }
     }
 }

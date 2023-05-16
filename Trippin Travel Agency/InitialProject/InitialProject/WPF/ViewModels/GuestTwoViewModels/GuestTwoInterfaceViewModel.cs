@@ -8,12 +8,25 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using System.Windows.Input;
 using InitialProject.WPF.ViewModels;
 using InitialProject.WPF.ViewModels.GuestTwoViewModels;
+using InitialProject.Model;
+using InitialProject.WPF.View.GuestTwoViews;
+using System.Windows.Controls;
 
 namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 {
     public class GuestTwoInterfaceViewModel : ViewModelBase
     {
         private ViewModelBase _currentChildView;
+
+        public string TourNameReport { get; set; }
+        public string CityNameReport { get; set; }
+        public string CountryNameReport { get; set; }
+
+        public string KeyPointsReport { get; set; } 
+
+        public int GuestNumberReport { get; set; }
+        public int Duration { get; set; }
+
 
         public ViewModelBase CurrentChildView
         {
@@ -39,6 +52,8 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
         public ICommand ShowGuestTwoRequests { get; }
         public ICommand ShowGuestTwoStatistics { get; }
 
+        public ICommand GenerateReport { get; }
+
 
         public GuestTwoInterfaceViewModel()
         {
@@ -56,11 +71,15 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 
             ShowGuestTwoStatistics = new ViewModelCommand(ExecuteShowGuestTwoStatistics);
 
+            GenerateReport = new ViewModelCommand(ExecuteGenerateReport);
+
+            LoggedUser.GuestTwoInterfaceViewModel = this;
+
         }
 
-        private void ExecuteTourViewCommand(object obj)
+        public void ExecuteTourViewCommand(object obj)
         {
-            CurrentChildView = new TourDisplayViewModel(this);
+            CurrentChildView = new TourDisplayViewModel();
 
         }
         public void ExecuteShowDetailedTourView(object obj)
@@ -102,6 +121,16 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
         public void ExecuteShowGuestTwoStatistics(object obj)
         {
             CurrentChildView = new GuestTwoStatisticsViewModel();
+        }
+
+        public void ExecuteGenerateReport(object obj)
+        {
+            GuestTwoReport report = new GuestTwoReport(TourNameReport, CityNameReport, CountryNameReport, KeyPointsReport, Duration, GuestNumberReport);
+            PrintDialog printDialog = new PrintDialog();
+            if (printDialog.ShowDialog() == true)
+            {
+                printDialog.PrintVisual(report, "Report");
+            }
         }
 
     }

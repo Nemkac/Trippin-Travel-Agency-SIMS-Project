@@ -5,12 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.WPF.View.GuestTwoViews"
              mc:Ignorable="d" 
-             d:DesignHeight="1470" d:DesignWidth="1520">
+             d:DesignHeight="2000" d:DesignWidth="1520">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="250"/>
             <RowDefinition Height="800"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="950"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -19,15 +19,43 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0">
-                <Image Source="C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\logo.png" Height="250"/>
+                <Image Source="pack://application:,,,/Assets/Existing Assets/logo2.png" Height="250"/>
             </StackPanel>
 
             <StackPanel Grid.Column="1">
-                <Label Content="" FontSize="60" Margin="25 0 0 0" Name="UsernameLabel" FontFamily="Ubuntu" FontWeight="Medium" Foreground="#273c75"/>
-                <Label Content="Number of coupons" Margin ="-945 30 0 0" FontSize="24" FontFamily="Ubuntu" FontWeight="Light" Width="225"/>
-                <Label Content="Tours visited" Margin ="-450 -38 0 0 " FontSize="24" FontFamily="Ubuntu" FontWeight="Light" Width="225"/>
-                <Label Content="" FontSize="24" Margin ="-1119 0 0 0" FontFamily="Ubuntu" FontWeight="Light" Width="50" Name="CouponNumberLabel"/>
-                <Label Content="" FontSize="24" Margin ="-620 -38 0 0" FontFamily="Ubuntu" FontWeight="Light" Width="50" Name="ToursVisitedLabel"/>
+                <Label Content="{Binding UsernameLabel}" 
+                       FontSize="60"
+                       Margin="25 0 0 0" 
+                       Name="UsernameLabel" 
+                       FontFamily="Ubuntu" 
+                       FontWeight="Medium"
+                       Foreground="#273c75"/>
+                <Label Content="Number of coupons" 
+                       Margin ="-945 30 0 0" 
+                       FontSize="24" 
+                       FontFamily="Ubuntu"
+                       FontWeight="Light"
+                       Width="225"/>
+                <Label Content="Tours visited" 
+                       Margin ="-450 -38 0 0 "
+                       FontSize="24" 
+                       FontFamily="Ubuntu" 
+                       FontWeight="Light" 
+                       Width="225"/>
+                <Label Content="{Binding NumberOfCoupons}" 
+                       FontSize="24" 
+                       Margin ="-1119 0 0 0" 
+                       FontFamily="Ubuntu" 
+                       FontWeight="Light" 
+                       Width="50" 
+                       Name="CouponNumberLabel"/>
+                <Label Content="{Binding NumberOfVisitedTours}" 
+                       FontSize="24" 
+                       Margin ="-620 -38 0 0"
+                       FontFamily="Ubuntu"
+                       FontWeight="Light" 
+                       Width="50" 
+                       Name="ToursVisitedLabel"/>
             </StackPanel>
 
         </Grid>
@@ -39,14 +67,34 @@
 
             <GroupBox Header="Info" FontSize="28" FontFamily="Ubuntu" FontWeight="Light" Height="287" VerticalAlignment="Top" Foreground="#192a56">
                 <StackPanel Grid.Column="0">
-                    <Label Name="UsernameLabel2" Margin ="15 15 0 0" FontSize="20" FontFamily="Ubuntu" FontWeight="Medium"/>
-                    <Label Name="AccountTypeLabel" Margin ="15 15 0 0" FontSize="20" FontFamily="Ubuntu" FontWeight="Medium"/>
+                    <Label Name="UsernameLabel2" 
+                           Margin ="15 15 0 0" 
+                           FontSize="20"
+                           FontFamily="Ubuntu"
+                           FontWeight="Medium"
+                           Content="{Binding UsernameLabel2}"
+                           />
+                    <Label Name="AccountTypeLabel" 
+                           Margin ="15 15 0 0" 
+                           FontSize="20" 
+                           FontFamily="Ubuntu" 
+                           FontWeight="Medium"
+                           Content="{Binding AccountType}"
+                           />
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="My messages" Margin ="0 -5 0 0" Grid.Column="1" Height="810" Width="1200" HorizontalAlignment="Left" FontSize="40" FontFamily="Ubuntu" FontWeight="Light" Foreground="#192a56">
-                <StackPanel Grid.Column="1" Margin="15 0 0 0" Height="765" Width="1150" HorizontalAlignment="Left" Orientation="Vertical">
-                    <DataGrid x:Name="dataGrid" d:DataContext ="" Width="1125" Height="550" Margin="0 50 0 0" FontSize="28" FontFamily="Ubuntu"/>
+            <GroupBox Header="My messages" Margin ="0 0 0 0" Grid.Column="1" Height="800" Width="1200" HorizontalAlignment="Left" FontSize="40" FontFamily="Ubuntu" FontWeight="Light" Foreground="#192a56">
+                <StackPanel Grid.Column="1" Margin="15 0 0 0" Height="600" Width="1150" HorizontalAlignment="Left" Orientation="Vertical">
+                    <DataGrid x:Name="dataGrid" 
+                              d:DataContext ="" 
+                              Width="1125" 
+                              Height="450" 
+                              Margin="0 0 0 0" 
+                              FontSize="28" 
+                              FontFamily="Ubuntu"
+                              ItemsSource="{Binding responseMessages}"
+                              SelectedItem="{Binding SelectedResponseMessage}"/>
                     <Button Width="350"
                             Height="130"
                             Style="{StaticResource openMessageButtonWEB}"
@@ -54,7 +102,55 @@
                             Content="Open" 
                             FontSize="32" 
                             FontFamily="Ubuntu" 
-                            FontWeight="Heavy" Click="OpenMessage"/>
+                            FontWeight="Heavy" 
+                            Command="{Binding OpenMessage}"/>
+                    <TextBlock Width="350"
+                               Height="130"
+                               Margin="-770 -140 0 0"
+                               Foreground="{Binding ResponseColor}"
+                               Text="{Binding MyMessagesFeedback}"
+                               FontSize="20"
+                               FontWeight="Light"
+                               FontFamily="Ubuntu"
+                               />
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="1220"/>
+            </Grid.ColumnDefinitions>
+
+            <GroupBox Header="Accepted Requests" Margin ="0 -150 0 0" Grid.Column="1" Height="800" Width="1200" HorizontalAlignment="Left" FontSize="40" FontFamily="Ubuntu" FontWeight="Light" Foreground="#192a56">
+                <StackPanel Grid.Column="1" Margin="15 0 0 0" Height="600" Width="1150" HorizontalAlignment="Left" Orientation="Vertical">
+                    <ListBox x:Name="requestDataGrid" 
+                             d:DataContext =""
+                             Width="1125" 
+                             Height="350" 
+                             Margin="0 50 0 0"
+                             FontSize="28" 
+                             FontFamily="Ubuntu" 
+                             ItemsSource="{Binding requestMessages}" 
+                             SelectedItem="{Binding SelectedRequest}"/>
+                    <Button Width="350"
+                            Height="130"
+                            Style="{StaticResource openMessageButtonWEB}"
+                            Margin="775 15 0 0" 
+                            Content="Preview" 
+                            FontSize="32" 
+                            FontFamily="Ubuntu" 
+                            FontWeight="Heavy"
+                            Command="{Binding DetailedTourViewCommand}"/>
+                    <TextBlock Width="350"
+                               Height="130"
+                               Margin="-770 -140 0 0"
+                               Foreground="{Binding ResponseColor}"
+                               Text="{Binding AcceptedRequestsFeedback}"
+                               FontSize="20"
+                               FontWeight="Light"
+                               FontFamily="Ubuntu"                               
+                               />
                 </StackPanel>
             </GroupBox>
         </Grid>

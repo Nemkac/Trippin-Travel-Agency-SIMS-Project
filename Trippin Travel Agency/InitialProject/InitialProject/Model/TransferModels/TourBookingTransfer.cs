@@ -11,6 +11,7 @@ namespace InitialProject.Model.TransferModels
     {
 
         public int id { get; set; }
+        public int tourId { get; set; }
         public string name { get; set; }
         public string description { get; set; }
         public string cityLocation { get; set; }
@@ -25,7 +26,7 @@ namespace InitialProject.Model.TransferModels
 
         public TourBookingTransfer(int id, string name, string description, string cityLocation, string countryLocation, string keypoints, language language, int touristLimit, DateTime startDates, int hoursDuration, int numberOfGuests)
         {
-            this.id = id;
+            this.tourId = id;
             this.name = name;
             this.description = description;
             this.cityLocation = cityLocation;

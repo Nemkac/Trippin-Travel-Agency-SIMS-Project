@@ -44,6 +44,10 @@ namespace InitialProject.Context
         public DbSet<TourTodayImagesTransfer> TourTodayImagesTransfers { get; set; }
         public DbSet<AccommodationRenovation> AccommodationRenovations { get; set; }
 
+        public DbSet<UnfulfilledTourRequests> UnfulfilledTourRequests { get; set; }
+        public DbSet<UnfulfilledTourCities> UnfulfilledTourCities { get; set; }
+        public DbSet<UnfulfilledTourCountries> unfulfilledTourCountries { get; set; }   
+        public DbSet<UnfulfilledTourLanguages> UnfulfilledTourLanguages { get; set; }
 
 
 
@@ -58,10 +62,10 @@ namespace InitialProject.Context
         // Nemanja Ranitovic
         // public string path = @"C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
 
-        // Nemanja Todorovic
+        // Nemanja Todorovic -> Laptop
         // public string path = @"C:\Users\Nemanja\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
 
-        // Vladimir Blanusa lap
+        // Vladimir Blanusa -> Laptop
         // public string path = @"C:\Users\abc\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
 
         // Vladimir BLanusa pc

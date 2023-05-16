@@ -68,7 +68,7 @@
         </Grid.ColumnDefinitions>
         <Border Grid.ColumnSpan="3" Grid.RowSpan="2" Background="#273c75"/>
         <StackPanel Grid.Row="0" Orientation="Horizontal" Background="#273c75" Grid.Column="1">
-            <Image Source="C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\logo.png" Height="120" Width="120"/>
+                <Image Source="pack://application:,,,/Assets/Existing Assets/logo.png" Height="120" Width="120"/>
             <Label Content="Trippin' Travel" VerticalAlignment="Center" FontFamily="Ubuntu" FontSize="60" FontWeight="Medium" Foreground="#f4fff8" Margin="10 0 0 0"/>
             <Label Content="Fly High" VerticalAlignment="Bottom" FontFamily="Ubuntu" FontSize="28" FontWeight="Light" Foreground="#f4fff8" Margin="10 0 0 20" FontStyle="Italic"/>
                 <Button Margin="700 0 0 0" Height="70" Background="#273c75" Command="{Binding ShowGuestTwoMessages}" >
@@ -87,7 +87,11 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" Grid.Column="1">
-            <Image Source="C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\headerImage2.png" Width="1520" Height="220" Stretch="UniformToFill" RenderTransformOrigin="500,500" />
+                <Image Source="pack://application:,,,/Assets/Existing Assets/headerimage2.png" 
+                   Width="1520" 
+                   Height="220" 
+                   Stretch="UniformToFill"
+                   RenderTransformOrigin="500,500" />
         </StackPanel>
        
         

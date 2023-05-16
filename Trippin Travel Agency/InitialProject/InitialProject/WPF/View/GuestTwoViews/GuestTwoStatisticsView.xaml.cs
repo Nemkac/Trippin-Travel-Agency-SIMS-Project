@@ -1,5 +1,6 @@
 ﻿using InitialProject.Context;
 using InitialProject.Model;
+using InitialProject.WPF.ViewModels.GuestTwoViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,132 +26,7 @@ namespace InitialProject.WPF.View.GuestTwoViews
         public GuestTwoStatisticsView()
         {
             InitializeComponent();
-            LoadWindow();
-            GetAllTourRequestYears();
-        }
-
-        public void LoadWindow() {
-            this.UsernameLabel.Content = "Hello, " + LoggedUser.username + "!";
-            this.NameLastName.Content = LoggedUser.firstName + " "+ LoggedUser.lastName;
-            this.UsernameLabel2.Content = "@" + LoggedUser.username;
-            this.AccountTypeLabel.Content = "Account type:  " + LoggedUser.role;
-
-        }
-
-        public void LoadStatistics(string selectedYear) 
-        {
-            this.AcceptedToursLabel.Content =         "Percentage of tours i suggested that are accepted:          " + GetAcceptedTourPercentage(selectedYear);
-            this.AverageNumberOfPeopleLabel.Content = "Average number of people in accepted tours:                     " + GetAverageNumberOfPeople(selectedYear);
-            this.DeclinedToursLabel.Content =         "Percentage of tours i suggested that are not accepted:   " + GetDeclinedTourPercentage(selectedYear);
-        }
-
-        public void ComboBoxSelectedYear(object sender, SelectionChangedEventArgs e) 
-        {
-            LoadStatistics(this.YearsComboBox.SelectedItem.ToString());
-        }
-
-
-        public string GetAcceptedTourPercentage(string selectedYear)
-        {
-            string acceptedToursPercentage = "";
-            int acceptedToursCounter = 0;
-            int toursCounter = 0;
-            string yearToCompare = selectedYear;
-            if (selectedYear.Equals("All time")) {
-                yearToCompare = "";
-            }
-            DataBaseContext context = new DataBaseContext();
-            foreach (TourRequest tourRequest in context.TourRequests.ToList()) 
-            {
-                if (tourRequest.guestId == LoggedUser.id && tourRequest.startDate.Year.ToString().Contains(yearToCompare))
-                {
-                    if (tourRequest.status == TourRequestStatus.Accepted) 
-                    {
-                        acceptedToursCounter++;                       
-                    }
-                    toursCounter++;
-                }
-            }
-            if (toursCounter > 0)
-            {
-                double percentage = Math.Round(((double)acceptedToursCounter / toursCounter) * 100,2);
-                acceptedToursPercentage += percentage.ToString() + "%";
-            }
-            return acceptedToursPercentage;
-        }
-
-        public string GetAverageNumberOfPeople(string selectedYear) 
-        {
-            string averageNumberOfPeople = "";
-            int numberOfPeopleInTour = 0;
-            int acceptedToursCounter = 0;
-            int tourCounter = 0;
-            string yearToCompare = selectedYear;
-            if (selectedYear.Equals("All time"))
-            {
-                yearToCompare = "";
-            }
-            DataBaseContext context = new DataBaseContext();
-            foreach (TourRequest tourRequest in context.TourRequests.ToList())
-            {
-                if (tourRequest.guestId == LoggedUser.id && tourRequest.startDate.Year.ToString().Contains(yearToCompare))
-                {
-                    if (tourRequest.status == TourRequestStatus.Accepted)
-                    {
-                        acceptedToursCounter++;
-                        numberOfPeopleInTour += tourRequest.numberOfTourists;
-                    }
-                    tourCounter++;
-                }
-            }
-            if (tourCounter > 0) 
-            {
-                averageNumberOfPeople = Math.Round(((double)numberOfPeopleInTour / acceptedToursCounter),2).ToString();
-            }
-            return averageNumberOfPeople;
-        }
-
-        public string GetDeclinedTourPercentage(string selectedYear) 
-        {
-            string declinedToursPercentage = "";
-            int declinedToursCounter = 0;
-            int toursCounter = 0;
-            string yearToCompare = selectedYear;
-            if (selectedYear.Equals("All time"))
-            {
-                yearToCompare = "";
-            }
-            DataBaseContext context = new DataBaseContext();
-            foreach (TourRequest tourRequest in context.TourRequests.ToList())
-            {
-                if (tourRequest.guestId == LoggedUser.id && tourRequest.startDate.Year.ToString().Contains(yearToCompare))
-                {
-                    if (tourRequest.status == TourRequestStatus.OnHold || tourRequest.status == TourRequestStatus.Invalid)
-                    {
-                        declinedToursCounter++;
-                    }
-                    toursCounter++;
-                }
-            }
-            if (toursCounter > 0)
-            {
-                double percentage = Math.Round(((double)declinedToursCounter / toursCounter) * 100,2);
-                declinedToursPercentage += percentage.ToString() + "%";
-            }
-            return declinedToursPercentage;
-        }
-
-        public void GetAllTourRequestYears() 
-        {
-            DataBaseContext context = new DataBaseContext();
-            foreach (TourRequest tourRequest in context.TourRequests.ToList()) 
-            {
-                if (!this.YearsComboBox.Items.Contains(tourRequest.startDate.Year))
-                {
-                    this.YearsComboBox.Items.Add(tourRequest.startDate.Year);
-                }
-            }
-            this.YearsComboBox.Items.Add("All time");
-        }
+            this.DataContext = new GuestTwoStatisticsViewModel();
+        } 
     }
 }

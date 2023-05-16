@@ -32,6 +32,13 @@ namespace InitialProject.Service.TourServices
         {
             return iTourLocationRepository.GetAllTourLocations();
         }
-
+        public List<string> GetAllCities()
+        {
+            return iTourLocationRepository.GetAllCities();
+        }
+        public List<string> GetAllCountries()
+        {
+            return iTourLocationRepository.GetAllCountries();
+        }
     }
 }

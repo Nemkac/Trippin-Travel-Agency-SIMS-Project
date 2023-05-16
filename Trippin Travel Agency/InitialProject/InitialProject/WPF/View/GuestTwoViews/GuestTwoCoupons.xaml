@@ -20,15 +20,44 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0">
-                <Image Source="C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\logo.png" Height="250"/>
+                <Image Source="pack://application:,,,/Assets/Existing Assets/logo2.png" Height="250"/>
             </StackPanel>
 
             <StackPanel Grid.Column="1">
-                <Label Content="" FontSize="60" Margin="25 0 0 0" Name="UsernameLabel" FontFamily="Ubuntu" FontWeight="Medium"/>
-                <Label Content="Number of coupons" Margin ="-945 30 0 0" FontSize="24" FontFamily="Ubuntu" FontWeight="Light" Width="225"/>
-                <Label Content="Tours visited" Margin ="-450 -38 0 0 " FontSize="24" FontFamily="Ubuntu" FontWeight="Light" Width="225"/>
-                <Label Content="" FontSize="24" Margin ="-1119 0 0 0" FontFamily="Ubuntu" FontWeight="Light" Width="50" Name="CouponNumberLabel"/>
-                <Label Content="" FontSize="24" Margin ="-620 -38 0 0" FontFamily="Ubuntu" FontWeight="Light" Width="50" Name="ToursVisitedLabel"/>
+                <Label FontSize="60" 
+                       Margin="25 0 0 0" 
+                       Name="UsernameLabel"
+                       FontFamily="Ubuntu" 
+                       FontWeight="Medium"
+                       Foreground="#192a56"
+                       Content="{Binding UsernameLabel}"/>
+                
+                <Label Content="Number of coupons"
+                       Margin ="-945 30 0 0"
+                       FontSize="24"
+                       FontFamily="Ubuntu"
+                       FontWeight="Light"
+                       Width="225"/>
+                <Label Content="Tours visited"
+                       Margin ="-450 -38 0 0 " 
+                       FontSize="24" 
+                       FontFamily="Ubuntu" 
+                       FontWeight="Light"
+                       Width="225"/>
+                <Label Content="" 
+                       FontSize="24" 
+                       Margin ="-1119 0 0 0" 
+                       FontFamily="Ubuntu"
+                       FontWeight="Light" 
+                       Width="50" 
+                       Name="CouponNumberLabel"/>
+                <Label Content=""
+                       FontSize="24" 
+                       Margin ="-620 -38 0 0" 
+                       FontFamily="Ubuntu" 
+                       FontWeight="Light" 
+                       Width="50" 
+                       Name="ToursVisitedLabel"/>
             </StackPanel>
 
         </Grid>
@@ -40,14 +69,31 @@
 
             <GroupBox Header="Info" FontSize="28" FontFamily="Ubuntu" FontWeight="Light" Height="287" VerticalAlignment="Top" Foreground="#192a56">
                 <StackPanel Grid.Column="0">
-                    <Label Name="UsernameLabel2" Margin ="15 15 0 0" FontSize="20" FontFamily="Ubuntu" FontWeight="Medium"/>
-                    <Label Name="AccountTypeLabel" Margin ="15 15 0 0" FontSize="20" FontFamily="Ubuntu" FontWeight="Medium"/>
+                    <Label Name="UsernameLabel2"
+                           Margin ="15 15 0 0"
+                           FontSize="20" 
+                           FontFamily="Ubuntu"
+                           FontWeight="Medium"
+                           Content="{Binding UsernameLabel2}"/>
+                    <Label Name="AccountTypeLabel" 
+                           Margin ="15 15 0 0"
+                           FontSize="20" 
+                           FontFamily="Ubuntu"
+                           FontWeight="Medium"
+                           Content="{Binding AccountType}"/>
                 </StackPanel>
             </GroupBox>
 
             <GroupBox Header="My coupons" Margin ="0 -112 0 0" Grid.Column="1" Height="700" Width="600" HorizontalAlignment="Left" FontSize="40" FontFamily="Ubuntu" FontWeight="Light" Foreground="#192a56">
                 <StackPanel Grid.Column="1" Margin="15 0 0 0" Height="650" Width="550" HorizontalAlignment="Left">
-                    <DataGrid x:Name="dataGrid" d:DataContext ="" Width="525" Height="550" Margin="0 50 0 0" FontSize="28" FontFamily="Ubuntu"/>
+                    <DataGrid x:Name="dataGrid"
+                              d:DataContext ="" 
+                              Width="525" 
+                              Height="550" 
+                              Margin="0 50 0 0" 
+                              FontSize="28" 
+                              FontFamily="Ubuntu"
+                              ItemsSource="{Binding couponDTOs}"/>
                 </StackPanel>
             </GroupBox>
         </Grid>
