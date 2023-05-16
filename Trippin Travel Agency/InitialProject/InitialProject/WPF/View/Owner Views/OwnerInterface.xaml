@@ -91,7 +91,7 @@
             <StackPanel>
                 <!--Logo-->
                 <StackPanel Orientation="Horizontal" Height="35" Margin="0, 25, 0, 40" HorizontalAlignment="Center">
-                    <Image Source="C:\Users\Nemanja\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\logo.png"/>
+                    <Image Source="pack://application:,,,/Assets/Existing Assets/logo.png"/>
                     <TextBlock Text="TRIPPIN" Foreground="#f4fff8" FontFamily="Ubuntu" FontSize="20" FontWeight="Medium" VerticalAlignment="Center" Margin="10, 0, 0, 0"/>
                 </StackPanel>
 

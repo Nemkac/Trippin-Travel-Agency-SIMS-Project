@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace InitialProject.Migrations
 {
     /// <inheritdoc />
-    public partial class DataBaseSetup : Migration
+    public partial class CP3DB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -306,6 +306,7 @@ namespace InitialProject.Migrations
                 {
                     id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    tourId = table.Column<int>(type: "INTEGER", nullable: false),
                     name = table.Column<string>(type: "TEXT", nullable: false),
                     description = table.Column<string>(type: "TEXT", nullable: false),
                     cityLocation = table.Column<string>(type: "TEXT", nullable: false),
@@ -421,7 +422,8 @@ namespace InitialProject.Migrations
                     acceptedDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     description = table.Column<string>(type: "TEXT", nullable: false),
                     status = table.Column<int>(type: "INTEGER", nullable: false),
-                    guestId = table.Column<int>(type: "INTEGER", nullable: false)
+                    guestId = table.Column<int>(type: "INTEGER", nullable: false),
+                    sent = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -473,6 +475,65 @@ namespace InitialProject.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TourTodayImagesTransfers", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UnfulfilledTourCities",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    guestId = table.Column<int>(type: "INTEGER", nullable: false),
+                    city = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UnfulfilledTourCities", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "unfulfilledTourCountries",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    guestId = table.Column<int>(type: "INTEGER", nullable: false),
+                    country = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_unfulfilledTourCountries", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UnfulfilledTourLanguages",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    guestId = table.Column<int>(type: "INTEGER", nullable: false),
+                    language = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UnfulfilledTourLanguages", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UnfulfilledTourRequests",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    guestId = table.Column<int>(type: "INTEGER", nullable: false),
+                    city = table.Column<string>(type: "TEXT", nullable: false),
+                    country = table.Column<string>(type: "TEXT", nullable: false),
+                    language = table.Column<int>(type: "INTEGER", nullable: false),
+                    fulfilled = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UnfulfilledTourRequests", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -742,6 +803,18 @@ namespace InitialProject.Migrations
 
             migrationBuilder.DropTable(
                 name: "TourTodayImagesTransfers");
+
+            migrationBuilder.DropTable(
+                name: "UnfulfilledTourCities");
+
+            migrationBuilder.DropTable(
+                name: "unfulfilledTourCountries");
+
+            migrationBuilder.DropTable(
+                name: "UnfulfilledTourLanguages");
+
+            migrationBuilder.DropTable(
+                name: "UnfulfilledTourRequests");
 
             migrationBuilder.DropTable(
                 name: "Users");

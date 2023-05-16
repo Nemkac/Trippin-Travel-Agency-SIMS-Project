@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20230430144528_PodelaZahteva")]
-    partial class PodelaZahteva
+    [Migration("20230516104602_CP3DB")]
+    partial class CP3DB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,6 +157,43 @@ namespace InitialProject.Migrations
                     b.HasKey("id");
 
                     b.ToTable("AccommodationRates");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.AccommodationRenovation", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("accommodationId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("accommodationName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("accommodationType")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("duration")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("endDate")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("startDate")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("id");
+
+                    b.ToTable("AccommodationRenovations");
                 });
 
             modelBuilder.Entity("InitialProject.Model.Booking", b =>
@@ -748,6 +785,9 @@ namespace InitialProject.Migrations
 
                     b.Property<DateTime>("startDates")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("tourId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("touristLimit")
                         .HasColumnType("INTEGER");
