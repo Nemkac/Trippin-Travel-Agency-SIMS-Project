@@ -262,7 +262,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             if (imagecounter < 4)
             {
                 imagecounter += 1;
-                ImageSlider = "C:\\Users\\Nemanja\\Desktop\\Faks\\Semestar 6\\Projekat c#\\Trippin-Travel-Agency-SIMS-Project\\Trippin Travel Agency\\InitialProject\\InitialProject\\Assets\\" + CityName + imagecounter.ToString() + ".jpg";
+                ImageSlider = "pack://application:,,,/Assets/Existing Assets/" + CityName + imagecounter.ToString() + ".jpg";
             }
         }
 
@@ -271,7 +271,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             if (imagecounter > 1)
             {
                 imagecounter -= 1;
-                ImageSlider = "C:\\Users\\Nemanja\\Desktop\\Faks\\Semestar 6\\Projekat c#\\Trippin-Travel-Agency-SIMS-Project\\Trippin Travel Agency\\InitialProject\\InitialProject\\Assets\\" + CityName + imagecounter.ToString() + ".jpg";
+                ImageSlider = "pack://application:,,,/Assets/Existing Assets/" + CityName + imagecounter.ToString() + ".jpg";
             }
         }
         public void ExecuteCreateTourReport(object obj)
