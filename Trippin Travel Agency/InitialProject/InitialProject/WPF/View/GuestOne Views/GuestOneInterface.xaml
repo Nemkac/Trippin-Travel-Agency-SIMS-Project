@@ -43,15 +43,14 @@
                     Background="#FF192A56"
                     RenderTransformOrigin="0.5,0.5" 
                     Grid.Row="1" >
-
-            <DatePicker.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform X="0"/>
-                </TransformGroup>
-            </DatePicker.RenderTransform>
+                    <DatePicker.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform X="0"/>
+                        </TransformGroup>
+                    </DatePicker.RenderTransform>
         </DatePicker>
 
         <DatePicker HorizontalAlignment="Left"
