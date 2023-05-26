@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media;
 using Xceed.Wpf.Toolkit.Primitives;
 
 namespace InitialProject.WPF.ViewModels.GuestOneViewModels
@@ -24,6 +25,8 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         private BookingDelaymentRequestService bookingDelaymentRequestService;
         public ViewModelCommand CheckDates { get; set; }
         public ViewModelCommand Search { get; set; }
+        public ViewModelCommand OpenNavigator { get; set; }
+
         public AnyWhereAnyWhenViewModel()
         {
             this.bookingService = new BookingService(new BookingRepository());
@@ -35,6 +38,8 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             Introduction = GenerateIntroductionText();
             Search = new ViewModelCommand(SearchAccommodations);
             CheckDates = new ViewModelCommand(CheckForDates);
+            OpenNavigator = new ViewModelCommand(ShowNavigator);
+
             InputStartingDate = DateTime.Today;
             InputEndingDate = DateTime.Today;
 
@@ -136,6 +141,15 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                     OnPropertyChanged(nameof(SelectedAccommodation));
                 }
             }
+        }
+
+        private void ShowNavigator(object sender)
+        {
+            Navigator navigator = new Navigator();
+            navigator.Left = GuestOneStaticHelper.anyWhereAnyWhenInterface.Left + (GuestOneStaticHelper.anyWhereAnyWhenInterface.Width - navigator.Width) / 2;
+            navigator.Top = GuestOneStaticHelper.anyWhereAnyWhenInterface.Top + (GuestOneStaticHelper.anyWhereAnyWhenInterface.Height - navigator.Height) / 2;
+            GuestOneStaticHelper.anyWhereAnyWhenInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
+            navigator.Show();
         }
 
         private string GenerateIntroductionText()

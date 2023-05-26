@@ -5,7 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
         mc:Ignorable="d"
-        Title="AnyWhereAnyWhenInterface" Height="800" Width="1500">
+        Title="AnyWhereAnyWhenInterface" Height="800" Width="1500"
+        >
+        <Window.InputBindings>
+            <KeyBinding Key="Escape" Command="{Binding GoToPreviousWindow}" />
+            <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
+            <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
+        </Window.InputBindings>
     <Grid>
         <GroupBox Header="Navigator"
             Margin="985,1,26,662"
@@ -179,10 +185,10 @@
             Background="#FF273C75" 
             Foreground="White" 
             FontWeight="Medium" 
-            IsTabStop="False"
             Style="{StaticResource leadButton}"
             Command="{Binding CheckDates}" 
-            Margin="1230,546,78,173"/>
+            Margin="1230,546,78,173"
+            IsTabStop="False"/>
 
         <DatePicker HorizontalAlignment="Left"
                     VerticalAlignment="Top"
