@@ -97,7 +97,7 @@
                      TextAlignment="Center" 
                      VerticalContentAlignment="Center" 
                      IsTabStop="False"
-      
+                     
                      Text="{Binding NumberOfGuests,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <TextBox.InputBindings>
                     <KeyBinding Key="Enter" Command="{Binding BookAccommodation}" />

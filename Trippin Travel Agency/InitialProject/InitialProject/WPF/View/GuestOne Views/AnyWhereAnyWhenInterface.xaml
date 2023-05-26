@@ -7,13 +7,197 @@
         mc:Ignorable="d"
         Title="AnyWhereAnyWhenInterface" Height="800" Width="1500">
     <Grid>
-        <TextBlock HorizontalAlignment="Center"
-                   Height="155"
-                   Margin="0,97,0,0" 
-                   TextWrapping="Wrap" 
-                   Text="{Binding Test}" 
-                   VerticalAlignment="Top" 
-                   Width="318"/>
+        <GroupBox Header="Navigator"
+            Margin="985,1,26,662"
+            Padding="10" 
+            FontFamily="ubuntu" 
+            FontSize="30"
+            BorderThickness="3" 
+            BorderBrush="#192a56" 
+            FontWeight="medium" >
+            <StackPanel>
+                <TextBlock Width="478" FontWeight="medium"><Run Text="Press CTRL+N for program map" FontFamily="ubuntu"/></TextBlock>
+            </StackPanel>
+        </GroupBox>
+
+        <Rectangle HorizontalAlignment="Center" 
+            Height="80" 
+            Margin="0,704,0,0"
+            Fill ="#273c75" 
+            Stroke="Black"
+            VerticalAlignment="Top"
+            Width="1500"/>
+
+        <TextBlock HorizontalAlignment="Left" 
+            Height="72"
+            Margin="609,693,0,0"
+            TextWrapping="Wrap" Text="Trippin' Travel" 
+            VerticalAlignment="Top"
+            Width="325" 
+            Foreground="white" 
+            FontSize="48" 
+            FontWeight="Bold" />
+
+        <GroupBox Header="Help"
+            Margin="35,0,1107,662"
+            Padding="10"
+            FontFamily="ubuntu" 
+            FontSize="30"
+            BorderThickness="3" 
+            BorderBrush="#192a56"
+            FontWeight="medium" >
+            <StackPanel>
+                <TextBlock Height="39" FontWeight="medium"><Run Text="Press CTRL+H for help"/></TextBlock>
+            </StackPanel>
+        </GroupBox>
+
+        <Label Content="AnyWhere AnyWhen"
+            FontSize ="50" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" 
+            Margin="470,28,0,0"
+            FontFamily="ubuntu"
+            FontWeight="Bold" 
+            Foreground="#192a56"/>
+
+        <Rectangle HorizontalAlignment="Left" 
+            Height="5"
+            Margin="35,120,0,0" 
+            Stroke="#FF192A56" 
+            VerticalAlignment="Top" 
+            Width="1435" 
+            Fill="#192a56"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Height="27" Margin="35,719,0,0" 
+            TextWrapping="Wrap"
+            Text="Press ESC to go back" 
+            VerticalAlignment="Top" 
+            Width="225"
+            Foreground="#e1b12c"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Bold"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Height="90" 
+            Margin="35,159,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding Introduction}" 
+            VerticalAlignment="Top" 
+            Width="1435"
+            TextAlignment="Center"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium" 
+            Foreground="#FF192A56"/>
+
+        <GroupBox HorizontalAlignment="Left"
+            Height="153"
+            Header="Please enter following parameters (date range is optional)"
+            Margin="35,261,0,0" 
+            VerticalAlignment="Top" 
+            Width="1435"
+            FontFamily="ubuntu" 
+            FontSize="36"
+            FontWeight="Medium" 
+            Foreground="#FF192A56" 
+            BorderThickness="3" 
+            BorderBrush="#192a56"/>
+
+        <TextBox 
+            HorizontalAlignment="Left" 
+            Height="56" 
+            Margin="80,323,0,0"
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top"
+            Width="135"
+            FontFamily="ubuntu" 
+            FontSize="22" 
+            TextAlignment="Center" 
+            VerticalContentAlignment="Center"
+            Text="{Binding InputDays}"/>
+
+        <TextBox 
+            HorizontalAlignment="Left" 
+            Height="56" 
+            Margin="276,323,0,0"
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top"
+            Width="135"
+            FontFamily="ubuntu" 
+            FontSize="22" 
+            TextAlignment="Center" 
+            VerticalContentAlignment="Center"
+            Text="{Binding InputGuests}"/>
+
+        <DatePicker 
+            HorizontalAlignment="Left"
+            Height="56" 
+            Margin="452,323,0,0" 
+            VerticalAlignment="Top" 
+            Width="267"
+            SelectedDate="{Binding InputStartingDate}"/>
+
+        <DatePicker 
+            HorizontalAlignment="Left"
+            Height="56" 
+            Margin="772,323,0,0" 
+            VerticalAlignment="Top" 
+            Width="266"
+            SelectedDate="{Binding InputEndingDate}"/>
+
+        <Button Content="Search" 
+            Height="NaN" 
+            x:Name ="BookAccommodation" 
+            FontFamily="ubuntu" 
+            FontSize="24" 
+            Background="#FF273C75" 
+            Foreground="White" 
+            FontWeight="Medium" 
+            IsTabStop="False"
+            Style="{StaticResource leadButton}"
+            Command="{Binding Search}" 
+            Margin="1172,327,214,409"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="1172,0,0,0"
+            TextWrapping="Wrap" 
+            Text="Press ENTER" 
+            VerticalAlignment="Center" 
+            Width="102"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"/>
+
+        <DataGrid 
+            x:Name="dataGrid" 
+            Margin ="41,426,308,113"
+            FontFamily="ubuntu"
+            FontSize="22" 
+            Foreground="#FF192A56" 
+            BorderBrush="#FF192A56"
+            Background="White" 
+            FontWeight="Medium"
+            ItemsSource="{Binding AccommodationsGrid}"
+            SelectedItem="{Binding SelectedAccommodation}"/>
+        <Button Content="Book" 
+            Height="NaN" 
+            x:Name ="BookAccommodation_Copy" 
+            FontFamily="ubuntu" 
+            FontSize="24" 
+            Background="#FF273C75" 
+            Foreground="White" 
+            FontWeight="Medium" 
+            IsTabStop="False"
+            Style="{StaticResource leadButton}"
+            Command="{Binding CheckDates}" 
+            Margin="1278,524,108,211"/>
 
     </Grid>
 </Window>
