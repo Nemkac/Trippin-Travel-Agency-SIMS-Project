@@ -213,6 +213,17 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             AddImageCommand = new ViewModelCommand(AddImage);
             ImageNumber = "Image " + imageCounter;
 
+            if(LoggedUser.creatingAccommodationFromRecomendation == false)
+            {
+                SelectedCountry = LoggedUser.MostPopularCountry;
+                SelectedCity = LoggedUser.MostPopularCity;
+            } 
+            else
+            {
+                SelectedCountry = null;
+                selectedCity = null;
+            }
+
             Mediator.IsCheckedChanged += OnIsCheckedChanged;
 
             ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";

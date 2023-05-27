@@ -41,12 +41,12 @@ namespace InitialProject.Service.AccommodationServices
             return this.iAccommodationRepository.GetById(id);
         }
 
-        public List<string> GetAccommodationLocation(int id)
+        public List<string> GetAccommodationLocation(int accommodatonId)
         {
             DataBaseContext context = new DataBaseContext();
             List<Accommodation> accommodations = context.Accommodations.ToList();
             List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
-            Accommodation accommodation = accommodations.Find(a => a.id == id);
+            Accommodation accommodation = accommodations.Find(a => a.id == accommodatonId);
             return new List<string>() { accommodation.location.country, accommodation.location.city };
         }
 
@@ -296,6 +296,11 @@ namespace InitialProject.Service.AccommodationServices
                 }
             }
             return false;
+        }
+
+        public AccommodationLocation GetLocationByAccommodationLocation(AccommodationLocation accommodationLocation)
+        {
+            return this.iAccommodationRepository.GetLocationByAccommodationLocation(accommodationLocation);
         }
     }
 }

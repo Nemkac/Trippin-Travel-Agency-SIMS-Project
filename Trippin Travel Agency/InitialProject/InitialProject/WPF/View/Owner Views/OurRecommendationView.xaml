@@ -38,7 +38,7 @@
                 CornerRadius="0, 25, 25, 25">
                 <Grid>
                     <Grid.Background>
-                        <ImageBrush ImageSource="pack://application:,,,/Assets/Existing Assets/mitrovica.jpg">
+                        <ImageBrush ImageSource="{Binding MostPopularLocationImage}">
                             <ImageBrush.RelativeTransform>
                                 <ScaleTransform ScaleX="1" ScaleY="1" />
                             </ImageBrush.RelativeTransform>
@@ -55,7 +55,7 @@
                         </VisualBrush>
                     </Grid.OpacityMask>
                     <Rectangle Fill="#80000000" />
-                    <Label Content="Serbia,"
+                    <Label Content="{Binding MostPopularCountry}"
                        FontSize="28"
                        FontFamily="Ubuntu"
                        FontWeight="Bold"
@@ -63,7 +63,7 @@
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
                        Margin="20, -25, 0, 0"/>
-                    <Label Content="Sremska Mitrovica"
+                    <Label Content="{Binding MostPopularCity}"
                        FontSize="28"
                        FontFamily="Ubuntu"
                        FontWeight="Bold"
@@ -75,6 +75,7 @@
                         Content="Open new accommodation"
                         Width="183"
                         HorizontalAlignment="Left"
+                        Command="{Binding OpenNewAccommodation}"
                         Margin="20, 120, 0, 0"
                         Height="40">
 
@@ -89,7 +90,7 @@
                 CornerRadius="0, 25, 25, 25">
                 <Grid>
                     <Grid.Background>
-                        <ImageBrush ImageSource="pack://application:,,,/Assets/Existing Assets/madrid.jpg">
+                        <ImageBrush ImageSource="{Binding LeastPopularLocationImage}">
                             <ImageBrush.RelativeTransform>
                                 <ScaleTransform ScaleX="1" ScaleY="1" />
                             </ImageBrush.RelativeTransform>
@@ -106,7 +107,7 @@
                         </VisualBrush>
                     </Grid.OpacityMask>
                     <Rectangle Fill="#80000000" />
-                    <Label Content="Spain,"
+                    <Label Content="{Binding LeastPopularCountry}"
                        FontSize="28"
                        FontFamily="Ubuntu"
                        FontWeight="Bold"
@@ -114,7 +115,7 @@
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
                        Margin="20, -25, 0, 0"/>
-                    <Label Content="Madrid"
+                    <Label Content="{Binding LeastPopularCity}"
                        FontSize="28"
                        FontFamily="Ubuntu"
                        FontWeight="Bold"

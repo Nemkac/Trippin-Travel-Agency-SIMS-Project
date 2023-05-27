@@ -266,6 +266,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             IsChecked = false;
             IsLanguageChecked = false;
             Mediator.OnIsCheckedChanged(IsChecked);
+            Mediator.OnIsUserLogged(LoggedUser.id);
             Mediator.OnIsLanguageCheckedChanged(IsLanguageChecked);
             GenerateReportCommand = new ViewModelCommand(GenerateAnnualReport);
 

@@ -33,5 +33,9 @@ namespace InitialProject.Model
         public static bool IsChecked { get; set; }
         public static bool IsLanguageChecked { get; set; }
         public static SolidColorBrush ContentTextColor { get; set; }
+
+        public static bool creatingAccommodationFromRecomendation { get; set; }
+        public static string MostPopularCity { get; set; }
+        public static string MostPopularCountry { get; set; }
     }
 }

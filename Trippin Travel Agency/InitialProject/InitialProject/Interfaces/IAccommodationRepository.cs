@@ -20,5 +20,6 @@ namespace InitialProject.Interfaces
         public List<Accommodation> GetOwnersAccommodations(int id);
         public AccommodationLocation GetNewLocation(string country, string city);
         public List<AccommodationRenovation> GetAllRenovations();
+        public AccommodationLocation GetLocationByAccommodationLocation(AccommodationLocation accommodationLocation);
     }
 }

@@ -10,9 +10,11 @@ namespace InitialProject.Model
     {
         private static bool _isChecked;
         private static bool _isLanguageChecked;
+        private static int _isUserLogged;
 
         public static event EventHandler<bool> IsCheckedChanged;
         public static event EventHandler<bool> IsLanguageCheckedChanged;
+        public static event EventHandler<int> IsUserLogged;
 
         public static void OnIsCheckedChanged(bool isChecked)
         {
@@ -24,6 +26,17 @@ namespace InitialProject.Model
         {
             _isLanguageChecked = isLanguageChecked;
             IsLanguageCheckedChanged?.Invoke(null, isLanguageChecked);
+        }
+
+        public static void OnIsUserLogged(int isUserLogged)
+        {
+            _isUserLogged = isUserLogged;
+            IsUserLogged?.Invoke(null, isUserLogged);
+        }
+
+        public static int GetIsUserLogged()
+        {
+            return _isUserLogged;
         }
 
         public static bool GetCurrentIsChecked()

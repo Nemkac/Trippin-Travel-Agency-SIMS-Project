@@ -31,7 +31,7 @@
                 <Label x:Name="label1" Style="{StaticResource defaultLabel}" Content="Country"  HorizontalAlignment="Left" Margin="49,45,0,0" VerticalAlignment="Top" Height="30" Width="150"/>
                 <ComboBox x:Name="countryComboBox" HorizontalAlignment="Left" Margin="49,10,0,0" 
                           VerticalAlignment="Top" Width="190" Height="22" 
-                          SelectedItem="{Binding SelectedCountry}"
+                          SelectedItem="{Binding SelectedCountry, Mode=TwoWay}"
                           ItemsSource="{Binding countries}"/>
                 <Label x:Name="label2" Style="{StaticResource defaultLabel}" Content="City"  HorizontalAlignment="Left" Margin="49,45,0,0" VerticalAlignment="Top" Width="125" Height="26"/>
                 <ComboBox x:Name="cityComboBox" HorizontalAlignment="Left" Margin="49,10,0,0" 

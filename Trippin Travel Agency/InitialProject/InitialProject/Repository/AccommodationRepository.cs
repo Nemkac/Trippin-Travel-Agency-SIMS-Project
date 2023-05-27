@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Xceed.Wpf.Toolkit;
 
 namespace InitialProject.Repository
 {
@@ -174,6 +175,23 @@ namespace InitialProject.Repository
             DataBaseContext renovationsContext = new DataBaseContext();
             List<AccommodationRenovation> renovations = renovationsContext.AccommodationRenovations.ToList();
             return renovations;
+        }
+
+        public AccommodationLocation GetLocationByAccommodationLocation(AccommodationLocation accommodationLocation)
+        {
+            DataBaseContext locationContext = new DataBaseContext();
+            List<AccommodationLocation> locations = locationContext.AccommodationLocation.ToList();
+            
+            foreach(AccommodationLocation accLoc in locations)
+            {
+                if(accLoc == accommodationLocation)
+                {
+                    return accLoc;
+                }
+
+            }
+
+            return null;
         }
     }
 }
