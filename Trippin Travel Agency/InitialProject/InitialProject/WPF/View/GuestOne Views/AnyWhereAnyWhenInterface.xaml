@@ -6,12 +6,13 @@
         xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
         mc:Ignorable="d"
         Title="AnyWhereAnyWhenInterface" Height="800" Width="1500"
+        KeyDown="F"
         >
-        <Window.InputBindings>
-            <KeyBinding Key="Escape" Command="{Binding GoToPreviousWindow}" />
-            <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
-            <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
-        </Window.InputBindings>
+    <Window.InputBindings>
+        <KeyBinding Key="Escape" Command="{Binding GoToPreviousWindow}" />
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
+        <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
+    </Window.InputBindings>
     <Grid>
         <GroupBox Header="Navigator"
             Margin="985,1,26,662"
@@ -114,7 +115,9 @@
             BorderBrush="#192a56"/>
 
         <TextBox 
-            HorizontalAlignment="Left" 
+            HorizontalAlignment="Left"
+            KeyDown="F"
+            Name="n0"
             Height="56" 
             Margin="146,311,0,0"
             TextWrapping="Wrap" 
@@ -124,10 +127,13 @@
             FontSize="22" 
             TextAlignment="Center" 
             VerticalContentAlignment="Center"
+            IsTabStop="False"
             Text="{Binding InputDays}"/>
 
         <TextBox 
-            HorizontalAlignment="Left" 
+            HorizontalAlignment="Left"
+            KeyDown="F"
+            Name="n1"
             Height="56" 
             Margin="410,311,0,0"
             TextWrapping="Wrap" 
@@ -137,6 +143,7 @@
             FontSize="22" 
             TextAlignment="Center" 
             VerticalContentAlignment="Center"
+            IsTabStop="False"
             Text="{Binding InputGuests}"/>
 
         <Button Content="Search" 
@@ -191,6 +198,8 @@
             IsTabStop="False"/>
 
         <DatePicker HorizontalAlignment="Left"
+                    KeyDown="F"
+                    Name="n2"
                     VerticalAlignment="Top"
                     SelectedDate="{Binding InputStartingDate}"
                     Height="30"
@@ -199,7 +208,8 @@
                     FontFamily="ubuntu"
                     FontSize="18" 
                     Background="#FF192A56"
-                    RenderTransformOrigin="0.5,0.5" >
+                    RenderTransformOrigin="0.5,0.5" 
+                    IsTabStop="False">
             <DatePicker.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -211,7 +221,9 @@
         </DatePicker>
 
         <DatePicker HorizontalAlignment="Left"
+                    KeyDown="F"
                     VerticalAlignment="Top"
+                    Name="n3"
                     SelectedDate="{Binding InputEndingDate}"
                     Height="30"
                     Width="170"
@@ -219,7 +231,8 @@
                     FontFamily="ubuntu"
                     FontSize="18" 
                     Background="#FF192A56"
-                    RenderTransformOrigin="0.5,0.5" >
+                    RenderTransformOrigin="0.5,0.5" 
+                    IsTabStop="False">
             <DatePicker.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -294,6 +307,19 @@
             FontFamily="Ubuntu" 
             FontSize="17" 
             FontWeight="Medium"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="52" 
+            Name="debug"
+            Margin="410,401,0,0"
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="652"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="20" 
+            FontWeight="Normal"/>
 
     </Grid>
 </Window>
