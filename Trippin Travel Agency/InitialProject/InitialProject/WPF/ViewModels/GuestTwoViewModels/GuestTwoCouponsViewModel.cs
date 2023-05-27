@@ -13,7 +13,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 {
     public class GuestTwoCouponsViewModel : ViewModelBase
     {
-        public ObservableCollection<CouponDTO> couponDTOs { get; set; } = new ObservableCollection<CouponDTO>();
+        public ObservableCollection<CouponDTO> couponDTOs { get; set; } = new ObservableCollection<CouponDTO>();       
 
         private string usernameLabel;
         public string UsernameLabel
@@ -57,6 +57,34 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             }
         }
 
+        private int toursVisitedLabel;
+        public int ToursVisitedLabel
+        {
+            get { return toursVisitedLabel; }
+            set
+            {
+                if (toursVisitedLabel != value)
+                {
+                    toursVisitedLabel = value;
+                    OnPropertyChanged(nameof(ToursVisitedLabel));
+                }
+            }
+        }
+        private int numberOfCouponsLabel;
+        public int NumberOfCouponsLabel
+        {
+            get { return numberOfCouponsLabel; }
+            set
+            {
+                if (numberOfCouponsLabel != value)
+                {
+                    numberOfCouponsLabel = value;
+                    OnPropertyChanged(nameof(NumberOfCouponsLabel));
+                }
+            }
+        }
+
+       
         public GuestTwoCouponsViewModel() {
             WindowLoaded();
         }
@@ -68,6 +96,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 
             DataBaseContext context = new DataBaseContext();
             LoadCoupons(context);
+            LoadData(context);
         }
 
         public void LoadCoupons(DataBaseContext context)
@@ -82,6 +111,24 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                     couponDTOs.Add(new CouponDTO(coup.id, "Coupon" + counter, coup.exiresOn));
                 }
             }            
+        }
+        public void LoadData(DataBaseContext context)
+        {
+            foreach (Coupon coupon in context.Coupons.ToList())
+            {
+                if (coupon.userId == LoggedUser.id)
+                {
+                    NumberOfCouponsLabel++;
+                }
+            }
+            foreach (TourAttendance attendance in context.TourAttendances.ToList())
+            {
+                if (attendance.guestID == LoggedUser.id)
+                {
+                    ToursVisitedLabel++;
+                }
+            }
+
         }
 
     }

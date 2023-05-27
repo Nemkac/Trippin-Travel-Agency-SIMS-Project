@@ -94,7 +94,8 @@
                               FontSize="28" 
                               FontFamily="Ubuntu"
                               ItemsSource="{Binding responseMessages}"
-                              SelectedItem="{Binding SelectedResponseMessage}"/>
+                              SelectedItem="{Binding SelectedResponseMessage}"
+                              IsEnabled="{Binding DisableMessage}"/>
                     <Button Width="350"
                             Height="130"
                             Style="{StaticResource openMessageButtonWEB}"

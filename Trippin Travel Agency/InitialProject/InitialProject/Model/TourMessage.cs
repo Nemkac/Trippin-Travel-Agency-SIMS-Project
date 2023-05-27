@@ -20,6 +20,8 @@ namespace InitialProject.Model
 
         public int numberOfGuests { get; set; }
 
+        public bool opened { get; set; }
+
         public TourMessage(int tourId, int guestId, int keyPointId, int numberOfGuests)
         {
             this.message = "Vodič je potvrdio vaše prisustvo na turi :";
@@ -27,6 +29,7 @@ namespace InitialProject.Model
             this.guestId = guestId;
             this.keyPointId = keyPointId;
             this.numberOfGuests = numberOfGuests;
+            this.opened = false;
         }
 
         public TourMessage() { }

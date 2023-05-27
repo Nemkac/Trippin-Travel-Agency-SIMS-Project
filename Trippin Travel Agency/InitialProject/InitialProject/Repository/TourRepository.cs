@@ -155,30 +155,40 @@ namespace InitialProject.Repository
             List<TourDTO> tourDTOs = new List<TourDTO>();
             TourDTO tourDTO = new TourDTO();
 
-            foreach (Tour tour in dataBaseContext.Tours.ToList())
+            int number;
+            if (int.TryParse(duration, out number))
             {
-                if (tour.hoursDuration == Int32.Parse(duration))
+                foreach (Tour tour in dataBaseContext.Tours.ToList())
                 {
-                    tourDTO = CreateTourDTO(tour);
-                    tourDTOs.Add(tourDTO);
+                    if (tour.hoursDuration == Int32.Parse(duration))
+                    {
+                        tourDTO = CreateTourDTO(tour);
+                        tourDTOs.Add(tourDTO);
+                    }
                 }
+                return tourDTOs;
             }
             return tourDTOs;
         }
 
         public List<TourDTO> GetAllByTouristLimit(string limit)
-        {
+        {             
             DataBaseContext dataBaseContext = new DataBaseContext();
             List<TourDTO> tourDTOs = new List<TourDTO>();
             TourDTO tourDTO = new TourDTO();
 
-            foreach (Tour tour in dataBaseContext.Tours.ToList())
+            int number;
+            if (int.TryParse(limit, out number)) 
             {
-                if (tour.touristLimit == Int32.Parse(limit))
+                foreach (Tour tour in dataBaseContext.Tours.ToList())
                 {
-                    tourDTO = CreateTourDTO(tour);
-                    tourDTOs.Add(tourDTO);
+                    if (tour.touristLimit == Int32.Parse(limit))
+                    {
+                        tourDTO = CreateTourDTO(tour);
+                        tourDTOs.Add(tourDTO);
+                    }
                 }
+                return tourDTOs;
             }
             return tourDTOs;
         }

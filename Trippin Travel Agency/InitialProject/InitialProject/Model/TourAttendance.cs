@@ -16,6 +16,7 @@ namespace InitialProject.Model
 
         public int guestID { get; set; }
         public int numberOfGuests { get; set; }
+        public bool checkedForCoupon { get; set; }  
 
         public TourAttendance(int tourId, int keyPointId, int guestID, int numberOfGuests)
         {
@@ -23,6 +24,7 @@ namespace InitialProject.Model
             this.keyPointId = keyPointId;
             this.guestID = guestID;
             this.numberOfGuests = numberOfGuests;
+            this.checkedForCoupon = false;
         }
 
         public TourAttendance() { } 

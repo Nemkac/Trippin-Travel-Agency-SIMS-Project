@@ -6,6 +6,7 @@ using InitialProject.Service.TourServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -164,6 +165,20 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             }
         }
 
+        private bool disableMessage;
+        public bool DisableMessage
+        {
+            get { return disableMessage; }
+            set
+            {
+                if (disableMessage != value)
+                {
+                    disableMessage = value;
+                    OnPropertyChanged(nameof(DisableMessage));
+                }
+            }
+        }
+
         public GuestTwoMesagesViewModel()
         {
             
@@ -171,6 +186,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             _mainViewModel = LoggedUser.GuestTwoInterfaceViewModel;
             DetailedTourViewCommand = new ViewModelCommand(ShowDetailedTourView);
             OpenMessage = new ViewModelCommand(OpenSelectedMessage);
+            DisableMessage = true;
             WindowLoaded();
             tourIdTransfer = -1;
         }
@@ -185,12 +201,10 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             LoadMessages(context);
         }
         public void LoadMessages(DataBaseContext context)
-        {
-
-            
+        {     
             foreach (TourMessage message in context.TourMessages.ToList())
             {
-                if (LoggedUser.id == message.guestId)
+                if (LoggedUser.id == message.guestId && message.opened == false)
                 {
                     responseMessages.Add(message);
                 }
@@ -208,7 +222,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 {
                     string poruka = "[AcceptedTour] Tour request accepted by guide: " + tourRequest.id.ToString() + ".  Set date: " + tourRequest.acceptedDate.ToString();
                     announcements.Add(poruka);
-                    MessageBox.Show(poruka);
+                    //MessageBox.Show(poruka);
                     tourRequest.sent = true;
                     context.Update(tourRequest);
                     context.SaveChanges();
@@ -290,7 +304,11 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             {
                 TourAttendance tourAttendance = new TourAttendance(tourMessage.tourId, tourMessage.keyPointId, tourMessage.guestId, tourMessage.numberOfGuests);
                 context.TourAttendances.Add(tourAttendance);
+                tourMessage.opened = true;
+                context.Update(tourMessage);
+                DisableMessage = false;
                 //context.TourMessages.Remove(tourMessage);
+                CheckForCouponRequirements(context);
                 ResponseColor = "#4cd137";
                 MyMessagesFeedback = "Your attendence has been marked";
                 context.SaveChanges();
@@ -300,6 +318,38 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 ResponseColor = "#e84118";
                 MyMessagesFeedback = "Please select a message."; 
             }
+        }
+        public void CheckForCouponRequirements(DataBaseContext context) 
+        {
+            int counter = 0;
+            foreach(TourAttendance attendance in context.TourAttendances.ToList())
+            {
+                if (attendance.checkedForCoupon == false && attendance.guestID == LoggedUser.id)
+                {
+                    counter++;
+                    if (counter%5 == 0)
+                    {
+                        DateTime now = DateTime.Now;
+                        Coupon coupon = new Coupon(LoggedUser.id, now.AddMonths(6));
+                        context.Coupons.Add(coupon);
+                        int counter2 = 0;
+                        foreach (TourAttendance attendances in context.TourAttendances.ToList())
+                        {
+                            if (attendances.checkedForCoupon == false && attendances.guestID == LoggedUser.id)
+                            {
+                                counter2++;
+                                attendances.checkedForCoupon = true;
+                                context.Update(attendances);
+                                if (counter2 == 5) 
+                                {
+                                    break;
+                                }
+                            }
+                        }                        
+                    }
+                }
+            }
+        
         }
         public void ShowDetailedTourView(object obj)
         {

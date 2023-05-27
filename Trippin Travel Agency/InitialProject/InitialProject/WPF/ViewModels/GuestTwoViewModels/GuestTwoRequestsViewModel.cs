@@ -15,7 +15,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 {
     public class GuestTwoRequestsViewModel : ViewModelBase
     {
-        public ObservableCollection<TourRequest> requests { get; set; } = new ObservableCollection<TourRequest>();
+        public ObservableCollection<TourRequestDTO> requests { get; set; } = new ObservableCollection<TourRequestDTO>();
 
         private string usernameLabel;
         public string UsernameLabel
@@ -109,7 +109,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             {
                 if (LoggedUser.id == request.guestId)
                 {
-                    requests.Add(request);
+                    requests.Add(new TourRequestDTO(request.city,request.country,request.language,request.startDate.ToShortDateString(),request.endDate.ToShortDateString(),request.status));
                 }
             }
 

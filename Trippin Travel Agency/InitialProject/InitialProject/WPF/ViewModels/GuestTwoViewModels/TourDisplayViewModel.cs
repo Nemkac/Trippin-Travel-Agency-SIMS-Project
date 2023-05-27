@@ -169,60 +169,71 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
         {
             TourDTO selectedTour = SelectedTour;
             List<TourDTO> tourDTOS = new List<TourDTO>();
-            int index = selectedTour.id;
-            int numberOfGuests = Int32.Parse(NumberOfTourists);
-            int flag = this.tourService.Book(index, numberOfGuests);
-            TourDisplayViewModel.CanExecute = false;
+            if (selectedTour != null)
+            {
+                int index = selectedTour.id;
+                int numberOfGuests;
+                bool parsing = int.TryParse(NumberOfTourists, out numberOfGuests);
+                if (parsing == false)
+                {
+                    return;
+                }
+                int flag = this.tourService.Book(index, numberOfGuests);
+                TourDisplayViewModel.CanExecute = false;
 
-            if (flag == 0)
-            {
-                TextBlockText = "You have booked the selected tour.";
-                TourBookingTransfer tourBookingTransfer = new TourBookingTransfer(
-                    selectedTour.id,
-                    selectedTour.name,
-                    selectedTour.description,
-                    selectedTour.cityLocation,
-                    selectedTour.countryLocation,
-                    selectedTour.keypoints,
-                    selectedTour.language,
-                    selectedTour.touristLimit,
-                    selectedTour.startDates,
-                    selectedTour.touristLimit,
-                    numberOfGuests
-            );
-                DataBaseContext context = new DataBaseContext();
-                context.tourBookingTransfers.Add(tourBookingTransfer);
-                context.SaveChanges();
-                TourDisplayViewModel.CanExecute = true;
-            }
-            else if (flag == 1)
-            {
-                TextBlockText = "Not enough room for desired number of tourists. Number of spots left for this tour: " + selectedTour.touristLimit;
-                tourDTOs.Clear();
-                tourDTOS = this.tourService.GetPreviouslySelected(selectedTour.id);
-                foreach (TourDTO tourDTO in tourDTOS)
+                if (flag == 0)
                 {
-                    tourDTOs.Add(tourDTO);
+                    TextBlockText = "You have booked the selected tour.";
+                    TourBookingTransfer tourBookingTransfer = new TourBookingTransfer(
+                        selectedTour.id,
+                        selectedTour.name,
+                        selectedTour.description,
+                        selectedTour.cityLocation,
+                        selectedTour.countryLocation,
+                        selectedTour.keypoints,
+                        selectedTour.language,
+                        selectedTour.touristLimit,
+                        selectedTour.startDates,
+                        selectedTour.touristLimit,
+                        numberOfGuests
+                );
+                    DataBaseContext context = new DataBaseContext();
+                    context.tourBookingTransfers.Add(tourBookingTransfer);
+                    context.SaveChanges();
+                    TourDisplayViewModel.CanExecute = true;
                 }
-                TourDisplayViewModel.CanExecute = false;
-            }
-            else if (flag == -1)
-            {
-                TextBlockText = "This tour is full. Here are some other tours in the same location.";
-                tourDTOs.Clear();
-                List<TourDTO> dtos = this.tourService.GetBookableTours(selectedTour.cityLocation, selectedTour.name);
-                foreach (TourDTO tourDTO in dtos)
+                else if (flag == 1)
                 {
-                    tourDTOs.Add(tourDTO);
+                    TextBlockText = "Not enough room for desired number of tourists. Number of spots left for this tour: " + selectedTour.touristLimit;
+                    tourDTOs.Clear();
+                    tourDTOS = this.tourService.GetPreviouslySelected(selectedTour.id);
+                    foreach (TourDTO tourDTO in tourDTOS)
+                    {
+                        tourDTOs.Add(tourDTO);
+                    }
+                    TourDisplayViewModel.CanExecute = false;
                 }
-                TourDisplayViewModel.CanExecute = false;
+                else if (flag == -1)
+                {
+                    TextBlockText = "This tour is full. Here are some other tours in the same location.";
+                    tourDTOs.Clear();
+                    List<TourDTO> dtos = this.tourService.GetBookableTours(selectedTour.cityLocation, selectedTour.name);
+                    foreach (TourDTO tourDTO in dtos)
+                    {
+                        tourDTOs.Add(tourDTO);
+                    }
+                    TourDisplayViewModel.CanExecute = false;
+                }
+
+                if (CanExecute == true)
+                {
+                    _mainViewModel.ExecuteShowBookingConfirmation(null);
+                }
             }
-         
-            if (CanExecute == true)
+            else 
             {
-                _mainViewModel.ExecuteShowBookingConfirmation(null);
+                TextBlockText = "Please select a tour!";
             }
-                
         }
 
         private void WindowLoaded() 
