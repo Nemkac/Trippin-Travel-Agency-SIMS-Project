@@ -188,7 +188,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             OpenMessage = new ViewModelCommand(OpenSelectedMessage);
             DisableMessage = true;
             WindowLoaded();
-            tourIdTransfer = -1;
+            tourIdTransfer = -1;            
         }
 
         public void WindowLoaded()
@@ -197,8 +197,10 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             UsernameLabel2 = "@" + LoggedUser.username;
             AccountType = "Account type:  " + LoggedUser.role;
             DataBaseContext context = new DataBaseContext();
-            LoadData(context);
+            LoadData(context);            
             LoadMessages(context);
+            LoadNewTourAnnouncements(context);
+            LoadAcceptedTours();
         }
         public void LoadMessages(DataBaseContext context)
         {     
@@ -208,27 +210,21 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 {
                     responseMessages.Add(message);
                 }
-            }
-            LoadAcceptedTours(context);
-            LoadNewTourAnnouncements(context);
-
+            }                                    
         }
-        private void LoadAcceptedTours(DataBaseContext context)
-        {
-            List<string> announcements = new List<string>();
-            foreach (TourRequest tourRequest in context.TourRequests.ToList())
+        public void LoadAcceptedTours() {
+            DataBaseContext context = new DataBaseContext();
+            List<TourRequest> requests = context.TourRequests.ToList();      
+            foreach (TourRequest tourRequest in requests)
             {
-                if (tourRequest.status == TourRequestStatus.Accepted && tourRequest.sent == false && tourRequest.guestId == LoggedUser.id)
+                if (tourRequest.status == TourRequestStatus.Accepted && tourRequest.guestId == LoggedUser.id)
                 {
-                    string poruka = "[AcceptedTour] Tour request accepted by guide: " + tourRequest.id.ToString() + ".  Set date: " + tourRequest.acceptedDate.ToString();
-                    announcements.Add(poruka);
-                    //MessageBox.Show(poruka);
-                    tourRequest.sent = true;
-                    context.Update(tourRequest);
-                    context.SaveChanges();
-                    requestMessages.Add(poruka);
+                    string poruka = "[AcceptedTour] Tour request accepted by guide: " + tourRequest.city + ", " + tourRequest.country + ".  Set date: " + tourRequest.acceptedDate.ToString();
+                    requestMessages.Add(poruka);                         
+                   
                 }
             }
+            //context.SaveChanges();
         }
 
         private void LoadNewTourAnnouncements(DataBaseContext context)
@@ -293,7 +289,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                     }
                 }
             }            
-            context.SaveChanges();
+           // context.SaveChanges();
         }
 
         public void OpenSelectedMessage(object obj) 
@@ -308,7 +304,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 context.Update(tourMessage);
                 DisableMessage = false;
                 //context.TourMessages.Remove(tourMessage);
-                CheckForCouponRequirements(context);
+                CheckRequirementsForCouponAcquisition(context);
                 ResponseColor = "#4cd137";
                 MyMessagesFeedback = "Your attendence has been marked";
                 context.SaveChanges();
@@ -319,7 +315,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 MyMessagesFeedback = "Please select a message."; 
             }
         }
-        public void CheckForCouponRequirements(DataBaseContext context) 
+        public void CheckRequirementsForCouponAcquisition(DataBaseContext context) 
         {
             int counter = 0;
             foreach(TourAttendance attendance in context.TourAttendances.ToList())
@@ -348,8 +344,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                         }                        
                     }
                 }
-            }
-        
+            }        
         }
         public void ShowDetailedTourView(object obj)
         {
