@@ -101,6 +101,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         }
 
         public ICommand OpenNewAccommodation { get; }
+        public ICommand CloseAccommodation { get; }
 
         public OurRecommendationsViewModel() 
         {
@@ -109,13 +110,19 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             GetMostAndLeastPopularLocation();
 
             OpenNewAccommodation = new ViewModelCommand(ExecuteOpenNewAccommodation);
+            CloseAccommodation = new ViewModelCommand(ExecuteCloseExistingAccommodation);
 
             ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";
         }
 
         private void ExecuteOpenNewAccommodation(object obj)
         {
-            this._mainViewModel.ExecuteShowAccommodationRegistrationViewCommand(null);
+            this._mainViewModel.ExecuteCreateNewAccommodationFromRecommendationViewCommand(null);
+        }
+
+        private void ExecuteCloseExistingAccommodation(object obj)
+        {
+            this._mainViewModel.ExecuteCloseExistingAccommodationCommand(null);
         }
 
         private void OnIsCheckedChanged(object sender, bool isChecked)
@@ -169,7 +176,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             MostPopularCity = countryAndCity[0];
 
             LoggedUser.MostPopularCity = MostPopularCity;
-            LoggedUser.MostPopularCountry = MostPopularCountry;
+            LoggedUser.MostPopularCountry = MostPopularCountry.Replace(", ", "");
 
             string formatedLocationName = mostPopularLocation.ToLower().Replace(" ", "");
 
@@ -179,6 +186,9 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             string[] leastPopularCountryAndCity = leastPopularLocation.Split("_");
             LeastPopularCountry = leastPopularCountryAndCity[1] + ", ";
             LeastPopularCity = leastPopularCountryAndCity[0];
+
+            LoggedUser.LeastPopularCity = LeastPopularCity;
+            LoggedUser.LeastPopularCountry = LeastPopularCountry.Replace(", ", "");
 
             string formatedLeastPopularLocationName = leastPopularLocation.ToLower().Replace(" ", "");
 

@@ -27,15 +27,16 @@
                        Margin="49,26,0,0" VerticalAlignment="Top" Width="165"/>
                 <TextBox x:Name="accommodationNameTB" HorizontalAlignment="Left" Margin="49,10,0,0" 
                          TextWrapping="Wrap" VerticalAlignment="Top" Width="190" 
-                         Height="25" Text="{Binding AccommodationName}"/>
+                         Height="25" Text="{Binding AccommodationName}"
+                         FontFamily="Ubuntu" FontSize="12"/>
                 <Label x:Name="label1" Style="{StaticResource defaultLabel}" Content="Country"  HorizontalAlignment="Left" Margin="49,45,0,0" VerticalAlignment="Top" Height="30" Width="150"/>
                 <ComboBox x:Name="countryComboBox" HorizontalAlignment="Left" Margin="49,10,0,0" 
-                          VerticalAlignment="Top" Width="190" Height="22" 
+                          VerticalAlignment="Top" Width="190" Height="22" FontFamily="Ubuntu" FontSize="12"
                           SelectedItem="{Binding SelectedCountry, Mode=TwoWay}"
                           ItemsSource="{Binding countries}"/>
                 <Label x:Name="label2" Style="{StaticResource defaultLabel}" Content="City"  HorizontalAlignment="Left" Margin="49,45,0,0" VerticalAlignment="Top" Width="125" Height="26"/>
                 <ComboBox x:Name="cityComboBox" HorizontalAlignment="Left" Margin="49,10,0,0" 
-                          VerticalAlignment="Top" Width="190" Height="22"
+                          VerticalAlignment="Top" Width="190" Height="22" FontFamily="Ubuntu" FontSize="12"
                           ItemsSource="{Binding cities}" SelectedItem="{Binding SelectedCity}"/>
             </StackPanel>
         </Border>
@@ -45,18 +46,18 @@
                 <Label x:Name="label4" Style="{StaticResource defaultLabel}" Content="Maximum number of guests"  HorizontalAlignment="Left" Margin="49,26,0,0" VerticalAlignment="Top" Width="200" Height="26"/>
                 <TextBox x:Name="guestLimitTB" HorizontalAlignment="Left" Margin="49,10,0,0" 
                          TextWrapping="Wrap" Text="{Binding GuestLimit}" VerticalAlignment="Top" 
-                         Width="190" Height="25"/>
+                         Width="190" Height="25" FontFamily="Ubuntu" FontSize="12"/>
                 <Label x:Name="label5" Style="{StaticResource defaultLabel}" 
                        Content="Minimum days to book" HorizontalAlignment="Left" 
                        Margin="49,49,0,0" VerticalAlignment="Top" Width="190" 
                        Height="26"/>
                 <TextBox x:Name="minDaysBookedTB"  HorizontalAlignment="Left" Margin="49,10,0,0" 
-                         TextWrapping="Wrap" Text="{Binding MinDaysBooked}" 
+                         TextWrapping="Wrap" Text="{Binding MinDaysBooked}" FontFamily="Ubuntu" FontSize="12"
                          VerticalAlignment="Top" Width="190" Height="25"/>
                 <Label x:Name="label6" Style="{StaticResource defaultLabel}" Content="Booking cancelation period" HorizontalAlignment="Left" Margin="49,43,0,0" VerticalAlignment="Top" Width="193" Height="26"/>
                 <TextBox x:Name="bookingCancelPeriodTB"  HorizontalAlignment="Left" 
                          Margin="49,10,0,0" TextWrapping="Wrap" Text="{Binding BookingCancelationPeriod}" 
-                         VerticalAlignment="Top" Width="190" Height="25"/>
+                         VerticalAlignment="Top" Width="190" Height="25" FontFamily="Ubuntu" FontSize="12"/>
                 <Label x:Name="label7" Style="{StaticResource defaultLabel}" Content="Accommodation type" HorizontalAlignment="Left" Margin="49,36,0,0" VerticalAlignment="Top" Width="190" Height="26"/>
 
                 <StackPanel Orientation="Vertical" Margin="49 0 0 0">

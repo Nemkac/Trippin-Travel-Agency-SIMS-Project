@@ -208,21 +208,12 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public AccommodationRegistrationViewModel() 
         {
-            FillCountryComboBox();
             SaveAccommodationCommand = new ViewModelCommand(SaveAccommodation);
             AddImageCommand = new ViewModelCommand(AddImage);
             ImageNumber = "Image " + imageCounter;
 
-            if(LoggedUser.creatingAccommodationFromRecomendation == false)
-            {
-                SelectedCountry = LoggedUser.MostPopularCountry;
-                SelectedCity = LoggedUser.MostPopularCity;
-            } 
-            else
-            {
-                SelectedCountry = null;
-                selectedCity = null;
-            }
+            FillCountryComboBox();
+            SetCountryFromRecommendation();
 
             Mediator.IsCheckedChanged += OnIsCheckedChanged;
 
@@ -252,6 +243,18 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             cities.Clear();
             string selectedCountry = SelectedCountry;
             GetCitiesByCountry(selectedCountry);
+        }
+
+        private void SetCountryFromRecommendation()
+        {
+            if(LoggedUser.creatingAccommodationFromRecomendation == true)
+            {
+                string MostPopularCountry = LoggedUser.MostPopularCountry;
+                SelectedCountry = MostPopularCountry;
+
+                string MostPopularCity = LoggedUser.MostPopularCity;
+                SelectedCity = MostPopularCity;
+            }
         }
 
         private void GetCitiesByCountry(string selectedCountry)

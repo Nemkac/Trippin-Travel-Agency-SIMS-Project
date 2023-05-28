@@ -243,8 +243,9 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public ICommand ShowNewRenovationCommand { get; }
         public ICommand ShowScheduleNewRenovationCommand { get; }
         public ICommand GenerateReportCommand { get; }
-        public ICommand SignOutCommand { get; set; }
-
+        public ICommand SignOutCommand { get; }
+        public ICommand CreateAccommodationFromRecommendations { get; }
+        public ICommand CloseExistingAccommodationCommand { get; }
         public ICommand LogOut { get; }
         public OwnerInterfaceViewModel()
         {
@@ -262,6 +263,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ShowRenovationsCommand = new ViewModelCommand(ExecuteShowRenovationsCommand);
             ShowNewRenovationCommand = new ViewModelCommand(ExecuteShowNewRenovationViewCommand);
             ShowScheduleNewRenovationCommand = new ViewModelCommand(ExecuteShowScheduleNewRenovationCommand);
+            CloseExistingAccommodationCommand = new ViewModelCommand(ExecuteCloseExistingAccommodationCommand);
             //SignOutCommand = new ViewModelCommand(ExecuteSignOutCommand);
             IsChecked = false;
             IsLanguageChecked = false;
@@ -295,6 +297,14 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public void ExecuteShowAccommodationRegistrationViewCommand(object obj)
         {
+            LoggedUser.creatingAccommodationFromRecomendation = false;
+            CurrentChildView = new AccommodationRegistrationViewModel();
+            Caption = "New Accommodation";
+        }
+
+        public void ExecuteCreateNewAccommodationFromRecommendationViewCommand(object obj)
+        {
+            LoggedUser.creatingAccommodationFromRecomendation = true;
             CurrentChildView = new AccommodationRegistrationViewModel();
             Caption = "New Accommodation";
         }
@@ -303,6 +313,12 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             CurrentChildView = new ProfileViewModel();
             Caption = "Profile";
+        }
+
+        public void ExecuteCloseExistingAccommodationCommand(object obj)
+        {
+            CurrentChildView = new CloseExistingAccommodationViewModel();
+            Caption = "Close Accommodation";
         }
 
         public void ExecuteShowReviewsViewCommand(object obj)

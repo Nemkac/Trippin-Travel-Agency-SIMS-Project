@@ -71,6 +71,10 @@
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
                        Margin="20, 35, 0, 0"/>
+                    <Label Content="MOST POPULAR LOCATION" 
+                       Foreground="#f4f6f8"
+                       Margin="140 0 0 0"
+                       FontWeight="Light" FontSize="14"/>
                     <Button Style="{StaticResource acceptButton}"
                         Content="Open new accommodation"
                         Width="183"
@@ -123,9 +127,14 @@
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
                        Margin="20, 35, 0, 0"/>
+                    <Label Content="LEAST POPULAR LOCATION" 
+                       Foreground="#f4f6f8"
+                       Margin="140 0 0 0"
+                       FontWeight="Light" FontSize="14"/>
                     <Button Style="{StaticResource denyButtonMobile}"
                         Content="Close existing accommodation"
                         Width="183"
+                        Command="{Binding CloseAccommodation}"
                         HorizontalAlignment="Left"
                         Margin="20, 120, 0, 0"
                         Height="40">

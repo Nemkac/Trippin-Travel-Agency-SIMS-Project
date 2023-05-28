@@ -76,6 +76,11 @@
         <DataTemplate DataType="{x:Type viewModel:ScheduleNewRenovationViewModel}">
             <owner:ScheduleNewRenovation/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:CloseExistingAccommodationViewModel}">
+            <owner:CloseExistingAccommodationView/>
+        </DataTemplate>
+
     </Window.Resources>
 
     <Grid>

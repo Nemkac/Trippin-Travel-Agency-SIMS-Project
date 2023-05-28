@@ -37,5 +37,7 @@ namespace InitialProject.Model
         public static bool creatingAccommodationFromRecomendation { get; set; }
         public static string MostPopularCity { get; set; }
         public static string MostPopularCountry { get; set; }
+        public static string LeastPopularCountry { get; set; }
+        public static string LeastPopularCity { get; set; }
     }
 }
