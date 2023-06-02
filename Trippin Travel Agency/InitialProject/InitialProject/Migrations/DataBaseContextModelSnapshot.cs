@@ -1042,6 +1042,9 @@ namespace InitialProject.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("super")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("username")
                         .IsRequired()
                         .HasColumnType("TEXT");

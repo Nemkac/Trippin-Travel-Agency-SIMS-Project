@@ -16,7 +16,7 @@
         <viewModel:TourGuide_FutureToursViewModel />
     </UserControl.DataContext>
 
-    <Grid Background="White">
+    <Grid Background="#f5f6fa">
         <Grid.RowDefinitions>
             <!-- Margin -->
             <RowDefinition Height="20"/>
