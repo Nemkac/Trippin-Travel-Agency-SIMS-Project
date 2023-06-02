@@ -26,11 +26,14 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         private AccommodationService accommodationService;
         private AccommodationRepository accommodationRepository;
         private BookingDelaymentRequestService bookingDelaymentRequestService;
+        bool isHelpOn = false;
 
         public ViewModelCommand RefreshGrid { get;set; }
         public ViewModelCommand SearchBy { get; set; }
         public ViewModelCommand CheckDates { get; set; }
         public ViewModelCommand OpenNavigator { get; set; }
+        public ViewModelCommand Help { get; set; }
+
         public GuestOneViewModel()
         {
             this.bookingService = new BookingService(new BookingRepository());
@@ -43,9 +46,11 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             SearchBy = new ViewModelCommand(Search);
             CheckDates = new ViewModelCommand(CheckForDates);
             OpenNavigator = new ViewModelCommand(ShowNavigator);
+            Help = new ViewModelCommand(ShowHelp);
             CheckIfStillSuperGuest();
             CheckIfValidForSuperGuest();
             SendBookingDelaymentUpdate();
+
         }
 
         private AccommodationDTO selectedAccommodation;
@@ -215,6 +220,49 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 }
             }
         }
+
+        private string helpLand;
+        public string HelpLand
+        {
+            get { return helpLand; }
+            set
+            {
+                if (helpLand != value)
+                {
+                    helpLand = value;
+                    OnPropertyChanged(nameof(HelpLand));
+                }
+            }
+        }
+
+        private string helpExit;
+        public string HelpExit
+        {
+            get { return helpExit; }
+            set
+            {
+                if (helpExit != value)
+                {
+                    helpExit = value;
+                    OnPropertyChanged(nameof(helpExit));
+                }
+            }
+        }
+
+        private string helpCheck;
+        public string HelpCheck
+        {
+            get { return helpCheck; }
+            set
+            {
+                if (helpCheck != value)
+                {
+                    helpCheck = value;
+                    OnPropertyChanged(nameof(HelpCheck));
+                }
+            }
+        }
+
         private void ShowNavigator(object sender)
         {
             Navigator navigator = new Navigator();
@@ -222,6 +270,25 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             navigator.Top = GuestOneStaticHelper.guestOneInterface.Top + (GuestOneStaticHelper.guestOneInterface.Height - navigator.Height) / 2;
             GuestOneStaticHelper.guestOneInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
             navigator.Show();
+        }
+
+        public void ShowHelp(object sender)
+        {
+            if (isHelpOn)
+            {
+                HelpLand = string.Empty;
+                HelpExit = string.Empty;
+                HelpCheck = string.Empty;
+                isHelpOn = false;
+            }
+            else
+            {
+
+                HelpLand = "Go through search parameters with Left and Right Shift.Then press TAB to access the list of accommodations";
+                HelpCheck = "Once accommo-dation is selected, press SPACE to iterate through dates and number of guests input";
+                HelpExit = "To exit Help, press CTRL + H again";
+                isHelpOn = true;
+            }
         }
 
         private ObservableCollection<AccommodationDTO> ShowAccommodations()

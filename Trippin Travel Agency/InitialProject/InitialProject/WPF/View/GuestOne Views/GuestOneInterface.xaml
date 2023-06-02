@@ -8,10 +8,10 @@
         xmlns:i1="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
         mc:Ignorable="d"
         Title="GuestOneInterface" Height="800" Width="1500" Background="#f5f6fa">
-        <Window.InputBindings>
-            <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
-            <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
-        </Window.InputBindings>
+    <Window.InputBindings>
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
+        <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
+    </Window.InputBindings>
 
     <Grid Margin="10,-1,-10,1">
         <Grid.RowDefinitions>
@@ -43,14 +43,14 @@
                     Background="#FF192A56"
                     RenderTransformOrigin="0.5,0.5" 
                     Grid.Row="1" >
-                    <DatePicker.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform X="0"/>
-                        </TransformGroup>
-                    </DatePicker.RenderTransform>
+            <DatePicker.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform X="0"/>
+                </TransformGroup>
+            </DatePicker.RenderTransform>
         </DatePicker>
 
         <DatePicker HorizontalAlignment="Left"
@@ -176,7 +176,7 @@
 
         <Label Content="Name" 
                HorizontalAlignment="Left" 
-               Margin="100,191,0,0" 
+               Margin="100,183,0,0" 
                VerticalAlignment="Top"
                Width="79"
                FontFamily="ubuntu" 
@@ -186,7 +186,7 @@
 
         <Label Content="City" 
                HorizontalAlignment="Left" 
-               Margin="566,189,0,0" 
+               Margin="566,181,0,0" 
                VerticalAlignment="Top" 
                Width="60" 
                FontFamily="ubuntu" 
@@ -196,7 +196,7 @@
 
         <Label Content="Country"
                HorizontalAlignment="Left" 
-               Margin="313,187,0,0" 
+               Margin="313,179,0,0" 
                VerticalAlignment="Top"
                Width="109"
                FontFamily="ubuntu" 
@@ -206,7 +206,7 @@
 
         <Label Content="Type" 
                HorizontalAlignment="Left" 
-               Margin="808,193,0,0" 
+               Margin="808,185,0,0" 
                VerticalAlignment="Top" 
                Width="74" 
                FontFamily="ubuntu" 
@@ -216,7 +216,7 @@
 
         <Label Content="No.of guests" 
                HorizontalAlignment="Left"
-               Margin="1017,192,0,0"
+               Margin="1017,184,0,0"
                VerticalAlignment="Top" 
                RenderTransformOrigin="0.498,0.396" 
                Width="165" 
@@ -227,7 +227,7 @@
 
         <Label Content="No.of days"
                HorizontalAlignment="Left" 
-               Margin="1266,192,0,0"
+               Margin="1266,184,0,0"
                VerticalAlignment="Top" 
                RenderTransformOrigin="0.498,0.58" 
                Width="152"
@@ -237,11 +237,12 @@
                Foreground="#FF192A56"/>
 
         <TextBox HorizontalAlignment="Left"
-                 Margin="61,237,0,0"
+                 Margin="61,229,0,0"
                  TextWrapping="Wrap" 
                  VerticalAlignment="Top" 
                  Width="150" Height="61" 
-                 x:Name="input_name"
+                 Name="n0"
+                 IsTabStop="false"
                  Text="{Binding InputName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  TextAlignment="Center"
                  FontFamily="Ubuntu" 
@@ -257,13 +258,14 @@
         </TextBox>
 
         <TextBox HorizontalAlignment="Left" 
-                 Margin="285,240,0,0"
+                 Margin="285,232,0,0"
                  TextWrapping="Wrap" 
                  VerticalAlignment="Top" 
                  Width="150"
                  Height="60" 
+                 IsTabStop="false"                 
                  RenderTransformOrigin="0.147,0.03" 
-                 x:Name="input_country"
+                 Name="n1"
                  Text="{Binding InputCountry,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  TextAlignment="Center" 
                  FontFamily="ubuntu" 
@@ -279,12 +281,13 @@
         </TextBox>
 
         <TextBox HorizontalAlignment="Left"
-                 Margin="768,237,0,0" 
+                 Margin="768,229,0,0" 
                  TextWrapping="Wrap"
                  VerticalAlignment="Top"
                  Width="150" 
                  Height="61"
-                 x:Name="input_type" 
+                 Name="n3" 
+                 IsTabStop="false" 
                  Text="{Binding InputType,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  TextAlignment="Center" 
                  FontFamily="ubuntu" 
@@ -300,12 +303,13 @@
         </TextBox>
 
         <TextBox HorizontalAlignment="Left"
-                 Margin="1021,237,0,0"
+                 Margin="1021,229,0,0"
                  TextWrapping="Wrap"
                  VerticalAlignment="Top"
                  Width="150" 
                  Height="61"
-                 x:Name="input_guests"
+                 Name="n4"
+                 IsTabStop="false" 
                  Text="{Binding InputGuests,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  TextAlignment="Center"
                  FontFamily="ubuntu" 
@@ -321,12 +325,13 @@
         </TextBox>
 
         <TextBox HorizontalAlignment="Left"
-                 Margin="1256,237,0,0"
+                 Margin="1256,229,0,0"
                  TextWrapping="Wrap" 
                  VerticalAlignment="Top"
                  Width="150" 
                  Height="61"
-                 x:Name="input_days"
+                 Name="n5"
+                 IsTabStop="false" 
                  Text="{Binding InputDays,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  TextAlignment="Center"
                  FontFamily="ubuntu"
@@ -342,12 +347,13 @@
         </TextBox>
 
         <TextBox HorizontalAlignment="Left" 
-                 Margin="521,237,0,0" 
+                 Margin="521,229,0,0" 
                  TextWrapping="Wrap"
                  VerticalAlignment="Top"
                  Width="150"
                  Height="61"
-                 x:Name="input_city"
+                 Name="n2"
+                 IsTabStop="false" 
                  Text="{Binding InputCity,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  TextAlignment="Center" 
                  FontFamily="ubuntu" 
@@ -424,5 +430,44 @@
             Grid.Row="1"
             FontWeight="medium"
             Foreground="#FF192A56"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="54" 
+            Margin="369,107,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpLand}"
+            VerticalAlignment="Top" 
+            Width="627"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center" Grid.Row="1"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="71" 
+            Margin="29,104,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpExit}"
+            VerticalAlignment="Top" 
+            Width="192"
+            Foreground="#c23616"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center" Grid.Row="1"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="304" 
+            Margin="1361,125,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpCheck}"
+            VerticalAlignment="Top" 
+            Width="110"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center" Grid.Row="1"/>
     </Grid>
 </Window>

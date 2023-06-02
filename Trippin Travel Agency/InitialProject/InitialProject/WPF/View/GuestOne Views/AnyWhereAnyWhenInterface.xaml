@@ -102,7 +102,7 @@
             Foreground="#FF192A56"/>
 
         <GroupBox HorizontalAlignment="Left"
-            Height="153"
+            Height="179"
             Header="Please enter following parameters (date range is optional)"
             Margin="81,258,0,0" 
             VerticalAlignment="Top" 
@@ -116,7 +116,6 @@
 
         <TextBox 
             HorizontalAlignment="Left"
-            KeyDown="F"
             Name="n0"
             Height="56" 
             Margin="146,311,0,0"
@@ -132,7 +131,6 @@
 
         <TextBox 
             HorizontalAlignment="Left"
-            KeyDown="F"
             Name="n1"
             Height="56" 
             Margin="410,311,0,0"
@@ -157,12 +155,12 @@
             IsTabStop="False"
             Style="{StaticResource leadButton}"
             Command="{Binding Search}" 
-            Margin="1230,320,156,402"/>
+            Margin="1230,344,156,378"/>
 
         <TextBlock 
             HorizontalAlignment="Left"
             Height="20" 
-            Margin="1230,295,0,0"
+            Margin="1230,319,0,0"
             TextWrapping="Wrap" 
             Text="Press S" 
             VerticalAlignment="Top" 
@@ -198,7 +196,6 @@
             IsTabStop="False"/>
 
         <DatePicker HorizontalAlignment="Left"
-                    KeyDown="F"
                     Name="n2"
                     VerticalAlignment="Top"
                     SelectedDate="{Binding InputStartingDate}"
@@ -221,7 +218,6 @@
         </DatePicker>
 
         <DatePicker HorizontalAlignment="Left"
-                    KeyDown="F"
                     VerticalAlignment="Top"
                     Name="n3"
                     SelectedDate="{Binding InputEndingDate}"
@@ -246,12 +242,12 @@
         <TextBlock 
             HorizontalAlignment="Left"
             Height="20" 
-            Margin="408,376,0,0"
+            Margin="408,371,0,0"
             TextWrapping="Wrap" 
             Text="How many guests" 
             VerticalAlignment="Top" 
             Width="138"
-            Foreground="#718093"
+            Foreground="#FF192A56"
             FontFamily="Ubuntu" 
             FontSize="17" 
             FontWeight="Medium"/>
@@ -259,12 +255,12 @@
         <TextBlock 
             HorizontalAlignment="Left"
             Height="20" 
-            Margin="152,374,0,0"
+            Margin="152,369,0,0"
             TextWrapping="Wrap" 
             Text="How many days" 
             VerticalAlignment="Top" 
             Width="124"
-            Foreground="#718093"
+            Foreground="#FF192A56"
             FontFamily="Ubuntu" 
             FontSize="17" 
             FontWeight="Medium"/>
@@ -272,12 +268,12 @@
         <TextBlock 
             HorizontalAlignment="Left"
             Height="20" 
-            Margin="953,376,0,0"
+            Margin="953,371,0,0"
             TextWrapping="Wrap" 
             Text="End of date range" 
             VerticalAlignment="Top" 
             Width="141"
-            Foreground="#718093"
+            Foreground="#FF192A56"
             FontFamily="Ubuntu" 
             FontSize="17" 
             FontWeight="Medium"/>
@@ -285,12 +281,12 @@
         <TextBlock 
             HorizontalAlignment="Left"
             Height="20" 
-            Margin="670,376,0,0"
+            Margin="670,371,0,0"
             TextWrapping="Wrap" 
             Text="Start of date range" 
             VerticalAlignment="Top" 
             Width="150"
-            Foreground="#718093"
+            Foreground="#FF192A56"
             FontFamily="Ubuntu" 
             FontSize="17" 
             FontWeight="Medium"/>
@@ -307,19 +303,98 @@
             FontFamily="Ubuntu" 
             FontSize="17" 
             FontWeight="Medium"/>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="440,671,0,0"
+            TextWrapping="Wrap" 
+            Text="Press TAB to access, then UP and DOWN arrows" 
+            VerticalAlignment="Top" 
+            Width="404"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
 
         <TextBlock 
             HorizontalAlignment="Left"
-            Height="52" 
-            Name="debug"
-            Margin="410,401,0,0"
+            Height="20" 
+            Margin="518,409,0,0"
             TextWrapping="Wrap" 
+            Text="&lt; Left Shift            Right Shift &gt;" 
             VerticalAlignment="Top" 
-            Width="652"
+            Width="248"
             Foreground="#718093"
             FontFamily="Ubuntu" 
-            FontSize="20" 
-            FontWeight="Normal"/>
+            FontSize="17" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="150" 
+            Margin="1217,172,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpLand}"
+            VerticalAlignment="Top" 
+            Width="239"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="117" 
+            Margin="1230,419,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpCheck}"
+            VerticalAlignment="Top" 
+            Width="226"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="71" 
+            Margin="1230,628,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpExit}"
+            VerticalAlignment="Top" 
+            Width="192"
+            Foreground="#c23616"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left" 
+            Height="76" 
+            Margin="1230,623,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding WarningMessageCheck}" 
+            VerticalAlignment="Top" 
+            Width="215"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Bold" 
+            Foreground="#e84118"
+            TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left" 
+            Height="76" 
+            Margin="1227,438,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding WarningMessageSearch}" 
+            VerticalAlignment="Top" 
+            Width="181"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Bold" 
+            Foreground="#e84118"
+            TextAlignment="Center"/>
 
     </Grid>
 </Window>

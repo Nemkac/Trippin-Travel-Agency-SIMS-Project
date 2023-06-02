@@ -23,6 +23,7 @@ namespace InitialProject.WPF.View.GuestOne_Views
     public partial class AnyWhereAnyWhenInterface : Window
     {
         private int c;
+        private int a;
         private List<IInputElement> n;
         public AnyWhereAnyWhenInterface()
         {
@@ -33,63 +34,6 @@ namespace InitialProject.WPF.View.GuestOne_Views
             c = 0;
         }
         public void F(object s, KeyEventArgs k)
-        {
-            if (k.Key == Key.LeftShift)
-            {
-                if (c == 0)
-                {
-                    c = 3;
-                    Keyboard.Focus(n3);
-                    debug.Text = "kliknut L na c=0, sad je 3";
-                }
-                else if(c == 1)
-                {
-                    c = 0;
-                    Keyboard.Focus(n0);
-                    debug.Text = "kliknut L na c=1, sad je 0";
-                }
-                else if (c == 2)
-                {
-                    c = 1;
-                    Keyboard.Focus(n1);
-                    debug.Text = "kliknut L na c=2, sad je 1";
-                }
-                else if (c == 3)
-                {
-                    c = 2;
-                    Keyboard.Focus(n2);
-                    debug.Text = "kliknut L na c=3, sad je 2";
-                }
-
-            }
-            else if (k.Key == Key.RightShift)
-            {
-                if (c == 3)
-                {
-                    c = 0;
-                    Keyboard.Focus(n0);
-                    debug.Text = "kliknut R na c=3, sad je 0";
-                }
-                else if (c == 0)
-                {
-                    c = 1;
-                    Keyboard.Focus(n1);
-                    debug.Text = "kliknut R na c=0, sad je 1";
-                }
-                else if (c == 1)
-                {
-                    c = 2;
-                    Keyboard.Focus(n2);
-                    debug.Text = "kliknut R na c=1, sad je 2";
-                }
-                else if (c == 2)
-                {
-                    c = 3;
-                    Keyboard.Focus(n3);
-                    debug.Text = "kliknut R na c=2, sad je 3";
-                }
-
-            }
-        }
+        {if (k.Key == Key.LeftShift){if (c == 0){c = 3;}else{c--;}Keyboard.Focus(n[c]);}if (k.Key == Key.RightShift){if (c == 3){c = 0;}else{c++;}Keyboard.Focus(n[c]);}}
     }
 }

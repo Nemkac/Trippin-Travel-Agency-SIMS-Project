@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media;
+using ToastNotifications.Messages.Warning;
 using Xceed.Wpf.Toolkit.Primitives;
 
 namespace InitialProject.WPF.ViewModels.GuestOneViewModels
@@ -23,9 +24,11 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         private AccommodationService accommodationService;
         private AccommodationRepository accommodationRepository;
         private BookingDelaymentRequestService bookingDelaymentRequestService;
+        bool isHelpOn = false;
         public ViewModelCommand CheckDates { get; set; }
         public ViewModelCommand Search { get; set; }
         public ViewModelCommand OpenNavigator { get; set; }
+        public ViewModelCommand Help { get; set; }
 
         public AnyWhereAnyWhenViewModel()
         {
@@ -39,6 +42,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             Search = new ViewModelCommand(SearchAccommodations);
             CheckDates = new ViewModelCommand(CheckForDates);
             OpenNavigator = new ViewModelCommand(ShowNavigator);
+            Help = new ViewModelCommand(ShowHelp);
 
             InputStartingDate = DateTime.Today;
             InputEndingDate = DateTime.Today;
@@ -115,6 +119,76 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             }
         }
 
+        private string helpLand;
+        public string HelpLand
+        {
+            get { return helpLand; }
+            set
+            {
+                if (helpLand != value)
+                {
+                    helpLand = value;
+                    OnPropertyChanged(nameof(HelpLand));
+                }
+            }
+        }
+
+        private string helpCheck;
+        public string HelpCheck
+        {
+            get { return helpCheck; }
+            set
+            {
+                if (helpCheck != value)
+                {
+                    helpCheck = value;
+                    OnPropertyChanged(nameof(HelpCheck));
+                }
+            }
+        }
+
+        private string helpExit;
+        public string HelpExit
+        {
+            get { return helpExit; }
+            set
+            {
+                if (helpExit != value)
+                {
+                    helpExit = value;
+                    OnPropertyChanged(nameof(helpExit));
+                }
+            }
+        }
+
+        private string warningMessageSearch;
+        public string WarningMessageSearch
+        {
+            get { return warningMessageSearch; }
+            set
+            {
+                if (warningMessageSearch != value)
+                {
+                    warningMessageSearch = value;
+                    OnPropertyChanged(nameof(WarningMessageSearch));
+                }
+            }
+        }
+
+        private string warningMessageCheck;
+        public string WarningMessageCheck
+        {
+            get { return warningMessageCheck; }
+            set
+            {
+                if (warningMessageCheck != value)
+                {
+                    warningMessageCheck = value;
+                    OnPropertyChanged(nameof(WarningMessageCheck));
+                }
+            }
+        }
+
         private ObservableCollection<AccommodationDTO> accommodationsGrid;
         public ObservableCollection<AccommodationDTO> AccommodationsGrid
         {
@@ -152,6 +226,26 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             navigator.Show();
         }
 
+        public void ShowHelp(object sender)
+        {
+            if (isHelpOn)
+            {
+                HelpLand = string.Empty;
+                HelpCheck = string.Empty;
+                HelpExit = string.Empty;
+                isHelpOn = false;
+            }
+            else
+            {
+                WarningMessageCheck = string.Empty;
+                WarningMessageSearch = string.Empty;
+                HelpLand = "Go through search parameters with Left and Right Shift.\nIf you don't want to state dates, leave it as it is.\nPress S to search accommodations.";
+                HelpCheck = "Once you selected accommodation, press ENTER to book it.";
+                HelpExit = "To exit Help, press CTRL + H again";
+                isHelpOn = true;
+            }
+        }
+
         private string GenerateIntroductionText()
         {
             return "AnyWhere - AnyWhen lets you search accommodations based only on number of days you want to " +
@@ -172,57 +266,71 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 
         private void SearchAccommodations(object sender)
         {
-            DataBaseContext context = new DataBaseContext();
-            List<Accommodation> accommodations = context.Accommodations.ToList();
-            List<DateTime> dateLimits = new List<DateTime>();
-            List<int> byGuests = this.accommodationRepository.GetAllByGuestsNumber(int.Parse(InputGuests));
-            List<int> byDays = this.accommodationRepository.GetAllByMininumDays(int.Parse(InputDays));
-
-            List<Accommodation> foundResults1 = accommodationService.GetMatching(byGuests, accommodations);
-            List<Accommodation> foundResults = accommodationService.GetMatching(byDays, foundResults1);
-
-            if (InputStartingDate != DateTime.Today && InputEndingDate != DateTime.Today)
+            if (InputGuests != null && InputDays != null && int.TryParse(InputGuests,out int x) && int.TryParse(InputDays, out int y) && InputStartingDate < inputEndingDate)
             {
-                dateLimits.Add(InputStartingDate);
-                dateLimits.Add(InputEndingDate);
+                DataBaseContext context = new DataBaseContext();
+                List<Accommodation> accommodations = context.Accommodations.ToList();
+                List<DateTime> dateLimits = new List<DateTime>();
+                List<int> byGuests = this.accommodationRepository.GetAllByGuestsNumber(int.Parse(InputGuests));
+                List<int> byDays = this.accommodationRepository.GetAllByMininumDays(int.Parse(InputDays));
+
+                List<Accommodation> foundResults1 = accommodationService.GetMatching(byGuests, accommodations);
+                List<Accommodation> foundResults = accommodationService.GetMatching(byDays, foundResults1);
+
+                if (InputStartingDate != DateTime.Today && InputEndingDate != DateTime.Today)
+                {
+                    dateLimits.Add(InputStartingDate);
+                    dateLimits.Add(InputEndingDate);
+                }
+                else
+                {
+                    dateLimits.Add(DateTime.Today);
+                    dateLimits.Add(DateTime.Today.AddYears(1));
+                }
+
+                List<Accommodation> foundAccommodations = new List<Accommodation>();
+                foreach (Accommodation accommodation in foundResults)
+                {
+                    if (accommodationService.GetDatesForAnyWhereAnyWhen(accommodation, int.Parse(InputDays), dateLimits) != null)
+                    {
+                        foundAccommodations.Add(accommodation);
+                    }
+                }
+
+                List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
+                foreach (Accommodation accommodation in foundAccommodations)
+                {
+                    accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetAccommodationLocation(accommodation.id)));
+                }
+                AccommodationsGrid = new ObservableCollection<AccommodationDTO>(accommodationsDTO);
             } else
             {
-                dateLimits.Add(DateTime.Today);
-                dateLimits.Add(DateTime.Today.AddYears(1));
+                WarningMessageSearch = "Incorrect input for search parameters";
             }
-
-            List<Accommodation> foundAccommodations = new List<Accommodation>();
-            foreach(Accommodation accommodation in foundResults)
-            {
-                if (accommodationService.GetDatesForAnyWhereAnyWhen(accommodation, int.Parse(InputDays), dateLimits) != null)
-                {
-                    foundAccommodations.Add(accommodation);
-                }
-            }
-
-            List<AccommodationDTO> accommodationsDTO = new List<AccommodationDTO>();
-            foreach (Accommodation accommodation in foundAccommodations)
-            {
-                accommodationsDTO.Add(new AccommodationDTO(accommodation, accommodationService.GetAccommodationLocation(accommodation.id)));
-            }
-            AccommodationsGrid = new ObservableCollection<AccommodationDTO>(accommodationsDTO);
         }
 
         private void CheckForDates(object sender)
         {
-            int daysToBook;
-            List<string> displayableDates;
-            GetBasicDatesProperties(sender, out daysToBook, out displayableDates);
-
-            dynamic result = displayableDates.Select(s => new { value = s }).ToList();
-            if (daysToBook < selectedAccommodation.minDaysBooked)
+            if (SelectedAccommodation != null)
             {
-                // ne moze da se bukira
+                int daysToBook;
+                List<string> displayableDates;
+                GetBasicDatesProperties(sender, out daysToBook, out displayableDates);
+
+                dynamic result = displayableDates.Select(s => new { value = s }).ToList();
+                if (daysToBook < selectedAccommodation.minDaysBooked)
+                {
+                    // ne moze da se bukira
+                }
+                else
+                {
+                    GuestOneStaticHelper.result = result;
+                    ShowBookInterface();
+                }
             }
             else
             {
-                GuestOneStaticHelper.result = result;
-                ShowBookInterface();
+                WarningMessageCheck = "You need to select accommodation first";
             }
         }
 
