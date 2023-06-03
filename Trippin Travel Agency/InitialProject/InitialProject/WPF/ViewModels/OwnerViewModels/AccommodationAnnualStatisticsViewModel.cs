@@ -210,7 +210,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
             ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";
             ContentHintColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#353b48";
-            DetailsButtonColor = Mediator.GetCurrentIsChecked() ? "#718093" : "#2f3640";
+            DetailsButtonColor = Mediator.GetCurrentIsChecked() ? "#487eb0" : "#2f3640";
 
             DataGridStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridStyle2"] : (Style)Application.Current.Resources["DataGridStyle1"];
 
@@ -225,7 +225,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             ContentTextColor = isChecked ? "#F4F6F8" : "#192a56";
             ContentHintColor = isChecked ? "#F4F6F8" : "#353b48";
-            DetailsButtonColor = isChecked ? "#718093" : "#2f3640";
+            DetailsButtonColor = isChecked ? "#487eb0" : "#2f3640";
 
             DataGridStyle = isChecked ? (Style)Application.Current.Resources["DataGridStyle2"] : (Style)Application.Current.Resources["DataGridStyle1"];
 

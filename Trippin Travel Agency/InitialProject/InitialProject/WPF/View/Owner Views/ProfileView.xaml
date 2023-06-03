@@ -15,103 +15,123 @@
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="500"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="190"/>
-                    <RowDefinition Height="250"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="120"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="140"/>
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="510"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical"
-                            HorizontalAlignment="Left" Margin="30 0 0 0" VerticalAlignment="Top">
-                    <fa:IconImage Icon="User" Width="160" Height="160" Foreground="{Binding ContentTextColor}"/>
+
+                <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <fa:IconImage Icon="User" Width="70" Height="70" Foreground="{Binding ContentTextColor}"/>
                 </StackPanel>
-                <StackPanel Grid.Row="0" Grid.Column="1">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="90"/>
-                            <RowDefinition Height="70"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="170"/>
-                            <ColumnDefinition Width="340"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal">
-                            <Label Content="Hello, " FontFamily="Ubuntu"
-                           FontSize="48" FontWeight="Bold" VerticalAlignment="Bottom" 
-                                   Foreground="{Binding ContentTextColor}"/>
-                            <TextBlock x:Name="UsernameTextBlock" FontFamily="Ubuntu" Width="310" 
-                                       Margin="0 0 0 5" FontSize="48" FontWeight="Bold" 
-                                       VerticalAlignment="Bottom" 
+
+                <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock x:Name="UsernameTextBlock" FontFamily="Ubuntu" Width="310" 
+                                       FontSize="48" FontWeight="SemiBold" 
+                                       TextAlignment="Center"
                                        Foreground="{Binding ContentTextColor}"
                                        Text="{Binding Username}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" Grid.Column="0">
-                            <TextBlock x:Name="OwnerTypeTextBlock" FontFamily="Ubuntu" 
+                    <TextBlock x:Name="LastnameTextBlock" FontFamily="Ubuntu" Width="310" 
+                                       FontSize="48" FontWeight="SemiBold" 
+                                       TextAlignment="Center"
+                                       Foreground="{Binding ContentTextColor}"
+                                       Text="{Binding Lastname}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock x:Name="OwnerTypeTextBlock" FontFamily="Ubuntu" 
                                        Margin="5 5 0 0" Text="{Binding OwnerType}"
-                                       FontSize="20" FontWeight="Regular" 
+                                       FontSize="20" FontWeight="Regular" TextAlignment="Center"
                                        VerticalAlignment="Center" Foreground="{Binding ContentTextColor}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-                            <fa:IconImage Icon="Gratipay" Width="30" Height="30" VerticalAlignment="Top"
-                                          HorizontalAlignment="Left" Margin="0 5 0 0" Foreground="#fbc531"/>
-                            <TextBlock x:Name="TotalRateTextBlock" FontFamily="Ubuntu" 
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Separator Width="310" Foreground="{Binding ContentTextColor}"
+                               Margin="0 0 0 10"/>
+                    <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Width="Auto">
+
+                        <fa:IconImage Icon="Star"
+                              Width="20"
+                              Height="20"
+                              Foreground="#fbc531"/>
+
+                        <TextBlock x:Name="TotalRateTextBlock" FontFamily="Ubuntu" 
                                        FontSize="20" FontWeight="Bold" VerticalAlignment="Top"
-                                       Margin="10 7 0 0" Foreground="#fbc531" Width="80"
+                                       Margin="10 0 0 0" Foreground="#fbc531" Width="50"
                                        Text="{Binding TotalRating}"/>
-                        </StackPanel>
-                    </Grid>
+
+                        <fa:IconImage Icon="House"
+                              Width="20"
+                              Height="20"
+                              Foreground="{Binding ContentTextColor}"
+                               Margin="10, 0, 0, 0"/>
+
+                        <TextBlock FontSize="20"
+                               Foreground="{Binding ContentTextColor}"
+                               FontFamily="Ubuntu"
+                               FontWeight="Regular"
+                               Text="31 total accommodations"
+                               Margin="10, 0, 0, 0"/>
+
+                    </StackPanel>
+                    <Separator Width="310" Foreground="{Binding ContentTextColor}"
+                               Margin="0 10 0 0"/>
                 </StackPanel>
-                <Separator Grid.ColumnSpan="2" Grid.Row="1" Width="630" VerticalAlignment="Top" Margin="0 20 0 0" Background="{Binding ContentTextColor}"/>
-                <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical">
-                    <Label Content="First Name" Margin="30 50 0 0"
-                           FontFamily="Ubuntu" FontSize="20" FontWeight="Medium" 
-                           VerticalAlignment="Top" HorizontalAlignment="Left" 
-                           Foreground="{Binding ContentTextColor}"/>
-                    <Label Content="Last Name" Margin="30 20 0 0"
-                           FontFamily="Ubuntu" FontSize="20" FontWeight="Medium" 
-                           VerticalAlignment="Top" HorizontalAlignment="Left" 
-                           Foreground="{Binding ContentTextColor}"/>
-                    <Label Content="E-mail" Margin="30 20 0 0"
-                           FontFamily="Ubuntu" FontSize="20" FontWeight="Medium" 
-                           VerticalAlignment="Top" HorizontalAlignment="Left" 
-                           Foreground="{Binding ContentTextColor}"/>
+
+
+                <StackPanel Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                    <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Width="Auto">
+
+                        <TextBlock FontFamily="Ubuntu" Text="Email" 
+                                       FontSize="20" FontWeight="Regular" VerticalAlignment="Top"
+                                       Foreground="{Binding ContentTextColor}" Width="80"
+                                       Margin="0 0 10 0"/>
+                        
+                        <TextBlock x:Name="EmailTextBlock" FontFamily="Ubuntu" 
+                                       FontSize="20" FontWeight="Regular" VerticalAlignment="Top" TextAlignment="Right"
+                                       Margin="10 0 0 0" Foreground="{Binding ContentTextColor}" Width="252"
+                                       Text="{Binding Email}"/>
+
+                    </StackPanel>
+
                 </StackPanel>
-                <StackPanel Grid.Row="1" Grid.Column="1">
-                    <TextBlock x:Name="FirstNameTextBlock" FontFamily="Ubuntu" Width="430"
-                           FontSize="20" FontWeight="Medium" VerticalAlignment="Center" 
-                           Foreground="{Binding ContentTextColor}" Margin="5 55 0 0" HorizontalAlignment="Left"
-                           Text="{Binding Firstname}"/>
-                    <TextBlock x:Name="LastNameTextBlock" FontFamily="Ubuntu" Width="430"
-                           FontSize="20" FontWeight="Medium" VerticalAlignment="Center" 
-                           Foreground="{Binding ContentTextColor}" Margin="5 30 0 0" HorizontalAlignment="Left"
-                           Text="{Binding Lastname}"/>
-                    <TextBlock x:Name="EmailTextBlock" FontFamily="Ubuntu" Width="430"
-                           FontSize="20" FontWeight="Medium" VerticalAlignment="Center" 
-                           Foreground="{Binding ContentTextColor}" Margin="5 30 0 0" HorizontalAlignment="Left"
-                           Text="{Binding Email}"/>
+
+                <StackPanel Grid.Row="5">
+                    <Button HorizontalAlignment="Center"
+                        Style="{StaticResource detailsButton}"
+                        Width="140"
+                        Height="60"
+                        Margin="0, 75, 0, 0"
+                        Command="{Binding ShowReviewsViewCommand}">
+                        <Label VerticalAlignment="Center" Content="Show Reviews" FontSize="14" 
+                               FontFamily="Ubuntu" FontWeight="Regular" Foreground="#F4FFF8"/>
+                    </Button>
                 </StackPanel>
+
             </Grid>
+        
         </StackPanel>
-        <StackPanel Grid.Row="2">
-            <Button Style="{StaticResource detailsButton}"
-                Grid.Row="1" HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Margin="0 70 40 10" Width="220" Height="35"
-                BorderBrush="Transparent" 
-                Command="{Binding ShowReviewsViewCommand}">
-                <StackPanel Orientation="Horizontal"
-                                Margin="0, 0, 0 ,0">
-                    <fa:IconImage Icon="PlusCircle" HorizontalAlignment="Left" Width="20" Height="20" Foreground="#F4FFF8" VerticalAlignment="Center" Margin="0 2 0 0"/>
-                    <Label VerticalAlignment="Center" Content="Show Reviews" FontSize="20" FontFamily="Ubuntu" FontWeight="Regular" Foreground="#F4FFF8" Margin="10 0 0 0"/>
-                </StackPanel>
-            </Button>
-        </StackPanel>
+        
     </Grid>
 </UserControl>

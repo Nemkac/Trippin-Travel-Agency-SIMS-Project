@@ -136,13 +136,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             Mediator.IsCheckedChanged += OnIsCheckedChanged;
 
             ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";
-            DetailsButtonColor = Mediator.GetCurrentIsChecked() ? "#718093" : "#2f3640";
+            DetailsButtonColor = Mediator.GetCurrentIsChecked() ? "#487eb0" : "#2f3640";
         }
 
         private void OnIsCheckedChanged(object sender, bool isChecked)
         {
             ContentTextColor = isChecked ? "#F4F6F8" : "#192a56";
-            DetailsButtonColor = isChecked ? "#718093" : "#2f3640";
+            DetailsButtonColor = isChecked ? "#487eb0" : "#2f3640";
         }
 
         public void ShowReviewsView(object obj)
