@@ -107,11 +107,10 @@ namespace InitialProject.WPF.View.TourGuideViews
             language languageInput;
             DateTime selectedDate;
             bool active;
-            // Fetch the User object from the database
-            User user = FetchUserFromDatabase(LoggedUser.id);  // Implement this method based on your database access method
 
-            // Check if the user is super
+            User user = FetchUserFromDatabase(LoggedUser.id);
             bool isSuper = user.super;
+
             CreateTourBasicProperties(out name, out location, out guestLimit, out hoursDuration, out description, out languageInput, out selectedDate, out active);
 
             ICollection<KeyPoint> keyPoints = CreateKeyPoints();
