@@ -15,6 +15,7 @@ namespace InitialProject.DTO
 
         public string dateFrom { get; set; }
         public string dateTo { get; set; }
+        public string acceptedDate { get; set; }
         public TourRequestStatus status { get; set; }  
 
         public TourRequestDTO( string city, string country, language language, string dateFrom, string dateTo, TourRequestStatus status)
@@ -24,6 +25,16 @@ namespace InitialProject.DTO
             this.language = language;
             this.dateFrom = dateFrom;
             this.dateTo = dateTo;
+            this.status = status;
+        }
+        public TourRequestDTO(string city, string country, language language, string dateFrom, string dateTo,string acceptedDate, TourRequestStatus status)
+        {
+            this.city = city;
+            this.country = country;
+            this.language = language;
+            this.dateFrom = dateFrom;
+            this.dateTo = dateTo;
+            this.acceptedDate = acceptedDate;
             this.status = status;
         }
     }

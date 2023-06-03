@@ -5,11 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.WPF.View.GuestTwoViews"
              mc:Ignorable="d" 
-             d:DesignHeight="1470" d:DesignWidth="1520">
+             d:DesignHeight="2070" d:DesignWidth="1520">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="250"/>
             <RowDefinition Height="800"/>
+            <RowDefinition Height="700"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -112,6 +113,45 @@
                     </DataGrid>
                 </StackPanel>
             </GroupBox>
+
         </Grid>
+        <GroupBox Grid.Row="2"
+                  Margin="303,0,0,0"
+                  Header="Complex tour i suggested"
+                  FontSize="40"
+                  FontFamily="Ubuntu"
+                  FontWeight="Light" 
+                  Foreground="#192a56">
+            <StackPanel Grid.Row="2"
+                    Margin="48,-200,36,0"
+                    Height = "400">
+                <DataGrid x:Name="dataGrid2" 
+                              d:DataContext ="" 
+                              Width="1125" 
+                              Height="300"
+                              Margin="0 50 0 0"
+                              FontSize="15"
+                              FontFamily="Ubuntu"
+                              HorizontalAlignment="Center"
+                              Style="{DynamicResource DataGridStyle1}" 
+                              CellStyle="{DynamicResource DataGridCellStyle1}" 
+                              ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                              RowStyle="{DynamicResource DataGridRowStyle1}"
+                              ItemsSource="{Binding complexRequests}" IsReadOnly="True"                           
+                              >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="" Binding="{Binding field}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </StackPanel>
+        </GroupBox>
     </Grid>
 </UserControl>

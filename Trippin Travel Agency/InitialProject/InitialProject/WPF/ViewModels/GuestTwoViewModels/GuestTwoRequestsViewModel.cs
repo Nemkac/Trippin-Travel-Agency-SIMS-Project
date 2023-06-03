@@ -1,6 +1,7 @@
 ﻿using InitialProject.Context;
 using InitialProject.DTO;
 using InitialProject.Model;
+using InitialProject.WPF.View.Owner_Views;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
     public class GuestTwoRequestsViewModel : ViewModelBase
     {
         public ObservableCollection<TourRequestDTO> requests { get; set; } = new ObservableCollection<TourRequestDTO>();
+        public ObservableCollection<TourRequestDTO> complexRequests { get; set; } = new ObservableCollection<TourRequestDTO>();
+
 
         private string usernameLabel;
         public string UsernameLabel
@@ -113,6 +116,31 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 }
             }
 
+            foreach (ComplexTourRequest complexRequest in context.ComplexTourRequests.ToList()) 
+            {
+                foreach (TourRequest request in complexRequest.singleRequestIds)
+                {
+
+                
+                    DateTime date = Convert.ToDateTime(request.acceptedDate);                    
+                    string acceptedDate;
+
+                    if (date.ToShortDateString().Equals("1/1/0001"))
+                    {
+                        acceptedDate = "-";
+                    }
+                    else {
+                        acceptedDate = date.ToShortDateString();
+                    }
+                    complexRequests.Add(new TourRequestDTO(request.city,
+                                                           request.country,
+                                                           request.language,
+                                                           request.startDate.ToShortDateString(),
+                                                           request.endDate.ToShortDateString(),
+                                                           acceptedDate.ToString(),
+                                                           request.status));
+                }
+            }
         }
 
         public void LoadData(DataBaseContext context) 

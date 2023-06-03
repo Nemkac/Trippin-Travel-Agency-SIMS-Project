@@ -50,7 +50,7 @@ namespace InitialProject.Context
         public DbSet<UnfulfilledTourLanguages> UnfulfilledTourLanguages { get; set; }
         public DbSet<RenovationSuggestion> RenovationSuggestions { get; set; }  
         public DbSet<RenovationSuggestionMessage> RenovationSuggestionMessages { get; set; }
-
+        public DbSet<ComplexTourRequest> ComplexTourRequests { get; set; }
 
         // Apsolute paths for every memeber of the team
 

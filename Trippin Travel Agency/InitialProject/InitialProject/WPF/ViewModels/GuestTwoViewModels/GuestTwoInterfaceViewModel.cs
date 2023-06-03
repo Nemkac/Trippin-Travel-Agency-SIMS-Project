@@ -11,6 +11,7 @@ using InitialProject.WPF.ViewModels.GuestTwoViewModels;
 using InitialProject.Model;
 using InitialProject.WPF.View.GuestTwoViews;
 using System.Windows.Controls;
+using System.Windows;
 
 namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 {
@@ -54,6 +55,8 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 
         public ICommand GenerateReport { get; }
 
+        public ICommand ExecuteSignOut { get; }
+
 
         public GuestTwoInterfaceViewModel()
         {
@@ -72,6 +75,8 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             ShowGuestTwoStatistics = new ViewModelCommand(ExecuteShowGuestTwoStatistics);
 
             GenerateReport = new ViewModelCommand(ExecuteGenerateReport);
+
+            ExecuteSignOut = new ViewModelCommand(SignOut);
 
             LoggedUser.GuestTwoInterfaceViewModel = this;
 
@@ -131,6 +136,14 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             {
                 printDialog.PrintVisual(report, "Report");
             }
+        }
+        public void SignOut(object obj)
+        {
+            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            window?.Close();
+            SignInForm form = new SignInForm();
+            form.Show();
+
         }
 
     }

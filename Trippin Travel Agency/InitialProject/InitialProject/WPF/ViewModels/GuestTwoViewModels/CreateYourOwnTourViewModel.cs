@@ -1,4 +1,5 @@
 ﻿using InitialProject.Context;
+using InitialProject.DTO;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service.TourServices;
@@ -19,6 +20,8 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
         public ObservableCollection<language> languages { get; set; } = new ObservableCollection<language>();
         public ObservableCollection<string> CountryComboBox { get; set; } = new ObservableCollection<string>();
         public ObservableCollection<string> CityComboBox { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<TourRequestDTO> requests { get; set; } = new ObservableCollection<TourRequestDTO>();
+        public List<TourRequest> temporaryRequests { get; set; } = new List<TourRequest>(); 
 
         private string country;
         public string Country
@@ -148,11 +151,15 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
         }
 
         public ViewModelCommand CreateRegularTourCommand { get; private set; }
+        public ViewModelCommand CreateComplexTourCommand { get; private set; }
+        public ViewModelCommand ConfirmComplexTour { get; private set; }
 
     public CreateYourOwnTourViewModel()
         {
             CreateRegularTourCommand = new ViewModelCommand(ExecuteCreateRegularTour);
-            LoadInputs();
+            CreateComplexTourCommand = new ViewModelCommand(ExecuteCreateComplexTour);
+            ConfirmComplexTour = new ViewModelCommand(ExecuteConfirmComplexTour);
+            LoadInputs();           
         }
 
         private void LoadInputs()
@@ -268,6 +275,88 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 ResponseColor = "#e84118";
                 FeedbackMessage = "Please enter complete request information";
             }
+        }
+
+        private void ExecuteCreateComplexTour(object obj)
+        {
+            if (Country != null
+                && City != null
+                && StartDate != null
+                && EndDate != null
+                && GuestNumberInput != null
+                && LanguageComboBox != null
+                && DescriptionBox != null)
+            {
+
+                if (StartDate < EndDate)
+                {
+                    TourRequest tourRequest = new TourRequest(City,
+                                                              Country,
+                                                              GuestNumberInput,
+                                                              LanguageComboBox,
+                                                              StartDate,
+                                                              EndDate,
+                                                              DescriptionBox,
+                                                              LoggedUser.id);
+                    DataBaseContext context = new DataBaseContext();                   
+                    temporaryRequests.Add(tourRequest);
+                    requests.Add(new TourRequestDTO(City, Country,LanguageComboBox,StartDate.ToShortDateString(),EndDate.ToShortDateString(),TourRequestStatus.OnHold));                    
+                }
+                else
+                {
+                    ResponseColor = "#e84118";
+                    FeedbackMessage = "Invalid dates!";
+                }
+            }
+            else
+            {
+                ResponseColor = "#e84118";
+                FeedbackMessage = "Please enter complete request information";
+            }
+        }
+        private void ExecuteConfirmComplexTour(object obj)
+        {            
+            ComplexTourRequest complexTourRequest = new ComplexTourRequest(temporaryRequests);
+            DataBaseContext context = new DataBaseContext();
+            foreach (TourRequest request in temporaryRequests)
+            {
+                bool cityFlag = false;
+                bool countryFlag = false;
+                bool languageFlag = false;
+
+                foreach (Tour tour in context.Tours.ToList())
+                {
+                    TourLocation location = this.tourLocationService.GetById(tour.location);
+                    if (City == location.city)
+                    {
+                        cityFlag = true;
+                    }
+
+                    if (Country == location.country)
+                    {
+                        countryFlag = true;
+                    }
+                    if (LanguageComboBox == tour.language)
+                    {
+                        languageFlag = true;
+                    }
+                }
+                if (!cityFlag)
+                {
+                    context.UnfulfilledTourCities.Add(new(LoggedUser.id, request.city));
+                }
+                if (!countryFlag)
+                {
+                    context.unfulfilledTourCountries.Add(new(LoggedUser.id, request.country));
+                }
+                if (!languageFlag)
+                {
+                    context.UnfulfilledTourLanguages.Add(new(LoggedUser.id, request.language));
+                }                            
+            }
+            context.ComplexTourRequests.Add(complexTourRequest);
+            context.SaveChanges();
+            requests.Clear();
         }
     }
 }
