@@ -17,6 +17,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand GoAccount { get; set; }
         public ViewModelCommand GoDelaymentRequests { get; set; }
         public ViewModelCommand GoAnyWhereAnyWhen { get; set; }
+        public ViewModelCommand GoForums { get; set; }
         public NavigatorViewModel()
         {
             GoToBookings = new ViewModelCommand(GoToFutureBookings);
@@ -25,6 +26,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             GoAccount = new ViewModelCommand(GoToAccount);
             GoDelaymentRequests = new ViewModelCommand(GoToDelaymentRequests);
             GoAnyWhereAnyWhen = new ViewModelCommand(GoToAnyWhereAnyWhen);
+            GoForums = new ViewModelCommand(GoToForums);
 
         }
 
@@ -90,6 +92,16 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             anyWhereAnyWhenInterface.Top = GuestOneStaticHelper.guestOneInterface.Top;
             anyWhereAnyWhenInterface.Left = GuestOneStaticHelper.guestOneInterface.Left;
             anyWhereAnyWhenInterface.Show();
+        }
+
+        public void GoToForums(object sender)
+        {
+            CloseInterfaces();
+            ForumsInterface forumsInterface = new ForumsInterface();
+            GuestOneStaticHelper.forumsInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#f5f6fa");
+            forumsInterface.Top = GuestOneStaticHelper.guestOneInterface.Top;
+            forumsInterface.Left = GuestOneStaticHelper.guestOneInterface.Left;
+            forumsInterface.Show();
         }
 
         public void CloseInterfaces()

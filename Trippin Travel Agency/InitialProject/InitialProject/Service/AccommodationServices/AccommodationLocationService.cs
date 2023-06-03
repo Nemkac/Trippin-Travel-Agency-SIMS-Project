@@ -23,5 +23,12 @@ namespace InitialProject.Service.AccommodationServices
             }
             return null;
         }
+
+        public List<AccommodationLocation> GetAll()
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
+            return locations;
+        }
     }
 }

@@ -1,0 +1,159 @@
+﻿<Window x:Class="InitialProject.WPF.View.GuestOne_Views.ForumsInterface"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
+        mc:Ignorable="d"
+        Title="ForumsInterface" Height="800" Width="1500">
+    <Grid>
+        <Label Content="Forums" 
+            FontSize ="64"
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" 
+            Margin="609,24,0,0"
+            FontFamily="ubuntu" 
+            FontWeight="Bold" 
+            Foreground="#192a56"/>
+
+        <GroupBox Header="Navigator" 
+            Margin="985,1,26,674" 
+            Padding="10"
+            FontFamily="ubuntu"
+            FontSize="30" 
+            BorderThickness="3"
+            BorderBrush="#192a56" 
+            FontWeight="medium" >
+            <StackPanel>
+                <TextBlock 
+                    Width="478" 
+                    FontWeight="medium"><Run Text="Press CTRL+N for program map" FontFamily="ubuntu"/></TextBlock>
+            </StackPanel>
+        </GroupBox>
+
+        <Rectangle HorizontalAlignment="Center"
+            Height="76"
+            Margin="0,708,0,0" 
+            Fill ="#273c75" 
+            Stroke="Black" 
+            VerticalAlignment="Top"
+            Width="1500"
+        />
+
+        <TextBlock HorizontalAlignment="Center" 
+            Height="72" 
+            Margin="0,702,0,0" 
+            TextWrapping="Wrap"
+            Text="Trippin' Travel" 
+            VerticalAlignment="Top" 
+            Width="324" 
+            Foreground="white"
+            FontSize="48"
+            FontWeight="Bold"
+        />
+
+        <GroupBox Header="Help"
+            Margin="35,0,1105,677" 
+            Padding="10"
+            FontFamily="ubuntu"
+            FontSize="30"
+            BorderThickness="3"
+            BorderBrush="#192a56" 
+            FontWeight="medium" >
+
+            <StackPanel>
+                <TextBlock Height="39" FontWeight="medium"><Run Text="Press CTRL+H for help"/></TextBlock>
+            </StackPanel>
+        </GroupBox>
+
+        <Rectangle HorizontalAlignment="Left" 
+            Height="5" 
+            Margin="28,119,0,0" 
+            Stroke="#FF192A56"
+            VerticalAlignment="Top" 
+            Width="1434" 
+            Fill="#192a56"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Height="27" Margin="35,727,0,0" 
+            TextWrapping="Wrap"
+            Text="Press ESC to go back" 
+            VerticalAlignment="Top" 
+            Width="225"
+            Foreground="#e1b12c"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Bold"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Height="128" 
+            Margin="113,149,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding ForumText}" 
+            VerticalAlignment="Top" 
+            Width="1291"
+            TextAlignment="Center"
+            FontFamily="Ubuntu" 
+            FontSize="28" 
+            FontWeight="Medium" 
+            Foreground="#FF192A56"/>
+        
+        <DataGrid 
+            HorizontalAlignment="Left" 
+            Height="386" 
+            Margin="727,282,0,0" 
+            VerticalAlignment="Top" 
+            Width="665"
+            ItemsSource="{Binding ForumsGrid}"
+            SelectedItem="{Binding SelectedForum}"
+            />
+        
+        <TextBox 
+            HorizontalAlignment="Left" 
+            Height="56"
+            Margin="137,392,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding InputCountry}" 
+            VerticalAlignment="Top"
+            Width="156"/>
+        
+        <TextBox 
+            HorizontalAlignment="Left" 
+            Height="56"
+            Margin="437,392,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding InputCity}" 
+            VerticalAlignment="Top"
+            Width="156"/>
+        
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Height="36" 
+            Margin="137,339,0,0" 
+            TextWrapping="Wrap" 
+            Text="po zemlji" 
+            VerticalAlignment="Top"
+            Width="156"/>
+        
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Height="36" 
+            Margin="437,339,0,0" 
+            TextWrapping="Wrap" 
+            Text="po gradu" 
+            VerticalAlignment="Top"
+            Width="156"/>
+        
+        <Button 
+            Content="moji forumi" 
+            HorizontalAlignment="Left" 
+            Height="59"
+            Command="{Binding GoMyForums}"
+            Margin="199,609,0,0" 
+            VerticalAlignment="Top" 
+            Width="316"/>
+
+    </Grid>
+</Window>

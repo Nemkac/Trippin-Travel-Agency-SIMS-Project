@@ -31,10 +31,13 @@ namespace InitialProject.Model
         public static SendSuggestionConfirmationInterface sendSuggestionConfirmationInterface { get; set; }
         public static GuestsBookingDelaymentRequestsInterface guestsBookingDelaymentRequestsInterface { get; set; }
         public static AnyWhereAnyWhenInterface anyWhereAnyWhenInterface { get; set; }
+        public static ForumsInterface forumsInterface { get; set; }
+        public static GuestsForumsInterface guestsForumsInterface { get; set; }
         public static Navigator navigator { get; set; }
         public static GuestRate guestRate { get; set; }
         public static string numberOfGuests { get; set; }
         public static string temp { get; set; }
+        
 
     }
 }

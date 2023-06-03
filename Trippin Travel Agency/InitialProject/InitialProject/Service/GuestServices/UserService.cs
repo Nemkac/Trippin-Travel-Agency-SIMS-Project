@@ -224,5 +224,19 @@ namespace InitialProject.Service.GuestServices
             return bookingsSinceTitleAcquisition;
         }
 
+        public bool HasGuestVisitedPlace(AccommodationLocation location)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<Booking> bookings = context.Bookings.ToList();
+            foreach (Booking booking in bookings)
+            {
+                if (accommodationService.GetAccommodationLocation(accommodationService.GetById(booking.accommodationId).id)[0] == location.country && accommodationService.GetAccommodationLocation(accommodationService.GetById(booking.accommodationId).id)[1] == location.city)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 }
