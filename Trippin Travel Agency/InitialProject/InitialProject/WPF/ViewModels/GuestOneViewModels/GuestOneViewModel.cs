@@ -26,11 +26,14 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         private AccommodationService accommodationService;
         private AccommodationRepository accommodationRepository;
         private BookingDelaymentRequestService bookingDelaymentRequestService;
+        bool isHelpOn = false;
 
         public ViewModelCommand RefreshGrid { get;set; }
         public ViewModelCommand SearchBy { get; set; }
         public ViewModelCommand CheckDates { get; set; }
         public ViewModelCommand OpenNavigator { get; set; }
+        public ViewModelCommand Help { get; set; }
+
         public GuestOneViewModel()
         {
             this.bookingService = new BookingService(new BookingRepository());
@@ -43,9 +46,11 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             SearchBy = new ViewModelCommand(Search);
             CheckDates = new ViewModelCommand(CheckForDates);
             OpenNavigator = new ViewModelCommand(ShowNavigator);
+            Help = new ViewModelCommand(ShowHelp);
             CheckIfStillSuperGuest();
             CheckIfValidForSuperGuest();
             SendBookingDelaymentUpdate();
+
         }
 
         private AccommodationDTO selectedAccommodation;
@@ -215,6 +220,49 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 }
             }
         }
+
+        private string helpLand;
+        public string HelpLand
+        {
+            get { return helpLand; }
+            set
+            {
+                if (helpLand != value)
+                {
+                    helpLand = value;
+                    OnPropertyChanged(nameof(HelpLand));
+                }
+            }
+        }
+
+        private string helpExit;
+        public string HelpExit
+        {
+            get { return helpExit; }
+            set
+            {
+                if (helpExit != value)
+                {
+                    helpExit = value;
+                    OnPropertyChanged(nameof(helpExit));
+                }
+            }
+        }
+
+        private string warningMessage;
+        public string WarningMessage
+        {
+            get { return warningMessage; }
+            set
+            {
+                if (warningMessage != value)
+                {
+                    warningMessage = value;
+                    OnPropertyChanged(nameof(WarningMessage));
+                }
+            }
+        }
+
         private void ShowNavigator(object sender)
         {
             Navigator navigator = new Navigator();
@@ -222,6 +270,24 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             navigator.Top = GuestOneStaticHelper.guestOneInterface.Top + (GuestOneStaticHelper.guestOneInterface.Height - navigator.Height) / 2;
             GuestOneStaticHelper.guestOneInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
             navigator.Show();
+        }
+
+        public void ShowHelp(object sender)
+        {
+            if (isHelpOn)
+            {
+                HelpLand = string.Empty;
+                HelpExit = string.Empty;
+                isHelpOn = false;
+            }
+            else
+            {
+
+                HelpLand = "Go through search parameters with Left and Right CTRL.Then press TAB to access the list of accommodations.\nOnce accommodation is selected, press F1 to iterate through dates and number of guests input";
+                HelpExit = "To exit Help, press CTRL + H again";
+                WarningMessage = string.Empty;
+                isHelpOn = true;
+            }
         }
 
         private ObservableCollection<AccommodationDTO> ShowAccommodations()
@@ -319,20 +385,35 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 
         private void CheckForDates(object sender)
         {
+            if (SelectedAccommodation == null)
+            {
+                WarningMessage = "You need to select accommo-\ndation";
+                return;
+            }
+            if (!int.TryParse(DaysToStay, out int x))
+            {
+                WarningMessage = "Invalid input for number of days";
+                return;
+            }
+            if(StartingDate >= EndingDate)
+            {
+                WarningMessage = "Ending date must be set to date after starting one";
+                return;
+            }
+            if(int.Parse(DaysToStay) < SelectedAccommodation.minDaysBooked)
+            {
+                WarningMessage = "Selected accommoda-\ntion cannot be booked under " + SelectedAccommodation.minDaysBooked + "days";
+                return;
+            }
+
             int daysToBook;
             List<string> displayableDates;
             GetBasicDatesProperties(sender, out daysToBook, out displayableDates);
 
             dynamic result = displayableDates.Select(s => new { value = s }).ToList();
-            if (daysToBook < selectedAccommodation.minDaysBooked)
-            {
-                // ne moze da se bukira
-            }
-            else
-            {
-                GuestOneStaticHelper.result = result;
-                ShowBookInterface();
-            }
+            GuestOneStaticHelper.result = result;
+            ShowBookInterface();
+            
         }
 
         private void ShowBookInterface()

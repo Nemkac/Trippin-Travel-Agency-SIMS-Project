@@ -282,6 +282,11 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             Help = new ViewModelCommand(ShowHelp);
             CheckIfRecentlyRenovated();
             BonusPointsText();
+
+            if (GuestOneStaticHelper.numberOfGuests != null)
+            {
+                NumberOfGuests = GuestOneStaticHelper.numberOfGuests;
+            }
         }
 
         public void CheckIfRecentlyRenovated()

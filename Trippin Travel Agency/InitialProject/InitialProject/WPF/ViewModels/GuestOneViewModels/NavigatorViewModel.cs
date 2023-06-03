@@ -16,6 +16,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand GoReviews { get; set; }
         public ViewModelCommand GoAccount { get; set; }
         public ViewModelCommand GoDelaymentRequests { get; set; }
+        public ViewModelCommand GoAnyWhereAnyWhen { get; set; }
         public NavigatorViewModel()
         {
             GoToBookings = new ViewModelCommand(GoToFutureBookings);
@@ -23,6 +24,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             GoReviews = new ViewModelCommand(GoToReviews);
             GoAccount = new ViewModelCommand(GoToAccount);
             GoDelaymentRequests = new ViewModelCommand(GoToDelaymentRequests);
+            GoAnyWhereAnyWhen = new ViewModelCommand(GoToAnyWhereAnyWhen);
 
         }
 
@@ -79,6 +81,17 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             guestsAccountInterface.Show();
         }
 
+
+        public void GoToAnyWhereAnyWhen(object sender)
+        {
+            CloseInterfaces();
+            AnyWhereAnyWhenInterface anyWhereAnyWhenInterface = new AnyWhereAnyWhenInterface();
+            GuestOneStaticHelper.anyWhereAnyWhenInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#f5f6fa");
+            anyWhereAnyWhenInterface.Top = GuestOneStaticHelper.guestOneInterface.Top;
+            anyWhereAnyWhenInterface.Left = GuestOneStaticHelper.guestOneInterface.Left;
+            anyWhereAnyWhenInterface.Show();
+        }
+
         public void CloseInterfaces()
         {
             GuestOneStaticHelper.navigator.Close();
@@ -91,6 +104,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             GuestOneStaticHelper.guestsReviewsInterface?.Close();
             GuestOneStaticHelper.renovationSuggestionInterface?.Close();
             GuestOneStaticHelper.guestsAccountInterface?.Close();
+            GuestOneStaticHelper.anyWhereAnyWhenInterface?.Close();
         }
     }
 }

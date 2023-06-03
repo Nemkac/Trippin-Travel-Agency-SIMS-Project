@@ -7,11 +7,13 @@
         xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views" 
         xmlns:i1="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
         mc:Ignorable="d"
+        KeyDown="F"
         Title="GuestOneInterface" Height="800" Width="1500" Background="#f5f6fa">
-        <Window.InputBindings>
-            <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
-            <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
-        </Window.InputBindings>
+    <Window.InputBindings>
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
+        <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
+        <KeyBinding Key="Enter" Command="{Binding CheckDates}" />
+    </Window.InputBindings>
 
     <Grid Margin="10,-1,-10,1">
         <Grid.RowDefinitions>
@@ -28,22 +30,24 @@
                   Background="White" 
                   FontWeight="Medium"
                   Grid.Row="1"
+                  KeyDown="G"
                   ItemsSource="{Binding AccommodationsGrid}"
                   SelectedItem="{Binding SelectedAccommodation}"/>
 
         <DatePicker HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    x:Name ="input_starting_date"
+                    Name ="d0"
                     SelectedDate="{Binding StartingDate}"
                     Height="33"
                     Width="170"
-                    Margin="1182,173,0,0" 
+                    IsTabStop="false" 
+                    Margin="1168,173,0,0" 
                     FontFamily="ubuntu"
-                    FontSize="18" 
+                    FontSize="18"
+                    KeyDown="G"
                     Background="#FF192A56"
                     RenderTransformOrigin="0.5,0.5" 
                     Grid.Row="1" >
-
             <DatePicker.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -56,12 +60,14 @@
 
         <DatePicker HorizontalAlignment="Left"
                     VerticalAlignment="Top" 
-                    Name ="input_ending_date" 
+                    Name ="d1" 
                     SelectedDate="{Binding EndingDate}"
                     Height="31" 
-                    Width="170" 
-                    Margin="1180,252,0,0"
-                    FontFamily="ubuntu" 
+                    Width="170"
+                    KeyDown="G"
+                    Margin="1166,252,0,0"
+                    FontFamily="ubuntu"
+                    IsTabStop="false" 
                     FontSize="18"
                     Background="#FF192A56" 
                     Grid.Row="1"/>
@@ -71,7 +77,7 @@
                VerticalAlignment="Top" 
                Height="35" 
                Width="145" 
-               Margin="1194,140,0,0" 
+               Margin="1180,140,0,0" 
                FontFamily="Ubuntu"
                FontSize="22"
                Grid.Row="1"
@@ -83,7 +89,7 @@
                VerticalAlignment="Top"
                Height="37" 
                Width="143"
-               Margin="1202,224,0,0"
+               Margin="1188,224,0,0"
                FontFamily="Ubuntu" 
                FontSize="22" 
                Grid.Row="1" 
@@ -91,15 +97,17 @@
                Foreground="#FF192A56"/>
 
         <Button Content="Check for dates"
+                Style="{StaticResource leadButton}"
                 HorizontalAlignment="Left" 
                 Height="41" 
                 VerticalAlignment="Top" 
                 Width="174"
-                Margin="1183,389,0,0"
+                Margin="1169,389,0,0"
                 FontFamily="ubuntu" 
                 FontSize="20" 
                 Background="#FF273C75" 
                 Foreground="White"
+                IsTabStop="false" 
                 Grid.Row="1"
                 FontWeight="Medium"
                 Command="{Binding CheckDates}"/>
@@ -107,12 +115,14 @@
         <TextBox HorizontalAlignment="Left"
                  Height="45" 
                  TextWrapping="Wrap" 
-                 Name ="numberOfDays" 
+                 Name ="d2" 
                  Text="{Binding DaysToStay,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top"
-                 Width="90" 
-                 Margin="1222,329,0,0" 
-                 FontFamily="ubuntu" 
+                 Width="90"
+                 KeyDown="G"
+                 Margin="1208,329,0,0" 
+                 FontFamily="ubuntu"
+                 IsTabStop="false" 
                  FontSize="22"
                  Grid.Row="1" 
                  TextAlignment="Center" 
@@ -124,7 +134,7 @@
                    VerticalAlignment="Top" 
                    Height="30" 
                    Width="128"
-                   Margin="1205,299,0,0" 
+                   Margin="1191,299,0,0" 
                    FontFamily="ubuntu"
                    FontSize="22"
                    Grid.Row="1"
@@ -177,7 +187,7 @@
 
         <Label Content="Name" 
                HorizontalAlignment="Left" 
-               Margin="100,191,0,0" 
+               Margin="100,183,0,0" 
                VerticalAlignment="Top"
                Width="79"
                FontFamily="ubuntu" 
@@ -187,7 +197,7 @@
 
         <Label Content="City" 
                HorizontalAlignment="Left" 
-               Margin="566,189,0,0" 
+               Margin="566,181,0,0" 
                VerticalAlignment="Top" 
                Width="60" 
                FontFamily="ubuntu" 
@@ -197,7 +207,7 @@
 
         <Label Content="Country"
                HorizontalAlignment="Left" 
-               Margin="313,187,0,0" 
+               Margin="313,179,0,0" 
                VerticalAlignment="Top"
                Width="109"
                FontFamily="ubuntu" 
@@ -207,7 +217,7 @@
 
         <Label Content="Type" 
                HorizontalAlignment="Left" 
-               Margin="808,193,0,0" 
+               Margin="808,185,0,0" 
                VerticalAlignment="Top" 
                Width="74" 
                FontFamily="ubuntu" 
@@ -217,7 +227,7 @@
 
         <Label Content="No.of guests" 
                HorizontalAlignment="Left"
-               Margin="1017,192,0,0"
+               Margin="1017,184,0,0"
                VerticalAlignment="Top" 
                RenderTransformOrigin="0.498,0.396" 
                Width="165" 
@@ -228,7 +238,7 @@
 
         <Label Content="No.of days"
                HorizontalAlignment="Left" 
-               Margin="1266,192,0,0"
+               Margin="1266,184,0,0"
                VerticalAlignment="Top" 
                RenderTransformOrigin="0.498,0.58" 
                Width="152"
@@ -238,11 +248,12 @@
                Foreground="#FF192A56"/>
 
         <TextBox HorizontalAlignment="Left"
-                 Margin="61,237,0,0"
+                 Margin="61,229,0,0"
                  TextWrapping="Wrap" 
                  VerticalAlignment="Top" 
                  Width="150" Height="61" 
-                 x:Name="input_name"
+                 Name="n0"
+                 IsTabStop="false"
                  Text="{Binding InputName,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  TextAlignment="Center"
                  FontFamily="Ubuntu" 
@@ -258,13 +269,14 @@
         </TextBox>
 
         <TextBox HorizontalAlignment="Left" 
-                 Margin="285,240,0,0"
+                 Margin="285,232,0,0"
                  TextWrapping="Wrap" 
                  VerticalAlignment="Top" 
                  Width="150"
                  Height="60" 
+                 IsTabStop="false"                 
                  RenderTransformOrigin="0.147,0.03" 
-                 x:Name="input_country"
+                 Name="n1"
                  Text="{Binding InputCountry,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  TextAlignment="Center" 
                  FontFamily="ubuntu" 
@@ -280,12 +292,13 @@
         </TextBox>
 
         <TextBox HorizontalAlignment="Left"
-                 Margin="768,237,0,0" 
+                 Margin="768,229,0,0" 
                  TextWrapping="Wrap"
                  VerticalAlignment="Top"
                  Width="150" 
                  Height="61"
-                 x:Name="input_type" 
+                 Name="n3" 
+                 IsTabStop="false" 
                  Text="{Binding InputType,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  TextAlignment="Center" 
                  FontFamily="ubuntu" 
@@ -301,12 +314,13 @@
         </TextBox>
 
         <TextBox HorizontalAlignment="Left"
-                 Margin="1021,237,0,0"
+                 Margin="1021,229,0,0"
                  TextWrapping="Wrap"
                  VerticalAlignment="Top"
                  Width="150" 
                  Height="61"
-                 x:Name="input_guests"
+                 Name="n4"
+                 IsTabStop="false" 
                  Text="{Binding InputGuests,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  TextAlignment="Center"
                  FontFamily="ubuntu" 
@@ -322,12 +336,13 @@
         </TextBox>
 
         <TextBox HorizontalAlignment="Left"
-                 Margin="1256,237,0,0"
+                 Margin="1256,229,0,0"
                  TextWrapping="Wrap" 
                  VerticalAlignment="Top"
                  Width="150" 
                  Height="61"
-                 x:Name="input_days"
+                 Name="n5"
+                 IsTabStop="false" 
                  Text="{Binding InputDays,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  TextAlignment="Center"
                  FontFamily="ubuntu"
@@ -343,12 +358,13 @@
         </TextBox>
 
         <TextBox HorizontalAlignment="Left" 
-                 Margin="521,237,0,0" 
+                 Margin="521,229,0,0" 
                  TextWrapping="Wrap"
                  VerticalAlignment="Top"
                  Width="150"
                  Height="61"
-                 x:Name="input_city"
+                 Name="n2"
+                 IsTabStop="false" 
                  Text="{Binding InputCity,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  TextAlignment="Center" 
                  FontFamily="ubuntu" 
@@ -425,5 +441,139 @@
             Grid.Row="1"
             FontWeight="medium"
             Foreground="#FF192A56"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="54" 
+            Margin="23,107,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpLand}"
+            VerticalAlignment="Top" 
+            Width="1153"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center" Grid.Row="1"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="52" 
+            Margin="1162,100,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpExit}"
+            VerticalAlignment="Top" 
+            Width="312"
+            Foreground="#c23616"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center" Grid.Row="1"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="603,69,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt; Left CTRL            Right CTRL &gt;" 
+            VerticalAlignment="Top" 
+            Width="248"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"
+            TextAlignment="Center" Grid.Row="1"/>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="368,439,0,0"
+            TextWrapping="Wrap" 
+            Text="Press TAB to access, then UP and DOWN arrows" 
+            VerticalAlignment="Top" 
+            Width="404"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"
+            TextAlignment="Center" Grid.Row="1"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="1373,270,0,0"
+            TextWrapping="Wrap" 
+            Text="Press F1" 
+            VerticalAlignment="Top" 
+            Width="67"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17"
+            FontWeight="Medium" Grid.Row="1"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="25" 
+            Margin="1397,281,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt;" 
+            VerticalAlignment="Top" 
+            Width="16"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="20"
+            FontWeight="Medium" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="25" 
+            Margin="1398,257,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt;" 
+            VerticalAlignment="Top" 
+            Width="16"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="20"
+            FontWeight="Medium" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="1208,435,0,0"
+            TextWrapping="Wrap" 
+            Text="Press ENTER" 
+            VerticalAlignment="Top" 
+            Width="100"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium" Grid.Row="1"/>
+
+        <TextBlock HorizontalAlignment="Left" 
+            Height="158" 
+            Margin="1339,310,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding WarningMessage}" 
+            VerticalAlignment="Top" 
+            Width="135"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Bold" 
+            Foreground="#e84118"
+            TextAlignment="Center" Grid.Row="1"/>
     </Grid>
 </Window>
