@@ -50,6 +50,9 @@ namespace InitialProject.Context
         public DbSet<UnfulfilledTourLanguages> UnfulfilledTourLanguages { get; set; }
         public DbSet<RenovationSuggestion> RenovationSuggestions { get; set; }  
         public DbSet<RenovationSuggestionMessage> RenovationSuggestionMessages { get; set; }
+        public DbSet<Forum> Forums { get; set; }
+        public DbSet<ForumComment> ForumComments { get; set; }
+        public DbSet<ForumMessage> ForumMessages { get; set; }
 
 
         // Apsolute paths for every memeber of the team
@@ -64,7 +67,7 @@ namespace InitialProject.Context
         // public string path = @"C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
 
         // Nemanja Todorovic -> Laptop
-        public string path = @"C:\Users\Nemanja\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
+        // public string path = @"C:\Users\Nemanja\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
 
         // Vladimir Blanusa -> Laptop
         // public string path = @"C:\Users\abc\Documents\GitHub\SIMS-HCI-Project\Trippin Travel Agency\InitialProject\InitialProject\MyDatabase.sqlite";
