@@ -107,6 +107,11 @@ namespace InitialProject.WPF.View.TourGuideViews
             language languageInput;
             DateTime selectedDate;
             bool active;
+            // Fetch the User object from the database
+            User user = FetchUserFromDatabase(LoggedUser.id);  // Implement this method based on your database access method
+
+            // Check if the user is super
+            bool isSuper = user.super;
             CreateTourBasicProperties(out name, out location, out guestLimit, out hoursDuration, out description, out languageInput, out selectedDate, out active);
 
             ICollection<KeyPoint> keyPoints = CreateKeyPoints();
@@ -114,8 +119,15 @@ namespace InitialProject.WPF.View.TourGuideViews
             List<Model.Image> imageLinks = CreateImageLinks();
 
             Tour tour = new Tour(name, location.id, keyPoints, description, languageInput, guestLimit, selectedDate, hoursDuration, imageLinks, active,LoggedUser.id);
-
+            tour.super = isSuper;
             DoesTourExist(name, selectedDate, tour);
+        }
+        private User FetchUserFromDatabase(int userId)
+        {
+            using (DataBaseContext dbContext = new DataBaseContext())
+            {
+                return dbContext.Users.Find(userId);
+            }
         }
 
         private void CreateTourBasicProperties(out string name, out TourLocation location, out int guestLimit, out int hoursDuration, out string description, out language languageInput, out DateTime selectedDate, out bool active)
