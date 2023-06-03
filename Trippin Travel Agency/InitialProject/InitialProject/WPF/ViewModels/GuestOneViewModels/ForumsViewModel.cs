@@ -23,7 +23,16 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 "Thousands of people every day share their opinion and advices.\n" +
                 "You can create your own forum or open an existing one.";
             GoMyForums = new ViewModelCommand(GoToMyForums);
-            ForumsGrid = new ObservableCollection<Forum>(forumService.GetAll());
+
+            var forumsToGrid = from forum in forumService.GetAll()
+                               select new
+                               {
+                                   Country = forumService.GetLocation(forum.id)[0],
+                                   City = forumService.GetLocation(forum.id)[1],
+                                   IfClosed = forum.isClosed ? new String("Closed") : new String("Opened"),
+                                   IfUseful = forum.isVeryUseful ? new String("Useful") : new String("-")
+                               };
+            ForumsGrid = forumsToGrid;
 
         }
 
@@ -41,8 +50,8 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             }
         }
 
-        private ObservableCollection<Forum> forumsGrid;
-        public ObservableCollection<Forum> ForumsGrid
+        private dynamic forumsGrid;
+        public dynamic ForumsGrid
         {
             get { return forumsGrid; }
             set

@@ -21,14 +21,26 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand CreateForum { get; set; }
         private AccommodationLocationService accommodationLocationService { get; set; }
         private UserService userService { get; set; }
+        public ViewModelCommand CloseForum { get; set; }
         public GuestsForumsViewModel()
         {
+            CloseForum = new ViewModelCommand(CloseGuestsForum);
+
             forumService = new ForumService();
             userService = new UserService();
             accommodationLocationService = new AccommodationLocationService();
             CreateForum = new ViewModelCommand(CreateNewForum);
             ForumText = "You can close your forum for additional commenting, but you can never delete it.";
-            ForumsGrid = new ObservableCollection<Forum>(forumService.GetByCreatorId());
+
+            var forumsToGrid = from forum in forumService.GetAll()
+                               select new
+                               {
+                                   Country = forumService.GetLocation(forum.id)[0],
+                                   City = forumService.GetLocation(forum.id)[1],
+                                   IfClosed = forum.isClosed ? new String("Closed") : new String("Opened"),
+                                   IfUseful = forum.isVeryUseful ? new String("Useful") : new String("-")
+                               };
+            ForumsGrid = forumsToGrid;
         }
 
         private string forumText;
@@ -87,8 +99,22 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             }
         }
 
-        private ObservableCollection<Forum> forumsGrid;
-        public ObservableCollection<Forum> ForumsGrid
+        private string debug;
+        public string Debug
+        {
+            get { return debug; }
+            set
+            {
+                if (debug != value)
+                {
+                    debug = value;
+                    OnPropertyChanged(nameof(Debug));
+                }
+            }
+        }
+
+        private dynamic forumsGrid;
+        public dynamic ForumsGrid
         {
             get { return forumsGrid; }
             set
@@ -97,6 +123,20 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 {
                     forumsGrid = value;
                     OnPropertyChanged(nameof(ForumsGrid));
+                }
+            }
+        }
+
+        private int selectedForum;
+        public int SelectedForum
+        {
+            get { return selectedForum; }
+            set
+            {
+                if (selectedForum != value)
+                {
+                    selectedForum = value;
+                    OnPropertyChanged(nameof(SelectedForum));
                 }
             }
         }
@@ -151,6 +191,13 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 context.SaveChanges();
 
             }
+        }
+
+        public void CloseGuestsForum(object sender)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<Forum> forums = context.Forums.ToList();
+            Debug = forums[SelectedForum].id.ToString();
         }
     }
 }

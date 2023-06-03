@@ -101,9 +101,9 @@
                 Height="509" 
                 Margin="609,152,0,0" 
                 VerticalAlignment="Top" 
-                Width="812" 
+                Width="621" 
                 ItemsSource="{Binding ForumsGrid}"
-                SelectedItem="{Binding SelectedForum}"/>
+                SelectedIndex="{Binding SelectedForum}"/>
 
             <TextBox
                 HorizontalAlignment="Left"
@@ -140,7 +140,7 @@
                 Text="zemlja" 
                 VerticalAlignment="Top"
                 Width="109"/>
-            
+
             <TextBlock 
                 HorizontalAlignment="Left"
                 Height="45" 
@@ -149,7 +149,7 @@
                 Text="dgra" 
                 VerticalAlignment="Top"
                 Width="109"/>
-            
+
             <TextBlock 
                 HorizontalAlignment="Left"
                 Height="45" 
@@ -158,7 +158,7 @@
                 Text="kom" 
                 VerticalAlignment="Top"
                 Width="109"/>
-            
+
             <Button 
                 Content="ROKAAAAAAAAAAAAAAAM" 
                 HorizontalAlignment="Left"
@@ -167,6 +167,16 @@
                 Margin="111,590,0,0"
                 VerticalAlignment="Top" 
                 Width="284"/>
+
+            <Button Content="ZATVORDEGA" 
+                    HorizontalAlignment="Left"
+                    Height="172"
+                    Margin="1292,340,0,0"
+                    VerticalAlignment="Top"
+                    Command="{Binding CloseForum}"
+                    Width="143"/>
+
+            <TextBlock HorizontalAlignment="Left" Height="101" Margin="1276,560,0,0" TextWrapping="Wrap" Text="{Binding Debug}" VerticalAlignment="Top" Width="186" FontSize="50"/>
 
         </Grid>
 
