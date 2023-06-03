@@ -50,6 +50,15 @@ namespace InitialProject.Service.AccommodationServices
             return new List<string>() { accommodation.location.country, accommodation.location.city };
         }
 
+        public int GetAccommodationLocationId(int accommodatonId)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<Accommodation> accommodations = context.Accommodations.ToList();
+            List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
+            Accommodation accommodation = accommodations.Find(a => a.id == accommodatonId);
+            return accommodation.location.id;
+        }
+
         public List<int> GetAllByCountry(string country)
         {
             if (country != null)

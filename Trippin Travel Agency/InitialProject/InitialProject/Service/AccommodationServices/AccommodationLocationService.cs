@@ -23,5 +23,21 @@ namespace InitialProject.Service.AccommodationServices
             }
             return null;
         }
+
+        public int GetAccommodationLocationId(AccommodationLocation accommodationLocation)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<AccommodationLocation> accommodationLocations = context.AccommodationLocation.ToList();
+
+            foreach(AccommodationLocation location in accommodationLocations)
+            {
+                if(location.id == accommodationLocation.id)
+                {
+                    return location.id;
+                }
+            }
+
+            return 0;
+        }
     }
 }
