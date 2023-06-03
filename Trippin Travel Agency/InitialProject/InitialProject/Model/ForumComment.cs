@@ -14,14 +14,16 @@ namespace InitialProject.Model
         public DateTime postingDate { get; set; }
         public int numberOfReports { get; set; }
         public bool hasGuestVisited { get; set; }
+        public int forumId { get; set; }
         public ForumComment() { }
-        public ForumComment(int userId, string comment, DateTime postingDate, int numberOfReports, bool hasGuestVisited)
+        public ForumComment(int userId, string comment, DateTime postingDate, int numberOfReports, bool hasGuestVisited, int forumId)
         {
             this.userId = userId;
             this.comment = comment;
             this.postingDate = postingDate;
             this.numberOfReports = numberOfReports;
             this.hasGuestVisited = hasGuestVisited;
+            this.forumId = forumId;
         }
     }
 }

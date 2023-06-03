@@ -55,6 +55,5 @@ namespace InitialProject.Service.AccommodationServices
             Forum forum = forums.Find(f => f.id == forumId);
             return new List<string>() { forum.location.country, forum.location.city };
         }
-
     }
 }

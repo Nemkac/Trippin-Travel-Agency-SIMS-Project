@@ -107,7 +107,7 @@
             VerticalAlignment="Top" 
             Width="665"
             ItemsSource="{Binding ForumsGrid}"
-            SelectedItem="{Binding SelectedForum}"
+            SelectedIndex="{Binding SelectedForum}"
             />
         
         <TextBox 
@@ -154,6 +154,15 @@
             Margin="199,609,0,0" 
             VerticalAlignment="Top" 
             Width="316"/>
+        
+        <Button 
+            Content="vidga"
+            Command="{Binding ShowForum}"
+            HorizontalAlignment="Left"
+            Height="387" 
+            Margin="1411,281,0,0"
+            VerticalAlignment="Top"
+            Width="63"/>
 
     </Grid>
 </Window>

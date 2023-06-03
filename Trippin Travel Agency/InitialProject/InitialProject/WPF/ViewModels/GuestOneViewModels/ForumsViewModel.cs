@@ -1,4 +1,5 @@
-﻿using InitialProject.DTO;
+﻿using InitialProject.Context;
+using InitialProject.DTO;
 using InitialProject.Model;
 using InitialProject.Service.AccommodationServices;
 using InitialProject.WPF.View.GuestOne_Views;
@@ -14,7 +15,9 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
     public class ForumsViewModel : ViewModelBase
     {
         public ViewModelCommand GoMyForums { get; set; }
+        public ViewModelCommand ShowForum { get; set; }
         private ForumService forumService { get; set; }
+        
 
         public ForumsViewModel()
         {
@@ -23,7 +26,9 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 "Thousands of people every day share their opinion and advices.\n" +
                 "You can create your own forum or open an existing one.";
             GoMyForums = new ViewModelCommand(GoToMyForums);
+            ShowForum = new ViewModelCommand(ShowSelectedForum);
 
+            // ne treba svi nego od tog foruma
             var forumsToGrid = from forum in forumService.GetAll()
                                select new
                                {
@@ -64,12 +69,38 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             }
         }
 
+        private int selectedForum;
+        public int SelectedForum
+        {
+            get { return selectedForum; }
+            set
+            {
+                if (selectedForum != value)
+                {
+                    selectedForum = value;
+                    OnPropertyChanged(nameof(SelectedForum));
+                }
+            }
+        }
+
         public void GoToMyForums(object sender)
         {
             GuestsForumsInterface guestsForumsInterface = new GuestsForumsInterface();
             guestsForumsInterface.Left = GuestOneStaticHelper.guestOneInterface.Left;
             guestsForumsInterface.Top = GuestOneStaticHelper.guestOneInterface.Top;
             guestsForumsInterface.Show();
+            GuestOneStaticHelper.forumsInterface.Hide();
+        }
+
+        public void ShowSelectedForum(object sender)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<Forum> forums = context.Forums.ToList();
+            GuestOneStaticHelper.selectedForum = forums[SelectedForum];
+            SelectedForumInterface selectedForumInterface = new SelectedForumInterface();
+            selectedForumInterface.Left = GuestOneStaticHelper.guestOneInterface.Left;
+            selectedForumInterface.Top = GuestOneStaticHelper.guestOneInterface.Top;
+            selectedForumInterface.Show();
             GuestOneStaticHelper.forumsInterface.Hide();
         }
 

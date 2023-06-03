@@ -32,7 +32,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             CreateForum = new ViewModelCommand(CreateNewForum);
             ForumText = "You can close your forum for additional commenting, but you can never delete it.";
 
-            var forumsToGrid = from forum in forumService.GetAll()
+            var forumsToGrid = from forum in forumService.GetByCreatorId()
                                select new
                                {
                                    Country = forumService.GetLocation(forum.id)[0],
@@ -153,16 +153,21 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             {
                 if (location.country.ToUpper().Equals(InputCountry.ToUpper()) && location.city.ToUpper().Equals(InputCity.ToUpper()))
                 {
+                    ifLocationAlreadyExists = true;
 
-                    ForumComment comment = new ForumComment(LoggedUser.id, Comment, DateTime.Today, 0, userService.HasGuestVisitedPlace(location));
+                    Forum forum = new Forum(false, location, LoggedUser.id, false, null);
+                    context.Attach(forum);
+                    context.SaveChanges();
+
+                    ForumComment comment = new ForumComment(LoggedUser.id, Comment, DateTime.Today, 0, userService.HasGuestVisitedPlace(location), forum.id);
                     context.Attach(comment);
                     context.SaveChanges();
                     List<ForumComment> comments = new List<ForumComment>() { comment };
 
-                    ifLocationAlreadyExists = true;
-                    Forum forum = new Forum(false, location, LoggedUser.id, false, comments);
-                    context.Attach(forum);
+                    forum.comments = comments;
+                    context.Update(forum);
                     context.SaveChanges();
+
 
                     ForumMessage message = new ForumMessage(new string("New forum is opened at location " + location.city + "," + location.country), location.id, false, forum.id);
                     context.Attach(message);
@@ -173,17 +178,21 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             }
             if (!ifLocationAlreadyExists)
             {
-                ForumComment comment = new ForumComment(LoggedUser.id, Comment, DateTime.Today, 0, false);
-                context.Attach(comment);
-                context.SaveChanges();
-                List<ForumComment> comments = new List<ForumComment>() { comment };
-
                 accommodationLocation = new AccommodationLocation(InputCountry, InputCity);
                 context.Attach(accommodationLocation);
                 context.SaveChanges();
 
-                Forum forum = new Forum(false, accommodationLocation, LoggedUser.id, false, comments);
+                Forum forum = new Forum(false, accommodationLocation, LoggedUser.id, false, null);
                 context.Attach(forum);
+                context.SaveChanges();
+
+                ForumComment comment = new ForumComment(LoggedUser.id, Comment, DateTime.Today, 0, false, forum.id);
+                context.Attach(comment);
+                context.SaveChanges();
+                List<ForumComment> comments = new List<ForumComment>() { comment };
+
+                forum.comments = comments;
+                context.Update(forum);
                 context.SaveChanges();
 
                 ForumMessage message = new ForumMessage(new string("New forum is opened at location " + accommodationLocation.city + "," + accommodationLocation.country), accommodationLocation.id, false, forum.id);
@@ -191,13 +200,34 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 context.SaveChanges();
 
             }
+            var forumsToGrid = from forum1 in forumService.GetByCreatorId()
+                               select new
+                               {
+                                   Country = forumService.GetLocation(forum1.id)[0],
+                                   City = forumService.GetLocation(forum1.id)[1],
+                                   IfClosed = forum1.isClosed ? new String("Closed") : new String("Opened"),
+                                   IfUseful = forum1.isVeryUseful ? new String("Useful") : new String("-")
+                               };
+            ForumsGrid = forumsToGrid;
         }
 
         public void CloseGuestsForum(object sender)
         {
             DataBaseContext context = new DataBaseContext();
-            List<Forum> forums = context.Forums.ToList();
-            Debug = forums[SelectedForum].id.ToString();
+            List<Forum> forums = forumService.GetByCreatorId();
+            Forum forum = forums[SelectedForum];
+            forum.isClosed = true;
+            context.Update(forum);
+            context.SaveChanges();
+            var forumsToGrid = from forum1 in forumService.GetByCreatorId()
+                               select new
+                               {
+                                   Country = forumService.GetLocation(forum1.id)[0],
+                                   City = forumService.GetLocation(forum1.id)[1],
+                                   IfClosed = forum1.isClosed ? new String("Closed") : new String("Opened"),
+                                   IfUseful = forum1.isVeryUseful ? new String("Useful") : new String("-")
+                               };
+            ForumsGrid = forumsToGrid;
         }
     }
 }
