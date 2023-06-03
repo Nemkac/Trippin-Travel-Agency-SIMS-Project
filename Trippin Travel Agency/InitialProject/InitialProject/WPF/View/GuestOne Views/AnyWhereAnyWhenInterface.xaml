@@ -12,6 +12,8 @@
         <KeyBinding Key="Escape" Command="{Binding GoToPreviousWindow}" />
         <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
         <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
+        <KeyBinding Key="S" Modifiers="Ctrl" Command="{Binding Search}" />
+        <KeyBinding Key="F1" Command="{Binding CheckDates}" />
     </Window.InputBindings>
     <Grid>
         <GroupBox Header="Navigator"
@@ -162,7 +164,7 @@
             Height="20" 
             Margin="1230,319,0,0"
             TextWrapping="Wrap" 
-            Text="Press S" 
+            Text="Press CTRL + S" 
             VerticalAlignment="Top" 
             Width="58"
             Foreground="#718093"
@@ -192,7 +194,7 @@
             FontWeight="Medium" 
             Style="{StaticResource leadButton}"
             Command="{Binding CheckDates}" 
-            Margin="1230,546,78,173"
+            Margin="1230,546,65,173"
             IsTabStop="False"/>
 
         <DatePicker HorizontalAlignment="Left"
@@ -296,7 +298,7 @@
             Height="20" 
             Margin="1230,592,0,0"
             TextWrapping="Wrap" 
-            Text="Press ENTER" 
+            Text="Press F1" 
             VerticalAlignment="Top" 
             Width="100"
             Foreground="#718093"

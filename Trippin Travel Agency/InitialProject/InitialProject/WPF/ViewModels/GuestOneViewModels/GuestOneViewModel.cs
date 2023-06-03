@@ -249,16 +249,16 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             }
         }
 
-        private string helpCheck;
-        public string HelpCheck
+        private string warningMessage;
+        public string WarningMessage
         {
-            get { return helpCheck; }
+            get { return warningMessage; }
             set
             {
-                if (helpCheck != value)
+                if (warningMessage != value)
                 {
-                    helpCheck = value;
-                    OnPropertyChanged(nameof(HelpCheck));
+                    warningMessage = value;
+                    OnPropertyChanged(nameof(WarningMessage));
                 }
             }
         }
@@ -278,15 +278,14 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             {
                 HelpLand = string.Empty;
                 HelpExit = string.Empty;
-                HelpCheck = string.Empty;
                 isHelpOn = false;
             }
             else
             {
 
-                HelpLand = "Go through search parameters with Left and Right Shift.Then press TAB to access the list of accommodations";
-                HelpCheck = "Once accommo-dation is selected, press SPACE to iterate through dates and number of guests input";
+                HelpLand = "Go through search parameters with Left and Right CTRL.Then press TAB to access the list of accommodations.\nOnce accommodation is selected, press F1 to iterate through dates and number of guests input";
                 HelpExit = "To exit Help, press CTRL + H again";
+                WarningMessage = string.Empty;
                 isHelpOn = true;
             }
         }
@@ -386,20 +385,35 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 
         private void CheckForDates(object sender)
         {
+            if (SelectedAccommodation == null)
+            {
+                WarningMessage = "You need to select accommo-\ndation";
+                return;
+            }
+            if (!int.TryParse(DaysToStay, out int x))
+            {
+                WarningMessage = "Invalid input for number of days";
+                return;
+            }
+            if(StartingDate >= EndingDate)
+            {
+                WarningMessage = "Ending date must be set to date after starting one";
+                return;
+            }
+            if(int.Parse(DaysToStay) < SelectedAccommodation.minDaysBooked)
+            {
+                WarningMessage = "Selected accommoda-\ntion cannot be booked under " + SelectedAccommodation.minDaysBooked + "days";
+                return;
+            }
+
             int daysToBook;
             List<string> displayableDates;
             GetBasicDatesProperties(sender, out daysToBook, out displayableDates);
 
             dynamic result = displayableDates.Select(s => new { value = s }).ToList();
-            if (daysToBook < selectedAccommodation.minDaysBooked)
-            {
-                // ne moze da se bukira
-            }
-            else
-            {
-                GuestOneStaticHelper.result = result;
-                ShowBookInterface();
-            }
+            GuestOneStaticHelper.result = result;
+            ShowBookInterface();
+            
         }
 
         private void ShowBookInterface()

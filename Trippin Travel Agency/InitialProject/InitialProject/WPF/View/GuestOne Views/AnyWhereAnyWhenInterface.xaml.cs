@@ -23,7 +23,6 @@ namespace InitialProject.WPF.View.GuestOne_Views
     public partial class AnyWhereAnyWhenInterface : Window
     {
         private int c;
-        private int a;
         private List<IInputElement> n;
         public AnyWhereAnyWhenInterface()
         {
