@@ -34,6 +34,7 @@ namespace InitialProject.Model
         public static ForumsInterface forumsInterface { get; set; }
         public static GuestsForumsInterface guestsForumsInterface { get; set; }
         public static SelectedForumInterface selectedForumInterface { get; set; }
+        public static BookingDetails bookingDetails { get; set; }
         public static Navigator navigator { get; set; }
         public static GuestRate guestRate { get; set; }
         public static string numberOfGuests { get; set; }
