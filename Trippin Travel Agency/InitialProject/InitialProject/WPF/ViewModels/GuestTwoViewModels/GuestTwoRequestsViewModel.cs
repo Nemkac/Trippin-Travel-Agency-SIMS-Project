@@ -116,8 +116,10 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 }
             }
 
+            int brojac = 0;
             foreach (ComplexTourRequest complexRequest in context.ComplexTourRequests.ToList()) 
             {
+                
                 foreach (TourRequest request in complexRequest.singleRequestIds)
                 {
 
@@ -132,14 +134,17 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                     else {
                         acceptedDate = date.ToShortDateString();
                     }
-                    complexRequests.Add(new TourRequestDTO(request.city,
+                    complexRequests.Add(new TourRequestDTO(
+                                                           "Complex tour:  " + brojac.ToString(),
+                                                           request.city,
                                                            request.country,
                                                            request.language,
                                                            request.startDate.ToShortDateString(),
                                                            request.endDate.ToShortDateString(),
                                                            acceptedDate.ToString(),
-                                                           request.status));
+                                                           request.status)) ;
                 }
+                brojac++;
             }
         }
 

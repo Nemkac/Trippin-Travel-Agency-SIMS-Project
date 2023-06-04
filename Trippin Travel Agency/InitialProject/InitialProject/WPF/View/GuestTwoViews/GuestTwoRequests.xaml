@@ -137,7 +137,7 @@
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               RowStyle="{DynamicResource DataGridRowStyle1}"
-                              ItemsSource="{Binding complexRequests}" IsReadOnly="True"                           
+                              ItemsSource="{Binding complexRequests}" IsReadOnly="True"                          
                               >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="" Binding="{Binding field}">
