@@ -21,11 +21,16 @@ namespace InitialProject.WPF.View.GuestOne_Views
     /// </summary>
     public partial class GuestsForumsInterface : Window
     {
+        private int p;
+        private List<IInputElement> n;
         public GuestsForumsInterface()
         {
             InitializeComponent();
             GuestOneStaticHelper.guestsForumsInterface = this;
             this.DataContext = new GuestsForumsViewModel();
+            p = -1;
+            n = new List<IInputElement>() { p0,p1,p2 };
         }
-    }
+
+        public void F(object s, KeyEventArgs k) {  if (k.Key == Key.LeftShift) { if (p == 0 || p == -1) { p = 2; } else  {  p--; }  Keyboard.Focus(n[p]);}if (k.Key == Key.RightShift) { if (p == 2 || p == -1) { p = 0; } else { p++; }Keyboard.Focus(n[p]); }} }
 }

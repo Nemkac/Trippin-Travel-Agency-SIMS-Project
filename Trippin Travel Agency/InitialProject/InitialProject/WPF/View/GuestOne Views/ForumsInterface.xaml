@@ -124,7 +124,7 @@
             Height="200" 
             Margin="500,390,0,0" 
             VerticalAlignment="Top" 
-            Width="516"
+            Width="515"
             ItemsSource="{Binding ForumsGrid}"
             SelectedIndex="{Binding SelectedForum}"
             />

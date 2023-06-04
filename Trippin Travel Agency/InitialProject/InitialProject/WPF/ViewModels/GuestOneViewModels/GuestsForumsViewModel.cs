@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media;
 
 namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 {
@@ -24,6 +25,10 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         private UserService userService { get; set; }
         public ViewModelCommand CloseForum { get; set; }
         public ViewModelCommand ShowForum { get; set; }
+        public ViewModelCommand Help { get; set; }
+        public ViewModelCommand OpenNavigator { get; set; }
+
+        bool isHelpOn = false;
         public GuestsForumsViewModel()
         {
             CloseForum = new ViewModelCommand(CloseGuestsForum);
@@ -33,7 +38,9 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             accommodationLocationService = new AccommodationLocationService();
             CreateForum = new ViewModelCommand(CreateNewForum);
             ShowForum = new ViewModelCommand(ShowSelectedForum);
-            ForumText = "You can close your forum for additional commenting, but you can never delete it.";
+            Help = new ViewModelCommand(ShowHelp);
+            OpenNavigator = new ViewModelCommand(ShowNavigator);
+            ForumText = "Here are shown forums you have created.\n You can close one of your forums from additional commenting, but you can never delete it.";
 
             var forumsToGrid = from forum in forumService.GetByCreatorId()
                                select new
@@ -144,8 +151,69 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             }
         }
 
+        private string helpLand;
+        public string HelpLand
+        {
+            get { return helpLand; }
+            set
+            {
+                if (helpLand != value)
+                {
+                    helpLand = value;
+                    OnPropertyChanged(nameof(HelpLand));
+                }
+            }
+        }
+
+        private string helpExit;
+        public string HelpExit
+        {
+            get { return helpExit; }
+            set
+            {
+                if (helpExit != value)
+                {
+                    helpExit = value;
+                    OnPropertyChanged(nameof(helpExit));
+                }
+            }
+        }
+
+        private string warningMessage;
+        public string WarningMessage
+        {
+            get { return warningMessage; }
+            set
+            {
+                if (warningMessage != value)
+                {
+                    warningMessage = value;
+                    OnPropertyChanged(nameof(WarningMessage));
+                }
+            }
+        }
+
+        private string warningMessage2;
+        public string WarningMessage2
+        {
+            get { return warningMessage2; }
+            set
+            {
+                if (warningMessage2 != value)
+                {
+                    warningMessage2 = value;
+                    OnPropertyChanged(nameof(WarningMessage2));
+                }
+            }
+        }
+
         public void CreateNewForum(object sender)
         {
+            if(InputCity == null || InputCity == string.Empty || InputCountry == null || InputCountry == string.Empty || Comment == null || Comment == string.Empty)
+            {
+                WarningMessage = "You must enter all parameters first";
+                return;
+            }
             bool ifLocationAlreadyExists = false;
             bool ifVisited = false;
             DataBaseContext context = new DataBaseContext();
@@ -176,6 +244,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                     context.Attach(message);
                     context.SaveChanges();
                     ifVisited = false;
+                    WarningMessage = string.Empty;
 
                 }
             }
@@ -243,6 +312,31 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             selectedForumInterface.Top = GuestOneStaticHelper.guestOneInterface.Top;
             selectedForumInterface.Show();
             GuestOneStaticHelper.guestsForumsInterface.Hide();
+        }
+
+        public void ShowHelp(object sender)
+        {
+            if (isHelpOn)
+            {
+                HelpLand = string.Empty;
+                HelpExit = string.Empty;
+                isHelpOn = false;
+            }
+            else
+            {
+                HelpLand = "Go through input parameters with UP and DOWN arrows.\nThen press ";
+                HelpExit = "To exit Help, press CTRL + H again";
+                isHelpOn = true;
+            }
+        }
+
+        private void ShowNavigator(object sender)
+        {
+            Navigator navigator = new Navigator();
+            navigator.Left = GuestOneStaticHelper.guestsForumsInterface.Left + (GuestOneStaticHelper.guestsForumsInterface.Width - navigator.Width) / 2;
+            navigator.Top = GuestOneStaticHelper.guestsForumsInterface.Top + (GuestOneStaticHelper.guestsForumsInterface.Height - navigator.Height) / 2;
+            GuestOneStaticHelper.guestsForumsInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
+            navigator.Show();
         }
     }
 }
