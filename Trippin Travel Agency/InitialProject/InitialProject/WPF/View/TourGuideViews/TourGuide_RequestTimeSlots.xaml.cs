@@ -22,17 +22,16 @@ namespace InitialProject.WPF.View.TourGuideViews
     /// <summary>
     /// Interaction logic for TourGuide_Tours.xaml
     /// </summary>
-    public partial class TourGuide_TourPartRequests : UserControl
+    public partial class TourGuide_RequestTimeSlots : UserControl
     {
         private TourService tourService;
         private TourRequestService tourRequestService;
-        public TourGuide_TourPartRequests()
+        public TourGuide_RequestTimeSlots()
         {
             InitializeComponent();
             this.tourService = new(new TourRepository());
             this.tourRequestService = new(new TourRepository());
             List<TourRequest> requests = tourRequestService.GetAllFullTourRequests();
-            tourRequestsDataGrid.ItemsSource = requests;
         }
 
     }
