@@ -386,7 +386,7 @@ namespace InitialProject.Service.GuestServices
                 {
                     ownerCommentCounter++;
                 }
-                if (IfCommentByGuest(comment.userId, new AccommodationLocation((forumService.GetLocation(forum.id))[0], (forumService.GetLocation(forum.id))[1])))
+                if (IfCommentByGuest1(comment.userId, new AccommodationLocation((forumService.GetLocation(forum.id))[0], (forumService.GetLocation(forum.id))[1])) || IfCommentByGuest2(comment.userId, new AccommodationLocation((forumService.GetLocation(forum.id))[0], (forumService.GetLocation(forum.id))[1])))
                 {
                     guestCommentCounter++;
                 }
@@ -420,7 +420,7 @@ namespace InitialProject.Service.GuestServices
             return false;
         }
 
-        public bool IfCommentByGuest(int guestId, AccommodationLocation location)
+        public bool IfCommentByGuest1(int guestId, AccommodationLocation location)
         {
             DataBaseContext context = new DataBaseContext();
             ForumService forumService = new ForumService();
@@ -442,6 +442,36 @@ namespace InitialProject.Service.GuestServices
                 return true;
             }
             
+            return false;
+        }
+
+        public bool IfCommentByGuest2(int guestId, AccommodationLocation location)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<TourAttendance> tourAttendances = context.TourAttendances.ToList();
+            TourService tourService = new TourService(new TourRepository());
+            List<Tour> tours = tourService.GetAllByLocation(location);
+            List<TourAttendance> foundTourAttendaces = new List<TourAttendance>();
+            if (tours != null)
+            {
+                foreach (Tour tour in tours)
+                {
+                    foreach (TourAttendance tourAttendance in tourAttendances)
+                    {
+                        if (tour.id == tourAttendance.tourId)
+                        {
+                            foundTourAttendaces.Add(tourAttendance);
+                        }
+                    }
+                }
+                foreach (TourAttendance tourAttendance1 in foundTourAttendaces)
+                {
+                    if (tourAttendance1.guestID == guestId)
+                    {
+                        return true;
+                    }
+                }
+            }
             return false;
         }
 
