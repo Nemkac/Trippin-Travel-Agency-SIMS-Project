@@ -1,5 +1,6 @@
 ﻿using InitialProject.Model;
 using InitialProject.WPF.View.GuestOne_Views;
+using InitialProject.WPF.View.Owner_Views;
 using InitialProject.WPF.ViewModels;
 using System;
 using System.Windows;
@@ -130,7 +131,6 @@ namespace InitialProject.WPF.ViewModels
         {
             CurrentChildView = new TourGuide_AcceptedTourRequestViewModel(this);
         }
-
 
     }
 }

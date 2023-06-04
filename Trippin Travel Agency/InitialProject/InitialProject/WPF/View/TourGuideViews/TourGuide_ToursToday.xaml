@@ -88,7 +88,6 @@
                           SelectedItem ="{Binding SelectedToursTodayDTO}"
                           >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Id" Binding="{Binding id}" Width="*"/>
                         <DataGridTextColumn Header="Name" Binding="{Binding name}" Width="*"/>
                         <DataGridTextColumn Header="Language" Binding="{Binding language}" Width="*"/>
                     </DataGrid.Columns>
@@ -149,6 +148,12 @@
 
                 </DockPanel>
 
+                <Button Content="Generate report"
+                        Style="{StaticResource denyButtonMobile}"
+                        Width="Auto"
+                        Command="{Binding GenerateTourReportCommand}"
+                        Margin="0, 25, 0, 0"
+                      />
 
             </StackPanel>
             

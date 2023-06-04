@@ -142,8 +142,10 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             string mostPopularLocation = numberOfBookingsPerLocation.FirstOrDefault().Key;
             string leastPopularLocation = numberOfBookingsPerLocation.LastOrDefault().Key;
 
-            UpdateImageAndLocation(mostPopularLocation, leastPopularLocation);
-
+            if(mostPopularLocation != null && leastPopularLocation != null)
+            {
+                UpdateImageAndLocation(mostPopularLocation, leastPopularLocation);
+            }
         }
 
         private void GetNumberOfBookingsPerLocation(Dictionary<string, int> numberOfBookingsPerLocation, List<Booking> bookings, List<Accommodation> ownersAccommodations)
