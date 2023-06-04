@@ -129,6 +129,43 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+
+        private string _hintText;
+
+        public string HintText
+        {
+            get { return _hintText; }
+            set
+            {
+                _hintText = value;
+                OnPropertyChanged(nameof(HintText));
+            }
+        }
+
+        private string _showImagesText;
+
+        public string ShowImagesText
+        {
+            get { return _showImagesText; }
+            set
+            {
+                _showImagesText = value;
+                OnPropertyChanged(nameof(ShowImagesText));
+            }
+        }
+
+        private string _showDetailsText;
+
+        public string ShowDetailsText
+        {
+            get { return _showDetailsText; }
+            set
+            {
+                _showDetailsText = value;
+                OnPropertyChanged(nameof(ShowDetailsText));
+            }
+        }
+
         public ICommand ShowOurRecommendationsViewCommand { get; private set; }
         public ViewModelCommand ShowAnnualStatisticsViewCommand { get; private set; }
 
@@ -142,17 +179,19 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ExecuteShowOurRecommendationsViewCommand(null);
 
             Mediator.IsCheckedChanged += OnIsCheckedChanged;
+            Mediator.IsLanguageCheckedChanged += OnIsLanguageCheckChanged;
 
             ContentHintColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#353b48";
             DetailsButtonColor = Mediator.GetCurrentIsChecked() ? "#487eb0" : "#2f3640";
-
             DataGridStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridStyle2"] : (Style)Application.Current.Resources["DataGridStyle1"];
-
             DataGridCellStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridCellStyle2"] : (Style)Application.Current.Resources["DataGridCellStyle1"];
-
             DataGridColumnHeaderStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridColumnHeaderStyle2"] : (Style)Application.Current.Resources["DataGridColumnHeaderStyle1"];
-
             DataGridRowStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridRowStyle2"] : (Style)Application.Current.Resources["DataGridRowStyle1"];
+
+            HintText = Mediator.GetCurrentIsLanguageChecked() ? "Izaberite smestaj i kliknite dugme ispod kako bi videli godisnju statistiku" :
+                                                                "Choose an accommodation and click a button beneath to see accommodations annual statistics";
+            ShowImagesText = Mediator.GetCurrentIsLanguageChecked() ? "Prikazi slike" : "Show images";
+            ShowDetailsText = Mediator.GetCurrentIsLanguageChecked() ? "Detaljnije" : "Show details";
         }
 
         private void OnIsCheckedChanged(object sender, bool isChecked)
@@ -167,6 +206,14 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             DataGridColumnHeaderStyle = isChecked ? (Style)Application.Current.Resources["DataGridColumnHeaderStyle2"] : (Style)Application.Current.Resources["DataGridColumnHeaderStyle1"];
 
             DataGridRowStyle = isChecked ? (Style)Application.Current.Resources["DataGridRowStyle2"] : (Style)Application.Current.Resources["DataGridRowStyle1"];
+        }
+
+        private void OnIsLanguageCheckChanged(object sender, bool isChecked)
+        {
+            HintText = isChecked ? "Izaberite smestaj i kliknite dugme ispod kako bi videli godisnju statistiku" :
+                                                                "Choose an accommodation and click a button beneath to see accommodations annual statistics";
+            ShowImagesText = isChecked ? "Prikazi slike" : "Show images";
+            ShowDetailsText = isChecked ? "Detaljnije" : "Show details";
         }
 
         public void ExecuteShowOurRecommendationsViewCommand(object obj)

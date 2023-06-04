@@ -28,26 +28,27 @@
                        Width="Auto" FontSize="20" FontWeight="Light" Margin="5 0 0 0" 
                        VerticalAlignment="Center" Foreground="{Binding ContentTextColor}"
                        Text="{Binding AccommodationNameTextBlock}"/>
-            <Label Content="annual statistics"  FontFamily="Ubuntu"
+            <Label Content="{Binding AnnualStatisticsText}"  FontFamily="Ubuntu"
                            FontSize="20" FontWeight="Light" VerticalAlignment="Center" 
                            Foreground="{Binding ContentTextColor}"/>
         </StackPanel>
         
         <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <Label Content="Choose year"  FontFamily="Ubuntu"
+            <Label Content="{Binding ChooseYearText}"  FontFamily="Ubuntu"
                            FontSize="20" FontWeight="Regular" VerticalAlignment="Center" 
-                           Foreground="{Binding ContentTextColor}"/>
+                           Foreground="{Binding ContentTextColor}" Width="150"/>
             <ComboBox x:Name="yearComboBox" Width="120" Height="30" Margin="15 0 0 0" 
                       ItemsSource="{Binding years}"
                       SelectedItem="{Binding SelectedYear}"/>
             <Button Style="{StaticResource showImagesButton}"
                 Grid.Row="1" HorizontalAlignment="Right"
-                BorderBrush="Transparent" Width="220" Height="35" Margin="225 0 0 0"
+                BorderBrush="Transparent" Width="220" Height="35" Margin="200 0 0 0"
                 Command="{Binding GenerateAnnualReport}">
                 <StackPanel Orientation="Horizontal"
                                 Margin="0, 0, 0 ,0">
                     <fa:IconImage Icon="FilePdf" HorizontalAlignment="Left" Width="20" Height="20" Foreground="#192a56" VerticalAlignment="Center" Margin="0 2 0 0"/>
-                    <Label VerticalAlignment="Center" Foreground="#192a56" Content="Generate report" FontSize="20" FontFamily="Ubuntu" FontWeight="Regular"  Margin="10 0 0 0"/>
+                    <Label VerticalAlignment="Center" Foreground="#192a56" 
+                           Content="{Binding GenerateReportText}" FontSize="20" FontFamily="Ubuntu" FontWeight="Regular"  Margin="10 0 0 0"/>
                 </StackPanel>
             </Button>
         </StackPanel>
@@ -60,7 +61,7 @@
                                       HorizontalAlignment="Left"
                                       Style="{StaticResource menuBackButtonIcon}"
                                       Width="15" Height="15" Foreground="{Binding ContentHintColor}"/>
-                    <Label Content="Choose an accommodation and click a button beneath to see accommodations annual statistics"
+                    <Label Content="{Binding HintText}"
                                Style="{StaticResource labelAboveTextBox}"
                                Foreground="{Binding ContentHintColor}"
                                Margin="10,0,0,0"
@@ -95,7 +96,7 @@
                 <StackPanel Orientation="Horizontal"
                                 Margin="0, 0, 0 ,0">
                     <fa:IconImage Icon="PlusCircle" HorizontalAlignment="Left" Width="20" Height="20" Foreground="#F4FFF8" VerticalAlignment="Center" Margin="0 2 0 0"/>
-                    <Label VerticalAlignment="Center" Content="Show Details" FontSize="20" FontFamily="Ubuntu" FontWeight="Regular" Foreground="#F4FFF8" Margin="10 0 0 0"/>
+                    <Label VerticalAlignment="Center" Content="{Binding ShowDetailsText}" FontSize="20" FontFamily="Ubuntu" FontWeight="Regular" Foreground="#F4FFF8" Margin="10 0 0 0"/>
                 </StackPanel>
             </Button>
         </StackPanel>
@@ -114,17 +115,17 @@
                     </lc:Axis>
                 </lc:CartesianChart.AxisY>
             </lc:CartesianChart>
-            <GroupBox Header="Accommodation Details" FontFamily="Ubuntu" FontSize="20"
+            <GroupBox Header="{Binding AccommodationDetailsText}" FontFamily="Ubuntu" FontSize="20"
                       FontWeight="Bold" Foreground="{Binding ContentTextColor}" Width="410">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
-                        <Label Content="Accommodation name:" Style="{StaticResource defaultLabel}" 
+                        <Label Content="{Binding AccommodationNameText}" Style="{StaticResource defaultLabel}" 
                                Margin="0 20 0 0" FontSize="16"/>
-                        <Label Content="Location: " Style="{StaticResource defaultLabel}" 
+                        <Label Content="{Binding LocationText}" Style="{StaticResource defaultLabel}" 
                                Margin="0 20 0 0" FontSize="16"/>
-                        <Label Content="Max. number of guests: " Style="{StaticResource defaultLabel}" 
+                        <Label Content="{Binding MaxGuestsText}" Style="{StaticResource defaultLabel}" 
                                Margin="0 20 0 0" FontSize="16"/>
-                        <Label Content="Accommodation type:" Style="{StaticResource defaultLabel}" 
+                        <Label Content="{Binding AccommodationTypeText}" Style="{StaticResource defaultLabel}" 
                                Margin="0 20 0 0" FontSize="16"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="10 0 0 0">

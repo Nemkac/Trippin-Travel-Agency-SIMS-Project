@@ -89,6 +89,10 @@
             <local:AllForumsView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModel:ReportCommentViewModel}">
+            <local:ReportCommentView/>
+        </DataTemplate>
+
     </Window.Resources>
 
     <Grid>
@@ -114,7 +118,7 @@
                              GroupName="MainWindowButtons">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Plus" Style="{StaticResource menuButtonIconTablet}"/>
-                        <TextBlock Style="{StaticResource menuButtonText}" Text="New Accommodation"/>
+                        <TextBlock Style="{StaticResource menuButtonText}" Text="{Binding NewAccommodationText}"/>
                     </StackPanel>
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}" 
@@ -122,7 +126,7 @@
                              GroupName="MainWindowButtons">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Bookmark" Style="{StaticResource menuButtonIconTablet}"/>
-                        <TextBlock Style="{StaticResource menuButtonText}" Text="Bookings"/>
+                        <TextBlock Style="{StaticResource menuButtonText}" Text="{Binding BookingsText}"/>
                     </StackPanel>
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}" 
@@ -131,7 +135,7 @@
                              IsChecked="True">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="BuildingUser" Style="{StaticResource menuButtonIconTablet}"/>
-                        <TextBlock Style="{StaticResource menuButtonText}" Text="My Accommodations"/>
+                        <TextBlock Style="{StaticResource menuButtonText}" Text="{Binding MyAccommodationsText}"/>
                     </StackPanel>
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}"
@@ -139,7 +143,7 @@
                              GroupName="MainWindowButtons">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="ArrowDown" Style="{StaticResource menuButtonIconTablet}"/>
-                        <TextBlock Style="{StaticResource menuButtonText}" Text="Requests"/>
+                        <TextBlock Style="{StaticResource menuButtonText}" Text="{Binding RequestsText}"/>
                     </StackPanel>
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}"
@@ -147,7 +151,7 @@
                              Command="{Binding ShowRenovationsCommand}">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Gear" Style="{StaticResource menuButtonIconTablet}"/>
-                        <TextBlock Style="{StaticResource menuButtonText}" Text="Renovations"/>
+                        <TextBlock Style="{StaticResource menuButtonText}" Text="{Binding RenovationsText}"/>
                     </StackPanel>
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}"
@@ -155,7 +159,7 @@
                              Command="{Binding AllForumsCommand}">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Comment" Style="{StaticResource menuButtonIconTablet}"/>
-                        <TextBlock Style="{StaticResource menuButtonText}" Text="Forum"/>
+                        <TextBlock Style="{StaticResource menuButtonText}" Text="{Binding ForumsText}"/>
                     </StackPanel>
                 </RadioButton>
 

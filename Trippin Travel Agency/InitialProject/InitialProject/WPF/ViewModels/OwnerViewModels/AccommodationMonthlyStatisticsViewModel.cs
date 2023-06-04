@@ -114,6 +114,37 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private string _generateReportText;
+        public string GenerateReportText
+        {
+            get { return _generateReportText; }
+            set
+            {
+                _generateReportText = value;
+                OnPropertyChanged(nameof(GenerateReportText));
+            }
+        }
+        private string _chooseMonthText;
+        public string ChooseMonthText
+        {
+            get { return _chooseMonthText; }
+            set
+            {
+                _chooseMonthText = value;
+                OnPropertyChanged(nameof(ChooseMonthText));
+            }
+        }
+        private string _monthlyStatisticsText;
+        public string MonthlyStatisticsText
+        {
+            get { return _monthlyStatisticsText; }
+            set
+            {
+                _monthlyStatisticsText = value;
+                OnPropertyChanged(nameof(MonthlyStatisticsText));
+            }
+        }
+
         public SeriesCollection PieSeriesCollection { get; set; }
 
         public ObservableCollection<AccommodationMonthlyStatisticsDTO> monthlyStatistics { get; set; } = new ObservableCollection<AccommodationMonthlyStatisticsDTO>();
@@ -133,16 +164,24 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             DisplayPieChart(PieSeriesCollection);
 
             Mediator.IsCheckedChanged += OnIsCheckedChanged;
+            Mediator.IsLanguageCheckedChanged += OnIsLanguageCheckChanged;
 
             ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";
-
             DataGridStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridStyle2"] : (Style)Application.Current.Resources["DataGridStyle1"];
-
             DataGridCellStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridCellStyle2"] : (Style)Application.Current.Resources["DataGridCellStyle1"];
-
             DataGridColumnHeaderStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridColumnHeaderStyle2"] : (Style)Application.Current.Resources["DataGridColumnHeaderStyle1"];
-
             DataGridRowStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridRowStyle2"] : (Style)Application.Current.Resources["DataGridRowStyle1"];
+
+            GenerateReportText = Mediator.GetCurrentIsLanguageChecked() ? "Generisi izvestaj" : "Generate report";
+            ChooseMonthText = Mediator.GetCurrentIsLanguageChecked() ? "Prikaz statistike za mesec" : "Show statistics for month";
+            MonthlyStatisticsText = Mediator.GetCurrentIsLanguageChecked() ? "mesecna statistika" : "monthly statistics";
+        }
+
+        private void OnIsLanguageCheckChanged(object sender, bool isChecked)
+        {
+            GenerateReportText = isChecked ? "Generisi izvestaj" : "Generate report";
+            ChooseMonthText = isChecked ? "Prikaz statistike za mesec" : "Show statistics for month";
+            MonthlyStatisticsText = isChecked ? "mesecna statistika" : "monthly statistics";
         }
 
         private void OnIsCheckedChanged(object sender, bool isChecked)
@@ -150,11 +189,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ContentTextColor = isChecked ? "#F4F6F8" : "#192a56";
 
             DataGridStyle = isChecked ? (Style)Application.Current.Resources["DataGridStyle2"] : (Style)Application.Current.Resources["DataGridStyle1"];
-
             DataGridCellStyle = isChecked ? (Style)Application.Current.Resources["DataGridCellStyle2"] : (Style)Application.Current.Resources["DataGridCellStyle1"];
-
             DataGridColumnHeaderStyle = isChecked ? (Style)Application.Current.Resources["DataGridColumnHeaderStyle2"] : (Style)Application.Current.Resources["DataGridColumnHeaderStyle1"];
-
             DataGridRowStyle = isChecked ? (Style)Application.Current.Resources["DataGridRowStyle2"] : (Style)Application.Current.Resources["DataGridRowStyle1"];
         }
 

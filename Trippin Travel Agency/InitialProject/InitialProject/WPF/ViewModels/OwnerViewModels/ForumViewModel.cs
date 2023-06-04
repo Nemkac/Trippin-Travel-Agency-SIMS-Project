@@ -4,15 +4,19 @@ using InitialProject.Migrations;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service.GuestServices;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
 using Microsoft.VisualBasic.ApplicationServices;
 using SharpVectors.Dom;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -22,6 +26,19 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
     {
         private readonly OwnerInterfaceViewModel _mainViewModel;
         private UserService userService = new UserService();
+
+        public int reportButtonNumber;
+
+        private string _reportButtonName;
+        public string ReportButtonName
+        {
+            get { return _reportButtonName; }
+            set
+            {
+                _reportButtonName = value;
+                OnPropertyChanged(nameof(ReportButtonName));
+            }
+        }
 
         private ObservableCollection<ForumComment> _comments;
         public ObservableCollection<ForumComment> Comments
@@ -79,6 +96,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         }
 
         public ICommand SendCommentCommand { get; }
+        public ICommand ReportCommentCommand { get; }
         public ForumViewModel()
         {
             this._mainViewModel = LoggedUser._mainViewModel;
@@ -88,6 +106,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";
 
             SendCommentCommand = new ViewModelCommand(SendComment);
+            ReportCommentCommand = new ViewModelCommand(ReportComment);
 
             LoadComments();
         }
@@ -102,6 +121,15 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 newCommentContext.SaveChanges();
                 LoadComments();
                 OwnerInput = null;
+            }
+        }
+
+        private void ReportComment(object obj)
+        {
+            if (obj is int id)
+            {
+                LoggedUser.commentIdToReport = id;
+                _mainViewModel.ExecuteShowReportCommentCommand(null);
             }
         }
 
@@ -123,6 +151,25 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             List<ForumComment> comments = commentsContext.ForumComments
                 .Where(comment => comment.forumId == forumId)
                 .ToList();
+
+            List<ReportedComment> reportedComments = commentsContext.ReportedComments.ToList();
+
+            foreach (ForumComment comment in comments)
+            {
+                comment.numberOfReports = 0;
+                commentsContext.ForumComments.Update(comment);
+                commentsContext.SaveChanges();
+
+                foreach(ReportedComment reportedComment in reportedComments)
+                {
+                    if (comment.id == reportedComment.commentId)
+                    {
+                        comment.numberOfReports++;
+                        commentsContext.ForumComments.Update(comment);
+                        commentsContext.SaveChanges();
+                    }
+                }
+            }
 
             return new ObservableCollection<ForumComment>(comments);
         }

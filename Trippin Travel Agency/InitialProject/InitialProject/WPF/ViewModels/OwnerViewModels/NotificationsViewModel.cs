@@ -232,7 +232,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
             DataBaseContext forumMessageContext = new DataBaseContext();
             List<ForumMessage> newForumMessages = forumMessageContext.ForumMessages.ToList();
-            /* foreach (ForumMessage forumMessage in newForumMessages.ToList())
+            
+            foreach (ForumMessage forumMessage in newForumMessages.ToList())
              {
                  if (forumMessage.forumId == newForumMessageId)
                  {
@@ -240,7 +241,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                      forumMessageContext.ForumMessages.Update(forumMessage);
                      forumMessageContext.SaveChanges();
                  }
-             }*/
+             }
 
             LoggedUser.VisitedForumId = newForumMessageId;
 

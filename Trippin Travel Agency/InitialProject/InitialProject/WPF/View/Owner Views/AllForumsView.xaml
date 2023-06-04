@@ -17,15 +17,28 @@
              BorderBrush="Transparent"
              Foreground="#192a56"
              ItemsSource="{Binding Forums}"
+             SelectedItem="{Binding SelectedItem}"
              FontFamily="Ubuntu"
              FontSize="23"
              FontWeight="Regular">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Margin="0 10 0 0">
-                            <TextBlock Text="{Binding}" FontSize="26" FontWeight="Bold"/>
-                            <TextBlock Text="{Binding}" FontSize="18" FontWeight="Regular"/>
-                        </StackPanel>
+                        <Border CornerRadius="10" Background="#30000000" Width="680">
+                            <StackPanel Margin="10 5 0 10">
+                                <TextBlock Text="{Binding ForumId}"
+                                           Foreground="{Binding DataContext.ContentTextColor, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                           FontSize="24" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Location}" 
+                                           Foreground="{Binding DataContext.ContentTextColor, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                           FontSize="18" FontWeight="Regular"/>
+                                <TextBlock Text="{Binding NoOfComments}" 
+                                           Foreground="{Binding DataContext.ContentTextColor, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                           FontSize="18" FontWeight="Regular"/>
+                                <TextBlock Text="{Binding ForumType}" 
+                                           Foreground="#fbc531"
+                                           FontSize="18" FontWeight="Bold"/>
+                            </StackPanel>
+                        </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

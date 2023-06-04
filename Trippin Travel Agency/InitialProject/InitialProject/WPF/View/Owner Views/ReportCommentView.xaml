@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="InitialProject.WPF.View.Owner_Views.ReportCommentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InitialProject.WPF.View.Owner_Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="710">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="350"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical" Grid.Row="0">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Label Content="Guest Name" Style="{StaticResource defaultLabel}"
+                       FontSize="20"/>
+                <TextBlock FontSize="20" FontFamily="Ubuntu" FontWeight="Regular"
+                           Margin="65 5 0 0" Width="auto" 
+                           Text="{Binding Guestname}"
+                           Foreground="{Binding ContentTextColor}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
+                        Margin="0 20 0 0">
+                <Label Content="Forum location" Style="{StaticResource defaultLabel}"
+                       FontSize="20"/>
+                <TextBlock FontSize="20" FontFamily="Ubuntu" FontWeight="Regular"
+                           Margin="40 5 0 0" Width="auto"
+                           Text="{Binding ForumLocation}"
+                           Foreground="{Binding ContentTextColor}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
+                        Margin="0 20 0 0">
+                <Label Content="Report from" Style="{StaticResource defaultLabel}"
+                       FontSize="20"/>
+                <TextBlock FontSize="20" FontFamily="Ubuntu" FontWeight="Regular"
+                           Margin="65 5 0 0" Width="auto"
+                           Text="{Binding ReporterName}"
+                           Foreground="{Binding ContentTextColor}"/>
+            </StackPanel>
+
+            <Separator Width="410" Foreground="{Binding ContentTextColor}"
+                       Margin="0 25 0 0"
+                       HorizontalAlignment="Left"/>
+
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Top"
+                    Margin="0 10 0 0">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Label Content="Explanation" Style="{StaticResource defaultLabel}"
+                       FontSize="20"/>
+                <TextBox FontSize="16" FontFamily="Ubuntu" FontWeight="Regular"
+                         Margin="20 0 0 0" Width="540" Height="300"
+                         Text="{Binding Explanation}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <TextBlock x:Name="FeedBack" Margin="15 10 0 0" Width="150" Height="30" 
+                       FontSize="17" Foreground="#4CD137" FontFamily="Ubuntu"
+                       Text="{Binding FeedBack}"/>
+            <Button x:Name="saveAccommodation" Style="{StaticResource saveButtonTablet}" 
+                    Grid.Row="1" Margin="0, 0, 30, 0"
+                    Content="Submit report"
+                    Command="{Binding SubmitReportCommand}"/>
+        </StackPanel>
+        
+    </Grid>
+</UserControl>
