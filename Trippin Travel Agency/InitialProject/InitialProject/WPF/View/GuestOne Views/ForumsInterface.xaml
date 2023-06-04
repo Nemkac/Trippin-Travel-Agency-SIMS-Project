@@ -3,24 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
         mc:Ignorable="d"
         KeyDown="F"
         Title="ForumsInterface" Height="800" Width="1500">
     <Window.InputBindings>
         <KeyBinding Key="M" Modifiers="Ctrl" Command="{Binding GoMyForums}" />
+        <KeyBinding Key="F1" Command="{Binding ShowForum}" />
+        <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
     </Window.InputBindings>
     <Grid>
-
-        <GroupBox 
-            Header="Search by" 
-            FontFamily="ubuntu" 
-            FontSize="36" 
-            FontWeight="Bold" 
-            Foreground="#FF192A56" 
-            BorderThickness="3" 
-            BorderBrush="#192a56" 
-            Margin="106,254,796,153"/>
 
         <GroupBox 
             Header="Forums" 
@@ -30,7 +24,7 @@
             Foreground="#FF192A56" 
             BorderThickness="3" 
             BorderBrush="#192a56" 
-                Margin="798,254,104,153"/>
+                Margin="461,193,441,87"/>
 
         <Label Content="Forums" 
             FontSize ="64"
@@ -42,7 +36,7 @@
             Foreground="#192a56"/>
 
         <GroupBox Header="Navigator" 
-            Margin="985,1,26,674" 
+            Margin="985,1,26,665" 
             Padding="10"
             FontFamily="ubuntu"
             FontSize="30" 
@@ -78,7 +72,7 @@
         />
 
         <GroupBox Header="Help"
-            Margin="35,0,1105,677" 
+            Margin="35,0,1105,665" 
             Padding="10"
             FontFamily="ubuntu"
             FontSize="30"
@@ -113,8 +107,8 @@
 
         <TextBlock 
             HorizontalAlignment="Left" 
-            Height="105" 
-            Margin="113,149,0,0" 
+            Height="82" 
+            Margin="113,127,0,0" 
             TextWrapping="Wrap" 
             Text="{Binding ForumText}" 
             VerticalAlignment="Top" 
@@ -128,7 +122,7 @@
         <DataGrid 
             HorizontalAlignment="Left" 
             Height="200" 
-            Margin="836,330,0,0" 
+            Margin="500,390,0,0" 
             VerticalAlignment="Top" 
             Width="516"
             ItemsSource="{Binding ForumsGrid}"
@@ -139,30 +133,42 @@
             HorizontalAlignment="Left" 
             Height="56"
             Name="s0"
-            Margin="199,424,0,0" 
+            Margin="516,284,0,0" 
             TextWrapping="Wrap" 
             IsTabStop="False"
-            Text="{Binding InputCountry}" 
+            Text="{Binding InputCountry,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
             VerticalAlignment="Top"
-            Width="156"/>
+            Width="156" >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="TextChanged">
+                    <i:InvokeCommandAction Command="{Binding Search}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
 
         <TextBox 
             HorizontalAlignment="Left" 
             Height="56"
-            Margin="455,424,0,0" 
+            Margin="828,284,0,0" 
             TextWrapping="Wrap"
             IsTabStop="False"
             Name="s1"
-            Text="{Binding InputCity}" 
+            Text="{Binding InputCity,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
             VerticalAlignment="Top"
-            Width="156"/>
+            Width="156">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="TextChanged">
+                    <i:InvokeCommandAction Command="{Binding Search}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
 
         <Button 
             Content="My forums" 
             HorizontalAlignment="Left" 
             Height="39"
             Command="{Binding GoMyForums}"
-            Margin="337,629,0,0" 
+            Margin="1072,595,0,0" 
             VerticalAlignment="Top"
             FontFamily="ubuntu" 
             FontSize="24" 
@@ -178,7 +184,7 @@
             Command="{Binding ShowForum}"
             HorizontalAlignment="Left"
             Height="38" 
-            Margin="1020,537,0,0"
+            Margin="684,597,0,0"
             FontFamily="ubuntu" 
             FontSize="24" 
             Background="#FF273C75" 
@@ -195,7 +201,7 @@
             FontFamily="Ubuntu" 
             FontSize="22" 
             FontWeight="Bold" 
-            Foreground="#FF192A56" Margin="233,364,1145,371"/>
+            Foreground="#FF192A56" Margin="551,252,827,483"/>
 
         <TextBlock 
             TextWrapping="Wrap" 
@@ -203,23 +209,7 @@
             FontFamily="Ubuntu" 
             FontSize="22" 
             FontWeight="Bold" 
-            Foreground="#FF192A56" Margin="509,364,896,365"/>
-
-        <Button 
-            Content="Search"
-            Command="{Binding Serach}"
-            HorizontalAlignment="Left"
-            Height="38"
-            FontFamily="ubuntu" 
-            FontSize="24" 
-            Background="#718093" 
-            Foreground="White" 
-            FontWeight="Medium" 
-            Margin="337,537,0,0"
-            VerticalAlignment="Top"
-            IsTabStop="False"
-            Style="{StaticResource leadButton}"
-            Width="136"/>
+            Foreground="#FF192A56" Margin="887,256,518,473"/>
 
         <TextBlock 
             TextWrapping="Wrap" 
@@ -228,15 +218,15 @@
             FontSize="22" 
             FontWeight="Medium" 
             Foreground="#718093" 
-            Margin="107,636,1137,91"/>
+            Margin="1072,559,172,168"/>
         <TextBlock 
             HorizontalAlignment="Left"
             Height="20" 
-            Margin="1043,580,0,0"
+            Margin="727,640,0,0"
             TextWrapping="Wrap" 
-            Text="Press ENTER" 
+            Text="Press F1" 
             VerticalAlignment="Top" 
-            Width="102"
+            Width="74"
             Foreground="#718093"
             FontFamily="Ubuntu" 
             FontSize="17" 
@@ -245,7 +235,7 @@
         <TextBlock 
             HorizontalAlignment="Left"
             Height="20" 
-            Margin="885,302,0,0"
+            Margin="550,362,0,0"
             TextWrapping="Wrap" 
             Text="Press TAB to access, then UP and DOWN arrows" 
             VerticalAlignment="Top" 
@@ -259,7 +249,7 @@
         <TextBlock 
             HorizontalAlignment="Left"
             Height="29" 
-            Margin="484,639,0,0"
+            Margin="1079,640,0,0"
             TextWrapping="Wrap" 
             Text="Press CTRL + M" 
             VerticalAlignment="Top" 
@@ -268,19 +258,55 @@
             FontFamily="Ubuntu" 
             FontSize="17" 
             FontWeight="Medium"/>
-        
+
         <TextBlock 
             HorizontalAlignment="Left"
             Height="20" 
-            Margin="248,485,0,0"
+            Margin="646,256,0,0"
             TextWrapping="Wrap" 
-            Text="&lt; Left CTRL                             Right CTRL &gt;" 
+            Text="&lt; Left CTRL     Right CTRL &gt;" 
             VerticalAlignment="Top" 
-            Width="330"
+            Width="224"
             Foreground="#718093"
             FontFamily="Ubuntu" 
             FontSize="17" 
             FontWeight="Medium"
+            TextAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Left"
+            Height="324" 
+            Margin="98,224,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpLand}"
+            VerticalAlignment="Top" 
+            Width="310"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Left"
+            Height="112" 
+            Margin="98,563,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpExit}"
+            VerticalAlignment="Top" 
+            Width="312"
+            Foreground="#c23616"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Left" 
+            Height="67" 
+            Margin="849,598,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding WarningMessage}" 
+            VerticalAlignment="Top" 
+            Width="167"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Bold" 
+            Foreground="#e84118"
             TextAlignment="Center"/>
 
     </Grid>

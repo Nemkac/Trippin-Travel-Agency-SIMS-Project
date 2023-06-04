@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -76,6 +78,70 @@ namespace InitialProject.Service.AccommodationServices
             DataBaseContext context = new DataBaseContext();
             context.Add(comment);
             context.SaveChanges();
+        }
+
+        public List<Forum> GetAllByCountry(string country)
+        {
+            if (country != null && country != string.Empty)
+            {
+                DataBaseContext context = new DataBaseContext();
+                List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
+                List<Forum> forums = context.Forums.ToList();
+                List<Forum> foundForums = new List<Forum>();
+                foreach(Forum forum in forums)
+                {
+                    if(GetLocation(forum.id)[0].ToUpper().Contains(country.ToUpper()))
+                    {
+                        foundForums.Add(forum);
+                    }
+                }
+                return foundForums;
+            }
+            return null;
+        }
+
+        public List<Forum> GetAllByCity(string city)
+        {
+            if (city != null && city != string.Empty)
+            {
+                DataBaseContext context = new DataBaseContext();
+                List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
+                List<Forum> forums = context.Forums.ToList();
+                List<Forum> foundForums = new List<Forum>();
+                foreach (Forum forum in forums)
+                {
+                    if (GetLocation(forum.id)[1].ToUpper().Contains(city.ToUpper()))
+                    {
+                        foundForums.Add(forum);
+                    }
+                }
+                return foundForums;
+            }
+            return null;
+        }
+
+        public List<Forum> GetMathching(List<Forum> forums1, List<Forum> forums2)
+        {
+            if(forums2 == null)
+            {
+                return forums1;
+            }
+            if(forums1 == null)
+            {
+                return forums2;
+            } 
+            List<Forum> matchingForums = new List<Forum>();
+            foreach(Forum forum1 in forums1)
+            {
+                foreach(Forum forum2 in forums2)
+                {
+                    if(forum1.id == forum2.id)
+                    {
+                        matchingForums.Add(forum1);
+                    }
+                }
+            }
+            return matchingForums;
         }
     }
 }

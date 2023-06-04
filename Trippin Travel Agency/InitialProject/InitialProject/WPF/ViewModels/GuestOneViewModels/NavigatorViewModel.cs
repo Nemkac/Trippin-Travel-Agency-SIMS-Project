@@ -118,6 +118,9 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             GuestOneStaticHelper.renovationSuggestionInterface?.Close();
             GuestOneStaticHelper.guestsAccountInterface?.Close();
             GuestOneStaticHelper.anyWhereAnyWhenInterface?.Close();
+            GuestOneStaticHelper.forumsInterface?.Close();
+            GuestOneStaticHelper.guestsForumsInterface?.Close();
+            GuestOneStaticHelper.selectedForumInterface?.Close();
         }
     }
 }
