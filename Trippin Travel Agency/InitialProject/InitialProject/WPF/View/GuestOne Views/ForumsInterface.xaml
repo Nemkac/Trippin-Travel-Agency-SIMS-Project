@@ -308,6 +308,48 @@
             FontWeight="Bold" 
             Foreground="#e84118"
             TextAlignment="Center"/>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="31" 
+            Margin="1020,489,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt;" 
+            VerticalAlignment="Top" 
+            Width="16"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="25"
+            FontWeight="Medium" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="29" 
+            Margin="1022,466,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt;" 
+            VerticalAlignment="Top" 
+            Width="16"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="25"
+            FontWeight="Medium" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
 
     </Grid>
 </Window>

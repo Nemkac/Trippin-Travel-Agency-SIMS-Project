@@ -27,5 +27,13 @@ namespace InitialProject.WPF.View.GuestOne_Views
             GuestOneStaticHelper.selectedForumInterface = this;
             this.DataContext = new SelectedForumViewModel();
         }
+
+        public void F(object s, KeyEventArgs k)
+        {
+            if (k.Key == Key.F1)
+            {
+                Keyboard.Focus(t);
+            }
+        }
     }
 }

@@ -168,9 +168,9 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         private void ShowNavigator(object sender)
         {
             Navigator navigator = new Navigator();
-            navigator.Left = GuestOneStaticHelper.guestOneInterface.Left + (GuestOneStaticHelper.guestOneInterface.Width - navigator.Width) / 2;
-            navigator.Top = GuestOneStaticHelper.guestOneInterface.Top + (GuestOneStaticHelper.guestOneInterface.Height - navigator.Height) / 2;
-            GuestOneStaticHelper.guestOneInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
+            navigator.Left = GuestOneStaticHelper.forumsInterface.Left + (GuestOneStaticHelper.forumsInterface.Width - navigator.Width) / 2;
+            navigator.Top = GuestOneStaticHelper.forumsInterface.Top + (GuestOneStaticHelper.forumsInterface.Height - navigator.Height) / 2;
+            GuestOneStaticHelper.forumsInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
             navigator.Show();
         }
 

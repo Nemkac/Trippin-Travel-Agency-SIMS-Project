@@ -5,8 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
         mc:Ignorable="d"
+        KeyDown="F"
         Title="SelectedForumInterface" Height="800" Width="1500">
+        <Window.InputBindings>
+            <KeyBinding Key="F1" Command="{Binding ShowForum}" />
+            <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
+            <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
+            <KeyBinding Key="Enter" Command="{Binding AddComment}" />
+    </Window.InputBindings>
     <Grid>
+        <GroupBox 
+            Header="Add comment" 
+            FontFamily="ubuntu"
+            FontSize="36" 
+            FontWeight="Bold" 
+            Foreground="#FF192A56" 
+            BorderThickness="3" 
+            BorderBrush="#192a56" 
+            Margin="833,161,110,96"/>
+
+
+        <GroupBox 
+            Header="Comments" 
+            FontFamily="ubuntu" 
+            FontSize="36" 
+            FontWeight="Bold" 
+            Foreground="#FF192A56" 
+            BorderThickness="3" 
+            BorderBrush="#192a56" 
+            Margin="116,160,831,96"/>
+
+
         <GroupBox Header="Navigator"
             Margin="985,1,26,662"
             Padding="10" 
@@ -82,29 +111,142 @@
 
         <DataGrid 
             HorizontalAlignment="Left" 
-            Height="405" 
-            Margin="64,187,0,0" 
+            Height="380" 
+            Margin="161,224,0,0" 
             VerticalAlignment="Top" 
-            Width="688" 
+            Width="457" 
             ItemsSource="{Binding Comments}"/>
-        
+
         <TextBox 
             HorizontalAlignment="Left" 
-            Height="171" 
-            Margin="928,310,0,0" 
+            Height="314"
+            Name="t"
+            Margin="878,242,0,0" 
             TextWrapping="Wrap" 
-            Text="{Binding NewComment}" 
+            Text="{Binding NewComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
             VerticalAlignment="Top" 
-            Width="365"/>
+            IsTabStop="False"
+            Width="469"/>
         
         <Button 
-            Content="rokni kom" 
-            HorizontalAlignment="Left"
+            Content="Add comment"
             Command="{Binding AddComment}"
-            Height="72" 
-            Margin="1012,565,0,0" 
+            HorizontalAlignment="Left"
+            Height="38" 
+            Margin="1028,585,0,0"
+            FontFamily="ubuntu" 
+            FontSize="24" 
+            Background="#FF273C75" 
+            Foreground="White" 
+            FontWeight="Medium"
+            IsTabStop="False"
             VerticalAlignment="Top"
-            Width="218"/>
+            Style="{StaticResource leadButton}"
+            Width="196"/>
+        <TextBlock HorizontalAlignment="Left" 
+            Height="88" 
+            Margin="1195,561,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding WarningMessage}" 
+            VerticalAlignment="Top" 
+            Width="178"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Bold" 
+            Foreground="#e84118"
+            TextAlignment="Center"/>
+        <Rectangle HorizontalAlignment="Left" Height="100" Margin="1665,524,0,0" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+        <TextBlock HorizontalAlignment="Left"
+            Height="224" 
+            Margin="678,268,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpLand}"
+            VerticalAlignment="Top" 
+            Width="138"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Left"
+            Height="98" 
+            Margin="678,538,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpExit}"
+            VerticalAlignment="Top" 
+            Width="150"
+            Foreground="#c23616"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="1089,628,0,0"
+            TextWrapping="Wrap" 
+            Text="Press ENTER" 
+            VerticalAlignment="Top" 
+            Width="74"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"/>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="188,622,0,0"
+            TextWrapping="Wrap" 
+            Text="Press TAB to access, then UP and DOWN arrows" 
+            VerticalAlignment="Top" 
+            Width="404"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="31" 
+            Margin="626,416,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt;" 
+            VerticalAlignment="Top" 
+            Width="16"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="25"
+            FontWeight="Medium" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="29" 
+            Margin="629,393,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt;" 
+            VerticalAlignment="Top" 
+            Width="16"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="25"
+            FontWeight="Medium" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
 
 
     </Grid>
