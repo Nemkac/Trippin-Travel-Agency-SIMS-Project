@@ -10,6 +10,7 @@
         <KeyBinding Key="R" Command="{Binding GoToDelayment}" />
         <KeyBinding Key="C" Command="{Binding DeleteBooking}" />
         <KeyBinding Key="B" Command="{Binding GoToPastBookings}" />
+        <KeyBinding Key="D" Command="{Binding ShowDetailed}" />
         <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
         <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
     </Window.InputBindings>

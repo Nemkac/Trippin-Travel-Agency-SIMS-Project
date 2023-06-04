@@ -25,6 +25,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand OpenNavigator { get; set; }
         private UserService userService { get; set; }
         private ForumService forumService { get; set; }
+        
 
         
         bool isHelpOn = false;
@@ -220,7 +221,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             List<Forum> byCity = forumService.GetAllByCity(InputCity);
             List<Forum> restult1 = new List<Forum>();
             List<Forum> result = new List<Forum>();
-            if((InputCountry==null||InputCountry == string.Empty) && (inputCity == null || inputCity == string.Empty))
+            if ((InputCountry == null || InputCountry == string.Empty) && (inputCity == null || inputCity == string.Empty))
             {
                 result = byCity;
                 var forumsToGrid1 = from forum in allForums
@@ -240,30 +241,30 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             {
                 result = byCity;
                 var forumsToGrid1 = from forum in result
-                                   select new
-                                   {
-                                       Country = forumService.GetLocation(forum.id)[0],
-                                       City = forumService.GetLocation(forum.id)[1],
-                                       IfClosed = forum.isClosed ? new String("Closed") : new String("Opened"),
-                                       IfUseful = userService.IsForumSuperUseful(forum) ? new String("Super Useful!") : new String("-"),
+                                    select new
+                                    {
+                                        Country = forumService.GetLocation(forum.id)[0],
+                                        City = forumService.GetLocation(forum.id)[1],
+                                        IfClosed = forum.isClosed ? new String("Closed") : new String("Opened"),
+                                        IfUseful = userService.IsForumSuperUseful(forum) ? new String("Super Useful!") : new String("-"),
 
-                                   };
+                                    };
                 ForumsGrid = forumsToGrid1;
                 return;
-                    
+
             }
-            if(byCity == null)
+            if (byCity == null)
             {
                 result = byCountry;
                 var forumsToGrid2 = from forum in result
-                                   select new
-                                   {
-                                       Country = forumService.GetLocation(forum.id)[0],
-                                       City = forumService.GetLocation(forum.id)[1],
-                                       IfClosed = forum.isClosed ? new String("Closed") : new String("Opened"),
-                                       IfUseful = userService.IsForumSuperUseful(forum) ? new String("Super Useful!") : new String("-"),
+                                    select new
+                                    {
+                                        Country = forumService.GetLocation(forum.id)[0],
+                                        City = forumService.GetLocation(forum.id)[1],
+                                        IfClosed = forum.isClosed ? new String("Closed") : new String("Opened"),
+                                        IfUseful = userService.IsForumSuperUseful(forum) ? new String("Super Useful!") : new String("-"),
 
-                                   };
+                                    };
                 ForumsGrid = forumsToGrid2;
                 return;
             }

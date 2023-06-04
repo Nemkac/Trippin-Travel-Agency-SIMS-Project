@@ -85,6 +85,15 @@
             FontFamily="Ubuntu" 
             FontSize="22" 
             FontWeight="Bold"/>
+        
+        <TextBlock
+            HorizontalAlignment="Left"
+            Height="245" 
+            Text ="{Binding Debug}"
+            Margin="417,271,0,0" 
+            TextWrapping="Wrap"
+            VerticalAlignment="Top" 
+            Width="628"/>
 
     </Grid>
 </Window>
