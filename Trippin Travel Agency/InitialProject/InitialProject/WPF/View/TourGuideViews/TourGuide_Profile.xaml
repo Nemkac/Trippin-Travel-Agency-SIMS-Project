@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:viewModel="clr-namespace:InitialProject.WPF.ViewModels"
-             xmlns:local="clr-namespace:InitialProject.WPF.View.TourGuideViews"
+             xmlns:local="clr-namespace:InitialProject.WPF.View.TourGuideViews" d:DataContext="{d:DesignInstance Type=viewModel:TourGuide_ProfileViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="660" d:DesignWidth="430">
-    
-    <Grid>
+
+    <Grid Background="#f5f6fa">
         <Grid.RowDefinitions>
             <!-- Margin -->
             <RowDefinition Height="20"/>
@@ -43,12 +43,6 @@
 
             </RadioButton>
             <Label Content="Profile" Style="{StaticResource labelBackHeader}"/>
-            <Button Style="{StaticResource resignButtonMobile}"
-                    Background="AliceBlue"
-                    Content="Resign"
-                    Margin="48, -35, 0, 0"
-                    Width="70"
-                    />
         </StackPanel>
 
         <ScrollViewer VerticalScrollBarVisibility="Hidden"
@@ -63,8 +57,8 @@
                               HorizontalAlignment="Center"
                               Width="70"
                               Height="70"
-                              Margin="0, 70, 0, 20"
-                              Foreground="#273c75"
+                              Margin="0, 20, 0, 20"
+                              Foreground="#487eb0"
                               />
                 <TextBlock Text="{Binding UserName}"
                            FontSize="48"
@@ -78,18 +72,18 @@
                            FontSize="48"
                            FontFamily="Ubuntu"
                            FontWeight="Bold"
-                           Foreground="#171717"
+                           Foreground="#2f3640"
                            HorizontalAlignment="Center"
                            />
 
-                <TextBlock Text="Super - guide"
-                           FontSize="18"
-                           FontFamily="Ubuntu"
-                           FontWeight="Regular"
-                           Foreground="#171717"
-                           HorizontalAlignment="Center"
-                           Margin="0, 10, 0, 0"
-                           />
+                <TextBlock Text="{Binding GuideStatus}"
+                   FontSize="18"
+                   FontFamily="Ubuntu"
+                   FontWeight="Medium"
+                   Foreground="#353b48"
+                   HorizontalAlignment="Center"
+                   Margin="0, 10, 0, 0" />  
+
 
                 <Line Style="{StaticResource mobileDelimiterLine}"
                       Width="Auto"
@@ -103,27 +97,27 @@
                     <fa:IconImage Icon="Star"
                               Width="20"
                               Height="20"
-                              Foreground="#2f3640"
+                              Foreground="#487eb0"
                               />
                     <TextBlock FontSize="20"
                                Foreground="#2f3640"
                                FontFamily="Ubuntu"
                                FontWeight="Regular"
-                               Text="9.7"
+                               Text="{Binding AverageRating}"
                                Margin="10, 0, 0, 0"
                                />
 
                     <fa:IconImage Icon="ChartBar"
                               Width="20"
                               Height="20"
-                              Foreground="#2f3640"
+                              Foreground="#487eb0"
                                Margin="30, 0, 0, 0"
                               />
                     <TextBlock FontSize="20"
                                Foreground="#2f3640"
                                FontFamily="Ubuntu"
                                FontWeight="Regular"
-                               Text="31 tours on Serbian"
+                               Text="{Binding HowMuchOnLanguage}"
                                Margin="10, 0, 0, 0"
                                />
                 </StackPanel>
@@ -132,14 +126,60 @@
                       Width="Auto"
                       HorizontalAlignment="Center"
                       />
-                <Button HorizontalAlignment="Center"
+                <TextBlock FontSize="20"
+                               Foreground="#2f3640"
+                               FontFamily="Ubuntu"
+                               FontWeight="Regular"
+                               Text="{Binding SuperLanguages}"
+                               Margin="10, 0, 0, 0"
+                               TextAlignment="Center"
+                               />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button HorizontalAlignment="Center"
                         Content="Log out"
                         Style="{StaticResource denyButtonMobile}"
                         Width="100"
                         Height="40"
-                        Margin="0, 50, 0, 0"
+                        Margin="0, 0, 0, 0"
                         Command="{Binding LogoutCommand}"
                         />
+                    <Button HorizontalAlignment="Center"
+                        Content="Resign"
+                        Style="{StaticResource resignButtonMobile}"
+                        Width="100"
+                        Height="40"
+                        Margin="20, 0, 0, 0"
+                        Command="{Binding LogoutCommand}"
+                        />
+                </StackPanel>
+
+                <!-- Super guide info card-->
+                <Border
+        Width="Auto"
+        Height="200"
+        CornerRadius="0, 25, 25, 25"
+        Margin="0, 20, 0, 20"
+                >
+                    <Grid>
+                        <Grid.Background>
+                            <ImageBrush ImageSource="pack://application:,,,/Assets/Existing Assets/super_guide.png">
+                                <ImageBrush.RelativeTransform>
+                                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                                </ImageBrush.RelativeTransform>
+                            </ImageBrush>
+                        </Grid.Background>
+                        <Grid.OpacityMask>
+                            <VisualBrush>
+                                <VisualBrush.Visual>
+                                    <Border Width="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}"
+                            Height="{Binding ActualHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}"
+                            Background="Black"
+                            CornerRadius="0, 25, 25, 25" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Grid.OpacityMask>
+                    </Grid>
+                </Border>
             </StackPanel>
         </ScrollViewer>
         <ContentControl Content="{Binding CurrentChildView}" Grid.RowSpan="3" Grid.ColumnSpan="3"/>

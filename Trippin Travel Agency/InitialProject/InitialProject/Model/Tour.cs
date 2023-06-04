@@ -49,6 +49,8 @@ namespace InitialProject.Model
         public int guideId { get; set; }
 
         public bool finished { get; set; }
+        public bool super { get; set; }
+
  
         public Tour(string name, int location, ICollection<KeyPoint> keyPoints, string description, language language, int touristLimit, DateTime startDates, int hoursDuration, List<Image> imageLinks, bool active, int guideID)
         {
@@ -64,6 +66,7 @@ namespace InitialProject.Model
             this.active = active;
             this.guideId = guideID;
             this.finished = false;
+            this.super = false;
         }
 
         public Tour(string name, int location, ICollection<KeyPoint> keyPoints, string description, language language, int touristLimit, DateTime startDates, int hoursDuration)
@@ -77,6 +80,7 @@ namespace InitialProject.Model
             this.startDates = startDates;
             this.hoursDuration = hoursDuration;
             this.finished = false;
+            this.super = false;
         }
 
         public Tour() { }

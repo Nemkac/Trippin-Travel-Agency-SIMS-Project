@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -19,6 +20,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using System.Reflection;
+
 
 namespace InitialProject.WPF.View.TourGuideViews
 {
@@ -28,13 +32,19 @@ namespace InitialProject.WPF.View.TourGuideViews
     public partial class TourGuide_CreateTour : UserControl
     {
         private TourService tourService;
+        // Za demo 
+        private DispatcherTimer timer;
+        private string textToFill;
         public TourGuide_CreateTour()
         {
             InitializeComponent();
             FillCountryComboBox();
             this.tourService = new(new TourRepository());
             this.Loaded += DataLoaded;
-            //this.Loaded += languageDataLoaded; 
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(400);
+            timer.Tick += Timer_Tick;
+
         }
         public void DataLoaded(object sender, RoutedEventArgs e)
         {
@@ -107,6 +117,10 @@ namespace InitialProject.WPF.View.TourGuideViews
             language languageInput;
             DateTime selectedDate;
             bool active;
+
+            User user = FetchUserFromDatabase(LoggedUser.id);
+            bool isSuper = user.super;
+
             CreateTourBasicProperties(out name, out location, out guestLimit, out hoursDuration, out description, out languageInput, out selectedDate, out active);
 
             ICollection<KeyPoint> keyPoints = CreateKeyPoints();
@@ -114,8 +128,15 @@ namespace InitialProject.WPF.View.TourGuideViews
             List<Model.Image> imageLinks = CreateImageLinks();
 
             Tour tour = new Tour(name, location.id, keyPoints, description, languageInput, guestLimit, selectedDate, hoursDuration, imageLinks, active,LoggedUser.id);
-
+            tour.super = isSuper;
             DoesTourExist(name, selectedDate, tour);
+        }
+        private User FetchUserFromDatabase(int userId)
+        {
+            using (DataBaseContext dbContext = new DataBaseContext())
+            {
+                return dbContext.Users.Find(userId);
+            }
         }
 
         private void CreateTourBasicProperties(out string name, out TourLocation location, out int guestLimit, out int hoursDuration, out string description, out language languageInput, out DateTime selectedDate, out bool active)
@@ -308,5 +329,186 @@ namespace InitialProject.WPF.View.TourGuideViews
             return newLabel;
         }
 
+        // DEMO 
+        // DEMO 
+        private void startDemo_Click(object sender, RoutedEventArgs e)
+        {
+            StartDemo();
+        }
+
+        private async void StartDemo()
+        {
+            await FillTextBoxWithDelay(tourNameTextBox, "Krstarenje Mediteranom", TimeSpan.FromMilliseconds(400));
+            await SelectComboBoxItemWithDelay(tourCountryComboBox, 0, TimeSpan.FromMilliseconds(200));
+            await SelectComboBoxItemWithDelay(tourCityComboBox, 0, TimeSpan.FromMilliseconds(200));
+            await FillTextBoxWithDelay(tourMaximumNumberOfGuestsTextBox, "75", TimeSpan.FromMilliseconds(400));
+
+            ScrollToElement(tourDurationTextBox);
+            await FillTextBoxWithDelay(tourDurationTextBox, "12", TimeSpan.FromMilliseconds(400));
+            await SelectComboBoxItemWithDelay(tourLanguageComboBox, 0, TimeSpan.FromMilliseconds(200));
+            await FillTextBoxWithDelay(tourStartingPointTextBox, "Novi Sad", TimeSpan.FromMilliseconds(400));
+            AddCheckpoint();
+            await FillDynamicTextBoxWithDelay(dynamicTextBoxes.Last(), "Rim", TimeSpan.FromMilliseconds(400));
+            await FillTextBoxWithDelay(tourEndingPointTextBox, "Monako", TimeSpan.FromMilliseconds(400));
+
+            ScrollByPixels(myScrollViewer, 400);
+            SelectCalendarDate(27);
+            AddImage();
+            await FillDynamicTextBoxWithDelay(dynamicImageLinksTextBoxes.First(), "URL Neke slike", TimeSpan.FromMilliseconds(400));
+
+            ScrollByPixels(myScrollViewer, 400);
+            await FillTextBoxWithDelay(tourDescriptionTextBox, "Apsolventska ekskurzija", TimeSpan.FromMilliseconds(400));
+            await Task.Delay(1000);
+            Save(saveButton, new RoutedEventArgs());
+        }
+
+        private void SelectCalendarDate(int day)
+        {
+            DateTime currentDate = DateTime.Today;
+            DateTime selectedDate = new DateTime(currentDate.Year, currentDate.Month, day);
+            tourCalendar.SelectedDate = selectedDate;
+        }
+
+
+        private async Task FillTextBoxWithDelay(TextBox textBox, string text, TimeSpan delay)
+        {
+            foreach (char c in text)
+            {
+                textBox.Text += c;
+                await Task.Delay(delay);
+            }
+        }
+        private async Task SelectComboBoxItemWithDelay(ComboBox comboBox, int index, TimeSpan delay)
+        {
+            comboBox.Focus();
+            ToggleComboBoxDropdown(comboBox);
+            await Task.Delay(delay);
+            SelectComboBoxItem(comboBox, index);
+        }
+        private void ToggleComboBoxDropdown(ComboBox comboBox)
+        {
+            var toggleButton = comboBox.Template.FindName("ToggleButton", comboBox) as ToggleButton;
+            if (toggleButton != null)
+            {
+                toggleButton.IsChecked = true;
+            }
+        }
+        private void SelectComboBoxItem(ComboBox comboBox, int index)
+        {
+            if (comboBox.Items.Count > index && index >= 0)
+            {
+                comboBox.SelectedIndex = index;
+            }
+        }
+        private void ScrollToElement(UIElement element)
+        {
+            // Find the ScrollViewer containing the element
+            ScrollViewer scrollViewer = FindParentScrollViewer(element);
+
+            if (scrollViewer != null)
+            {
+                // Scroll to the element's position
+                GeneralTransform transform = element.TransformToAncestor(scrollViewer);
+                Rect elementRect = transform.TransformBounds(new Rect(0, 0, element.RenderSize.Width, element.RenderSize.Height));
+                scrollViewer.ScrollToVerticalOffset(elementRect.Top);
+            }
+        }
+        private ScrollViewer FindParentScrollViewer(UIElement element)
+        {
+            DependencyObject parent = VisualTreeHelper.GetParent(element);
+
+            while (parent != null && !(parent is ScrollViewer))
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+
+            return parent as ScrollViewer;
+        }
+        private void AddCheckpoint()
+        {
+            RadioButton radioButton = addCheckpointButton;
+            radioButton.IsChecked = true;
+            addKeyPoint_IfChecked(radioButton, null);
+        }
+        private void AddImage()
+        {
+            RadioButton radioButton = addimageButton;
+            //radioButton.IsChecked = true;
+            addImage_IfChecked(radioButton, null);
+        }
+        private async Task FillDynamicTextBoxWithDelay(TextBox textBox, string text, TimeSpan delay)
+        {
+            foreach (char c in text)
+            {
+                textBox.Text += c;
+                await Task.Delay(delay);
+            }
+        }
+        private void ScrollByPixels(ScrollViewer scrollViewer, double pixelsToScroll)
+        {
+            double currentVerticalOffset = scrollViewer.VerticalOffset;
+            double targetVerticalOffset = currentVerticalOffset + pixelsToScroll;
+
+            if (targetVerticalOffset < 0)
+                targetVerticalOffset = 0;
+            else if (targetVerticalOffset > scrollViewer.ScrollableHeight)
+                targetVerticalOffset = scrollViewer.ScrollableHeight;
+
+            scrollViewer.ScrollToVerticalOffset(targetVerticalOffset);
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (textToFill.Length > 0)
+            {
+                tourNameTextBox.Text += textToFill[0];
+                textToFill = textToFill.Substring(1);
+            }
+            else if (tourCountryComboBox.SelectedIndex == -1)
+            {
+                timer.Stop();
+                tourCountryComboBox.Focus();
+                ToggleComboBoxDropdown(tourCountryComboBox);
+                SelectComboBoxItem(tourCountryComboBox, 0);
+                timer.Start();
+            }
+            else if (tourCityComboBox.SelectedIndex == -1)
+            {
+                timer.Stop();
+                tourCityComboBox.Focus();
+                ToggleComboBoxDropdown(tourCityComboBox);
+                SelectComboBoxItem(tourCityComboBox, 0);
+                timer.Start();
+            }
+            else if (tourMaximumNumberOfGuestsTextBox.Text.Length == 0)
+            {
+                timer.Stop();
+                tourMaximumNumberOfGuestsTextBox.Focus();
+                textToFill = "75";
+                timer.Interval = TimeSpan.FromMilliseconds(400);
+                timer.Start();
+            }
+            else if (tourDurationTextBox.Text.Length == 0)
+            {
+                timer.Stop();
+                tourDurationTextBox.Focus();
+                textToFill = "12";
+                timer.Interval = TimeSpan.FromMilliseconds(400);
+                timer.Start();
+            }
+            else if (tourLanguageComboBox.SelectedIndex == -1)
+            {
+                timer.Stop();
+                tourLanguageComboBox.Focus();
+                ToggleComboBoxDropdown(tourLanguageComboBox);
+                SelectComboBoxItem(tourLanguageComboBox, 0);
+                timer.Start();
+            }
+            else
+            {
+                timer.Stop();
+            }
+            
+        }
     }
 }

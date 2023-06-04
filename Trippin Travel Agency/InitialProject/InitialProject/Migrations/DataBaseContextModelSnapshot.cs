@@ -612,6 +612,9 @@ namespace InitialProject.Migrations
                     b.Property<DateTime>("startDates")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("super")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("touristLimit")
                         .HasColumnType("INTEGER");
 
@@ -1122,6 +1125,9 @@ namespace InitialProject.Migrations
                     b.Property<string>("role")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("super")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("username")
                         .IsRequired()
