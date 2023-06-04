@@ -161,10 +161,11 @@
                   FontWeight="Bold"
                   Foreground="#FF192A56"
                   BorderThickness="3" 
-                  BorderBrush="#192a56" Opacity="1" 
+                  BorderBrush="#192a56" 
+                  Opacity="1" 
                   RenderTransformOrigin="0,0"
                   Grid.RowSpan="2" 
-                  Background="#EDF0FF">
+                  Background="#ebebf5">
 
             <GroupBox.RenderTransform>
                 <TransformGroup>

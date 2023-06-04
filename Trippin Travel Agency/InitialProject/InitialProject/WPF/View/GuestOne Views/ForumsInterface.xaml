@@ -5,8 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
         mc:Ignorable="d"
+        KeyDown="F"
         Title="ForumsInterface" Height="800" Width="1500">
+    <Window.InputBindings>
+        <KeyBinding Key="M" Modifiers="Ctrl" Command="{Binding GoMyForums}" />
+    </Window.InputBindings>
     <Grid>
+
+        <GroupBox 
+            Header="Search by" 
+            FontFamily="ubuntu" 
+            FontSize="36" 
+            FontWeight="Bold" 
+            Foreground="#FF192A56" 
+            BorderThickness="3" 
+            BorderBrush="#192a56" 
+            Margin="106,254,796,153"/>
+
+        <GroupBox 
+            Header="Forums" 
+            FontFamily="ubuntu" 
+            FontSize="36" 
+            FontWeight="Bold" 
+            Foreground="#FF192A56" 
+            BorderThickness="3" 
+            BorderBrush="#192a56" 
+                Margin="798,254,104,153"/>
+
         <Label Content="Forums" 
             FontSize ="64"
             HorizontalAlignment="Left" 
@@ -88,7 +113,7 @@
 
         <TextBlock 
             HorizontalAlignment="Left" 
-            Height="128" 
+            Height="105" 
             Margin="113,149,0,0" 
             TextWrapping="Wrap" 
             Text="{Binding ForumText}" 
@@ -99,70 +124,164 @@
             FontSize="28" 
             FontWeight="Medium" 
             Foreground="#FF192A56"/>
-        
+
         <DataGrid 
             HorizontalAlignment="Left" 
-            Height="386" 
-            Margin="727,282,0,0" 
+            Height="200" 
+            Margin="836,330,0,0" 
             VerticalAlignment="Top" 
-            Width="665"
+            Width="516"
             ItemsSource="{Binding ForumsGrid}"
             SelectedIndex="{Binding SelectedForum}"
             />
-        
+
         <TextBox 
             HorizontalAlignment="Left" 
             Height="56"
-            Margin="137,392,0,0" 
+            Name="s0"
+            Margin="199,424,0,0" 
             TextWrapping="Wrap" 
+            IsTabStop="False"
             Text="{Binding InputCountry}" 
             VerticalAlignment="Top"
             Width="156"/>
-        
+
         <TextBox 
             HorizontalAlignment="Left" 
             Height="56"
-            Margin="437,392,0,0" 
-            TextWrapping="Wrap" 
+            Margin="455,424,0,0" 
+            TextWrapping="Wrap"
+            IsTabStop="False"
+            Name="s1"
             Text="{Binding InputCity}" 
             VerticalAlignment="Top"
             Width="156"/>
-        
-        <TextBlock 
-            HorizontalAlignment="Left" 
-            Height="36" 
-            Margin="137,339,0,0" 
-            TextWrapping="Wrap" 
-            Text="po zemlji" 
-            VerticalAlignment="Top"
-            Width="156"/>
-        
-        <TextBlock 
-            HorizontalAlignment="Left" 
-            Height="36" 
-            Margin="437,339,0,0" 
-            TextWrapping="Wrap" 
-            Text="po gradu" 
-            VerticalAlignment="Top"
-            Width="156"/>
-        
+
         <Button 
-            Content="moji forumi" 
+            Content="My forums" 
             HorizontalAlignment="Left" 
-            Height="59"
+            Height="39"
             Command="{Binding GoMyForums}"
-            Margin="199,609,0,0" 
-            VerticalAlignment="Top" 
-            Width="316"/>
-        
+            Margin="337,629,0,0" 
+            VerticalAlignment="Top"
+            FontFamily="ubuntu" 
+            FontSize="24" 
+            Background="#FF273C75" 
+            Foreground="White"
+            IsTabStop="False"
+            Style="{StaticResource leadButton}"
+            FontWeight="Medium" 
+            Width="136"/>
+
         <Button 
-            Content="vidga"
+            Content="Open forum"
             Command="{Binding ShowForum}"
             HorizontalAlignment="Left"
-            Height="387" 
-            Margin="1411,281,0,0"
+            Height="38" 
+            Margin="1020,537,0,0"
+            FontFamily="ubuntu" 
+            FontSize="24" 
+            Background="#FF273C75" 
+            Foreground="White" 
+            FontWeight="Medium"
+            IsTabStop="False"
             VerticalAlignment="Top"
-            Width="63"/>
+            Style="{StaticResource leadButton}"
+            Width="154"/>
+
+        <TextBlock 
+            TextWrapping="Wrap" 
+            Text="Country" 
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Bold" 
+            Foreground="#FF192A56" Margin="233,364,1145,371"/>
+
+        <TextBlock 
+            TextWrapping="Wrap" 
+            Text="City" 
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Bold" 
+            Foreground="#FF192A56" Margin="509,364,896,365"/>
+
+        <Button 
+            Content="Search"
+            Command="{Binding Serach}"
+            HorizontalAlignment="Left"
+            Height="38"
+            FontFamily="ubuntu" 
+            FontSize="24" 
+            Background="#718093" 
+            Foreground="White" 
+            FontWeight="Medium" 
+            Margin="337,537,0,0"
+            VerticalAlignment="Top"
+            IsTabStop="False"
+            Style="{StaticResource leadButton}"
+            Width="136"/>
+
+        <TextBlock 
+            TextWrapping="Wrap" 
+            Text="or go to my forums:" 
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium" 
+            Foreground="#718093" 
+            Margin="107,636,1137,91"/>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="1043,580,0,0"
+            TextWrapping="Wrap" 
+            Text="Press ENTER" 
+            VerticalAlignment="Top" 
+            Width="102"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="885,302,0,0"
+            TextWrapping="Wrap" 
+            Text="Press TAB to access, then UP and DOWN arrows" 
+            VerticalAlignment="Top" 
+            Width="404"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="29" 
+            Margin="484,639,0,0"
+            TextWrapping="Wrap" 
+            Text="Press CTRL + M" 
+            VerticalAlignment="Top" 
+            Width="146"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"/>
+        
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="248,485,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt; Left CTRL                             Right CTRL &gt;" 
+            VerticalAlignment="Top" 
+            Width="330"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
 
     </Grid>
 </Window>

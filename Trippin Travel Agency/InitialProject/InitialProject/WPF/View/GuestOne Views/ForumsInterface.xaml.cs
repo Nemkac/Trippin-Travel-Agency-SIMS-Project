@@ -27,5 +27,17 @@ namespace InitialProject.WPF.View.GuestOne_Views
             GuestOneStaticHelper.forumsInterface = this;
             this.DataContext = new ForumsViewModel();
         }
+
+        public void F(object s, KeyEventArgs k)
+        {
+            if(k.Key == Key.LeftCtrl)
+            {
+                Keyboard.Focus(s0);
+            }
+            if(k.Key == Key.RightCtrl)
+            {
+                Keyboard.Focus(s1);
+            }
+        }
     }
 }
