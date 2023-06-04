@@ -223,14 +223,21 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
         public ViewModelCommand BookingConfirmationViewCommand { get; private set; }
 
         private readonly GuestTwoInterfaceViewModel _mainViewModel;
-        
+        public ViewModelCommand DetailedRecommendedView1 {  get; private set; }
+        public ViewModelCommand DetailedRecommendedView2 { get; private set; }
+        public ViewModelCommand DetailedRecommendedView3 { get; private set; }
+
         public ViewModelCommand ApplyFiltersCommand { get; private set; }
 
         public TourDisplayViewModel()
         {
             _mainViewModel = LoggedUser.GuestTwoInterfaceViewModel;
             DetailedTourViewCommand = new ViewModelCommand(ShowDetailedTourView);
-            BookingConfirmationViewCommand = new ViewModelCommand(ShowBookingConfirmation);                       
+            BookingConfirmationViewCommand = new ViewModelCommand(ShowBookingConfirmation);
+            DetailedRecommendedView1 = new ViewModelCommand(ShowDetailedTourFromRecommendation1);
+            DetailedRecommendedView2 = new ViewModelCommand(ShowDetailedTourFromRecommendation2);
+            DetailedRecommendedView3 = new ViewModelCommand(ShowDetailedTourFromRecommendation3);
+
             WindowLoaded();
             LoadRecommendations();
             ApplyFiltersCommand = new ViewModelCommand(ApplyFilters);
@@ -248,6 +255,24 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             }
         }
 
+        public void ShowDetailedTourFromRecommendation1(object obj) 
+        {
+            Tour tour = tourService.GetByName(RecommendedTourName1);
+            _mainViewModel.ExecuteShowDetailedTourView(null);
+            DetailedId = tour.id;
+        }
+        public void ShowDetailedTourFromRecommendation2(object obj)
+        {
+            Tour tour = tourService.GetByName(RecommendedTourName2);
+            _mainViewModel.ExecuteShowDetailedTourView(null);
+            DetailedId = tour.id;
+        }
+        public void ShowDetailedTourFromRecommendation3(object obj)
+        {
+            Tour tour = tourService.GetByName(RecommendedTourName3);
+            _mainViewModel.ExecuteShowDetailedTourView(null);
+            DetailedId = tour.id;
+        }
         public void ShowBookingConfirmation(object obj)
         {
             TourDTO selectedTour = SelectedTour;

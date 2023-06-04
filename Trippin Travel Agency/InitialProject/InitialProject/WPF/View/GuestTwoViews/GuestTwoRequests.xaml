@@ -127,8 +127,10 @@
                   FontSize="40"
                   FontFamily="Ubuntu"
                   FontWeight="Light" 
-                  Foreground="#192a56">
+                  Foreground="#192a56"
+                  Grid.Column="1">
             <StackPanel Grid.Row="2"
+                        Grid.Column="1"
                     Margin="48,-200,36,0"
                     Height = "400">
                 <DataGrid x:Name="dataGrid2" 

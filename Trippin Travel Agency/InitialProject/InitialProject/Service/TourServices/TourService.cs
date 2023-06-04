@@ -169,7 +169,18 @@ namespace InitialProject.Service.TourServices
             }
             return reviews;
         }
-
+        public Tour GetByName(string name) 
+        {
+            DataBaseContext context = new DataBaseContext();    
+            foreach(Tour tour in context.Tours.ToList()) 
+            {
+                if(tour.name == name)
+                {
+                    return tour;
+                }
+            }
+            return null;    
+        }
 
         public Tour GetByID(int tourId)
         {

@@ -5,12 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.WPF.View.GuestTwoViews" 
              xmlns:viewmodels="clr-namespace:InitialProject.WPF.ViewModels" xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="2000" d:DesignWidth="1520">
 
 
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="46*"/>
+            <ColumnDefinition Width="123*"/>
+        </Grid.ColumnDefinitions>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="350"/>
             <RowDefinition Height="350"/>
@@ -18,11 +24,12 @@
             <RowDefinition Height="600"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="900"/>
                 <ColumnDefinition Width="620"/>
             </Grid.ColumnDefinitions>
+
             <GroupBox Header="Search by these parameters" FontSize="40" FontFamily="Ubuntu" FontWeight="Medium" Foreground="#192a56"/>
             <StackPanel Grid.Column="0">
                 <Label Content="Filter by country" HorizontalAlignment="Left" Margin="50,60,0,0" VerticalAlignment="Top" Width="244" Height="40" FontSize="20"/>
@@ -32,9 +39,49 @@
                 <TextBox HorizontalAlignment="Left" Margin="400,-201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Name ="duration" Text="{Binding Duration}"/>
                 <Label Content="Filter by duration" HorizontalAlignment="Left" Margin="400,-245,0,0" VerticalAlignment="Top" Width="244" Height="40" FontSize="20"/>
                 <TextBox HorizontalAlignment="Left" Margin="400,-19,0,0" VerticalAlignment="Top" Width="100" Name="touristLimit" Text="{Binding TouristLimit}"/>
-                <Label Content="Number of Tourists" Margin="400,-65,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="244" Height="40" FontSize="20"/>
-                <Button Content="Apply filters" HorizontalAlignment="Left" Margin="640,-50,0,0" VerticalAlignment="Top" Height="82" Width="239" Command="{Binding ApplyFiltersCommand}" FontSize="20" Style="{StaticResource addButtonWEB}" Cursor="Hand"/>
-                <ComboBox HorizontalAlignment="Left" Margin="640,-235,0,0" Text = "Language" VerticalAlignment="Top" Width="120" Name ="languageBox" ItemsSource="{Binding languages}" SelectedItem="{Binding SelectedLanguage}"/>
+                <Label Content="Number of Tourists" Margin="400,-65,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="244" 
+                       Height="40" FontSize="20"/>
+                <Button Content="Apply filters" 
+                        HorizontalAlignment="Left" 
+                        Margin="640,-50,0,0"
+                        VerticalAlignment="Top" 
+                        Height="82" 
+                        Width="239" 
+                        Command="{Binding ApplyFiltersCommand}" 
+                        FontSize="20" 
+                        FontFamily="Ubuntu"
+                        Foreground="White"
+                        Cursor="Hand">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="ActiveReservationsButton" CornerRadius="5" Background="#273c75">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="8,6,8,6" ContentSource="Content" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff" />
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+
+                    </Button.Template>
+                </Button>
+
+                <xctk:WatermarkComboBox
+                    Watermark="Language"
+                    HorizontalAlignment="Left" 
+                    Margin="640,-235,0,0"                      
+                    VerticalAlignment="Top"
+                    FontFamily="Ubuntu" 
+                    FontSize="20" 
+                    FontWeight="Light"
+                    Width="150" 
+                    Name ="languageBox" 
+                    ItemsSource="{Binding languages}" 
+                    SelectedItem="{Binding SelectedLanguage}"/>
 
             </StackPanel>
 
@@ -44,13 +91,30 @@
                 <Button Content="Book" 
                         HorizontalAlignment="Left"
                         Margin ="22 255 0 0" 
-                        Style="{DynamicResource saveButtonWEB}" 
+                        FontSize="20"
+                        FontWeight="Light"
+                        Foreground="White"
+                        FontFamily="Ubuntu"
                         VerticalAlignment="Center"                         
                         Command="{Binding BookingConfirmationViewCommand}" 
                         Height="82" Width="239" Cursor="Hand">
-                    <Button.Effect>
-                        <DropShadowEffect/>
-                    </Button.Effect>
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="ActiveReservationsButton" CornerRadius="5" Background="#4cd137">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="8,6,8,6" ContentSource="Content" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff" />
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+
+                    </Button.Template>
                 </Button>
                 <TextBox TextWrapping="Wrap" Margin ="22 -250 0 0" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" Name ="NumberOfTourists" Text="{Binding NumberOfTourists}"/>
                 <Label Content="No. of tourists" Margin="22 -350 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="244" Height="40" FontSize="20"/>
@@ -58,21 +122,37 @@
                 <Button Margin="325 -500 0 0" 
                         Width="200"
                         Height="50"
-                        Background="#00a8ff"
-                        Foreground="Black"
+                        FontSize="20" Style="{StaticResource imagesButtonWeb}"  
+                        Foreground="#192a56"
                         FontFamily="Ubuntu"
-                        FontWeight="Medium" ToolTip="Tour booking tutorial"                        
+                        ToolTip="Tour booking tutorial"                        
                         >
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="ActiveReservationsButton" CornerRadius="5" Background="#fbc531">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="8,6,8,6" ContentSource="Content" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff" />
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+
+                    </Button.Template>
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="Tutorial" FontFamily="Ubuntu" FontSize="20" FontWeight="Heavy" Margin="0 0 0 0"/>
-                        <fa:IconImage Icon="QuestionCircle" Width="35" Margin="0 0 0 0"/>
+                        <fa:IconImage Icon="QuestionCircle" Width="20" Margin="0 0 0 0" Height="20"/>
+                        <Label Content="Tutorial" FontFamily="Ubuntu" FontSize="20" FontWeight="Light" Margin="0 0 0 0"/>
                     </StackPanel>
                 </Button>
             </StackPanel>
         </Grid>
 
-        <GroupBox Header="Tours" FontSize="40" FontFamily="Ubuntu" FontWeight="Medium" Grid.Row="1" Grid.RowSpan="2" Height="600" Margin="0 -190 0 0" Foreground="#192a56"/>
-        <StackPanel Grid.Row="1" Grid.RowSpan="2" Orientation="Horizontal">
+        <GroupBox Header="Tours" FontSize="40" FontFamily="Ubuntu" FontWeight="Medium" Grid.RowSpan="3" Height="600" Margin="0,340,0,180" Foreground="#192a56" Grid.ColumnSpan="2"/>
+        <StackPanel Grid.Row="1" Grid.RowSpan="2" Orientation="Horizontal" Grid.ColumnSpan="2">
             <DataGrid x:Name="dataGrid"
                       d:DataContext ="" 
                       Width="1400" 
@@ -108,7 +188,24 @@
                     Height="82" Width="239" 
                     FontSize="20" Style="{StaticResource imagesButtonWeb}"                     
                     Grid.Row="2"
-                    Command="{Binding DetailedTourViewCommand}" Cursor="Hand"/>
+                    Command="{Binding DetailedTourViewCommand}" Cursor="Hand">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="ActiveReservationsButton" CornerRadius="5" Background="#fbc531">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="8,6,8,6" ContentSource="Content" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+
+                </Button.Template>
+            </Button>
         </StackPanel>
 
         <GroupBox Grid.Row="3"
@@ -116,36 +213,41 @@
                   FontSize="40"
                   FontFamily="Ubuntu"
                   FontWeight="Heavy"
-                  Foreground="#192a56"
+                  Foreground="#192a56" Grid.ColumnSpan="2"
                   >
             <StackPanel Grid.Row="3" 
                         Background="Transparent" 
                         Height="500"
                         Orientation="Horizontal">
-                
+
                 <Button Width="450" 
                         Height="450"
                         Margin="50 0 0 0"
+                        Command="{Binding DetailedRecommendedView1}"                        
                         >
+                    
                     <StackPanel Width="450" Height="450">
                         <Image Source="{Binding RecommendedTourImage1}"
                                Stretch="Fill"
                                Width="450"
                                Height="450"/>
                         <StackPanel Orientation="Horizontal"
-                                Margin="0 -50 0 0">
-                        <Label Content="{Binding RecommendedTourName1}" 
+                                Margin="0 -50 0 0"
+                                Background="#77000000">
+                            <Label Content="{Binding RecommendedTourName1}" 
                                FontFamily="Ubuntu" 
-                               FontSize="20" 
+                               FontSize="30" 
                                FontWeight="Heavy"
-                               Margin="0 0 0 0"/>
+                               Foreground="White"/>
                         </StackPanel>
                     </StackPanel>
+
                 </Button>
 
                 <Button Width="450" 
                         Height="450"
                         Margin="25 0 0 0"
+                         Command="{Binding DetailedRecommendedView2}"
                         >
                     <StackPanel Width="450" Height="450">
                         <Image Source="{Binding RecommendedTourImage2}"
@@ -153,39 +255,41 @@
                                Width="450"
                                Height="450"/>
                         <StackPanel Orientation="Horizontal"
-                                Margin="0 -50 0 0">
+                                Margin="0 -50 0 0"
+                                Background="#77000000">
                             <Label Content="{Binding RecommendedTourName2}" 
                                FontFamily="Ubuntu" 
-                               FontSize="20" 
-                               FontWeight="Heavy"
-                               Margin="0 0 0 0"/>
+                               FontSize="30" 
+                               FontWeight="Heavy"                                   
+                               Margin="0 0 0 0"
+                               Foreground="White"/>
                         </StackPanel>
                     </StackPanel>
                 </Button>
                 <Button Width="450" 
                         Height="450"
                         Margin="25 0 0 0"
-                        >
+                         Command="{Binding DetailedRecommendedView3}">
                     <StackPanel Width="450" Height="450">
                         <Image Source="{Binding RecommendedTourImage3}"
                                Stretch="Fill"
                                Width="450"
                                Height="450"/>
                         <StackPanel Orientation="Horizontal"
-                                Margin="0 -50 0 0">
+                                Margin="0 -50 0 0"
+                                Background="#77000000">
                             <Label Content="{Binding RecommendedTourName3}" 
                                FontFamily="Ubuntu" 
-                               FontSize="20" 
+                               FontSize="30" 
                                FontWeight="Heavy"
-                               Margin="0 0 0 0"/>
+                               Margin="0 0 0 0"
+                               Foreground="White"/>
                         </StackPanel>
                     </StackPanel>
                 </Button>
 
             </StackPanel>
         </GroupBox>
-
-
     </Grid>
 
 </UserControl>

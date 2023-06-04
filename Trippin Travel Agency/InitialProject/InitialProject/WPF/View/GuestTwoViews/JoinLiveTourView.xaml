@@ -72,8 +72,8 @@
                        Name ="KeyPointLabel"
                        Content="{Binding KeyPointLabel}"
                        />
-                <Button Width="200" 
-                        Height="100" 
+                <Button Height="82" 
+                        Width="239" 
                         Margin="350 -350 0 0"
                         Style="{StaticResource saveButtonWEB}" 
                         FontSize="32" 
@@ -82,9 +82,25 @@
                         Command="{Binding JoinTourCommand}" Cursor="Hand">
 
                     <StackPanel Orientation="Horizontal">
-                        <fa:IconImage Icon="Check" Width="35" Margin="15 0 0 0"/>
-                        <Label Content="Join Tour" FontFamily="Ubuntu" FontSize="25" FontWeight="Heavy" Margin="0 0 0 0"/>
+                        <fa:IconImage Icon="Check" Width="35" Margin="15 0 0 0" Foreground="White"/>
+                        <Label Content="Join Tour" FontFamily="Ubuntu" FontSize="25" FontWeight="Heavy" Margin="0 0 0 0" Foreground="White"/>
                     </StackPanel>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="ActiveReservationsButton" CornerRadius="5" Background="#4cd137">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="8,6,8,6" ContentSource="Content" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff" />
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+
+                    </Button.Template>
                 </Button>
             </StackPanel>
         </GroupBox>
@@ -100,14 +116,34 @@
                        Content="You can submit some images that you took at the tour"/>
 
                 <TextBox Width="350" Height="36" Margin="-1050 0 0 0"/>
-                <Button Width="100"
-                        Height="36" 
+                <Button Height="82" 
+                        Width="239"   
                         Content="Upload"
                         Style="{StaticResource addButtonWEB}" 
-                        Margin="-500 0 0 0" 
+                        Margin="-400 0 0 0" 
                         Name="UploadPhotoButton"
+                        FontFamily="Ubuntu" 
+                        FontSize="28" 
+                        FontWeight="Light" 
                         IsEnabled="{Binding UploadButtonEnabled}" Cursor="Hand"
-                        />
+                        >
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="ActiveReservationsButton" CornerRadius="5" Background="#273c75">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="8,6,8,6" ContentSource="Content" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff" />
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+
+                    </Button.Template>
+                </Button>
             </StackPanel>
         </GroupBox>
 
@@ -129,7 +165,7 @@
                     <Viewbox Height="40">
                         <RadioButton GroupName="Guide Knowledge" Margin="0 0 15 0 " Name="Knowledge1" IsChecked="{Binding Knowledge1}"/>
                     </Viewbox>
-                    
+
                     <Viewbox Height="40">
                         <RadioButton GroupName="Guide Knowledge" Margin="0 0 15 0 " Name="Knowledge2" IsChecked="{Binding Knowledge2}"/>
                     </Viewbox>
@@ -142,7 +178,7 @@
                     <Viewbox Height="40">
                         <RadioButton GroupName="Guide Knowledge" Name="Knowledge5" IsChecked="{Binding Knowledge5}"/>
                     </Viewbox>
-                    
+
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Label Margin="0 0 65 0" Content="1" FontSize="20"></Label>
@@ -151,7 +187,7 @@
                     <Label Margin="0 0 65 0" Content="4" FontSize="20"></Label>
                     <Label Margin="0 0 0 0" Content="5" FontSize="20"></Label>
                 </StackPanel>
-   
+
                 <Label Content="Quality of translation"
                        FontFamily="Ubuntu"
                        FontSize="20"
@@ -228,9 +264,9 @@
                        HorizontalAlignment="Left"
                        Width="570"
                        Margin="30 100 0 0"/>
-                
+
                 <Separator/>
-                
+
                 <TextBox Width="450" 
                          Height="150" 
                          Margin="-165 15 0 0" 
@@ -249,10 +285,27 @@
                         Content="Submit" 
                         FontFamily="Ubuntu" 
                         FontSize="28" 
-                        FontWeight="Medium" 
+                        FontWeight="Light" 
                         Name="SubmitButton"
                         Command="{Binding SubmitRatingCommand}"
-                        IsEnabled="{Binding SubmitButtonEnabled}" Cursor="Hand"/>
+                        IsEnabled="{Binding SubmitButtonEnabled}" Cursor="Hand">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="ActiveReservationsButton" CornerRadius="5" Background="#273c75">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="8,6,8,6" ContentSource="Content" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff" />
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+
+                    </Button.Template>
+                </Button>
 
             </StackPanel>
         </GroupBox>
