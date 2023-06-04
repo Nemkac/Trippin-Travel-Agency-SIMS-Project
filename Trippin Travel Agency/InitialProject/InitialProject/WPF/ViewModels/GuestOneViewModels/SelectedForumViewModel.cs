@@ -25,14 +25,13 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             userService = new UserService();
             Label = (forumService.GetLocation(GuestOneStaticHelper.selectedForum.id))[1];
 
-            DataBaseContext context = new DataBaseContext();
-
-            var commentsToGrid = from comment in context.ForumComments.ToList()
+            var commentsToGrid = from comment in forumService.GetForumsComments(GuestOneStaticHelper.selectedForum)
                                  select new
                                  {
                                      User = userService.GetById(comment.userId).firstName,
                                      Date = comment.postingDate.ToString().Substring(0, comment.postingDate.ToString().Length-11),
-                                     Comment = comment.comment
+                                     Comment = comment.comment,
+                                     Visited = userService.HasGuestVisitedPlace(userService.GetById(comment.userId).id, new AccommodationLocation(forumService.GetLocation(GuestOneStaticHelper.selectedForum.id)[0], forumService.GetLocation(GuestOneStaticHelper.selectedForum.id)[1])) ? new string("Been there") : new string("Hasn't been there")
                                  };
             Comments = commentsToGrid;
         }
@@ -81,11 +80,18 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 
         public void AddNewComment(object sender)
         {
-            bool ifVisited = userService.HasGuestVisitedPlace(new AccommodationLocation(forumService.GetLocation(GuestOneStaticHelper.selectedForum.id)[0], forumService.GetLocation(GuestOneStaticHelper.selectedForum.id)[1]));
-            //ForumComment comment = new ForumComment(LoggedUser.id, NewComment,DateTime.Today,0, ifVisited);
-
-            // na listu komentara selektovanog foruma dodas taj novi kom i updajtujes bazu
-            
+            bool ifVisited = userService.HasGuestVisitedPlace(LoggedUser.id, new AccommodationLocation(forumService.GetLocation(GuestOneStaticHelper.selectedForum.id)[0], forumService.GetLocation(GuestOneStaticHelper.selectedForum.id)[1]));
+            ForumComment comment = new ForumComment(LoggedUser.id, NewComment,DateTime.Today,0, ifVisited,GuestOneStaticHelper.selectedForum.id);
+            forumService.AddComment(comment);
+            var commentsToGrid = from comment1 in forumService.GetForumsComments(GuestOneStaticHelper.selectedForum)
+                                 select new
+                                 {
+                                     User = userService.GetById(comment1.userId).firstName,
+                                     Date = comment1.postingDate.ToString().Substring(0, comment1.postingDate.ToString().Length - 11),
+                                     Comment = comment1.comment,
+                                     Visited = ifVisited ? new string("Been there") : new string("Hasn't been there")
+                                 };
+            Comments = commentsToGrid;
 
         }
     }

@@ -3,6 +3,7 @@ using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service.AccommodationServices;
 using InitialProject.Service.GuestServices;
+using InitialProject.WPF.View.GuestOne_Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,6 +23,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         private AccommodationLocationService accommodationLocationService { get; set; }
         private UserService userService { get; set; }
         public ViewModelCommand CloseForum { get; set; }
+        public ViewModelCommand ShowForum { get; set; }
         public GuestsForumsViewModel()
         {
             CloseForum = new ViewModelCommand(CloseGuestsForum);
@@ -30,6 +32,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             userService = new UserService();
             accommodationLocationService = new AccommodationLocationService();
             CreateForum = new ViewModelCommand(CreateNewForum);
+            ShowForum = new ViewModelCommand(ShowSelectedForum);
             ForumText = "You can close your forum for additional commenting, but you can never delete it.";
 
             var forumsToGrid = from forum in forumService.GetByCreatorId()
@@ -159,7 +162,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                     context.Attach(forum);
                     context.SaveChanges();
 
-                    ForumComment comment = new ForumComment(LoggedUser.id, Comment, DateTime.Today, 0, userService.HasGuestVisitedPlace(location), forum.id);
+                    ForumComment comment = new ForumComment(LoggedUser.id, Comment, DateTime.Today, 0, userService.HasGuestVisitedPlace(LoggedUser.id, location), forum.id);
                     context.Attach(comment);
                     context.SaveChanges();
                     List<ForumComment> comments = new List<ForumComment>() { comment };
@@ -228,6 +231,18 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                                    IfUseful = forum1.isVeryUseful ? new String("Useful") : new String("-")
                                };
             ForumsGrid = forumsToGrid;
+        }
+
+        public void ShowSelectedForum(object sender)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<Forum> forums = context.Forums.ToList();
+            GuestOneStaticHelper.selectedForum = forums[SelectedForum];
+            SelectedForumInterface selectedForumInterface = new SelectedForumInterface();
+            selectedForumInterface.Left = GuestOneStaticHelper.guestOneInterface.Left;
+            selectedForumInterface.Top = GuestOneStaticHelper.guestOneInterface.Top;
+            selectedForumInterface.Show();
+            GuestOneStaticHelper.guestsForumsInterface.Hide();
         }
     }
 }

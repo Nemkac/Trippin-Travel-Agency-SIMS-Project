@@ -55,5 +55,28 @@ namespace InitialProject.Service.AccommodationServices
             Forum forum = forums.Find(f => f.id == forumId);
             return new List<string>() { forum.location.country, forum.location.city };
         }
+
+        public List<ForumComment> GetForumsComments(Forum forum)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<ForumComment> comments = context.ForumComments.ToList();
+            List<ForumComment> foundComments = new List<ForumComment>();
+            foreach(ForumComment comment in comments)
+            {
+                if(comment.forumId == forum.id)
+                {
+                    foundComments.Add(comment);
+                }
+            }
+            return foundComments;
+        }
+
+        public void AddComment(ForumComment comment)
+        {
+            DataBaseContext context = new DataBaseContext();
+            context.Add(comment);
+            context.SaveChanges();
+        }
+
     }
 }

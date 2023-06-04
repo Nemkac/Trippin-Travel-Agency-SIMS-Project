@@ -3,6 +3,7 @@ using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service.AccommodationServices;
 using InitialProject.Service.BookingServices;
+using InitialProject.Service.TourServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -224,15 +225,40 @@ namespace InitialProject.Service.GuestServices
             return bookingsSinceTitleAcquisition;
         }
 
-        public bool HasGuestVisitedPlace(AccommodationLocation location)
+        public bool HasGuestVisitedPlace(int guestId, AccommodationLocation location)
         {
-            DataBaseContext context = new DataBaseContext();
-            List<Booking> bookings = context.Bookings.ToList();
+            List<Booking> bookings = GetGuestsBookings(guestId);
             foreach (Booking booking in bookings)
             {
                 if (accommodationService.GetAccommodationLocation(accommodationService.GetById(booking.accommodationId).id)[0] == location.country && accommodationService.GetAccommodationLocation(accommodationService.GetById(booking.accommodationId).id)[1] == location.city)
                 {
                     return true;
+                }
+            }
+
+            DataBaseContext context = new DataBaseContext();
+            List<TourAttendance> tourAttendances = context.TourAttendances.ToList();
+            TourService tourService = new TourService(new TourRepository());
+            List<Tour> tours = tourService.GetAllByLocation(location);
+            List<TourAttendance> foundTourAttendaces = new List<TourAttendance>();
+            if (tours != null)
+            {
+                foreach (Tour tour in tours)
+                {
+                    foreach (TourAttendance tourAttendance in tourAttendances)
+                    {
+                        if (tour.id == tourAttendance.tourId)
+                        {
+                            foundTourAttendaces.Add(tourAttendance);
+                        }
+                    }
+                }
+                foreach (TourAttendance tourAttendance1 in foundTourAttendaces)
+                {
+                    if (tourAttendance1.guestID == guestId)
+                    {
+                        return true;
+                    }
                 }
             }
             return false;

@@ -176,7 +176,17 @@
                     Command="{Binding CloseForum}"
                     Width="143"/>
 
+            
             <TextBlock HorizontalAlignment="Left" Height="101" Margin="1276,560,0,0" TextWrapping="Wrap" Text="{Binding Debug}" VerticalAlignment="Top" Width="186" FontSize="50"/>
+            
+            <Button 
+                Content="vidga"
+                Command="{Binding ShowForum}"
+                HorizontalAlignment="Left" 
+                Height="89" 
+                Margin="1303,560,0,0" 
+                VerticalAlignment="Top"
+                Width="132"/>
 
         </Grid>
 
