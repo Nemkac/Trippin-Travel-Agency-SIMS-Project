@@ -16,10 +16,13 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
     public class GuestsAccountViewModel : ViewModelBase
     {
         public ViewModelCommand OpenNavigator { get; set; }
+        public ViewModelCommand Help { get; set; }
         private UserService userService = new UserService();
+        bool isHelpOn = false;
         public GuestsAccountViewModel()
         {
             OpenNavigator = new ViewModelCommand(ShowNavigator);
+            Help = new ViewModelCommand(ShowHelp);
             SuperGuestText = GenerateSuperGuestText();
             IsSuperGuest();
         }
@@ -130,6 +133,65 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                     progressBarValue = value;
                     OnPropertyChanged(nameof(ProgressBarValue));
                 }
+            }
+        }
+
+        private string helpPoints;
+        public string HelpPoints
+        {
+            get { return helpPoints; }
+            set
+            {
+                if (helpPoints != value)
+                {
+                    helpPoints = value;
+                    OnPropertyChanged(nameof(HelpPoints));
+                }
+            }
+        }
+
+        private string helpBookings;
+        public string HelpBookings
+        {
+            get { return helpBookings; }
+            set
+            {
+                if (helpBookings != value)
+                {
+                    helpBookings = value;
+                    OnPropertyChanged(nameof(HelpBookings));
+                }
+            }
+        }
+
+        private string helpExit;
+        public string HelpExit
+        {
+            get { return helpExit; }
+            set
+            {
+                if (helpExit != value)
+                {
+                    helpExit = value;
+                    OnPropertyChanged(nameof(HelpExit));
+                }
+            }
+        }
+        public void ShowHelp(object sedner)
+        {
+            if (isHelpOn)
+            {
+                HelpBookings = string.Empty;
+                HelpPoints = string.Empty;
+                HelpExit = string.Empty;
+                isHelpOn = false;
+            }
+            else
+            {
+                HelpPoints = "This represents the amount of points that you have available for spending";
+                HelpBookings = "This is how many bookings you have in last one year on since acquiring last Super-Guest title";
+                HelpExit = "To exit Help, press CTRL + H again";
+                isHelpOn = true;
             }
         }
 

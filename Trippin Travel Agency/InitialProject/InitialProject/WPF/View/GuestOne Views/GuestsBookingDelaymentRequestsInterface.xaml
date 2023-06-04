@@ -5,33 +5,306 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
         mc:Ignorable="d"
+        KeyDown="KeyHandler"
         Title="GuestsBookingDelaymentRequestsInterface" Height="800" Width="1500">
     <Grid>
 
-        <GroupBox HorizontalAlignment="Left" Height="517" Header="Resolved requests" Margin="772,147,0,0" VerticalAlignment="Top" Width="696" FontFamily="ubuntu" FontSize="36" FontWeight="Bold" Foreground="#FF192A56" BorderThickness="3" BorderBrush="#192a56"/>
+        <GroupBox 
+            HorizontalAlignment="Left"
+            Height="517"
+            Header="Resolved requests" 
+            Margin="812,147,0,0" 
+            VerticalAlignment="Top"
+            Width="662" 
+            FontFamily="ubuntu"
+            FontSize="36" 
+            FontWeight="Bold" 
+            Foreground="#FF192A56" 
+            BorderThickness="3" 
+            BorderBrush="#192a56"/>
 
-        <DataGrid HorizontalAlignment="Left" Height="305" Margin="807,213,0,0" VerticalAlignment="Top" Width="636" x:Name="resolvedRequestsGrid" FontFamily="ubuntu" FontSize="18" Foreground="#FF192A56" BorderBrush="#FF192A56" Background="White" FontWeight="Medium" TextBlock.TextAlignment="Center" MinRowHeight="50" />
-        <Label Content="My requests" FontSize ="64" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,16,0,0" FontFamily="ubuntu" FontWeight="Bold" Foreground="#192a56"/>
-        <GroupBox Header="Navigator" Margin="985,1,26,665" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
+        <DataGrid 
+            HorizontalAlignment="Left"
+            Height="305"
+            Margin="883,230,0,0" 
+            VerticalAlignment="Top" 
+            Width="550" 
+            KeyDown="ResolvedKey"
+            x:Name="resolvedRequestsGrid"
+            FontFamily="ubuntu" 
+            FontSize="18" 
+            Foreground="#FF192A56" 
+            BorderBrush="#FF192A56" 
+            Background="White" 
+            FontWeight="Medium"
+            TextBlock.TextAlignment="Center"
+            MinRowHeight="50" />
+
+        <Label 
+            Content="My requests" 
+            FontSize ="64" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Top" 
+            Margin="0,16,0,0" 
+            FontFamily="ubuntu" 
+            FontWeight="Bold" 
+            Foreground="#192a56"/>
+
+        <GroupBox
+            Header="Navigator"
+            Margin="985,1,26,665"
+            Padding="10" 
+            FontFamily="ubuntu"
+            FontSize="30" 
+            BorderThickness="3" 
+            BorderBrush="#192a56"
+            FontWeight="medium" >
             <StackPanel>
                 <TextBlock Width="478" FontWeight="medium"><Run Text="Press CTRL+N for program map" FontFamily="ubuntu"/></TextBlock>
             </StackPanel>
         </GroupBox>
-        <Rectangle HorizontalAlignment="Center" Height="65" Margin="0,708,0,0" Fill ="#273c75" Stroke="Black" VerticalAlignment="Top" Width="1500"/>
-        <TextBlock HorizontalAlignment="Left" Height="72" Margin="609,702,0,0" TextWrapping="Wrap" Text="Trippin' Travel" VerticalAlignment="Top" Width="325" Foreground="white" FontSize="48" FontWeight="Bold" />
+
+        <Rectangle 
+            HorizontalAlignment="Center" 
+            Height="65" 
+            Margin="0,708,0,0" 
+            Fill ="#273c75"
+            Stroke="Black" 
+            VerticalAlignment="Top" 
+            Width="1500"/>
+
+        <TextBlock
+            HorizontalAlignment="Left" 
+            Height="72"
+            Margin="609,702,0,0"
+            TextWrapping="Wrap" 
+            Text="Trippin' Travel"
+            VerticalAlignment="Top"
+            Width="325" 
+            Foreground="white" 
+            FontSize="48" 
+            FontWeight="Bold" />
         <GroupBox Header="Help" Margin="35,0,1109,665" Padding="10" FontFamily="ubuntu" FontSize="30" BorderThickness="3" BorderBrush="#192a56" FontWeight="medium" >
             <StackPanel>
                 <TextBlock Height="39" FontWeight="medium"><Run Text="Press CTRL+H for help"/></TextBlock>
             </StackPanel>
         </GroupBox>
-        <Rectangle HorizontalAlignment="Left" Height="5" Margin="28,119,0,0" Stroke="#FF192A56" VerticalAlignment="Top" Width="1434" Fill="#192a56"/>
-        <Button Content="Check a comment" HorizontalAlignment="Left" Height="44" Margin="859,558,0,0" VerticalAlignment="Top" Width="232" FontFamily="ubuntu" FontSize="24" Background="#FF273C75" Foreground="White" FontWeight="Medium" Click="ShowResolvedRequestComment" RenderTransformOrigin="0.642,0.524"/>
-        <Button Content="Got it!" HorizontalAlignment="Left" Height="44" Margin="1168,558,0,0" VerticalAlignment="Top" Width="232" FontFamily="ubuntu" FontSize="24" Background="#FF273C75" Foreground="White" FontWeight="Medium" Click="DeleteResolvedRequest"/>
-        <GroupBox HorizontalAlignment="Left" Height="517" Header="Pending requests" Margin="43,147,0,0" VerticalAlignment="Top" Width="696" FontFamily="ubuntu" FontSize="36" FontWeight="Bold" Foreground="#FF192A56" BorderThickness="3" BorderBrush="#192a56"/>
-        <DataGrid HorizontalAlignment="Left" Height="305" Margin="73,213,0,0" VerticalAlignment="Top" Width="636" Name="pendingRequestsGrid" FontFamily="ubuntu" FontSize="18" Foreground="#FF192A56" BorderBrush="#FF192A56" Background="White" FontWeight="Medium" TextBlock.TextAlignment="Center" MinRowHeight="50" />
-        <Button Content="Check a comment" HorizontalAlignment="Left" Height="44" Margin="117,558,0,0" VerticalAlignment="Top" Width="232" FontFamily="ubuntu" FontSize="24" Background="#FF273C75" Foreground="White" FontWeight="Medium" Click="ShowPendingRequestComment"/>
-        <Button Content="Cancel request" HorizontalAlignment="Left" Height="44" Margin="426,558,0,0" VerticalAlignment="Top" Width="232" FontFamily="ubuntu" FontSize="24" Background="#FF273C75" Foreground="White" FontWeight="Medium" Click="DeletePendingRequest"/>
-        <TextBlock HorizontalAlignment="Left" Height="62" Margin="911,611,0,0" TextWrapping="Wrap" Text="By pressing Got it! you are removing selected request from history and you won't get reminders for it any more" VerticalAlignment="Top" Width="418" FontSize="16" TextAlignment="center" Foreground="#FF5F5656" FontFamily="ubuntu"/>
+
+        <Rectangle 
+            HorizontalAlignment="Left" 
+            Height="5" 
+            Margin="28,119,0,0"
+            Stroke="#FF192A56" 
+            VerticalAlignment="Top" 
+            Width="1434"
+            Fill="#192a56"/>
+
+        <Button 
+            Content="Check a comment"
+            HorizontalAlignment="Left"
+            Height="44" 
+            Margin="883,579,0,0" 
+            VerticalAlignment="Top"
+            Width="232" 
+            FontFamily="ubuntu" 
+            FontSize="24"
+            Background="#FF273C75"
+            Foreground="White" 
+            FontWeight="Medium" 
+            Click="ShowResolvedRequestComment" 
+            RenderTransformOrigin="0.642,0.524"/>
+
+        <Button 
+            Content="Got it!"
+            HorizontalAlignment="Left" 
+            Height="44" 
+            Margin="1201,579,0,0"
+            VerticalAlignment="Top"
+            Width="232" 
+            FontFamily="ubuntu"
+            FontSize="24"
+            Background="#FF273C75" 
+            Foreground="White" 
+            FontWeight="Medium" 
+            Click="DeleteResolvedRequest"/>
+
+        <GroupBox
+            HorizontalAlignment="Left"
+            Height="517" 
+            Header="Pending requests" 
+            Margin="43,147,0,0" 
+            VerticalAlignment="Top"
+            Width="659" 
+            FontFamily="ubuntu"
+            FontSize="36" 
+            FontWeight="Bold" 
+            Foreground="#FF192A56" 
+            BorderThickness="3"
+            BorderBrush="#192a56"/>
+
+        <DataGrid 
+            HorizontalAlignment="Left" 
+            Height="305" 
+            Margin="73,230,0,0" 
+            VerticalAlignment="Top"
+            Width="565"
+            KeyDown="PendingKey"
+            Name="pendingRequestsGrid" 
+            FontFamily="ubuntu" 
+            FontSize="18" 
+            Foreground="#FF192A56" 
+            BorderBrush="#FF192A56" 
+            Background="White" 
+            FontWeight="Medium" 
+            TextBlock.TextAlignment="Center" 
+            MinRowHeight="50" />
+
+        <Button 
+            Content="Check a comment" 
+            HorizontalAlignment="Left" 
+            Height="44"
+            Margin="73,577,0,0" 
+            VerticalAlignment="Top" 
+            Width="232"
+            FontFamily="ubuntu" 
+            FontSize="24" 
+            Background="#FF273C75"
+            Foreground="White" 
+            FontWeight="Medium"
+            Click="ShowPendingRequestComment"/>
+
+        <Button 
+            Content="Cancel request" 
+            HorizontalAlignment="Left" 
+            Height="44" 
+            Margin="406,579,0,0"
+            VerticalAlignment="Top" 
+            Width="232" 
+            FontFamily="ubuntu" 
+            FontSize="24" 
+            Background="#FF273C75" 
+            Foreground="White"
+            FontWeight="Medium"
+            Click="DeletePendingRequest"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="41" 
+            Margin="938,536,0,0" 
+            TextWrapping="Wrap" 
+            Text="By pressing Got it! you are removing selected request from history and you won't get reminders for it any more"
+            VerticalAlignment="Top" 
+            Width="418"
+            FontSize="16" 
+            TextAlignment="center" 
+            Foreground="#FF5F5656" FontFamily="ubuntu"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="322" 
+            Margin="707,177,0,0" 
+            TextWrapping="Wrap" 
+            Name="HelpLand"
+            VerticalAlignment="Top" 
+            Width="100"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="160" 
+            Margin="707,504,0,0" 
+            TextWrapping="Wrap" 
+            Name="HelpExit"
+            VerticalAlignment="Top" 
+            Width="105"
+            Foreground="#c23616"
+            FontFamily="Ubuntu" 
+            FontSize="26" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+        
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="152,627,0,0"
+            TextWrapping="Wrap" 
+            Text="Press C" 
+            VerticalAlignment="Top" 
+            Width="62"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"/>
+        
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="450,627,0,0"
+            TextWrapping="Wrap" 
+            Text="Press BACKSPACE" 
+            VerticalAlignment="Top" 
+            Width="143"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"/>
+        
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="971,627,0,0"
+            TextWrapping="Wrap" 
+            Text="Press C" 
+            VerticalAlignment="Top" 
+            Width="63"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"/>
+        
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="1248,627,0,0"
+            TextWrapping="Wrap" 
+            Text="Press BACKSPACE" 
+            VerticalAlignment="Top" 
+            Width="146"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"/>
+        
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="172,200,0,0"
+            TextWrapping="Wrap" 
+            Text="Press P to access, then UP and DOWN arrows" 
+            VerticalAlignment="Top" 
+            Width="368"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="985,200,0,0"
+            TextWrapping="Wrap" 
+            Text="Press R to access, then UP and DOWN arrows" 
+            VerticalAlignment="Top" 
+            Width="361"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
 
     </Grid>
 </Window>

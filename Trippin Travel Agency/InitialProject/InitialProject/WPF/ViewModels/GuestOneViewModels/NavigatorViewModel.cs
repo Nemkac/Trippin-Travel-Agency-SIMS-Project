@@ -107,6 +107,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public void CloseInterfaces()
         {
             GuestOneStaticHelper.navigator.Close();
+            GuestOneStaticHelper.guestsBookingDelaymentRequestsInterface?.Close();
             GuestOneStaticHelper.guestOneInterface?.Close();
             GuestOneStaticHelper.bookAccommodationInterface?.Close();
             GuestOneStaticHelper.pastBookingsInterface?.Close();

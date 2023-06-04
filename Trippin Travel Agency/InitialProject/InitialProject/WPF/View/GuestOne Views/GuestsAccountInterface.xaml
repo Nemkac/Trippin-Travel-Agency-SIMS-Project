@@ -8,6 +8,7 @@
         Title="GuestsAccountInterface" Height="800" Width="1500">
     <Window.InputBindings>
         <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
+        <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
     </Window.InputBindings>
     <Grid>
         <Rectangle 
@@ -173,6 +174,45 @@
             FontWeight="Bold" 
             Foreground="#FF192A56"
             Text="0   1   2   3   4   5   6   7   8   9  10"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="152" 
+            Margin="35,559,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpBookings}"
+            VerticalAlignment="Top" 
+            Width="205"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="98" 
+            Margin="35,458,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpPoints}"
+            VerticalAlignment="Top" 
+            Width="358"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+        
+        <TextBlock HorizontalAlignment="Left"
+            Height="111" 
+            Margin="1257,500,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpExit}"
+            VerticalAlignment="Top" 
+            Width="188"
+            Foreground="#c23616"
+            FontFamily="Ubuntu" 
+            FontSize="26" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
 
     </Grid>
 </Window>

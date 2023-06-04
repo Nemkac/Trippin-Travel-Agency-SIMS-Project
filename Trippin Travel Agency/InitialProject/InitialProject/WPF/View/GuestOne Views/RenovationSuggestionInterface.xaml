@@ -8,6 +8,7 @@
         Title="RenovationSuggestionInterface" Height="800" Width="1500">
     <Window.InputBindings>
         <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
+        <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
         <KeyBinding Key="Escape" Command="{Binding GoToPreviousWindow}" />
         <KeyBinding Key="Enter" Command="{Binding SendRenovationSuggestion}" />
     </Window.InputBindings>
@@ -213,7 +214,7 @@
             IsTabStop="False"
             Style="{StaticResource leadButton}"
             Command="{Binding SendRenovationSuggestion}"/>
-        
+
         <TextBlock HorizontalAlignment="Left" 
             Height="35" 
             Margin="898,417,0,0" 
@@ -238,6 +239,85 @@
             FontFamily="Ubuntu" 
             FontSize="17" 
             FontWeight="Medium"/>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="254,298,0,0"
+            TextWrapping="Wrap" 
+            Text="Press TAB" 
+            VerticalAlignment="Top" 
+            Width="87"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17"
+            FontWeight="Medium"/>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="25" 
+            Margin="284,309,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt;" 
+            VerticalAlignment="Top" 
+            Width="16"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="20"
+            FontWeight="Medium" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="25" 
+            Margin="285,285,0,0"
+            TextWrapping="Wrap" 
+            Text="&lt;" 
+            VerticalAlignment="Top" 
+            Width="16"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="20"
+            FontWeight="Medium" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Left"
+            Height="300" 
+            Margin="1271,176,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpIterate}"
+            VerticalAlignment="Top" 
+            Width="205"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+        
+        <TextBlock HorizontalAlignment="Left"
+            Height="111" 
+            Margin="1271,427,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpExit}"
+            VerticalAlignment="Top" 
+            Width="188"
+            Foreground="#c23616"
+            FontFamily="Ubuntu" 
+            FontSize="26" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
 
     </Grid>
 </Window>

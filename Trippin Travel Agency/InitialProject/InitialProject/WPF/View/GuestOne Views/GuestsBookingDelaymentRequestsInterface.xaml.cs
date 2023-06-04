@@ -20,6 +20,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using InitialProject.WPF.ViewModels.GuestOneViewModels;
+
 
 namespace InitialProject.WPF.View.GuestOne_Views
 {
@@ -32,9 +34,12 @@ namespace InitialProject.WPF.View.GuestOne_Views
         private AccommodationRepository accommodationRepository;
         private BookingService bookingService;
         private AccommodationService accommodationService;
+        bool isHelpOn = false;
         public GuestsBookingDelaymentRequestsInterface()
         {
             InitializeComponent();
+            this.DataContext = new GuestsBookingDelaymentRequestsViewModel();
+            GuestOneStaticHelper.guestsBookingDelaymentRequestsInterface = this;
             this.Loaded += ShowDelaymentRequests;
             this.accommodationRepository = new AccommodationRepository();
             this.accommodationService = new AccommodationService(accommodationRepository);
@@ -152,7 +157,129 @@ namespace InitialProject.WPF.View.GuestOne_Views
             UserService userService = new UserService();
             bookingDelaymentRequestService.Delete(userService.GetPendingBookingDelaymentRequests()[selectedRowIndex]);
             ShowDelaymentRequests(sender, e);
+        }
 
+        public void KeyHandler(object s, System.Windows.Input.KeyEventArgs k)
+        {
+            
+            if(Keyboard.Modifiers == ModifierKeys.Control && k.Key == Key.H)
+            {
+                if(!isHelpOn)
+                {
+                    HelpLand.Text = "On the left are shown pending requets, and on the right are shown resolved requests";
+                    HelpExit.Text = "To exit Help, press CTRL + H again";
+                    isHelpOn = true;
+                }
+                else
+                {
+                    HelpLand.Text = string.Empty;
+                    HelpExit.Text = string.Empty;
+                    isHelpOn = false;
+                }
+            }
+
+            if (Keyboard.Modifiers == ModifierKeys.Control && k.Key == Key.N)
+            {
+                Navigator navigator = new Navigator();
+                navigator.Left = GuestOneStaticHelper.guestsBookingDelaymentRequestsInterface.Left + (GuestOneStaticHelper.guestsBookingDelaymentRequestsInterface.Width - navigator.Width) / 2;
+                navigator.Top = GuestOneStaticHelper.guestsBookingDelaymentRequestsInterface.Top + (GuestOneStaticHelper.guestsBookingDelaymentRequestsInterface.Height - navigator.Height) / 2;
+                GuestOneStaticHelper.guestsBookingDelaymentRequestsInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
+                navigator.Show();
+            }
+
+            if(k.Key == Key.P)
+            {
+                pendingRequestsGrid.Focus();
+            }
+
+            if(k.Key == Key.R)
+            {
+                resolvedRequestsGrid.Focus();
+            }
+        }
+
+        public void PendingKey(object s, System.Windows.Input.KeyEventArgs k)
+        {
+            if(k.Key == Key.C)
+            {
+                DelaymentRequestComment delaymentRequestComment = new DelaymentRequestComment();
+                UserService userService = new UserService();
+
+                int selectedRowIndex = pendingRequestsGrid.SelectedIndex;
+
+                OpenPendingRequestComment(delaymentRequestComment, userService, selectedRowIndex);
+            }
+
+            if(k.Key == Key.Back)
+            {
+                int selectedRowIndex = pendingRequestsGrid.SelectedIndex;
+                UserService userService = new UserService();
+                bookingDelaymentRequestService.Delete(userService.GetPendingBookingDelaymentRequests()[selectedRowIndex]);
+                DataBaseContext context = new DataBaseContext();
+                List<BookingDelaymentRequest> resolvedDelaymentRequests = userService.GetResolvedBookingDelaymentRequests();
+                List<BookingDelaymentRequest> pendingDelaymentRequests = userService.GetPendingBookingDelaymentRequests();
+
+                if (resolvedDelaymentRequests != null)
+                {
+                    FillResolvedRequestsGrid(bookingService, accommodationService, resolvedDelaymentRequests);
+
+                }
+                else
+                {
+                    resolvedRequestsGrid.ItemsSource = null;
+                }
+
+                if (pendingDelaymentRequests != null)
+                {
+                    FillPendingRequestsGrid(bookingService, accommodationService, pendingDelaymentRequests);
+                }
+                else
+                {
+                    pendingRequestsGrid.ItemsSource = null;
+                }
+            } 
+        }
+
+        public void ResolvedKey(object s, System.Windows.Input.KeyEventArgs k)
+        {
+            if (k.Key == Key.C)
+            {
+                DelaymentRequestComment delaymentRequestComment = new DelaymentRequestComment();
+                UserService userService = new UserService();
+
+                int selectedRowIndex = resolvedRequestsGrid.SelectedIndex;
+
+                OpenResolvedtRequestComment(delaymentRequestComment, userService, selectedRowIndex);
+            }
+
+            if (k.Key == Key.Back)
+            {
+                int selectedRowIndex = resolvedRequestsGrid.SelectedIndex;
+                UserService userService = new UserService();
+                bookingDelaymentRequestService.Delete(userService.GetResolvedBookingDelaymentRequests()[selectedRowIndex]);
+                DataBaseContext context = new DataBaseContext();
+                List<BookingDelaymentRequest> resolvedDelaymentRequests = userService.GetResolvedBookingDelaymentRequests();
+                List<BookingDelaymentRequest> pendingDelaymentRequests = userService.GetPendingBookingDelaymentRequests();
+
+                if (resolvedDelaymentRequests != null)
+                {
+                    FillResolvedRequestsGrid(bookingService, accommodationService, resolvedDelaymentRequests);
+
+                }
+                else
+                {
+                    resolvedRequestsGrid.ItemsSource = null;
+                }
+
+                if (pendingDelaymentRequests != null)
+                {
+                    FillPendingRequestsGrid(bookingService, accommodationService, pendingDelaymentRequests);
+                }
+                else
+                {
+                    pendingRequestsGrid.ItemsSource = null;
+                }
+            }
         }
     }
 }
