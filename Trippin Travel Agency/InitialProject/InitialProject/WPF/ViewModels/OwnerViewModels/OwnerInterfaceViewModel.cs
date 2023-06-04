@@ -246,6 +246,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public ICommand SignOutCommand { get; }
         public ICommand CreateAccommodationFromRecommendations { get; }
         public ICommand CloseExistingAccommodationCommand { get; }
+        public ICommand ForumCommand { get; }
+        public ICommand AllForumsCommand { get; }
         public ICommand LogOut { get; }
         public OwnerInterfaceViewModel()
         {
@@ -264,7 +266,9 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ShowNewRenovationCommand = new ViewModelCommand(ExecuteShowNewRenovationViewCommand);
             ShowScheduleNewRenovationCommand = new ViewModelCommand(ExecuteShowScheduleNewRenovationCommand);
             CloseExistingAccommodationCommand = new ViewModelCommand(ExecuteCloseExistingAccommodationCommand);
-            //SignOutCommand = new ViewModelCommand(ExecuteSignOutCommand);
+            ForumCommand = new ViewModelCommand(ExecuteShowForumCommand);
+            AllForumsCommand = new ViewModelCommand(ExecuteShowAllForumsCommand);
+            LogOut = new ViewModelCommand(ExecuteSignOutCommand);
             IsChecked = false;
             IsLanguageChecked = false;
             Mediator.OnIsCheckedChanged(IsChecked);
@@ -379,10 +383,24 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             Caption = "Renovations";
         }
 
-        /*public void ExecuteSignOutCommand(object obj)
+        public void ExecuteShowForumCommand(object obj)
         {
-            
-        }*/
+            CurrentChildView = new ForumViewModel();
+            Caption = "Forum";
+        }
+        public void ExecuteShowAllForumsCommand(object obj)
+        {
+            CurrentChildView = new AllForumsViewModel();
+            Caption = "All Forums";
+        }
+
+        public void ExecuteSignOutCommand(object obj)
+        {
+            var Window = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            Window?.Close();
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
+        }
 
         public void GenerateAnnualReport(object obj)
         {

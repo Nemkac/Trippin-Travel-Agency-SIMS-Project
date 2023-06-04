@@ -59,6 +59,15 @@ namespace InitialProject.Service.AccommodationServices
             return accommodation.location.id;
         }
 
+        public int GetAccommodationLocationIdByForumId(int forumId)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<Forum> forums = context.Forums.ToList();
+            List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
+            Forum forum = forums.Find(f => f.id == forumId);
+            return forum.location.id;
+        }
+
         public List<int> GetAllByCountry(string country)
         {
             if (country != null)

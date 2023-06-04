@@ -425,6 +425,7 @@
                 <ResourceDictionary Source="/Styles/Colors.xaml"/>
                 <ResourceDictionary Source="/Styles/Calendar.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+ 
         </ResourceDictionary>
     </Application.Resources>
 </Application>

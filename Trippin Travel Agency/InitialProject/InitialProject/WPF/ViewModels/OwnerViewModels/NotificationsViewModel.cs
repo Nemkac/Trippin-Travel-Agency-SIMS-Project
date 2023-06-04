@@ -65,6 +65,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             SendNotification();
         }
 
+        public void ShowNewForumView(object obj)
+        {
+            _mainViewModel.ExecuteShowForumCommand(obj);
+        }
+
         public void ShowGuestRatingView(object obj)
         {
             _mainViewModel.ExecuteShowGuestRatingCommand(obj);
@@ -153,6 +158,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
             ShowGuestRatingView(canceledBookingId, newForumMessageId);
 
+            ShowNewForumView(null);
         }
 
         private void ShowGuestRatingView(int canceledBookingId, int newForumMessageId)
@@ -226,23 +232,22 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
             DataBaseContext forumMessageContext = new DataBaseContext();
             List<ForumMessage> newForumMessages = forumMessageContext.ForumMessages.ToList();
-            foreach (ForumMessage forumMessage in newForumMessages.ToList())
-            {
-                if (forumMessage.forumId == newForumMessageId)
-                {
-                    forumMessage.seen = true;
-                    forumMessageContext.ForumMessages.Update(forumMessage);
-                    forumMessageContext.SaveChanges();
-                }
-            }
+            /* foreach (ForumMessage forumMessage in newForumMessages.ToList())
+             {
+                 if (forumMessage.forumId == newForumMessageId)
+                 {
+                     forumMessage.seen = true;
+                     forumMessageContext.ForumMessages.Update(forumMessage);
+                     forumMessageContext.SaveChanges();
+                 }
+             }*/
+
+            LoggedUser.VisitedForumId = newForumMessageId;
 
             Notifications.Remove(SelectedNotification);
 
             return newForumMessageId;
-
         }
-
-
 
         private static void TransferSelectedBooking(BookingService bookingService, int bookingId)
         {

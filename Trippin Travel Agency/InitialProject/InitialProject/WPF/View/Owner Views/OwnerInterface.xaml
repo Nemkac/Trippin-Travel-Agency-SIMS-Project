@@ -81,6 +81,14 @@
             <owner:CloseExistingAccommodationView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModel:ForumViewModel}">
+            <local:ForumView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:AllForumsViewModel}">
+            <local:AllForumsView/>
+        </DataTemplate>
+
     </Window.Resources>
 
     <Grid>
@@ -143,7 +151,8 @@
                     </StackPanel>
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}"
-                             GroupName="MainWindowButtons">
+                             GroupName="MainWindowButtons"
+                             Command="{Binding AllForumsCommand}">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Comment" Style="{StaticResource menuButtonIconTablet}"/>
                         <TextBlock Style="{StaticResource menuButtonText}" Text="Forum"/>
@@ -201,18 +210,24 @@
                     </StackPanel>
 
                     <!--User-->
-                    <StackPanel Grid.Column="1" Orientation="Horizontal" FlowDirection="LeftToRight" VerticalAlignment="Bottom" Margin="0, 14, 35, 0" HorizontalAlignment="Right">
-                        <RadioButton Style="{StaticResource headerButton}" IsChecked="False"
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" 
+                                FlowDirection="LeftToRight" VerticalAlignment="Bottom" 
+                                Margin="0, 14, 35, 0" HorizontalAlignment="Right">
+                        <RadioButton Style="{StaticResource headerButton}" 
+                                     IsChecked="False"
                                      GroupName="MainWindowButtons" Margin="0 0 10 0"
                                      Command="{Binding ShowNotificationsViewCommand}">
                             <fa:IconImage x:Name="notificationIcon" Icon="Bell" Style="{StaticResource HeaderButtonIcon}"/>
                         </RadioButton>
-                        <RadioButton Style="{StaticResource headerButton}" IsChecked="False"
+                        <RadioButton Style="{StaticResource headerButton}" 
+                                     IsChecked="False"
                                      GroupName="MainWindowButtons" Margin="0 0 10 0"
                                      Command="{Binding ShowProfileViewCommand}">
                             <fa:IconImage Icon="User" Style="{StaticResource HeaderButtonIcon}"/>
                         </RadioButton>
-                        <RadioButton Style="{StaticResource headerButton}" IsChecked="False"
+                        <RadioButton Style="{StaticResource headerButton}" 
+                                     IsChecked="False"
+                                     Command="{Binding LogOut}"
                                      GroupName="MainWindowButtons">
                             <fa:IconImage Icon="PowerOff" Style="{StaticResource HeaderButtonIcon}"/>
                         </RadioButton>
