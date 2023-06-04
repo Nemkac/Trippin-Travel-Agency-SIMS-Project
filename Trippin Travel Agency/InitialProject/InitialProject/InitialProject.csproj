@@ -44,6 +44,10 @@
     <None Remove="Assets\fruska-gora.jpg" />
     <None Remove="Assets\madrid.jpg" />
     <None Remove="Assets\mitrovica.jpg" />
+    <None Remove="Assets\Ohrid1.jpg" />
+    <None Remove="Assets\Ohrid2.jpg" />
+    <None Remove="Assets\Ohrid3.jpg" />
+    <None Remove="Assets\Ohrid4.jpg" />
     <None Remove="Assets\Ohrid5.jpg" />
     <None Remove="Assets\tours-white.svg" />
   </ItemGroup>
@@ -116,7 +120,9 @@
     <Resource Include="Assets\Existing Assets\logoWEB.png" />
     <Resource Include="Assets\Existing Assets\madrid.jpg" />
     <Resource Include="Assets\Existing Assets\most_popular_location_generic.jpg" />
-    <Resource Include="Assets\Existing Assets\Ohrid1.jpg" />
+    <Resource Include="Assets\Existing Assets\Ohrid1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Existing Assets\Ohrid2.jpg" />
     <Resource Include="Assets\Existing Assets\Ohrid3.jpg" />
     <Resource Include="Assets\Existing Assets\Ohrid4.jpg" />
@@ -128,6 +134,10 @@
 
   <ItemGroup>
     <Resource Include="Assets\Existing Assets\sremskamitrovica_serbia.jpg" />
+    <Resource Include="Assets\Ohrid1.jpg" />
+    <Resource Include="Assets\Ohrid2.jpg" />
+    <Resource Include="Assets\Ohrid3.jpg" />
+    <Resource Include="Assets\Ohrid4.jpg" />
   </ItemGroup>
 
 </Project>

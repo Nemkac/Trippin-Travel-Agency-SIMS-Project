@@ -142,7 +142,10 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             string mostPopularLocation = numberOfBookingsPerLocation.FirstOrDefault().Key;
             string leastPopularLocation = numberOfBookingsPerLocation.LastOrDefault().Key;
 
-            UpdateImageAndLocation(mostPopularLocation, leastPopularLocation);
+            if (mostPopularLocation != null && leastPopularLocation != null)
+            {
+                UpdateImageAndLocation(mostPopularLocation, leastPopularLocation);
+            }
 
         }
 
@@ -152,7 +155,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             {
                 foreach (Accommodation accommodation in ownersAccommodations)
                 {
-
                     if (booking.accommodationId == accommodation.id)
                     {
                         List<string> locationToParse = this.accommodationService.GetAccommodationLocation(accommodation.id);

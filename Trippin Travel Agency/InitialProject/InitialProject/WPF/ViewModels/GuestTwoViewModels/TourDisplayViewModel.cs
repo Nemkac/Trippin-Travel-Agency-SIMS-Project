@@ -24,6 +24,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
         public ObservableCollection<TourDTO> tourDTOs { get; set; } = new ObservableCollection<TourDTO>();  
 
         private readonly TourService tourService = new(new TourRepository());
+        private readonly TourLocationService tourLocationService = new(new TourLocationRepository());
 
         public static int DetailedId = -1;
         
@@ -137,6 +138,87 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             }
         }
 
+        private string recommendedTourName1;
+        public string RecommendedTourName1
+        {
+            get { return recommendedTourName1; }
+            set
+            {
+                if (recommendedTourName1 != value)
+                {
+                    recommendedTourName1 = value;
+                    OnPropertyChanged(nameof(RecommendedTourName1));
+                }
+            }
+        }
+        private string recommendedTourName2;
+        public string RecommendedTourName2
+        {
+            get { return recommendedTourName2; }
+            set
+            {
+                if (recommendedTourName2 != value)
+                {
+                    recommendedTourName2 = value;
+                    OnPropertyChanged(nameof(RecommendedTourName2));
+                }
+            }
+        }
+        private string recommendedTourName3;
+        public string RecommendedTourName3
+        {
+            get { return recommendedTourName3; }
+            set
+            {
+                if (recommendedTourName3 != value)
+                {
+                    recommendedTourName3 = value;
+                    OnPropertyChanged(nameof(RecommendedTourName3));
+                }
+            }
+        }
+
+        private string recommendedTourImage1;
+        public string RecommendedTourImage1
+        {
+            get { return recommendedTourImage1; }
+            set
+            {
+                if (recommendedTourImage1 != value)
+                {
+                    recommendedTourImage1 = value;
+                    OnPropertyChanged(nameof(RecommendedTourImage1));
+                }
+            }
+        }
+        private string recommendedTourImage2;
+        public string RecommendedTourImage2
+        {
+            get { return recommendedTourImage2; }
+            set
+            {
+                if (recommendedTourImage2 != value)
+                {
+                    recommendedTourImage2= value;
+                    OnPropertyChanged(nameof(RecommendedTourImage2));
+                }
+            }
+        }
+
+        private string recommendedTourImage3;
+        public string RecommendedTourImage3
+        {
+            get { return recommendedTourImage3; }
+            set
+            {
+                if (recommendedTourImage3 != value)
+                {
+                    recommendedTourImage3 = value;
+                    OnPropertyChanged(nameof(RecommendedTourImage3));
+                }
+            }
+        }
+
         public ViewModelCommand DetailedTourViewCommand { get; private set; }
         public ViewModelCommand BookingConfirmationViewCommand { get; private set; }
 
@@ -150,6 +232,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             DetailedTourViewCommand = new ViewModelCommand(ShowDetailedTourView);
             BookingConfirmationViewCommand = new ViewModelCommand(ShowBookingConfirmation);                       
             WindowLoaded();
+            LoadRecommendations();
             ApplyFiltersCommand = new ViewModelCommand(ApplyFilters);
             DetailedId = -1;
             SelectedLanguage = null;
@@ -336,7 +419,50 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             return dataList;
         }
 
+        public void LoadRecommendations() 
+        {
+            DataBaseContext context = new DataBaseContext();
+            Dictionary<int,int> indexes = new Dictionary<int,int>();
 
+            foreach(TourAttendance attendance in context.TourAttendances.ToList()) 
+            {
+                if (!indexes.ContainsKey(attendance.tourId))
+                {
+                    indexes.Add(attendance.tourId, 1);
+                }
+                else {
+                    indexes[attendance.tourId]++;
+                }
+            }
 
+            var sortedIndexes = from entry in indexes orderby entry.Value descending select entry;
+            var firstThreeTours = sortedIndexes.Take(3);
+            var toursToDict = firstThreeTours.ToDictionary(x => x.Key, x=>x.Value);
+
+            int counter = 0; 
+            foreach (KeyValuePair<int, int> entry in toursToDict) 
+            {
+                //3 dvojke 2 keca 2 trojke
+                //MessageBox.Show(entry.Key.ToString(), entry.Value.ToString());
+                Tour tour = tourService.GetByID(entry.Key);
+                TourLocation location = tourLocationService.GetById(tour.location);              
+                if (counter == 0) 
+                {                    
+                    RecommendedTourName1 = tour.name;
+                    RecommendedTourImage1 = "pack://application:,,,/Assets/Existing Assets/"+location.city+"1.jpg";
+                }
+                if (counter == 1) 
+                {                    
+                    RecommendedTourName2 = tour.name;
+                    RecommendedTourImage2 = "pack://application:,,,/Assets/Existing Assets/" +location.city +"1.jpg";
+                }
+                if (counter == 2)
+                {                    
+                    RecommendedTourName3 = tour.name;
+                    RecommendedTourImage3 = "pack://application:,,,/Assets/Existing Assets/" +location.city +"1.jpg";
+                }
+                counter++;                
+            }
+        }
     }
 }

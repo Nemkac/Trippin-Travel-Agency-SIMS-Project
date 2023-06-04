@@ -166,7 +166,7 @@
                     Style="{StaticResource addButtonWEB}" 
                     Name ="FinishBookingButton" 
                     Command="{Binding TourViewCommand}"
-                    IsEnabled="{Binding FinishDisabled}">
+                    IsEnabled="{Binding FinishDisabled}" Cursor="Hand">
                 
                 <TextBlock Text="Finish booking" 
                            TextWrapping="Wrap" 
@@ -178,7 +178,7 @@
                     FontSize="28" 
                     Height="120" 
                     Style="{StaticResource saveButtonWEB}"
-                    Command="{Binding CreateTourReport}">
+                    Command="{Binding CreateTourReport}" Cursor="Hand">
                 <TextBlock Text="Generate booking confirmation" 
                            TextWrapping="Wrap" 
                            TextAlignment="Center"/>
@@ -192,7 +192,7 @@
                     Style="{StaticResource cancelButtonWEB}" 
                     Name="CancelBookingButton"
                     IsEnabled="{Binding CancelDisabled}"
-                    Command="{Binding CancelBookingCommand}"/>
+                    Command="{Binding CancelBookingCommand}" Cursor="Hand"/>
         </StackPanel>
 
         <GroupBox Header="My Coupons" 

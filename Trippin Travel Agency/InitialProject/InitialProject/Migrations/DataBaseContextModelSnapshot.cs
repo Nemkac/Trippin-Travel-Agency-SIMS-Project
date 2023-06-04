@@ -1248,12 +1248,14 @@ namespace InitialProject.Migrations
                     b.Navigation("images");
                 });
 
-            modelBuilder.Entity("InitialProject.Model.Forum", b =>
-                {
-                    b.Navigation("comments");
             modelBuilder.Entity("InitialProject.Model.ComplexTourRequest", b =>
                 {
                     b.Navigation("singleRequestIds");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.Forum", b =>
+                {
+                    b.Navigation("comments");
                 });
 
             modelBuilder.Entity("InitialProject.Model.Tour", b =>

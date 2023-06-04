@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20230516145154_vatafak")]
-    partial class vatafak
+    [Migration("20230604085953_CP4G2HCI")]
+    partial class CP4G2HCI
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -296,6 +296,17 @@ namespace InitialProject.Migrations
                     b.ToTable("CanceledBookings");
                 });
 
+            modelBuilder.Entity("InitialProject.Model.ComplexTourRequest", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("ComplexTourRequests");
+                });
+
             modelBuilder.Entity("InitialProject.Model.Coupon", b =>
                 {
                     b.Property<int>("id")
@@ -331,6 +342,87 @@ namespace InitialProject.Migrations
                     b.HasKey("id");
 
                     b.ToTable("DelayedBookings");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.Forum", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("creatorId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("isClosed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("isVeryUseful")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("locationid")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("locationid");
+
+                    b.ToTable("Forums");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.ForumComment", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("Forumid")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("comment")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("hasGuestVisited")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("numberOfReports")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("postingDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("userId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Forumid");
+
+                    b.ToTable("ForumComments");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.ForumMessage", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("forumId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("locationId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("message")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("seen")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("ForumMessages");
                 });
 
             modelBuilder.Entity("InitialProject.Model.GuestRate", b =>
@@ -434,7 +526,7 @@ namespace InitialProject.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("RenovationSugestions");
+                    b.ToTable("RenovationSuggestions");
                 });
 
             modelBuilder.Entity("InitialProject.Model.RenovationSuggestionMessage", b =>
@@ -534,6 +626,9 @@ namespace InitialProject.Migrations
                     b.Property<DateTime>("startDates")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("super")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("touristLimit")
                         .HasColumnType("INTEGER");
 
@@ -582,6 +677,9 @@ namespace InitialProject.Migrations
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("checkedForCoupon")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("guestID")
@@ -639,6 +737,9 @@ namespace InitialProject.Migrations
                     b.Property<int>("numberOfGuests")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("opened")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("tourId")
                         .HasColumnType("INTEGER");
 
@@ -651,6 +752,9 @@ namespace InitialProject.Migrations
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("ComplexTourRequestid")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("acceptedDate")
@@ -690,6 +794,8 @@ namespace InitialProject.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("id");
+
+                    b.HasIndex("ComplexTourRequestid");
 
                     b.ToTable("TourRequests");
                 });
@@ -1045,6 +1151,9 @@ namespace InitialProject.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("super")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("username")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -1083,6 +1192,24 @@ namespace InitialProject.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("InitialProject.Model.Forum", b =>
+                {
+                    b.HasOne("InitialProject.Model.AccommodationLocation", "location")
+                        .WithMany()
+                        .HasForeignKey("locationid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("location");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.ForumComment", b =>
+                {
+                    b.HasOne("InitialProject.Model.Forum", null)
+                        .WithMany("comments")
+                        .HasForeignKey("Forumid");
+                });
+
             modelBuilder.Entity("InitialProject.Model.Image", b =>
                 {
                     b.HasOne("InitialProject.Model.AccommodationRate", null)
@@ -1107,6 +1234,13 @@ namespace InitialProject.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("InitialProject.Model.TourRequest", b =>
+                {
+                    b.HasOne("InitialProject.Model.ComplexTourRequest", null)
+                        .WithMany("singleRequestIds")
+                        .HasForeignKey("ComplexTourRequestid");
+                });
+
             modelBuilder.Entity("InitialProject.Model.Accommodation", b =>
                 {
                     b.Navigation("imageLinks");
@@ -1115,6 +1249,16 @@ namespace InitialProject.Migrations
             modelBuilder.Entity("InitialProject.Model.AccommodationRate", b =>
                 {
                     b.Navigation("images");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.ComplexTourRequest", b =>
+                {
+                    b.Navigation("singleRequestIds");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.Forum", b =>
+                {
+                    b.Navigation("comments");
                 });
 
             modelBuilder.Entity("InitialProject.Model.Tour", b =>

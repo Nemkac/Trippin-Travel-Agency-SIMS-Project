@@ -296,6 +296,19 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 }
             }
         }
+        private string fullName;
+        public string FullName
+        {
+            get { return fullName; }
+            set
+            {
+                if (fullName != value)
+                {
+                    fullName = value;
+                    OnPropertyChanged(nameof(FullName));
+                }
+            }
+        }
 
         public GuestTwoStatisticsViewModel()
         {
@@ -308,6 +321,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             NameAndLastname = LoggedUser.firstName + " " + LoggedUser.lastName;
             UsernameLabel2 = "@" + LoggedUser.username;
             AccountType = "Account type:  " + LoggedUser.role;
+            FullName = "@" + LoggedUser.firstName + " " + LoggedUser.lastName;
             DataBaseContext context = new DataBaseContext();
             LoadData(context);
         }

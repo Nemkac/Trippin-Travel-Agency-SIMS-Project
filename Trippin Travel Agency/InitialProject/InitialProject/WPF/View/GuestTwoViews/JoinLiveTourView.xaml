@@ -79,7 +79,7 @@
                         FontSize="32" 
                         FontWeight="Medium" 
                         FontFamily="Ubuntu"
-                        Command="{Binding JoinTourCommand}">
+                        Command="{Binding JoinTourCommand}" Cursor="Hand">
 
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Check" Width="35" Margin="15 0 0 0"/>
@@ -106,7 +106,7 @@
                         Style="{StaticResource addButtonWEB}" 
                         Margin="-500 0 0 0" 
                         Name="UploadPhotoButton"
-                        IsEnabled="{Binding UploadButtonEnabled}"
+                        IsEnabled="{Binding UploadButtonEnabled}" Cursor="Hand"
                         />
             </StackPanel>
         </GroupBox>
@@ -252,7 +252,7 @@
                         FontWeight="Medium" 
                         Name="SubmitButton"
                         Command="{Binding SubmitRatingCommand}"
-                        IsEnabled="{Binding SubmitButtonEnabled}"/>
+                        IsEnabled="{Binding SubmitButtonEnabled}" Cursor="Hand"/>
 
             </StackPanel>
         </GroupBox>

@@ -138,7 +138,7 @@
                     Width="NaN"
                     Style="{StaticResource addButtonWEB}"
                     Margin="150,1318,150,82"
-                    Command="{Binding BookingViewCommand}">
+                    Command="{Binding BookingViewCommand}" Cursor="Hand">
 
                 <StackPanel Orientation="Horizontal">
                     <fa:IconImage Icon="PlaneDeparture" Width="70" Margin="15 0 0 0"/>

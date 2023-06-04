@@ -67,6 +67,12 @@
 
             <GroupBox Header="Info" FontSize="28" FontFamily="Ubuntu" FontWeight="Light" Height="287" VerticalAlignment="Top" Foreground="#192a56">
                 <StackPanel Grid.Column="0">
+                    <Label Name="NameLabel" 
+                           Margin ="15 15 0 0" 
+                           FontSize="20"
+                           FontFamily="Ubuntu" 
+                           FontWeight="Medium" 
+                           Content="{Binding FullName}"/>
                     <Label Name="UsernameLabel2" 
                            Margin ="15 15 0 0" 
                            FontSize="20"
@@ -108,7 +114,7 @@
                             FontSize="32" 
                             FontFamily="Ubuntu" 
                             FontWeight="Heavy" 
-                            Command="{Binding OpenMessage}"/>
+                            Command="{Binding OpenMessage}" Cursor="Hand"/>
                     <TextBlock Width="350"
                                Height="130"
                                Margin="-770 -140 0 0"
@@ -146,7 +152,7 @@
                             FontSize="32" 
                             FontFamily="Ubuntu" 
                             FontWeight="Heavy"
-                            Command="{Binding DetailedTourViewCommand}"/>
+                            Command="{Binding DetailedTourViewCommand}" Cursor="Hand"/>
                     <TextBlock Width="350"
                                Height="130"
                                Margin="-770 -140 0 0"
