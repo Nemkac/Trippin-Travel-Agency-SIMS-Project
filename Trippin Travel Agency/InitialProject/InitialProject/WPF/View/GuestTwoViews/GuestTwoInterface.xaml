@@ -83,7 +83,7 @@
             <Button x:Name="MyRequests" Content="My Requests" Style="{StaticResource menuButtonWEB}" Command="{Binding ShowGuestTwoRequests}"/>
             <Button x:Name="Coupons" Content="Coupons" Style="{StaticResource menuButtonWEB}" Command="{Binding ShowGuestTwoCoupons}"/>
             <Button x:Name="Account" Content="Account" Style="{StaticResource menuButtonWEB}" Command="{Binding ShowGuestTwoStatistics}"/>
-            <Button x:Name="SignOut" Content="Sign Out" Style="{StaticResource menuButtonWEB}"/>
+                <Button x:Name="SignOut" Content="Sign Out" Style="{StaticResource menuButtonWEB}" Command="{Binding ExecuteSignOut}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" Grid.Column="1">

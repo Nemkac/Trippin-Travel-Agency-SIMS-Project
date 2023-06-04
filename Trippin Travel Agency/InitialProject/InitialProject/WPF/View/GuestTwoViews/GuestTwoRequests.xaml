@@ -5,11 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.WPF.View.GuestTwoViews"
              mc:Ignorable="d" 
-             d:DesignHeight="1470" d:DesignWidth="1520">
+             d:DesignHeight="2070" d:DesignWidth="1520">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="250"/>
             <RowDefinition Height="800"/>
+            <RowDefinition Height="700"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -83,20 +84,74 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="Tours i suggested" Margin ="0 -400 0 0" Grid.Column="1" Height="400" Width="1200" HorizontalAlignment="Left" FontSize="40" FontFamily="Ubuntu" FontWeight="Light" Foreground="#192a56">
-                <StackPanel Grid.Column="1" Margin="15 0 0 0" Height="765" Width="1150" HorizontalAlignment="Left" Orientation="Vertical">
+            <GroupBox Header="Tours i suggested" Margin ="0 0 0 0" Grid.Column="1" Height="900" Width="1200" HorizontalAlignment="Left" FontSize="40" FontFamily="Ubuntu" FontWeight="Light" Foreground="#192a56" Grid.RowSpan="3">
+                <StackPanel Grid.Column="1" Margin="15 0 0 0" Height="1200" Width="1150" HorizontalAlignment="Left" Orientation="Vertical">
                     <DataGrid x:Name="dataGrid" 
+                              d:DataContext ="" 
+                              Width="1125" 
+                              Height="600"
+                              Margin="0 50 0 0"
+                              FontSize="15"
+                              FontFamily="Ubuntu"
+                              HorizontalAlignment="Center"
+                              Style="{DynamicResource DataGridStyle1}" 
+                              CellStyle="{DynamicResource DataGridCellStyle1}" 
+                              ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                              RowStyle="{DynamicResource DataGridRowStyle1}"
+                              ItemsSource="{Binding requests}" IsReadOnly="True"                           
+                              >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="" Binding="{Binding field}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style>
+                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </GroupBox>
+
+        </Grid>
+        <GroupBox Grid.Row="2"
+                  Margin="303,0,0,0"
+                  Header="Complex tour i suggested"
+                  FontSize="40"
+                  FontFamily="Ubuntu"
+                  FontWeight="Light" 
+                  Foreground="#192a56">
+            <StackPanel Grid.Row="2"
+                    Margin="48,-200,36,0"
+                    Height = "400">
+                <DataGrid x:Name="dataGrid2" 
                               d:DataContext ="" 
                               Width="1125" 
                               Height="300"
                               Margin="0 50 0 0"
-                              FontSize="20"
+                              FontSize="15"
                               FontFamily="Ubuntu"
                               HorizontalAlignment="Center"
-                              ItemsSource="{Binding requests}"
-                              />
-                </StackPanel>
-            </GroupBox>
-        </Grid>
+                              Style="{DynamicResource DataGridStyle1}" 
+                              CellStyle="{DynamicResource DataGridCellStyle1}" 
+                              ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                              RowStyle="{DynamicResource DataGridRowStyle1}"
+                              ItemsSource="{Binding complexRequests}" IsReadOnly="True"                          
+                              >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="" Binding="{Binding field}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </StackPanel>
+        </GroupBox>
     </Grid>
 </UserControl>

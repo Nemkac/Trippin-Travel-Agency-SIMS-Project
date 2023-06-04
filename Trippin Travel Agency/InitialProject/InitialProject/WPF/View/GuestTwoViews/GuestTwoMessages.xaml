@@ -91,10 +91,15 @@
                               Width="1125" 
                               Height="450" 
                               Margin="0 0 0 0" 
-                              FontSize="28" 
+                              FontSize="20" 
                               FontFamily="Ubuntu"
                               ItemsSource="{Binding responseMessages}"
-                              SelectedItem="{Binding SelectedResponseMessage}"/>
+                              SelectedItem="{Binding SelectedResponseMessage}"
+                              IsEnabled="{Binding DisableMessage}"
+                              Style="{DynamicResource DataGridStyle1}" 
+                              CellStyle="{DynamicResource DataGridCellStyle1}" 
+                              ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                              RowStyle="{DynamicResource DataGridRowStyle1}"/>
                     <Button Width="350"
                             Height="130"
                             Style="{StaticResource openMessageButtonWEB}"
@@ -129,7 +134,7 @@
                              Width="1125" 
                              Height="350" 
                              Margin="0 50 0 0"
-                             FontSize="28" 
+                             FontSize="20" 
                              FontFamily="Ubuntu" 
                              ItemsSource="{Binding requestMessages}" 
                              SelectedItem="{Binding SelectedRequest}"/>

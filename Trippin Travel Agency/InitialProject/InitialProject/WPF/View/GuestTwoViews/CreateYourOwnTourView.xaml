@@ -113,7 +113,8 @@
                     FontFamily="Ubuntu" 
                     FontSize="20" 
                     FontWeight="Medium"
-                    Style="{StaticResource addButtonWEB}">
+                    Style="{StaticResource addButtonWEB}"
+                    Command="{Binding CreateComplexTourCommand}">
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center">
                     Add to complex tour
                 </TextBlock>
@@ -175,6 +176,43 @@
                 />
         </StackPanel>
 
-        
+        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+            <DataGrid x:Name="dataGrid" 
+                              d:DataContext ="" 
+                              Width="1200" 
+                              Height="400"
+                              Margin="0 50 0 0"
+                              FontSize="15"
+                              FontFamily="Ubuntu"
+                              HorizontalAlignment="Center"
+                              Style="{DynamicResource DataGridStyle1}" 
+                              CellStyle="{DynamicResource DataGridCellStyle1}" 
+                              ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                              RowStyle="{DynamicResource DataGridRowStyle1}"
+                              ItemsSource="{Binding requests}" IsReadOnly="True"                           
+                              >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="" Binding="{Binding field}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style>
+                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Margin="1030 15 0 0" 
+                    Width="170" 
+                    Height="90" 
+                    FontFamily="Ubuntu" 
+                    FontSize="20" 
+                    FontWeight="Medium"
+                    Style="{StaticResource addButtonWEB}" Command="{Binding ConfirmComplexTour}">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center">
+                    Submit
+                </TextBlock>
+            </Button>
+        </StackPanel>
     </Grid>
 </UserControl>
