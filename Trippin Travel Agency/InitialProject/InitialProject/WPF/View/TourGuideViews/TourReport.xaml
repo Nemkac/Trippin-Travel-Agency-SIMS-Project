@@ -190,7 +190,7 @@
                           Background="#f5f6fa"
                           >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Binding="{Binding GuestName}" Width="Auto"/>
+                            <DataGridTextColumn Header="Name" Binding="{Binding GuestName}" Width="300"/>
                             <DataGridTextColumn Header="Number of guests" Binding="{Binding numberOfGuests}" Width="Auto"/>
                         </DataGrid.Columns>
                         <DataGrid.CellStyle>

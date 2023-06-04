@@ -159,7 +159,7 @@ namespace InitialProject.WPF.View.TourGuideViews
         {
             bool tourExists = TourService.CheckExistence(name, selectedDate);
             if (!tourExists)
-            {
+            {   
                 this.tourService.Save(tour);
                 clearInputs();
             }
@@ -510,5 +510,53 @@ namespace InitialProject.WPF.View.TourGuideViews
             }
             
         }
+
+        private void tourMaximumNumberOfGuestsTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int maxNumberOfGuests;
+            if (!int.TryParse(tourMaximumNumberOfGuestsTextBox.Text, out maxNumberOfGuests))
+            {
+                errorMessageTextBlock.Text = "Entry must be a number!";
+                errorMessageTextBlock.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                errorMessageTextBlock.Text = string.Empty;
+                errorMessageTextBlock.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void tourDurationTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int duration;
+            if (!int.TryParse(tourDurationTextBox.Text, out duration))
+            {
+                tourDurationErrorMessageTextBlock.Text = "Entry must be a number!";
+                tourDurationErrorMessageTextBlock.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                tourDurationErrorMessageTextBlock.Text = string.Empty;
+                tourDurationErrorMessageTextBlock.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void tourNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(tourNameTextBox.Text))
+            {
+                ScrollByPixels(myScrollViewer, -1000);
+                tourNameErrorMessageTextBlock.Text = "Enter tour name!";
+                tourNameErrorMessageTextBlock.Visibility = Visibility.Visible;
+                return;
+            }
+            else
+            {
+                tourNameErrorMessageTextBlock.Visibility = Visibility.Collapsed; 
+            }
+
+        }
+
+
     }
 }
