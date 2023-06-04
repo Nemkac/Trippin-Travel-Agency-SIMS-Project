@@ -77,6 +77,5 @@ namespace InitialProject.Service.AccommodationServices
             context.Add(comment);
             context.SaveChanges();
         }
-
     }
 }

@@ -2,6 +2,7 @@
 using InitialProject.DTO;
 using InitialProject.Model;
 using InitialProject.Service.AccommodationServices;
+using InitialProject.Service.GuestServices;
 using InitialProject.WPF.View.GuestOne_Views;
 using System;
 using System.Collections.Generic;
@@ -16,26 +17,27 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
     {
         public ViewModelCommand GoMyForums { get; set; }
         public ViewModelCommand ShowForum { get; set; }
+        private UserService userService { get; set; }
         private ForumService forumService { get; set; }
         
 
         public ForumsViewModel()
         {
             forumService = new ForumService();
+            userService = new UserService();
             ForumText = "Forum is a great place where you can get to know a lot about certain place.\n" +
                 "Thousands of people every day share their opinion and advices.\n" +
                 "You can create your own forum or open an existing one.";
             GoMyForums = new ViewModelCommand(GoToMyForums);
             ShowForum = new ViewModelCommand(ShowSelectedForum);
-
-            // ne treba svi nego od tog foruma
             var forumsToGrid = from forum in forumService.GetAll()
                                select new
                                {
                                    Country = forumService.GetLocation(forum.id)[0],
                                    City = forumService.GetLocation(forum.id)[1],
                                    IfClosed = forum.isClosed ? new String("Closed") : new String("Opened"),
-                                   IfUseful = forum.isVeryUseful ? new String("Useful") : new String("-")
+                                   IfUseful = userService.IsForumSuperUseful(forum) ? new String("Super Useful!") : new String("-"),
+
                                };
             ForumsGrid = forumsToGrid;
 
