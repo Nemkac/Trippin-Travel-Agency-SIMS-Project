@@ -54,7 +54,7 @@
                 Grid.Row="1" HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Command="{Binding ShowAcceptDenyViewCommand}"
-                Margin="0 0 10 10" Width="220" Height="35"
+                Margin="0 0 10 10" Width="220" Height="50"
                 BorderBrush="Transparent">
             <StackPanel Orientation="Horizontal"
                                 Margin="0, 0, 0 ,0">

@@ -174,7 +174,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             HintText = Mediator.GetCurrentIsLanguageChecked() ? "Izaberite renoviranje i kliknite dugme ispod kako bi ga otkazali" :
                                         "Choose an renovation and click a button beneath to cancel it";
             HeaderText = Mediator.GetCurrentIsLanguageChecked() ? "Lista vasih renoviranja" : "Here is a list of your renovations";
-            RenovateText = Mediator.GetCurrentIsLanguageChecked() ? "Zakazi novo renoviranje" : "Schedule new renovation";
+            RenovateText = Mediator.GetCurrentIsLanguageChecked() ? "Novo renoviranje" : "New renovation";
             CancelRenovationText = Mediator.GetCurrentIsLanguageChecked() ? "Otkazi renoviranje" : "Cancel renovation";
         }
 

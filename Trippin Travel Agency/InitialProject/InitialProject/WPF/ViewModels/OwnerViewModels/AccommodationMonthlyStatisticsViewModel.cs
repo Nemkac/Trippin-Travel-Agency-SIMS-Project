@@ -23,6 +23,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class AccommodationMonthlyStatisticsViewModel : ViewModelBase
     {
+        private readonly OwnerInterfaceViewModel _mainViewModel;
         private AccommodationService accommodationService = new(new AccommodationRepository());
         private BookingService bookingService = new(new BookingRepository());
         private string[] months = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
@@ -150,9 +151,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public ObservableCollection<AccommodationMonthlyStatisticsDTO> monthlyStatistics { get; set; } = new ObservableCollection<AccommodationMonthlyStatisticsDTO>();
         public ObservableCollection<string> monthsList { get; set; } = new ObservableCollection<string>();
 
-
+        public ViewModelCommand GenerateMonthlyReport { get; private set; }
         public AccommodationMonthlyStatisticsViewModel()
         {
+            this._mainViewModel = LoggedUser._mainViewModel;
+
             ShowMonthlyAccommodationStatistics();
             GetMonthList();
 
@@ -162,6 +165,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             AccommodationName = accommodation.name;
             PieSeriesCollection = new SeriesCollection();
             DisplayPieChart(PieSeriesCollection);
+
+            GenerateMonthlyReport = new ViewModelCommand(ExecuteGenerateMonthlyReport);
 
             Mediator.IsCheckedChanged += OnIsCheckedChanged;
             Mediator.IsLanguageCheckedChanged += OnIsLanguageCheckChanged;
@@ -175,6 +180,16 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             GenerateReportText = Mediator.GetCurrentIsLanguageChecked() ? "Generisi izvestaj" : "Generate report";
             ChooseMonthText = Mediator.GetCurrentIsLanguageChecked() ? "Prikaz statistike za mesec" : "Show statistics for month";
             MonthlyStatisticsText = Mediator.GetCurrentIsLanguageChecked() ? "mesecna statistika" : "monthly statistics";
+        }
+
+        private void ExecuteGenerateMonthlyReport(object obj)
+        {
+            if (SelectedMonth != null)
+            {
+                _mainViewModel.selectedMonthForMonthlyReport = SelectedMonth;
+                _mainViewModel.GenerateMonthlyReport(null);
+            }
+            else MessageBox.Show("You must select a month before generating a report!");
         }
 
         private void OnIsLanguageCheckChanged(object sender, bool isChecked)

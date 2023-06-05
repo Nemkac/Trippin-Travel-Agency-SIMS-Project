@@ -11,8 +11,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="260"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="250"/>
             <RowDefinition Height="260"/>
         </Grid.RowDefinitions>
 
@@ -33,13 +33,18 @@
             <ComboBox x:Name="monthComboBox" Width="120" Height="30" Margin="15 0 0 0" 
                       SelectedItem="{Binding SelectedMonth}" ItemsSource="{Binding monthsList}"/>
             <Button Style="{StaticResource showImagesButton}"
-                Grid.Row="1" HorizontalAlignment="Right"
-                BorderBrush="Transparent" Width="220" Height="35" Margin="105 0 0 0">
+                    Grid.Row="1" HorizontalAlignment="Right"
+                    Command="{Binding GenerateMonthlyReport}"
+                    BorderBrush="Transparent" Width="220" Height="50" Margin="105 0 0 0">
                 <StackPanel Orientation="Horizontal"
-                                Margin="0, 0, 0 ,0">
-                    <fa:IconImage Icon="FilePdf" HorizontalAlignment="Left" Width="20" Height="20" Foreground="#192a56" VerticalAlignment="Center" Margin="0 2 0 0"/>
+                            Margin="0, 0, 0 ,0">
+                    <fa:IconImage Icon="FilePdf" 
+                                  HorizontalAlignment="Left" Width="20" Height="20" 
+                                  Foreground="#192a56" VerticalAlignment="Center" 
+                                  Margin="0 2 0 0"/>
                     <Label VerticalAlignment="Center" Foreground="#192a56" 
-                           Content="{Binding GenerateReportText}" FontSize="20" FontFamily="Ubuntu" FontWeight="Regular"  Margin="10 0 0 0"/>
+                           Content="{Binding GenerateReportText}" FontSize="20" 
+                           FontFamily="Ubuntu" FontWeight="Regular"  Margin="10 0 0 0"/>
                 </StackPanel>
             </Button>
         </StackPanel>

@@ -231,14 +231,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             GetNumberOfBookingsPerLocation(numberOfBookingsPerLocation, bookings, ownersAccommodations);
 
             var sortedDict = numberOfBookingsPerLocation.OrderByDescending(x => x.Value);
-            string mostPopularLocation = numberOfBookingsPerLocation.FirstOrDefault().Key;
-            string leastPopularLocation = numberOfBookingsPerLocation.LastOrDefault().Key;
+            string mostPopularLocation = sortedDict.FirstOrDefault().Key;
+            string leastPopularLocation = sortedDict.LastOrDefault().Key;
 
             if (mostPopularLocation != null && leastPopularLocation != null)
             {
                 UpdateImageAndLocation(mostPopularLocation, leastPopularLocation);
             }
-
         }
 
         private void GetNumberOfBookingsPerLocation(Dictionary<string, int> numberOfBookingsPerLocation, List<Booking> bookings, List<Accommodation> ownersAccommodations)

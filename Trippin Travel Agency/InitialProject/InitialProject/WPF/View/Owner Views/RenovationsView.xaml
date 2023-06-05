@@ -60,7 +60,7 @@
 
         <Button Style="{StaticResource showImagesButton}"
                 Grid.Row="3" HorizontalAlignment="Right"
-                BorderBrush="Transparent" Width="280" Height="35" Margin="0 0 10 0"
+                BorderBrush="Transparent" Width="280" Height="50" Margin="0 0 10 0"
                 Command="{Binding ShowNewRenovationView}">
             <StackPanel Orientation="Horizontal"
                                 Margin="0, 0, 0 ,0">
@@ -74,7 +74,7 @@
         </Button>
         <Button Style="{StaticResource denyButtonTablet}"
                 Grid.Row="3" HorizontalAlignment="Left" Command="{Binding CancelRenovationCommand}"
-                BorderBrush="Transparent" Width="280" Height="35" Margin="10 0 0 0">
+                BorderBrush="Transparent" Width="280" Height="50" Margin="10 0 0 0">
             <StackPanel Orientation="Horizontal"
                                 Margin="0, 0, 0 ,0">
                 <fa:IconImage Icon="Xmark" HorizontalAlignment="Left" Width="20" Height="20" Foreground="#F4FFF8" VerticalAlignment="Center" Margin="0 2 0 0"/>

@@ -29,6 +29,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private RequestDTO _requestDataGridSelectedItem;
 
         public int selectedYearForAnnualReport { get; set; }
+        public string selectedMonthForMonthlyReport { get; set; }
 
         private SolidColorBrush _menuColor;
         public SolidColorBrush MenuColor 
@@ -308,6 +309,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public ICommand ShowNewRenovationCommand { get; }
         public ICommand ShowScheduleNewRenovationCommand { get; }
         public ICommand GenerateReportCommand { get; }
+        public ICommand GenerateMonthlyReportCommand { get; }
         public ICommand SignOutCommand { get; }
         public ICommand CreateAccommodationFromRecommendations { get; }
         public ICommand CloseExistingAccommodationCommand { get; }
@@ -341,7 +343,9 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             Mediator.OnIsCheckedChanged(IsChecked);
             Mediator.OnIsUserLogged(LoggedUser.id);
             Mediator.OnIsLanguageCheckedChanged(IsLanguageChecked);
+
             GenerateReportCommand = new ViewModelCommand(GenerateAnnualReport);
+            GenerateMonthlyReportCommand = new ViewModelCommand(GenerateMonthlyReport);
 
             //Default view
             LoggedUser._mainViewModel = this;
@@ -505,6 +509,25 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             else
             {
                 AnnualStatisticsReport report = new AnnualStatisticsReport(selectedYearForAnnualReport);
+
+                PrintDialog printDialog = new PrintDialog();
+                if (printDialog.ShowDialog() == true)
+                {
+                    printDialog.PrintVisual(report, "Report");
+                }
+            }
+        }
+
+        public void GenerateMonthlyReport(object obj)
+        {
+            if (selectedMonthForMonthlyReport == null)
+            {
+                MessageBox.Show("You must select a month before generating a report!");
+                return;
+            }
+            else
+            {
+                MonthlyStatisticsReport report = new MonthlyStatisticsReport(selectedMonthForMonthlyReport);
 
                 PrintDialog printDialog = new PrintDialog();
                 if (printDialog.ShowDialog() == true)

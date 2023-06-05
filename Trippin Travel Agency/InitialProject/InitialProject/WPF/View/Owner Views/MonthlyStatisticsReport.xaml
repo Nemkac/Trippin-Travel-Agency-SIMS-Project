@@ -1,13 +1,12 @@
-﻿<UserControl x:Class="InitialProject.WPF.View.Owner_Views.AnnualStatisticsReport"
+﻿<UserControl x:Class="InitialProject.WPF.View.Owner_Views.MonthlyStatisticsReport"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:InitialProject.WPF.View.Owner_Views"
-             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"  
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp" 
              mc:Ignorable="d" 
-             d:DesignHeight=" 1122.5" d:DesignWidth="793.7">
-    
+             d:DesignHeight="1122.5" d:DesignWidth="793.7">
     <Grid Background="#f5f6fa">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -22,7 +21,7 @@
         </StackPanel>
         <StackPanel Grid.Row="0" Background="#192a56"
                     Orientation="Horizontal" HorizontalAlignment="Right">
-            <Label Content="ANNUAL REPORT" FontFamily="Ubuntu" FontSize="16" Foreground="#edeef0"
+            <Label Content="MONTHLY REPORT" FontFamily="Ubuntu" FontSize="16" Foreground="#edeef0"
                            FontWeight="Bold" VerticalAlignment="Center" Margin="0 0 10 0"/>
         </StackPanel>
 
@@ -44,7 +43,7 @@
                            FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <TextBlock x:Name="AccommodationNameTB1" FontSize="20" FontFamily="Ubuntu"
                                Foreground="#2f3640" FontWeight="Light" Margin="5 -10 0 0"/>
-                    <Label Content="ANNUAL STATISTICS" FontFamily="Ubuntu" FontSize="16" Foreground="#2f3640"
+                    <Label Content="MONTHLY STATISTICS" FontFamily="Ubuntu" FontSize="16" Foreground="#2f3640"
                            FontWeight="Bold"/>
                 </StackPanel>
 
@@ -185,6 +184,6 @@
             <Label Content="Trippin Travel" FontFamily="Ubuntu" FontSize="14" VerticalAlignment="Center"
                    Margin="0 2 0 0" Foreground="#f5f6fa" FontWeight="Light" HorizontalAlignment="Center"/>
         </StackPanel>
-        
+
     </Grid>
 </UserControl>
