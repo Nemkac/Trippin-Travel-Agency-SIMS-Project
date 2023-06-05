@@ -30,8 +30,26 @@ namespace InitialProject.WPF.View.TourGuideViews
         {
             InitializeComponent();
             this.tourService = new(new TourRepository());
-            this.tourRequestService = new(new TourRepository());
-            List<TourRequest> requests = tourRequestService.GetAllFullTourRequests();
+            this.tourRequestService = new(new TourRepository());            
+            headerTextBlock.Text = TourGuide_TourPartRequests.selectedComplexId.ToString();
+            int complexId = TourGuide_TourPartRequests.selectedComplexId;
+            DataBaseContext dataBaseContext = new DataBaseContext();
+
+            foreach (ComplexRegularPairs pair in dataBaseContext.ComplexRegularPairs.ToList())
+            {
+                if (pair.complexId == complexId)
+                {
+                    foreach (TourRequest request in dataBaseContext.TourRequests.ToList())
+                    {
+                        if (pair.regularId == request.id)
+                        {
+
+                            tourRequestsDataGrid.Items.Add(request);
+
+                        }
+                    }
+                }
+            }
         }
 
     }

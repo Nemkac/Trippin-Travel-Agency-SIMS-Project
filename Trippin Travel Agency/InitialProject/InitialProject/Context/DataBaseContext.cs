@@ -54,6 +54,8 @@ namespace InitialProject.Context
         public DbSet<ForumComment> ForumComments { get; set; }
         public DbSet<ForumMessage> ForumMessages { get; set; }
 
+        public DbSet<ComplexRegularPairs> ComplexRegularPairs { get; set; } 
+
         public DbSet<ComplexTourRequest> ComplexTourRequests { get; set; }
 
         // Apsolute paths for every memeber of the team

@@ -20,6 +20,7 @@ namespace InitialProject.WPF.ViewModels
 
         public void ShowRequestTimeSlots(object obj)
         {
+
             _mainViewModel.ExecuteShowTourGuideRequestTimeSlotsViewCommand(null);
         }
 

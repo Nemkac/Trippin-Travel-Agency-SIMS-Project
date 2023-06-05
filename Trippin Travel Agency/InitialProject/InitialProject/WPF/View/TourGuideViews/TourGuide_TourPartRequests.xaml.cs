@@ -24,6 +24,7 @@ namespace InitialProject.WPF.View.TourGuideViews
     /// </summary>
     public partial class TourGuide_TourPartRequests : UserControl
     {
+        public static int selectedComplexId;
         private TourService tourService;
         private TourRequestService tourRequestService;
         public TourGuide_TourPartRequests()
@@ -32,8 +33,15 @@ namespace InitialProject.WPF.View.TourGuideViews
             this.tourService = new(new TourRepository());
             this.tourRequestService = new(new TourRepository());
             List<TourRequest> requests = tourRequestService.GetAllFullTourRequests();
-            tourRequestsDataGrid.ItemsSource = requests;
+            DataBaseContext context = new DataBaseContext();
+            tourRequestsDataGrid.ItemsSource = context.ComplexTourRequests.ToList();           
+            
         }
+        public void NewWindow(object sender,RoutedEventArgs e)
+        {
+            ComplexTourRequest temp = this.tourRequestsDataGrid.SelectedItem as ComplexTourRequest;
+            selectedComplexId = temp.id;
 
+        }
     }
 }

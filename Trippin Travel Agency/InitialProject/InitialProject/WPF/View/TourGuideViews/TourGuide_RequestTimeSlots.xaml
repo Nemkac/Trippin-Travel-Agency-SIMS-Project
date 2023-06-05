@@ -71,7 +71,7 @@
                               Width="330"
                               BorderThickness="0">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Complex Req. Id" Binding="{Binding ComplexTourRequestid}" Width="120"/>
+                        <DataGridTextColumn Header="Complex Req. Id" Binding="{Binding id}" Width="120"/>
                         <DataGridTextColumn Header="Start" Binding="{Binding startDate}" Width="85"/>
                         <DataGridTextColumn Header="End" Binding="{Binding endDate}" Width="85"/>
                     </DataGrid.Columns>

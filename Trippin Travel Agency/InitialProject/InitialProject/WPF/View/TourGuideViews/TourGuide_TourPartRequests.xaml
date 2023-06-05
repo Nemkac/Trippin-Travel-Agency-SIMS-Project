@@ -71,9 +71,8 @@
                               Width="330"
                               BorderThickness="0">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Complex Req. Id" Binding="{Binding ComplexTourRequestid}" Width="120"/>
-                        <DataGridTextColumn Header="Start" Binding="{Binding startDate}" Width="85"/>
-                        <DataGridTextColumn Header="End" Binding="{Binding endDate}" Width="85"/>
+                        <DataGridTextColumn Header="Complex Req. Id" Binding="{Binding id}" Width="120"/>
+
                     </DataGrid.Columns>
                     <DataGrid.CellStyle>
                         <Style TargetType="{x:Type DataGridCell}">
@@ -100,6 +99,7 @@
                 <Button Content="Proceed"
                         Style="{StaticResource showImagesButton}"
                         Margin="0,20,0,0"
+                        Click="NewWindow"
                         Command="{Binding ShowRequestTimeSlotsCommand}"
                         />
 
