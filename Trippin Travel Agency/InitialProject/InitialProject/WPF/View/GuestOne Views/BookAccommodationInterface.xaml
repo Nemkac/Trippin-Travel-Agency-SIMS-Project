@@ -407,7 +407,7 @@
         <TextBlock 
             HorizontalAlignment="Left"
             Height="31" 
-            Margin="1222,352,0,0"
+            Margin="1223,352,0,0"
             TextWrapping="Wrap" 
             Text="&lt;" 
             VerticalAlignment="Top" 

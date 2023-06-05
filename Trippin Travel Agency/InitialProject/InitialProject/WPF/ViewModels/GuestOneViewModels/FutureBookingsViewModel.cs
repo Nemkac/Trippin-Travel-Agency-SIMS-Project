@@ -28,7 +28,6 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand OpenNavigator { get; set; }
         public ViewModelCommand GoToPastBookings { get; set; }
         public ViewModelCommand Help { get;set; }
-
         bool isHelpOn = false;
 
         public FutureBookingsViewModel()

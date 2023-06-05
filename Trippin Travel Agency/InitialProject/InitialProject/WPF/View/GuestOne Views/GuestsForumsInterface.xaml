@@ -1,0 +1,341 @@
+﻿<Window x:Class="InitialProject.WPF.View.GuestOne_Views.GuestsForumsInterface"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
+        mc:Ignorable="d"
+        KeyDown="F"
+        Title="GuestsForumsInterface" Height="800" Width="1500">
+    <Window.InputBindings>
+        <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
+        <KeyBinding Key="Enter" Command="{Binding CreateForum}" />
+    </Window.InputBindings>
+    <Grid>
+        <Grid Margin="0,1,0,-1">
+            <GroupBox 
+                Header="Add new forum" 
+                FontFamily="ubuntu" 
+                FontSize="36" 
+                FontWeight="Bold" 
+                Foreground="#FF192A56" 
+                BorderThickness="3" 
+                BorderBrush="#192a56" 
+                Margin="84,219,818,87"/>
+
+            <GroupBox 
+                Header="My forums" 
+                FontFamily="ubuntu" 
+                FontSize="36" 
+                FontWeight="Bold" 
+                Foreground="#FF192A56" 
+                BorderThickness="3" 
+                BorderBrush="#192a56" 
+                Margin="814,219,88,87"/>
+            <Label Content="My forums" 
+                FontSize ="64"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Margin="609,24,0,0"
+                FontFamily="ubuntu" 
+                FontWeight="Bold" 
+                Foreground="#192a56"/>
+
+            <GroupBox Header="Navigator" 
+                Margin="985,1,26,665" 
+                Padding="10"
+                FontFamily="ubuntu"
+                FontSize="30" 
+                BorderThickness="3"
+                BorderBrush="#192a56" 
+                FontWeight="medium" >
+                <StackPanel>
+                    <TextBlock 
+                        Width="478" 
+                        FontWeight="medium"><Run Text="Press CTRL+N for program map" FontFamily="ubuntu"/></TextBlock>
+                </StackPanel>
+            </GroupBox>
+
+            <Rectangle HorizontalAlignment="Center"
+                Height="76"
+                Margin="0,708,0,0" 
+                Fill ="#273c75" 
+                Stroke="Black" 
+                VerticalAlignment="Top"
+                Width="1500"
+        />
+
+            <TextBlock HorizontalAlignment="Center" 
+                Height="72" 
+                Margin="0,702,0,0" 
+                TextWrapping="Wrap"
+                Text="Trippin' Travel" 
+                VerticalAlignment="Top" 
+                Width="324" 
+                Foreground="white"
+                FontSize="48"
+                FontWeight="Bold"
+        />
+
+            <GroupBox Header="Help"
+                Margin="35,0,1105,665" 
+                Padding="10"
+                FontFamily="ubuntu"
+                FontSize="30"
+                BorderThickness="3"
+                BorderBrush="#192a56" 
+                FontWeight="medium" >
+
+                <StackPanel>
+                    <TextBlock Height="39" FontWeight="medium"><Run Text="Press CTRL+H for help"/></TextBlock>
+                </StackPanel>
+            </GroupBox>
+
+            <Rectangle HorizontalAlignment="Left" 
+                Height="5" 
+                Margin="28,119,0,0" 
+                Stroke="#FF192A56"
+                VerticalAlignment="Top" 
+                Width="1434" 
+                Fill="#192a56"/>
+
+            <TextBlock 
+                HorizontalAlignment="Left" 
+                Height="27" Margin="35,727,0,0" 
+                TextWrapping="Wrap"
+                Text="Press ESC to go back" 
+                VerticalAlignment="Top" 
+                Width="225"
+                Foreground="#e1b12c"
+                FontFamily="Ubuntu" 
+                FontSize="22" 
+                FontWeight="Bold"/>
+
+
+
+            <DataGrid 
+                HorizontalAlignment="Left"
+                Height="277" 
+                Margin="854,306,0,0" 
+                VerticalAlignment="Top" 
+                Width="514" 
+                ItemsSource="{Binding ForumsGrid}"
+                SelectedIndex="{Binding SelectedForum}">
+                <DataGrid.InputBindings>
+                    <KeyBinding Key="S" Command="{Binding ShowForum}" />
+                    <KeyBinding Key="C" Command="{Binding CloseForum}" />
+                </DataGrid.InputBindings>
+            </DataGrid>
+
+            <TextBox
+                HorizontalAlignment="Left"
+                Height="50" 
+                Name="p0"
+                Margin="266,300,0,0" 
+                TextWrapping="Wrap" 
+                Text="{Binding InputCountry, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                VerticalAlignment="Top"
+                Width="216"/>
+
+            <TextBox 
+                HorizontalAlignment="Left" 
+                Height="50" 
+                Name="p1"
+                Margin="266,389,0,0" 
+                TextWrapping="Wrap"
+                Text="{Binding InputCity,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                VerticalAlignment="Top"
+                Width="216"/>
+
+            <TextBox 
+                HorizontalAlignment="Left"
+                Height="84"
+                Name="p2"
+                Margin="228,499,0,0" 
+                TextWrapping="Wrap" 
+                Text="{Binding Comment,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                VerticalAlignment="Top" 
+                Width="292"/>
+
+            <TextBlock 
+                TextWrapping="Wrap" 
+                Text="Add first comment" 
+                FontFamily="Ubuntu" 
+                FontSize="22" 
+                FontWeight="Bold" 
+                TextBlock.TextAlignment="Center"
+                Foreground="#FF192A56" Margin="251,461,1002,275"/>
+            <TextBlock 
+                TextWrapping="Wrap" 
+                Text="City" 
+                FontFamily="Ubuntu" 
+                FontSize="22" 
+                FontWeight="Bold" 
+                Foreground="#FF192A56" Margin="345,358,1078,358" RenderTransformOrigin="0.74,0.558"/>
+            <TextBlock 
+                TextWrapping="Wrap" 
+                Text="Country" 
+                FontFamily="Ubuntu" 
+                FontSize="22" 
+                FontWeight="Bold" 
+                Foreground="#FF192A56" Margin="326,267,1068,471"/>
+            <TextBlock HorizontalAlignment="Left" 
+                Height="92" 
+                Margin="495,594,0,0" 
+                TextWrapping="Wrap" 
+                Text="{Binding WarningMessage}" 
+                VerticalAlignment="Top" 
+                Width="167"
+                FontFamily="Ubuntu" 
+                FontSize="22" 
+                FontWeight="Bold" 
+                Foreground="#e84118"
+                TextAlignment="Center"/>
+            <TextBlock HorizontalAlignment="Center"
+                Height="250" 
+                TextWrapping="Wrap" 
+                Text="{Binding HelpLand}"
+                VerticalAlignment="Top" 
+                Width="124"
+                Foreground="#7f8fa6"
+                FontFamily="Ubuntu" 
+                FontSize="22" 
+                FontWeight="Medium"
+                TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Margin="0,262,0,0">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0.039"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock HorizontalAlignment="Left"
+                Height="133" 
+                Margin="687,516,0,0" 
+                TextWrapping="Wrap" 
+                Text="{Binding HelpExit}"
+                VerticalAlignment="Top" 
+                Width="122"
+                Foreground="#c23616"
+                FontFamily="Ubuntu" 
+                FontSize="22" 
+                FontWeight="Medium"
+                TextAlignment="Center"/>
+            <TextBlock 
+                HorizontalAlignment="Center" 
+                Height="84" 
+                Margin="0,135,0,0" 
+                TextWrapping="Wrap" 
+                Text="{Binding ForumText}" 
+                VerticalAlignment="Top" 
+                Width="1292"
+                TextAlignment="Center"
+                FontFamily="Ubuntu" 
+                FontSize="28" 
+                FontWeight="Medium" 
+                Foreground="#FF192A56"/>
+            <TextBlock 
+                HorizontalAlignment="Left"
+                Height="20" 
+                Margin="326,645,0,0"
+                TextWrapping="Wrap" 
+                Text="Press ENTER" 
+                VerticalAlignment="Top" 
+                Width="106"
+                Foreground="#718093"
+                FontFamily="Ubuntu" 
+                FontSize="17" 
+                FontWeight="Medium"/>
+            <TextBlock 
+                HorizontalAlignment="Left"
+                Height="20" 
+                Margin="976,645,0,0"
+                TextWrapping="Wrap" 
+                Text="Press S" 
+                VerticalAlignment="Top" 
+                Width="60"
+                Foreground="#718093"
+                FontFamily="Ubuntu" 
+                FontSize="17" 
+                FontWeight="Medium"/>
+            <TextBlock 
+                HorizontalAlignment="Left"
+                Height="20" 
+                Margin="1215,645,0,0"
+                TextWrapping="Wrap" 
+                Text="Press C" 
+                VerticalAlignment="Top" 
+                Width="61"
+                Foreground="#718093"
+                FontFamily="Ubuntu" 
+                FontSize="17" 
+                FontWeight="Medium"/>
+            <TextBlock 
+                HorizontalAlignment="Left"
+                Height="20" 
+                Margin="909,280,0,0"
+                TextWrapping="Wrap" 
+                Text="Press TAB to access, then UP and DOWN arrows" 
+                VerticalAlignment="Top" 
+                Width="404"
+                Foreground="#718093"
+                FontFamily="Ubuntu" 
+                FontSize="17" 
+                FontWeight="Medium"
+                TextAlignment="Center"/>
+
+        </Grid>
+
+        <Button 
+            Content="Create forumt" 
+            HorizontalAlignment="Left" 
+            Height="39"
+            Command="{Binding CreateForum}"
+            Margin="276,604,0,0" 
+            VerticalAlignment="Top"
+            FontFamily="ubuntu" 
+            FontSize="24" 
+            Background="#FF273C75" 
+            Foreground="White"
+            IsTabStop="False"
+            Style="{StaticResource leadButton}"
+            FontWeight="Medium" 
+            Width="203"/>
+
+        <Button 
+            Content="Show forum" 
+            HorizontalAlignment="Left" 
+            Height="39"
+            Command="{Binding ShowForum}"
+            Margin="895,604,0,0" 
+            VerticalAlignment="Top"
+            FontFamily="ubuntu" 
+            FontSize="24" 
+            Background="#FF273C75" 
+            Foreground="White"
+            IsTabStop="False"
+            Style="{StaticResource leadButton}"
+            FontWeight="Medium" 
+            Width="203"/>
+
+        <Button 
+            Content="Close forum" 
+            HorizontalAlignment="Left" 
+            Height="39"
+            Command="{Binding CloseForum}"
+            Margin="1134,604,0,0" 
+            VerticalAlignment="Top"
+            FontFamily="ubuntu" 
+            FontSize="24" 
+            Background="#FF273C75" 
+            Foreground="White"
+            IsTabStop="False"
+            Style="{StaticResource leadButton}"
+            FontWeight="Medium" 
+            Width="203"/>
+
+    </Grid>
+</Window>

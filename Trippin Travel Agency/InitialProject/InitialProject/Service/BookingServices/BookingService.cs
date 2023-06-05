@@ -222,6 +222,38 @@ namespace InitialProject.Service.BookingServices
 
             return numberOfBookings;
         }
+
+        public List<Booking> GetAllInDateRange(DateTime startingDate, DateTime endingDate)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<Booking> bookings = context.Bookings.ToList();
+            List<Booking> foundBookings = new List<Booking>();
+            foreach(Booking booking in bookings)
+            {
+                if(DateTime.Parse(booking.arrival) >= startingDate && DateTime.Parse(booking.departure) <= endingDate)
+                {
+                    foundBookings.Add(booking);
+                }
+            }
+            return foundBookings;
+        }
+
+        public List<CanceledBooking> GetAllCanceledInDateRange(DateTime startingDate, DateTime endingDate)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<CanceledBooking> canceledBookings = context.CanceledBookings.ToList();
+            List<CanceledBooking> foundBookings = new List<CanceledBooking>();
+            foreach(CanceledBooking canceledBooking in canceledBookings)
+            {
+                if(canceledBooking.plannedArrival >= startingDate && canceledBooking.plannedArrival.AddDays(5) < endingDate)
+                {
+                    foundBookings.Add(canceledBooking);
+                }
+            }
+            return foundBookings;
+        }
+
+
     }
 }
 

@@ -70,6 +70,38 @@ namespace InitialProject.Service.AccommodationServices
             return null;
         }
 
+        public List<int> GetAllByCity(string city)
+        {
+            if (city != null)
+            {
+                DataBaseContext context = new DataBaseContext();
+                List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
+                List<int> filtered = new List<int>();
+                List<Accommodation> accommodations = context.Accommodations.ToList();
+                foreach (Accommodation accommodation in accommodations)
+                {
+                    if (GetAccommodationLocation(accommodation.id)[1].ToUpper().Contains(city.ToUpper()))
+                    {
+                        filtered.Add(accommodation.id);
+                    }
+                }
+                return filtered;
+            }
+            return null;
+        }
+
+        public List<Accommodation> GetAllByLocation(AccommodationLocation location)
+        {
+            List<int> byCountry = GetAllByCountry(location.country);
+            List<int> byCity = GetAllByCity(location.city);
+            List<Accommodation> byCity1 = new List<Accommodation>();
+            foreach(int id in byCity)
+            {
+                byCity1.Add(GetById(id));
+            }
+            return GetMatching(byCountry, byCity1);
+        }
+
         public List<Accommodation> GetMatching(List<int> allAccommodations, List<Accommodation> accommodationsToCheck)
         {
             if(allAccommodations == null)

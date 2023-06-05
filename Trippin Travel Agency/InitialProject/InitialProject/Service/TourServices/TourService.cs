@@ -9,6 +9,7 @@ using InitialProject.Interfaces;
 using InitialProject.Repository;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Collections.ObjectModel;
+using Xceed.Wpf.Toolkit;
 
 namespace InitialProject.Service.TourServices
 {
@@ -117,6 +118,22 @@ namespace InitialProject.Service.TourServices
             }
             return tourDTOs;
         }
+
+        public List<Tour> GetAllByLocation(AccommodationLocation accommodationLocation)
+        {
+            DataBaseContext context = new DataBaseContext(); 
+            List<Tour> tours = context.Tours.ToList();
+            List<Tour> foundTours = new List<Tour>();
+            foreach(Tour tour in tours)
+            {
+                if(tourLocationService.GetById(tour.location).country.ToUpper() == accommodationLocation.country.ToUpper() && tourLocationService.GetById(tour.location).city.ToUpper() == accommodationLocation.city.ToUpper())
+                {
+                    foundTours.Add(tour);
+                }
+            }
+            return foundTours;
+        }
+
         public int Book(int tourId, int numberOfTourists)
         {
             using DataBaseContext dataBase = new DataBaseContext();
