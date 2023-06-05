@@ -3,6 +3,7 @@ using System;
 using InitialProject.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230604003623_userIcon")]
+    partial class userIcon
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
@@ -293,17 +296,6 @@ namespace InitialProject.Migrations
                     b.ToTable("CanceledBookings");
                 });
 
-            modelBuilder.Entity("InitialProject.Model.ComplexTourRequest", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("id");
-
-                    b.ToTable("ComplexTourRequests");
-                });
-
             modelBuilder.Entity("InitialProject.Model.Coupon", b =>
                 {
                     b.Property<int>("id")
@@ -552,35 +544,6 @@ namespace InitialProject.Migrations
                     b.ToTable("RenovationSuggestionMessages");
                 });
 
-            modelBuilder.Entity("InitialProject.Model.ReportedComment", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("commentId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("explanation")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("forumId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("reporterUsername")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("senderUsername")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("id");
-
-                    b.ToTable("ReportedComments");
-                });
-
             modelBuilder.Entity("InitialProject.Model.RequestMessage", b =>
                 {
                     b.Property<int>("id")
@@ -660,9 +623,6 @@ namespace InitialProject.Migrations
                     b.Property<DateTime>("startDates")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("super")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("touristLimit")
                         .HasColumnType("INTEGER");
 
@@ -711,9 +671,6 @@ namespace InitialProject.Migrations
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("checkedForCoupon")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("guestID")
@@ -771,9 +728,6 @@ namespace InitialProject.Migrations
                     b.Property<int>("numberOfGuests")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("opened")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("tourId")
                         .HasColumnType("INTEGER");
 
@@ -786,9 +740,6 @@ namespace InitialProject.Migrations
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("ComplexTourRequestid")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("acceptedDate")
@@ -828,8 +779,6 @@ namespace InitialProject.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("id");
-
-                    b.HasIndex("ComplexTourRequestid");
 
                     b.ToTable("TourRequests");
                 });
@@ -1185,9 +1134,6 @@ namespace InitialProject.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("super")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("username")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -1270,13 +1216,6 @@ namespace InitialProject.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("InitialProject.Model.TourRequest", b =>
-                {
-                    b.HasOne("InitialProject.Model.ComplexTourRequest", null)
-                        .WithMany("singleRequestIds")
-                        .HasForeignKey("ComplexTourRequestid");
-                });
-
             modelBuilder.Entity("InitialProject.Model.Accommodation", b =>
                 {
                     b.Navigation("imageLinks");
@@ -1290,9 +1229,6 @@ namespace InitialProject.Migrations
             modelBuilder.Entity("InitialProject.Model.Forum", b =>
                 {
                     b.Navigation("comments");
-            modelBuilder.Entity("InitialProject.Model.ComplexTourRequest", b =>
-                {
-                    b.Navigation("singleRequestIds");
                 });
 
             modelBuilder.Entity("InitialProject.Model.Tour", b =>

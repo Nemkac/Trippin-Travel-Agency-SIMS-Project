@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="InitialProject.WPF.View.Owner_Views.AllForumsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InitialProject.WPF.View.Owner_Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="710">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="1">
+            <ListBox Height="550"
+             Background="Transparent"
+             BorderBrush="Transparent"
+             Foreground="#192a56"
+             ItemsSource="{Binding Forums}"
+             SelectedItem="{Binding SelectedItem}"
+             FontFamily="Ubuntu"
+             FontSize="23"
+             FontWeight="Regular">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border CornerRadius="10" Background="#30000000" Width="680">
+                            <StackPanel Margin="10 5 0 10">
+                                <TextBlock Text="{Binding ForumId}"
+                                           Foreground="{Binding DataContext.ContentTextColor, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                           FontSize="24" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Location}" 
+                                           Foreground="{Binding DataContext.ContentTextColor, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                           FontSize="18" FontWeight="Regular"/>
+                                <TextBlock Text="{Binding NoOfComments}" 
+                                           Foreground="{Binding DataContext.ContentTextColor, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                           FontSize="18" FontWeight="Regular"/>
+                                <TextBlock Text="{Binding ForumType}" 
+                                           Foreground="#fbc531"
+                                           FontSize="18" FontWeight="Bold"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+    </Grid>
+</UserControl>

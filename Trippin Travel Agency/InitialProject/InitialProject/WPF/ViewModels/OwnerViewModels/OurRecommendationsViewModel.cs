@@ -100,19 +100,101 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+
+        private string _ourRecommendationsText;
+
+        public string OurRecommendationsText
+        {
+            get { return _ourRecommendationsText; }
+            set
+            {
+                _ourRecommendationsText = value;
+                OnPropertyChanged(nameof(OurRecommendationsText));
+            }
+        }
+
+        private string _basedOnMostAndLeastPopularLocationsText;
+
+        public string BasedOnMostAndLeastPopularLocationsText
+        {
+            get { return _basedOnMostAndLeastPopularLocationsText; }
+            set
+            {
+                _basedOnMostAndLeastPopularLocationsText = value;
+                OnPropertyChanged(nameof(BasedOnMostAndLeastPopularLocationsText));
+            }
+        }
+
+        private string _mostPopularLocationText;
+
+        public string MostPopularLocationText
+        {
+            get { return _mostPopularLocationText; }
+            set
+            {
+                _mostPopularLocationText = value;
+                OnPropertyChanged(nameof(MostPopularLocationText));
+            }
+        }
+
+        private string _leastPopularLocationText;
+
+        public string LeastPopularLocationText
+        {
+            get { return _leastPopularLocationText; }
+            set
+            {
+                _leastPopularLocationText = value;
+                OnPropertyChanged(nameof(LeastPopularLocationText));
+            }
+        }
+
+        private string _openNewAccommodationText;
+
+        public string OpenNewAccommodationText
+        {
+            get { return _openNewAccommodationText; }
+            set
+            {
+                _openNewAccommodationText = value;
+                OnPropertyChanged(nameof(OpenNewAccommodationText));
+            }
+        }
+
+        private string _closeExistingAccommodationText;
+
+        public string CloseExistingAccommodationText
+        {
+            get { return _closeExistingAccommodationText; }
+            set
+            {
+                _closeExistingAccommodationText = value;
+                OnPropertyChanged(nameof(CloseExistingAccommodationText));
+            }
+        }
+
+
         public ICommand OpenNewAccommodation { get; }
         public ICommand CloseAccommodation { get; }
 
         public OurRecommendationsViewModel() 
         {
             this._mainViewModel = LoggedUser._mainViewModel;
-            Mediator.IsCheckedChanged += OnIsCheckedChanged;            
+            Mediator.IsCheckedChanged += OnIsCheckedChanged;
+            Mediator.IsLanguageCheckedChanged += OnIsLanguageCheckChanged;
             GetMostAndLeastPopularLocation();
 
             OpenNewAccommodation = new ViewModelCommand(ExecuteOpenNewAccommodation);
             CloseAccommodation = new ViewModelCommand(ExecuteCloseExistingAccommodation);
 
             ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";
+
+            OurRecommendationsText = Mediator.GetCurrentIsLanguageChecked() ? "Nase Preporuke" : "Our Recommendations";
+            BasedOnMostAndLeastPopularLocationsText = Mediator.GetCurrentIsLanguageChecked() ? "Bazirano na najpopularnijoj i najnepopularnijoj lokaciji" : "Based on most and least popular location";
+            MostPopularLocationText = Mediator.GetCurrentIsLanguageChecked() ? "NAJPOPULARNIJA LOKACIJA" : "MOST POPULAR LOCATION";
+            LeastPopularLocationText = Mediator.GetCurrentIsLanguageChecked() ? "NAJNEPOPULARNIJA LOKACIJA" : "LEAST POPULAR LOCATION";
+            OpenNewAccommodationText = Mediator.GetCurrentIsLanguageChecked() ? "Otvori novi smestaj" : "Open new accommodation";
+            CloseExistingAccommodationText = Mediator.GetCurrentIsLanguageChecked() ? "Zatvori postojeci smestaj" : "Close existing accommodation";
         }
 
         private void ExecuteOpenNewAccommodation(object obj)
@@ -128,6 +210,16 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private void OnIsCheckedChanged(object sender, bool isChecked)
         {
             ContentTextColor = isChecked ? "#F4F6F8" : "#192a56";
+        }
+
+        private void OnIsLanguageCheckChanged(object sender, bool isChecked)
+        {
+            OurRecommendationsText = isChecked ? "Nase Preporuke" : "Our Recommendations";
+            BasedOnMostAndLeastPopularLocationsText = isChecked ? "Bazirano na najpopularnijoj i najnepopularnijoj lokaciji" : "Based on most and least popular location";
+            MostPopularLocationText = isChecked ? "NAJPOPULARNIJA LOKACIJA" : "MOST POPULAR LOCATION";
+            LeastPopularLocationText = isChecked ? "NAJNEPOPULARNIJA LOKACIJA" : "LEAST POPULAR LOCATION";
+            OpenNewAccommodationText = isChecked ? "Otvori novi smestaj" : "Open new accommodation";
+            CloseExistingAccommodationText = isChecked ? "Zatvori postojeci smestaj" : "Close existing accommodation";
         }
 
         public void GetMostAndLeastPopularLocation()

@@ -203,6 +203,55 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+
+        private string _cleannessText;
+
+        public string CleannessText
+        {
+            get { return _cleannessText; }
+            set
+            {
+                _cleannessText = value;
+                OnPropertyChanged(nameof(CleannessText));
+            }
+        }
+
+        private string _rulesText;
+
+        public string RulesText
+        {
+            get { return _rulesText; }
+            set
+            {
+                _rulesText = value;
+                OnPropertyChanged(nameof(RulesText));
+            }
+        }
+
+        private string _commentText;
+
+        public string CommentText
+        {
+            get { return _commentText; }
+            set
+            {
+                _commentText = value;
+                OnPropertyChanged(nameof(CommentText));
+            }
+        }
+
+        private string _saveRatingText;
+
+        public string SaveRatingText
+        {
+            get { return _saveRatingText; }
+            set
+            {
+                _saveRatingText = value;
+                OnPropertyChanged(nameof(SaveRatingText));
+            }
+        }
+
         public ViewModelCommand SaveRatingCommand { get; set; }
 
         public RateGuestViewModel() 
@@ -213,8 +262,22 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             SaveRatingCommand = new ViewModelCommand(SaveRate);
 
             Mediator.IsCheckedChanged += OnIsCheckedChanged;
+            Mediator.IsLanguageCheckedChanged += OnIsLanguageCheckChanged;
 
             ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";
+
+            CleannessText = Mediator.GetCurrentIsLanguageChecked() ? "Cistoca" : "Cleanness";
+            RulesText = Mediator.GetCurrentIsLanguageChecked() ? "Postovanje pravila" : "Respecting the rules";
+            CommentText = Mediator.GetCurrentIsLanguageChecked() ? "Komentar" : "Comment";
+            SaveRatingText = Mediator.GetCurrentIsLanguageChecked() ? "Sacuvaj ocenu" : "Save rating";
+        }
+
+        private void OnIsLanguageCheckChanged(object sender, bool isChecked)
+        {
+            CleannessText = isChecked ? "Cistoca" : "Cleanness";
+            RulesText = isChecked ? "Postovanje pravila" : "Respecting the rules";
+            CommentText = isChecked ? "Komentar" : "Comment";
+            SaveRatingText = isChecked ? "Sacuvaj ocenu" : "Save rating";
         }
 
         private void OnIsCheckedChanged(object sender, bool isChecked)

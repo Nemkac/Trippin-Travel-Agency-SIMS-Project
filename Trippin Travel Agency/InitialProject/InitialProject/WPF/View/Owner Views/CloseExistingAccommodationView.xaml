@@ -20,7 +20,7 @@
                                       HorizontalAlignment="Left"
                                       Style="{StaticResource menuBackButtonIcon}"
                                       Width="15" Height="15" Foreground="{Binding ContentHintColor}"/>
-                <Label Content="Choose an accommodation and click a button beneath to close it."
+                <Label Content="{Binding HintText}"
                                Style="{StaticResource labelAboveTextBox}"
                                Foreground="{Binding ContentHintColor}"
                                Margin="10,0,0,0"
@@ -47,7 +47,7 @@
 
         <StackPanel Grid.Row="1" VerticalAlignment="Center">
             <Button Style="{StaticResource denyButtonTablet}"
-                        Content="Close accommodation"
+                        Content="{Binding CloseAccommodationText}"
                         Command="{Binding CloseAccommodation}"
                         HorizontalAlignment="Right"/>
         </StackPanel>

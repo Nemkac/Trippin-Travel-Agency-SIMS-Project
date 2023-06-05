@@ -86,6 +86,70 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+
+        // Language properties
+        private string _newAccommodationText;
+        public string NewAccommodationText
+        {
+            get { return _newAccommodationText; }
+            set
+            {
+                _newAccommodationText = value;
+                OnPropertyChanged(nameof(NewAccommodationText));
+            }
+        }
+        private string _bookingsText;
+        public string BookingsText
+        {
+            get { return _bookingsText; }
+            set
+            {
+                _bookingsText = value;
+                OnPropertyChanged(nameof(BookingsText));
+            }
+        }
+        private string _myAccommodationsText;
+        public string MyAccommodationsText
+        {
+            get { return _myAccommodationsText; }
+            set
+            {
+                _myAccommodationsText = value;
+                OnPropertyChanged(nameof(MyAccommodationsText));
+            }
+        }
+        private string _requestsText;
+        public string RequestsText
+        {
+            get { return _requestsText; }
+            set
+            {
+                _requestsText = value;
+                OnPropertyChanged(nameof(RequestsText));
+            }
+        }
+        private string _renovationsText;
+        public string RenovationsText
+        {
+            get { return _renovationsText; }
+            set
+            {
+                _renovationsText = value;
+                OnPropertyChanged(nameof(RenovationsText));
+            }
+        }
+        private string _forumsText;
+        public string ForumsText
+        {
+            get { return _forumsText; }
+            set
+            {
+                _forumsText = value;
+                OnPropertyChanged(nameof(ForumsText));
+            }
+        }
+
+
         private string _contentTextColor;
         public string ContentTextColor
         {
@@ -181,6 +245,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             set
             {
                 _caption = value;
+                EngOrSrbLanguage();
                 OnPropertyChanged(nameof(Caption));
             }
         }
@@ -246,6 +311,9 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public ICommand SignOutCommand { get; }
         public ICommand CreateAccommodationFromRecommendations { get; }
         public ICommand CloseExistingAccommodationCommand { get; }
+        public ICommand ForumCommand { get; }
+        public ICommand AllForumsCommand { get; }
+        public ICommand ReportCommentCommand { get; }
         public ICommand LogOut { get; }
         public OwnerInterfaceViewModel()
         {
@@ -264,7 +332,10 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ShowNewRenovationCommand = new ViewModelCommand(ExecuteShowNewRenovationViewCommand);
             ShowScheduleNewRenovationCommand = new ViewModelCommand(ExecuteShowScheduleNewRenovationCommand);
             CloseExistingAccommodationCommand = new ViewModelCommand(ExecuteCloseExistingAccommodationCommand);
-            //SignOutCommand = new ViewModelCommand(ExecuteSignOutCommand);
+            ForumCommand = new ViewModelCommand(ExecuteShowForumCommand);
+            AllForumsCommand = new ViewModelCommand(ExecuteShowAllForumsCommand);
+            ReportCommentCommand = new ViewModelCommand(ExecuteShowReportCommentCommand);
+            LogOut = new ViewModelCommand(ExecuteSignOutCommand);
             IsChecked = false;
             IsLanguageChecked = false;
             Mediator.OnIsCheckedChanged(IsChecked);
@@ -280,109 +351,149 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public void ExecuteShowOwnersBookingViewCommand(object obj)
         {
             CurrentChildView = new OwnersBookingDisplayViewModel();
-            Caption = "Bookings";
+            if (IsLanguageChecked == true) Caption = "Rezervacije";
+            else Caption = "Bookings";
         }
 
         public void ExecuteShowAcceptDenyViewCommand(object obj)
         {
             CurrentChildView = new AcceptDenyViewModel();
-            Caption = "Requests";
+            if (IsLanguageChecked == true) Caption = "Zahtevi";
+            else Caption = "Requests";
         }
 
         public void ExecuteShowRequestViewCommand(object obj)
         {
             CurrentChildView = new RequestViewModel();
-            Caption = "Requests";
+            if (IsLanguageChecked == true) Caption = "Zahtevi";
+            else Caption = "Requests";
         }
 
         public void ExecuteShowAccommodationRegistrationViewCommand(object obj)
         {
             LoggedUser.creatingAccommodationFromRecomendation = false;
             CurrentChildView = new AccommodationRegistrationViewModel();
-            Caption = "New Accommodation";
+            if (IsLanguageChecked == true) Caption = "Novi Smestaj";
+            else Caption = "New Accommodation";
         }
 
         public void ExecuteCreateNewAccommodationFromRecommendationViewCommand(object obj)
         {
             LoggedUser.creatingAccommodationFromRecomendation = true;
             CurrentChildView = new AccommodationRegistrationViewModel();
-            Caption = "New Accommodation";
+            if (IsLanguageChecked == true) Caption = "Novi Smestaj";
+            else Caption = "New Accommodation";
         }
 
         public void ExecuteShowProfileViewCommand(object obj)
         {
             CurrentChildView = new ProfileViewModel();
-            Caption = "Profile";
+            if (IsLanguageChecked == true) Caption = "Profil";
+            else Caption = "Profile";
         }
 
         public void ExecuteCloseExistingAccommodationCommand(object obj)
         {
             CurrentChildView = new CloseExistingAccommodationViewModel();
-            Caption = "Close Accommodation";
+            if (IsLanguageChecked == true) Caption = "Zatvori Smestaj";
+            else Caption = "Close Accommodation";
         }
 
         public void ExecuteShowReviewsViewCommand(object obj)
         {
             CurrentChildView = new ReviewsViewModel();
-            Caption = "Reviews";
+            if (IsLanguageChecked == true) Caption = "Recenzije";
+            else Caption = "Reviews";
         }
 
         public void ExecuteShowNotificationsViewCommand(object obj)
         {
             CurrentChildView = new NotificationsViewModel();
-            Caption = "Notifications";
+            if (IsLanguageChecked == true) Caption = "Obavestenja";
+            else Caption = "Notifications";
         }
 
         public void ExecuteShowGuestRatingCommand(object obj)
         {
             CurrentChildView = new RateGuestViewModel();
-            Caption = "Rate Guest";
+            if (IsLanguageChecked == true) Caption = "Oceni Gosta";
+            else Caption = "Rate Guest";
         }
 
         public void ExecuteShowMyBookingsCommand(object obj)
         {
             CurrentChildView = new AccommodationStatisticsViewModel();
-            Caption = "My Accommodations";
+            if (IsLanguageChecked == true) Caption = "Moji Smestaji";
+            else Caption = "My Accommodations";
         }
         public void ExecuteShowOurRecommendationsViewCommand(object obj)
         {
             SecondChildView = new OurRecommendationsViewModel();
-            Caption = "My Accommodations";
+            if (IsLanguageChecked == true) Caption = "Moji Smestaji";
+            else Caption = "My Accommodations";
         }
         public void ExecuteShowAnnualStatisticsCommand(object obj)
         {
             CurrentChildView = new AccommodationAnnualStatisticsViewModel();
-            Caption = "My Accommodations";
+            if (IsLanguageChecked == true) Caption = "Moji Smestaji";
+            else Caption = "My Accommodations";
         }
 
         public void ExecuteShowMonthlyStatistics(object obj)
         {
             CurrentChildView = new AccommodationMonthlyStatisticsViewModel();
-            Caption = "My Accommodations";
+            if (IsLanguageChecked == true) Caption = "Moji Smestaji";
+            else Caption = "My Accommodations";
         }
 
         public void ExecuteShowRenovationsCommand(object obj)
         {
             CurrentChildView = new RenovationsViewModel();
-            Caption = "Renovations";
+            if (IsLanguageChecked == true) Caption = "Renoviranja";
+            else Caption = "Renovations";
         }
 
         public void ExecuteShowNewRenovationViewCommand(object obj)
         {
             CurrentChildView = new NewRenovationViewModel();
-            Caption = "Renovations";
+            if (IsLanguageChecked == true) Caption = "Renoviranja";
+            else Caption = "Renovations";
         }
 
         public void ExecuteShowScheduleNewRenovationCommand(object obj)
         {
             CurrentChildView = new ScheduleNewRenovationViewModel();
-            Caption = "Renovations";
+            if (IsLanguageChecked == true) Caption = "Renoviranja";
+            else Caption = "Renovations";
         }
 
-        /*public void ExecuteSignOutCommand(object obj)
+        public void ExecuteShowForumCommand(object obj)
         {
-            
-        }*/
+            CurrentChildView = new ForumViewModel();
+            if (IsLanguageChecked == true) Caption = "Forum";
+            else Caption = "Forum";
+        }
+        public void ExecuteShowAllForumsCommand(object obj)
+        {
+            CurrentChildView = new AllForumsViewModel();
+            if (IsLanguageChecked == true) Caption = "Forumi";
+            else Caption = "All Forums";
+        }
+
+        public void ExecuteShowReportCommentCommand(object obj)
+        {
+            CurrentChildView = new ReportCommentViewModel();
+            if (IsLanguageChecked == true) Caption = "Prijavi komentar";
+            else Caption = "Report Comment";
+        }
+
+        public void ExecuteSignOutCommand(object obj)
+        {
+            var Window = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            Window?.Close();
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
+        }
 
         public void GenerateAnnualReport(object obj)
         {
@@ -436,11 +547,23 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             {
                 SrbChecked = (SolidColorBrush)Application.Current.Resources["ModeChecked"];
                 EngChecked = (SolidColorBrush)Application.Current.Resources["ModeUnchecked"];
+                NewAccommodationText = "Novi Smestaj";
+                BookingsText = "Rezervacije";
+                MyAccommodationsText = "Moji Smestaji";
+                RequestsText = "Zahtevi";
+                RenovationsText = "Renoviranja";
+                ForumsText = "Forumi";
             }
             else
             {
                 EngChecked = (SolidColorBrush)Application.Current.Resources["ModeChecked"];
                 SrbChecked = (SolidColorBrush)Application.Current.Resources["ModeUnchecked"];
+                NewAccommodationText = "New Accommodation";
+                BookingsText = "Bookings";
+                MyAccommodationsText = "My Accommodations";
+                RequestsText = "Requests";
+                RenovationsText = "Renovations";
+                ForumsText = "Forums";
             }
         }
     }

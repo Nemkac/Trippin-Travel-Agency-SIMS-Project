@@ -22,7 +22,7 @@
                                       HorizontalAlignment="Left"
                                       Style="{StaticResource menuBackButtonIcon}"
                                       Width="15" Height="15" Foreground="{Binding ContentHintColor}"/>
-                    <Label Content="Choose an accommodation and click a button beneath to see accommodation images or annual statistics"
+                    <Label Content="{Binding HintText}"
                                Style="{StaticResource labelAboveTextBox}"
                                Foreground="{Binding ContentHintColor}"
                                Margin="10,0,0,0"
@@ -56,7 +56,9 @@
                 <StackPanel Orientation="Horizontal"
                                 Margin="0, 0, 0 ,0">
                     <fa:IconImage Icon="Image" HorizontalAlignment="Left" Width="20" Height="20" Foreground="#192a56" VerticalAlignment="Center" Margin="0 2 0 0"/>
-                    <Label VerticalAlignment="Center" Foreground="#192a56" Content="Show Images" FontSize="20" FontFamily="Ubuntu" FontWeight="Regular"  Margin="10 0 0 0"/>
+                    <Label VerticalAlignment="Center" Foreground="#192a56" 
+                           Content="{Binding ShowImagesText}" FontSize="20" 
+                           FontFamily="Ubuntu" FontWeight="Regular"  Margin="10 0 0 0"/>
                 </StackPanel>
             </Button>
             <Label Content="{Binding LabelContent}"
@@ -72,7 +74,10 @@
                 <StackPanel Orientation="Horizontal"
                                 Margin="0, 0, 0 ,0">
                     <fa:IconImage Icon="PlusCircle" HorizontalAlignment="Left" Width="20" Height="20" Foreground="#F4FFF8" VerticalAlignment="Center" Margin="0 2 0 0"/>
-                    <Label VerticalAlignment="Center" Content="Show Details" FontSize="20" FontFamily="Ubuntu" FontWeight="Regular" Foreground="#F4FFF8" Margin="10 0 0 0"/>
+                    <Label VerticalAlignment="Center" 
+                           Content="{Binding ShowDetailsText}" FontSize="20" 
+                           FontFamily="Ubuntu" FontWeight="Regular" 
+                           Foreground="#F4FFF8" Margin="10 0 0 0"/>
                 </StackPanel>
             </Button>
         </StackPanel>

@@ -20,7 +20,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
-            <Label Content="Cleanness" Style="{StaticResource RatingLabel}"
+            <Label Content="{Binding CleannessText}" Style="{StaticResource RatingLabel}"
                    Foreground="{Binding ContentTextColor}"
                    VerticalAlignment="Center" Margin="0 0 0 0"/>
         </StackPanel>
@@ -54,7 +54,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
-            <Label Content="Respecting the rules" Style="{StaticResource RatingLabel}"
+            <Label Content="{Binding RulesText}" Style="{StaticResource RatingLabel}"
                    Foreground="{Binding ContentTextColor}"
                    VerticalAlignment="Center" Margin="0 0 0 0"/>
         </StackPanel>
@@ -88,7 +88,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
-            <Label Content="Comment" Style="{StaticResource RatingLabel}"
+            <Label Content="{Binding CommentText}" Style="{StaticResource RatingLabel}"
                    Foreground="{Binding ContentTextColor}"
                    VerticalAlignment="Top" Margin="0 40 0 0"/>
         </StackPanel>
@@ -102,7 +102,7 @@
                    VerticalAlignment="Center"
                    Height="30" Width="200" Margin="260 10 10 0" FontSize="17" Foreground="#4CD137" 
                    FontFamily="Ubuntu" Text="{Binding FeedBack}"/>
-            <Button Content="Save Rating" 
+            <Button Content="{Binding SaveRatingText}" 
                 Grid.Row="3" Grid.ColumnSpan="3"
                 VerticalAlignment="Center"
                 Style="{StaticResource saveButtonTablet}"

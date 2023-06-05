@@ -88,7 +88,7 @@
                                Foreground="{Binding ContentTextColor}"
                                FontFamily="Ubuntu"
                                FontWeight="Regular"
-                               Text="31 total accommodations"
+                               Text="{Binding TotalAccommodationsText}"
                                Margin="10, 0, 0, 0"/>
 
                     </StackPanel>
@@ -124,8 +124,11 @@
                         Height="60"
                         Margin="0, 75, 0, 0"
                         Command="{Binding ShowReviewsViewCommand}">
-                        <Label VerticalAlignment="Center" Content="Show Reviews" FontSize="14" 
-                               FontFamily="Ubuntu" FontWeight="Regular" Foreground="#F4FFF8"/>
+                        <Label VerticalAlignment="Center" 
+                               Content="{Binding ShowReviewsText}" 
+                               FontSize="14" 
+                               FontFamily="Ubuntu" FontWeight="Regular" 
+                               Foreground="#F4FFF8"/>
                     </Button>
                 </StackPanel>
 

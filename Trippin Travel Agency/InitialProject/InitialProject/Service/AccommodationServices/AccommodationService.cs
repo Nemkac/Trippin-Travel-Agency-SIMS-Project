@@ -50,6 +50,33 @@ namespace InitialProject.Service.AccommodationServices
             return new List<string>() { accommodation.location.country, accommodation.location.city };
         }
 
+        public int GetAccommodationLocationId(int accommodatonId)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<Accommodation> accommodations = context.Accommodations.ToList();
+            List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
+            Accommodation accommodation = accommodations.Find(a => a.id == accommodatonId);
+            return accommodation.location.id;
+        }
+
+        public int GetAccommodationLocationIdByForumId(int forumId)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<Forum> forums = context.Forums.ToList();
+            List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
+            Forum forum = forums.Find(f => f.id == forumId);
+            return forum.location.id;
+        }
+
+        public List<string> GetAccommodationLocationCityAndCountryByForumId(int forumId)
+        {
+            DataBaseContext context = new DataBaseContext();
+            List<Forum> forums = context.Forums.ToList();
+            List<AccommodationLocation> locations = context.AccommodationLocation.ToList();
+            Forum forum = forums.Find(f => f.id == forumId);
+            return new List<string>() { forum.location.country, forum.location.city };
+        }
+
         public List<int> GetAllByCountry(string country)
         {
             if (country != null)

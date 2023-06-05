@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
@@ -154,6 +155,117 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private string locationText;
+        public string LocationText
+        {
+            get { return locationText; }
+            set
+            {
+                if (locationText != value)
+                {
+                    locationText = value;
+                    OnPropertyChanged(nameof(LocationText));
+                }
+            }
+        }
+
+        private string _accommodationTypeText;
+        public string AccommodationTypeText
+        {
+            get { return _accommodationTypeText; }
+            set
+            {
+                if (_accommodationTypeText != value)
+                {
+                    _accommodationTypeText = value;
+                    OnPropertyChanged(nameof(AccommodationTypeText));
+                }
+            }
+        }
+
+        private string _hintText;
+
+        public string HintText
+        {
+            get { return _hintText; }
+            set
+            {
+                _hintText = value;
+                OnPropertyChanged(nameof(HintText));
+            }
+        }
+
+        private string _startingDateText;
+
+        public string StartingDateText
+        {
+            get { return _startingDateText; }
+            set
+            {
+                _startingDateText = value;
+                OnPropertyChanged(nameof(StartingDateText));
+            }
+        }
+
+        private string _endingDateText;
+
+        public string EndingDateText
+        {
+            get { return _endingDateText; }
+            set
+            {
+                _endingDateText = value;
+                OnPropertyChanged(nameof(EndingDateText));
+            }
+        }
+
+        private string _durationText;
+
+        public string DurationText
+        {
+            get { return _durationText; }
+            set
+            {
+                _durationText = value;
+                OnPropertyChanged(nameof(DurationText));
+            }
+        }
+        private string _descriptionText;
+
+        public string DescriptionText
+        {
+            get { return _descriptionText; }
+            set
+            {
+                _descriptionText = value;
+                OnPropertyChanged(nameof(DescriptionText));
+            }
+        }
+
+        private string _proceedText;
+
+        public string ProceedText
+        {
+            get { return _proceedText; }
+            set
+            {
+                _proceedText = value;
+                OnPropertyChanged(nameof(ProceedText));
+            }
+        }
+
+        private string _scheduleRenovationText;
+
+        public string ScheduleRenovationText
+        {
+            get { return _scheduleRenovationText; }
+            set
+            {
+                _scheduleRenovationText = value;
+                OnPropertyChanged(nameof(ScheduleRenovationText));
+            }
+        }
+
         public ViewModelCommand ShowAvailableDateRanges { get; set; }
         public ViewModelCommand ScheduleRenovationCommand { get; set; }
 
@@ -166,9 +278,35 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ScheduleRenovationCommand = new ViewModelCommand(ScheduleRenovation);
 
             Mediator.IsCheckedChanged += OnIsCheckedChanged;
+            Mediator.IsLanguageCheckedChanged += OnIsLanguageCheckChanged;
 
             ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";
             ContentHintColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#353b48";
+
+            LocationText = Mediator.GetCurrentIsLanguageChecked() ? "Lokacija:" : "Location:";
+            AccommodationTypeText = Mediator.GetCurrentIsLanguageChecked() ? "Tip Smestaja:" : "Accommodation Type:";
+            HintText = Mediator.GetCurrentIsLanguageChecked() ? "Izaberite jedan od dostupnih perioda" :
+                                                                "Choose one of the available periods";
+            StartingDateText = Mediator.GetCurrentIsLanguageChecked() ? "Pocetni datum" : "Starting date";
+            EndingDateText = Mediator.GetCurrentIsLanguageChecked() ? "Krajnji datum" : "Ending date";
+            DurationText = Mediator.GetCurrentIsLanguageChecked() ? "Trajanje" : "Duration";
+            DescriptionText = Mediator.GetCurrentIsLanguageChecked() ? "Opis renoviranja" : "Renovation descriotion";
+            ProceedText = Mediator.GetCurrentIsLanguageChecked() ? "Nastavi" : "Proceed";
+            ScheduleRenovationText = Mediator.GetCurrentIsLanguageChecked() ? "Zakazi renoviranje" : "Schedule a renovation";
+        }
+
+        private void OnIsLanguageCheckChanged(object sender, bool isChecked)
+        {
+            LocationText = isChecked ? "Lokacija:" : "Location:";
+            AccommodationTypeText = isChecked ? "Tip" : "Type";
+            HintText = isChecked ? "Izaberite jedan od dostupnih perioda" :
+                                                                "Choose one of the available periods";
+            StartingDateText = isChecked ? "Pocetni datum" : "Starting date";
+            EndingDateText = isChecked ? "Krajnji datum" : "Ending date";
+            DurationText = isChecked ? "Trajanje" : "Duration";
+            DescriptionText = isChecked ? "Opis renoviranja" : "Renovation descriotion";
+            ProceedText = isChecked ? "Nastavi" : "Proceed";
+            ScheduleRenovationText = isChecked ? "Zakazi renoviranje" : "Schedule a renovation";
         }
 
         private void OnIsCheckedChanged(object sender, bool isChecked)

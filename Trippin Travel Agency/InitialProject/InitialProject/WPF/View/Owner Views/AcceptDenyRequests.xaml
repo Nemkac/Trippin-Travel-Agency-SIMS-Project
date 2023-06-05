@@ -22,12 +22,12 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" Orientation="Vertical">
-                    <Label Content="Accommodation Name:" Style="{StaticResource defaultLabel}"  
+                    <Label Content="{Binding AccommodationNameText}" Style="{StaticResource defaultLabel}"  
                            HorizontalAlignment="Left" Height="27" Margin="49,26,0,0" 
                            VerticalAlignment="Top" Width="165"/>
-                    <Label Content="Location:" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="49,26,0,0" VerticalAlignment="Top" Width="165"/>
-                    <Label Content="Accommodation type:" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="49,26,0,0" VerticalAlignment="Top" Width="165"/>
-                    <Label Content="Booking ID: " Style="{StaticResource defaultLabel}" HorizontalAlignment="Left" Height="27" Margin="49,26,0,0" VerticalAlignment="Top" Width="165"/>
+                    <Label Content="{Binding LocationText}" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="49,26,0,0" VerticalAlignment="Top" Width="165"/>
+                    <Label Content="{Binding AccommodationTypeText}" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="49,26,0,0" VerticalAlignment="Top" Width="165"/>
+                    <Label Content="{Binding BookingIdText}" Style="{StaticResource defaultLabel}" HorizontalAlignment="Left" Height="27" Margin="49,26,0,0" VerticalAlignment="Top" Width="165"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Vertical">
                     <TextBlock x:Name="AccommodationNameTextBlock" Margin="0,28,0,0" Height="27" 
@@ -60,7 +60,7 @@
                             <ColumnDefinition Width="325"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Orientation="Horizontal" Grid.Column="0">
-                            <Label Content="Guest:" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="49,0,0,0" VerticalAlignment="Center" Width="165"/>
+                            <Label Content="{Binding GuestText}" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="49,0,0,0" VerticalAlignment="Center" Width="165"/>
                         </StackPanel>
                         <Separator Grid.ColumnSpan="2" Background="{Binding ContentTextColor}" Width="612" Margin="49, 70, 0, 0"/>
                         <StackPanel Orientation="Horizontal" Grid.Column="1">
@@ -77,25 +77,25 @@
                             <ColumnDefinition Width="360"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Orientation="Vertical" Grid.Column="0">
-                            <Label Content="Old Arrival:" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="49,57,0,0" VerticalAlignment="Top" Width="105"/>
+                            <Label Content="{Binding OldArrivalText}" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="49,57,0,0" VerticalAlignment="Top" Width="105"/>
                             <TextBlock x:Name="OldArrivalTextBlock" 
                                        Margin="0,-24,20,0" Height="27" HorizontalAlignment="Right" 
                                        Width="165" FontFamily="Ubuntu" FontSize="16" 
                                        FontWeight="Light" Foreground="{Binding ContentTextColor}"
                                        Text="{Binding OldArrival}"/>
-                            <Label Content="Old Departure:" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="49,26,0,0" VerticalAlignment="Top" Width="110" />
+                            <Label Content="{Binding OldDepartureText}" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="49,26,0,0" VerticalAlignment="Top" Width="110" />
                             <TextBlock x:Name="OldDepartureTextBlock" Margin="0,-24,20,0" Height="27" 
                                        HorizontalAlignment="Right" Width="165" FontFamily="Ubuntu" 
                                        FontSize="16" FontWeight="Light" Foreground="{Binding ContentTextColor}"
                                        Text="{Binding OldDeparture}"/>
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Grid.Column="1">
-                            <Label Content="New Arrival:" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="0,56,0,0" VerticalAlignment="Top" Width="105"/>
+                            <Label Content="{Binding NewArrivalText}" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="0,56,0,0" VerticalAlignment="Top" Width="105"/>
                             <TextBlock x:Name="NewArrivalTextBlock" Margin="0,-24,70,0" 
                                        Height="27" HorizontalAlignment="Right" Width="165" 
                                        FontFamily="Ubuntu" FontSize="16" FontWeight="Light" 
                                        Foreground="{Binding ContentTextColor}" Text="{Binding NewArrival}"/>
-                            <Label Content="New Departure:" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="0,26,0,0" VerticalAlignment="Top" Width="120"/>
+                            <Label Content="{Binding NewDepartureText}" Style="{StaticResource defaultLabel}"  HorizontalAlignment="Left" Height="27" Margin="0,26,0,0" VerticalAlignment="Top" Width="120"/>
                             <TextBlock x:Name="NewDepartureTextBlock" Margin="0,-24,70,0" 
                                        Height="27" HorizontalAlignment="Right" Width="165" 
                                        FontFamily="Ubuntu" FontSize="16" FontWeight="Light" 
@@ -112,7 +112,7 @@
                     <ColumnDefinition Width="325"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2">
-                    <Button Content="Deny" Margin="49 0 0 0" VerticalAlignment="Center" 
+                    <Button Content="{Binding DenyText}" Margin="49 0 0 0" VerticalAlignment="Center" 
                             Style="{StaticResource denyButtonTablet}" Width="150" 
                             Command="{Binding DenyRequestCommand}" />
                     <TextBlock x:Name="DenyFeedback" Margin="0 10 0 0" Width="160" Height="30" 
@@ -123,7 +123,7 @@
                     <TextBlock x:Name="AcceptFeedBack" Margin="15 10 0 0" Width="160" Height="30" 
                                FontSize="17" Foreground="#4CD137" FontFamily="Ubuntu"
                                Text="{Binding AcceptFeedBack}"/>
-                    <Button Content="Accept" Margin="0 0 0 0" VerticalAlignment="Center" 
+                    <Button Content="{Binding AcceptText}" Margin="0 0 0 0" VerticalAlignment="Center" 
                             Style="{StaticResource saveButtonTablet}" Width="150" 
                             Command="{Binding AcceptRequestCommand}"/>
                 </StackPanel>
