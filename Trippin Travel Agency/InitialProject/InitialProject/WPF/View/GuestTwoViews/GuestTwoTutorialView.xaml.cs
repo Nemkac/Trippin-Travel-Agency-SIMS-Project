@@ -34,7 +34,7 @@ namespace InitialProject.WPF.View.GuestTwoViews
 
         private void Pause(object sender, RoutedEventArgs e)
         {
-            this.Tutorial.Pause();
+           this.Tutorial.Pause();
         }
     }
 }

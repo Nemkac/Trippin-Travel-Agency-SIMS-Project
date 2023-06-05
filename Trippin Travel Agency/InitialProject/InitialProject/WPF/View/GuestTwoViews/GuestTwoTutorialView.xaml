@@ -20,7 +20,7 @@
                       VerticalAlignment="Top" 
                       Width="1028"
                       Source="C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\Tutorial.mov" 
-                      LoadedBehavior="Manual"                      
+                      LoadedBehavior="Manual"                                         
                       />
         <Button
                 Width="200"
@@ -47,7 +47,7 @@
         <TextBlock HorizontalAlignment="Left" 
                    Margin="1149,81,0,0"                    
                    VerticalAlignment="Top"
-                   Height="358" 
+                   Height="162" 
                    Width="307"
                    Text="In this tutorial we are demonstrating how easily you can book a tour for yourself and your friends. If you have any furhter question feel free to contact us"
                    FontSize="19"
@@ -56,6 +56,11 @@
                    Foreground="Black"
                    TextWrapping="Wrap"
                    />
+        <Image HorizontalAlignment="Left"
+               Height="444" 
+               Margin="1149,243,0,0"
+               VerticalAlignment="Top"
+               Width="292"/>
 
 
     </Grid>
