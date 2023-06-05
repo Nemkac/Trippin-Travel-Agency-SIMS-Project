@@ -88,8 +88,22 @@ namespace InitialProject.WPF.ViewModels
             (string location, int locationCount) = GetMostRequestedLocation(tourRequests);
             (string language, int languageCount) = GetMostRequestedLanguage(tourRequests);
 
-            Location = location;
-            Language = language;
+            if(locationCount  > 0)
+            {
+                Location = location;
+            }
+            else
+            {
+                Location = "No requests"; 
+            }
+            if(languageCount > 0)
+            {
+                Language = language;
+            }
+            else
+            {
+                Language = "No requests";
+            }
             LocationRequestNumber = $"{locationCount} requests";
             LanguageRequestNumber = $"{languageCount} requests";
             Username = LoggedUser.firstName; 
