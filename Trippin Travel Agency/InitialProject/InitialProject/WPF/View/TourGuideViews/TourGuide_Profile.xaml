@@ -149,7 +149,7 @@
                         Width="100"
                         Height="40"
                         Margin="20, 0, 0, 0"
-                        Command="{Binding LogoutCommand}"
+                        Command="{Binding CancelAllToursCommand}"
                         />
                 </StackPanel>
 

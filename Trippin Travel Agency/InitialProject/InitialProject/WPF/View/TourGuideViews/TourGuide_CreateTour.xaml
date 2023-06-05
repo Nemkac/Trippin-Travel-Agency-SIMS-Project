@@ -300,13 +300,22 @@
                              x:Name="tourDescriptionTextBox"
                              />
                 </StackPanel>
+                <TextBlock x:Name="saveMessageTextBlock"
+                           Foreground="Green"
+                           Margin="5,20,0,0"
+                           HorizontalAlignment="Center"
+                           Visibility="Collapsed"/>
+                <TextBlock x:Name="fillAllTheDataMessageTextBlock"
+                           Foreground="Red"
+                           Margin="5,20,0,0"
+                           HorizontalAlignment="Center"
+                           Visibility="Collapsed"/>
                 <Button Content="Save"
                         Style="{StaticResource acceptButton}"
                         Margin="0,20,0,0"
                         Click="Save"
                         x:Name="saveButton"
                         />
-
             </StackPanel>
         </ScrollViewer>
         <ContentControl Content="{Binding CurrentChildView}" Grid.RowSpan="3" Grid.ColumnSpan="3"/>

@@ -120,16 +120,33 @@ namespace InitialProject.WPF.View.TourGuideViews
 
             User user = FetchUserFromDatabase(LoggedUser.id);
             bool isSuper = user.super;
+            if (string.IsNullOrWhiteSpace(tourNameTextBox.Text) ||
+                tourCountryComboBox.SelectedItem == null ||
+                tourCityComboBox.SelectedItem == null ||
+                string.IsNullOrWhiteSpace(tourMaximumNumberOfGuestsTextBox.Text) ||
+                string.IsNullOrWhiteSpace(tourDurationTextBox.Text) ||
+                tourLanguageComboBox.SelectedItem == null ||
+                string.IsNullOrWhiteSpace(tourStartingPointTextBox.Text) ||
+                string.IsNullOrWhiteSpace(tourEndingPointTextBox.Text) ||
+                tourCalendar.SelectedDate == null ||
+                string.IsNullOrWhiteSpace(tourDescriptionTextBox.Text))
+            {
+                MessageBox.Show("Fill in all the data.", "Data Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                fillAllTheDataMessageTextBlock.Text = "Fill in all the data.";
+                fillAllTheDataMessageTextBlock.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                CreateTourBasicProperties(out name, out location, out guestLimit, out hoursDuration, out description, out languageInput, out selectedDate, out active);
 
-            CreateTourBasicProperties(out name, out location, out guestLimit, out hoursDuration, out description, out languageInput, out selectedDate, out active);
+                ICollection<KeyPoint> keyPoints = CreateKeyPoints();
 
-            ICollection<KeyPoint> keyPoints = CreateKeyPoints();
+                List<Model.Image> imageLinks = CreateImageLinks();
 
-            List<Model.Image> imageLinks = CreateImageLinks();
-
-            Tour tour = new Tour(name, location.id, keyPoints, description, languageInput, guestLimit, selectedDate, hoursDuration, imageLinks, active,LoggedUser.id);
-            tour.super = isSuper;
-            DoesTourExist(name, selectedDate, tour);
+                Tour tour = new Tour(name, location.id, keyPoints, description, languageInput, guestLimit, selectedDate, hoursDuration, imageLinks, active, LoggedUser.id);
+                tour.super = isSuper;
+                DoesTourExist(name, selectedDate, tour);
+            }
         }
         private User FetchUserFromDatabase(int userId)
         {
@@ -159,9 +176,12 @@ namespace InitialProject.WPF.View.TourGuideViews
         {
             bool tourExists = TourService.CheckExistence(name, selectedDate);
             if (!tourExists)
-            {   
+            {
                 this.tourService.Save(tour);
                 clearInputs();
+
+                saveMessageTextBlock.Text = "Tour saved succesfully";
+                saveMessageTextBlock.Visibility = Visibility.Visible;
             }
             else
             {
@@ -518,6 +538,7 @@ namespace InitialProject.WPF.View.TourGuideViews
             {
                 errorMessageTextBlock.Text = "Entry must be a number!";
                 errorMessageTextBlock.Visibility = Visibility.Visible;
+                tourMaximumNumberOfGuestsTextBox.BorderBrush = new SolidColorBrush(Colors.Red); 
             }
             else
             {
@@ -533,6 +554,7 @@ namespace InitialProject.WPF.View.TourGuideViews
             {
                 tourDurationErrorMessageTextBlock.Text = "Entry must be a number!";
                 tourDurationErrorMessageTextBlock.Visibility = Visibility.Visible;
+                tourDurationTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
             }
             else
             {

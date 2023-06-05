@@ -131,10 +131,9 @@ namespace InitialProject.WPF.ViewModels
                 }
             }
         }
-
         private void SetProperties(Dictionary<language, int> languageTourCounts, KeyValuePair<language, int>? languageWithMaxTours, double averageRating, double roundedAverage)
         {
-            if (averageRating > 9.0)
+            if (averageRating > 4.0)
             {
                 GuideStatus = $"Super guide for language: {languageWithMaxTours.Value.Key}";
                 AverageRating = roundedAverage.ToString();
@@ -149,7 +148,6 @@ namespace InitialProject.WPF.ViewModels
                 SetSuperGuideStatus(false);
             }
         }
-
         private void UpdateGuideStatus()
         {
             DateTime oneYearAgo = DateTime.Now.Date.AddYears(-1);
@@ -174,7 +172,6 @@ namespace InitialProject.WPF.ViewModels
                 SetProperties(languageTourCounts, languageWithMaxTours, averageRating, roundedAverage);
             }
         }
-
         private static void CountAverages(DateTime oneYearAgo, DataBaseContext dataBaseContext, KeyValuePair<language, int>? languageWithMaxTours, out double averageRating, out double roundedAverage)
         {
             var tourIdsWithLanguage = dataBaseContext.Tours
@@ -219,12 +216,10 @@ namespace InitialProject.WPF.ViewModels
                     List<Tour> toursToDelete = dataBaseContext.Tours
                         .Where(t => t.guideId == LoggedUser.id && t.startDates >= currentDate)
                         .ToList();
-                    StringBuilder message = new StringBuilder("Tours to be cancelled:\n");
                     if (toursToDelete.Count > 0)
                     {
                         foreach (Tour tourToDelete in toursToDelete)
                         {
-                            message.AppendLine($"Tour ID: {tourToDelete.id}");
                             // Remove related entities
                             dataBaseContext.Images.RemoveRange(dataBaseContext.Images.Where(i => i.tourId == tourToDelete.id));
                             dataBaseContext.KeyPoints.RemoveRange(dataBaseContext.KeyPoints.Where(k => k.tourId == tourToDelete.id));
@@ -240,18 +235,25 @@ namespace InitialProject.WPF.ViewModels
                                 Coupon coupon = new Coupon(tr.guestId, DateTime.Now.AddYears(2));
                                 dataBaseContext.Coupons.Add(coupon);
                             }
-
+                            var user = dataBaseContext.Users.SingleOrDefault(u => u.id == LoggedUser.id);
+                            if (user != null)
+                            {
+                                user.resigned = true;
+                            }
                             dataBaseContext.SaveChanges();
-                            MessageBox.Show(message.ToString(), "Tours to Cancel");
                         }
                     }
                     else
                     {
                         MessageBox.Show("There are no tours to be canceled for the resigning tour guide. Wish you all the best!");
+                        var user = dataBaseContext.Users.SingleOrDefault(u => u.id == LoggedUser.id);
+                        if (user != null)
+                        {
+                            user.resigned = true;
+                        }
+                        dataBaseContext.SaveChanges();
                     }
-                    ParentWindow?.Close();
-                    SignInForm signInForm = new SignInForm();
-                    signInForm.Show();
+                    Logout(parameter); 
                 }
             }
         }
