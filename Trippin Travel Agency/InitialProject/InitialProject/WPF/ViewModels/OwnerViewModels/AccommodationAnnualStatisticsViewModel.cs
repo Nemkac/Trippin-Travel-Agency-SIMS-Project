@@ -194,6 +194,129 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private string _accommodationNameText;
+        public string AccommodationNameText
+        {
+            get { return _accommodationNameText; }
+            set
+            {
+                if (_accommodationNameText != value)
+                {
+                    _accommodationNameText = value;
+                    OnPropertyChanged(nameof(AccommodationNameText));
+                }
+            }
+        }
+
+        private string _maxGuestsText;
+        public string MaxGuestsText
+        {
+            get { return _maxGuestsText; }
+            set
+            {
+                if (_maxGuestsText != value)
+                {
+                    _maxGuestsText = value;
+                    OnPropertyChanged(nameof(MaxGuestsText));
+                }
+            }
+        }
+        private string _accommodationTypeText;
+        public string AccommodationTypeText
+        {
+            get { return _accommodationTypeText; }
+            set
+            {
+                if (_accommodationTypeText != value)
+                {
+                    _accommodationTypeText = value;
+                    OnPropertyChanged(nameof(AccommodationTypeText));
+                }
+            }
+        }
+        private string locationText;
+        public string LocationText
+        {
+            get { return locationText; }
+            set
+            {
+                if (locationText != value)
+                {
+                    locationText = value;
+                    OnPropertyChanged(nameof(LocationText));
+                }
+            }
+        }
+
+        private string _accommodationDetailsText;
+        public string AccommodationDetailsText
+        {
+            get { return _accommodationDetailsText; }
+            set
+            {
+                if (_accommodationDetailsText != value)
+                {
+                    _accommodationDetailsText = value;
+                    OnPropertyChanged(nameof(AccommodationDetailsText));
+                }
+            }
+        }
+
+        private string _hintText;
+
+        public string HintText
+        {
+            get { return _hintText; }
+            set
+            {
+                _hintText = value;
+                OnPropertyChanged(nameof(HintText));
+            }
+        }
+
+        private string _showDetailsText;
+
+        public string ShowDetailsText
+        {
+            get { return _showDetailsText; }
+            set
+            {
+                _showDetailsText = value;
+                OnPropertyChanged(nameof(ShowDetailsText));
+            }
+        }
+
+        private string _generateReportText;
+        public string GenerateReportText
+        {
+            get { return _generateReportText; }
+            set
+            {
+                _generateReportText = value;
+                OnPropertyChanged(nameof(GenerateReportText));
+            }
+        }
+        private string _chooseYearText;
+        public string ChooseYearText
+        {
+            get { return _chooseYearText; }
+            set
+            {
+                _chooseYearText = value;
+                OnPropertyChanged(nameof(ChooseYearText));
+            }
+        }
+        private string _annualStatisticsText;
+        public string AnnualStatisticsText
+        {
+            get { return _annualStatisticsText; }
+            set
+            {
+                _annualStatisticsText = value;
+                OnPropertyChanged(nameof(AnnualStatisticsText));
+            }
+        }
+
         public ViewModelCommand ShowMonthlyStatistics { get; private set; }
         public ViewModelCommand GenerateAnnualReport { get; private set; }
 
@@ -207,18 +330,28 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ShowAccommodationsDetails();
 
             Mediator.IsCheckedChanged += OnIsCheckedChanged;
+            Mediator.IsLanguageCheckedChanged += OnIsLanguageCheckChanged;
+
 
             ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";
             ContentHintColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#353b48";
             DetailsButtonColor = Mediator.GetCurrentIsChecked() ? "#487eb0" : "#2f3640";
-
             DataGridStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridStyle2"] : (Style)Application.Current.Resources["DataGridStyle1"];
-
             DataGridCellStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridCellStyle2"] : (Style)Application.Current.Resources["DataGridCellStyle1"];
-
             DataGridColumnHeaderStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridColumnHeaderStyle2"] : (Style)Application.Current.Resources["DataGridColumnHeaderStyle1"];
-
             DataGridRowStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridRowStyle2"] : (Style)Application.Current.Resources["DataGridRowStyle1"];
+
+            AccommodationNameText = Mediator.GetCurrentIsLanguageChecked() ? "Naziv Smestaja:" : "Accommodation Name:";
+            MaxGuestsText = Mediator.GetCurrentIsLanguageChecked() ? "Maksimalno gostiju" : "Max. number of guests";
+            AccommodationTypeText = Mediator.GetCurrentIsLanguageChecked() ? "Tip Smestaja:" : "Accommodation Type:";
+            LocationText = Mediator.GetCurrentIsLanguageChecked() ? "Lokacija:" : "Location:";
+            AccommodationDetailsText = Mediator.GetCurrentIsLanguageChecked() ? "Detalji Smestaja:" : "Accommodation Details:";
+            HintText = Mediator.GetCurrentIsLanguageChecked() ? "Izaberite smestaj i kliknite dugme ispod kako bi videli slike ili godisnju statistiku" :
+                                                                "Choose an accommodation and click a button beneath to see accommodation images or annual statistics";
+            ShowDetailsText = Mediator.GetCurrentIsLanguageChecked() ? "Detaljnije" : "Show details";
+            GenerateReportText = Mediator.GetCurrentIsLanguageChecked() ? "Generisi izvestaj" : "Generate report";
+            ChooseYearText = Mediator.GetCurrentIsLanguageChecked() ? "Izaberi godinu" : "Choose year";
+            AnnualStatisticsText = Mediator.GetCurrentIsLanguageChecked() ? "godisnja statistika" : "annual statistics";
         }
 
         private void OnIsCheckedChanged(object sender, bool isChecked)
@@ -228,12 +361,24 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             DetailsButtonColor = isChecked ? "#487eb0" : "#2f3640";
 
             DataGridStyle = isChecked ? (Style)Application.Current.Resources["DataGridStyle2"] : (Style)Application.Current.Resources["DataGridStyle1"];
-
             DataGridCellStyle = isChecked ? (Style)Application.Current.Resources["DataGridCellStyle2"] : (Style)Application.Current.Resources["DataGridCellStyle1"];
-
             DataGridColumnHeaderStyle = isChecked ? (Style)Application.Current.Resources["DataGridColumnHeaderStyle2"] : (Style)Application.Current.Resources["DataGridColumnHeaderStyle1"];
-
             DataGridRowStyle = isChecked ? (Style)Application.Current.Resources["DataGridRowStyle2"] : (Style)Application.Current.Resources["DataGridRowStyle1"];
+        }
+
+        private void OnIsLanguageCheckChanged(object sender, bool isChecked)
+        {
+            AccommodationNameText = isChecked ? "Naziv Smestaja:" : "Accommodation Name:";
+            MaxGuestsText = isChecked ? "Maksimalno gostiju" : "Max. number of guests";
+            AccommodationTypeText = isChecked ? "Tip Smestaja:" : "Accommodation Type:";
+            LocationText = isChecked ? "Lokacija:" : "Location:";
+            AccommodationDetailsText = isChecked ? "Detalji Smestaja:" : "Accommodation Details:";
+            HintText = isChecked ? "Izaberite smestaj i kliknite dugme ispod kako bi videli slike ili godisnju statistiku" :
+                                                    "Choose an accommodation and click a button beneath to see accommodation images or annual statistics";
+            ShowDetailsText = isChecked ? "Detaljnije" : "Show details";
+            GenerateReportText = isChecked ? "Generisi izvestaj" : "Generate report";
+            ChooseYearText = isChecked ? "Izaberi godinu" : "Choose year";
+            AnnualStatisticsText = isChecked ? "godisnja statistika" : "annual statistics";
         }
 
 

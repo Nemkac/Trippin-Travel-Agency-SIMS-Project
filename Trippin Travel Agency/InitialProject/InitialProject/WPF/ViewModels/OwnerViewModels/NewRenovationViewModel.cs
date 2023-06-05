@@ -98,6 +98,41 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private string _hintText;
+
+        public string HintText
+        {
+            get { return _hintText; }
+            set
+            {
+                _hintText = value;
+                OnPropertyChanged(nameof(HintText));
+            }
+        }
+
+        private string _headerText;
+
+        public string HeaderText
+        {
+            get { return _headerText; }
+            set
+            {
+                _headerText = value;
+                OnPropertyChanged(nameof(HeaderText));
+            }
+        }
+
+        private string _renovateText;
+        public string RenovateText
+        {
+            get { return _renovateText; }
+            set
+            {
+                _renovateText = value;
+                OnPropertyChanged(nameof(RenovateText));
+            }
+        }
+
         public ViewModelCommand ScheduleNewRenovationView { get; private set; }
 
         public NewRenovationViewModel()
@@ -107,17 +142,20 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ShowOwnersAccommodations();
 
             Mediator.IsCheckedChanged += OnIsCheckedChanged;
+            Mediator.IsLanguageCheckedChanged += OnIsLanguageCheckChanged;
 
             ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";
             ContentHintColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#353b48";
 
             DataGridStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridStyle2"] : (Style)Application.Current.Resources["DataGridStyle1"];
-
             DataGridCellStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridCellStyle2"] : (Style)Application.Current.Resources["DataGridCellStyle1"];
-
             DataGridColumnHeaderStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridColumnHeaderStyle2"] : (Style)Application.Current.Resources["DataGridColumnHeaderStyle1"];
-
             DataGridRowStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridRowStyle2"] : (Style)Application.Current.Resources["DataGridRowStyle1"];
+
+            HintText = Mediator.GetCurrentIsLanguageChecked() ? "Izaberite smestaj i kliknite dugme ispod kako bi nastavili sa zakazivanjem renoviranja" :
+                                                    "Choose an accommodation and click a button beneath to proceed with renovation";
+            HeaderText = Mediator.GetCurrentIsLanguageChecked() ? "Lista vasih smestaja koje mozete renovirati" : "Here is a list of your accommodations that you can renovate";
+            RenovateText = Mediator.GetCurrentIsLanguageChecked() ? "Renoviraj" : "Renovate";
         }
 
         private void OnIsCheckedChanged(object sender, bool isChecked)
@@ -126,12 +164,17 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ContentHintColor = isChecked ? "#F4F6F8" : "#353b48";
 
             DataGridStyle = isChecked ? (Style)Application.Current.Resources["DataGridStyle2"] : (Style)Application.Current.Resources["DataGridStyle1"];
-
             DataGridCellStyle = isChecked ? (Style)Application.Current.Resources["DataGridCellStyle2"] : (Style)Application.Current.Resources["DataGridCellStyle1"];
-
             DataGridColumnHeaderStyle = isChecked ? (Style)Application.Current.Resources["DataGridColumnHeaderStyle2"] : (Style)Application.Current.Resources["DataGridColumnHeaderStyle1"];
-
             DataGridRowStyle = isChecked ? (Style)Application.Current.Resources["DataGridRowStyle2"] : (Style)Application.Current.Resources["DataGridRowStyle1"];
+        }
+
+        private void OnIsLanguageCheckChanged(object sender, bool isChecked)
+        {
+            HintText = isChecked ? "Izaberite smestaj i kliknite dugme ispod kako bi nastavili sa zakazivanjem renoviranja" :
+                                                    "Choose an accommodation and click a button beneath to proceed with renovation";
+            HeaderText = Mediator.GetCurrentIsLanguageChecked() ? "Lista vasih smestaja koje mozete renovirati" : "Here is a list of your accommodations that you can renovate";
+            RenovateText = Mediator.GetCurrentIsLanguageChecked() ? "Renoviraj" : "Renovate";
         }
 
         public void ShowScheduleNewRenovationView(object obj)

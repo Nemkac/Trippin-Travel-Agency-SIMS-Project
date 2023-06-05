@@ -187,6 +187,160 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+
+
+
+        private string _accommodationNameText;
+        public string AccommodationNameText
+        {
+            get { return _accommodationNameText; }
+            set
+            {
+                if (_accommodationNameText != value)
+                {
+                    _accommodationNameText = value;
+                    OnPropertyChanged(nameof(AccommodationNameText));
+                }
+            }
+        }
+
+        private string locationText;
+        public string LocationText
+        {
+            get { return locationText; }
+            set
+            {
+                if (locationText != value)
+                {
+                    locationText = value;
+                    OnPropertyChanged(nameof(LocationText));
+                }
+            }
+        }
+
+        private string _accommodationTypeText;
+        public string AccommodationTypeText
+        {
+            get { return _accommodationTypeText; }
+            set
+            {
+                if (_accommodationTypeText != value)
+                {
+                    _accommodationTypeText = value;
+                    OnPropertyChanged(nameof(AccommodationTypeText));
+                }
+            }
+        }
+        private string _bookingIdText;
+        public string BookingIdText
+        {
+            get { return _bookingIdText; }
+            set
+            {
+                if (_bookingIdText != value)
+                {
+                    _bookingIdText = value;
+                    OnPropertyChanged(nameof(BookingIdText));
+                }
+            }
+        }
+        private string _guestText;
+        public string GuestText
+        {
+            get { return _guestText; }
+            set
+            {
+                if (_guestText != value)
+                {
+                    _guestText = value;
+                    OnPropertyChanged(nameof(GuestText));
+                }
+            }
+        }
+
+        private string _oldArrivalText;
+        public string OldArrivalText
+        {
+            get { return _oldArrivalText; }
+            set
+            {
+                if (_oldArrivalText != value)
+                {
+                    _oldArrivalText = value;
+                    OnPropertyChanged(nameof(OldArrivalText));
+                }
+            }
+        }
+
+        private string _oldDepartureText;
+        public string OldDepartureText
+        {
+            get { return _oldDepartureText; }
+            set
+            {
+                if (_oldDepartureText != value)
+                {
+                    _oldDepartureText = value;
+                    OnPropertyChanged(nameof(OldDepartureText));
+                }
+            }
+        }
+
+        private string _newArrivalText;
+        public string NewArrivalText
+        {
+            get { return _newArrivalText; }
+            set
+            {
+                if (_newArrivalText != value)
+                {
+                    _newArrivalText = value;
+                    OnPropertyChanged(nameof(NewArrivalText));
+                }
+            }
+        }
+        private string _newDepartureText;
+        public string NewDepartureText
+        {
+            get { return _newDepartureText; }
+            set
+            {
+                if (_newDepartureText != value)
+                {
+                    _newDepartureText = value;
+                    OnPropertyChanged(nameof(NewDepartureText));
+                }
+            }
+        }
+        private string _denyText;
+        public string DenyText
+        {
+            get { return _denyText; }
+            set
+            {
+                if (_denyText != value)
+                {
+                    _denyText = value;
+                    OnPropertyChanged(nameof(DenyText));
+                }
+            }
+        }
+        private string _acceptText;
+        public string AcceptText
+        {
+            get { return _acceptText; }
+            set
+            {
+                if (_acceptText != value)
+                {
+                    _acceptText = value;
+                    OnPropertyChanged(nameof(AcceptText));
+                }
+            }
+
+        }
+
+
         public ViewModelCommand AcceptRequestCommand { get; set; }
         public ViewModelCommand DenyRequestCommand { get; set; }
 
@@ -199,10 +353,37 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             DisplayData();
 
             Mediator.IsCheckedChanged += OnIsCheckedChanged;
+            Mediator.IsLanguageCheckedChanged += OnIsLanguageCheckChanged;
 
             ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";
+
+            AccommodationNameText = Mediator.GetCurrentIsLanguageChecked() ? "Naziv Smestaja:" : "Accommodation Name:";
+            LocationText = Mediator.GetCurrentIsLanguageChecked() ? "Lokacija:" : "Location:";
+            AccommodationTypeText = Mediator.GetCurrentIsLanguageChecked() ? "Tip Smestaja:" : "Accommodation Type:";
+            BookingIdText = Mediator.GetCurrentIsLanguageChecked() ? "ID Rezervacije:" : "Booking ID:";
+            GuestText = Mediator.GetCurrentIsLanguageChecked() ? "Korisnik:" : "Guest:";
+            OldArrivalText = Mediator.GetCurrentIsLanguageChecked() ? "Prethodni Dolazak:" : "Old Arrival:";
+            OldDepartureText = Mediator.GetCurrentIsLanguageChecked() ? "Prethodni Odlazak:" : "Old Departure:";
+            NewArrivalText = Mediator.GetCurrentIsLanguageChecked() ? "Novi Dolazak:" : "New Arrival:";
+            NewDepartureText = Mediator.GetCurrentIsLanguageChecked() ? "Novi Odlazak:" : "New Departure:";
+            AcceptText = Mediator.GetCurrentIsLanguageChecked() ? "Prihvati" : "Accept";
+            DenyText = Mediator.GetCurrentIsLanguageChecked() ? "Zatvori postojeci smestaj" : "Close existing accommodation";
         }
 
+        private void OnIsLanguageCheckChanged(object sender, bool isChecked)
+        {
+            AccommodationNameText = isChecked ? "Naziv Smestaja:" : "Accommodation Name:";
+            LocationText = isChecked ? "Lokacija:" : "Location:";
+            AccommodationTypeText = isChecked ? "Tip Smestaja:" : "Accommodation Type:";
+            BookingIdText = isChecked ? "ID Rezervacije:" : "Booking ID:";
+            GuestText = isChecked ? "Korisnik:" : "Guest:";
+            OldArrivalText = isChecked ? "Prethodni Dolazak:" : "Old Arrival:";
+            OldDepartureText = isChecked ? "Prethodni Odlazak:" : "Old Departure:";
+            NewArrivalText = isChecked ? "Novi Dolazak:" : "New Arrival:";
+            NewDepartureText = isChecked ? "NAJNEPOPULARNIJA LOKACIJA" : "LEAST POPULAR LOCATION";
+            AcceptText = isChecked ? "Otvori novi smestaj" : "Open new accommodation";
+            DenyText = isChecked ? "Odbij" : "Deny";
+        }
         private void OnIsCheckedChanged(object sender, bool isChecked)
         {
             ContentTextColor = isChecked ? "#F4F6F8" : "#192a56";

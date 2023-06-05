@@ -39,5 +39,8 @@ namespace InitialProject.Model
         public static string MostPopularCountry { get; set; }
         public static string LeastPopularCountry { get; set; }
         public static string LeastPopularCity { get; set; }
+
+        public static int VisitedForumId { get; set; }
+        public static int commentIdToReport { get; set; }
     }
 }

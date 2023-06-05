@@ -122,6 +122,27 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private string _totalAccommodationsText;
+        public string TotalAccommodationsText
+        {
+            get { return _totalAccommodationsText; }
+            set
+            {
+                _totalAccommodationsText = value;
+                OnPropertyChanged(nameof(TotalAccommodationsText));
+            }
+        }
+        private string _showReviewsText;
+        public string ShowReviewsText
+        {
+            get { return _showReviewsText; }
+            set
+            {
+                _showReviewsText = value;
+                OnPropertyChanged(nameof(ShowReviewsText));
+            }
+        }
+
         public ProfileViewModel()
         {
             _mainViewModel = LoggedUser._mainViewModel;
@@ -134,9 +155,19 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             DisplayOwnerType(totalRating);
 
             Mediator.IsCheckedChanged += OnIsCheckedChanged;
+            Mediator.IsLanguageCheckedChanged += OnIsLanguageCheckChanged;
 
             ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";
             DetailsButtonColor = Mediator.GetCurrentIsChecked() ? "#487eb0" : "#2f3640";
+
+            TotalAccommodationsText = Mediator.GetCurrentIsLanguageChecked() ? "broj vasih smestaja" : "total accommodations";
+            ShowReviewsText = Mediator.GetCurrentIsLanguageChecked() ? "Prikaz Recenzija" : "Show Reviews";
+        }
+
+        private void OnIsLanguageCheckChanged(object sender, bool isChecked)
+        {
+            TotalAccommodationsText = isChecked ? "4 broj vasih smestaja" : "4 total accommodations";
+            ShowReviewsText = isChecked ? "Prikaz Recenzija" : "Show Reviews";
         }
 
         private void OnIsCheckedChanged(object sender, bool isChecked)

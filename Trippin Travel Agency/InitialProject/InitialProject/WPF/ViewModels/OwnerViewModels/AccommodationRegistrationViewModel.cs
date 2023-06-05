@@ -201,6 +201,198 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 OnPropertyChanged(nameof(ContentTextColor));
             }
         }
+        //------------------------------------------------------------------------------------
+        private string _accommodationNameText;
+        public string AccommodationNameText
+        {
+            get { return _accommodationNameText; }
+            set
+            {
+                if (_accommodationNameText != value)
+                {
+                    _accommodationNameText = value;
+                    OnPropertyChanged(nameof(AccommodationNameText));
+                }
+            }
+        }
+        private string _countryText;
+        public string CountryText
+        {
+            get { return _countryText; }
+            set
+            {
+                if (_countryText != value)
+                {
+                    _countryText = value;
+                    OnPropertyChanged(nameof(CountryText));
+                }
+            }
+        }
+
+        private string _cityText;
+        public string CityText
+        {
+            get { return _cityText; }
+            set
+            {
+                if (_cityText != value)
+                {
+                    _cityText = value;
+                    OnPropertyChanged(nameof(CityText));
+                }
+            }
+        }
+        private string _accommodationTypeText;
+        public string AccommodationTypeText
+        {
+            get { return _accommodationTypeText; }
+            set
+            {
+                if (_accommodationTypeText != value)
+                {
+                    _accommodationTypeText = value;
+                    OnPropertyChanged(nameof(AccommodationTypeText));
+                }
+            }
+        }
+        private string _bookingCancelPeriodText;
+        public string BookingCancelPeriodText
+        {
+            get { return _bookingCancelPeriodText; }
+            set
+            {
+                if (_bookingCancelPeriodText != value)
+                {
+                    _bookingCancelPeriodText = value;
+                    OnPropertyChanged(nameof(BookingCancelPeriodText));
+                }
+            }
+        }
+        private string _minDaysText;
+        public string MinDaysText
+        {
+            get { return _minDaysText; }
+            set
+            {
+                if (_minDaysText != value)
+                {
+                    _minDaysText = value;
+                    OnPropertyChanged(nameof(MinDaysText));
+                }
+            }
+        }
+
+        private string _maxGuestsText;
+        public string MaxGuestsText
+        {
+            get { return _maxGuestsText; }
+            set
+            {
+                if (_maxGuestsText != value)
+                {
+                    _maxGuestsText = value;
+                    OnPropertyChanged(nameof(MaxGuestsText));
+                }
+            }
+        }
+
+        private string _houseText;
+        public string HouseText
+        {
+            get { return _houseText; }
+            set
+            {
+                if (_houseText != value)
+                {
+                    _houseText = value;
+                    OnPropertyChanged(nameof(HouseText));
+                }
+            }
+        }
+
+        private string _apartmentText;
+        public string ApartmentText
+        {
+            get { return _apartmentText; }
+            set
+            {
+                if (_apartmentText != value)
+                {
+                    _apartmentText = value;
+                    OnPropertyChanged(nameof(ApartmentText));
+                }
+            }
+        }
+        private string _hutText;
+        public string HutText
+        {
+            get { return _hutText; }
+            set
+            {
+                if (_hutText != value)
+                {
+                    _hutText = value;
+                    OnPropertyChanged(nameof(HutText));
+                }
+            }
+        }
+        private string _saveAccommodationText;
+        public string SaveAccommodationText
+        {
+            get { return _saveAccommodationText; }
+            set
+            {
+                if (_saveAccommodationText != value)
+                {
+                    _saveAccommodationText = value;
+                    OnPropertyChanged(nameof(SaveAccommodationText));
+                }
+            }
+        }
+        private string _addImageText;
+        public string AddImageText
+        {
+            get { return _addImageText; }
+            set
+            {
+                if (_addImageText != value)
+                {
+                    _addImageText = value;
+                    OnPropertyChanged(nameof(AddImageText));
+                }
+            }
+
+        }
+
+        private string _imagesText;
+        public string ImagesText
+        {
+            get { return _imagesText; }
+            set
+            {
+                if (_imagesText != value)
+                {
+                    _imagesText = value;
+                    OnPropertyChanged(nameof(ImagesText));
+                }
+            }
+
+        }
+
+        private string _imageNoText;
+        public string ImageNoText
+        {
+            get { return _imageNoText; }
+            set
+            {
+                if (_imageNoText != value)
+                {
+                    _imageNoText = value;
+                    OnPropertyChanged(nameof(ImageNoText));
+                }
+            }
+
+        }
 
         public ViewModelCommand AddImageCommand { get; set; }
       
@@ -216,8 +408,40 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             SetCountryFromRecommendation();
 
             Mediator.IsCheckedChanged += OnIsCheckedChanged;
+            Mediator.IsLanguageCheckedChanged += OnIsLanguageCheckChanged;
 
             ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";
+
+            AccommodationNameText = Mediator.GetCurrentIsLanguageChecked() ? "Naziv Smestaja:" : "Accommodation Name:";
+            CountryText = Mediator.GetCurrentIsLanguageChecked() ? "Drzava" : "Country";
+            CityText = Mediator.GetCurrentIsLanguageChecked() ? "Grad" : "City";
+            AccommodationTypeText = Mediator.GetCurrentIsLanguageChecked() ? "Tip Smestaja:" : "Accommodation Type:";
+            MinDaysText = Mediator.GetCurrentIsLanguageChecked() ? "Min. dana za rezervaciju" : "Minimum days to book";
+            BookingCancelPeriodText = Mediator.GetCurrentIsLanguageChecked() ? "Otkazni rok" : "Booking cancelation period";
+            MaxGuestsText = Mediator.GetCurrentIsLanguageChecked() ? "Maksimalno gostiju" : "Maximum number of guests";
+            HouseText = Mediator.GetCurrentIsLanguageChecked() ? "Kuca" : "House";
+            ApartmentText = Mediator.GetCurrentIsLanguageChecked() ? "Apartman" : "Apartment";
+            HutText = Mediator.GetCurrentIsLanguageChecked() ? "Koliba" : "Hut";
+            SaveAccommodationText = Mediator.GetCurrentIsLanguageChecked() ? "Sacuvaj Smestaj" : "Save Accommodation";
+            AddImageText = Mediator.GetCurrentIsLanguageChecked() ? "Dodaj sliku" : "Add image";
+            ImagesText = Mediator.GetCurrentIsLanguageChecked() ? "Slike" : "Images";
+        }
+
+        private void OnIsLanguageCheckChanged(object sender, bool isChecked)
+        {
+            AccommodationNameText = isChecked ? "Naziv Smestaja:" : "Accommodation Name:";
+            CountryText = isChecked ? "Drzava" : "Country";
+            CityText = isChecked ? "Grad" : "City";
+            AccommodationTypeText = isChecked ? "Tip Smestaja:" : "Accommodation Type:";
+            MinDaysText = isChecked ? "Min. dana za rezervaciju" : "Minimum days to book";
+            BookingCancelPeriodText = isChecked ? "Otkazni rok" : "Booking cancelation period";
+            MaxGuestsText = isChecked ? "Maksimalno gostiju" : "Maximum number of guests";
+            HouseText = isChecked ? "Kuca" : "House";
+            ApartmentText = isChecked ? "Apartman" : "Apartment";
+            HutText = isChecked ? "Koliba" : "Hut";
+            SaveAccommodationText = isChecked ? "Sacuvaj Smestaj" : "Save Accommodation";
+            AddImageText = isChecked ? "Dodaj sliku" : "Add image";
+            ImagesText = isChecked ? "Slike" : "Images";
         }
 
         private void OnIsCheckedChanged(object sender, bool isChecked)

@@ -81,6 +81,18 @@
             <owner:CloseExistingAccommodationView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModel:ForumViewModel}">
+            <local:ForumView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:AllForumsViewModel}">
+            <local:AllForumsView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:ReportCommentViewModel}">
+            <local:ReportCommentView/>
+        </DataTemplate>
+
     </Window.Resources>
 
     <Grid>
@@ -106,7 +118,7 @@
                              GroupName="MainWindowButtons">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Plus" Style="{StaticResource menuButtonIconTablet}"/>
-                        <TextBlock Style="{StaticResource menuButtonText}" Text="New Accommodation"/>
+                        <TextBlock Style="{StaticResource menuButtonText}" Text="{Binding NewAccommodationText}"/>
                     </StackPanel>
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}" 
@@ -114,7 +126,7 @@
                              GroupName="MainWindowButtons">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Bookmark" Style="{StaticResource menuButtonIconTablet}"/>
-                        <TextBlock Style="{StaticResource menuButtonText}" Text="Bookings"/>
+                        <TextBlock Style="{StaticResource menuButtonText}" Text="{Binding BookingsText}"/>
                     </StackPanel>
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}" 
@@ -123,7 +135,7 @@
                              IsChecked="True">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="BuildingUser" Style="{StaticResource menuButtonIconTablet}"/>
-                        <TextBlock Style="{StaticResource menuButtonText}" Text="My Accommodations"/>
+                        <TextBlock Style="{StaticResource menuButtonText}" Text="{Binding MyAccommodationsText}"/>
                     </StackPanel>
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}"
@@ -131,7 +143,7 @@
                              GroupName="MainWindowButtons">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="ArrowDown" Style="{StaticResource menuButtonIconTablet}"/>
-                        <TextBlock Style="{StaticResource menuButtonText}" Text="Requests"/>
+                        <TextBlock Style="{StaticResource menuButtonText}" Text="{Binding RequestsText}"/>
                     </StackPanel>
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}"
@@ -139,14 +151,15 @@
                              Command="{Binding ShowRenovationsCommand}">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Gear" Style="{StaticResource menuButtonIconTablet}"/>
-                        <TextBlock Style="{StaticResource menuButtonText}" Text="Renovations"/>
+                        <TextBlock Style="{StaticResource menuButtonText}" Text="{Binding RenovationsText}"/>
                     </StackPanel>
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}"
-                             GroupName="MainWindowButtons">
+                             GroupName="MainWindowButtons"
+                             Command="{Binding AllForumsCommand}">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Comment" Style="{StaticResource menuButtonIconTablet}"/>
-                        <TextBlock Style="{StaticResource menuButtonText}" Text="Forum"/>
+                        <TextBlock Style="{StaticResource menuButtonText}" Text="{Binding ForumsText}"/>
                     </StackPanel>
                 </RadioButton>
 
@@ -201,18 +214,24 @@
                     </StackPanel>
 
                     <!--User-->
-                    <StackPanel Grid.Column="1" Orientation="Horizontal" FlowDirection="LeftToRight" VerticalAlignment="Bottom" Margin="0, 14, 35, 0" HorizontalAlignment="Right">
-                        <RadioButton Style="{StaticResource headerButton}" IsChecked="False"
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" 
+                                FlowDirection="LeftToRight" VerticalAlignment="Bottom" 
+                                Margin="0, 14, 35, 0" HorizontalAlignment="Right">
+                        <RadioButton Style="{StaticResource headerButton}" 
+                                     IsChecked="False"
                                      GroupName="MainWindowButtons" Margin="0 0 10 0"
                                      Command="{Binding ShowNotificationsViewCommand}">
                             <fa:IconImage x:Name="notificationIcon" Icon="Bell" Style="{StaticResource HeaderButtonIcon}"/>
                         </RadioButton>
-                        <RadioButton Style="{StaticResource headerButton}" IsChecked="False"
+                        <RadioButton Style="{StaticResource headerButton}" 
+                                     IsChecked="False"
                                      GroupName="MainWindowButtons" Margin="0 0 10 0"
                                      Command="{Binding ShowProfileViewCommand}">
                             <fa:IconImage Icon="User" Style="{StaticResource HeaderButtonIcon}"/>
                         </RadioButton>
-                        <RadioButton Style="{StaticResource headerButton}" IsChecked="False"
+                        <RadioButton Style="{StaticResource headerButton}" 
+                                     IsChecked="False"
+                                     Command="{Binding LogOut}"
                                      GroupName="MainWindowButtons">
                             <fa:IconImage Icon="PowerOff" Style="{StaticResource HeaderButtonIcon}"/>
                         </RadioButton>

@@ -32,13 +32,17 @@
                     <StackPanel Grid.Column="0" Orientation="Vertical">
                         
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="Location" Style="{StaticResource defaultLabel}" FontSize="18"/>
+                            <Label Content="{Binding LocationText}" 
+                                   Style="{StaticResource defaultLabel}" 
+                                   FontSize="18"/>
                             <TextBlock x:Name="locationTextBlock" Width="auto"
                                    Margin="10 7 0 0" FontFamily="Ubuntu" FontSize="16" FontWeight="Light" 
                                    Foreground="{Binding ContentTextColor}" Text="{Binding Location}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="Type" Style="{StaticResource defaultLabel}" FontSize="18"/>
+                            <Label Content="{Binding AccommodationTypeText}" 
+                                   Style="{StaticResource defaultLabel}" 
+                                   FontSize="18"/>
                             <TextBlock x:Name="typeTextBlock" Width="auto"
                                    Margin="10 7 0 0" FontFamily="Ubuntu" FontSize="16" FontWeight="Light" 
                                    Foreground="{Binding ContentTextColor}" Text="{Binding Type}"/>
@@ -46,7 +50,8 @@
 
                         <StackPanel Orientation="Horizontal">
                             <StackPanel Orientation="Vertical">
-                                <Label Content="Starting date" Style="{StaticResource defaultLabel}"
+                                <Label Content="{Binding StartingDateText}" 
+                                       Style="{StaticResource defaultLabel}"
                                FontSize="18" Margin="0 10 0 0"  HorizontalAlignment="Center"/>
                                 <Viewbox Width="200">
                                     <Calendar x:Name="startingDateCalendar" 
@@ -56,7 +61,7 @@
                             </StackPanel>
 
                             <StackPanel Orientation="Vertical" Margin="8 0 0 0">
-                                <Label Content="Ending date" Style="{StaticResource defaultLabel}"
+                                <Label Content="{Binding EndingDateText}" Style="{StaticResource defaultLabel}"
                                FontSize="18" Margin="0 10 0 0"  HorizontalAlignment="Center"/>
                                 <Viewbox Width="200" Margin="0 0 0 0">
                                     <Calendar x:Name="endingDateCalendar" HorizontalAlignment="Center" 
@@ -67,7 +72,9 @@
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
-                            <Label Content="Duration" Style="{StaticResource defaultLabel}" FontSize="18"/>
+                            <Label Content="{Binding DurationText}" 
+                                   Style="{StaticResource defaultLabel}" 
+                                   FontSize="18" Width="90"/>
                             <TextBox x:Name="durationTextBox" Width="302"
                                    Margin="20 0 0 0" Text="{Binding Duration, Mode=TwoWay}"/>
                         </StackPanel>
@@ -79,7 +86,11 @@
                                 Margin="0 20 0 0" Command="{Binding ShowAvailableDateRanges}">
                                 <StackPanel Orientation="Horizontal"
                                 Margin="0, 0, 0 ,0">
-                                    <Label VerticalAlignment="Center" Foreground="#192a56" Content="Proceed" FontSize="20" FontFamily="Ubuntu" FontWeight="Regular"  Margin="10 0 0 0"/>
+                                    <Label VerticalAlignment="Center" 
+                                           Foreground="#192a56" Content="{Binding ProceedText}" 
+                                           FontSize="20" 
+                                           FontFamily="Ubuntu" FontWeight="Regular"  
+                                           Margin="10 0 0 0"/>
                                 </StackPanel>
                             </Button>
                         </StackPanel>
@@ -94,7 +105,7 @@
                                       HorizontalAlignment="Left"
                                       Style="{StaticResource menuBackButtonIcon}"
                                       Width="15" Height="15" Foreground="{Binding ContentHintColor}"/>
-                        <Label Content="Choose one of the available periods"
+                        <Label Content="{Binding HintText}"
                                Style="{StaticResource labelAboveTextBox}"
                                Foreground="{Binding ContentHintColor}"
                                Margin="10,0,0,0"
@@ -109,7 +120,8 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="0 25 0 0">
-            <Label Content="Renovation description" Style="{StaticResource defaultLabel}" FontSize="18"/>
+            <Label Content="{Binding DescriptionText}" Width="200"
+                   Style="{StaticResource defaultLabel}" FontSize="18"/>
             <TextBox x:Name="descriptionTextBlock" FontFamily="Ubuntu" FontSize="16" FontWeight="Light"
                      Width="495" Height="60" Margin="5 5 0 0" TextWrapping="Wrap" Text="{Binding Description}"/>
 
@@ -121,7 +133,7 @@
                        FontSize="17" Foreground="#4CD137" FontFamily="Ubuntu" Text="{Binding FeedBack}"/>
             <Button x:Name="scheduleARenovation" Style="{StaticResource saveButtonTablet}" 
                         Margin="0, 0, 0, 0" Command="{Binding ScheduleRenovationCommand}"
-                        Content="Schedule a renovation"/>
+                        Content="{Binding ScheduleRenovationText}"/>
         </StackPanel>
     </Grid>
 </UserControl>

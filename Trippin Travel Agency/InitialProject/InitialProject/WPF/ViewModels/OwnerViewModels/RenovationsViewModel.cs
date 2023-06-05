@@ -101,6 +101,52 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private string _hintText;
+
+        public string HintText
+        {
+            get { return _hintText; }
+            set
+            {
+                _hintText = value;
+                OnPropertyChanged(nameof(HintText));
+            }
+        }
+
+        private string _headerText;
+
+        public string HeaderText
+        {
+            get { return _headerText; }
+            set
+            {
+                _headerText = value;
+                OnPropertyChanged(nameof(HeaderText));
+            }
+        }
+
+        private string _renovateText;
+        public string RenovateText
+        {
+            get { return _renovateText; }
+            set
+            {
+                _renovateText = value;
+                OnPropertyChanged(nameof(RenovateText));
+            }
+        }
+
+        private string _cancelRenovationText;
+        public string CancelRenovationText
+        {
+            get { return _cancelRenovationText; }
+            set
+            {
+                _cancelRenovationText = value;
+                OnPropertyChanged(nameof(CancelRenovationText));
+            }
+        }
+
         public ViewModelCommand CancelRenovationCommand { get; }
 
         private readonly OwnerInterfaceViewModel _mainViewModel;
@@ -115,17 +161,30 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ShowRenovation();
 
             Mediator.IsCheckedChanged += OnIsCheckedChanged;
+            Mediator.IsLanguageCheckedChanged += OnIsLanguageCheckChanged;
 
             ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";
             ContentHintColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#353b48";
 
             DataGridStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridStyle2"] : (Style)Application.Current.Resources["DataGridStyle1"];
-
             DataGridCellStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridCellStyle2"] : (Style)Application.Current.Resources["DataGridCellStyle1"];
-
             DataGridColumnHeaderStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridColumnHeaderStyle2"] : (Style)Application.Current.Resources["DataGridColumnHeaderStyle1"];
-
             DataGridRowStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridRowStyle2"] : (Style)Application.Current.Resources["DataGridRowStyle1"];
+
+            HintText = Mediator.GetCurrentIsLanguageChecked() ? "Izaberite renoviranje i kliknite dugme ispod kako bi ga otkazali" :
+                                        "Choose an renovation and click a button beneath to cancel it";
+            HeaderText = Mediator.GetCurrentIsLanguageChecked() ? "Lista vasih renoviranja" : "Here is a list of your renovations";
+            RenovateText = Mediator.GetCurrentIsLanguageChecked() ? "Zakazi novo renoviranje" : "Schedule new renovation";
+            CancelRenovationText = Mediator.GetCurrentIsLanguageChecked() ? "Otkazi renoviranje" : "Cancel renovation";
+        }
+
+        private void OnIsLanguageCheckChanged(object sender, bool isChecked)
+        {
+            HintText = isChecked ? "Izaberite renoviranje i kliknite dugme ispod kako bi ga otkazali" :
+                                        "Choose an renovation and click a button beneath to cancel it";
+            HeaderText = isChecked ? "Lista vasih renoviranja" : "Here is a list of your renovations";
+            RenovateText = isChecked ? "Zakazi novo renoviranje" : "Schedule new renovation";
+            CancelRenovationText = isChecked ? "Otkazi renoviranje" : "Cancel renovation";
         }
 
         private void OnIsCheckedChanged(object sender, bool isChecked)
@@ -134,11 +193,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ContentHintColor = isChecked ? "#F4F6F8" : "#353b48";
 
             DataGridStyle = isChecked ? (Style)Application.Current.Resources["DataGridStyle2"] : (Style)Application.Current.Resources["DataGridStyle1"];
-
             DataGridCellStyle = isChecked ? (Style)Application.Current.Resources["DataGridCellStyle2"] : (Style)Application.Current.Resources["DataGridCellStyle1"];
-
             DataGridColumnHeaderStyle = isChecked ? (Style)Application.Current.Resources["DataGridColumnHeaderStyle2"] : (Style)Application.Current.Resources["DataGridColumnHeaderStyle1"];
-
             DataGridRowStyle = isChecked ? (Style)Application.Current.Resources["DataGridRowStyle2"] : (Style)Application.Current.Resources["DataGridRowStyle1"];
         }
 

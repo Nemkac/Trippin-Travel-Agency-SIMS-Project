@@ -104,7 +104,29 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private string _hintText;
 
+        public string HintText
+        {
+            get { return _hintText; }
+            set
+            {
+                _hintText = value;
+                OnPropertyChanged(nameof(HintText));
+            }
+        }
+
+        private string _showDetailsText;
+
+        public string ShowDetailsText
+        {
+            get { return _showDetailsText; }
+            set
+            {
+                _showDetailsText = value;
+                OnPropertyChanged(nameof(ShowDetailsText));
+            }
+        }
         public RequestViewModel()
         {
             _mainViewModel = LoggedUser._mainViewModel;
@@ -112,17 +134,18 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ShowRequests();
 
             Mediator.IsCheckedChanged += OnIsCheckedChanged;
+            Mediator.IsLanguageCheckedChanged += OnIsLanguageCheckChanged;
 
             ContentHintColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#353b48";
             DetailsButtonColor = Mediator.GetCurrentIsChecked() ? "#487eb0" : "#2f3640";
-
             DataGridStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridStyle2"] : (Style)Application.Current.Resources["DataGridStyle1"];
-
             DataGridCellStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridCellStyle2"] : (Style)Application.Current.Resources["DataGridCellStyle1"];
-
             DataGridColumnHeaderStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridColumnHeaderStyle2"] : (Style)Application.Current.Resources["DataGridColumnHeaderStyle1"];
-
             DataGridRowStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridRowStyle2"] : (Style)Application.Current.Resources["DataGridRowStyle1"];
+
+            HintText = Mediator.GetCurrentIsLanguageChecked() ? "Izaberite zahtev i kliknite dugme ispod kako bi prikazali detalje" :
+                                                        "Choose a request and click a button beneath to see details";
+            ShowDetailsText = Mediator.GetCurrentIsLanguageChecked() ? "Detaljnije" : "Show details";
         }
 
         private void OnIsCheckedChanged(object sender, bool isChecked)
@@ -131,12 +154,16 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             DetailsButtonColor = isChecked ? "#487eb0" : "#2f3640";
 
             DataGridStyle = isChecked ? (Style)Application.Current.Resources["DataGridStyle2"] : (Style)Application.Current.Resources["DataGridStyle1"];
-
             DataGridCellStyle = isChecked ? (Style)Application.Current.Resources["DataGridCellStyle2"] : (Style)Application.Current.Resources["DataGridCellStyle1"];
-
             DataGridColumnHeaderStyle = isChecked ? (Style)Application.Current.Resources["DataGridColumnHeaderStyle2"] : (Style)Application.Current.Resources["DataGridColumnHeaderStyle1"];
-
             DataGridRowStyle = isChecked ? (Style)Application.Current.Resources["DataGridRowStyle2"] : (Style)Application.Current.Resources["DataGridRowStyle1"];
+        }
+
+        private void OnIsLanguageCheckChanged(object sender, bool isChecked)
+        {
+            HintText = isChecked ? "Izaberite zahtev i kliknite dugme ispod kako bi prikazali detalje" :
+                                                                "Choose a request and click a button beneath to see details";
+            ShowDetailsText = isChecked ? "Detaljnije" : "Show details";
         }
 
         public void ShowAcceptDenyView(object obj)
