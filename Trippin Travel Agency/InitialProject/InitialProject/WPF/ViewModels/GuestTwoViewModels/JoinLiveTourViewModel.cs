@@ -11,6 +11,9 @@ using InitialProject.Service.TourServices;
 using InitialProject.WPF.ViewModels;
 using InitialProject.DTO;
 using System.Collections.ObjectModel;
+using System.Windows.Forms;
+using Microsoft.Win32;
+using MessageBox = System.Windows.MessageBox;
 
 namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 {    
@@ -316,12 +319,13 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 
         public ViewModelCommand JoinTourCommand { get; private set; }
         public ViewModelCommand SubmitRatingCommand { get; private set; }
-
+        public ViewModelCommand UploadPhoto { get; private set; }
 
         public JoinLiveTourViewModel() 
         {
             JoinTourCommand = new ViewModelCommand(JoinTour);
             SubmitRatingCommand = new ViewModelCommand(SubmitRating);
+            UploadPhoto = new ViewModelCommand(UploadImage);
             LoadTourInfo();
         }
 
@@ -333,6 +337,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 
             SubmitButtonEnabled = false;
             CommentBoxEnabled = false;
+            UploadButtonEnabled = true;
             if (activeTour != null)
             {
                 TourName = activeTour.name;
@@ -464,6 +469,23 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             SubmitButtonEnabled = false;
             CommentBoxEnabled = false;
             
+        }
+        public void UploadImage(object obj)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Title = "Select a picture";
+            fileDialog.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";           
+
+            fileDialog.ShowDialog();
+            bool? response = fileDialog.ShowDialog();  
+            if(response == true)
+            {
+
+                string filepath = fileDialog.FileName;
+                MessageBox.Show(filepath);
+            }
         }
     }
 }

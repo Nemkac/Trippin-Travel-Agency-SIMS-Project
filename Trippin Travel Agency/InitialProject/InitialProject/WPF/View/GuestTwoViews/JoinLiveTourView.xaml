@@ -126,6 +126,7 @@
                         FontSize="28" 
                         FontWeight="Light" 
                         IsEnabled="{Binding UploadButtonEnabled}" Cursor="Hand"
+                        Command="{Binding UploadPhoto}"
                         >
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
