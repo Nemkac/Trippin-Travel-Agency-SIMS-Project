@@ -230,7 +230,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                     context.Attach(forum);
                     context.SaveChanges();
 
-                    ForumComment comment = new ForumComment(LoggedUser.id, Comment, DateTime.Today, 0, userService.HasGuestVisitedPlace(LoggedUser.id, location), forum.id);
+                    ForumComment comment = new ForumComment(LoggedUser.id,LoggedUser.username, Comment, DateTime.Today, 0, userService.HasGuestVisitedPlace(LoggedUser.id, location), forum.id, new string("User"));
                     context.Attach(comment);
                     context.SaveChanges();
                     List<ForumComment> comments = new List<ForumComment>() { comment };
@@ -258,7 +258,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 context.Attach(forum);
                 context.SaveChanges();
 
-                ForumComment comment = new ForumComment(LoggedUser.id, Comment, DateTime.Today, 0, false, forum.id);
+                ForumComment comment = new ForumComment(LoggedUser.id,LoggedUser.username, Comment, DateTime.Today, 0, false, forum.id, new string("User"));
                 context.Attach(comment);
                 context.SaveChanges();
                 List<ForumComment> comments = new List<ForumComment>() { comment };

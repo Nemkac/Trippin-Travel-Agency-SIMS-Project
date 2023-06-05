@@ -1,6 +1,5 @@
 ﻿using InitialProject.Context;
 using InitialProject.DTO;
-using InitialProject.Migrations;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service.GuestServices;

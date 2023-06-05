@@ -1,5 +1,4 @@
 ﻿using InitialProject.Context;
-using InitialProject.Migrations;
 using InitialProject.Model;
 using InitialProject.WPF.ViewModels.OwnerViewModels;
 using System;

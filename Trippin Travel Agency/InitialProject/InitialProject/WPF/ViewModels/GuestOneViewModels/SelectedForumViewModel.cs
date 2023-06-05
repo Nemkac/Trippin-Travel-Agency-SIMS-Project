@@ -164,7 +164,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 if (NewComment != null && NewComment != string.Empty)
                 {
                     bool ifVisited = userService.HasGuestVisitedPlace(LoggedUser.id, new AccommodationLocation(forumService.GetLocation(GuestOneStaticHelper.selectedForum.id)[0], forumService.GetLocation(GuestOneStaticHelper.selectedForum.id)[1]));
-                    ForumComment comment = new ForumComment(LoggedUser.id, NewComment, DateTime.Today, 0, ifVisited, GuestOneStaticHelper.selectedForum.id);
+                    ForumComment comment = new ForumComment(LoggedUser.id,LoggedUser.username, NewComment, DateTime.Today, 0, ifVisited, GuestOneStaticHelper.selectedForum.id,new string("User"));
                     forumService.AddComment(comment);
                     var commentsToGrid = from comment1 in forumService.GetForumsComments(GuestOneStaticHelper.selectedForum)
                                          select new

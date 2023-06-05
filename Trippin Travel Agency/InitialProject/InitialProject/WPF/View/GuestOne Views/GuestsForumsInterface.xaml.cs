@@ -32,5 +32,5 @@ namespace InitialProject.WPF.View.GuestOne_Views
             n = new List<IInputElement>() { p0,p1,p2 };
         }
 
-        public void F(object s, KeyEventArgs k) {  if (k.Key == Key.LeftShift) { if (p == 0 || p == -1) { p = 2; } else  {  p--; }  Keyboard.Focus(n[p]);}if (k.Key == Key.RightShift) { if (p == 2 || p == -1) { p = 0; } else { p++; }Keyboard.Focus(n[p]); }} }
+        public void F(object s, KeyEventArgs k) {  if (k.Key == Key.LeftCtrl) { if (p == 0 || p == -1) { p = 2; } else  {  p--; }  Keyboard.Focus(n[p]);}if (k.Key == Key.RightCtrl) { if (p == 2 || p == -1) { p = 0; } else { p++; }Keyboard.Focus(n[p]); }} }
 }
