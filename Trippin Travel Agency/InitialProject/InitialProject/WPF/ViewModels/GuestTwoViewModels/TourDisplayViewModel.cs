@@ -277,7 +277,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
         {
             TourDTO selectedTour = SelectedTour;
             List<TourDTO> tourDTOS = new List<TourDTO>();
-            if (selectedTour != null)
+            if (selectedTour != null && NumberOfTourists != null)
             {
                 int index = selectedTour.id;
                 int numberOfGuests;
@@ -337,10 +337,11 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 {
                     _mainViewModel.ExecuteShowBookingConfirmation(null);
                 }
+                NumberOfTourists = null;
             }
             else 
             {
-                TextBlockText = "Please select a tour!";
+                TextBlockText = "Please select a tour and enter the number of guests!";
             }
         }
 

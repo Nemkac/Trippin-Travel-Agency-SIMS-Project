@@ -18,7 +18,7 @@ using MessageBox = System.Windows.MessageBox;
 namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 {    
     public class JoinLiveTourViewModel : ViewModelBase
-    {
+    {        
         private readonly TourService tourService = new(new TourRepository());
 
         public ObservableCollection<KeyPointDTO> keyPoitsGrid { get; set; } = new ObservableCollection<KeyPointDTO>();
@@ -472,19 +472,23 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
         }
         public void UploadImage(object obj)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
+            Microsoft.Win32.OpenFileDialog fileDialog = new Microsoft.Win32.OpenFileDialog();
             fileDialog.Title = "Select a picture";
             fileDialog.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
               "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
               "Portable Network Graphic (*.png)|*.png";           
-
-            fileDialog.ShowDialog();
             bool? response = fileDialog.ShowDialog();  
             if(response == true)
             {
 
                 string filepath = fileDialog.FileName;
-                MessageBox.Show(filepath);
+                string destination = System.IO.Path.Combine("Assets",System.IO.Path.GetFileName(filepath));
+                System.IO.File.Copy(filepath, destination, true);
+                int tourId = tourService.GetByName(TourName).id;
+                DataBaseContext context = new DataBaseContext();                
+                destination = destination.Replace("\\" , "/");
+                context.Images.Add(new Image("pack://application:,,,/" + destination, tourId));
+                context.SaveChanges();
             }
         }
     }

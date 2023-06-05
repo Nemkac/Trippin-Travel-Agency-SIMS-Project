@@ -118,7 +118,7 @@
                 </Button>
                 <TextBox TextWrapping="Wrap" Margin ="22 -250 0 0" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" Name ="NumberOfTourists" Text="{Binding NumberOfTourists}"/>
                 <Label Content="No. of tourists" Margin="22 -350 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="244" Height="40" FontSize="20"/>
-                <TextBlock Height="136" TextWrapping="Wrap" Margin="300 -135 0 0" Width="275" HorizontalAlignment="Left"  VerticalAlignment="Center" Background="#d1e0e0" Name ="TextBlock" FontSize="20" FontFamily="Ubuntu" Text="{Binding TextBlockText}"/>
+                <TextBlock Height="136" TextWrapping="Wrap" Margin="300 -135 0 0" Width="275" HorizontalAlignment="Left"  VerticalAlignment="Center" Background="Transparent" Name ="TextBlock" FontSize="20" FontFamily="Ubuntu" Text="{Binding TextBlockText}" Foreground="#e84118"/>
                 <Button Margin="325 -500 0 0" 
                         Width="200"
                         Height="50"
@@ -165,7 +165,8 @@
                       AutoGenerateColumns="False"
                       FontSize="20"
                       ItemsSource="{Binding tourDTOs}"
-                      SelectedItem="{Binding SelectedTour}">
+                      SelectedItem="{Binding SelectedTour}"
+                      IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding name}" Width="auto"/>
                     <DataGridTextColumn Header="City" Binding="{Binding cityLocation}" Width="auto"/>

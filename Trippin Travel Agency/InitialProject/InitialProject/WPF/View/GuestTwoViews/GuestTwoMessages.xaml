@@ -97,7 +97,7 @@
                               Width="1125" 
                               Height="450" 
                               Margin="0 0 0 0" 
-                              FontSize="20" 
+                              FontSize="50" 
                               FontFamily="Ubuntu"
                               ItemsSource="{Binding responseMessages}"
                               SelectedItem="{Binding SelectedResponseMessage}"
@@ -105,7 +105,17 @@
                               Style="{DynamicResource DataGridStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-                              RowStyle="{DynamicResource DataGridRowStyle1}"/>
+                              RowStyle="{DynamicResource DataGridRowStyle1}"
+                              AutoGenerateColumns="False"                             
+                              >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Message" Binding="{Binding message}" Width="200" FontSize="20"/>
+                            <DataGridTextColumn Header="Tour id" Binding="{Binding tourId}" Width="200" FontSize="20"/>
+                            <DataGridTextColumn Header="Number of guests" Binding="{Binding numberOfGuests}" Width="200" FontSize="20"/>
+                        </DataGrid.Columns>
+                        
+                        
+                    </DataGrid>
                     <Button  Height="82" 
                         Width="239" 
                             Style="{StaticResource openMessageButtonWEB}"

@@ -221,7 +221,8 @@
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               RowStyle="{DynamicResource DataGridRowStyle1}"
-                              ItemsSource="{Binding requests}" IsReadOnly="True"                           
+                              ItemsSource="{Binding requests}" IsReadOnly="True"
+                      AutoGenerateColumns="False"
                               >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="" Binding="{Binding field}">
@@ -232,6 +233,12 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
+                    <DataGridTextColumn Header="Country" Binding="{Binding country}" Width="200" FontSize="20"/>
+                    <DataGridTextColumn Header="City" Binding="{Binding city}" Width="200" FontSize="20"/>
+                    <DataGridTextColumn Header="Start date" Binding="{Binding dateFrom}" Width="200" FontSize="20"/>
+                    <DataGridTextColumn Header="End date" Binding="{Binding dateTo}" Width="200" FontSize="20"/>
+                    <DataGridTextColumn Header="Language" Binding="{Binding language}" Width="200" FontSize="20"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding status}" Width="200" FontSize="20"/>
                 </DataGrid.Columns>
             </DataGrid>
             <Button Margin="900 15 0 0" 

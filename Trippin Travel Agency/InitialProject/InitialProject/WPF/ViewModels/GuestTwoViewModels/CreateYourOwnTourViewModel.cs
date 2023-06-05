@@ -224,7 +224,8 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 && EndDate != null
                 && GuestNumberInput != null
                 && LanguageComboBox != null
-                && DescriptionBox != null)
+                && DescriptionBox != null
+                && GuestNumberInput > 0)
             {
 
                 if (StartDate < EndDate)
@@ -302,7 +303,8 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 && EndDate != null
                 && GuestNumberInput != null
                 && LanguageComboBox != null
-                && DescriptionBox != null)
+                && DescriptionBox != null
+                && GuestNumberInput > 0)
             {
 
                 if (StartDate < EndDate)

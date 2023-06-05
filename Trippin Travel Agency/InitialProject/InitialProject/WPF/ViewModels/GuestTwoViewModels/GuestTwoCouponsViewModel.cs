@@ -121,7 +121,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 if (coup.userId == LoggedUser.id)
                 {
                     counter += 1;
-                    couponDTOs.Add(new CouponDTO(coup.id, "Coupon" + counter, coup.exiresOn));
+                    couponDTOs.Add(new CouponDTO(coup.id, "Coupon" + counter, coup.exiresOn.Date));
                 }
             }            
         }
