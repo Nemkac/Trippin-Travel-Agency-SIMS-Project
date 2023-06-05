@@ -373,7 +373,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private void OnIsLanguageCheckChanged(object sender, bool isChecked)
         {
             AccommodationNameText = isChecked ? "Naziv Smestaja:" : "Accommodation Name:";
-            LocationText = isChecked ? "Bazirano na najpopularnijoj i najnepopularnijoj lokaciji" : "Based on most and least popular location";
+            LocationText = isChecked ? "Lokacija:" : "Location:";
             AccommodationTypeText = isChecked ? "Tip Smestaja:" : "Accommodation Type:";
             BookingIdText = isChecked ? "ID Rezervacije:" : "Booking ID:";
             GuestText = isChecked ? "Korisnik:" : "Guest:";

@@ -95,20 +95,40 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private string _numberOfReportsText;
+
+        public string NumberOfReportsText
+        {
+            get { return _numberOfReportsText; }
+            set
+            {
+                _numberOfReportsText = value;
+                OnPropertyChanged(nameof(NumberOfReportsText));
+            }
+        }
+
         public ICommand SendCommentCommand { get; }
         public ICommand ReportCommentCommand { get; }
         public ForumViewModel()
         {
             this._mainViewModel = LoggedUser._mainViewModel;
             Mediator.IsCheckedChanged += OnIsCheckedChanged;
+            Mediator.IsLanguageCheckedChanged += OnIsLanguageCheckChanged;
 
             HeaderButtonIconColor = Mediator.GetCurrentIsChecked() ? "#487eb0" : "#192a56";
             ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";
+
+            NumberOfReportsText = Mediator.GetCurrentIsLanguageChecked() ? "Broj prijava: " : "No. of reports: ";
 
             SendCommentCommand = new ViewModelCommand(SendComment);
             ReportCommentCommand = new ViewModelCommand(ReportComment);
 
             LoadComments();
+        }
+
+        private void OnIsLanguageCheckChanged(object sender, bool isChecked)
+        {
+            NumberOfReportsText = isChecked ? "Broj prijava: " : "No. of reports: ";
         }
 
         private void SendComment(object obj)

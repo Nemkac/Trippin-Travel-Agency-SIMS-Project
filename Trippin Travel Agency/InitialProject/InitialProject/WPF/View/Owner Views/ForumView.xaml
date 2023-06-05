@@ -37,7 +37,7 @@
                                     <Label FontWeight="Regular" Margin="385 20 0 0" FontSize="14"
                                        Foreground="{Binding DataContext.ContentTextColor, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
                                         <TextBlock>
-                                        <Run Text="No. of reports: "/>
+                                        <Run Text="{Binding DataContext.NumberOfReportsText , RelativeSource={RelativeSource AncestorType=ItemsControl}}"/>
                                         <Run Text="{Binding numberOfReports}"/>
                                         </TextBlock>
                                     </Label>

@@ -99,11 +99,36 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private string _hintText;
+
+        public string HintText
+        {
+            get { return _hintText; }
+            set
+            {
+                _hintText = value;
+                OnPropertyChanged(nameof(HintText));
+            }
+        }
+
+        private string _closeAccommodationText;
+
+        public string CloseAccommodationText
+        {
+            get { return _closeAccommodationText; }
+            set
+            {
+                _closeAccommodationText = value;
+                OnPropertyChanged(nameof(CloseAccommodationText));
+            }
+        }
+
 
         public CloseExistingAccommodationViewModel()
         {
             this._mainViewModel = LoggedUser._mainViewModel;
             Mediator.IsCheckedChanged += OnIsCheckedChanged;
+            Mediator.IsLanguageCheckedChanged += OnIsLanguageCheckChanged;
             ShowOwnersAccommodations();
 
             ContentHintColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#353b48";
@@ -111,8 +136,18 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             DataGridCellStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridCellStyle2"] : (Style)Application.Current.Resources["DataGridCellStyle1"];
             DataGridColumnHeaderStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridColumnHeaderStyle2"] : (Style)Application.Current.Resources["DataGridColumnHeaderStyle1"];
             DataGridRowStyle = Mediator.GetCurrentIsChecked() ? (Style)Application.Current.Resources["DataGridRowStyle2"] : (Style)Application.Current.Resources["DataGridRowStyle1"];
+
+            HintText = Mediator.GetCurrentIsLanguageChecked() ? "Izaberite smestaj i kliknite dugme ispod kako bi videli slike ili godisnju statistiku" :
+                                                                "Choose an accommodation and click a button beneath to see accommodation images or annual statistics";
+            CloseAccommodationText = Mediator.GetCurrentIsLanguageChecked() ? "Zatvori smestaj" : "Close accommodation";
         }
 
+        private void OnIsLanguageCheckChanged(object sender, bool isChecked)
+        {
+            HintText = isChecked ? "Izaberite smestaj i kliknite dugme ispod kako bi ga zatvorili" :
+                                                    "Choose an accommodation and click a button beneath to close it.";
+            CloseAccommodationText = isChecked ? "Zatvori smestaj" : "Close accommodation";
+        }
 
         private void OnIsCheckedChanged(object sender, bool isChecked)
         {

@@ -80,6 +80,69 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+
+        private string _guestNameText;
+        public string GuestNameText
+        {
+            get { return _guestNameText; }
+            set
+            {
+                if (_guestNameText != value)
+                {
+                    _guestNameText = value;
+                    OnPropertyChanged(nameof(GuestNameText));
+                }
+            }
+        }
+
+        private string _forumLocationText;
+
+        public string ForumLocationText
+        {
+            get { return _forumLocationText; }
+            set
+            {
+                _forumLocationText = value;
+                OnPropertyChanged(nameof(ForumLocationText));
+            }
+        }
+
+        private string _reportFromText;
+
+        public string ReportFromText
+        {
+            get { return _reportFromText; }
+            set
+            {
+                _reportFromText = value;
+                OnPropertyChanged(nameof(ReportFromText));
+            }
+        }
+
+        private string _explanationText;
+
+        public string ExplanationText
+        {
+            get { return _explanationText; }
+            set
+            {
+                _explanationText = value;
+                OnPropertyChanged(nameof(ExplanationText));
+            }
+        }
+
+        private string _submitReportText;
+
+        public string SubmitReportText
+        {
+            get { return _submitReportText; }
+            set
+            {
+                _submitReportText = value;
+                OnPropertyChanged(nameof(SubmitReportText));
+            }
+        }
+
         public ViewModelCommand SubmitReportCommand { get; }
 
         public ReportCommentViewModel()
@@ -87,9 +150,26 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ForumComment commentToReport = GetCommentToReport();
             DisplayData(commentToReport);
             Mediator.IsCheckedChanged += OnIsCheckedChanged;
+            Mediator.IsLanguageCheckedChanged += OnIsLanguageCheckChanged;
 
             ContentTextColor = Mediator.GetCurrentIsChecked() ? "#F4F6F8" : "#192a56";
+
+            GuestNameText = Mediator.GetCurrentIsLanguageChecked() ? "Ime gosta" : "Guest name";
+            ForumLocationText = Mediator.GetCurrentIsLanguageChecked() ? "Lokacija foruma" : "Forum location";
+            ReportFromText = Mediator.GetCurrentIsLanguageChecked() ? "Prijava od" : "Report from";
+            ExplanationText = Mediator.GetCurrentIsLanguageChecked() ? "Obrazlozenje" : "Explanation";
+            SubmitReportText = Mediator.GetCurrentIsLanguageChecked() ? "Posalji prijavu" : "Submit report";
+
             SubmitReportCommand = new ViewModelCommand(SubmitReport);
+        }
+
+        private void OnIsLanguageCheckChanged(object sender, bool isChecked)
+        {
+            GuestNameText = isChecked ? "Ime gosta" : "Guest name";
+            ForumLocationText = isChecked ? "Lokacija foruma" : "Forum location";
+            ReportFromText = isChecked ? "Prijava od" : "Report from";
+            ExplanationText = isChecked ? "Obrazlozenje" : "Explanation";
+            SubmitReportText = isChecked ? "Posalji prijavu" : "Submit report";
         }
 
         private void OnIsCheckedChanged(object sender, bool isChecked)

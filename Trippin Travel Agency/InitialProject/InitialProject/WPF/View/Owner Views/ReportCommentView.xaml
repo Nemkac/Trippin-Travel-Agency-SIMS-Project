@@ -15,7 +15,7 @@
 
         <StackPanel Orientation="Vertical" Grid.Row="0">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <Label Content="Guest Name" Style="{StaticResource defaultLabel}"
+                <Label Content="{Binding GuestNameText}" Style="{StaticResource defaultLabel}"
                        FontSize="20"/>
                 <TextBlock FontSize="20" FontFamily="Ubuntu" FontWeight="Regular"
                            Margin="65 5 0 0" Width="auto" 
@@ -25,7 +25,7 @@
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
                         Margin="0 20 0 0">
-                <Label Content="Forum location" Style="{StaticResource defaultLabel}"
+                <Label Content="{Binding ForumLocationText}" Style="{StaticResource defaultLabel}"
                        FontSize="20"/>
                 <TextBlock FontSize="20" FontFamily="Ubuntu" FontWeight="Regular"
                            Margin="40 5 0 0" Width="auto"
@@ -35,7 +35,7 @@
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
                         Margin="0 20 0 0">
-                <Label Content="Report from" Style="{StaticResource defaultLabel}"
+                <Label Content="{Binding ReportFromText}" Style="{StaticResource defaultLabel}"
                        FontSize="20"/>
                 <TextBlock FontSize="20" FontFamily="Ubuntu" FontWeight="Regular"
                            Margin="65 5 0 0" Width="auto"
@@ -52,10 +52,10 @@
         <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Top"
                     Margin="0 10 0 0">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <Label Content="Explanation" Style="{StaticResource defaultLabel}"
-                       FontSize="20"/>
+                <Label Content="{Binding ExplanationText}" Style="{StaticResource defaultLabel}"
+                       FontSize="20" Width="133"/>
                 <TextBox FontSize="16" FontFamily="Ubuntu" FontWeight="Regular"
-                         Margin="20 0 0 0" Width="540" Height="300"
+                         Margin="10 0 0 0" Width="540" Height="300"
                          Text="{Binding Explanation}"/>
             </StackPanel>
         </StackPanel>
@@ -65,8 +65,8 @@
                        FontSize="17" Foreground="#4CD137" FontFamily="Ubuntu"
                        Text="{Binding FeedBack}"/>
             <Button x:Name="saveAccommodation" Style="{StaticResource saveButtonTablet}" 
-                    Grid.Row="1" Margin="0, 0, 30, 0"
-                    Content="Submit report"
+                    Grid.Row="1" Margin="0, 0, 27, 0"
+                    Content="{Binding SubmitReportText}"
                     Command="{Binding SubmitReportCommand}"/>
         </StackPanel>
         

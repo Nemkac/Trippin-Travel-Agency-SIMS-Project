@@ -73,7 +73,7 @@
                        Margin="20, 35, 0, 0"/>
                     <Label Content="{Binding MostPopularLocationText}" 
                        Foreground="#f4f6f8"
-                       Margin="140 0 0 0"
+                       Margin="20 0 0 0"
                        FontWeight="Light" FontSize="14"/>
                     <Button Style="{StaticResource acceptButton}"
                         Content="{Binding OpenNewAccommodationText}"
@@ -129,7 +129,7 @@
                        Margin="20, 35, 0, 0"/>
                     <Label Content="{Binding LeastPopularLocationText}" 
                        Foreground="#f4f6f8"
-                       Margin="130 0 10 0"
+                       Margin="20 0 0 0"
                        FontWeight="Light" FontSize="14"/>
                     <Button Style="{StaticResource denyButtonMobile}"
                         Content="{Binding CloseExistingAccommodationText}"

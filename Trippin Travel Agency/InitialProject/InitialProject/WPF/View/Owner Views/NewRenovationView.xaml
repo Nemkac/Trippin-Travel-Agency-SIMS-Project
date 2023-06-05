@@ -16,7 +16,7 @@
 
         <StackPanel Orientation="Vertical"
                             Margin="0,0,0,0" VerticalAlignment="Center">
-            <Label Content="Here is a list of your accommodations that you can renovate" Style="{StaticResource defaultLabel}"
+            <Label Content="{Binding HeaderText}" Style="{StaticResource defaultLabel}"
                Grid.Row="0" FontSize="20" FontWeight="Light" VerticalContentAlignment="Center"/>
             <!-- Choose a tour and click a button beneath -->
             <StackPanel Orientation="Horizontal"
@@ -25,7 +25,7 @@
                                       HorizontalAlignment="Left"
                                       Style="{StaticResource menuBackButtonIcon}"
                                       Width="15" Height="15" Foreground="{Binding ContentHintColor}"/>
-                <Label Content="Choose an accommodation and click a button beneath to proceed with renovation"
+                <Label Content="{Binding HintText}"
                                Style="{StaticResource labelAboveTextBox}"
                                Foreground="{Binding ContentHintColor}"
                                Margin="10,0,0,0"
@@ -56,7 +56,9 @@
             <StackPanel Orientation="Horizontal"
                                 Margin="0, 0, 0 ,0">
                 <fa:IconImage Icon="Gear" HorizontalAlignment="Left" Width="20" Height="20" Foreground="#192a56" VerticalAlignment="Center" Margin="0 2 0 0"/>
-                <Label VerticalAlignment="Center" Foreground="#192a56" Content="Renovate" FontSize="20" FontFamily="Ubuntu" FontWeight="Regular"  Margin="10 0 0 0"/>
+                <Label VerticalAlignment="Center" Foreground="#192a56" 
+                       Content="{Binding RenovateText}" FontSize="20" FontFamily="Ubuntu" 
+                       FontWeight="Regular"  Margin="10 0 0 0"/>
             </StackPanel>
         </Button>
 
