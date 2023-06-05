@@ -38,7 +38,7 @@
                     VerticalAlignment="Top"
                     Name ="d0"
                     SelectedDate="{Binding StartingDate}"
-                    Height="33"
+                    Height="31"
                     Width="170"
                     IsTabStop="false" 
                     Margin="1168,173,0,0" 

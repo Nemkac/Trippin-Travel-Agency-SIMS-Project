@@ -1,6 +1,4 @@
-﻿using InitialProject.Model;
-using InitialProject.WPF.ViewModels.GuestOneViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,19 +11,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using InitialProject.Model;
+using InitialProject.WPF.ViewModels.GuestOneViewModels;
+
 
 namespace InitialProject.WPF.View.GuestOne_Views
 {
     /// <summary>
-    /// Interaction logic for BookingDetails.xaml
+    /// Interaction logic for GenerateReportInterface.xaml
     /// </summary>
-    public partial class BookingDetails : Window
+    public partial class GenerateReportInterface : Window
     {
-        public BookingDetails()
+        public GenerateReportInterface()
         {
             InitializeComponent();
-            this.DataContext = new BookingDetailsViewModel();
-            GuestOneStaticHelper.bookingDetails = this;
+            this.DataContext = new GenerateReportViewModel();
+            GuestOneStaticHelper.generateReportInterface = this;
         }
     }
 }

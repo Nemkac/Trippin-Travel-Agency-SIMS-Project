@@ -179,7 +179,7 @@
                 FontFamily="Ubuntu" 
                 FontSize="22" 
                 FontWeight="Bold" 
-                Foreground="#FF192A56" Margin="326,267,1078,471"/>
+                Foreground="#FF192A56" Margin="326,267,1068,471"/>
             <TextBlock HorizontalAlignment="Left" 
                 Height="92" 
                 Margin="495,594,0,0" 

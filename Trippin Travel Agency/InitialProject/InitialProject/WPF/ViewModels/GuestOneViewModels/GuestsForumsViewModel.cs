@@ -40,7 +40,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             ShowForum = new ViewModelCommand(ShowSelectedForum);
             Help = new ViewModelCommand(ShowHelp);
             OpenNavigator = new ViewModelCommand(ShowNavigator);
-            ForumText = "Here are shown forums you have created.\n You can close one of your forums from additional commenting, but you can never delete it.";
+            ForumText = "Here are shown forums you have created.\n You can close one of your forums for further commenting, but you can never delete it.";
 
             var forumsToGrid = from forum in forumService.GetByCreatorId()
                                select new

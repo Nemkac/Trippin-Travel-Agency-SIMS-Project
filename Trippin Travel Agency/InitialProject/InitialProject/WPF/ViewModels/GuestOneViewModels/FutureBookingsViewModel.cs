@@ -28,8 +28,6 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand OpenNavigator { get; set; }
         public ViewModelCommand GoToPastBookings { get; set; }
         public ViewModelCommand Help { get;set; }
-        public ViewModelCommand ShowDetailed { get; set; }
-
         bool isHelpOn = false;
 
         public FutureBookingsViewModel()
@@ -40,7 +38,6 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             OpenNavigator = new ViewModelCommand(ShowNavigator);
             GoToPastBookings = new ViewModelCommand(ShowPastBookings);
             Help = new ViewModelCommand(ShowHelp);
-            ShowDetailed = new ViewModelCommand(ShowDetailedBooking);
         }
 
 
@@ -235,16 +232,6 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             {
                 WarningText = "You must select one of your bookings";
             }
-        }
-
-        private void ShowDetailedBooking(object sender)
-        {
-            GuestOneStaticHelper.selectedBooking = SelectedBooking;
-            BookingDetails bookingDetails = new BookingDetails();
-            bookingDetails.Left = GuestOneStaticHelper.futureBookingsInterface.Left + (GuestOneStaticHelper.futureBookingsInterface.Width - bookingDetails.Width) / 2;
-            bookingDetails.Top = GuestOneStaticHelper.futureBookingsInterface.Top + (GuestOneStaticHelper.futureBookingsInterface.Height - bookingDetails.Height) / 2;
-            GuestOneStaticHelper.futureBookingsInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
-            bookingDetails.Show();
         }
     }
 }

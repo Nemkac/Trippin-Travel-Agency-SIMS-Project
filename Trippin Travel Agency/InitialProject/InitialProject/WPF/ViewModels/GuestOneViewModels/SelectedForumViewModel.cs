@@ -41,6 +41,11 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                                      Visited = userService.HasGuestVisitedPlace(userService.GetById(comment.userId).id, new AccommodationLocation(forumService.GetLocation(GuestOneStaticHelper.selectedForum.id)[0], forumService.GetLocation(GuestOneStaticHelper.selectedForum.id)[1])) ? new string("Been there") : new string("Hasn't been there")
                                  };
             Comments = commentsToGrid;
+
+            if(GuestOneStaticHelper.selectedForum.isClosed == true)
+            {
+                NewComment = "The forum is closed for further commenting";
+            }
         }
 
         private string label;
@@ -154,25 +159,28 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 
         public void AddNewComment(object sender)
         {
-            if (NewComment != null && NewComment != string.Empty)
+            if (GuestOneStaticHelper.selectedForum.isClosed == false)
             {
-                bool ifVisited = userService.HasGuestVisitedPlace(LoggedUser.id, new AccommodationLocation(forumService.GetLocation(GuestOneStaticHelper.selectedForum.id)[0], forumService.GetLocation(GuestOneStaticHelper.selectedForum.id)[1]));
-                ForumComment comment = new ForumComment(LoggedUser.id, NewComment, DateTime.Today, 0, ifVisited, GuestOneStaticHelper.selectedForum.id);
-                forumService.AddComment(comment);
-                var commentsToGrid = from comment1 in forumService.GetForumsComments(GuestOneStaticHelper.selectedForum)
-                                     select new
-                                     {
-                                         User = userService.GetById(comment1.userId).firstName,
-                                         Date = comment1.postingDate.ToString().Substring(0, comment1.postingDate.ToString().Length - 11),
-                                         Comment = comment1.comment,
-                                         Visited = ifVisited ? new string("Been there") : new string("Hasn't been there")
-                                     };
-                Comments = commentsToGrid;
-                NewComment = string.Empty;
-            } 
-            else
-            {
-                WarningMessage = "Please add comment";
+                if (NewComment != null && NewComment != string.Empty)
+                {
+                    bool ifVisited = userService.HasGuestVisitedPlace(LoggedUser.id, new AccommodationLocation(forumService.GetLocation(GuestOneStaticHelper.selectedForum.id)[0], forumService.GetLocation(GuestOneStaticHelper.selectedForum.id)[1]));
+                    ForumComment comment = new ForumComment(LoggedUser.id, NewComment, DateTime.Today, 0, ifVisited, GuestOneStaticHelper.selectedForum.id);
+                    forumService.AddComment(comment);
+                    var commentsToGrid = from comment1 in forumService.GetForumsComments(GuestOneStaticHelper.selectedForum)
+                                         select new
+                                         {
+                                             User = userService.GetById(comment1.userId).firstName,
+                                             Date = comment1.postingDate.ToString().Substring(0, comment1.postingDate.ToString().Length - 11),
+                                             Comment = comment1.comment,
+                                             Visited = ifVisited ? new string("Been there") : new string("Hasn't been there")
+                                         };
+                    Comments = commentsToGrid;
+                    NewComment = string.Empty;
+                }
+                else
+                {
+                    WarningMessage = "Please add comment";
+                }
             }
         }
     }

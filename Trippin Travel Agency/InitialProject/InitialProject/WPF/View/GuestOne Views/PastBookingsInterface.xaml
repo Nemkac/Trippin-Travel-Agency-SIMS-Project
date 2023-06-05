@@ -15,9 +15,8 @@
     </Window.InputBindings>
     <Grid>
         <GroupBox HorizontalAlignment="Center"
-                  Height="488"
+                  Height="476"
                   Header="My previous bookings" 
-                  Margin="0,160,0,0" 
                   VerticalAlignment="Top"
                   Width="1032" 
                   FontFamily="ubuntu"
@@ -25,12 +24,12 @@
                   FontWeight="Bold" 
                   Foreground="#FF192A56" 
                   BorderThickness="3" 
-                  BorderBrush="#192a56"/>
+                  BorderBrush="#192a56" Margin="0,142,0,0"/>
 
         <Button Content="Leave a review"
                 HorizontalAlignment="Left"
                 Height="57" 
-                Margin="397,539,0,0"
+                Margin="397,522,0,0"
                 VerticalAlignment="Top"
                 Width="266"
                 FontFamily="ubuntu" 
@@ -104,7 +103,7 @@
 
         <DataGrid HorizontalAlignment="Center" 
                   Height="298" 
-                  Margin="0,220,0,0" 
+                  Margin="0,203,0,0" 
                   VerticalAlignment="Top" 
                   Width="838"
                   x:Name ="pastBookingsGrid" 
@@ -121,7 +120,7 @@
         <Button Content="Suggest a renovation idea" 
                 HorizontalAlignment="Left" 
                 Height="57" 
-                Margin="852,539,0,0"
+                Margin="852,522,0,0"
                 VerticalAlignment="Top" 
                 Width="266"
                 FontFamily="ubuntu"
@@ -160,7 +159,7 @@
         <TextBlock 
             HorizontalAlignment="Left"
             Height="20" 
-            Margin="499,601,0,0"
+            Margin="499,584,0,0"
             TextWrapping="Wrap" 
             Text="Press R" 
             VerticalAlignment="Top" 
@@ -173,7 +172,7 @@
         <TextBlock 
             HorizontalAlignment="Left"
             Height="20" 
-            Margin="954,605,0,0"
+            Margin="954,588,0,0"
             TextWrapping="Wrap" 
             Text="Press S" 
             VerticalAlignment="Top" 
@@ -225,7 +224,7 @@
         <TextBlock 
             HorizontalAlignment="Left"
             Height="142" 
-            Margin="1178,298,0,0"
+            Margin="1178,281,0,0"
             TextWrapping="Wrap" 
             Text="Press TAB to access then UP and DOWN arrows" 
             VerticalAlignment="Top" 
@@ -238,7 +237,7 @@
         <TextBlock 
             HorizontalAlignment="Left"
             Height="25" 
-            Margin="274,360,0,0"
+            Margin="274,343,0,0"
             TextWrapping="Wrap" 
             Text="&lt;" 
             VerticalAlignment="Top" 
@@ -260,7 +259,7 @@
         <TextBlock 
             HorizontalAlignment="Left"
             Height="25" 
-            Margin="278,336,0,0"
+            Margin="278,319,0,0"
             TextWrapping="Wrap" 
             Text="&lt;" 
             VerticalAlignment="Top" 
@@ -278,5 +277,31 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
+
+        <Button Content="Generate a report"
+            HorizontalAlignment="Left"
+            Height="57" 
+            Margin="622,627,0,0"
+            VerticalAlignment="Top"
+            Width="266"
+            FontFamily="ubuntu" 
+            FontSize="20"
+            Background="#FF273C75"
+            Foreground="White"
+            FontWeight="Medium"
+            Style="{StaticResource leadButton}"
+            Command="{Binding GoStatistics}"/>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="724,686,0,0"
+            TextWrapping="Wrap" 
+            Text="Press G" 
+            VerticalAlignment="Top" 
+            Width="62"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"/>
     </Grid>
 </Window>

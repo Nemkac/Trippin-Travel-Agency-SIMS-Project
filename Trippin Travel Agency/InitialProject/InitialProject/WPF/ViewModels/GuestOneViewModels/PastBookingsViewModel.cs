@@ -26,6 +26,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand OpenNavigator { get; set; }
         public ViewModelCommand Help { get; set; }
         public ViewModelCommand GoToRenovation { get; set; }
+        public ViewModelCommand GoStatistics { get;set; }
 
         public PastBookingsViewModel()
         {
@@ -35,6 +36,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             OpenNavigator = new ViewModelCommand(ShowNavigator);
             Help = new ViewModelCommand(ShowHelp);
             GoToRenovation = new ViewModelCommand(ShowRenovation);
+            GoStatistics = new ViewModelCommand(GoToStatistics);
         }
 
         private Booking selectedBooking;
@@ -119,6 +121,15 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                     OnPropertyChanged(nameof(PastBookingsGrid));
                 }
             }
+        }
+
+        public void GoToStatistics(object sender)
+        {
+            GenerateReportInterface generateReportInterface = new GenerateReportInterface();
+            generateReportInterface.Top = GuestOneStaticHelper.pastBookingsInterface.Top;
+            generateReportInterface.Left = GuestOneStaticHelper.pastBookingsInterface.Left;
+            generateReportInterface.Show();
+            GuestOneStaticHelper.pastBookingsInterface.Hide();
         }
 
         public void ShowRenovation(object sender)
