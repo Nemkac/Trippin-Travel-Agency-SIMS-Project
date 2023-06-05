@@ -43,6 +43,7 @@
     <None Remove="Assets\Existing Assets\sremskamitrovica_serbia.jpg" />
     <None Remove="Assets\Existing Assets\super_guide.png" />
     <None Remove="Assets\Existing Assets\tours-white.png" />
+    <None Remove="Assets\Existing Assets\Tutorial.mov" />
     <None Remove="Assets\fruska-gora.jpg" />
     <None Remove="Assets\madrid.jpg" />
     <None Remove="Assets\mitrovica.jpg" />
@@ -52,6 +53,7 @@
     <None Remove="Assets\Ohrid4.jpg" />
     <None Remove="Assets\Ohrid5.jpg" />
     <None Remove="Assets\tours-white.svg" />
+    <None Remove="Assets\Tutorial.mov" />
   </ItemGroup>
 
   <ItemGroup>
@@ -132,6 +134,12 @@
     <Resource Include="Assets\Existing Assets\Ohrid4.jpg" />
     <Resource Include="Assets\Existing Assets\super_guide.png" />
     <Resource Include="Assets\Existing Assets\tours-white.png" />
+    <Content Include="Assets\Existing Assets\Tutorial.mov">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Assets\Tutorial.mov">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\fruska-gora.jpg" />
     <Resource Include="Assets\madrid.jpg" />
   </ItemGroup>

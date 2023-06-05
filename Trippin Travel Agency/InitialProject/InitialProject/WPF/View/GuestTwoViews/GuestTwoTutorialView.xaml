@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="InitialProject.WPF.View.GuestTwoViews.GuestTwoTutorialView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InitialProject.WPF.View.GuestTwoViews"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             mc:Ignorable="d" 
+             d:DesignHeight="1200" d:DesignWidth="1500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1000"/>
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
+
+
+        <MediaElement x:Name="Tutorial" HorizontalAlignment="Left"
+                      Height="678"
+                      Margin="42,81,0,0" 
+                      VerticalAlignment="Top" 
+                      Width="1028"
+                      Source="C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\Tutorial.mov" 
+                      LoadedBehavior="Manual"                      
+                      />
+        <Button
+                Width="200"
+                Height="75"                
+                Background="#4cd137" Margin="42,810,1258,115" Click="Play">
+
+            <StackPanel>
+                <Label Content="Play" FontFamily="Ubuntu" FontSize="25" FontWeight="Heavy" Margin="0 0 0 0" Foreground="White"/>
+            </StackPanel>
+
+        </Button>
+        <Button HorizontalAlignment="Left" 
+                Margin="290,810,0,0"
+                VerticalAlignment="Top"
+                Width="200"
+                Height="75"                
+                Background="#fbc531" Click="Pause">
+
+            <StackPanel>
+                <Label Content="Pause" FontFamily="Ubuntu" FontSize="25" FontWeight="Heavy" Margin="0 0 0 0" Foreground="White"/>
+            </StackPanel>
+
+        </Button>
+        <TextBlock HorizontalAlignment="Left" 
+                   Margin="1149,81,0,0"                    
+                   VerticalAlignment="Top"
+                   Height="358" 
+                   Width="307"
+                   Text="In this tutorial we are demonstrating how easily you can book a tour for yourself and your friends. If you have any furhter question feel free to contact us"
+                   FontSize="19"
+                   FontFamily="Ubuntu"
+                   FontWeight="Light"
+                   Foreground="Black"
+                   TextWrapping="Wrap"
+                   />
+
+
+    </Grid>
+</UserControl>

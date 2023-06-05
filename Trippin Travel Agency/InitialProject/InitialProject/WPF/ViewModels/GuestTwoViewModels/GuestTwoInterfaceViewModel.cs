@@ -26,7 +26,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
         public string KeyPointsReport { get; set; } 
 
         public int GuestNumberReport { get; set; }
-        public int Duration { get; set; }
+        public int Duration { get; set; }        
 
 
         public ViewModelBase CurrentChildView
@@ -57,7 +57,6 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 
         public ICommand ExecuteSignOut { get; }
 
-
         public GuestTwoInterfaceViewModel()
         {
             ShowTourViewCommand = new ViewModelCommand(ExecuteTourViewCommand);
@@ -78,7 +77,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 
             ExecuteSignOut = new ViewModelCommand(SignOut);
 
-            LoggedUser.GuestTwoInterfaceViewModel = this;
+            LoggedUser.GuestTwoInterfaceViewModel = this;            
 
         }
 
@@ -92,6 +91,10 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
 
             CurrentChildView = new DetailedTourViewModel();
 
+        }
+        public void ShowTutorial(object obj)
+        {
+            CurrentChildView = new GuestTwoTutorialViewModel();
         }
 
         public void ExecuteShowGuestTwoCoupons(object obj)

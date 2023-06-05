@@ -226,8 +226,8 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
         public ViewModelCommand DetailedRecommendedView1 {  get; private set; }
         public ViewModelCommand DetailedRecommendedView2 { get; private set; }
         public ViewModelCommand DetailedRecommendedView3 { get; private set; }
-
         public ViewModelCommand ApplyFiltersCommand { get; private set; }
+        public ViewModelCommand TourBookingTutorialCommand { get; private set; }
 
         public TourDisplayViewModel()
         {
@@ -237,6 +237,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             DetailedRecommendedView1 = new ViewModelCommand(ShowDetailedTourFromRecommendation1);
             DetailedRecommendedView2 = new ViewModelCommand(ShowDetailedTourFromRecommendation2);
             DetailedRecommendedView3 = new ViewModelCommand(ShowDetailedTourFromRecommendation3);
+            TourBookingTutorialCommand = new ViewModelCommand(ShowTourBookingTutorial);
 
             WindowLoaded();
             LoadRecommendations();
@@ -253,6 +254,11 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 _mainViewModel.ExecuteShowDetailedTourView(null);
                 DetailedId = tour.id;
             }
+        }
+        public void ShowTourBookingTutorial(object obj)
+        {
+            _mainViewModel.ShowTutorial(null);
+        
         }
 
         public void ShowDetailedTourFromRecommendation1(object obj) 

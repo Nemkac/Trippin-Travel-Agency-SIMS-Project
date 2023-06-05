@@ -125,7 +125,8 @@
                         FontSize="20" Style="{StaticResource imagesButtonWeb}"  
                         Foreground="#192a56"
                         FontFamily="Ubuntu"
-                        ToolTip="Tour booking tutorial"                        
+                        ToolTip="Tour booking tutorial"
+                        Command="{Binding TourBookingTutorialCommand}"
                         >
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">

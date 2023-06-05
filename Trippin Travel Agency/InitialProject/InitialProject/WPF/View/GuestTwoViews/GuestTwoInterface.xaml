@@ -49,10 +49,15 @@
         <DataTemplate DataType="{x:Type viewModel:GuestTwoStatisticsViewModel}">
             <local:GuestTwoStatisticsView/>
         </DataTemplate>
-        
+
+        <DataTemplate DataType="{x:Type viewModel:GuestTwoTutorialViewModel}">
+            <local:GuestTwoTutorialView/>
+        </DataTemplate>
+
+
     </Window.Resources>
     
-    <ScrollViewer>
+    <ScrollViewer x:Name="ScrollViewerMain">
         <Grid Background="#F5F6FA">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>

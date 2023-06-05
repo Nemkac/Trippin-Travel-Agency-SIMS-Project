@@ -3,6 +3,7 @@ using InitialProject.DTO;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service.TourServices;
+using InitialProject.WPF.View.GuestTwoViews;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -319,7 +320,9 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                                                               LoggedUser.id);
                     DataBaseContext context = new DataBaseContext();                   
                     temporaryRequests.Add(tourRequest);
-                    requests.Add(new TourRequestDTO(City, Country,LanguageComboBox,StartDate.ToShortDateString(),EndDate.ToShortDateString(),TourRequestStatus.OnHold));                    
+                    requests.Add(new TourRequestDTO(City, Country,LanguageComboBox,StartDate.ToShortDateString(),EndDate.ToShortDateString(),TourRequestStatus.OnHold));
+                    ResponseColor = "#4cd137";
+                    FeedbackMessage = "Please scroll down to preview your complex tour request";
                 }
                 else
                 {
