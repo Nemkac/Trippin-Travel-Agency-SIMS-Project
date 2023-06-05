@@ -147,29 +147,43 @@ namespace InitialProject.WPF.ViewModels
 
         public void CreateTourByLocation(object obj)
         {
-            string location = Location;
-            string[] locationParts = CreateNamesByLocation(location);
-            string country = locationParts[0];
-            string city = locationParts[1];
-            DataBaseContext dataBaseContext = new DataBaseContext();
-            TourLocationTransfer tourLocationTransfer = new TourLocationTransfer(country, city);
-            TourFlagTransfer tourFlagTransfer = new TourFlagTransfer(0);
-            dataBaseContext.TourLocationTransfers.Add(tourLocationTransfer);
-            dataBaseContext.TourFlagTransfers.Add(tourFlagTransfer);
-            dataBaseContext.SaveChanges();
-            _mainViewModel.ExecuteShowTourGuideCreateTourViewCommand(null);
+            if (int.TryParse(LocationRequestNumber, out int requestCount) && requestCount > 0)
+            {
+                string location = Location;
+                string[] locationParts = CreateNamesByLocation(location);
+                string country = locationParts[0];
+                string city = locationParts[1];
+                DataBaseContext dataBaseContext = new DataBaseContext();
+                TourLocationTransfer tourLocationTransfer = new TourLocationTransfer(country, city);
+                TourFlagTransfer tourFlagTransfer = new TourFlagTransfer(0);
+                dataBaseContext.TourLocationTransfers.Add(tourLocationTransfer);
+                dataBaseContext.TourFlagTransfers.Add(tourFlagTransfer);
+                dataBaseContext.SaveChanges();
+                _mainViewModel.ExecuteShowTourGuideCreateTourViewCommand(null);
+            }
+            else
+            {
+                MessageBox.Show("There are no recommended location requests."); 
+            }
         }
 
         public void CreateTourByLanguage(object obj)
         {
-            string language = Language;
-            DataBaseContext dataBaseContext = new DataBaseContext();
-            TourLanguageTransfer tourLanguageTransfer = new TourLanguageTransfer(language);
-            TourFlagTransfer tourFlagTransfer = new TourFlagTransfer(1);
-            dataBaseContext.TourLanguageTransfers.Add(tourLanguageTransfer);
-            dataBaseContext.TourFlagTransfers.Add(tourFlagTransfer);
-            dataBaseContext.SaveChanges();
-            _mainViewModel.ExecuteShowTourGuideCreateTourViewCommand(null);
+            if (int.TryParse(LanguageRequestNumber, out int requestCount) && requestCount > 0)
+            {
+                string language = Language;
+                DataBaseContext dataBaseContext = new DataBaseContext();
+                TourLanguageTransfer tourLanguageTransfer = new TourLanguageTransfer(language);
+                TourFlagTransfer tourFlagTransfer = new TourFlagTransfer(1);
+                dataBaseContext.TourLanguageTransfers.Add(tourLanguageTransfer);
+                dataBaseContext.TourFlagTransfers.Add(tourFlagTransfer);
+                dataBaseContext.SaveChanges();
+                _mainViewModel.ExecuteShowTourGuideCreateTourViewCommand(null);
+            }
+            else
+            {
+                MessageBox.Show("There are no recommended language requests.");
+            }
         }
     }
 }

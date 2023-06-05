@@ -120,6 +120,67 @@ namespace InitialProject.WPF.View.TourGuideViews
 
             User user = FetchUserFromDatabase(LoggedUser.id);
             bool isSuper = user.super;
+            tourNameTextBox.ClearValue(TextBox.BorderBrushProperty);
+            tourCountryComboBox.ClearValue(ComboBox.BorderBrushProperty);
+            tourCityComboBox.ClearValue(ComboBox.BorderBrushProperty);
+            tourMaximumNumberOfGuestsTextBox.ClearValue(TextBox.BorderBrushProperty);
+            tourDurationTextBox.ClearValue(TextBox.BorderBrushProperty);
+            tourLanguageComboBox.ClearValue(ComboBox.BorderBrushProperty);
+            tourStartingPointTextBox.ClearValue(TextBox.BorderBrushProperty);
+            tourEndingPointTextBox.ClearValue(TextBox.BorderBrushProperty);
+            tourCalendar.ClearValue(Calendar.BorderBrushProperty);
+            tourDescriptionTextBox.ClearValue(TextBox.BorderBrushProperty);
+
+            if (string.IsNullOrWhiteSpace(tourNameTextBox.Text))
+            {
+                tourNameTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+
+            if (tourCountryComboBox.SelectedItem == null)
+            {
+                tourCountryComboBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+
+            if (tourCityComboBox.SelectedItem == null)
+            {
+                tourCityComboBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+
+            if (string.IsNullOrWhiteSpace(tourMaximumNumberOfGuestsTextBox.Text))
+            {
+                tourMaximumNumberOfGuestsTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+
+            if (string.IsNullOrWhiteSpace(tourDurationTextBox.Text))
+            {
+                tourDurationTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+
+            if (tourLanguageComboBox.SelectedItem == null)
+            {
+                tourLanguageComboBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+
+            if (string.IsNullOrWhiteSpace(tourStartingPointTextBox.Text))
+            {
+                tourStartingPointTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+
+            if (string.IsNullOrWhiteSpace(tourEndingPointTextBox.Text))
+            {
+                tourEndingPointTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+
+            if (tourCalendar.SelectedDate == null)
+            {
+                tourCalendar.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+
+            if (string.IsNullOrWhiteSpace(tourDescriptionTextBox.Text))
+            {
+                tourDescriptionTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+
             if (string.IsNullOrWhiteSpace(tourNameTextBox.Text) ||
                 tourCountryComboBox.SelectedItem == null ||
                 tourCityComboBox.SelectedItem == null ||
@@ -422,12 +483,10 @@ namespace InitialProject.WPF.View.TourGuideViews
         }
         private void ScrollToElement(UIElement element)
         {
-            // Find the ScrollViewer containing the element
             ScrollViewer scrollViewer = FindParentScrollViewer(element);
 
             if (scrollViewer != null)
             {
-                // Scroll to the element's position
                 GeneralTransform transform = element.TransformToAncestor(scrollViewer);
                 Rect elementRect = transform.TransformBounds(new Rect(0, 0, element.RenderSize.Width, element.RenderSize.Height));
                 scrollViewer.ScrollToVerticalOffset(elementRect.Top);
