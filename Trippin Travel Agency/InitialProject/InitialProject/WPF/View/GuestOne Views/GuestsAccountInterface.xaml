@@ -9,6 +9,7 @@
     <Window.InputBindings>
         <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
         <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
+        <KeyBinding Key="Esc" Command="{Binding GoBack}" />
     </Window.InputBindings>
     <Grid>
         <Rectangle 

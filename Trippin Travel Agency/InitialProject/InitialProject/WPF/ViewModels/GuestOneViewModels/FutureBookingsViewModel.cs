@@ -28,6 +28,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand OpenNavigator { get; set; }
         public ViewModelCommand GoToPastBookings { get; set; }
         public ViewModelCommand Help { get;set; }
+        public ViewModelCommand GoBack { get; set; }
         bool isHelpOn = false;
 
         public FutureBookingsViewModel()
@@ -38,6 +39,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             OpenNavigator = new ViewModelCommand(ShowNavigator);
             GoToPastBookings = new ViewModelCommand(ShowPastBookings);
             Help = new ViewModelCommand(ShowHelp);
+            GoBack = new ViewModelCommand(GoToPreviousWindow);
         }
 
 
@@ -159,6 +161,14 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             }
         }
 
+        public void GoToPreviousWindow(object sedner)
+        {
+            GuestOneStaticHelper.futureBookingsInterface.Hide();
+            GuestOneStaticHelper.InterfaceToGoBack.Top = GuestOneStaticHelper.futureBookingsInterface.Top;
+            GuestOneStaticHelper.InterfaceToGoBack.Left = GuestOneStaticHelper.futureBookingsInterface.Left;
+            GuestOneStaticHelper.InterfaceToGoBack.Show();
+        }
+
         private void CancelBooking(object sender)
         {
             if (SelectedBooking != null)
@@ -208,6 +218,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 
         private void ShowNavigator(object sender)
         {
+            GuestOneStaticHelper.InterfaceToGoBack = GuestOneStaticHelper.futureBookingsInterface;
             Navigator navigator = new Navigator();
             navigator.Left = GuestOneStaticHelper.futureBookingsInterface.Left + (GuestOneStaticHelper.futureBookingsInterface.Width - navigator.Width) / 2;
             navigator.Top = GuestOneStaticHelper.futureBookingsInterface.Top + (GuestOneStaticHelper.futureBookingsInterface.Height - navigator.Height) / 2;

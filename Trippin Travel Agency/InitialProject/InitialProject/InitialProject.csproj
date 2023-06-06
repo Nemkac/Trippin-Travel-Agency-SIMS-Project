@@ -52,6 +52,7 @@
     <PackageReference Include="Dapper" Version="2.0.123" />
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
     <PackageReference Include="FontAwesome.Sharp" Version="6.3.0" />
+    <PackageReference Include="kenjiuno.PdfSharp.Xps" Version="1.1.12" />
     <PackageReference Include="LiveCharts" Version="0.9.7" />
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     <PackageReference Include="MaterialDesignThemes" Version="4.8.0" />
@@ -66,6 +67,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     <PackageReference Include="Notifications.Wpf" Version="0.1.1" />
+    <PackageReference Include="PdfSharp" Version="1.50.5147" />
     <PackageReference Include="SharpVectors" Version="1.8.1" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.117" />
     <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />

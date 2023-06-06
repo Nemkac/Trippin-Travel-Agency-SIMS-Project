@@ -75,7 +75,9 @@
                 TextBlock.TextAlignment="Center" 
                 HorizontalAlignment="Left"
                 ItemsSource="{Binding AvaialableDatesGrid}" 
-                SelectedItem="{Binding SelectedDateRange}">
+                SelectedItem="{Binding SelectedDateRange}"
+                RowStyle="{DynamicResource DataGridRowStyle1}">
+                
                 <DataGrid.InputBindings>
                     <KeyBinding Key="Left" Command="{Binding PreviousImage}" />
                     <KeyBinding Key="Right" Command="{Binding NextImage}" />

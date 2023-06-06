@@ -13,6 +13,7 @@
         <KeyBinding Key="F1" Command="{Binding ShowForum}" />
         <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
         <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
+        <KeyBinding Key="Esc" Command="{Binding GoBack}" />
     </Window.InputBindings>
     <Grid>
 
@@ -125,8 +126,13 @@
             Margin="500,390,0,0" 
             VerticalAlignment="Top" 
             Width="515"
+            HeadersVisibility="None"
             ItemsSource="{Binding ForumsGrid}"
             SelectedIndex="{Binding SelectedForum}"
+            ColumnWidth="125"
+            TextBlock.TextAlignment="Center"
+            Style="{DynamicResource DataGridStyle1}"
+            RowStyle="{DynamicResource DataGridRowStyle1}"
             />
 
         <TextBox 
@@ -138,7 +144,11 @@
             IsTabStop="False"
             Text="{Binding InputCountry,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
             VerticalAlignment="Top"
-            Width="156" >
+            Width="156" 
+            FontFamily="ubuntu" 
+            FontSize="22" 
+            TextAlignment="Center" 
+            VerticalContentAlignment="Center">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="TextChanged">
                     <i:InvokeCommandAction Command="{Binding Search}" />
@@ -149,13 +159,17 @@
         <TextBox 
             HorizontalAlignment="Left" 
             Height="56"
-            Margin="828,284,0,0" 
+            Margin="831,284,0,0" 
             TextWrapping="Wrap"
             IsTabStop="False"
             Name="s1"
             Text="{Binding InputCity,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
             VerticalAlignment="Top"
-            Width="156">
+            Width="156"
+            FontFamily="ubuntu" 
+            FontSize="22" 
+            TextAlignment="Center" 
+            VerticalContentAlignment="Center">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="TextChanged">
                     <i:InvokeCommandAction Command="{Binding Search}" />
@@ -262,11 +276,11 @@
         <TextBlock 
             HorizontalAlignment="Left"
             Height="20" 
-            Margin="646,256,0,0"
+            Margin="591,232,0,0"
             TextWrapping="Wrap" 
-            Text="&lt; Left CTRL     Right CTRL &gt;" 
+            Text="&lt; Left CTRL     &#x9;&#x9;Right CTRL &gt;" 
             VerticalAlignment="Top" 
-            Width="224"
+            Width="336"
             Foreground="#718093"
             FontFamily="Ubuntu" 
             FontSize="17" 

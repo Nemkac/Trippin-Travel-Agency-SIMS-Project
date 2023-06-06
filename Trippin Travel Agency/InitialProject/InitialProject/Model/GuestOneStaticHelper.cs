@@ -40,6 +40,14 @@ namespace InitialProject.Model
         public static string numberOfGuests { get; set; }
         public static Forum selectedForum { get; set; }
         public static string temp { get; set; }
+        public static bool ifChoseCanceled { get; set; }
+        public static DateTime chosenStartingDate { get; set; }
+        public static DateTime chosenEndingDate { get; set; }
+        public static List<Booking> bookingsForReport { get; set; }
+        public static List<CanceledBooking> canceledBookingsForReport { get; set; }
+        public static dynamic InterfaceToGoBack { get; set; }
+        public static string writtersName { get; set; }
+        public static string commentToShow { get; set; }
         
 
     }

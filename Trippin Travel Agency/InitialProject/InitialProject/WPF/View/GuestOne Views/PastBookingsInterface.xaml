@@ -12,6 +12,7 @@
         <KeyBinding Key="S" Command="{Binding GoToRenovation}" />
         <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
         <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
+        <KeyBinding Key="G" Command="{Binding GoStatistics}" />
     </Window.InputBindings>
     <Grid>
         <GroupBox HorizontalAlignment="Center"
@@ -108,14 +109,18 @@
                   Width="838"
                   x:Name ="pastBookingsGrid" 
                   FontFamily="ubuntu"
-                  FontSize="28"
+                  FontSize="26"
                   Foreground="#FF192A56" 
                   BorderBrush="#FF192A56" 
                   Background="White"
                   FontWeight="Medium"
-                  TextBlock.TextAlignment="Center"
                   ItemsSource="{Binding PastBookingsGrid}" 
-                  SelectedItem="{Binding SelectedBooking}" />
+                  SelectedItem="{Binding SelectedBooking}" 
+                  ColumnWidth="132"
+                  TextBlock.TextAlignment="Center"
+                  Style="{DynamicResource DataGridStyle1}"
+                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                  RowStyle="{DynamicResource DataGridRowStyle1}"/>
 
         <Button Content="Suggest a renovation idea" 
                 HorizontalAlignment="Left" 
@@ -133,10 +138,10 @@
 
         <TextBlock HorizontalAlignment="Left"
                    Height="44"
-                   Margin="331,658,0,0" 
+                   Margin="895,636,0,0" 
                    TextWrapping="Wrap"
                    VerticalAlignment="Top" 
-                   Width="848"
+                   Width="588"
                    FontFamily="Ubuntu" 
                    FontSize="22" 
                    FontWeight="Bold" 

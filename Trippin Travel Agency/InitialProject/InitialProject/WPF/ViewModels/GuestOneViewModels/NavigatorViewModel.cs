@@ -18,6 +18,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand GoDelaymentRequests { get; set; }
         public ViewModelCommand GoAnyWhereAnyWhen { get; set; }
         public ViewModelCommand GoForums { get; set; }
+        public ViewModelCommand LogOut { get; set; }
         public NavigatorViewModel()
         {
             GoToBookings = new ViewModelCommand(GoToFutureBookings);
@@ -27,6 +28,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             GoDelaymentRequests = new ViewModelCommand(GoToDelaymentRequests);
             GoAnyWhereAnyWhen = new ViewModelCommand(GoToAnyWhereAnyWhen);
             GoForums = new ViewModelCommand(GoToForums);
+            LogOut = new ViewModelCommand(LogOutUser);
 
         }
 
@@ -104,23 +106,93 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             forumsInterface.Show();
         }
 
+        public void LogOutUser(object sender)
+        {
+            CloseInterfaces();
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
+        }
+
         public void CloseInterfaces()
         {
-            GuestOneStaticHelper.navigator.Close();
-            GuestOneStaticHelper.guestsBookingDelaymentRequestsInterface?.Close();
-            GuestOneStaticHelper.guestOneInterface?.Close();
-            GuestOneStaticHelper.bookAccommodationInterface?.Close();
-            GuestOneStaticHelper.pastBookingsInterface?.Close();
-            GuestOneStaticHelper.rateAccommodationInterface?.Close();
-            GuestOneStaticHelper.sendBookingDelaymentInterface?.Close();
-            GuestOneStaticHelper.futureBookingsInterface?.Close();
-            GuestOneStaticHelper.guestsReviewsInterface?.Close();
-            GuestOneStaticHelper.renovationSuggestionInterface?.Close();
-            GuestOneStaticHelper.guestsAccountInterface?.Close();
-            GuestOneStaticHelper.anyWhereAnyWhenInterface?.Close();
-            GuestOneStaticHelper.forumsInterface?.Close();
-            GuestOneStaticHelper.guestsForumsInterface?.Close();
-            GuestOneStaticHelper.selectedForumInterface?.Close();
+            GuestOneStaticHelper.navigator.Hide();
+            GuestOneStaticHelper.guestsBookingDelaymentRequestsInterface?.Hide();
+            GuestOneStaticHelper.guestOneInterface?.Hide();
+            GuestOneStaticHelper.bookAccommodationInterface?.Hide();
+            GuestOneStaticHelper.pastBookingsInterface?.Hide();
+            GuestOneStaticHelper.rateAccommodationInterface?.Hide();
+            GuestOneStaticHelper.sendBookingDelaymentInterface?.Hide();
+            GuestOneStaticHelper.futureBookingsInterface?.Hide();
+            GuestOneStaticHelper.guestsReviewsInterface?.Hide();
+            GuestOneStaticHelper.renovationSuggestionInterface?.Hide();
+            GuestOneStaticHelper.guestsAccountInterface?.Hide();
+            GuestOneStaticHelper.anyWhereAnyWhenInterface?.Hide();
+            GuestOneStaticHelper.forumsInterface?.Hide();
+            GuestOneStaticHelper.guestsForumsInterface?.Hide();
+            GuestOneStaticHelper.selectedForumInterface?.Hide();
+            GuestOneStaticHelper.generateReportInterface?.Hide();
+
+            if (GuestOneStaticHelper.guestsBookingDelaymentRequestsInterface != null)
+            {
+                GuestOneStaticHelper.guestsBookingDelaymentRequestsInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#f5f6fa");
+            }
+            if (GuestOneStaticHelper.guestOneInterface != null)
+            {
+                GuestOneStaticHelper.guestOneInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#f5f6fa");
+            }
+            if (GuestOneStaticHelper.bookAccommodationInterface != null)
+            {
+                GuestOneStaticHelper.bookAccommodationInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#f5f6fa");
+            }
+            if (GuestOneStaticHelper.pastBookingsInterface != null)
+            {
+                GuestOneStaticHelper.pastBookingsInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#f5f6fa");
+            }
+            if (GuestOneStaticHelper.rateAccommodationInterface != null)
+            {
+                GuestOneStaticHelper.rateAccommodationInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#f5f6fa");
+            }
+            if (GuestOneStaticHelper.sendBookingDelaymentInterface != null)
+            {
+                GuestOneStaticHelper.sendBookingDelaymentInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#f5f6fa");
+            }
+            if (GuestOneStaticHelper.futureBookingsInterface != null)
+            {
+                GuestOneStaticHelper.futureBookingsInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#f5f6fa");
+            }
+            if (GuestOneStaticHelper.guestsReviewsInterface != null)
+            {
+                GuestOneStaticHelper.guestsReviewsInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#f5f6fa");
+            }
+            if (GuestOneStaticHelper.renovationSuggestionInterface != null)
+            {
+                GuestOneStaticHelper.renovationSuggestionInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#f5f6fa");
+            }
+            if (GuestOneStaticHelper.guestsAccountInterface != null)
+            {
+                GuestOneStaticHelper.guestsAccountInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#f5f6fa");
+            }
+            if (GuestOneStaticHelper.anyWhereAnyWhenInterface != null)
+            {
+                GuestOneStaticHelper.anyWhereAnyWhenInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#f5f6fa");
+            }
+            if (GuestOneStaticHelper.forumsInterface != null)
+            {
+                GuestOneStaticHelper.forumsInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#f5f6fa");
+            }
+            if (GuestOneStaticHelper.guestsForumsInterface != null)
+            {
+                GuestOneStaticHelper.guestsForumsInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#f5f6fa");
+            }
+            if (GuestOneStaticHelper.selectedForumInterface != null)
+            {
+                GuestOneStaticHelper.selectedForumInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#f5f6fa");
+            }
+            if (GuestOneStaticHelper.generateReportInterface != null)
+            {
+                GuestOneStaticHelper.generateReportInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#f5f6fa");
+            }
+
         }
     }
 }

@@ -13,6 +13,7 @@
         <KeyBinding Key="D" Command="{Binding ShowDetailed}" />
         <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
         <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
+        <KeyBinding Key="Esc" Command="{Binding GoBack}" />
     </Window.InputBindings>
     <Grid>
         <GroupBox HorizontalAlignment="Center"
@@ -35,12 +36,16 @@
                   Width="855"
                   x:Name ="futureBookingsGrid"
                   FontFamily="ubuntu" 
-                  FontSize="28"
+                  FontSize="26"
                   Foreground="#FF192A56" 
                   BorderBrush="#FF192A56"
                   Background="White" 
                   FontWeight="Medium"
-                  TextBlock.TextAlignment="Center" 
+                  ColumnWidth="136"
+                  TextBlock.TextAlignment="Center"
+                  Style="{DynamicResource DataGridStyle1}"
+                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                  RowStyle="{DynamicResource DataGridRowStyle1}"                  
                   ItemsSource="{Binding UpcomingBookingsGrid}"
                   SelectedItem="{Binding SelectedBooking}"/>
 
@@ -363,7 +368,6 @@
             FontSize="22" 
             FontWeight="Medium"
             TextAlignment="Center"/>
-        <TextBlock HorizontalAlignment="Left" Margin="1387,-109,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-
+        
     </Grid>
 </Window>

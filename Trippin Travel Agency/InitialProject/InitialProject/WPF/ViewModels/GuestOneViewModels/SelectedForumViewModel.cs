@@ -21,12 +21,16 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand AddComment { get; set; }
         public ViewModelCommand Help { get; set; }
         public ViewModelCommand OpenNavigator { get; set; }
+        public ViewModelCommand GoBack { get; set; }
+        public ViewModelCommand SeeComment { get; set; }
         bool isHelpOn = false;
         public SelectedForumViewModel()
         {
             AddComment = new ViewModelCommand(AddNewComment);
             Help = new ViewModelCommand(ShowHelp);
             OpenNavigator = new ViewModelCommand(ShowNavigator);
+            GoBack = new ViewModelCommand(GoToForums);
+            SeeComment = new ViewModelCommand(OpenComment);
 
             forumService = new ForumService();
             userService = new UserService();
@@ -72,6 +76,20 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
                 {
                     comments = value;
                     OnPropertyChanged(nameof(Comments));
+                }
+            }
+        }
+
+        private int selectedComment;
+        public int SelectedComment
+        {
+            get { return selectedComment; }
+            set
+            {
+                if (selectedComment != value)
+                {
+                    selectedComment = value;
+                    OnPropertyChanged(nameof(SelectedComment));
                 }
             }
         }
@@ -150,11 +168,32 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 
         private void ShowNavigator(object sender)
         {
+            GuestOneStaticHelper.InterfaceToGoBack = GuestOneStaticHelper.selectedForumInterface;
             Navigator navigator = new Navigator();
             navigator.Left = GuestOneStaticHelper.selectedForumInterface.Left + (GuestOneStaticHelper.selectedForumInterface.Width - navigator.Width) / 2;
             navigator.Top = GuestOneStaticHelper.selectedForumInterface.Top + (GuestOneStaticHelper.selectedForumInterface.Height - navigator.Height) / 2;
             GuestOneStaticHelper.selectedForumInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
             navigator.Show();
+        }
+
+        private void GoToForums(object sender)
+        {
+            ForumsInterface forumsInterface = new ForumsInterface();
+            forumsInterface.Left = GuestOneStaticHelper.selectedForumInterface.Left;
+            forumsInterface.Top = GuestOneStaticHelper.selectedForumInterface.Top;
+            GuestOneStaticHelper.selectedForumInterface.Hide();
+            forumsInterface.Show();
+        }
+
+        private void OpenComment(object sender)
+        {
+            GuestOneStaticHelper.writtersName = forumService.GetForumsComments(GuestOneStaticHelper.selectedForum)[SelectedComment].username;
+            GuestOneStaticHelper.commentToShow = forumService.GetForumsComments(GuestOneStaticHelper.selectedForum)[SelectedComment].comment;
+            SelectedForumComment selectedForumComment = new SelectedForumComment();
+            selectedForumComment.Left = GuestOneStaticHelper.selectedForumInterface.Left + (GuestOneStaticHelper.selectedForumInterface.Width - selectedForumComment.Width) / 2;
+            selectedForumComment.Top = GuestOneStaticHelper.selectedForumInterface.Top + (GuestOneStaticHelper.selectedForumInterface.Height - selectedForumComment.Height) / 2;
+            GuestOneStaticHelper.selectedForumInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
+            selectedForumComment.Show();
         }
 
         public void AddNewComment(object sender)

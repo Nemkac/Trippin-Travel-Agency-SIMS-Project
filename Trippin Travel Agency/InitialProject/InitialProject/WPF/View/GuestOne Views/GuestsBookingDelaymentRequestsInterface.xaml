@@ -37,8 +37,12 @@
             BorderBrush="#FF192A56" 
             Background="White" 
             FontWeight="Medium"
+            MinRowHeight="50" 
+            ColumnWidth="119"
             TextBlock.TextAlignment="Center"
-            MinRowHeight="50" />
+            Style="{DynamicResource DataGridStyle1}"
+            ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+            RowStyle="{DynamicResource DataGridRowStyle1}"/>
 
         <Label 
             Content="My requests" 
@@ -156,8 +160,12 @@
             BorderBrush="#FF192A56" 
             Background="White" 
             FontWeight="Medium" 
-            TextBlock.TextAlignment="Center" 
-            MinRowHeight="50" />
+            MinRowHeight="50" 
+            ColumnWidth="110"
+            TextBlock.TextAlignment="Center"
+            Style="{DynamicResource DataGridStyle1}"
+            ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+            RowStyle="{DynamicResource DataGridRowStyle1}"/>
 
         <Button 
             Content="Check a comment" 

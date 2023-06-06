@@ -32,7 +32,12 @@
                   Grid.Row="1"
                   KeyDown="G"
                   ItemsSource="{Binding AccommodationsGrid}"
-                  SelectedItem="{Binding SelectedAccommodation}"/>
+                  SelectedItem="{Binding SelectedAccommodation}"
+                  ColumnWidth="125"
+                  TextBlock.TextAlignment="Center"
+                  Style="{DynamicResource DataGridStyle1}"
+                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                  RowStyle="{DynamicResource DataGridRowStyle1}"/>
 
         <DatePicker HorizontalAlignment="Left"
                     VerticalAlignment="Top"

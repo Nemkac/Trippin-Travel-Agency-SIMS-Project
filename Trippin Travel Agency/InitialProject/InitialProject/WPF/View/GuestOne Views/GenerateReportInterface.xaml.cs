@@ -25,8 +25,8 @@ namespace InitialProject.WPF.View.GuestOne_Views
         public GenerateReportInterface()
         {
             InitializeComponent();
-            this.DataContext = new GenerateReportViewModel();
             GuestOneStaticHelper.generateReportInterface = this;
+            this.DataContext = new GenerateReportViewModel();
         }
     }
 }

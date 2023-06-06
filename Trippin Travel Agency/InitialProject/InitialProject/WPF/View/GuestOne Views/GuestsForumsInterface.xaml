@@ -11,6 +11,7 @@
         <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
         <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
         <KeyBinding Key="Enter" Command="{Binding CreateForum}" />
+        <KeyBinding Key="Esc" Command="{Binding GoBack}" />
     </Window.InputBindings>
     <Grid>
         <Grid Margin="0,1,0,-1">
@@ -121,7 +122,12 @@
                 VerticalAlignment="Top" 
                 Width="514" 
                 ItemsSource="{Binding ForumsGrid}"
-                SelectedIndex="{Binding SelectedForum}">
+                SelectedIndex="{Binding SelectedForum}"
+                ColumnWidth="125"
+                TextBlock.TextAlignment="Center"
+                HeadersVisibility="None"
+                Style="{DynamicResource DataGridStyle1}"
+            RowStyle="{DynamicResource DataGridRowStyle1}">
                 <DataGrid.InputBindings>
                     <KeyBinding Key="S" Command="{Binding ShowForum}" />
                     <KeyBinding Key="C" Command="{Binding CloseForum}" />
@@ -136,7 +142,11 @@
                 TextWrapping="Wrap" 
                 Text="{Binding InputCountry, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                 VerticalAlignment="Top"
-                Width="216"/>
+                Width="216"
+                FontFamily="ubuntu" 
+                FontSize="22" 
+                TextAlignment="Center" 
+                VerticalContentAlignment="Center"/>
 
             <TextBox 
                 HorizontalAlignment="Left" 
@@ -146,7 +156,11 @@
                 TextWrapping="Wrap"
                 Text="{Binding InputCity,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
                 VerticalAlignment="Top"
-                Width="216"/>
+                Width="216"                
+                FontFamily="ubuntu" 
+                FontSize="22" 
+                TextAlignment="Center" 
+                VerticalContentAlignment="Center"/>
 
             <TextBox 
                 HorizontalAlignment="Left"
@@ -156,7 +170,11 @@
                 TextWrapping="Wrap" 
                 Text="{Binding Comment,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 VerticalAlignment="Top" 
-                Width="292"/>
+                Width="292"                
+                FontFamily="ubuntu" 
+                FontSize="22" 
+                TextAlignment="Center" 
+                VerticalContentAlignment="Center"/>
 
             <TextBlock 
                 TextWrapping="Wrap" 
@@ -286,6 +304,28 @@
                 FontSize="17" 
                 FontWeight="Medium"
                 TextAlignment="Center"/>
+            <TextBlock 
+                HorizontalAlignment="Left"
+                Height="20" 
+                Margin="-60,430,0,0"
+                TextWrapping="Wrap" 
+                Text="&lt; Left CTRL     &#x9;&#x9;Right CTRL &gt;" 
+                VerticalAlignment="Top" 
+                Width="336"
+                Foreground="#718093"
+                FontFamily="Ubuntu" 
+                FontSize="17" 
+                FontWeight="Medium"
+                TextAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-90"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
         </Grid>
 

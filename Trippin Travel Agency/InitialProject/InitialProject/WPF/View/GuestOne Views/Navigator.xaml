@@ -14,6 +14,7 @@
         <KeyBinding Key="F5" Command="{Binding GoForums}" />
         <KeyBinding Key="F6" Command="{Binding GoDelaymentRequests}" />
         <KeyBinding Key="F7" Command="{Binding GoAccount}" />
+        <KeyBinding Key="Esc" Command="{Binding LogOut}" />
     </Window.InputBindings>
     <Grid>
         <GroupBox HorizontalAlignment="Left"

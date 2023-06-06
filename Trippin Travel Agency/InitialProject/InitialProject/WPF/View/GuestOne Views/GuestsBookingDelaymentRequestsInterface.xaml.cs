@@ -21,7 +21,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.WPF.ViewModels.GuestOneViewModels;
-
+using ToastNotifications.Messages.Warning;
 
 namespace InitialProject.WPF.View.GuestOne_Views
 {
@@ -114,12 +114,15 @@ namespace InitialProject.WPF.View.GuestOne_Views
 
         private void OpenResolvedtRequestComment(DelaymentRequestComment delaymentRequestComment, UserService userService, int selectedRowIndex)
         {
-            delaymentRequestComment.WindowStartupLocation = WindowStartupLocation.Manual;
-            delaymentRequestComment.Left = this.Left + (this.Width - delaymentRequestComment.Width) / 2;
-            delaymentRequestComment.Top = this.Top + (this.Height - delaymentRequestComment.Height) / 2;
-            delaymentRequestComment.Topmost = true;
-            delaymentRequestComment.ownersComment.Text = userService.GetResolvedBookingDelaymentRequests()[selectedRowIndex].comment;
-            delaymentRequestComment.Show();
+            {
+                delaymentRequestComment.WindowStartupLocation = WindowStartupLocation.Manual;
+                delaymentRequestComment.Left = this.Left + (this.Width - delaymentRequestComment.Width) / 2;
+                delaymentRequestComment.Top = this.Top + (this.Height - delaymentRequestComment.Height) / 2;
+                delaymentRequestComment.Topmost = true;
+                delaymentRequestComment.ownersComment.Text = userService.GetResolvedBookingDelaymentRequests()[selectedRowIndex].comment;
+                delaymentRequestComment.Show();
+            }
+
         }
 
         private void ShowPendingRequestComment(object sender, RoutedEventArgs e)
@@ -195,6 +198,14 @@ namespace InitialProject.WPF.View.GuestOne_Views
             if(k.Key == Key.R)
             {
                 resolvedRequestsGrid.Focus();
+            }
+
+            if(k.Key == Key.Escape)
+            {
+                GuestOneStaticHelper.guestsBookingDelaymentRequestsInterface.Hide();
+                GuestOneStaticHelper.InterfaceToGoBack.Top = GuestOneStaticHelper.guestsBookingDelaymentRequestsInterface.Top;
+                GuestOneStaticHelper.InterfaceToGoBack.Left = GuestOneStaticHelper.guestsBookingDelaymentRequestsInterface.Left;
+                GuestOneStaticHelper.InterfaceToGoBack.Show();
             }
         }
 

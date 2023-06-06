@@ -6,6 +6,13 @@
         xmlns:local="clr-namespace:InitialProject.WPF.View.GuestOne_Views"
         mc:Ignorable="d"
         Title="GenerateReportInterface" Height="800" Width="1500">
+    <Window.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding GeneratePDF}" />
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
+        <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
+        <KeyBinding Key="Enter" Command="{Binding GeneratePDF}" />
+        <KeyBinding Key="Esc" Command="{Binding GoBack}" />
+    </Window.InputBindings>
     <Grid>
         <GroupBox HorizontalAlignment="Left"
             Height="446"
@@ -18,7 +25,9 @@
             FontWeight="Medium" 
             Foreground="#FF192A56" 
             BorderThickness="3" 
-            BorderBrush="#192a56"/>
+            BorderBrush="#192a56">
+
+        </GroupBox>
 
         <Label Content="Report"
             FontSize ="64" 
@@ -100,7 +109,7 @@
             Height="32"
             Width="170"
             IsTabStop="false" 
-            Margin="562,354,0,0" 
+            Margin="579,354,0,0" 
             FontFamily="ubuntu"
             FontSize="18"
             Background="#FF192A56"
@@ -121,7 +130,7 @@
             SelectedDate="{Binding EndingDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Height="31" 
             Width="170"
-            Margin="802,356,0,0"
+            Margin="819,356,0,0"
             FontFamily="ubuntu"
             IsTabStop="false" 
             FontSize="18"
@@ -132,7 +141,7 @@
             VerticalAlignment="Top" 
             Height="35" 
             Width="145" 
-            Margin="575,314,0,0" 
+            Margin="593,314,0,0" 
             FontFamily="Ubuntu"
             FontSize="20"
             FontWeight="medium" 
@@ -142,7 +151,7 @@
             VerticalAlignment="Top"
             Height="37" 
             Width="142"
-            Margin="822,314,0,0"
+            Margin="840,314,0,0"
             FontFamily="Ubuntu" 
             FontSize="20" 
             FontWeight="medium"
@@ -151,10 +160,11 @@
         <Button Content="Generate a PDF report"
             HorizontalAlignment="Left"
             Height="57" 
-            Margin="648,586,0,0"
+            Margin="648,572,0,0"
             VerticalAlignment="Top"
             Width="266"
             FontFamily="ubuntu" 
+            IsTabStop="False"
             FontSize="20"
             Background="#FF273C75"
             Foreground="White"
@@ -170,7 +180,8 @@
             IsSnapToTickEnabled="True" 
             TickFrequency="1" 
             Minimum="0" 
-            Maximum="1" 
+            Maximum="1"
+            IsTabStop="True"
             Foreground="#273c75" 
             BorderBrush="#273c75" 
             Value="{Binding Choice}" Cursor="Arrow" />
@@ -211,6 +222,57 @@
             FontSize="22" 
             FontWeight="Medium" 
             Foreground="#FF192A56"/>
+
+        <TextBlock HorizontalAlignment="Left"
+            Height="198" 
+            Margin="79,288,0,0" 
+            TextWrapping="Wrap" 
+            Text= "{Binding HelpLand}"
+            VerticalAlignment="Top" 
+            Width="202"
+            Foreground="#7f8fa6"
+            FontFamily="Ubuntu" 
+            FontSize="22" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="729,634,0,0"
+            TextWrapping="Wrap" 
+            Text="Press ENTER" 
+            VerticalAlignment="Top" 
+            Width="104"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"/>
+        <TextBlock HorizontalAlignment="Left"
+            Height="111" 
+            Margin="86,533,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding HelpExit}"
+            VerticalAlignment="Top" 
+            Width="188"
+            Foreground="#c23616"
+            FontFamily="Ubuntu" 
+            FontSize="26" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
+        
+        <TextBlock HorizontalAlignment="Left"
+            Height="111" 
+            Margin="939,553,0,0" 
+            TextWrapping="Wrap" 
+            Text="{Binding WarningMessage}"
+            VerticalAlignment="Top" 
+            Width="188"
+            Foreground="#c23616"
+            FontFamily="Ubuntu" 
+            FontSize="26" 
+            FontWeight="Medium"
+            TextAlignment="Center"/>
 
     </Grid>
 </Window>

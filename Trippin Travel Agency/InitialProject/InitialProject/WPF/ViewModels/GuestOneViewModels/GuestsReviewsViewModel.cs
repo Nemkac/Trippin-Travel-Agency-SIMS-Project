@@ -25,6 +25,8 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand OpenReview { get; set; }
         public ViewModelCommand OpenNavigator { get; set; }
         public ViewModelCommand Help { get; set; }
+        public ViewModelCommand GoBack { get; set; }
+
         public GuestsReviewsViewModel()
         {
             this.bookingService = new BookingService(new BookingRepository());
@@ -34,13 +36,15 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             OpenReview = new ViewModelCommand(ShowReview);
             OpenNavigator = new ViewModelCommand(ShowNavigator);
             Help = new ViewModelCommand(ShowHelp);
+            GoBack = new ViewModelCommand(GoToPreviousWindow);
+
 
             var guestsRatesToGrid = from guestRate in guestsRates
                                     select new
                                     {
-                                        bookingId = guestRate.bookingId,
-                                        accommodationName = accommodationService.GetById((bookingService.GetById(guestRate.bookingId)).accommodationId).name,
-                                        test = GenerateFeedback(bookingService.HasGuestRated(guestRate.bookingId))
+                                        Booking = guestRate.bookingId,
+                                        Accommodation = accommodationService.GetById((bookingService.GetById(guestRate.bookingId)).accommodationId).name,
+                                        _ = GenerateFeedback(bookingService.HasGuestRated(guestRate.bookingId))
                                     };
             ReviewsGrid = guestsRatesToGrid;
             
@@ -62,11 +66,20 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 
         private void ShowNavigator(object sender)
         {
+            GuestOneStaticHelper.InterfaceToGoBack = GuestOneStaticHelper.guestsReviewsInterface;
             Navigator navigator = new Navigator();
             navigator.Left = GuestOneStaticHelper.guestsReviewsInterface.Left + (GuestOneStaticHelper.guestsReviewsInterface.Width - navigator.Width) / 2;
             navigator.Top = GuestOneStaticHelper.guestsReviewsInterface.Top + (GuestOneStaticHelper.guestsReviewsInterface.Height - navigator.Height) / 2;
             GuestOneStaticHelper.guestsReviewsInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
             navigator.Show();
+        }
+
+        public void GoToPreviousWindow(object sedner)
+        {
+            GuestOneStaticHelper.guestsReviewsInterface.Hide();
+            GuestOneStaticHelper.InterfaceToGoBack.Top = GuestOneStaticHelper.guestsReviewsInterface.Top;
+            GuestOneStaticHelper.InterfaceToGoBack.Left = GuestOneStaticHelper.guestsReviewsInterface.Left;
+            GuestOneStaticHelper.InterfaceToGoBack.Show();
         }
 
         public void ShowHelp(object sender)
