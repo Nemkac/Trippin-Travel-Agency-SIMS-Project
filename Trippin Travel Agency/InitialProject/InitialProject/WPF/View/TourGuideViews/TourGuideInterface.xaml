@@ -88,6 +88,10 @@
         <DataTemplate DataType="{x:Type viewModel:TourGuide_RequestTimeSlotsViewModel}">
             <local:TourGuide_RequestTimeSlots/>
         </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type viewModel:TourGuide_SpecificTourPartViewModel}">
+            <local:TourGuide_SpecificTourPart/>
+        </DataTemplate>
     </Window.Resources>
     
     <Grid>

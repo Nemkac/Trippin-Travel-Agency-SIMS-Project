@@ -17,20 +17,22 @@ using System.Windows.Controls;
 
 namespace InitialProject.WPF.View.TourGuideViews
 {
-    public partial class TourGuide_AcceptedTourRequest : UserControl
+    public partial class TourGuide_SpecificTourPart : UserControl
     {
         private readonly TourService tourService = new(new TourRepository());
-        public TourGuide_AcceptedTourRequest()
+        public TourGuide_SpecificTourPart()
         {
             InitializeComponent();
             this.Loaded += requestDataLoaded;
+            headerTextBlock.Text = TourGuide_RequestTimeSlots.selectedRequestId.ToString();
+
         }
 
         public void requestDataLoaded(object sender, RoutedEventArgs e)
         {
-            DataBaseContext context;
+            /*DataBaseContext context;
             TourRequest tr;
-            GetExact(out context, out tr);
+            GetExact(out context, out tr); 
             if (tr != null)
             {
                 startingDateLabel.Content = tr.startDate.ToString("yyyy-MM-dd");
@@ -39,15 +41,14 @@ namespace InitialProject.WPF.View.TourGuideViews
             }
             else
             {
-                return;
-            }
-
+                return; 
+            }*/
 
         }
 
-        public void GetExact(out DataBaseContext context, out TourRequest tr)
+        /*public void GetExact(out DataBaseContext context, out TourRequest tr)
         {
-            context = new DataBaseContext();
+            /*context = new DataBaseContext();
             List<AcceptedTourRequestViewTransfer> acceptedrequests = context.AcceptedTourRequestViewTransfers.ToList();
             tr = null;
 
@@ -60,12 +61,12 @@ namespace InitialProject.WPF.View.TourGuideViews
                 MessageBox.Show("No accepted requests found.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
-        }
+        }*/
 
         private void acceptRequest_ButtonClick(object sender, RoutedEventArgs e)
         {
 
-            DataBaseContext context;
+            /*DataBaseContext context;
             TourRequest tr;
             GetExact(out context, out tr);
 
@@ -91,7 +92,7 @@ namespace InitialProject.WPF.View.TourGuideViews
             RequestMessage rm = new RequestMessage(tr.id, tr.guestId);
             context.RequestMessages.Add(rm);
             context.SaveChanges();
-            MessageBox.Show("Tour accepted.");
+            MessageBox.Show("Tour accepted.");*/
         }
 
 
