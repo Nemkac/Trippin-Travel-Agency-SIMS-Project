@@ -60,7 +60,7 @@ namespace InitialProject.WPF.View.TourGuideViews
             if (dateList.SelectedItem != null)
             {
                 DateTime selectedDate = DateTime.Parse(dateList.SelectedItem.ToString());
-
+                TourRequest tr = GetTourRequestById(TourGuide_RequestTimeSlots.selectedRequestId); 
                 // Create a new TourGuideBusy record
                 var newBusyDate = new TourGuideBusy
                 {
@@ -68,9 +68,20 @@ namespace InitialProject.WPF.View.TourGuideViews
                     BusyDate = selectedDate
                 };
 
-                // Add the new record to the context and save changes
+                bool hasConflictingTours = _context.Tours
+                .Any(t => t.startDates == selectedDate);
+
+                if (hasConflictingTours)
+                {
+                    MessageBox.Show("There is already a tour scheduled for the selected date.");
+                    return;
+                }
+                tr.status = TourRequestStatus.Accepted;
+                tr.acceptedDate = selectedDate;
+                _context.TourRequests.Update(tr);
                 _context.TourGuideBusyDates.Add(newBusyDate);
                 _context.SaveChanges();
+                MessageBox.Show("Tour accepted.");
 
                 // Remove the selected date from the list box
                 dateList.Items.Remove(dateList.SelectedItem);
