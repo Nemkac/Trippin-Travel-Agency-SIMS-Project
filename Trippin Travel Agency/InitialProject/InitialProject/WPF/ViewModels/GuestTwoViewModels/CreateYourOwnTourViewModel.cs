@@ -319,11 +319,10 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             ComplexTourRequest complexTourRequest = new ComplexTourRequest(temporaryRequests);
             DataBaseContext context = new DataBaseContext();
             foreach (TourRequest request in temporaryRequests)
-            {
+            {             
                 bool cityFlag = false;
                 bool countryFlag = false;
                 bool languageFlag = false;
-
                 foreach (Tour tour in context.Tours.ToList())
                 {
                     TourLocation location = this.tourLocationService.GetById(tour.location);
@@ -354,9 +353,19 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                     context.UnfulfilledTourLanguages.Add(new(LoggedUser.id, request.language));
                 }                            
             }
+          
             context.ComplexTourRequests.Add(complexTourRequest);
             context.SaveChanges();
+
+            foreach (TourRequest request in temporaryRequests) 
+            {
+                context.ComplexRegularPairs.Add(new ComplexRegularPairs(complexTourRequest.id, request.id));
+                MessageBox.Show(complexTourRequest.id.ToString() + request.id.ToString());
+            }
+
+            context.SaveChanges();
             requests.Clear();
+            temporaryRequests.Clear();
         }
     }
 }

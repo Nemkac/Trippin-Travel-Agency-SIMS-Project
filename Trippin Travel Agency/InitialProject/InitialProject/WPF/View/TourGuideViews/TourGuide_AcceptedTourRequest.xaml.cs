@@ -31,20 +31,39 @@ namespace InitialProject.WPF.View.TourGuideViews
             DataBaseContext context;
             TourRequest tr;
             GetExact(out context, out tr);
-            startingDateLabel.Content = tr.startDate.ToString("yyyy-MM-dd");
-            endingDateLabel.Content = tr.endDate.ToString("yyyy-MM-dd");
+            if (tr != null)
+            {
+                startingDateLabel.Content = tr.startDate.ToString("yyyy-MM-dd");
+                endingDateLabel.Content = tr.endDate.ToString("yyyy-MM-dd");
+
+            }
+            else
+            {
+                return; 
+            }
 
         }
 
-        private void GetExact(out DataBaseContext context, out TourRequest tr)
+        public void GetExact(out DataBaseContext context, out TourRequest tr)
         {
             context = new DataBaseContext();
             List<AcceptedTourRequestViewTransfer> acceptedrequests = context.AcceptedTourRequestViewTransfers.ToList();
-            tr = this.tourService.GetRequestById(acceptedrequests.Last().requestId);
+            tr = null;
+
+            if (acceptedrequests.Count > 0)
+            {
+                tr = this.tourService.GetRequestById(acceptedrequests.Last().requestId);
+            }
+            else
+            {
+                MessageBox.Show("No accepted requests found.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+
         }
 
         private void acceptRequest_ButtonClick(object sender, RoutedEventArgs e)
         {
+            
             DataBaseContext context;
             TourRequest tr;
             GetExact(out context, out tr);

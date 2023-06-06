@@ -5,6 +5,8 @@ using InitialProject.Model.TransferModels;
 using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.Service.TourServices;
+using InitialProject.WPF.View;
+using InitialProject.WPF.View.TourGuideViews;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace InitialProject.WPF.ViewModels
 {
@@ -36,6 +39,7 @@ namespace InitialProject.WPF.ViewModels
                 }
             }
         }
+        public ViewModelCommand GenerateTourReportCommand { get; private set; }
         public TourGuide_MainViewModel _mainViewModel;
 
         public TourGuide_ToursTodayViewModel()
@@ -44,6 +48,7 @@ namespace InitialProject.WPF.ViewModels
             ShowToursCommands = new ViewModelCommand(ShowTours);
             ShowTourLiveCommand = new ViewModelCommand(ShowTourLive);
             ShowTourImagesCommand = new ViewModelCommand(ShowImages);
+            GenerateTourReportCommand = new ViewModelCommand(GenerateTourReport); 
             ShowToursTodayDTOsOnDataGrid();
         }
 
@@ -99,6 +104,21 @@ namespace InitialProject.WPF.ViewModels
                 dataBaseContext.TourTodayImagesTransfers.Add(tourTodayImagesTransfer);
                 dataBaseContext.SaveChanges();
                 _mainViewModel.ExecuteShowTourGuideToursTodayImagesViewCommand(null);
+            }
+        }
+        public void GenerateTourReport(object obj)
+        { 
+            if (SelectedToursTodayDTO == null)
+            {
+                MessageBox.Show("You must select a tour to generate its report");
+                return;
+            }
+            TourReport report = new TourReport(SelectedToursTodayDTO.id);
+
+            PrintDialog printDialog = new PrintDialog();
+            if (printDialog.ShowDialog() == true)
+            {
+                printDialog.PrintVisual(report, "Report");
             }
         }
     }

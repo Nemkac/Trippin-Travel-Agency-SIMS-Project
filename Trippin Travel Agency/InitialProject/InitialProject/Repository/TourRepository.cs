@@ -57,7 +57,7 @@ namespace InitialProject.Repository
             DataBaseContext saveContext = new DataBaseContext();
             saveContext.Attach(tour);
             saveContext.SaveChanges();
-            MessageBox.Show("Tour registered succesfuly!");
+            //MessageBox.Show("Tour registered succesfuly!");
         }
 
         public List<KeyPoint> GetTourKeyPoints(int tourId, DataBaseContext dataBaseContext)

@@ -24,12 +24,24 @@ namespace InitialProject.WPF.View.TourGuideViews
     /// </summary>
     public partial class TourGuide_TourPartRequests : UserControl
     {
+        public static int selectedComplexId;
         private TourService tourService;
+        private TourRequestService tourRequestService;
         public TourGuide_TourPartRequests()
         {
             InitializeComponent();
             this.tourService = new(new TourRepository());
+            this.tourRequestService = new(new TourRepository());
+            List<TourRequest> requests = tourRequestService.GetAllFullTourRequests();
+            DataBaseContext context = new DataBaseContext();
+            tourRequestsDataGrid.ItemsSource = context.ComplexTourRequests.ToList();           
+            
         }
+        public void NewWindow(object sender,RoutedEventArgs e)
+        {
+            ComplexTourRequest temp = this.tourRequestsDataGrid.SelectedItem as ComplexTourRequest;
+            selectedComplexId = temp.id;
 
+        }
     }
 }

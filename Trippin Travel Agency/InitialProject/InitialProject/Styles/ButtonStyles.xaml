@@ -121,9 +121,9 @@
 
     <!-- Mobile menu label beneath icon -->
     <Style x:Key="labelBeneathIcon" TargetType="Label">
-        <Setter Property="FontFamily" Value="Ubuntu Bold"/>
+        <Setter Property="FontFamily" Value="Ubuntu Medium"/>
         <Setter Property="Foreground" Value="#f5f6fa"/>
-        <Setter Property="FontSize" Value="10pt"/>
+        <Setter Property="FontSize" Value="12pt"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
 

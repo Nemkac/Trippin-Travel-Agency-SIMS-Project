@@ -120,16 +120,94 @@ namespace InitialProject.WPF.View.TourGuideViews
 
             User user = FetchUserFromDatabase(LoggedUser.id);
             bool isSuper = user.super;
+            tourNameTextBox.ClearValue(TextBox.BorderBrushProperty);
+            tourCountryComboBox.ClearValue(ComboBox.BorderBrushProperty);
+            tourCityComboBox.ClearValue(ComboBox.BorderBrushProperty);
+            tourMaximumNumberOfGuestsTextBox.ClearValue(TextBox.BorderBrushProperty);
+            tourDurationTextBox.ClearValue(TextBox.BorderBrushProperty);
+            tourLanguageComboBox.ClearValue(ComboBox.BorderBrushProperty);
+            tourStartingPointTextBox.ClearValue(TextBox.BorderBrushProperty);
+            tourEndingPointTextBox.ClearValue(TextBox.BorderBrushProperty);
+            tourCalendar.ClearValue(Calendar.BorderBrushProperty);
+            tourDescriptionTextBox.ClearValue(TextBox.BorderBrushProperty);
 
-            CreateTourBasicProperties(out name, out location, out guestLimit, out hoursDuration, out description, out languageInput, out selectedDate, out active);
+            if (string.IsNullOrWhiteSpace(tourNameTextBox.Text))
+            {
+                tourNameTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
 
-            ICollection<KeyPoint> keyPoints = CreateKeyPoints();
+            if (tourCountryComboBox.SelectedItem == null)
+            {
+                tourCountryComboBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
 
-            List<Model.Image> imageLinks = CreateImageLinks();
+            if (tourCityComboBox.SelectedItem == null)
+            {
+                tourCityComboBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
 
-            Tour tour = new Tour(name, location.id, keyPoints, description, languageInput, guestLimit, selectedDate, hoursDuration, imageLinks, active,LoggedUser.id);
-            tour.super = isSuper;
-            DoesTourExist(name, selectedDate, tour);
+            if (string.IsNullOrWhiteSpace(tourMaximumNumberOfGuestsTextBox.Text))
+            {
+                tourMaximumNumberOfGuestsTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+
+            if (string.IsNullOrWhiteSpace(tourDurationTextBox.Text))
+            {
+                tourDurationTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+
+            if (tourLanguageComboBox.SelectedItem == null)
+            {
+                tourLanguageComboBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+
+            if (string.IsNullOrWhiteSpace(tourStartingPointTextBox.Text))
+            {
+                tourStartingPointTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+
+            if (string.IsNullOrWhiteSpace(tourEndingPointTextBox.Text))
+            {
+                tourEndingPointTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+
+            if (tourCalendar.SelectedDate == null)
+            {
+                tourCalendar.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+
+            if (string.IsNullOrWhiteSpace(tourDescriptionTextBox.Text))
+            {
+                tourDescriptionTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+
+            if (string.IsNullOrWhiteSpace(tourNameTextBox.Text) ||
+                tourCountryComboBox.SelectedItem == null ||
+                tourCityComboBox.SelectedItem == null ||
+                string.IsNullOrWhiteSpace(tourMaximumNumberOfGuestsTextBox.Text) ||
+                string.IsNullOrWhiteSpace(tourDurationTextBox.Text) ||
+                tourLanguageComboBox.SelectedItem == null ||
+                string.IsNullOrWhiteSpace(tourStartingPointTextBox.Text) ||
+                string.IsNullOrWhiteSpace(tourEndingPointTextBox.Text) ||
+                tourCalendar.SelectedDate == null ||
+                string.IsNullOrWhiteSpace(tourDescriptionTextBox.Text))
+            {
+                MessageBox.Show("Fill in all the data.", "Data Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                fillAllTheDataMessageTextBlock.Text = "Fill in all the data.";
+                fillAllTheDataMessageTextBlock.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                CreateTourBasicProperties(out name, out location, out guestLimit, out hoursDuration, out description, out languageInput, out selectedDate, out active);
+
+                ICollection<KeyPoint> keyPoints = CreateKeyPoints();
+
+                List<Model.Image> imageLinks = CreateImageLinks();
+
+                Tour tour = new Tour(name, location.id, keyPoints, description, languageInput, guestLimit, selectedDate, hoursDuration, imageLinks, active, LoggedUser.id);
+                tour.super = isSuper;
+                DoesTourExist(name, selectedDate, tour);
+            }
         }
         private User FetchUserFromDatabase(int userId)
         {
@@ -162,6 +240,9 @@ namespace InitialProject.WPF.View.TourGuideViews
             {
                 this.tourService.Save(tour);
                 clearInputs();
+
+                saveMessageTextBlock.Text = "Tour saved succesfully";
+                saveMessageTextBlock.Visibility = Visibility.Visible;
             }
             else
             {
@@ -402,12 +483,10 @@ namespace InitialProject.WPF.View.TourGuideViews
         }
         private void ScrollToElement(UIElement element)
         {
-            // Find the ScrollViewer containing the element
             ScrollViewer scrollViewer = FindParentScrollViewer(element);
 
             if (scrollViewer != null)
             {
-                // Scroll to the element's position
                 GeneralTransform transform = element.TransformToAncestor(scrollViewer);
                 Rect elementRect = transform.TransformBounds(new Rect(0, 0, element.RenderSize.Width, element.RenderSize.Height));
                 scrollViewer.ScrollToVerticalOffset(elementRect.Top);
@@ -510,5 +589,55 @@ namespace InitialProject.WPF.View.TourGuideViews
             }
             
         }
+
+        private void tourMaximumNumberOfGuestsTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int maxNumberOfGuests;
+            if (!int.TryParse(tourMaximumNumberOfGuestsTextBox.Text, out maxNumberOfGuests))
+            {
+                errorMessageTextBlock.Text = "Entry must be a number!";
+                errorMessageTextBlock.Visibility = Visibility.Visible;
+                tourMaximumNumberOfGuestsTextBox.BorderBrush = new SolidColorBrush(Colors.Red); 
+            }
+            else
+            {
+                errorMessageTextBlock.Text = string.Empty;
+                errorMessageTextBlock.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void tourDurationTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int duration;
+            if (!int.TryParse(tourDurationTextBox.Text, out duration))
+            {
+                tourDurationErrorMessageTextBlock.Text = "Entry must be a number!";
+                tourDurationErrorMessageTextBlock.Visibility = Visibility.Visible;
+                tourDurationTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
+                tourDurationErrorMessageTextBlock.Text = string.Empty;
+                tourDurationErrorMessageTextBlock.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void tourNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(tourNameTextBox.Text))
+            {
+                ScrollByPixels(myScrollViewer, -1000);
+                tourNameErrorMessageTextBlock.Text = "Enter tour name!";
+                tourNameErrorMessageTextBlock.Visibility = Visibility.Visible;
+                return;
+            }
+            else
+            {
+                tourNameErrorMessageTextBlock.Visibility = Visibility.Collapsed; 
+            }
+
+        }
+
+
     }
 }

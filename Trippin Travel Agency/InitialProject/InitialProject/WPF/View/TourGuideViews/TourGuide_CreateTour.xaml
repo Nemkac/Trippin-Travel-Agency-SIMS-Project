@@ -96,7 +96,12 @@
                     </StackPanel>
                     <TextBox Style="{StaticResource mobileTextBox}"
                              x:Name="tourNameTextBox"
+                             TextChanged="tourNameTextBox_TextChanged"
                              />
+                    <TextBlock x:Name="tourNameErrorMessageTextBlock"
+                          Foreground="Red"
+                          Margin="5,0,0,0"
+                          Visibility="Collapsed"/>
                 </StackPanel>
                 
                 <!-- Location GroupBox -->
@@ -140,8 +145,13 @@
                                />
                     </StackPanel>
                     <TextBox Style="{StaticResource mobileTextBox}"
-                             x:Name="tourMaximumNumberOfGuestsTextBox"
-                             />
+                         x:Name="tourMaximumNumberOfGuestsTextBox"
+                         TextChanged="tourMaximumNumberOfGuestsTextBox_TextChanged"/>
+                    <TextBlock x:Name="errorMessageTextBlock"
+                           Foreground="Red"
+                           Margin="5,0,0,0"
+                           Visibility="Collapsed"/> 
+
                 </StackPanel>
             
                 <!-- Duration (hours) -->
@@ -153,8 +163,12 @@
                                />
                     </StackPanel>
                     <TextBox Style="{StaticResource mobileTextBox}"
-                             x:Name="tourDurationTextBox"
-                             />
+                         x:Name="tourDurationTextBox"
+                         TextChanged="tourDurationTextBox_TextChanged"/>
+                    <TextBlock x:Name="tourDurationErrorMessageTextBlock"
+                          Foreground="Red"
+                          Margin="5,0,0,0"
+                          Visibility="Collapsed"/>
                 </StackPanel>
 
                 <!-- Language -->
@@ -286,13 +300,22 @@
                              x:Name="tourDescriptionTextBox"
                              />
                 </StackPanel>
+                <TextBlock x:Name="saveMessageTextBlock"
+                           Foreground="Green"
+                           Margin="5,20,0,0"
+                           HorizontalAlignment="Center"
+                           Visibility="Collapsed"/>
+                <TextBlock x:Name="fillAllTheDataMessageTextBlock"
+                           Foreground="Red"
+                           Margin="5,20,0,0"
+                           HorizontalAlignment="Center"
+                           Visibility="Collapsed"/>
                 <Button Content="Save"
                         Style="{StaticResource acceptButton}"
                         Margin="0,20,0,0"
                         Click="Save"
                         x:Name="saveButton"
                         />
-
             </StackPanel>
         </ScrollViewer>
         <ContentControl Content="{Binding CurrentChildView}" Grid.RowSpan="3" Grid.ColumnSpan="3"/>

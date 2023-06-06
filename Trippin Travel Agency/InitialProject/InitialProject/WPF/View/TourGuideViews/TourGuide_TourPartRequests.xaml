@@ -66,6 +66,43 @@
                         Margin="0,0,0,20">
 
 
+                <DataGrid x:Name="tourRequestsDataGrid"
+                              AutoGenerateColumns="False"
+                              Width="330"
+                              BorderThickness="0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Complex Req. Id" Binding="{Binding id}" Width="120"/>
+
+                    </DataGrid.Columns>
+                    <DataGrid.CellStyle>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <Setter Property="FontFamily" Value="Ubuntu"/>
+                            <Setter Property="FontSize" Value="16"/>
+                        </Style>
+                    </DataGrid.CellStyle>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="FontFamily" Value="Ubuntu"/>
+                            <Setter Property="FontSize" Value="12"/>
+                            <Setter Property="Padding" Value="6"/>
+                            <Setter Property="Background" Value="#273c75"/>
+                            <Setter Property="Foreground" Value="#f5f6fa"/>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+                </DataGrid>
+                <Button Content="Proceed"
+                        Style="{StaticResource showImagesButton}"
+                        Margin="0,20,0,0"
+                        Click="NewWindow"
+                        Command="{Binding ShowRequestTimeSlotsCommand}"
+                        />
+
 
             </StackPanel>
         </ScrollViewer>

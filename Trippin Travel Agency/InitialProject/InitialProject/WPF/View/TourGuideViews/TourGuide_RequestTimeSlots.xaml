@@ -1,0 +1,112 @@
+﻿<UserControl x:Class="InitialProject.WPF.View.TourGuideViews.TourGuide_RequestTimeSlots"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:viewModel="clr-namespace:InitialProject.WPF.ViewModels"
+             xmlns:local="clr-namespace:InitialProject.Model"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="750"
+             d:DesignWidth="430"
+             x:Name="requestTimeSlotsControl"
+             >
+
+    <Grid Background="#f5f6fa">
+        <Grid.RowDefinitions>
+            <!-- Margin -->
+            <RowDefinition Height="20"/>
+            <!-- Header -->
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Header -->
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+            <RadioButton x:Name="backButton"
+                     Grid.Column="1"
+                     Grid.Row="1"
+                     Style="{StaticResource mobileMenuButton}"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Left"
+                     IsChecked="False"
+                     Command="{Binding ShowRequestsCommand}"
+                     Width="Auto"
+                     Height="Auto"
+                     >
+
+                <StackPanel Orientation="Vertical" Margin="-5,0,0,0">
+                    <fa:IconImage Icon="ArrowLeft" Style="{StaticResource menuBackButtonIcon}"/>
+                    <Label Content="Requests" Style="{StaticResource labelBackBeneathIcon}"/>
+                </StackPanel>
+
+            </RadioButton>
+            <TextBlock     Text="Time slots"
+                           TextTrimming="CharacterEllipsis"
+                           MaxWidth="270"
+                           Style="{StaticResource headerTextBlock}"
+                           Margin="10,0,0,0"
+                           x:Name="headerTextBlock"
+                           />
+        </StackPanel>
+
+        <ScrollViewer VerticalScrollBarVisibility="Hidden"
+                      Grid.Row="2"
+                      Grid.Column="1">
+            <!-- Content -->
+            <StackPanel Orientation="Vertical"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="0,0,0,20">
+
+
+                <DataGrid x:Name="tourRequestsDataGrid"
+                              AutoGenerateColumns="False"
+                              Width="330"
+                              BorderThickness="0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Complex Req. Id" Binding="{Binding id}" Width="120"/>
+                        <DataGridTextColumn Header="Start" Binding="{Binding startDate}" Width="85"/>
+                        <DataGridTextColumn Header="End" Binding="{Binding endDate}" Width="85"/>
+                    </DataGrid.Columns>
+                    <DataGrid.CellStyle>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <Setter Property="FontFamily" Value="Ubuntu"/>
+                            <Setter Property="FontSize" Value="16"/>
+                        </Style>
+                    </DataGrid.CellStyle>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="FontFamily" Value="Ubuntu"/>
+                            <Setter Property="FontSize" Value="12"/>
+                            <Setter Property="Padding" Value="6"/>
+                            <Setter Property="Background" Value="#273c75"/>
+                            <Setter Property="Foreground" Value="#f5f6fa"/>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+                </DataGrid>
+                <Button Content="Proceed"
+                        Style="{StaticResource showImagesButton}"
+                        Margin="0,20,0,0"
+                        Command="{Binding ShowRequestTimeSlots}"
+                        />
+
+
+            </StackPanel>
+        </ScrollViewer>
+        <ContentControl Content="{Binding CurrentChildView}" Grid.RowSpan="3" Grid.ColumnSpan="3"/>
+
+    </Grid>
+</UserControl>

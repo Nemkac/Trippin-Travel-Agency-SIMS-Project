@@ -16,6 +16,7 @@ namespace InitialProject.Model
         public string role { get; set; }
         public int age { get; set; } 
         public bool super { get; set; }
+        public bool resigned { get; set; }
 
 
         public User() { }
@@ -30,6 +31,7 @@ namespace InitialProject.Model
             this.email = email;
             this.age = age; 
             this.super = false;
+            this.resigned = false;
         }
     }
 }

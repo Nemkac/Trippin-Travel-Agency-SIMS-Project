@@ -293,6 +293,23 @@ namespace InitialProject.Migrations
                     b.ToTable("CanceledBookings");
                 });
 
+            modelBuilder.Entity("InitialProject.Model.ComplexRegularPairs", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("complexId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("regularId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("ComplexRegularPairs");
+                });
+
             modelBuilder.Entity("InitialProject.Model.ComplexTourRequest", b =>
                 {
                     b.Property<int>("id")
@@ -798,6 +815,9 @@ namespace InitialProject.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("complexTourParentId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("country")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -1180,6 +1200,9 @@ namespace InitialProject.Migrations
                     b.Property<string>("password")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("resigned")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("role")
                         .IsRequired()

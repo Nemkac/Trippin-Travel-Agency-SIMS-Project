@@ -64,7 +64,7 @@
                            FontSize="48"
                            FontFamily="Ubuntu"
                            FontWeight="Bold"
-                           Foreground="#171717"
+                           Foreground="#2f3640"
                            HorizontalAlignment="Center"
                            />
 
@@ -149,7 +149,7 @@
                         Width="100"
                         Height="40"
                         Margin="20, 0, 0, 0"
-                        Command="{Binding LogoutCommand}"
+                        Command="{Binding CancelAllToursCommand}"
                         />
                 </StackPanel>
 
