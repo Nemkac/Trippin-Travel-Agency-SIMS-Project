@@ -86,13 +86,7 @@
                     <Label Content="" Style="{StaticResource labelAboveTextBox}" x:Name="endingDateLabel" FontWeight="Bold"/>
 
                 </StackPanel>
-                <!-- Calendar --> 
-                <Viewbox Width="330">
-                    <Calendar x:Name="tourCalendar"
-                                    HorizontalAlignment="Stretch"
-                                    Style="{StaticResource CustomCalendarStyle}"
-                                    />
-                </Viewbox>
+                <ListBox x:Name="dateList" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="200"/>
                 <Button Content="Accept tour request"
                         Style="{StaticResource acceptButton}"
                         Margin="0,20,0,0"

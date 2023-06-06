@@ -58,6 +58,7 @@ namespace InitialProject.Context
         public DbSet<ComplexRegularPairs> ComplexRegularPairs { get; set; } 
 
         public DbSet<ComplexTourRequest> ComplexTourRequests { get; set; }
+        public DbSet<TourGuideBusy> TourGuideBusyDates { get; set; }
 
 
         // Apsolute paths for every memeber of the team

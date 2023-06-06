@@ -1,100 +1,85 @@
 ﻿using InitialProject.Context;
-using InitialProject.DTO;
 using InitialProject.Model;
-using InitialProject.Model.TransferModels;
-using InitialProject.Repository;
-using InitialProject.Service.TourServices;
-using InitialProject.WPF.ViewModels;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Security.Policy;
 using System.Windows;
 using System.Windows.Controls;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace InitialProject.WPF.View.TourGuideViews
 {
     public partial class TourGuide_SpecificTourPart : UserControl
     {
-        private readonly TourService tourService = new(new TourRepository());
+        private DataBaseContext _context;
+
         public TourGuide_SpecificTourPart()
         {
             InitializeComponent();
+            _context = new DataBaseContext();
             this.Loaded += requestDataLoaded;
             headerTextBlock.Text = TourGuide_RequestTimeSlots.selectedRequestId.ToString();
-
+            this.DataContext = this;
         }
 
         public void requestDataLoaded(object sender, RoutedEventArgs e)
         {
-            /*DataBaseContext context;
-            TourRequest tr;
-            GetExact(out context, out tr); 
+            TourRequest tr = GetTourRequestById(TourGuide_RequestTimeSlots.selectedRequestId);
             if (tr != null)
             {
                 startingDateLabel.Content = tr.startDate.ToString("yyyy-MM-dd");
                 endingDateLabel.Content = tr.endDate.ToString("yyyy-MM-dd");
-
+                ShowGuideAvailability(LoggedUser.id, tr.startDate, tr.endDate);
             }
-            else
-            {
-                return; 
-            }*/
-
         }
 
-        /*public void GetExact(out DataBaseContext context, out TourRequest tr)
+        private void ShowGuideAvailability(int guideId, DateTime startDate, DateTime endDate)
         {
-            /*context = new DataBaseContext();
-            List<AcceptedTourRequestViewTransfer> acceptedrequests = context.AcceptedTourRequestViewTransfers.ToList();
-            tr = null;
+            // Fetch the guide's busy dates
+            var busyDates = _context.TourGuideBusyDates
+                .Where(b => b.UserId == guideId && b.BusyDate >= startDate && b.BusyDate <= endDate)
+                .Select(b => b.BusyDate)
+                .ToList();
 
-            if (acceptedrequests.Count > 0)
-            {
-                tr = this.tourService.GetRequestById(acceptedrequests.Last().requestId);
-            }
-            else
-            {
-                MessageBox.Show("No accepted requests found.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            // Create a date range
+            var dateRange = Enumerable.Range(0, (int)(endDate - startDate).TotalDays + 1)
+                .Select(i => startDate.AddDays(i));
 
-        }*/
+            // Filter the dates that the guide is available (not in the busy dates)
+            var availableDates = dateRange.Except(busyDates);
+
+            // Add the available dates to the list box
+            foreach (var date in availableDates)
+            {
+                dateList.Items.Add(date.ToString("yyyy-MM-dd"));
+            }
+        }
 
         private void acceptRequest_ButtonClick(object sender, RoutedEventArgs e)
         {
-
-            /*DataBaseContext context;
-            TourRequest tr;
-            GetExact(out context, out tr);
-
-            DateTime selectedDate = tourCalendar.SelectedDate ?? DateTime.MinValue;
-            if (selectedDate < tr.startDate || selectedDate > tr.endDate)
+            // Assuming the date selected in the list box is the date for the request
+            if (dateList.SelectedItem != null)
             {
-                MessageBox.Show("Selected date is not within the tour request's range of dates.");
-                return;
+                DateTime selectedDate = DateTime.Parse(dateList.SelectedItem.ToString());
+
+                // Create a new TourGuideBusy record
+                var newBusyDate = new TourGuideBusy
+                {
+                    UserId = LoggedUser.id,
+                    BusyDate = selectedDate
+                };
+
+                // Add the new record to the context and save changes
+                _context.TourGuideBusyDates.Add(newBusyDate);
+                _context.SaveChanges();
+
+                // Remove the selected date from the list box
+                dateList.Items.Remove(dateList.SelectedItem);
             }
-
-            bool hasConflictingTours = context.Tours
-                .Any(t => t.startDates == selectedDate);
-
-            if (hasConflictingTours)
-            {
-                MessageBox.Show("There is already a tour scheduled for the selected date.");
-                return;
-            }
-
-            tr.status = TourRequestStatus.Accepted;
-            tr.acceptedDate = selectedDate;
-            context.TourRequests.Update(tr);
-            RequestMessage rm = new RequestMessage(tr.id, tr.guestId);
-            context.RequestMessages.Add(rm);
-            context.SaveChanges();
-            MessageBox.Show("Tour accepted.");*/
         }
 
-
+        public TourRequest GetTourRequestById(int id)
+        {
+            return _context.TourRequests.Find(id);
+        }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using InitialProject.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230606184543_addedAvailabilites")]
+    partial class addedAvailabilites
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
@@ -750,13 +753,13 @@ namespace InitialProject.Migrations
                     b.ToTable("TourAttendances");
                 });
 
-            modelBuilder.Entity("InitialProject.Model.TourGuideBusy", b =>
+            modelBuilder.Entity("InitialProject.Model.TourGuideAvailability", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("BusyDate")
+                    b.Property<DateTime>("AvailableDate")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("UserId")
@@ -764,7 +767,7 @@ namespace InitialProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TourGuideBusyDates");
+                    b.ToTable("TourGuideAvailabilities");
                 });
 
             modelBuilder.Entity("InitialProject.Model.TourLocation", b =>
