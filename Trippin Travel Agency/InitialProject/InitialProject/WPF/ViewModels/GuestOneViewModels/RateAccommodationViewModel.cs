@@ -226,6 +226,13 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             {
                 ImageCounterMessage = "You have added " + imageCounter + " images";
             }
+
+            Microsoft.Win32.OpenFileDialog fileDialog = new Microsoft.Win32.OpenFileDialog();
+            fileDialog.Title = "Select a picture";
+            fileDialog.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            bool? response = fileDialog.ShowDialog();
         }
         private void Rate(object sender)
         {

@@ -27,6 +27,7 @@
     <None Remove="Assets\Existing Assets\cacak_serbia.jpg" />
     <None Remove="Assets\Existing Assets\fruska-gora.jpg" />
     <None Remove="Assets\Existing Assets\headerImage2.png" />
+    <None Remove="Assets\Existing Assets\info_card.jpg" />
     <None Remove="Assets\Existing Assets\Kragujevac1.jpg" />
     <None Remove="Assets\Existing Assets\Kragujevac2.jpg" />
     <None Remove="Assets\Existing Assets\Kragujevac3.jpg" />
@@ -39,11 +40,11 @@
     <None Remove="Assets\Existing Assets\logo.png" />
     <None Remove="Assets\Existing Assets\logo2.png" />
     <None Remove="Assets\Existing Assets\logoWEB.png" />
-    <None Remove="Assets\Existing Assets\madrid.jpg" />
     <None Remove="Assets\Existing Assets\Madrid1.jpg" />
     <None Remove="Assets\Existing Assets\Madrid2.jpg" />
     <None Remove="Assets\Existing Assets\Madrid3.jpg" />
     <None Remove="Assets\Existing Assets\Madrid4.jpg" />
+    <None Remove="Assets\Existing Assets\madrid_spain.jpg" />
     <None Remove="Assets\Existing Assets\mitrovica.jpg" />
     <None Remove="Assets\Existing Assets\most_popular_location_generic.jpg" />
     <None Remove="Assets\Existing Assets\Novi Sad1.jpg" />
@@ -63,6 +64,7 @@
     <None Remove="Assets\Existing Assets\tours-white.png" />
     <None Remove="Assets\Existing Assets\Tutorial.mov" />
     <None Remove="Assets\fruska-gora.jpg" />
+    <None Remove="Assets\info_card.psd" />
     <None Remove="Assets\madrid.jpg" />
     <None Remove="Assets\mitrovica.jpg" />
     <None Remove="Assets\Ohrid1.jpg" />
@@ -136,6 +138,9 @@
     <Resource Include="Assets\Existing Assets\cacak_serbia.jpg" />
     <Resource Include="Assets\Existing Assets\fruska-gora.jpg" />
     <Resource Include="Assets\Existing Assets\headerImage2.png" />
+    <Resource Include="Assets\Existing Assets\info_card.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Existing Assets\Kragujevac1.jpg" />
     <Resource Include="Assets\Existing Assets\Kragujevac2.jpg" />
     <Resource Include="Assets\Existing Assets\Kragujevac3.jpg" />
@@ -150,7 +155,7 @@
     </Resource>
     <Resource Include="Assets\Existing Assets\logo2.png" />
     <Resource Include="Assets\Existing Assets\logoWEB.png" />
-    <Resource Include="Assets\Existing Assets\madrid.jpg" />
+    <Resource Include="Assets\Existing Assets\madrid_spain.jpg" />
     <Resource Include="Assets\Existing Assets\Madrid1.jpg" />
     <Resource Include="Assets\Existing Assets\Madrid2.jpg" />
     <Resource Include="Assets\Existing Assets\Madrid3.jpg" />
@@ -175,6 +180,7 @@
     <Content Include="Assets\Existing Assets\Tutorial.mov">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Assets\info_card.psd" />
     <Resource Include="Assets\Tutorial.mov">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

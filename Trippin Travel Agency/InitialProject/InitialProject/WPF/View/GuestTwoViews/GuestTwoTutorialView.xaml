@@ -19,7 +19,7 @@
                       Margin="42,81,0,0" 
                       VerticalAlignment="Top" 
                       Width="1028"
-                      Source="C:\Users\Nemanja\Desktop\Faks\Semestar 6\Projekat c#\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\Tutorial.mov" 
+                      Source="C:\Users\aleks\OneDrive\Dokumenti\GitHub\Trippin-Travel-Agency-SIMS-Project\Trippin Travel Agency\InitialProject\InitialProject\Assets\Tutorial.mov" 
                       LoadedBehavior="Manual"                                         
                       />
         <Button
@@ -56,11 +56,12 @@
                    Foreground="Black"
                    TextWrapping="Wrap"
                    />
-        <Image HorizontalAlignment="Left"
+        <Image
                Height="444" 
-               Margin="1149,243,0,0"
+               Margin="1149,218,59,0"
                VerticalAlignment="Top"
-               Width="292"/>
+               Source="pack://application:,,,/Assets/Existing Assets/info_card.jpg"
+               />
 
 
     </Grid>

@@ -193,6 +193,8 @@ namespace InitialProject.WPF.View.TourGuideViews
                 string.IsNullOrWhiteSpace(tourDescriptionTextBox.Text))
             {
                 MessageBox.Show("Fill in all the data.", "Data Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                saveMessageTextBlock.Visibility = Visibility.Collapsed;
+
                 fillAllTheDataMessageTextBlock.Text = "Fill in all the data.";
                 fillAllTheDataMessageTextBlock.Visibility = Visibility.Visible;
             }

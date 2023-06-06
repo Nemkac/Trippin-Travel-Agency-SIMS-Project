@@ -68,7 +68,9 @@
                                Style="{StaticResource labelForDisplay}"
                                FontWeight="Bold"/>
                         <Label Content="{Binding TourName}"
-                               Style="{StaticResource labelForDisplay}"/>
+                               Style="{StaticResource labelForDisplay}"
+                               Width="185"
+                               />
                     </StackPanel>
 
                     <!-- Tour name -->

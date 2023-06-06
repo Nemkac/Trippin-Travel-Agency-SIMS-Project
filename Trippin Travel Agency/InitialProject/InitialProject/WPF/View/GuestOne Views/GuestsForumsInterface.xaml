@@ -330,7 +330,7 @@
         </Grid>
 
         <Button 
-            Content="Create forumt" 
+            Content="Create forum" 
             HorizontalAlignment="Left" 
             Height="39"
             Command="{Binding CreateForum}"

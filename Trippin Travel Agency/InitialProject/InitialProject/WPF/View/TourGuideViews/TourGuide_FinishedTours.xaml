@@ -89,7 +89,6 @@
                           SelectedItem ="{Binding SelectedFinishedTourDTO}"
                           >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Id" Binding="{Binding id}" Width="*"/>
                         <DataGridTextColumn Header="Name" Binding="{Binding name}" Width="*"/>
                         <DataGridTextColumn Header="Language" Binding="{Binding language}" Width="*"/>
                     </DataGrid.Columns>

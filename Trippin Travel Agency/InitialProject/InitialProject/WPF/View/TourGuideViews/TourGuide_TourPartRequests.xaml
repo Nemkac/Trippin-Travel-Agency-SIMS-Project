@@ -47,7 +47,7 @@
                 </StackPanel>
 
             </RadioButton>
-            <TextBlock     Text="Tour parts "
+            <TextBlock     Text="Complex requests "
                            TextTrimming="CharacterEllipsis"
                            MaxWidth="270"
                            Style="{StaticResource headerTextBlock}"

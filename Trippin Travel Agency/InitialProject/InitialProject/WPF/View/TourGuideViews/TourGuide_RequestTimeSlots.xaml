@@ -36,18 +36,18 @@
                      VerticalAlignment="Center"
                      HorizontalAlignment="Left"
                      IsChecked="False"
-                     Command="{Binding ShowRequestsCommand}"
+                     Command="{Binding ShowTourPartRequestsCommand}"
                      Width="Auto"
                      Height="Auto"
                      >
 
                 <StackPanel Orientation="Vertical" Margin="-5,0,0,0">
                     <fa:IconImage Icon="ArrowLeft" Style="{StaticResource menuBackButtonIcon}"/>
-                    <Label Content="Requests" Style="{StaticResource labelBackBeneathIcon}"/>
+                    <Label Content="Complex req." Style="{StaticResource labelBackBeneathIcon}"/>
                 </StackPanel>
 
             </RadioButton>
-            <TextBlock     Text="Time slots"
+            <TextBlock     Text="Tour parts"
                            TextTrimming="CharacterEllipsis"
                            MaxWidth="270"
                            Style="{StaticResource headerTextBlock}"

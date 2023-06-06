@@ -381,20 +381,17 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 context.ComplexTourRequests.Add(complexTourRequest);
                 context.SaveChanges();
                 requests.Clear();
-            }
-          
-            context.ComplexTourRequests.Add(complexTourRequest);
-            context.SaveChanges();
 
-            foreach (TourRequest request in temporaryRequests) 
-            {
-                context.ComplexRegularPairs.Add(new ComplexRegularPairs(complexTourRequest.id, request.id));
-                MessageBox.Show(complexTourRequest.id.ToString() + request.id.ToString());
-            }
 
-            context.SaveChanges();
-            requests.Clear();
-            temporaryRequests.Clear();
+                foreach (TourRequest request in temporaryRequests)
+                {
+                    context.ComplexRegularPairs.Add(new ComplexRegularPairs(complexTourRequest.id, request.id));
+                }
+
+                context.SaveChanges();
+                requests.Clear();
+                temporaryRequests.Clear();
+            }
         }
     }
 }

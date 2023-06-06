@@ -104,8 +104,8 @@ namespace InitialProject.WPF.ViewModels
             {
                 Language = "No requests";
             }
-            LocationRequestNumber = $"{locationCount} requests";
-            LanguageRequestNumber = $"{languageCount} requests";
+            LocationRequestNumber = $"{locationCount}";
+            LanguageRequestNumber = $"{languageCount}";
             Username = LoggedUser.firstName; 
         }
 
@@ -177,6 +177,7 @@ namespace InitialProject.WPF.ViewModels
             }
             else
             {
+                MessageBox.Show(LocationRequestNumber);
                 MessageBox.Show("There are no recommended location requests."); 
             }
         }
@@ -196,6 +197,7 @@ namespace InitialProject.WPF.ViewModels
             }
             else
             {
+                MessageBox.Show(LanguageRequestNumber);
                 MessageBox.Show("There are no recommended language requests.");
             }
         }

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitialProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20230605221551_stagod")]
-    partial class stagod
+    [Migration("20230606123258_Cp4_HCI")]
+    partial class Cp4_HCI
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -392,12 +392,12 @@ namespace InitialProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("Forumid")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("comment")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("forumId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("hasGuestVisited")
                         .HasColumnType("INTEGER");
@@ -408,12 +408,20 @@ namespace InitialProject.Migrations
                     b.Property<DateTime>("postingDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("userIcon")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("userId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("username")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.HasKey("id");
 
-                    b.HasIndex("Forumid");
+                    b.HasIndex("forumId");
 
                     b.ToTable("ForumComments");
                 });
@@ -562,6 +570,35 @@ namespace InitialProject.Migrations
                     b.HasKey("id");
 
                     b.ToTable("RenovationSuggestionMessages");
+                });
+
+            modelBuilder.Entity("InitialProject.Model.ReportedComment", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("commentId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("explanation")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("forumId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("reporterUsername")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("senderUsername")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("id");
+
+                    b.ToTable("ReportedComments");
                 });
 
             modelBuilder.Entity("InitialProject.Model.RequestMessage", b =>
@@ -780,9 +817,6 @@ namespace InitialProject.Migrations
                     b.Property<string>("city")
                         .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("complexTourParentId")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("country")
                         .IsRequired()
@@ -1230,7 +1264,9 @@ namespace InitialProject.Migrations
                 {
                     b.HasOne("InitialProject.Model.Forum", null)
                         .WithMany("comments")
-                        .HasForeignKey("Forumid");
+                        .HasForeignKey("forumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("InitialProject.Model.Image", b =>

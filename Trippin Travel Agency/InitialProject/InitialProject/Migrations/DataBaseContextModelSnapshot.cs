@@ -815,9 +815,6 @@ namespace InitialProject.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("complexTourParentId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("country")
                         .IsRequired()
                         .HasColumnType("TEXT");

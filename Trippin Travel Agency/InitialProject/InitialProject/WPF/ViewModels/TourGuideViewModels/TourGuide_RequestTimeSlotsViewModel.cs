@@ -10,11 +10,18 @@ namespace InitialProject.WPF.ViewModels
     {
 
         private readonly TourGuide_MainViewModel _mainViewModel;
+        public ViewModelCommand ShowTourPartRequestsCommand { get; private set; }
+
 
         public TourGuide_RequestTimeSlotsViewModel(TourGuide_MainViewModel mainViewModel)
         {
             _mainViewModel = mainViewModel;
-        }
+            ShowTourPartRequestsCommand = new ViewModelCommand(ShowTourPartRequests);
 
+        }
+        public void ShowTourPartRequests(object obj)
+        {
+            _mainViewModel.ExecuteShowTourGuideTourPartRequestsViewCommand(null);
+        }
     }
 }

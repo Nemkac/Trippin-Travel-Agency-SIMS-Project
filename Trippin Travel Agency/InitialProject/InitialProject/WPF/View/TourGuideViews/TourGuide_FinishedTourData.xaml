@@ -146,7 +146,6 @@
                           AutoGenerateColumns="False"
                           >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Id" Binding="{Binding id}" Width="30"/>
                         <DataGridTextColumn Header="KP" Binding="{Binding keyPointId}" Width="30"/>
                         <DataGridTextColumn Header="Guest" Binding="{Binding guestId}" Width="46"/>
                         <DataGridTextColumn Header="Knowledge" Binding="{Binding guideKnowledgeRating}" Width="*"/>

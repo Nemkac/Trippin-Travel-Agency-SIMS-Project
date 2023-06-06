@@ -87,9 +87,8 @@
                     <DataGrid x:Name="tourRequestsDataGrid"
                               AutoGenerateColumns="False"
                               Width="330"
-                              BorderThickness="0">        
+                              BorderThickness="0">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Id" Binding="{Binding id}" Width="30"/>
                             <DataGridTextColumn Header="Start" Binding="{Binding startDate}" Width="85"/>
                             <DataGridTextColumn Header="End" Binding="{Binding endDate}" Width="85"/>
                             <DataGridTextColumn Header="Num" Binding="{Binding numberOfTourists}" Width="45"/>

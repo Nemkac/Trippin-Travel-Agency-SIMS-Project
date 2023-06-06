@@ -87,7 +87,8 @@
                        Width="250"
                        TextWrapping="Wrap"
                 />
-                    <TextBlock 
+                    <StackPanel Orientation="Horizontal">
+                       <TextBlock 
                        Text="{Binding LocationRequestNumber}"
                        FontSize="16"
                        FontFamily="Ubuntu"
@@ -97,7 +98,18 @@
                        VerticalAlignment="Center"
                        Margin="20, 100, 0, 0"
                        x:Name="locationRequestNumberTextBlock"
-                />
+                       />
+                       <TextBlock 
+                       Text="requests"
+                       FontSize="16"
+                       FontFamily="Ubuntu"
+                       FontWeight="Light"
+                       Foreground="White"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Margin="5, 100, 0, 0"
+                       />
+                    </StackPanel>
                     <Button Style="{StaticResource showImagesButton}"
                         Content="Create"
                         Width="83"
@@ -151,7 +163,8 @@
                        Width="250"
                        TextWrapping="Wrap"
                 />
-                    <TextBlock Text="{Binding LanguageRequestNumber}"
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding LanguageRequestNumber}"
                        FontSize="16"
                        FontFamily="Ubuntu"
                        FontWeight="Light"
@@ -160,7 +173,18 @@
                        VerticalAlignment="Center"
                        Margin="20, 75, 0, 0"
                        x:Name="languageRequestNumberTextBlock"
-                />
+                        />
+
+                        <TextBlock Text="requests"
+                       FontSize="16"
+                       FontFamily="Ubuntu"
+                       FontWeight="Light"
+                       Foreground="White"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Margin="5, 75, 0, 0"
+                        />
+                    </StackPanel>
                     <Button Style="{StaticResource showImagesButton}"
                         Content="Create"
                         Width="83"

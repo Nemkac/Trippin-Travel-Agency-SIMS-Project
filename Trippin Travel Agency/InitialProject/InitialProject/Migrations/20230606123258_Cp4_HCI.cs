@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace InitialProject.Migrations
 {
     /// <inheritdoc />
-    public partial class mig1 : Migration
+    public partial class Cp4_HCI : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -131,6 +131,20 @@ namespace InitialProject.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CanceledBookings", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ComplexRegularPairs",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    complexId = table.Column<int>(type: "INTEGER", nullable: false),
+                    regularId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ComplexRegularPairs", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -619,7 +633,8 @@ namespace InitialProject.Migrations
                     email = table.Column<string>(type: "TEXT", nullable: false),
                     role = table.Column<string>(type: "TEXT", nullable: false),
                     age = table.Column<int>(type: "INTEGER", nullable: false),
-                    super = table.Column<bool>(type: "INTEGER", nullable: false)
+                    super = table.Column<bool>(type: "INTEGER", nullable: false),
+                    resigned = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -900,6 +915,9 @@ namespace InitialProject.Migrations
 
             migrationBuilder.DropTable(
                 name: "CanceledBookings");
+
+            migrationBuilder.DropTable(
+                name: "ComplexRegularPairs");
 
             migrationBuilder.DropTable(
                 name: "Coupons");
