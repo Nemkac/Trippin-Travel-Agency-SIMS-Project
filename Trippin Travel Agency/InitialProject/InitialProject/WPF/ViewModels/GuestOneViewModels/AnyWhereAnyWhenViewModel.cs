@@ -29,6 +29,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand Search { get; set; }
         public ViewModelCommand OpenNavigator { get; set; }
         public ViewModelCommand Help { get; set; }
+        public ViewModelCommand GoBack { get; set; }
 
         public AnyWhereAnyWhenViewModel()
         {
@@ -43,6 +44,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             CheckDates = new ViewModelCommand(CheckForDates);
             OpenNavigator = new ViewModelCommand(ShowNavigator);
             Help = new ViewModelCommand(ShowHelp);
+            GoBack = new ViewModelCommand(GoToPreviousWindow);
 
             InputStartingDate = DateTime.Today;
             InputEndingDate = DateTime.Today;
@@ -219,11 +221,20 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 
         private void ShowNavigator(object sender)
         {
+            GuestOneStaticHelper.InterfaceToGoBack = GuestOneStaticHelper.anyWhereAnyWhenInterface;
             Navigator navigator = new Navigator();
             navigator.Left = GuestOneStaticHelper.anyWhereAnyWhenInterface.Left + (GuestOneStaticHelper.anyWhereAnyWhenInterface.Width - navigator.Width) / 2;
             navigator.Top = GuestOneStaticHelper.anyWhereAnyWhenInterface.Top + (GuestOneStaticHelper.anyWhereAnyWhenInterface.Height - navigator.Height) / 2;
             GuestOneStaticHelper.anyWhereAnyWhenInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
             navigator.Show();
+        }
+
+        public void GoToPreviousWindow(object sedner)
+        {
+            GuestOneStaticHelper.anyWhereAnyWhenInterface.Hide();
+            GuestOneStaticHelper.InterfaceToGoBack.Top = GuestOneStaticHelper.anyWhereAnyWhenInterface.Top;
+            GuestOneStaticHelper.InterfaceToGoBack.Left = GuestOneStaticHelper.anyWhereAnyWhenInterface.Left;
+            GuestOneStaticHelper.InterfaceToGoBack.Show();
         }
 
         public void ShowHelp(object sender)
@@ -313,19 +324,19 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         {
             if (SelectedAccommodation != null)
             {
-                int daysToBook;
-                List<string> displayableDates;
-                GetBasicDatesProperties(sender, out daysToBook, out displayableDates);
-
-                dynamic result = displayableDates.Select(s => new { value = s }).ToList();
-                if (daysToBook < selectedAccommodation.minDaysBooked)
+                if (InputDays != null && InputDays != string.Empty && InputGuests != null && InputGuests != string.Empty)
                 {
-                    // ne moze da se bukira
+                    int daysToBook;
+                    List<string> displayableDates;
+                    GetBasicDatesProperties(sender, out daysToBook, out displayableDates);
+                    WarningMessageCheck = string.Empty;
+                    dynamic result = displayableDates.Select(s => new { value = s }).ToList();
+                    GuestOneStaticHelper.result = result;
+                    ShowBookInterface();
                 }
                 else
                 {
-                    GuestOneStaticHelper.result = result;
-                    ShowBookInterface();
+                    WarningMessageCheck = "Please enter parameters";
                 }
             }
             else

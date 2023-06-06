@@ -14,6 +14,7 @@
         <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
         <KeyBinding Key="S" Modifiers="Ctrl" Command="{Binding Search}" />
         <KeyBinding Key="F1" Command="{Binding CheckDates}" />
+        <KeyBinding Key="Esc" Command="{Binding GoBack}" />
     </Window.InputBindings>
     <Grid>
         <GroupBox Header="Navigator"
@@ -181,6 +182,11 @@
             BorderBrush="#FF192A56"
             Background="White" 
             FontWeight="Medium"
+            ColumnWidth="125"
+            TextBlock.TextAlignment="Center"
+            Style="{DynamicResource DataGridStyle1}"
+            ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+            RowStyle="{DynamicResource DataGridRowStyle1}"
             ItemsSource="{Binding AccommodationsGrid}"
             SelectedItem="{Binding SelectedAccommodation}"/>
 

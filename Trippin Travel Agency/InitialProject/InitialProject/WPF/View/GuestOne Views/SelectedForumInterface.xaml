@@ -7,11 +7,12 @@
         mc:Ignorable="d"
         KeyDown="F"
         Title="SelectedForumInterface" Height="800" Width="1500">
-        <Window.InputBindings>
-            <KeyBinding Key="F1" Command="{Binding ShowForum}" />
-            <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
-            <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
-            <KeyBinding Key="Enter" Command="{Binding AddComment}" />
+    <Window.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding ShowForum}" />
+        <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
+        <KeyBinding Key="Enter" Command="{Binding AddComment}" />
+        <KeyBinding Key="Esc" Command="{Binding GoBack}" />
     </Window.InputBindings>
     <Grid>
         <GroupBox 
@@ -111,11 +112,21 @@
 
         <DataGrid 
             HorizontalAlignment="Left" 
-            Height="380" 
-            Margin="161,224,0,0" 
+            Height="336" 
+            Margin="148,238,0,0" 
             VerticalAlignment="Top" 
-            Width="457" 
-            ItemsSource="{Binding Comments}"/>
+            Width="470" 
+            ItemsSource="{Binding Comments}"
+            SelectedIndex="{Binding SelectedComment}"
+            ColumnWidth="115"
+            TextBlock.TextAlignment="Center"
+            Style="{DynamicResource DataGridStyle1}"
+            ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+            RowStyle="{DynamicResource DataGridRowStyle1}">
+            <DataGrid.InputBindings>
+                <KeyBinding Key="S" Command="{Binding SeeComment}" />
+            </DataGrid.InputBindings>
+        </DataGrid>
 
         <TextBox 
             HorizontalAlignment="Left" 
@@ -126,8 +137,13 @@
             Text="{Binding NewComment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
             VerticalAlignment="Top" 
             IsTabStop="False"
-            Width="469"/>
-        
+            Width="469"
+            FontFamily="ubuntu" 
+            FontSize="22" 
+            TextAlignment="Center" 
+            VerticalContentAlignment="Center"
+            />
+
         <Button 
             Content="Add comment"
             Command="{Binding AddComment}"
@@ -145,7 +161,7 @@
             Width="196"/>
         <TextBlock HorizontalAlignment="Left" 
             Height="88" 
-            Margin="1195,561,0,0" 
+            Margin="1195,580,0,0" 
             TextWrapping="Wrap" 
             Text="{Binding WarningMessage}" 
             VerticalAlignment="Top" 
@@ -183,11 +199,11 @@
         <TextBlock 
             HorizontalAlignment="Left"
             Height="20" 
-            Margin="1089,628,0,0"
+            Margin="1086,628,0,0"
             TextWrapping="Wrap" 
             Text="Press ENTER" 
             VerticalAlignment="Top" 
-            Width="74"
+            Width="109"
             Foreground="#718093"
             FontFamily="Ubuntu" 
             FontSize="17" 
@@ -195,7 +211,7 @@
         <TextBlock 
             HorizontalAlignment="Left"
             Height="20" 
-            Margin="188,622,0,0"
+            Margin="171,210,0,0"
             TextWrapping="Wrap" 
             Text="Press TAB to access, then UP and DOWN arrows" 
             VerticalAlignment="Top" 
@@ -247,6 +263,45 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="1050,217,0,0"
+            TextWrapping="Wrap" 
+            Text="Press F1 to access" 
+            VerticalAlignment="Top" 
+            Width="152"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium"/>
+        <Button 
+            Content="See comment"
+            Command="{Binding SeeComment}"
+            HorizontalAlignment="Left"
+            Height="38" 
+            Margin="294,585,0,0"
+            FontFamily="ubuntu" 
+            FontSize="24" 
+            Background="#FF273C75" 
+            Foreground="White" 
+            FontWeight="Medium"
+            IsTabStop="False"
+            VerticalAlignment="Top"
+            Style="{StaticResource leadButton}"
+            Width="196"/>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Height="20" 
+            Margin="357,628,0,0"
+            TextWrapping="Wrap" 
+            Text="Press S" 
+            VerticalAlignment="Top" 
+            Width="70"
+            Foreground="#718093"
+            FontFamily="Ubuntu" 
+            FontSize="17" 
+            FontWeight="Medium" RenderTransformOrigin="0.53,-0.238"/>
 
 
     </Grid>

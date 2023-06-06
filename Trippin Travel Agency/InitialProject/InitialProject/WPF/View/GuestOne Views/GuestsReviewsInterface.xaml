@@ -10,9 +10,23 @@
         <KeyBinding Key="R" Command="{Binding OpenReview}" />
         <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding OpenNavigator}" />
         <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding Help}" />
+        <KeyBinding Key="Esc" Command="{Binding GoBack}" />
     </Window.InputBindings>
 
     <Grid>
+        <GroupBox HorizontalAlignment="Left"
+            Height="509"
+            Header="My reviews"
+            Margin="250,146,0,0" 
+            VerticalAlignment="Top" 
+            Width="1032"
+            FontFamily="ubuntu" 
+            FontSize="36"
+            FontWeight="Medium" 
+            Foreground="#FF192A56" 
+            BorderThickness="3" 
+            BorderBrush="#192a56"/>
+
         <Grid Margin="4,4,-4,-4">
             <Label Content="" 
                    FontSize ="72"
@@ -158,6 +172,7 @@
                     Background="#FF273C75" 
                     Foreground="White" 
                     FontWeight="Medium"
+                    Command="{Binding OpenReview}"
                     Style="{StaticResource leadButton}"
                     IsTabStop="False"
                     />
@@ -175,19 +190,6 @@
                 FontWeight="Medium"/>
         </Grid>
 
-        <GroupBox HorizontalAlignment="Left"
-            Height="509"
-            Header="My reviews"
-            Margin="250,146,0,0" 
-            VerticalAlignment="Top" 
-            Width="1032"
-            FontFamily="ubuntu" 
-            FontSize="36"
-            FontWeight="Medium" 
-            Foreground="#FF192A56" 
-            BorderThickness="3" 
-            BorderBrush="#192a56"/>
-
         <DataGrid HorizontalAlignment="Center"
                   Height="344" 
                   VerticalAlignment="Top"
@@ -198,10 +200,14 @@
                   BorderBrush="#FF192A56"
                   Background="White" 
                   FontWeight="Medium" 
-                  TextBlock.TextAlignment="Center" 
                   MinRowHeight="50"
                   ItemsSource="{Binding ReviewsGrid}"
                   SelectedIndex="{Binding SelectedIndex}" Margin="0,212,0,0"
+                  ColumnWidth="255"
+                  TextBlock.TextAlignment="Center"
+                  Style="{DynamicResource DataGridStyle1}"
+                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                  RowStyle="{DynamicResource DataGridRowStyle1}"
                   />
         <TextBlock HorizontalAlignment="Left"
             Height="198" 

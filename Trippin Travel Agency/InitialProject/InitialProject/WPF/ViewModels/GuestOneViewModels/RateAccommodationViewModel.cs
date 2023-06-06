@@ -203,6 +203,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 
         private void ShowNavigator(object sender)
         {
+            GuestOneStaticHelper.InterfaceToGoBack = GuestOneStaticHelper.rateAccommodationInterface;
             Navigator navigator = new Navigator();
             navigator.Left = GuestOneStaticHelper.rateAccommodationInterface.Left + (GuestOneStaticHelper.rateAccommodationInterface.Width - navigator.Width) / 2;
             navigator.Top = GuestOneStaticHelper.rateAccommodationInterface.Top + (GuestOneStaticHelper.rateAccommodationInterface.Height - navigator.Height) / 2;

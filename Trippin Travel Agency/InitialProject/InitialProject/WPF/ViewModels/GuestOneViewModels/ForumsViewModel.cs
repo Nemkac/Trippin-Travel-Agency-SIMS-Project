@@ -25,9 +25,11 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand OpenNavigator { get; set; }
         private UserService userService { get; set; }
         private ForumService forumService { get; set; }
-        
+        public ViewModelCommand GoBack { get; set; }
 
-        
+
+
+
         bool isHelpOn = false;
 
         public ForumsViewModel()
@@ -41,6 +43,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             Search = new ViewModelCommand(SearchBy);
             Help = new ViewModelCommand(ShowHelp);
             OpenNavigator = new ViewModelCommand(ShowNavigator);
+            GoBack = new ViewModelCommand(GoToPreviousWindow);
             var forumsToGrid = from forum in forumService.GetAll()
                                select new
                                {
@@ -168,11 +171,20 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 
         private void ShowNavigator(object sender)
         {
+            GuestOneStaticHelper.InterfaceToGoBack = GuestOneStaticHelper.forumsInterface;
             Navigator navigator = new Navigator();
             navigator.Left = GuestOneStaticHelper.forumsInterface.Left + (GuestOneStaticHelper.forumsInterface.Width - navigator.Width) / 2;
             navigator.Top = GuestOneStaticHelper.forumsInterface.Top + (GuestOneStaticHelper.forumsInterface.Height - navigator.Height) / 2;
             GuestOneStaticHelper.forumsInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
             navigator.Show();
+        }
+
+        public void GoToPreviousWindow(object sedner)
+        {
+            GuestOneStaticHelper.forumsInterface.Hide();
+            GuestOneStaticHelper.InterfaceToGoBack.Top = GuestOneStaticHelper.forumsInterface.Top;
+            GuestOneStaticHelper.InterfaceToGoBack.Left = GuestOneStaticHelper.forumsInterface.Left;
+            GuestOneStaticHelper.InterfaceToGoBack.Show();
         }
 
         public void ShowHelp(object sender)

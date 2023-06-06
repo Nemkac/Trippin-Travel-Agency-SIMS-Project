@@ -159,6 +159,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 
         private void ShowNavigator(object sender)
         {
+            GuestOneStaticHelper.InterfaceToGoBack = GuestOneStaticHelper.sendBookingDelaymentInterface;
             Navigator navigator = new Navigator();
             navigator.Left = GuestOneStaticHelper.sendBookingDelaymentInterface.Left + (GuestOneStaticHelper.sendBookingDelaymentInterface.Width - navigator.Width) / 2;
             navigator.Top = GuestOneStaticHelper.sendBookingDelaymentInterface.Top + (GuestOneStaticHelper.sendBookingDelaymentInterface.Height - navigator.Height) / 2;

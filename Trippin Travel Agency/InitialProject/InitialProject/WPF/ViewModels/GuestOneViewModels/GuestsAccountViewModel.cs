@@ -17,23 +17,36 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
     {
         public ViewModelCommand OpenNavigator { get; set; }
         public ViewModelCommand Help { get; set; }
+        public ViewModelCommand GoBack { get; set; }
+
         private UserService userService = new UserService();
         bool isHelpOn = false;
+
         public GuestsAccountViewModel()
         {
             OpenNavigator = new ViewModelCommand(ShowNavigator);
             Help = new ViewModelCommand(ShowHelp);
+            GoBack = new ViewModelCommand(GoToPreviousWindow);
             SuperGuestText = GenerateSuperGuestText();
             IsSuperGuest();
         }
 
         private void ShowNavigator(object sender)
         {
+            GuestOneStaticHelper.InterfaceToGoBack = GuestOneStaticHelper.guestsAccountInterface;
             Navigator navigator = new Navigator();
             navigator.Left = GuestOneStaticHelper.guestsAccountInterface.Left + (GuestOneStaticHelper.guestsAccountInterface.Width - navigator.Width) / 2;
             navigator.Top = GuestOneStaticHelper.guestsAccountInterface.Top + (GuestOneStaticHelper.guestsAccountInterface.Height - navigator.Height) / 2;
             GuestOneStaticHelper.guestsAccountInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
             navigator.Show();
+        }
+
+        public void GoToPreviousWindow(object sedner)
+        {
+            GuestOneStaticHelper.guestsAccountInterface.Hide();
+            GuestOneStaticHelper.InterfaceToGoBack.Top = GuestOneStaticHelper.guestsAccountInterface.Top;
+            GuestOneStaticHelper.InterfaceToGoBack.Left = GuestOneStaticHelper.guestsAccountInterface.Left;
+            GuestOneStaticHelper.InterfaceToGoBack.Show();
         }
 
         private string superGuestText;

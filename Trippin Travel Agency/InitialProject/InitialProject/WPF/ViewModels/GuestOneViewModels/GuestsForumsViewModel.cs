@@ -27,6 +27,7 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
         public ViewModelCommand ShowForum { get; set; }
         public ViewModelCommand Help { get; set; }
         public ViewModelCommand OpenNavigator { get; set; }
+        public ViewModelCommand GoBack { get; set; }
 
         bool isHelpOn = false;
         public GuestsForumsViewModel()
@@ -36,10 +37,13 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
             forumService = new ForumService();
             userService = new UserService();
             accommodationLocationService = new AccommodationLocationService();
+
             CreateForum = new ViewModelCommand(CreateNewForum);
             ShowForum = new ViewModelCommand(ShowSelectedForum);
             Help = new ViewModelCommand(ShowHelp);
             OpenNavigator = new ViewModelCommand(ShowNavigator);
+            GoBack = new ViewModelCommand(GoToForums);
+
             ForumText = "Here are shown forums you have created.\n You can close one of your forums for further commenting, but you can never delete it.";
 
             var forumsToGrid = from forum in forumService.GetByCreatorId()
@@ -332,11 +336,21 @@ namespace InitialProject.WPF.ViewModels.GuestOneViewModels
 
         private void ShowNavigator(object sender)
         {
+            GuestOneStaticHelper.InterfaceToGoBack = GuestOneStaticHelper.guestsForumsInterface;
             Navigator navigator = new Navigator();
             navigator.Left = GuestOneStaticHelper.guestsForumsInterface.Left + (GuestOneStaticHelper.guestsForumsInterface.Width - navigator.Width) / 2;
             navigator.Top = GuestOneStaticHelper.guestsForumsInterface.Top + (GuestOneStaticHelper.guestsForumsInterface.Height - navigator.Height) / 2;
             GuestOneStaticHelper.guestsForumsInterface.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#dcdde1");
             navigator.Show();
+        }
+
+        private void GoToForums(object sender)
+        {
+            ForumsInterface forumsInterface = new ForumsInterface();
+            forumsInterface.Left = GuestOneStaticHelper.guestsForumsInterface.Left;
+            forumsInterface.Top = GuestOneStaticHelper.guestsForumsInterface.Top;
+            GuestOneStaticHelper.guestsForumsInterface.Hide();
+            forumsInterface.Show();
         }
     }
 }
