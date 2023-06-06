@@ -20,6 +20,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.DTO;
+using System.Security.Cryptography.X509Certificates;
 
 namespace InitialProject.WPF.View.GuestTwoViews
 {
@@ -29,7 +30,7 @@ namespace InitialProject.WPF.View.GuestTwoViews
         public GuestTwoInterface()
         {
             InitializeComponent();
-           
-        } 
+            
+        }
     }
 }

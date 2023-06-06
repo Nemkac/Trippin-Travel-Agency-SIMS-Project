@@ -178,6 +178,19 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 }
             }
         }
+        private string fullName;
+        public string FullName
+        {
+            get { return fullName; }
+            set
+            {
+                if (fullName != value)
+                {
+                    fullName = value;
+                    OnPropertyChanged(nameof(FullName));
+                }
+            }
+        }
 
         public GuestTwoMesagesViewModel()
         {
@@ -196,6 +209,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             UsernameLabel = "Hello, " + LoggedUser.username + "!";
             UsernameLabel2 = "@" + LoggedUser.username;
             AccountType = "Account type:  " + LoggedUser.role;
+            FullName = "@" + LoggedUser.firstName + " " + LoggedUser.lastName;
             DataBaseContext context = new DataBaseContext();
             LoadData(context);            
             LoadMessages(context);

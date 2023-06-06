@@ -69,6 +69,12 @@
 
             <GroupBox Header="Info" FontSize="28" FontFamily="Ubuntu" FontWeight="Light" Height="287" VerticalAlignment="Top" Foreground="#192a56">
                 <StackPanel Grid.Column="0">
+                    <Label Name="NameLabel" 
+                           Margin ="15 15 0 0" 
+                           FontSize="20"
+                           FontFamily="Ubuntu" 
+                           FontWeight="Medium" 
+                           Content="{Binding FullName}"/>
                     <Label Name="UsernameLabel2"
                            Margin ="15 15 0 0" 
                            FontSize="20"
@@ -98,7 +104,8 @@
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               RowStyle="{DynamicResource DataGridRowStyle1}"
-                              ItemsSource="{Binding requests}" IsReadOnly="True"                           
+                              ItemsSource="{Binding requests}" IsReadOnly="True"
+                              AutoGenerateColumns="False"
                               >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="" Binding="{Binding field}">
@@ -109,6 +116,12 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
+                            <DataGridTextColumn Header="Country" Binding="{Binding country}" Width="200" FontSize="20"/>
+                            <DataGridTextColumn Header="City" Binding="{Binding city}" Width="200" FontSize="20"/>
+                            <DataGridTextColumn Header="Start date" Binding="{Binding dateFrom}" Width="200" FontSize="20"/>
+                            <DataGridTextColumn Header="End date" Binding="{Binding dateTo}" Width="200" FontSize="20"/>
+                            <DataGridTextColumn Header="Language" Binding="{Binding language}" Width="200" FontSize="20"/>
+                            <DataGridTextColumn Header="Status" Binding="{Binding status}" Width="200" FontSize="20"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
@@ -121,8 +134,10 @@
                   FontSize="40"
                   FontFamily="Ubuntu"
                   FontWeight="Light" 
-                  Foreground="#192a56">
+                  Foreground="#192a56"
+                  Grid.Column="1">
             <StackPanel Grid.Row="2"
+                        Grid.Column="1"
                     Margin="48,-200,36,0"
                     Height = "400">
                 <DataGrid x:Name="dataGrid2" 
@@ -138,6 +153,7 @@
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               RowStyle="{DynamicResource DataGridRowStyle1}"
                               ItemsSource="{Binding complexRequests}" IsReadOnly="True"                          
+                              AutoGenerateColumns="False"
                               >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="" Binding="{Binding field}">
@@ -148,6 +164,15 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
+                        <DataGridTextColumn Header="Tura" Binding="{Binding tura}" Width="250" FontSize="20"/>
+                        <DataGridTextColumn Header="City" Binding="{Binding city}" Width="180" FontSize="20"/>
+                        <DataGridTextColumn Header="Country" Binding="{Binding country}" Width="200" FontSize="20"/>
+                        <DataGridTextColumn Header="Language" Binding="{Binding language}" Width="200" FontSize="20"/>
+                        <DataGridTextColumn Header="Start date" Binding="{Binding dateFrom}" Width="200" FontSize="20"/>
+                        <DataGridTextColumn Header="End date" Binding="{Binding dateTo}" Width="200" FontSize="20"/>
+                        <DataGridTextColumn Header="Accepted date" Binding="{Binding acceptedDate}" Width="200" FontSize="20"/>
+                        <DataGridTextColumn Header="Status" Binding="{Binding status}" Width="200" FontSize="20"/>
+
                     </DataGrid.Columns>
                 </DataGrid>
 

@@ -166,7 +166,7 @@
                     Style="{StaticResource addButtonWEB}" 
                     Name ="FinishBookingButton" 
                     Command="{Binding TourViewCommand}"
-                    IsEnabled="{Binding FinishDisabled}">
+                    IsEnabled="{Binding FinishDisabled}" Cursor="Hand">
                 
                 <TextBlock Text="Finish booking" 
                            TextWrapping="Wrap" 
@@ -178,7 +178,7 @@
                     FontSize="28" 
                     Height="120" 
                     Style="{StaticResource saveButtonWEB}"
-                    Command="{Binding CreateTourReport}">
+                    Command="{Binding CreateTourReport}" Cursor="Hand">
                 <TextBlock Text="Generate booking confirmation" 
                            TextWrapping="Wrap" 
                            TextAlignment="Center"/>
@@ -192,7 +192,7 @@
                     Style="{StaticResource cancelButtonWEB}" 
                     Name="CancelBookingButton"
                     IsEnabled="{Binding CancelDisabled}"
-                    Command="{Binding CancelBookingCommand}"/>
+                    Command="{Binding CancelBookingCommand}" Cursor="Hand"/>
         </StackPanel>
 
         <GroupBox Header="My Coupons" 
@@ -203,16 +203,27 @@
                   Foreground="#192a56">
             
             <StackPanel Grid.Column="2">
-            <DataGrid x:Name="CouponsDataGrid" 
+                <DataGrid x:Name="CouponsDataGrid" 
                       d:DataContext ="" Width="550"
                       Height="700" Margin="0 30 0 0" 
                       FontWeight="Medium" 
-                      FontSize="28" 
+                      FontSize="25" 
                       ItemsSource="{Binding couponDTOs}"
                       SelectedItem="{Binding SelectedCoupon}"
-                      />
-                
-        </StackPanel>
+                      AutoGenerateColumns="False"
+                      Style="{DynamicResource DataGridStyle1}" 
+                      CellStyle="{DynamicResource DataGridCellStyle1}" 
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                      RowStyle="{DynamicResource DataGridRowStyle1}"
+                      >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Coupons" Binding="{Binding name}" Width="150"/>
+                        <DataGridTextColumn Header="Exp. date" Binding="{Binding expiresOn}" Width="*"/>
+                    </DataGrid.Columns>
+
+                </DataGrid>
+
+            </StackPanel>
         </GroupBox>
 
 

@@ -69,6 +69,12 @@
 
             <GroupBox Header="Info" FontSize="28" FontFamily="Ubuntu" FontWeight="Light" Height="287" VerticalAlignment="Top" Foreground="#192a56">
                 <StackPanel Grid.Column="0">
+                    <Label Name="NameLabel" 
+                           Margin ="15 15 0 0" 
+                           FontSize="20"
+                           FontFamily="Ubuntu" 
+                           FontWeight="Medium" 
+                           Content="{Binding FullName}"/>
                     <Label Name="UsernameLabel2"
                            Margin ="15 15 0 0"
                            FontSize="20" 
@@ -84,16 +90,28 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="My coupons" Margin ="0 -112 0 0" Grid.Column="1" Height="700" Width="600" HorizontalAlignment="Left" FontSize="40" FontFamily="Ubuntu" FontWeight="Light" Foreground="#192a56">
-                <StackPanel Grid.Column="1" Margin="15 0 0 0" Height="650" Width="550" HorizontalAlignment="Left">
+            <GroupBox Header="My coupons" Margin ="0 -112 0 0" Grid.Column="1" Height="700" Width="800" HorizontalAlignment="Left" FontSize="40" FontFamily="Ubuntu" FontWeight="Light" Foreground="#192a56">
+                <StackPanel Grid.Column="1" Margin="15 0 0 0" Height="650" Width="750" HorizontalAlignment="Left">
                     <DataGrid x:Name="dataGrid"
                               d:DataContext ="" 
-                              Width="525" 
+                              Width="700" 
                               Height="550" 
                               Margin="0 50 0 0" 
                               FontSize="28" 
                               FontFamily="Ubuntu"
-                              ItemsSource="{Binding couponDTOs}"/>
+                              ItemsSource="{Binding couponDTOs}"
+                              AutoGenerateColumns="False"
+                              Style="{DynamicResource DataGridStyle1}" 
+                              CellStyle="{DynamicResource DataGridCellStyle1}" 
+                              ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                              RowStyle="{DynamicResource DataGridRowStyle1}" IsReadOnly="True"
+                              ColumnWidth="Auto"
+                              >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Coupons" Binding="{Binding name}" Width="200"/>
+                            <DataGridTextColumn Header="Exp. date" Binding="{Binding expiresOn}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </StackPanel>
             </GroupBox>
         </Grid>

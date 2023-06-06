@@ -67,6 +67,12 @@
 
             <GroupBox Header="Info" FontSize="28" FontFamily="Ubuntu" FontWeight="Light" Height="287" VerticalAlignment="Top" Foreground="#192a56">
                 <StackPanel Grid.Column="0">
+                    <Label Name="NameLabel" 
+                           Margin ="15 15 0 0" 
+                           FontSize="20"
+                           FontFamily="Ubuntu" 
+                           FontWeight="Medium" 
+                           Content="{Binding FullName}"/>
                     <Label Name="UsernameLabel2" 
                            Margin ="15 15 0 0" 
                            FontSize="20"
@@ -91,7 +97,7 @@
                               Width="1125" 
                               Height="450" 
                               Margin="0 0 0 0" 
-                              FontSize="20" 
+                              FontSize="50" 
                               FontFamily="Ubuntu"
                               ItemsSource="{Binding responseMessages}"
                               SelectedItem="{Binding SelectedResponseMessage}"
@@ -99,16 +105,43 @@
                               Style="{DynamicResource DataGridStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-                              RowStyle="{DynamicResource DataGridRowStyle1}"/>
-                    <Button Width="350"
-                            Height="130"
+                              RowStyle="{DynamicResource DataGridRowStyle1}"
+                              AutoGenerateColumns="False"                             
+                              >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Message" Binding="{Binding message}" Width="200" FontSize="20"/>
+                            <DataGridTextColumn Header="Tour id" Binding="{Binding tourId}" Width="200" FontSize="20"/>
+                            <DataGridTextColumn Header="Number of guests" Binding="{Binding numberOfGuests}" Width="200" FontSize="20"/>
+                        </DataGrid.Columns>
+                        
+                        
+                    </DataGrid>
+                    <Button  Height="82" 
+                        Width="239" 
                             Style="{StaticResource openMessageButtonWEB}"
-                            Margin="775 15 0 0" 
+                            Margin="870 15 0 0" 
                             Content="Open" 
-                            FontSize="32" 
+                            FontSize="20" 
                             FontFamily="Ubuntu" 
-                            FontWeight="Heavy" 
-                            Command="{Binding OpenMessage}"/>
+                            FontWeight="Light" 
+                            Command="{Binding OpenMessage}" Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border x:Name="ActiveReservationsButton" CornerRadius="5" Background="#273c75">
+                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="8,6,8,6" ContentSource="Content" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff" />
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+
+                        </Button.Template>
+                    </Button>
                     <TextBlock Width="350"
                                Height="130"
                                Margin="-770 -140 0 0"
@@ -138,15 +171,32 @@
                              FontFamily="Ubuntu" 
                              ItemsSource="{Binding requestMessages}" 
                              SelectedItem="{Binding SelectedRequest}"/>
-                    <Button Width="350"
-                            Height="130"
+                    <Button Height="82" 
+                        Width="239"  
                             Style="{StaticResource openMessageButtonWEB}"
-                            Margin="775 15 0 0" 
+                            Margin="870 15 0 0" 
                             Content="Preview" 
-                            FontSize="32" 
+                            FontSize="20" 
                             FontFamily="Ubuntu" 
-                            FontWeight="Heavy"
-                            Command="{Binding DetailedTourViewCommand}"/>
+                            FontWeight="Light"
+                            Command="{Binding DetailedTourViewCommand}" Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border x:Name="ActiveReservationsButton" CornerRadius="5" Background="#273c75">
+                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="8,6,8,6" ContentSource="Content" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff" />
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+
+                        </Button.Template>
+                    </Button>
                     <TextBlock Width="350"
                                Height="130"
                                Margin="-770 -140 0 0"

@@ -20,9 +20,17 @@
     <None Remove="Assets\Existing Assets\accImg2.jpg" />
     <None Remove="Assets\Existing Assets\accImg3.jpg" />
     <None Remove="Assets\Existing Assets\accImg4.jpg" />
+    <None Remove="Assets\Existing Assets\Cacak1.jpg" />
+    <None Remove="Assets\Existing Assets\Cacak2.jpg" />
+    <None Remove="Assets\Existing Assets\Cacak3.jpg" />
+    <None Remove="Assets\Existing Assets\Cacak4.jpg" />
     <None Remove="Assets\Existing Assets\cacak_serbia.jpg" />
     <None Remove="Assets\Existing Assets\fruska-gora.jpg" />
     <None Remove="Assets\Existing Assets\headerImage2.png" />
+    <None Remove="Assets\Existing Assets\Kragujevac1.jpg" />
+    <None Remove="Assets\Existing Assets\Kragujevac2.jpg" />
+    <None Remove="Assets\Existing Assets\Kragujevac3.jpg" />
+    <None Remove="Assets\Existing Assets\Kragujevac4.jpg" />
     <None Remove="Assets\Existing Assets\language_generic.jpg" />
     <None Remove="Assets\Existing Assets\least_popular_location_generic.jpg" />
     <None Remove="Assets\Existing Assets\location_generic.jpg" />
@@ -32,20 +40,38 @@
     <None Remove="Assets\Existing Assets\logo2.png" />
     <None Remove="Assets\Existing Assets\logoWEB.png" />
     <None Remove="Assets\Existing Assets\madrid.jpg" />
+    <None Remove="Assets\Existing Assets\Madrid1.jpg" />
+    <None Remove="Assets\Existing Assets\Madrid2.jpg" />
+    <None Remove="Assets\Existing Assets\Madrid3.jpg" />
+    <None Remove="Assets\Existing Assets\Madrid4.jpg" />
     <None Remove="Assets\Existing Assets\mitrovica.jpg" />
     <None Remove="Assets\Existing Assets\most_popular_location_generic.jpg" />
+    <None Remove="Assets\Existing Assets\Novi Sad1.jpg" />
+    <None Remove="Assets\Existing Assets\Novi Sad2.jpg" />
+    <None Remove="Assets\Existing Assets\Novi Sad3.jpg" />
+    <None Remove="Assets\Existing Assets\Novi Sad4.jpg" />
     <None Remove="Assets\Existing Assets\Ohrid1.jpg" />
     <None Remove="Assets\Existing Assets\Ohrid2.jpg" />
     <None Remove="Assets\Existing Assets\Ohrid3.jpg" />
     <None Remove="Assets\Existing Assets\Ohrid4.jpg" />
+    <None Remove="Assets\Existing Assets\Sremska Mitrovica1.jpg" />
+    <None Remove="Assets\Existing Assets\Sremska Mitrovica2.jpg" />
+    <None Remove="Assets\Existing Assets\Sremska Mitrovica3.jpg" />
+    <None Remove="Assets\Existing Assets\Sremska Mitrovica4.jpg" />
     <None Remove="Assets\Existing Assets\sremskamitrovica_serbia.jpg" />
     <None Remove="Assets\Existing Assets\super_guide.png" />
     <None Remove="Assets\Existing Assets\tours-white.png" />
+    <None Remove="Assets\Existing Assets\Tutorial.mov" />
     <None Remove="Assets\fruska-gora.jpg" />
     <None Remove="Assets\madrid.jpg" />
     <None Remove="Assets\mitrovica.jpg" />
+    <None Remove="Assets\Ohrid1.jpg" />
+    <None Remove="Assets\Ohrid2.jpg" />
+    <None Remove="Assets\Ohrid3.jpg" />
+    <None Remove="Assets\Ohrid4.jpg" />
     <None Remove="Assets\Ohrid5.jpg" />
     <None Remove="Assets\tours-white.svg" />
+    <None Remove="Assets\Tutorial.mov" />
   </ItemGroup>
 
   <ItemGroup>
@@ -101,9 +127,17 @@
     <Resource Include="Assets\Existing Assets\accImg2.jpg" />
     <Resource Include="Assets\Existing Assets\accImg3.jpg" />
     <Resource Include="Assets\Existing Assets\accImg4.jpg" />
+    <Resource Include="Assets\Existing Assets\Cacak1.jpg" />
+    <Resource Include="Assets\Existing Assets\Cacak2.jpg" />
+    <Resource Include="Assets\Existing Assets\Cacak3.jpg" />
+    <Resource Include="Assets\Existing Assets\Cacak4.jpg" />
     <Resource Include="Assets\Existing Assets\cacak_serbia.jpg" />
     <Resource Include="Assets\Existing Assets\fruska-gora.jpg" />
     <Resource Include="Assets\Existing Assets\headerImage2.png" />
+    <Resource Include="Assets\Existing Assets\Kragujevac1.jpg" />
+    <Resource Include="Assets\Existing Assets\Kragujevac2.jpg" />
+    <Resource Include="Assets\Existing Assets\Kragujevac3.jpg" />
+    <Resource Include="Assets\Existing Assets\Kragujevac4.jpg" />
     <Resource Include="Assets\Existing Assets\language_generic.jpg" />
     <Resource Include="Assets\Existing Assets\least_popular_location_generic.jpg" />
     <Resource Include="Assets\Existing Assets\location_generic.jpg" />
@@ -115,19 +149,43 @@
     <Resource Include="Assets\Existing Assets\logo2.png" />
     <Resource Include="Assets\Existing Assets\logoWEB.png" />
     <Resource Include="Assets\Existing Assets\madrid.jpg" />
+    <Resource Include="Assets\Existing Assets\Madrid1.jpg" />
+    <Resource Include="Assets\Existing Assets\Madrid2.jpg" />
+    <Resource Include="Assets\Existing Assets\Madrid3.jpg" />
+    <Resource Include="Assets\Existing Assets\Madrid4.jpg" />
     <Resource Include="Assets\Existing Assets\most_popular_location_generic.jpg" />
-    <Resource Include="Assets\Existing Assets\Ohrid1.jpg" />
+    <Resource Include="Assets\Existing Assets\Novi Sad2.jpg" />
+    <Resource Include="Assets\Existing Assets\Novi Sad1.jpg" />
+    <Resource Include="Assets\Existing Assets\Novi Sad3.jpg" />
+    <Resource Include="Assets\Existing Assets\Novi Sad4.jpg" />
+    <Resource Include="Assets\Existing Assets\Ohrid1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Existing Assets\Ohrid2.jpg" />
     <Resource Include="Assets\Existing Assets\Ohrid3.jpg" />
     <Resource Include="Assets\Existing Assets\Ohrid4.jpg" />
+    <Resource Include="Assets\Existing Assets\Sremska Mitrovica1.jpg" />
+    <Resource Include="Assets\Existing Assets\Sremska Mitrovica2.jpg" />
+    <Resource Include="Assets\Existing Assets\Sremska Mitrovica3.jpg" />
+    <Resource Include="Assets\Existing Assets\Sremska Mitrovica4.jpg" />
     <Resource Include="Assets\Existing Assets\super_guide.png" />
     <Resource Include="Assets\Existing Assets\tours-white.png" />
+    <Content Include="Assets\Existing Assets\Tutorial.mov">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Assets\Tutorial.mov">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\fruska-gora.jpg" />
     <Resource Include="Assets\madrid.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Assets\Existing Assets\sremskamitrovica_serbia.jpg" />
+    <Resource Include="Assets\Ohrid1.jpg" />
+    <Resource Include="Assets\Ohrid2.jpg" />
+    <Resource Include="Assets\Ohrid3.jpg" />
+    <Resource Include="Assets\Ohrid4.jpg" />
   </ItemGroup>
 
 </Project>

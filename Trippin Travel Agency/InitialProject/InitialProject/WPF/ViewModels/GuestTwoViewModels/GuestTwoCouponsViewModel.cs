@@ -83,8 +83,21 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 }
             }
         }
+        private string fullName;
+        public string FullName
+        {
+            get { return fullName; }
+            set
+            {
+                if (fullName != value)
+                {
+                    fullName = value;
+                    OnPropertyChanged(nameof(FullName));
+                }
+            }
+        }
 
-       
+
         public GuestTwoCouponsViewModel() {
             WindowLoaded();
         }
@@ -93,7 +106,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             UsernameLabel = "Hello, " + LoggedUser.username + "!";
             UsernameLabel2 = "@" + LoggedUser.username;
             AccountType = "Account type:  " + LoggedUser.role;
-
+            FullName = "@" + LoggedUser.firstName + " " + LoggedUser.lastName;
             DataBaseContext context = new DataBaseContext();
             LoadCoupons(context);
             LoadData(context);
@@ -108,7 +121,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 if (coup.userId == LoggedUser.id)
                 {
                     counter += 1;
-                    couponDTOs.Add(new CouponDTO(coup.id, "Coupon" + counter, coup.exiresOn));
+                    couponDTOs.Add(new CouponDTO(coup.id, "Coupon" + counter, coup.exiresOn.Date));
                 }
             }            
         }

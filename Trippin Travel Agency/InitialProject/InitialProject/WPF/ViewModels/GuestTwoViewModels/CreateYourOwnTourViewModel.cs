@@ -3,12 +3,15 @@ using InitialProject.DTO;
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service.TourServices;
+using InitialProject.WPF.View.GuestTwoViews;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -21,8 +24,8 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
         public ObservableCollection<string> CountryComboBox { get; set; } = new ObservableCollection<string>();
         public ObservableCollection<string> CityComboBox { get; set; } = new ObservableCollection<string>();
         public ObservableCollection<TourRequestDTO> requests { get; set; } = new ObservableCollection<TourRequestDTO>();
-        public List<TourRequest> temporaryRequests { get; set; } = new List<TourRequest>(); 
-
+        public List<TourRequest> temporaryRequests { get; set; } = new List<TourRequest>();
+       
         private string country;
         public string Country
         {
@@ -33,6 +36,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 {
                     country = value;
                     OnPropertyChanged(nameof(Country));
+                    FeedbackMessage = "";
                     countryComboBox_SelectionChanged();
                 }
             }
@@ -48,6 +52,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 {
                     city = value;
                     OnPropertyChanged(nameof(City));
+                    FeedbackMessage = "";
                 }
             }
         }
@@ -62,6 +67,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 {
                     startDate = value;
                     OnPropertyChanged(nameof(StartDate));
+                    FeedbackMessage = "";
                 }
             }
         }
@@ -76,6 +82,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 {
                     endDate = value;
                     OnPropertyChanged(nameof(EndDate));
+                    FeedbackMessage = "";
                 }
             }
         }
@@ -89,7 +96,8 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 if (descriptionBox != value)
                 {
                     descriptionBox = value;
-                    OnPropertyChanged(nameof(DescriptionBox));                    
+                    OnPropertyChanged(nameof(DescriptionBox));
+                    FeedbackMessage = "";
                 }
             }
         }
@@ -104,6 +112,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 {
                     guestNumberInput = value;
                     OnPropertyChanged(nameof(GuestNumberInput));
+                    FeedbackMessage = "";
                 }
             }
         }
@@ -118,6 +127,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 {
                     languageComboBox = value;
                     OnPropertyChanged(nameof(LanguageComboBox));
+                    FeedbackMessage = "";
                 }
             }
         }
@@ -131,7 +141,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 if (feedbackMessage != value)
                 {
                     feedbackMessage = value;
-                    OnPropertyChanged(nameof(FeedbackMessage));
+                    OnPropertyChanged(nameof(FeedbackMessage));                    
                 }
             }
         }
@@ -146,6 +156,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 {
                     responseColor = value;
                     OnPropertyChanged(nameof(ResponseColor));
+
                 }
             }
         }
@@ -154,12 +165,15 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
         public ViewModelCommand CreateComplexTourCommand { get; private set; }
         public ViewModelCommand ConfirmComplexTour { get; private set; }
 
-    public CreateYourOwnTourViewModel()
+        
+
+        public CreateYourOwnTourViewModel()
         {
             CreateRegularTourCommand = new ViewModelCommand(ExecuteCreateRegularTour);
             CreateComplexTourCommand = new ViewModelCommand(ExecuteCreateComplexTour);
             ConfirmComplexTour = new ViewModelCommand(ExecuteConfirmComplexTour);
-            LoadInputs();           
+            LoadInputs();
+            
         }
 
         private void LoadInputs()
@@ -211,7 +225,8 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                 && EndDate != null
                 && GuestNumberInput != null
                 && LanguageComboBox != null
-                && DescriptionBox != null)
+                && DescriptionBox != null
+                && GuestNumberInput > 0)
             {
 
                 if (StartDate < EndDate)
@@ -263,29 +278,34 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                     ResponseColor = "#4cd137";
                     FeedbackMessage = "Request sent!";
                     context.SaveChanges();
+                                       
                 }
                 else
                 {
                     ResponseColor = "#e84118";
                     FeedbackMessage = "Invalid dates!";
+                    
                 }
             }
             else 
             {
                 ResponseColor = "#e84118";
                 FeedbackMessage = "Please enter complete request information";
+               
             }
         }
 
         private void ExecuteCreateComplexTour(object obj)
         {
+
             if (Country != null
                 && City != null
                 && StartDate != null
                 && EndDate != null
                 && GuestNumberInput != null
                 && LanguageComboBox != null
-                && DescriptionBox != null)
+                && DescriptionBox != null
+                && GuestNumberInput > 0)
             {
 
                 if (StartDate < EndDate)
@@ -300,7 +320,9 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
                                                               LoggedUser.id);
                     DataBaseContext context = new DataBaseContext();                   
                     temporaryRequests.Add(tourRequest);
-                    requests.Add(new TourRequestDTO(City, Country,LanguageComboBox,StartDate.ToShortDateString(),EndDate.ToShortDateString(),TourRequestStatus.OnHold));                    
+                    requests.Add(new TourRequestDTO(City, Country,LanguageComboBox,StartDate.ToShortDateString(),EndDate.ToShortDateString(),TourRequestStatus.OnHold));
+                    ResponseColor = "#4cd137";
+                    FeedbackMessage = "Please scroll down to preview your complex tour request";
                 }
                 else
                 {
@@ -315,43 +337,50 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
             }
         }
         private void ExecuteConfirmComplexTour(object obj)
-        {            
-            ComplexTourRequest complexTourRequest = new ComplexTourRequest(temporaryRequests);
-            DataBaseContext context = new DataBaseContext();
-            foreach (TourRequest request in temporaryRequests)
-            {             
-                bool cityFlag = false;
-                bool countryFlag = false;
-                bool languageFlag = false;
-                foreach (Tour tour in context.Tours.ToList())
+        {
+            if (temporaryRequests.Count > 0)
+            {
+                ComplexTourRequest complexTourRequest = new ComplexTourRequest(temporaryRequests);
+                DataBaseContext context = new DataBaseContext();
+                foreach (TourRequest request in temporaryRequests)
                 {
-                    TourLocation location = this.tourLocationService.GetById(tour.location);
-                    if (City == location.city)
-                    {
-                        cityFlag = true;
-                    }
+                    bool cityFlag = false;
+                    bool countryFlag = false;
+                    bool languageFlag = false;
 
-                    if (Country == location.country)
+                    foreach (Tour tour in context.Tours.ToList())
                     {
-                        countryFlag = true;
+                        TourLocation location = this.tourLocationService.GetById(tour.location);
+                        if (City == location.city)
+                        {
+                            cityFlag = true;
+                        }
+
+                        if (Country == location.country)
+                        {
+                            countryFlag = true;
+                        }
+                        if (LanguageComboBox == tour.language)
+                        {
+                            languageFlag = true;
+                        }
                     }
-                    if (LanguageComboBox == tour.language)
+                    if (!cityFlag)
                     {
-                        languageFlag = true;
+                        context.UnfulfilledTourCities.Add(new(LoggedUser.id, request.city));
+                    }
+                    if (!countryFlag)
+                    {
+                        context.unfulfilledTourCountries.Add(new(LoggedUser.id, request.country));
+                    }
+                    if (!languageFlag)
+                    {
+                        context.UnfulfilledTourLanguages.Add(new(LoggedUser.id, request.language));
                     }
                 }
-                if (!cityFlag)
-                {
-                    context.UnfulfilledTourCities.Add(new(LoggedUser.id, request.city));
-                }
-                if (!countryFlag)
-                {
-                    context.unfulfilledTourCountries.Add(new(LoggedUser.id, request.country));
-                }
-                if (!languageFlag)
-                {
-                    context.UnfulfilledTourLanguages.Add(new(LoggedUser.id, request.language));
-                }                            
+                context.ComplexTourRequests.Add(complexTourRequest);
+                context.SaveChanges();
+                requests.Clear();
             }
           
             context.ComplexTourRequests.Add(complexTourRequest);

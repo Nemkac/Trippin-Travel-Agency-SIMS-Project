@@ -12,7 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="300"/>
             <RowDefinition Height="500"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="650"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="760"/>
@@ -97,27 +97,59 @@
                                     />
 
             <Button Margin="700 -250 0 0" 
-                    Width="170" 
-                    Height="90" 
+                    Height="82" 
+                        Width="239"  
                     FontFamily="Ubuntu" 
                     FontSize="20" 
-                    FontWeight="Medium"
-                    Style="{StaticResource addButtonWEB}" Command="{Binding CreateRegularTourCommand}">
+                    FontWeight="Light"
+                    Style="{StaticResource addButtonWEB}" Command="{Binding CreateRegularTourCommand}" Cursor="Hand">
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center">
                     Create regular tour
                 </TextBlock>
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="ActiveReservationsButton" CornerRadius="5" Background="#273c75">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="8,6,8,6" ContentSource="Content" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+
+                </Button.Template>
             </Button>
-            <Button Margin="1100 -250 0 0" 
-                    Width="170" 
-                    Height="90" 
+            <Button Margin="1200 -250 0 0" 
+                   Height="82" 
+                        Width="239" 
                     FontFamily="Ubuntu" 
                     FontSize="20" 
-                    FontWeight="Medium"
+                    FontWeight="Light"
                     Style="{StaticResource addButtonWEB}"
-                    Command="{Binding CreateComplexTourCommand}">
+                    Command="{Binding CreateComplexTourCommand}" Cursor="Hand">
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center">
                     Add to complex tour
                 </TextBlock>
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="ActiveReservationsButton" CornerRadius="5" Background="#273c75">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="8,6,8,6" ContentSource="Content" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+
+                </Button.Template>
             </Button>
 
             <TextBlock Height="90"
@@ -180,7 +212,7 @@
             <DataGrid x:Name="dataGrid" 
                               d:DataContext ="" 
                               Width="1200" 
-                              Height="400"
+                              Height="300"
                               Margin="0 50 0 0"
                               FontSize="15"
                               FontFamily="Ubuntu"
@@ -189,7 +221,8 @@
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               RowStyle="{DynamicResource DataGridRowStyle1}"
-                              ItemsSource="{Binding requests}" IsReadOnly="True"                           
+                              ItemsSource="{Binding requests}" IsReadOnly="True"
+                              AutoGenerateColumns="False"                              
                               >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="" Binding="{Binding field}">
@@ -200,18 +233,43 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
+                    <DataGridTextColumn Header="Country" Binding="{Binding country}" Width="200" FontSize="20"/>
+                    <DataGridTextColumn Header="City" Binding="{Binding city}" Width="200" FontSize="20"/>
+                    <DataGridTextColumn Header="Start date" Binding="{Binding dateFrom}" Width="200" FontSize="20"/>
+                    <DataGridTextColumn Header="End date" Binding="{Binding dateTo}" Width="200" FontSize="20"/>
+                    <DataGridTextColumn Header="Language" Binding="{Binding language}" Width="200" FontSize="20"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding status}" Width="200" FontSize="20"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Margin="1030 15 0 0" 
-                    Width="170" 
-                    Height="90" 
+            <Button Margin="900 15 0 0" 
+                    Height="82" 
+                    Width="239" 
                     FontFamily="Ubuntu" 
                     FontSize="20" 
-                    FontWeight="Medium"
-                    Style="{StaticResource addButtonWEB}" Command="{Binding ConfirmComplexTour}">
+                    FontWeight="Light"
+                    Style="{StaticResource addButtonWEB}" 
+                    Command="{Binding ConfirmComplexTour}" 
+                    Cursor="Hand"
+                    >
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center">
                     Submit
                 </TextBlock>
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="ActiveReservationsButton" CornerRadius="5" Background="#273c75">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="8,6,8,6" ContentSource="Content" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+
+                </Button.Template>
             </Button>
         </StackPanel>
     </Grid>

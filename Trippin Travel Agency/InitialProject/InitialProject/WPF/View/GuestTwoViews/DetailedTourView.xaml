@@ -134,16 +134,32 @@
                 </StackPanel>
             </GroupBox>
 
-            <Button Height="NaN"
-                    Width="NaN"
+            <Button Height="82" 
+                        Width="239" 
                     Style="{StaticResource addButtonWEB}"
                     Margin="150,1318,150,82"
-                    Command="{Binding BookingViewCommand}">
+                    Command="{Binding BookingViewCommand}" Cursor="Hand">
 
                 <StackPanel Orientation="Horizontal">
-                    <fa:IconImage Icon="PlaneDeparture" Width="70" Margin="15 0 0 0"/>
-                    <Label Content="Book" FontFamily="Ubuntu" FontSize="55" FontWeight="Heavy" Margin="0 0 0 0"/>
+                    <fa:IconImage Icon="PlaneDeparture" Width="30" Height ="30" Margin="15 0 0 0" Foreground="White"/>
+                    <Label Content="Book" FontFamily="Ubuntu" FontSize="30" FontWeight="Light" Margin="0 0 0 0" Foreground="White"/>
                 </StackPanel>
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="ActiveReservationsButton" CornerRadius="5" Background="#273c75">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="8,6,8,6" ContentSource="Content" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ActiveReservationsButton" Property="Background" Value="#bee6ff"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+
+                </Button.Template>
             </Button>
         </Grid>
 

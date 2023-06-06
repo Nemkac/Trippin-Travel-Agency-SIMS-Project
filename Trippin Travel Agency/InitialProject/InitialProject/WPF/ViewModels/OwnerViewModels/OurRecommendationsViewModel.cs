@@ -246,7 +246,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             {
                 foreach (Accommodation accommodation in ownersAccommodations)
                 {
-
                     if (booking.accommodationId == accommodation.id)
                     {
                         List<string> locationToParse = this.accommodationService.GetAccommodationLocation(accommodation.id);

@@ -19,6 +19,6 @@ namespace InitialProject.DTO
             this.id = id;   
             this.name = name;
             this.expiresOn = expiresOn;
-        }
+        }        
     }
 }

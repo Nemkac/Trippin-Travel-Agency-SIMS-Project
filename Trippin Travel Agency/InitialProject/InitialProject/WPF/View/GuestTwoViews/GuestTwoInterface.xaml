@@ -49,10 +49,15 @@
         <DataTemplate DataType="{x:Type viewModel:GuestTwoStatisticsViewModel}">
             <local:GuestTwoStatisticsView/>
         </DataTemplate>
-        
+
+        <DataTemplate DataType="{x:Type viewModel:GuestTwoTutorialViewModel}">
+            <local:GuestTwoTutorialView/>
+        </DataTemplate>
+
+
     </Window.Resources>
     
-    <ScrollViewer>
+    <ScrollViewer x:Name="ScrollViewerMain">
         <Grid Background="#F5F6FA">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
@@ -77,7 +82,7 @@
             </StackPanel>
         
         <StackPanel Grid.Row="1" Orientation="Horizontal" Background="#273c75" Grid.Column="1">
-            <Button x:Name="TourView" Content="Tour View" Style="{StaticResource menuButtonWEB}" Command="{Binding ShowTourViewCommand}"/>
+            <Button x:Name="TourView" Content="Tour View" Style="{StaticResource menuButtonWEB}" Command="{Binding ShowTourViewCommand}" IsCancel="True"/>
             <Button x:Name="LiveTour" Content="Live Tour" Style="{StaticResource menuButtonWEB}" Command="{Binding ShowLiveTour}"/>
             <Button x:Name="CreateYourOwnTour" Content="Create Your Own Tour" Style="{StaticResource menuButtonWEB}" Width="250" Command="{Binding ShowCreateYourOwnTour}"/>
             <Button x:Name="MyRequests" Content="My Requests" Style="{StaticResource menuButtonWEB}" Command="{Binding ShowGuestTwoRequests}"/>
