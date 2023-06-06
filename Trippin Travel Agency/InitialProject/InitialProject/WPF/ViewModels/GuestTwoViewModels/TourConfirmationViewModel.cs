@@ -278,7 +278,7 @@ namespace InitialProject.WPF.ViewModels.GuestTwoViewModels
         {
             _mainViewModel.TourNameReport = TourName;
             _mainViewModel.CityNameReport = CityName;
-            _mainViewModel.CityNameReport = CountryName;
+            _mainViewModel.CountryNameReport = CountryName;
             _mainViewModel.KeyPointsReport = KeyPoints;
             _mainViewModel.Duration = Duration;
             _mainViewModel.GuestNumberReport = GuestNumber;

@@ -104,7 +104,7 @@
                               Style="{DynamicResource DataGridStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-                              RowStyle="{DynamicResource DataGridRowStyle1}" IsEnabled="False"
+                              RowStyle="{DynamicResource DataGridRowStyle1}" IsReadOnly="True"
                               ColumnWidth="Auto"
                               >
                         <DataGrid.Columns>
