@@ -24,6 +24,7 @@ namespace InitialProject.WPF.View.TourGuideViews
     /// </summary>
     public partial class TourGuide_RequestTimeSlots : UserControl
     {
+        public static int selectedRequestId;
         private TourService tourService;
         private TourRequestService tourRequestService;
         public TourGuide_RequestTimeSlots()
@@ -51,6 +52,11 @@ namespace InitialProject.WPF.View.TourGuideViews
                 }
             }
         }
+        public void NewWindow(object sender, RoutedEventArgs e)
+        {
+            TourRequest temp = this.tourRequestsDataGrid.SelectedItem as TourRequest;
+            selectedRequestId = temp.id;
 
+        }
     }
 }

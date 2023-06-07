@@ -25,7 +25,7 @@ namespace InitialProject.WPF.View.TourGuideViews
             InitializeComponent();
             this.Loaded += requestDataLoaded;
         }
-        
+
         public void requestDataLoaded(object sender, RoutedEventArgs e)
         {
             DataBaseContext context;
@@ -39,8 +39,9 @@ namespace InitialProject.WPF.View.TourGuideViews
             }
             else
             {
-                return; 
+                return;
             }
+
 
         }
 
@@ -63,7 +64,7 @@ namespace InitialProject.WPF.View.TourGuideViews
 
         private void acceptRequest_ButtonClick(object sender, RoutedEventArgs e)
         {
-            
+
             DataBaseContext context;
             TourRequest tr;
             GetExact(out context, out tr);

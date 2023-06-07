@@ -43,6 +43,7 @@ namespace InitialProject.WPF.ViewModels
         public ICommand ShowTourGuideAcceptedTourRequestViewCommand { get; }
         public ICommand ShowTourGuideToursTodayImagesViewCommand { get; }
         public ICommand ShowTourGuideRequestTimeSlotsViewCommand { get; }
+        public ICommand ShowTourGuideSpecificTourPartViewCommand { get; }
 
         public TourGuide_MainViewModel()
         {
@@ -63,6 +64,7 @@ namespace InitialProject.WPF.ViewModels
             ShowTourGuideAcceptedTourRequestViewCommand = new ViewModelCommand(ExecuteShowTourGuideAcceptedTourRequestViewCommand);
             ShowTourGuideToursTodayImagesViewCommand = new ViewModelCommand(ExecuteShowTourGuideToursTodayImagesViewCommand);
             ShowTourGuideRequestTimeSlotsViewCommand = new ViewModelCommand(ExecuteShowTourGuideRequestTimeSlotsViewCommand);
+            ShowTourGuideSpecificTourPartViewCommand = new ViewModelCommand(ExecuteShowTourGuideSpecificTourPartViewCommand);
 
             LoggedUser.TourGuide_MainViewModel = this; 
             ExecuteShowTourGuideDashboardViewCommand(null);
@@ -133,9 +135,14 @@ namespace InitialProject.WPF.ViewModels
         {
             CurrentChildView = new TourGuide_AcceptedTourRequestViewModel(this);
         }
+        
         public void ExecuteShowTourGuideRequestTimeSlotsViewCommand(object obj)
         {
             CurrentChildView = new TourGuide_RequestTimeSlotsViewModel(this);
+        }
+        public void ExecuteShowTourGuideSpecificTourPartViewCommand(object obj)
+        {
+            CurrentChildView = new TourGuide_SpecificTourPartViewModel(this);
         }
 
     }
