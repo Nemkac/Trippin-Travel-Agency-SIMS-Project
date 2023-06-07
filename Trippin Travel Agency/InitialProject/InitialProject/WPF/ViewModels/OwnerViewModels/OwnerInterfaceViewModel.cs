@@ -303,6 +303,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public ICommand ShowNotificationsViewCommand { get; }
         public ICommand ShowMyBookingsCommand { get; }
         public ICommand ShowOurRecommendationsCommand { get; }
+        public ICommand ShowShowImagesCommand { get; }
         public ICommand ShowAnnualStatisticsCommand { get; }
         public ICommand ShowAccommodationMonthlyStatistics { get; }
         public ICommand ShowRenovationsCommand { get; }
@@ -329,6 +330,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             ShowNotificationsViewCommand = new ViewModelCommand(ExecuteShowNotificationsViewCommand);
             ShowMyBookingsCommand = new ViewModelCommand(ExecuteShowMyBookingsCommand);
             ShowOurRecommendationsCommand = new ViewModelCommand(ExecuteShowOurRecommendationsViewCommand);
+            ShowShowImagesCommand = new ViewModelCommand(ExecuteShowImagesViewCommand);
             ShowAccommodationMonthlyStatistics = new ViewModelCommand(ExecuteShowMonthlyStatistics);
             ShowRenovationsCommand = new ViewModelCommand(ExecuteShowRenovationsCommand);
             ShowNewRenovationCommand = new ViewModelCommand(ExecuteShowNewRenovationViewCommand);
@@ -436,6 +438,14 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             if (IsLanguageChecked == true) Caption = "Moji Smestaji";
             else Caption = "My Accommodations";
         }
+
+        public void ExecuteShowImagesViewCommand(object obj)
+        {
+            SecondChildView = new ShowAccommodationImagesViewModel();
+            if (IsLanguageChecked == true) Caption = "Moji Smestaji";
+            else Caption = "My Accommodations";
+        }
+
         public void ExecuteShowAnnualStatisticsCommand(object obj)
         {
             CurrentChildView = new AccommodationAnnualStatisticsViewModel();

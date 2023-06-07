@@ -103,45 +103,30 @@
         </Border>
 
         <Border Grid.Row="0" Grid.Column="2" CornerRadius="0, 30, 0, 0">
-            <GroupBox Header="{Binding ImagesText}" VerticalAlignment="Top"
-                          Style="{StaticResource labelGroupBox}"
-                          Foreground="{Binding ContentTextColor}"
-                          Margin="0,30,0,0"
-                          Height="150"
-                          Padding="10">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center"
+
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center"
                                 x:Name="containerImages">
-                    <!-- Add image -->
-                    <StackPanel Orientation="Vertical"
-                                    Margin="0, 5, 0 ,0">
-                        <TextBlock Text="{Binding ImageNumber}"
-                                       FontSize="16" Foreground="{Binding ContentTextColor}"
-                                       Margin="0, 0, 0, 0"/>
-                        <TextBox Text="{Binding Url}"
-                                     FontSize="16" Width="140"
-                                     Margin="0, 5, 0, 0"/>
-                    </StackPanel>
-                    <RadioButton x:Name="addimageButton"
+                <!-- Add image -->
+                <RadioButton x:Name="addimageButton"
                                  Style="{StaticResource mobileCreateTourButton}"
                                  HorizontalAlignment="Center"
-                                 Command="{Binding AddImageCommand}">
-                        <StackPanel Orientation="Horizontal" Margin="0 15 0 0">
-                            <fa:IconImage Icon="PlusCircle"
+                                 Command="{Binding UploadPhoto}">
+                    <StackPanel Orientation="Horizontal" Margin="0 60 0 0">
+                        <fa:IconImage Icon="CloudUpload"
                                           HorizontalAlignment="Left"
                                           Style="{StaticResource menuBackButtonIcon}"
                                           Foreground="{Binding ContentTextColor}"
                                           Width="25" Height="25"/>
-                            <Label Content="{Binding AddImageText}"
+                        <Label Content="{Binding AddImageText}"
                                        FontSize="18"
                                        FontFamily="Ubuntu"
                                        FontWeight="SemiBold"
                                        Margin="10, 0, 0, 0"
                                        Style="{StaticResource labelBackHeader}"
                                        Foreground="{Binding ContentTextColor}"/>
-                        </StackPanel>
-                    </RadioButton>
-                </StackPanel>
-            </GroupBox>
+                    </StackPanel>
+                </RadioButton>
+            </StackPanel>
         </Border>
 
         <Border Grid.Row="1" Grid.ColumnSpan="3" CornerRadius="0, 0, 30, 30">

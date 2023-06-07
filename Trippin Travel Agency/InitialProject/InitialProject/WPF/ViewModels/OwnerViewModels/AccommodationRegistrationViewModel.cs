@@ -2,6 +2,7 @@
 using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service.AccommodationServices;
+using InitialProject.Service.TourServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -395,13 +396,14 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         }
 
         public ViewModelCommand AddImageCommand { get; set; }
-      
         public ViewModelCommand SaveAccommodationCommand { get; set; }
+        public ViewModelCommand UploadPhoto { get; }
 
         public AccommodationRegistrationViewModel() 
         {
             SaveAccommodationCommand = new ViewModelCommand(SaveAccommodation);
-            AddImageCommand = new ViewModelCommand(AddImage);
+            UploadPhoto = new ViewModelCommand(UploadImage);
+
             ImageNumber = "Image " + imageCounter;
 
             FillCountryComboBox();
@@ -597,12 +599,30 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             return imageLinks;
         }
 
-        public void AddImage(object obj)
+        public void AddImage()
         {
             dynamicImageLinksTextBoxes.Add(Url);
             Url = null;
             imageCounter++;
             ImageNumber = "Image " + imageCounter;
+        }
+
+        public void UploadImage(object obj)
+        {
+            Microsoft.Win32.OpenFileDialog fileDialog = new Microsoft.Win32.OpenFileDialog();
+            fileDialog.Title = "Select a picture";
+            fileDialog.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            bool? response = fileDialog.ShowDialog();
+            if (response == true && AccommodationName != null)
+            {
+
+                string filepath = fileDialog.FileName;
+                string destination = System.IO.Path.Combine("Assets", System.IO.Path.GetFileName(filepath));
+                System.IO.File.Copy(filepath, destination, true);
+                AddImage(); 
+            }
         }
     }
 }

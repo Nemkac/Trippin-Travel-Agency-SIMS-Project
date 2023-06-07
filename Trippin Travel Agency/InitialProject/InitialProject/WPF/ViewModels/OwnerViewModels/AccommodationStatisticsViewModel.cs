@@ -167,6 +167,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         }
 
         public ICommand ShowOurRecommendationsViewCommand { get; private set; }
+        public ICommand ShowImagesViewCommand { get; private set; }
         public ViewModelCommand ShowAnnualStatisticsViewCommand { get; private set; }
 
 
@@ -174,6 +175,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             _mainViewModel = LoggedUser._mainViewModel;
             ShowOurRecommendationsViewCommand = new ViewModelCommand(ExecuteShowOurRecommendationsViewCommand);
+            ShowImagesViewCommand = new ViewModelCommand(ExecuteShowImagesViewCommand);
             ShowAnnualStatisticsViewCommand = new ViewModelCommand(ShowAnnualStatistics);
             ShowOwnersAccommodations();
             ExecuteShowOurRecommendationsViewCommand(null);
@@ -216,6 +218,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public void ExecuteShowOurRecommendationsViewCommand(object obj)
         {
             SecondChildView = new OurRecommendationsViewModel();
+        }
+
+        public void ExecuteShowImagesViewCommand(object obj)
+        {
+            SecondChildView = new ShowAccommodationImagesViewModel();
         }
 
         public void ShowOwnersAccommodations()

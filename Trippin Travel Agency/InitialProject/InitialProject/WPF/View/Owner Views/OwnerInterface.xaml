@@ -57,6 +57,10 @@
             <owner:OurRecommendationView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModel:ShowAccommodationImagesViewModel}">
+            <owner:ShowAccommodationImagesView/>
+        </DataTemplate>
+
         <DataTemplate DataType="{x:Type viewModel:AccommodationAnnualStatisticsViewModel}">
             <owner:AccommodationsAnnualStatisticsView/>
         </DataTemplate>
