@@ -177,7 +177,6 @@ namespace InitialProject.WPF.ViewModels
             }
             else
             {
-                MessageBox.Show(LocationRequestNumber);
                 MessageBox.Show("There are no recommended location requests."); 
             }
         }
