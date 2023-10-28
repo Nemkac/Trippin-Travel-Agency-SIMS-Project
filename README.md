@@ -5,6 +5,8 @@ Accommodation agency that provides a platform for travelers to book unique and a
 # About 
 
 This application is written using .NET framework for backend and WPF for the frontend part. The goal of this project is to create and maintain a clean code solution and use the best coding practices. 
+<br>The application is designed so that its use is possible on all platforms and devices (Desktop, WEB, tablet, phone).
+<br>Also, it is designed to suit all types of users, whether they are young or old, experienced in working with a computer or without any experience, own all computer peripherals or only have a mouse or keyboard, etc.
 
 # Specification 
 
